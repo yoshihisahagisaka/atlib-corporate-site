@@ -1,0 +1,349 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/***************** MENU SETTING *****************/
+/*開閉用ボタン（ハンバーガーボタン）*/
+.menu-btn {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	width: 65px;
+	height: 65px;
+	background: #FFED5F;
+	cursor: pointer;
+	z-index: 9999;
+	border: none;
+	border-radius: 100%;
+	-webkit-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+.menu-btn::after {
+	position: absolute;
+	content: 'MENU';
+	bottom: 10px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	display: inline-block;
+	width: 38%;
+	font-size: 9px;
+	font-weight: 600;
+	text-decoration: none;
+	text-align: center;
+	letter-spacing: 0;
+	transition: all .4s;
+}
+.menu-btn-line {
+	position: absolute;
+	top: -10px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	height: 2px;
+	width: 38%;
+	background: #000;
+	-webkit-transition: all .1s ease-in-out;
+	transition: all .1s ease-in-out;
+}
+.menu-btn-line::before,
+.menu-btn-line::after {
+	content: "";
+	height: 2px;
+	width: 100%;
+	background: #000;
+	position: absolute;
+	left: 0;
+	-webkit-transition: inherit;
+	transition: inherit;
+}
+.menu-btn-line::before{
+	top: -7px;
+}
+.menu-btn-line::after{
+	top: 7px;
+}
+
+/* 開閉用ボタンがクリックされた時のスタイル */
+.open .menu {
+	transform: translateX(0); /* 右から登場 */
+	z-index: 9998;
+}
+.open .menu-btn {
+	border-color: #000;
+}
+.open .menu-btn::after {
+	position: absolute;
+	content: 'CLOSE';
+	bottom: 10px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	display: inline-block;
+	width: 38%;
+	font-size: 9px;
+	font-weight: 600;
+	text-decoration: none;
+	text-align: center;
+	letter-spacing: 0;
+	transition: all .4s;
+}
+.open .menu-btn-line{
+	background-color: transparent;
+}
+.open .menu-btn-line::before,
+.open .menu-btn-line::after {
+	top: 0;
+	background: #000;
+}
+.open .menu-btn-line::before {
+	-webkit-transform: rotate(30deg);
+	-ms-transform: rotate(30deg);
+	transform: rotate(30deg);
+}
+.open .menu-btn-line::after {
+	-webkit-transform: rotate(-30deg);
+	-ms-transform: rotate(-30deg);
+	transform: rotate(-30deg);
+}
+
+/*開いたメニュー*/
+.menu {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 400px;
+	height: 100vh;
+	background: #63A2DD;
+	z-index: 9998;
+	overflow-y: auto;
+	transform: translateX(100%); /* 右に隠す */
+	transition: transform 0.5s ease; /* アニメーション */
+}
+.menu .inner_nav {
+	width: 100%;
+	padding: 50px;
+	box-sizing: border-box; 
+}
+.menu .inner_nav ul {
+	padding-bottom: 30px;
+}
+.menu .inner_nav li {
+	font-size: 24px;
+	font-weight: 700;
+	margin: 0.7em 0;
+}
+.menu .inner_nav li a {
+	width: 100%;
+	padding: 0.1em 0;
+	display: block;
+	color: #fff;
+}
+.menu .inner_nav p a {
+	color: #fff;
+	padding: 0.5em 0;
+	display: inline-block;
+	font-size: 0.8em;
+}
+.overlay {
+	position: fixed;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+	background: rgba(0,0,0,0.4);
+	background-image: linear-gradient(-120deg, rgba(150,182,244,.6) 0%,rgba(32,226,215,.6) 100%);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+	z-index: 9990;
+}
+.open .overlay {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+
+@media screen and (max-width: 999px) {
+
+/***************** MENU SETTING *****************/
+/*開閉用ボタン（ハンバーガーボタン）*/
+.menu-btn {
+	position: fixed;
+	top: 12px;
+	right: 12px;
+	width: 65px;
+	height: 65px;
+	background: #FFED5F;
+	cursor: pointer;
+	z-index: 9999;
+	border: none;
+	border-radius: 100%;
+	-webkit-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+
+}
+
+
+@media screen and (max-width: 767px) {
+	
+/***************** MENU SETTING *****************/
+/*開閉用ボタン（ハンバーガーボタン）*/
+.menu-btn {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 50px;
+	height: 50px;
+	background: #FFED5F;
+	cursor: pointer;
+	z-index: 9999;
+	border: none;
+	border-radius: 100%;
+	-webkit-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+.menu-btn::after {
+	position: absolute;
+	content: 'MENU';
+	bottom: 7px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	display: inline-block;
+	width: 45%;
+	font-size: 8px;
+	font-weight: 600;
+	text-decoration: none;
+	text-align: center;
+	letter-spacing: 0;
+	transition: all .4s;
+}
+.menu-btn-line {
+	position: absolute;
+	top: -10px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	height: 2px;
+	width: 38%;
+	background: #000;
+	-webkit-transition: all .1s ease-in-out;
+	transition: all .1s ease-in-out;
+}
+.menu-btn-line::before,
+.menu-btn-line::after {
+	content: "";
+	height: 2px;
+	width: 100%;
+	background: #000;
+	position: absolute;
+	left: 0;
+	-webkit-transition: inherit;
+	transition: inherit;
+}
+.menu-btn-line::before{
+	top: -7px;
+}
+.menu-btn-line::after{
+	top: 7px;
+}
+
+/* 開閉用ボタンがクリックされた時のスタイル */
+.open .menu {
+	transform: translateX(0); /* 右から登場 */
+	z-index: 9998;
+}
+.open .menu-btn {
+	border-color: #000;
+}
+.open .menu-btn::after {
+	position: absolute;
+	content: 'CLOSE';
+	bottom: 7px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	display: inline-block;
+	width: 45%;
+	font-size: 8px;
+	font-weight: 600;
+	text-decoration: none;
+	text-align: center;
+	letter-spacing: 0;
+	transition: all .4s;
+}
+.open .menu-btn-line{
+	background-color: transparent;
+}
+.open .menu-btn-line::before,
+.open .menu-btn-line::after {
+	top: 0;
+	background: #000;
+}
+.open .menu-btn-line::before {
+	-webkit-transform: rotate(30deg);
+	-ms-transform: rotate(30deg);
+	transform: rotate(30deg);
+}
+.open .menu-btn-line::after {
+	-webkit-transform: rotate(-30deg);
+	-ms-transform: rotate(-30deg);
+	transform: rotate(-30deg);
+}
+
+/*開いたメニュー*/
+.menu {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 65%;
+	height: 100vh;
+	background: #63A2DD;
+	z-index: 9998;
+	overflow-y: auto;
+	transform: translateX(100%); /* 右に隠す */
+	transition: transform 0.5s ease; /* アニメーション */
+}
+.menu .inner_nav {
+	width: 100%;
+	padding: 50px 30px;
+	box-sizing: border-box; 
+}
+.menu .inner_nav ul {
+	padding-bottom: 30px;
+}
+.menu .inner_nav li {
+	font-size: 18px;
+	font-weight: 700;
+	margin: 0.7em 0;
+}
+.menu .inner_nav li a {
+	width: 100%;
+	padding: 0.1em 0;
+	display: block;
+	color: #fff;
+}
+.menu .inner_nav p a {
+	color: #fff;
+	padding: 0.5em 0;
+	display: inline-block;
+	font-size: 0.8em;
+}
+.overlay {
+	position: fixed;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+	background: rgba(0,0,0,0.4);
+	background-image: linear-gradient(-120deg, rgba(150,182,244,.6) 0%,rgba(32,226,215,.6) 100%);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+	z-index: 9990;
+}
+.open .overlay {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+}
