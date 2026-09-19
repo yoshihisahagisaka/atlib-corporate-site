@@ -18,7 +18,55 @@
 @media(max-width:850px){.hero-grid,.apply-box{grid-template-columns:1fr}.problem-grid,.benefit-grid,.use-grid,.plan-grid{grid-template-columns:1fr}.problem .card:nth-child(2){transform:none}.collab-flow{grid-template-columns:1fr}.collab-flow>.arrow{transform:rotate(90deg);text-align:center}.steps,.start .steps{grid-template-columns:1fr 1fr}.midcta .wrap{display:block}.midcta .cta{margin-top:18px}.hero-visual{min-height:330px}}
 @media(max-width:560px){.wrap{width:calc(100% - 24px)}.section{padding:64px 0}.head .cta{display:none}.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}.timeline{grid-template-columns:1fr}.blank{height:70px;width:6px;margin:auto;background:repeating-linear-gradient(180deg,var(--orange) 0 12px,transparent 12px 22px)}.blank span{left:22px;top:20px;transform:none}.reason-grid,.steps,.start .steps{grid-template-columns:1fr}.floating{left:0;right:0;bottom:0;padding:10px 12px;background:rgba(255,255,255,.96)}.floating .cta{width:100%}}
 </style>
-</head>
+<style>
+/* Creative-direction pass: brighter, editorial, less repetitive */
+body{background:#fff}
+.hero{position:relative;overflow:hidden;padding:104px 0 96px}
+.hero:after{content:"";position:absolute;inset:auto -8vw -22vw auto;width:46vw;height:46vw;border-radius:50%;border:70px solid rgba(45,190,157,.06);pointer-events:none}
+.hero-grid>div:first-child{position:relative;z-index:2}
+.hero h1{max-width:760px}
+.hero .cta{margin-top:10px}
+.hero-visual{transform:rotate(1.2deg);border:1px solid rgba(31,53,86,.06)}
+.problem{padding-top:110px}
+.problem-grid{align-items:start}
+.problem .card{border:0;box-shadow:none;padding:10px 26px 24px 0;border-radius:0;border-top:4px solid var(--navy)}
+.problem .card:nth-child(2){border-color:var(--orange)}
+.problem .card:nth-child(3){border-color:var(--green)}
+.gap{position:relative;overflow:hidden;padding:120px 0}
+.gap h2{max-width:760px}
+.gap:after{content:"BLANK";position:absolute;right:-20px;bottom:-68px;font-size:190px;font-weight:950;letter-spacing:-.08em;color:rgba(242,140,56,.055);line-height:1}
+.collab{padding:110px 0}
+.collab-flow{position:relative}
+.party{min-height:230px;display:flex;flex-direction:column;justify-content:center}
+.party.atlib{transform:scale(1.05);box-shadow:0 25px 55px rgba(45,190,157,.14)}
+.plans{padding:110px 0}
+.plan{transition:.25s}
+.plan:hover{transform:translateY(-7px);box-shadow:0 24px 60px rgba(31,53,86,.12)}
+.plan:nth-child(2){transform:translateY(-14px)}
+.plan:nth-child(2):hover{transform:translateY(-21px)}
+.benefits{padding:115px 0}
+.benefit-grid{grid-template-columns:1.05fr 1.2fr .9fr}
+.benefits .card{min-height:390px}
+.dash{box-shadow:0 28px 70px rgba(45,190,157,.13);border-color:rgba(45,190,157,.3)}
+.midcta{padding:64px 0;position:relative;overflow:hidden}
+.midcta:after{content:"→";position:absolute;right:4%;top:-70px;font-size:260px;font-weight:950;color:rgba(255,255,255,.05)}
+.usecases{padding:110px 0}
+.use-grid .card{border-radius:0;border:0;border-left:5px solid var(--green);box-shadow:none;background:transparent}
+.use-grid .card:nth-child(2){border-color:var(--orange)}
+.use-grid .card:nth-child(3){border-color:var(--navy)}
+.reason{padding:110px 0}
+.reason-grid{gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.reason .card{border-radius:0;box-shadow:none;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:38px}
+.support{padding:110px 0}
+.steps{counter-reset:flow}
+.support .step{border:0;border-top:3px solid var(--green);border-radius:0;background:transparent}
+.start .step{position:relative;padding-top:54px}
+.start .step:before{counter-increment:flow;content:counter(flow,decimal-leading-zero);position:absolute;top:4px;left:16px;font-size:32px;font-weight:950;color:rgba(31,53,86,.18)}
+.apply{padding:120px 0}
+.apply-box{border:1px solid rgba(31,53,86,.06)}
+footer{background:var(--off);padding:42px 0 90px}
+@media(max-width:850px){.benefit-grid{grid-template-columns:1fr}.plan:nth-child(2){transform:none}.party.atlib{transform:none}.reason-grid{grid-template-columns:1fr}.hero-visual{transform:none}}
+</style></head>
 <body>
 <header><div class="wrap head"><div class="service-lockup"><img class="logo-img" src="./images/atlib-logo.png" alt="atLIB株式会社"><div class="service-name">InfraVision<small>Partner Program</small></div></div><a class="cta track" data-position="header" href="#apply">オンラインで相談する →</a></div></header>
 <main>
