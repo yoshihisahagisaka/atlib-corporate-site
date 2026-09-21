@@ -362,6 +362,63 @@ header{height:64px}
   .gap-message{color:#d4e0e8}
 }
 </style>
+<style>
+/* v6.1 continuous-scroll correction — sections belong to one LP, not separate 16:9 panels */
+main{overflow:hidden}
+@media(min-width:851px){
+  .section{padding-top:88px;padding-bottom:88px}
+  .creative-problem{padding:96px 0 82px;background:linear-gradient(180deg,#fff 0%,#fff 72%,#f6fafb 100%)}
+  .creative-problem .wrap{grid-template-columns:.76fr 1.24fr;column-gap:62px}
+  .creative-problem h2{font-size:clamp(40px,3.8vw,58px)}
+  .problem-scenes article{padding-top:22px;padding-bottom:22px}
+  .problem-scenes article:before,.scene-icon{top:26px}
+  .problem-punch{margin-top:30px}
+  .problem-punch strong{font-size:20px}
+
+  .creative-gap{padding:82px 0 76px;background:
+    linear-gradient(180deg,#f6fafb 0 7%,var(--navy) 7% 93%,#fff 93% 100%);color:#fff}
+  .creative-gap .wrap{grid-template-columns:.72fr 1.28fr;gap:52px}
+  .gap-copy h2{font-size:clamp(38px,3.8vw,56px)}
+  .gap-story{grid-template-columns:1fr 94px 1fr;gap:16px}
+  .gap-before,.gap-after{min-height:270px;padding:24px 20px}
+  .gap-switch{width:94px;height:94px}
+  .gap-message{margin-top:18px}
+
+  .collab{padding:86px 0 92px;background:linear-gradient(180deg,#fff 0%,#fff 78%,#f7fafb 100%)}
+  .partnership-stage{margin-top:42px}
+  .partner-side,.customer-side{padding:36px 30px}
+  .partnership-core{min-height:300px;padding:38px}
+  .partnership-caption{margin-top:26px}
+
+  .plans{padding:92px 0 88px;background:linear-gradient(180deg,#f7fafb,#f4f8fa 82%,#fff)}
+  .plan-grid{margin-top:40px}
+  .plan-head{min-height:96px}.plan-body{padding:28px 26px}.price{font-size:42px}
+
+  .benefits{padding:94px 0 88px;background:linear-gradient(180deg,#fff,#f4fbf8 82%,#fff)}
+  .partner-value-stage{margin-top:44px}
+  .dashboard-shell{transform:translateY(-10px)}
+
+  .midcta{margin:-1px 0;padding:52px 0}
+  .usecases{padding:92px 0 86px}
+  .use-story{margin-top:42px}
+  .reason{padding:92px 0;background:linear-gradient(180deg,#eef7fb,#fff)}
+  .reason-stage{gap:54px}
+  .support{padding:92px 0;background:linear-gradient(180deg,#fff,#f7fbfd)}
+  .support-journey{margin-top:38px}
+  .start{padding:92px 0 86px;background:linear-gradient(180deg,#f7fbfd,#fff)}
+  #faq{padding:88px 0}
+  .apply{padding:96px 0}
+}
+/* soft continuity markers: visual hand-off instead of page-break feeling */
+.creative-problem:after,.collab:after,.plans:after,.benefits:after,.usecases:after,.reason:after,.support:after,.start:after{
+  content:"";position:absolute;left:50%;bottom:-18px;width:1px;height:36px;background:linear-gradient(var(--green),var(--orange));z-index:4
+}
+@media(max-width:850px){
+  .section,.creative-problem,.creative-gap,.collab,.plans,.benefits,.usecases,.reason,.support,.start,#faq{padding-top:64px;padding-bottom:64px}
+  .creative-gap{background:linear-gradient(180deg,#f6fafb 0 3%,var(--navy) 3% 97%,#fff 97%)}
+  .creative-problem:after,.collab:after,.plans:after,.benefits:after,.usecases:after,.reason:after,.support:after,.start:after{bottom:-14px;height:28px}
+}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
