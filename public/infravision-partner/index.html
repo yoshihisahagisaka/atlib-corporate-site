@@ -419,6 +419,27 @@ main{overflow:hidden}
   .creative-problem:after,.collab:after,.plans:after,.benefits:after,.usecases:after,.reason:after,.support:after,.start:after{bottom:-14px;height:28px}
 }
 </style>
+<style>
+/* v6.2 service-understanding bridge */
+.service-explain{padding:96px 0 92px;background:linear-gradient(180deg,#fff,#f4faf8)}
+.service-explain-head{display:grid;grid-template-columns:.78fr 1.22fr;column-gap:64px;align-items:end}
+.service-explain-head .eyebrow{grid-column:1/3;margin-bottom:14px;font-size:16px;color:var(--orange)}
+.service-explain-head h2{grid-column:1;font-size:clamp(38px,3.8vw,56px)}
+.service-explain-head .lead{grid-column:2;margin:0;max-width:620px}
+.service-mechanism{display:grid;grid-template-columns:.82fr 54px 1.36fr 54px .92fr;align-items:stretch;margin-top:52px}
+.service-source,.service-outcome{padding:34px 28px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+.service-core{padding:38px 34px;background:var(--navy);color:#fff;box-shadow:0 24px 60px rgba(31,53,86,.18)}
+.service-source small,.service-core small,.service-outcome small{font-size:10px;font-weight:950;letter-spacing:.13em;color:var(--green)}
+.service-source strong,.service-outcome strong{font-size:23px;line-height:1.45;margin:9px 0 16px}.service-core>strong{display:block;font-size:30px;line-height:1.35;margin:8px 0 22px}
+.service-arrow{display:grid;place-items:center;font-size:30px;font-weight:950;color:var(--orange)}
+.service-functions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.service-functions span{padding:10px 12px;background:rgba(255,255,255,.09);font-size:12px;font-weight:800}.service-functions span:last-child{grid-column:1/3;background:rgba(45,190,157,.2)}
+.network-symbol{height:88px;position:relative;margin:8px 0 10px}.network-symbol b,.network-symbol i{position:absolute;width:15px;height:15px;border-radius:50%;background:var(--green)}.network-symbol b{width:22px;height:22px;left:50%;top:34px;transform:translateX(-50%);background:var(--orange)}.network-symbol i:nth-child(1){left:8%;top:8px}.network-symbol i:nth-child(2){right:8%;top:8px}.network-symbol i:nth-child(3){left:16%;bottom:2px}.network-symbol i:nth-child(4){right:16%;bottom:2px}.network-symbol:before,.network-symbol:after{content:"";position:absolute;left:18%;right:18%;top:44px;height:1px;background:rgba(31,53,86,.25);transform:rotate(18deg)}.network-symbol:after{transform:rotate(-18deg)}
+.service-source>span{font-size:12px;color:var(--muted)}
+.action-lines{display:grid;gap:9px}.action-lines span{padding-left:14px;border-left:3px solid var(--orange);font-size:13px;font-weight:800}
+.service-explain-punch{display:flex;justify-content:center;gap:12px;margin-top:28px;font-size:17px}.service-explain-punch b{color:var(--orange)}
+.service-explain:after{content:"";position:absolute;left:50%;bottom:-18px;width:1px;height:36px;background:linear-gradient(var(--green),var(--orange));z-index:4}
+@media(max-width:850px){.service-explain{padding:64px 0}.service-explain-head{display:block}.service-explain-head .lead{margin-top:18px}.service-mechanism{grid-template-columns:1fr;gap:12px;margin-top:34px}.service-arrow{transform:rotate(90deg);height:34px}.service-functions{grid-template-columns:1fr}.service-functions span:last-child{grid-column:auto}.service-explain-punch{display:block}.service-explain-punch span{display:block;margin-top:6px}.service-explain:after{bottom:-14px;height:28px}}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
@@ -429,6 +450,38 @@ main{overflow:hidden}
 <section class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">IT・OA・通信・セキュリティ商材を扱う企業様へ</div><h1>既存顧客へのIT提案を、<br>「売切り」から<br><span class="accent">「毎月のストック収益」</span>へ。</h1><p>納品した後、次の更改までお客様との接点が空いていませんか？ InfraVisionを組み合わせれば、継続監視・月次レポート・運用支援を通じて、継続収益と次の提案機会をつくれます。</p><a class="cta track" data-position="hero" href="#apply">オンラインで協業について相談する →</a><div class="hero-proof" aria-label="InfraVisionパートナーの3つの価値"><div class="hero-proof-item revenue"><span class="proof-icon" aria-hidden="true">↗</span><span class="proof-copy"><small>売上が積み上がる</small><strong>ストック収益</strong></span></div><div class="hero-proof-item relation"><span class="proof-icon" aria-hidden="true">∞</span><span class="proof-copy"><small>顧客との関係が続く</small><strong>継続接点</strong></span></div><div class="hero-proof-item support-value"><span class="proof-icon" aria-hidden="true">＋</span><span class="proof-copy"><small>専門人材を抱えなくていい</small><strong>atLIBが技術支援</strong></span></div></div><div class="hero-easy"><span class="hero-easy-mark" aria-hidden="true">✓</span><span><strong>専門知識も、大きな初期投資も必要ありません。</strong><small>まずは、御社の既存顧客1社から。</small></span></div></div><div class="hero-visual"><div class="eyebrow">売切りを、続くビジネスへ。</div><div class="flow"><div class="bubble">機器販売<br>・構築</div><div class="arrow">→</div><div class="bubble green">継続監視<br>・レポート</div><div class="arrow">→</div><div class="bubble">更改・増設<br>改善提案</div></div><div class="chips"><span class="chip">24時間自動監視</span><span class="chip">月次レポート</span><span class="chip">EoL・リスク把握</span></div></div></div></section>
 <section class="section problem creative-problem"><div class="wrap"><div class="eyebrow">こんなこと、ありませんか？</div><h2>納品したあとに、<br>営業機会が眠っている。</h2><div class="problem-scenes"><article><div class="scene-icon" aria-hidden="true">↗</div><h3>次に連絡するのは数年後</h3><p>機器を納品すると、更改や障害が起きるまで接点が空いてしまう。</p><span>納品</span><i></i><span>数年間の空白</span><i></i><span>更改</span></article><article><div class="scene-icon" aria-hidden="true">◎</div><h3>専門人材が足りない</h3><p>NWの相談を受けても、自社だけでは深く入り込めない。</p><div class="scene-callout">相談は来る。でも、提案できる範囲が限られる。</div></article><article><div class="scene-icon" aria-hidden="true">＋</div><h3>スポット売上から抜けにくい</h3><p>既存顧客はいるのに、毎月積み上がるサービスを作りにくい。</p><div class="scene-bars"><b></b><b></b><b></b><b></b></div></article></div><div class="problem-punch"><small>新規顧客を増やす前に</small><strong>すでに取引のあるお客様の中に、次の売上機会があります。</strong></div></div></section>
 <section class="section gap creative-gap" aria-labelledby="gap-title"><div class="wrap"><div class="gap-copy"><div class="eyebrow">売上機会がなかったのではなく</div><h2 id="gap-title"><span class="accent">「気づく仕組み」</span>がなかった。</h2><p class="lead">お客様の環境は日々変わっています。その変化が見えないため、次の相談が来るまで待つ営業になりがちです。</p></div><div class="gap-story"><div class="gap-before"><small>これまで</small><strong>販売・納品</strong><span>数年間の空白</span><strong>障害・更改</strong></div><div class="gap-switch">InfraVision</div><div class="gap-after"><small>これから</small><strong>販売・納品</strong><span>継続監視</span><span>月次レポート</span><span>変化に気づく</span><strong>次の提案</strong></div></div><div class="gap-message">待つ営業から、<b>変化に気づいて提案する営業</b>へ。</div></div></section>
+<section class="section service-explain" id="what-is-infravision" aria-labelledby="service-explain-title">
+  <div class="wrap">
+    <div class="service-explain-head">
+      <div class="eyebrow">その課題、InfraVisionで解決できます！</div>
+      <h2 id="service-explain-title">ネットワークを継続的に見守り、<br><span class="accent">「変化に気づく」</span>ためのサービスです。</h2>
+      <p class="lead">InfraVisionは、お客様のネットワークを24時間自動監視し、機器や構成、異常、EoL・脆弱性リスクを継続的に把握。毎月のレポートを通じて、販売後もお客様の状況を確認できる状態をつくります。</p>
+    </div>
+    <div class="service-mechanism" aria-label="InfraVisionの仕組み">
+      <div class="service-source">
+        <small>CUSTOMER NETWORK</small>
+        <strong>お客様のネットワーク</strong>
+        <div class="network-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
+        <span>ルーター・UTM・Wi-Fi・NW機器</span>
+      </div>
+      <div class="service-arrow" aria-hidden="true">→</div>
+      <div class="service-core">
+        <small>InfraVision</small>
+        <strong>継続的に<br>見守る・把握する</strong>
+        <div class="service-functions">
+          <span>24時間自動監視</span><span>機器・構成の可視化</span><span>異常検知・通知</span><span>EoL・脆弱性リスク確認</span><span>月次レポート</span>
+        </div>
+      </div>
+      <div class="service-arrow" aria-hidden="true">→</div>
+      <div class="service-outcome">
+        <small>PARTNER ACTION</small>
+        <strong>変化が、次の提案テーマになる</strong>
+        <div class="action-lines"><span>「今月、この顧客に連絡しよう」</span><span>「この機器は更改提案できそう」</span><span>「NW改善を提案しよう」</span></div>
+      </div>
+    </div>
+    <div class="service-explain-punch"><b>売った後も状況が見える。</b><span>だから、次の相談を待つのではなく、変化に気づいて提案できます。</span></div>
+  </div>
+</section>
 <section class="section collab" id="partner-model" aria-labelledby="partner-model-title"><div class="wrap"><div class="eyebrow">atLIBとの協業</div><h2 id="partner-model-title">顧客との関係は御社のまま。<br>足りない「監視・運用機能」をatLIBが補完。</h2><div class="partnership-stage"><div class="partner-side"><span class="role">御社</span><h3>顧客との関係と<br>営業を担う</h3><p>既存商材の販売・提案・フォロー</p></div><div class="partnership-core"><small>TECHNICAL BACKEND</small><strong>atLIB</strong><div class="core-services"><span>導入</span><span>監視</span><span>月次レポート</span><span>運用・NW支援</span></div><b>御社の後ろに、技術チームを。</b></div><div class="customer-side"><span class="role">お客様</span><h3>継続的に<br>状態を把握</h3><p>変化への気づき・必要な改善</p></div></div><div class="partnership-caption"><b>顧客との関係は御社のまま。</b> atLIBは前に出るのではなく、提案を支える技術基盤になります。</div></div></section>
 <section class="section plans" id="plans" aria-labelledby="plans-title"><div class="wrap"><div class="eyebrow">3段階の継続サービス</div><h2 id="plans-title">小さく始めて、必要になったらアップグレード。</h2><p class="lead section-intro">まずは「見える化」から。定型運用の自動化、さらにネットワーク管理まで、お客様の体制や課題に合わせて選択できます。</p><div class="plan-grid"><div class="plan"><div class="plan-head"><h3>モニタープラン</h3>まず、見えるようにする</div><div class="plan-body"><div class="price">9,980<small>円/月</small></div><ul><li>24時間自動監視</li><li>異常通知</li><li>構成可視化</li><li>EoL・脆弱性チェック</li><li>月次レポート</li></ul></div></div><div class="plan"><div class="plan-head"><h3>オペレーションプラン</h3>決まった運用も任せる</div><div class="plan-body"><div class="price">29,800<small>円/月</small></div><ul><li>モニターの全機能</li><li>定期運用の自動化</li><li>VPNアカウント追加・削除</li><li>パスワード変更 等</li><li>お客様依頼の軽微作業 月2回まで</li></ul></div></div><div class="plan"><div class="plan-head"><h3>マネージドプラン</h3>NW管理そのものを任せる</div><div class="plan-body"><div class="price">79,800<small>円/月</small></div><ul><li>オペレーションの全機能</li><li>営業時間内の障害一次切り分け・調査</li><li>対応方針案内</li><li>NW相談・継続管理</li></ul></div></div></div><p class="trustline">小さく始めて、必要になったらアップグレード。お客様のIT体制に合わせて、継続的な提案ができます。</p><p class="note">※初期費用：モニター 30,000円／オペレーション 50,000円／マネージド 80,000円。標準料金は監視対象50台までを想定。50台超・複数拠点・大規模環境、設計変更、機器交換・増設、現地作業等は個別見積り。</p></div></section>
 <section class="section benefits" aria-labelledby="benefits-title"><div class="wrap"><div class="eyebrow">パートナー様のメリット</div><h2 id="benefits-title">InfraVisionの契約だけで終わらない。<br>既存顧客との<span class="accent">「次の商談」</span>へ。</h2><div class="partner-value-stage"><aside class="revenue-panel"><span class="mini-label">RECURRING REVENUE</span><h3>契約が増えるほど、<br>毎月の収益が積み上がる。</h3><div class="revenue-lines"><div><span>モニター</span><b>2,480円/月</b></div><div><span>オペレーション</span><b>7,480円/月</b></div><div><span>マネージド</span><b>19,800円/月</b></div></div><div class="revenue-example"><small>マネージド10契約の場合</small><strong>198,000<em>円/月</em></strong><span>年換算 2,376,000円</span></div><p class="note">12か月継続した場合の単純計算です。契約数・継続期間を保証するものではありません。</p></aside><div class="dashboard-shell"><div class="dashboard-top"><div><small>PARTNER VIEW</small><strong>既存顧客フォロー</strong></div><span>今月の確認対象</span></div><div class="dashboard-summary"><div><small>管理顧客</small><b>4社</b></div><div><small>要確認</small><b>2社</b></div><div><small>正常</small><b>2社</b></div></div><div class="customer-table"><div><span><i class="ok"></i>顧客A</span><b>正常</b><small>継続フォロー</small></div><div class="attention"><span><i></i>顧客B</span><b>EoL確認</b><small>機器更改へ</small></div><div class="attention"><span><i></i>顧客C</span><b>アラート増加</b><small>環境確認へ</small></div><div><span><i class="ok"></i>顧客D</span><b>正常</b><small>継続フォロー</small></div></div><div class="dashboard-punch">「今月、どのお客様に連絡すべきか」が分かる。</div></div><aside class="opportunity-panel"><span class="mini-label">NEXT OPPORTUNITY</span><h3>変化が、<br>次の提案テーマになる。</h3><div class="opportunity-list"><div><b>EoL</b><span>機器更改</span></div><div><b>AP増加</b><span>Wi-Fi改善・増設</span></div><div><b>脆弱性・リスク</b><span>セキュリティ改善</span></div><div><b>NW相談</b><span>構築・改善案件</span></div></div><p><b>顧客の変化を見て提案する営業へ。</b></p></aside></div></div></section>
