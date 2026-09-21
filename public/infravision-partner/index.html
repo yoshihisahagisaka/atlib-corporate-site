@@ -143,6 +143,41 @@ header{height:64px}
 .hero h1{font-size:44px}
 .hero-visual{min-height:225px}
 }
+</style><style>
+/* v3.2 hero benefit strip */
+@media(min-width:1100px){
+.hero{padding:52px 0 42px}
+.hero h1{font-size:clamp(46px,3.55vw,58px)}
+.hero-proof{margin-top:20px;gap:10px}
+.hero-proof-item{min-height:78px;padding:12px 14px!important;border:1px solid rgba(31,53,86,.08)!important;border-left:0!important;border-radius:16px;background:rgba(255,255,255,.9)!important;display:flex;align-items:center;gap:11px;box-shadow:0 8px 24px rgba(31,53,86,.06)}
+.hero-proof-item.revenue{box-shadow:inset 0 3px 0 var(--orange),0 8px 24px rgba(31,53,86,.06)}
+.hero-proof-item.relation{box-shadow:inset 0 3px 0 var(--green),0 8px 24px rgba(31,53,86,.06)}
+.hero-proof-item.support-value{box-shadow:inset 0 3px 0 var(--navy),0 8px 24px rgba(31,53,86,.06)}
+.proof-icon{width:34px;height:34px;flex:0 0 34px;border-radius:50%;display:grid;place-items:center;font-size:20px;font-weight:950;background:var(--off);color:var(--navy)}
+.revenue .proof-icon{background:rgba(242,140,56,.13);color:var(--orange)}
+.relation .proof-icon{background:rgba(45,190,157,.13);color:#078a70}
+.proof-copy{display:block;line-height:1.25}
+.hero-proof .proof-copy small{display:block;font-size:10px;font-weight:800;color:var(--muted);margin-bottom:4px;white-space:nowrap}
+.hero-proof .proof-copy strong{font-size:16px}
+.hero-easy{margin-top:12px;display:inline-flex;align-items:center;gap:10px;padding:9px 14px 9px 10px;border-radius:999px;background:linear-gradient(90deg,rgba(45,190,157,.11),rgba(255,255,255,.8));border:1px solid rgba(45,190,157,.22)}
+.hero-easy-mark{width:27px;height:27px;flex:0 0 27px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#fff;font-weight:950}
+.hero-easy strong{display:block;font-size:12px;line-height:1.3}
+.hero-easy small{display:block;font-size:10px;color:var(--muted);margin-top:2px}
+}
+@media(min-width:1100px) and (max-height:800px){
+.hero{padding:34px 0 28px}
+.hero-proof{margin-top:14px}
+.hero-proof-item{min-height:66px}
+.hero-easy{margin-top:8px}
+}
+@media(max-width:1099px){
+.hero-proof-item{display:flex;align-items:center;gap:10px}
+.proof-icon{font-weight:950;color:var(--orange)}
+.proof-copy small{display:block;font-size:11px;color:var(--muted)}
+.hero-easy{margin-top:14px;padding:12px 14px;border-radius:16px;background:rgba(45,190,157,.1)}
+.hero-easy-mark{margin-right:8px;color:#078a70;font-weight:950}
+.hero-easy strong,.hero-easy small{display:block}
+}
 </style><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ネットワークの専門知識がなくても提案できますか？","acceptedAnswer":{"@type":"Answer","text":"はい。顧客との関係や既存商材の提案はパートナー企業が担い、InfraVisionの導入・監視基盤・月次レポート・運用支援はatLIBが支援します。"}},{"@type":"Question","name":"どのような顧客に提案しやすいですか？","acceptedAnswer":{"@type":"Answer","text":"ルーター、UTM、Wi-Fi、ネットワーク構築などを導入済みで、納品後の継続監視や運用、機器更改の把握に課題がある企業が主な対象です。"}},{"@type":"Question","name":"小規模な顧客からでも始められますか？","acceptedAnswer":{"@type":"Answer","text":"はい。標準料金は監視対象50台までを想定しており、既存顧客1社から協業について相談できます。"}},{"@type":"Question","name":"現地作業や機器交換も月額料金に含まれますか？","acceptedAnswer":{"@type":"Answer","text":"現地作業、機器交換・増設、設計変更などは標準月額範囲外で、必要に応じて個別見積りです。"}}]}</script></head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
@@ -150,7 +185,7 @@ header{height:64px}
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","xtjmp7ly4g");</script>
 <header><div class="wrap head"><div class="service-lockup"><img class="logo-img" src="/images/h_logo.png" alt="atLIB株式会社"><div class="service-name">InfraVision<small>Partner Program</small></div></div><a class="cta track" data-position="header" href="#apply">オンラインで相談する →</a></div></header>
 <main>
-<section class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">IT・OA・通信・セキュリティ商材を扱う企業様へ</div><h1>既存顧客へのIT提案を、<br>「売切り」から<br><span class="accent">「毎月のストック収益」</span>へ。</h1><p>納品した後、次の更改までお客様との接点が空いていませんか？ InfraVisionを組み合わせれば、継続監視・月次レポート・運用支援を通じて、継続収益と次の提案機会をつくれます。</p><a class="cta track" data-position="hero" href="#apply">オンラインで協業について相談する →</a><div class="hero-proof" aria-label="InfraVisionパートナーの3つの価値"><div><strong>ストック収益</strong><span>1契約ごとに毎月収益</span></div><div><strong>継続接点</strong><span>販売後も顧客とつながる</span></div><div><strong>技術支援</strong><span>導入・監視・運用を支援</span></div></div><p class="note">NWの専門知識は必要ありません。既存顧客1社からご相談いただけます。</p></div><div class="hero-visual"><div class="eyebrow">売切りを、続くビジネスへ。</div><div class="flow"><div class="bubble">機器販売<br>・構築</div><div class="arrow">→</div><div class="bubble green">継続監視<br>・レポート</div><div class="arrow">→</div><div class="bubble">更改・増設<br>改善提案</div></div><div class="chips"><span class="chip">24時間自動監視</span><span class="chip">月次レポート</span><span class="chip">EoL・リスク把握</span></div></div></div></section>
+<section class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">IT・OA・通信・セキュリティ商材を扱う企業様へ</div><h1>既存顧客へのIT提案を、<br>「売切り」から<br><span class="accent">「毎月のストック収益」</span>へ。</h1><p>納品した後、次の更改までお客様との接点が空いていませんか？ InfraVisionを組み合わせれば、継続監視・月次レポート・運用支援を通じて、継続収益と次の提案機会をつくれます。</p><a class="cta track" data-position="hero" href="#apply">オンラインで協業について相談する →</a><div class="hero-proof" aria-label="InfraVisionパートナーの3つの価値"><div class="hero-proof-item revenue"><span class="proof-icon" aria-hidden="true">↗</span><span class="proof-copy"><small>売上が積み上がる</small><strong>ストック収益</strong></span></div><div class="hero-proof-item relation"><span class="proof-icon" aria-hidden="true">∞</span><span class="proof-copy"><small>顧客との関係が続く</small><strong>継続接点</strong></span></div><div class="hero-proof-item support-value"><span class="proof-icon" aria-hidden="true">＋</span><span class="proof-copy"><small>専門人材を抱えなくていい</small><strong>atLIBが技術支援</strong></span></div></div><div class="hero-easy"><span class="hero-easy-mark" aria-hidden="true">✓</span><span><strong>専門知識も、大きな初期投資も必要ありません。</strong><small>まずは、御社の既存顧客1社から。</small></span></div></div><div class="hero-visual"><div class="eyebrow">売切りを、続くビジネスへ。</div><div class="flow"><div class="bubble">機器販売<br>・構築</div><div class="arrow">→</div><div class="bubble green">継続監視<br>・レポート</div><div class="arrow">→</div><div class="bubble">更改・増設<br>改善提案</div></div><div class="chips"><span class="chip">24時間自動監視</span><span class="chip">月次レポート</span><span class="chip">EoL・リスク把握</span></div></div></div></section>
 <section class="section problem"><div class="wrap"><div class="eyebrow">こんなこと、ありませんか？</div><h2>納品したあとに、<br>営業機会が眠っている。</h2><div class="problem-grid"><div class="card"><h3>次に連絡するのは数年後</h3><p>機器を納品すると、更改や障害が起きるまで接点が空いてしまう。</p></div><div class="card"><h3>専門人材が足りない</h3><p>NWの相談を受けても、自社だけでは深く入り込めない。</p></div><div class="card"><h3>スポット売上から抜けにくい</h3><p>既存顧客はいるのに、毎月積み上がるサービスを作りにくい。</p></div></div></div></section>
 <section class="section gap" aria-labelledby="gap-title"><div class="wrap"><div class="eyebrow">売上機会がなかったのではなく</div><h2 id="gap-title"><span class="accent">「気づく仕組み」</span>がなかった。</h2><p class="lead">お客様の環境は日々変わっています。その変化が見えないため、次の相談が来るまで待つ営業になりがちです。</p><div class="timeline"><div class="node">販売・納品</div><div class="blank"><span>数年間の空白</span></div><div class="node">障害・更改・再商談</div></div></div></section>
 <section class="section collab" id="partner-model" aria-labelledby="partner-model-title"><div class="wrap"><div class="eyebrow">atLIBとの協業</div><h2 id="partner-model-title">顧客との関係は御社のまま。<br>足りない「監視・運用機能」をatLIBが補完。</h2><div class="collab-flow"><div class="party"><h3>パートナー企業様</h3><p>顧客との関係<br>既存商材の販売<br>提案・フォロー</p></div><div class="arrow">↔</div><div class="party atlib"><h3>atLIB</h3><p>導入・監視基盤<br>月次レポート<br>運用・NW支援</p></div><div class="arrow">↔</div><div class="party"><h3>お客様</h3><p>継続的な状態把握<br>変化への気づき<br>必要な改善</p></div></div></div></section>
