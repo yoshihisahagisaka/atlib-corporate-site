@@ -464,6 +464,49 @@ main{overflow:hidden}
 @media(min-width:1100px){.hero{min-height:calc(100vh - 64px);display:flex;align-items:center}.hero h1{font-size:clamp(42px,3.45vw,56px)}}
 @media(max-width:850px){.hero{padding:54px 0;background:linear-gradient(180deg,#fff 0 62%,#eef8f6 62%)}.hero:after{inset:56% 0 0;opacity:.35}.hero-grid{grid-template-columns:1fr;gap:24px}.hero-business-model{min-height:410px}.hero-model-card{width:100%;margin-top:auto}.hero h1{font-size:clamp(36px,10vw,50px)}}
 </style>
+<style>
+/* v6.4 creative polish: continuous editorial rhythm */
+:root{--shadow-soft:0 22px 55px rgba(31,53,86,.10)}
+body{background:#fff}
+.section{position:relative;overflow:visible}
+.section .wrap{position:relative;z-index:2}
+.hero{overflow:hidden}
+.hero-model-card{transform:translateY(12px)}
+.problem{background:linear-gradient(180deg,#fff 0%,#fbfcfd 72%,#f3f7f8 100%)}
+.problem:before{content:"";position:absolute;width:420px;height:420px;border:1px solid rgba(45,190,157,.12);border-radius:50%;right:-230px;top:18%;box-shadow:0 0 0 58px rgba(45,190,157,.025),0 0 0 116px rgba(45,190,157,.018)}
+.problem .issue-row{transition:transform .22s ease,box-shadow .22s ease;background:rgba(255,255,255,.86)}
+.problem .issue-row:hover{transform:translateX(7px);box-shadow:var(--shadow-soft)}
+.gap{margin-top:-1px}
+.gap:before{content:"";position:absolute;left:0;right:0;top:-1px;height:72px;background:linear-gradient(180deg,#f3f7f8,rgba(31,53,86,0));pointer-events:none}
+.service-explain{background:linear-gradient(180deg,#fff 0%,#f5fbf9 62%,#fff 100%)}
+.service-explain-head:before{content:"InfraVision";position:absolute;right:0;top:-52px;font-size:clamp(72px,11vw,150px);line-height:1;font-weight:950;letter-spacing:-.06em;color:rgba(31,53,86,.035);z-index:-1}
+.service-core{position:relative;overflow:hidden}.service-core:after{content:"";position:absolute;width:180px;height:180px;border:34px solid rgba(45,190,157,.10);border-radius:50%;right:-92px;bottom:-102px}
+.service-explain-punch{padding:22px 28px;border-left:5px solid var(--orange);background:#fff;box-shadow:var(--shadow-soft);justify-content:flex-start}
+.collab{background:linear-gradient(180deg,#fff,#f8fafc)}
+.collab .collab-core{box-shadow:0 28px 70px rgba(31,53,86,.16)}
+.plans{background:#fff}
+.plans .plan{transition:transform .22s ease,box-shadow .22s ease}.plans .plan:hover{transform:translateY(-5px);box-shadow:var(--shadow-soft)}
+.plans .plan.featured{transform:translateY(-8px);box-shadow:0 28px 65px rgba(31,53,86,.15)}.plans .plan.featured:hover{transform:translateY(-12px)}
+.benefits{background:linear-gradient(135deg,#f8fafc 0%,#eef8f6 100%)}
+.usecases{background:#fff}
+.reason{background:linear-gradient(180deg,#fff,#f8fafc)}
+.support{background:linear-gradient(120deg,#f8fafc,#eef8f6)}
+.start{background:#fff}
+.problem+.gap,.gap+.service-explain,.service-explain+.collab,.collab+.plans,.plans+.benefits,.benefits+.usecases,.usecases+.reason,.reason+.support,.support+.start{border-top:0}
+@media(min-width:851px){
+.problem .wrap,.service-explain .wrap,.collab .wrap,.plans .wrap,.benefits .wrap,.usecases .wrap,.reason .wrap,.support .wrap,.start .wrap{max-width:1160px}
+.service-explain{padding-top:112px}
+.collab{padding-top:82px}
+.plans{padding-top:84px}
+}
+@media(max-width:850px){
+.service-explain-head:before{font-size:68px;top:-26px}
+.service-explain-punch{padding:18px}
+.problem:before{display:none}
+.plans .plan.featured,.plans .plan.featured:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){.problem .issue-row,.plans .plan{transition:none}}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
