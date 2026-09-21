@@ -178,6 +178,57 @@ header{height:64px}
 .hero-easy-mark{margin-right:8px;color:#078a70;font-weight:950}
 .hero-easy strong,.hero-easy small{display:block}
 }
+</style><style>
+/* v4 full-page creative direction */
+.problem{background:linear-gradient(180deg,#fff,#fbfdff);position:relative}
+.problem h2{max-width:760px}.problem-grid{counter-reset:pain}
+.problem .card{position:relative;padding-top:28px!important}
+.problem .card:before{counter-increment:pain;content:"0" counter(pain);display:block;font-size:12px;font-weight:950;letter-spacing:.12em;color:var(--orange);margin-bottom:18px}
+.problem .card h3{font-size:24px}.problem .card p{color:var(--muted)}
+.gap{position:relative;overflow:hidden;padding:112px 0}
+.gap:after{content:"";position:absolute;right:-80px;top:50%;width:340px;height:340px;transform:translateY(-50%);border-radius:50%;border:56px solid rgba(45,190,157,.08)}
+.gap .wrap{position:relative;z-index:1}.gap .lead{max-width:700px}
+.timeline{background:#fff;padding:30px;border-radius:28px;box-shadow:0 18px 50px rgba(31,53,86,.08)}
+.collab{position:relative;background:linear-gradient(125deg,#fff 0 62%,#f2fbf8 62% 100%)}
+.collab-flow{position:relative}.party{min-height:210px;display:grid;place-content:center;border:1px solid var(--line);box-shadow:0 12px 34px rgba(31,53,86,.06)}
+.party h3{font-size:24px}.party.atlib{transform:scale(1.05);box-shadow:0 20px 50px rgba(45,190,157,.15)}
+.plans{background:linear-gradient(180deg,#f7fbfd,#fff);position:relative}
+.plan{box-shadow:0 16px 42px rgba(31,53,86,.07);transition:.2s}.plan:nth-child(2){transform:translateY(-14px)}
+.plan-head{min-height:108px}.plan-body{min-height:330px}.price small{font-size:14px}.plans .trustline{margin-top:36px}
+.benefits{position:relative;padding:120px 0}
+.benefits .benefit-grid{grid-template-columns:.9fr 1.2fr .9fr;align-items:stretch}
+.benefits .card{border:0;box-shadow:0 18px 50px rgba(31,53,86,.08)}
+.benefits .dash{transform:translateY(-18px);border:1px solid rgba(45,190,157,.25);box-shadow:0 24px 64px rgba(45,190,157,.14)}
+.benefits .dash h3:before{content:"PARTNER VIEW";display:block;font-size:10px;letter-spacing:.14em;color:var(--green);margin-bottom:8px}
+.midcta{padding:64px 0;background:radial-gradient(circle at 82% 20%,rgba(45,190,157,.28),transparent 26%),linear-gradient(105deg,#1f3556,#274e72)}
+.midcta h2{font-size:clamp(28px,3.2vw,42px)}
+.usecases{background:#f8fafc;overflow:hidden}
+.usecases .use-grid{gap:0;margin-top:48px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.usecases .card{border:0;border-right:1px solid var(--line);border-radius:0;box-shadow:none;background:transparent;padding:36px}
+.usecases .card:last-child{border-right:0}.usecases .card h3{font-size:23px}.usecases .card p{color:var(--muted)}
+.reason{background:#fff}.reason-grid{gap:0;border-top:1px solid var(--line)}
+.reason .card{border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;padding:34px 40px 34px 0}
+.reason .card:nth-child(even){padding-left:40px;border-left:1px solid var(--line)}
+.reason .card strong{display:block;color:var(--navy);font-size:22px}
+.support{background:linear-gradient(135deg,#effbf8,#f8fbff);position:relative;overflow:hidden}
+.support:after{content:"";position:absolute;right:-110px;bottom:-170px;width:420px;height:420px;border-radius:50%;border:70px solid rgba(242,140,56,.07)}
+.support .wrap{position:relative;z-index:1}.support .steps{gap:0;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 18px 48px rgba(31,53,86,.08)}
+.support .step{border:0;border-right:1px solid var(--line);border-radius:0;padding:30px 22px}.support .step:last-child{border-right:0}.support .step b{display:block;margin-bottom:8px;font-size:18px}
+.start{background:#fff}.start .steps{position:relative;gap:14px}.start .step{border:0;background:var(--off);padding:26px 20px;min-height:120px}.start .step b{display:block;font-size:12px;letter-spacing:.08em;margin-bottom:12px}.start .step:nth-child(5){background:rgba(45,190,157,.12)}
+#faq{background:#f8fafc}#faq .reason-grid{border:0;gap:16px}
+#faq .card,#faq .card:nth-child(even){padding:28px;border:1px solid var(--line);border-radius:18px;background:#fff}
+#faq .card h3{font-size:18px}
+.apply{position:relative;overflow:hidden;background:linear-gradient(120deg,#edf8ff,#f3fff9)}
+.apply:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(242,140,56,.14),transparent 23%),radial-gradient(circle at 18% 82%,rgba(45,190,157,.16),transparent 28%)}
+.apply .wrap{position:relative}.apply-box{border:1px solid rgba(31,53,86,.06)}
+@media(max-width:850px){
+.plan:nth-child(2),.benefits .dash,.party.atlib{transform:none}
+.benefits .benefit-grid{grid-template-columns:1fr}
+.usecases .use-grid{display:grid;grid-template-columns:1fr;border:0}
+.usecases .card{border-right:0;border-bottom:1px solid var(--line);padding:28px 0}
+.reason .card,.reason .card:nth-child(even){padding:26px 0;border-left:0}
+.support .steps{display:grid;grid-template-columns:1fr 1fr}.support .step{border-right:0;border-bottom:1px solid var(--line)}
+}
 </style><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ネットワークの専門知識がなくても提案できますか？","acceptedAnswer":{"@type":"Answer","text":"はい。顧客との関係や既存商材の提案はパートナー企業が担い、InfraVisionの導入・監視基盤・月次レポート・運用支援はatLIBが支援します。"}},{"@type":"Question","name":"どのような顧客に提案しやすいですか？","acceptedAnswer":{"@type":"Answer","text":"ルーター、UTM、Wi-Fi、ネットワーク構築などを導入済みで、納品後の継続監視や運用、機器更改の把握に課題がある企業が主な対象です。"}},{"@type":"Question","name":"小規模な顧客からでも始められますか？","acceptedAnswer":{"@type":"Answer","text":"はい。標準料金は監視対象50台までを想定しており、既存顧客1社から協業について相談できます。"}},{"@type":"Question","name":"現地作業や機器交換も月額料金に含まれますか？","acceptedAnswer":{"@type":"Answer","text":"現地作業、機器交換・増設、設計変更などは標準月額範囲外で、必要に応じて個別見積りです。"}}]}</script></head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
