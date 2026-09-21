@@ -507,6 +507,20 @@ body{background:#fff}
 }
 @media(prefers-reduced-motion:reduce){.problem .issue-row,.plans .plan{transition:none}}
 </style>
+<style>
+/* v6.5 conversion narrative: connect offer -> price -> partner business */
+.service-explain-punch{margin-bottom:-34px;position:relative;z-index:5}
+.collab{padding-top:122px}
+.collab:before{content:"";position:absolute;left:50%;top:0;width:1px;height:72px;background:linear-gradient(var(--orange),var(--green));opacity:.55}
+.plans{padding-bottom:54px}
+.plans:after{content:"";position:absolute;left:50%;bottom:-28px;width:56px;height:56px;background:#fff;border-right:1px solid rgba(31,53,86,.08);border-bottom:1px solid rgba(31,53,86,.08);transform:translateX(-50%) rotate(45deg);z-index:3}
+.benefits{padding-top:108px}
+.benefits:before{content:"料金はコストではなく、御社の継続ビジネスへ。";display:block;max-width:1160px;margin:0 auto 42px;padding:0 24px;font-size:clamp(25px,3vw,42px);font-weight:950;line-height:1.35;letter-spacing:-.03em;color:var(--navy);text-align:center}
+.usecases{padding-top:72px}
+.reason{padding-top:80px}
+.start{padding-top:78px}
+@media(max-width:850px){.service-explain-punch{margin-bottom:-20px}.collab{padding-top:94px}.plans{padding-bottom:44px}.benefits{padding-top:82px}.benefits:before{margin-bottom:28px;padding:0 20px;font-size:28px}}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
