@@ -613,6 +613,21 @@ footer{padding-bottom:82px}
 .partner-support{padding:100px 0 78px}.support-copy{display:grid;grid-template-columns:1.2fr .8fr;gap:54px;align-items:end}.support-copy p{margin:0;color:var(--muted)}.support-track{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;align-items:center;margin-top:48px}.support-track>div{padding:24px;border-top:3px solid var(--green);background:#fff}.support-track small{display:block;color:var(--muted);font-weight:900}.support-track b{display:block;margin-top:5px}.support-track>i{text-align:center;font-style:normal;color:var(--orange)}.support-focus{display:grid;grid-template-columns:auto 1fr auto auto 1fr;gap:12px;align-items:center;margin-top:18px;padding:20px 24px;background:var(--navy);color:#fff}.support-focus span{font-size:11px;color:#79e2ca;font-weight:900}.support-focus em{font-style:normal;color:var(--orange);font-size:22px}.support-focus strong{font-size:14px}
 @media(max-width:850px){.story-shift{padding-top:64px}.story-lead h2{font-size:36px}.story-lead>p{font-size:15px}.story-friction{grid-template-columns:1fr;margin-top:36px}.story-friction article,.story-friction article+article{padding:20px 0;border-left:0;border-bottom:1px solid var(--line)}.story-turn{margin-top:38px;padding:44px 16px}.turn-line{gap:8px}.story-turn h3{font-size:34px}.turn-result{align-items:stretch;flex-direction:column}.turn-result i{transform:rotate(90deg);text-align:center}.service-explain-head h2,.collab h2,.offer-range h2,.business-result h2,.sales-scenes h2,.partner-support h2,#faq h2{font-size:32px}.offer-lanes,.signal-flow,.sales-scenes-head,.support-copy{grid-template-columns:1fr}.offer-lanes article+article{border-left:0;border-top:1px solid var(--line)}.offer-lanes article{padding:24px 0}.detail-gate{display:block}.detail-gate span{display:block;margin-top:6px}.signal-source small,.signal-action small{grid-column:1/3}.sales-scenes-list article{grid-template-columns:1fr;padding:24px 0;gap:10px}.sales-scenes-list article>i{transform:rotate(90deg)}.support-track{grid-template-columns:1fr}.support-track>i{transform:rotate(90deg);padding:6px}.support-focus{grid-template-columns:1fr}.support-focus em{display:none}.close-next{margin-top:24px}}
 </style>
+<style>
+/* v7.2 flyer asset composition */
+.flyer-asset,.story-visual{margin-top:42px;overflow:hidden;background:#fff;box-shadow:0 28px 70px rgba(31,53,86,.12)}
+.flyer-asset img,.story-visual img{display:block;width:100%;height:auto}
+.story-visual{margin-top:54px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);box-shadow:none;background:var(--navy)}
+.story-visual img{width:min(1440px,100%);margin:auto}
+.service-explain-head{grid-template-columns:1fr .9fr}.service-explain{background:#fff}.service-visual-line{margin-top:44px;padding:0;border-top:2px solid var(--navy);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:0}.service-visual-line span,.service-visual-line strong{padding:22px 24px;font-size:14px}.service-visual-line span{flex:1;border-right:1px solid var(--line);font-weight:800}.service-visual-line strong{background:var(--orange);color:#fff;font-size:16px}
+.service-range-asset{box-shadow:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.support-asset{margin-top:44px;background:var(--navy);box-shadow:none}
+.offer-range,.partner-support{overflow:hidden}
+.detail-gate{margin-top:24px}
+.story-friction article,.offer-range,.business-result,.sales-scenes,.partner-support{border-radius:0}
+#faq .card{border-radius:0!important}
+@media(max-width:850px){.flyer-asset,.story-visual{overflow-x:auto}.service-range-asset img,.support-asset img{width:900px;max-width:none}.story-visual img{width:900px;max-width:none}.service-visual-line{display:grid;grid-template-columns:1fr 1fr}.service-visual-line span{border-bottom:1px solid var(--line)}.service-visual-line strong{grid-column:1/3;text-align:center}.service-explain-head{display:block}}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
@@ -624,7 +639,7 @@ footer{padding-bottom:82px}
 <section class="section story-shift" aria-labelledby="story-shift-title"><div class="wrap">
 <div class="story-lead"><h2 id="story-shift-title">新規顧客を増やす前に。<br><span>すでに取引のあるお客様</span>の中に、次の売上機会があります。</h2><p>機器やネットワークを納品したあとも、お客様の環境は変わり続けます。ところが、その変化が見えなければ、次の相談が来るまで営業機会には気づけません。</p></div>
 <div class="story-friction"><article><strong>次に連絡するのは数年後</strong><p>納品後、更改や障害まで顧客との接点が空いてしまう。</p></article><article><strong>NWの相談を深掘りできない</strong><p>相談はあっても、専門人材が足りず提案範囲を広げにくい。</p></article><article><strong>単発の売上で終わってしまう</strong><p>既存顧客はいるのに、継続的な接点と収益につながりにくい。</p></article></div>
-<div class="story-turn"><div class="turn-line"><span>納品</span><i></i><b>その後の変化が見えない</b><i></i><span>相談を待つ</span></div><p>更改・増設・改善の兆しを、こちらから見つけられたら。</p><h3>待つ営業から、<br><em>変化に気づいて提案する営業</em>へ。</h3><div class="turn-result"><span>変化を捉える</span><i>→</i><span>連絡する理由ができる</span><i>→</i><strong>次の提案へ</strong></div></div>
+<div class="story-visual"><img src="/infravision-partner/assets/story-shift.svg" alt="納品後の顧客環境の変化をInfraVisionで捉え、待つ営業から次の提案を生み出す営業へ変える流れ"></div>
 </div></section>
 <section class="section service-explain" id="what-is-infravision" aria-labelledby="service-explain-title">
   <div class="wrap">
@@ -633,41 +648,14 @@ footer{padding-bottom:82px}
       <h2 id="service-explain-title">その変化を捉えて、<br><span class="accent">次の提案につなげる。</span><br>それがInfraVisionです。</h2>
       <p class="lead">InfraVisionは、お客様のネットワークを24時間自動監視し、機器や構成、異常、EoL・脆弱性リスクを継続的に把握。販売後の変化を見えるようにし、顧客へ連絡する理由と、更改・増設・改善を提案するきっかけをつくります。</p>
     </div>
-    <div class="service-mechanism" aria-label="InfraVisionの仕組み">
-      <div class="service-source">
-        <small>CUSTOMER NETWORK</small>
-        <strong>お客様のネットワーク</strong>
-        <div class="network-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
-        <span>ルーター・UTM・Wi-Fi・NW機器</span>
-      </div>
-      <div class="service-arrow" aria-hidden="true">→</div>
-      <div class="service-core">
-        <small>InfraVision</small>
-        <strong>継続的に<br>見守る・把握する</strong>
-        <div class="service-functions">
-          <span>24時間自動監視</span><span>機器・構成の可視化</span><span>異常検知・通知</span><span>EoL・脆弱性リスク確認</span><span>月次レポート</span>
-        </div>
-      </div>
-      <div class="service-arrow" aria-hidden="true">→</div>
-      <div class="service-outcome">
-        <small>PARTNER ACTION</small>
-        <strong>変化が、次の提案テーマになる</strong>
-        <div class="action-lines"><span>「今月、この顧客に連絡しよう」</span><span>「この機器は更改提案できそう」</span><span>「NW改善を提案しよう」</span></div>
-      </div>
-    </div>
-    <div class="service-explain-punch"><b>売った後も状況が見える。</b><span>だから、次の相談を待つのではなく、変化に気づいて提案できます。</span></div>
+    <div class="service-visual-line" aria-label="InfraVisionが捉える変化"><span>EoL</span><span>異常・アラート</span><span>機器・構成の変化</span><span>月次レポート</span><strong>→ 次の提案へ</strong></div><div class="service-explain-punch"><b>売った後も状況が見える。</b><span>だから、次の相談を待つのではなく、変化に気づいて提案できます。</span></div>
   </div>
 </section>
 <section class="section collab" id="partner-model" aria-labelledby="partner-model-title"><div class="wrap"><h2 id="partner-model-title">顧客との関係は御社のまま。<br>足りない「監視・運用機能」をatLIBが補完。</h2><div class="partnership-stage"><div class="partner-side"><span class="role">御社</span><h3>顧客との関係と<br>営業を担う</h3><p>既存商材の販売・提案・フォロー</p></div><div class="partnership-core"><small>TECHNICAL BACKEND</small><strong>atLIB</strong><div class="core-services"><span>導入</span><span>監視</span><span>月次レポート</span><span>運用・NW支援</span></div><b>御社の後ろに、技術チームを。</b></div><div class="customer-side"><span class="role">お客様</span><h3>継続的に<br>状態を把握</h3><p>変化への気づき・必要な改善</p></div></div><div class="partnership-caption"><b>顧客との関係は御社のまま。</b> atLIBは前に出るのではなく、提案を支える技術基盤になります。</div></div></section>
 <section class="section plans offer-range" id="plans" aria-labelledby="plans-title"><div class="wrap">
 <h2 id="plans-title">お客様によって、必要な支援は違う。<br><span class="accent">監視から運用・管理まで</span>提案できます。</h2>
 <p class="lead section-intro">「まず状態を把握したい」「日々の運用も任せたい」「ネットワーク管理まで支えてほしい」。顧客の課題に合わせて、提案範囲を変えられます。</p>
-<div class="offer-lanes">
-<article><small>MONITOR</small><h3>まず、見えるようにする</h3><p>24時間監視・異常通知・構成可視化・EoLや脆弱性リスクの確認・月次レポート。</p></article>
-<article><small>OPERATION</small><h3>決まった運用も任せる</h3><p>監視に加えて、定期運用の自動化や、合意した範囲の軽微な運用作業まで。</p></article>
-<article><small>MANAGED</small><h3>NW管理まで支える</h3><p>障害一次切り分け・調査、対応方針案内、NW相談、継続的な管理と改善提案まで。</p></article>
-</div>
-<div class="detail-gate"><b>料金・パートナー条件・販売方法の詳細は、オンライン面談でご案内します。</b><span>御社の商材や顧客層を伺い、提案しやすい組み合わせとあわせてご説明します。</span></div>
+<div class="flyer-asset service-range-asset"><img src="/infravision-partner/assets/service-range.svg" alt="InfraVisionは顧客の課題に合わせ、監視から運用、ネットワーク管理まで支援範囲を選べます"></div><div class="detail-gate"><b>料金・パートナー条件・販売方法の詳細は、オンライン面談でご案内します。</b><span>御社の商材や顧客層を伺い、提案しやすい組み合わせとあわせてご説明します。</span></div>
 </div></section>
 <section class="section benefits business-result" aria-labelledby="benefits-title"><div class="wrap">
 <h2 id="benefits-title">監視契約を増やすことが目的ではありません。<br><span class="accent">既存顧客との接点を、次の商談につなげる。</span></h2>
@@ -688,9 +676,7 @@ footer{padding-bottom:82px}
 </div></div></section>
 <section class="section close-story partner-support" aria-labelledby="close-story-title"><div class="wrap">
 <div class="support-copy"><h2 id="close-story-title">御社は、顧客との関係と提案に集中。<br><span class="accent">技術面はatLIBが後ろから支えます。</span></h2><p>パートナー様に監視・運用の専門部隊を新設していただく必要はありません。「このお客様に提案できる？」という段階から、導入後の運用まで支援します。</p></div>
-<div class="support-track"><div><small>提案前</small><b>対象顧客・提案内容を一緒に整理</b></div><i>→</i><div><small>導入</small><b>監視環境の立ち上げを支援</b></div><i>→</i><div><small>販売後</small><b>監視・運用・レポートを継続支援</b></div></div>
-<div class="support-focus"><span>パートナー様</span><strong>顧客関係・営業・次の提案</strong><em>＋</em><span>atLIB</span><strong>監視・運用・技術支援</strong></div>
-<div class="close-next"><div><b>既存顧客1社から、提案できそうか確認できます。</b><span>具体的な案件がまだなくても構いません。</span></div><a class="cta track" data-position="pre_faq" href="#apply">オンラインで協業について相談する →</a></div>
+<div class="flyer-asset support-asset"><img src="/infravision-partner/assets/partner-support.svg" alt="パートナーは顧客関係と提案に集中し、atLIBが提案支援から導入、監視運用、月次フォローまで技術面を支援する協業モデル"></div><div class="close-next"><div><b>既存顧客1社から、提案できそうか確認できます。</b><span>具体的な案件がまだなくても構いません。</span></div><a class="cta track" data-position="pre_faq" href="#apply">オンラインで協業について相談する →</a></div>
 </div></section>
 <section class="section" id="faq" aria-labelledby="faq-title"><div class="wrap"><h2 id="faq-title">協業をご検討の企業様から、よくいただくご質問</h2><div class="reason-grid" style="margin-top:38px"><div class="card"><h3>ネットワークの専門知識がなくても提案できますか？</h3><p>はい。顧客との関係や既存商材の提案はパートナー企業様が担い、InfraVisionの導入・監視基盤・月次レポート・運用支援はatLIBが支援します。</p></div><div class="card"><h3>どのような顧客に提案しやすいですか？</h3><p>ルーター、UTM、Wi-Fi、ネットワーク構築などを導入済みで、納品後の継続監視や運用、機器更改の把握に課題がある企業が主な対象です。</p></div><div class="card"><h3>小規模な顧客からでも始められますか？</h3><p>はい。標準料金は監視対象50台までを想定しており、既存顧客1社から協業についてご相談いただけます。</p></div><div class="card"><h3>現地作業や機器交換も月額料金に含まれますか？</h3><p>現地作業、機器交換・増設、設計変更などは月額サービスの標準範囲外で、必要に応じて個別にお見積りします。</p></div></div></div></section><section class="apply" id="apply" aria-labelledby="apply-title"><div class="wrap"><div class="apply-box"><div class="apply-story"><div class="eyebrow">Partner Consultation</div><h2 id="apply-title">売って終わりから、<br><span class="accent">関係が続くビジネス</span>へ。</h2><div class="continuity-flow"><span>監視</span><i>→</i><span>変化に気づく</span><i>→</i><span>相談</span><i>→</i><span>次の提案</span></div><p class="lead">既存顧客との関係を、次の更改まで眠らせない。まずは御社の顧客1社で提案できそうか、一緒に整理しませんか？</p><div class="apply-assurance"><b>既存顧客1社から</b><b>NW専門知識不要</b><b>オンライン相談</b></div><div class="consult-steps"><span><i>1</i>3項目を入力</span><b>→</b><span><i>2</i>空き日時を選択</span><b>→</b><span><i>3</i>オンライン相談</span></div><p class="consult-note">まだ具体的な案件がなくても構いません。協業条件や、どんな既存顧客に提案しやすいかの確認だけでもご相談いただけます。</p></div><form id="partner-form"><input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_content"><input type="hidden" name="utm_term"><input type="hidden" name="cta_position"><input type="hidden" name="landing_url"><input type="hidden" name="referrer"><input type="text" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><div class="form-row"><label for="company">会社名 <span class="required">必須</span></label><input id="company" required autocomplete="organization" name="company"></div><div class="form-row"><label for="name">お名前 <span class="required">必須</span></label><input id="name" required autocomplete="name" name="name"></div><div class="form-row"><label for="email">メールアドレス <span class="required">必須</span></label><input id="email" required autocomplete="email" inputmode="email" type="email" name="email"></div><div class="form-row"><label for="phone">電話番号（任意）</label><input id="phone" autocomplete="tel" inputmode="tel" name="phone"></div><div class="form-row"><label for="business">主な事業・取扱商材</label><select id="business" name="business"><option value="">選択してください</option><option>OA・複合機</option><option>ネットワーク・通信</option><option>セキュリティ</option><option>IT・システム</option><option>その他</option></select></div><div class="form-row"><label for="message">ご相談内容（任意）</label><textarea id="message" name="message"></textarea></div><button class="cta submit" type="submit">送信して日程を選ぶ →</button><p class="note" id="form-status">送信後、そのままオンライン相談の日程をお選びいただけます。</p></form><div class="timerex-wrap" id="timerex-wrap" aria-live="polite"><h3>続けて、オンライン相談の日時をお選びください。</h3><p>空いている日時を選択すると、そのまま日程調整できます。</p><div id="timerex_calendar" data-url="https://timerex.net/s/yoshihisa.hagisaka_e611/f631db6d"></div><p class="timerex-fallback">カレンダーが表示されない場合は、<a href="https://timerex.net/s/yoshihisa.hagisaka_e611/f631db6d" target="_blank" rel="noopener noreferrer">TimeRexの日程調整ページを開く →</a></p></div></div></div></section>
 </main>
