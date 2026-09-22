@@ -711,6 +711,30 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
 .integrated-visual{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important}.integrated-visual img{display:block;width:100%;height:auto!important;object-fit:contain!important;box-shadow:none!important}.visibility-gap-visual{max-width:1180px;margin:34px auto 0}.collaboration-flow-visual{max-width:1240px;margin-top:32px;margin-left:auto!important;margin-right:auto!important}.support-system-visual{max-width:1180px;margin:36px auto 0}.trust-stage{display:none!important}.trust{background:linear-gradient(180deg,#f7fafb 0%,#fff 100%)}.trust .trust-strip{max-width:1080px;margin:12px auto 0;box-shadow:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.missed,.partnership,.mechanism,.trust{position:relative}.missed .journey-copy,.partnership .journey-copy,.mechanism .journey-copy,.trust .journey-copy{position:relative;z-index:1}.missed .journey-visual,.partnership .journey-visual{border-radius:0!important}.partnership{background:#fff}.mechanism{background:#f8fbfc}.mechanism .service-flow-image{background:transparent!important}.missed{padding-bottom:82px}.mechanism{padding-top:88px}.partnership{padding-top:86px}.trust{padding-top:88px}
 @media(max-width:850px){.visibility-gap-visual,.collaboration-flow-visual,.support-system-visual{margin-top:24px;margin-left:-8px!important;margin-right:-8px!important;overflow-x:auto!important}.visibility-gap-visual img,.collaboration-flow-visual img,.support-system-visual img{min-width:760px}.trust .trust-strip{margin-top:8px}}
 </style>
+<style>
+/* v10.5 hero refresh */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#f7fafc 100%);padding:28px 0 58px}
+.hero::after{content:"";position:absolute;inset:auto -10% -140px 35%;height:280px;background:radial-gradient(circle,rgba(45,190,157,.12),rgba(45,190,157,0) 68%);pointer-events:none}
+.hero .container{max-width:1320px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:center}
+.hero-copy{max-width:920px;position:relative;z-index:2}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;padding:7px 12px;border:1px solid rgba(31,53,86,.12);border-radius:999px;background:rgba(255,255,255,.82);font-size:.86rem;font-weight:700;letter-spacing:.04em}
+.hero h1{font-size:clamp(2.45rem,5vw,5.15rem);line-height:1.04;letter-spacing:-.04em;max-width:980px;margin:0}
+.hero h1 strong{color:var(--orange)}
+.hero .lead{max-width:800px;font-size:clamp(1.05rem,1.55vw,1.28rem);line-height:1.8;margin-top:20px}
+.hero-visual{position:relative;z-index:1;margin-top:8px;border-radius:28px;overflow:hidden;box-shadow:0 22px 55px rgba(31,53,86,.12)}
+.hero-visual img{display:block;width:100%;height:auto}
+.hero .hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:24px}
+.hero .hero-proof{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.hero .hero-proof span{display:inline-flex;align-items:center;padding:9px 13px;border-radius:999px;background:#fff;border:1px solid rgba(31,53,86,.1);font-size:.92rem;font-weight:700;box-shadow:0 6px 18px rgba(31,53,86,.05)}
+@media(max-width:850px){
+  .hero{padding:20px 0 34px}
+  .hero h1{font-size:clamp(2.15rem,11vw,3.35rem)}
+  .hero .lead{font-size:1rem;line-height:1.75}
+  .hero-visual{margin-left:-10px;margin-right:-10px;border-radius:18px;overflow-x:auto}
+  .hero-visual img{min-width:860px}
+}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
@@ -719,7 +743,7 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
 <header><div class="wrap head"><div class="service-lockup"><img class="logo-img" src="/images/h_logo.png" alt="atLIB株式会社"><div class="service-name">InfraVision<small>Partner Program</small></div></div><a class="cta track" data-position="header" href="#apply">提案できるか相談する →</a></div></header>
 <main>
 <section class="hero hero-overlay" aria-labelledby="hero-title">
-  <div class="hero-bg" aria-hidden="true"><img src="/infravision-partner/assets/infravision-partner-hero.png" alt=""></div>
+  <div class="hero-bg" aria-hidden="true"><img src="/infravision-partner/assets/infravision-partner-hero-v2.png" alt=""></div>
   <div class="wrap hero-overlay-inner"><div class="hero-copy">
     <div class="hero-product"><span>atLIB</span><strong>InfraVision</strong><small>PARTNER PROGRAM</small></div><div class="hero-kicker"><span>販売・協業パートナー募集</span><b>ネットワーク監視・運用サービス</b></div>
     <h1 id="hero-title" class="hero-headline"><span class="hero-line hero-line-1">新規顧客を増やす前に。</span><span class="hero-line hero-line-2">すでに取引のあるお客様の中に、</span><span class="hero-line hero-line-3">次の売上機会があります。</span></h1>
