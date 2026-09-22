@@ -760,6 +760,58 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
   .hero-visual img{min-width:0!important;width:100%!important;max-width:none!important}
 }
 </style>
+<style>
+/* v10.7 approved-comp hero rebuild */
+.hero.hero-comp{position:relative;overflow:hidden!important;padding:0!important;background:#fff!important;min-height:0!important}
+.hero-comp .hero-comp-inner{position:relative;max-width:1600px!important;min-height:760px;margin:0 auto;padding:0 52px!important;display:flex!important;align-items:stretch!important}
+.hero-comp .hero-copy{position:relative;z-index:3;width:48%;max-width:700px!important;padding:52px 0 76px!important;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.hero-comp .hero-visual{position:absolute!important;z-index:1!important;inset:0 0 0 auto!important;width:100%!important;height:100%!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:hidden!important;background:#fff!important;display:block!important}
+.hero-comp .hero-visual:after{content:"";position:absolute;inset:0 auto 0 0;width:52%;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.99) 42%,rgba(255,255,255,.90) 68%,rgba(255,255,255,0) 100%);pointer-events:none}
+.hero-comp .hero-visual img{position:absolute!important;right:0!important;top:50%!important;transform:translateY(-50%)!important;width:100%!important;height:100%!important;max-width:none!important;min-width:0!important;object-fit:contain!important;object-position:right center!important;filter:none!important}
+.hero-brandline{display:flex;align-items:baseline;gap:8px;color:#1f3556;margin-bottom:4px;white-space:nowrap}
+.hero-brandline span{font-size:1rem;font-weight:900}
+.hero-brandline strong{font-size:2.25rem;line-height:1;font-weight:900;letter-spacing:-.04em}
+.hero-brandline small{font-size:.68rem;font-weight:900;letter-spacing:.16em;color:#168f78}
+.hero-subbrand{margin:10px 0 30px!important;font-size:.94rem!important;font-weight:700;color:#1f3556}
+.hero-comp h1{margin:0!important;max-width:680px!important;font-size:clamp(3.15rem,4.3vw,4.9rem)!important;line-height:1.08!important;letter-spacing:-.055em!important;color:#17375d!important}
+.hero-comp h1>span,.hero-comp h1>strong{display:block}
+.hero-comp h1>strong{margin-top:9px;font-weight:900}
+.hero-comp h1 em{font-style:normal;color:#159f88}
+.hero-comp h1 b{color:#f47f20}
+.hero-comp .hero-definition{margin:24px 0 0!important;max-width:650px!important;font-size:1.08rem!important;line-height:1.75!important;font-weight:600;color:#17375d!important}
+.hero-benefits{display:flex;gap:18px;margin:28px 0 22px}
+.hero-benefits>div{width:150px;height:150px;border-radius:50%;background:rgba(238,250,248,.93);border:1px solid rgba(45,190,157,.12);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 8px 24px rgba(31,53,86,.04)}
+.hero-benefits span{height:36px;color:#159f88;font-size:1.55rem;font-weight:900;letter-spacing:-.18em}
+.hero-benefits b{font-size:.9rem;line-height:1.45;color:#17375d}
+.hero-primary-cta{min-width:520px!important;justify-content:center!important;padding:20px 30px!important;border-radius:16px!important;font-size:1.12rem!important;box-shadow:0 12px 26px rgba(242,140,56,.24)!important}
+.hero-scroll{position:absolute;z-index:4;bottom:10px;left:50%;transform:translateX(-50%);font-size:.7rem;font-weight:800;letter-spacing:.12em;color:#315271;display:flex;flex-direction:column;align-items:center;line-height:1.1}
+.hero-scroll span{font-size:1.25rem}
+@media(max-width:1200px){
+ .hero-comp .hero-comp-inner{min-height:700px;padding:0 34px!important}
+ .hero-comp .hero-copy{width:52%;padding-top:42px!important}
+ .hero-comp h1{font-size:clamp(2.8rem,4.7vw,4.2rem)!important}
+ .hero-benefits>div{width:130px;height:130px}
+ .hero-primary-cta{min-width:440px!important}
+}
+@media(max-width:850px){
+ .hero-comp .hero-comp-inner{display:flex!important;flex-direction:column!important;min-height:0;padding:0 20px 34px!important}
+ .hero-comp .hero-copy{width:100%;max-width:none!important;padding:30px 0 20px!important}
+ .hero-brandline strong{font-size:1.9rem}
+ .hero-brandline small{font-size:.58rem}
+ .hero-subbrand{margin:8px 0 22px!important}
+ .hero-comp h1{font-size:clamp(2.55rem,11vw,3.55rem)!important}
+ .hero-comp .hero-definition{font-size:1rem!important}
+ .hero-benefits{width:100%;gap:8px;justify-content:space-between}
+ .hero-benefits>div{width:31%;height:auto;aspect-ratio:1/1}
+ .hero-benefits b{font-size:.76rem}
+ .hero-primary-cta{min-width:0!important;width:100%!important}
+ .hero-comp .hero-visual{position:relative!important;inset:auto!important;width:calc(100% + 40px)!important;height:auto!important;margin:0 -20px!important;overflow:hidden!important}
+ .hero-comp .hero-visual:after{display:none}
+ .hero-comp .hero-visual img{position:relative!important;right:auto!important;top:auto!important;transform:none!important;width:100%!important;height:auto!important;object-fit:contain!important}
+ .hero-scroll{display:none}
+ .pc-only{display:none}
+}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
@@ -767,15 +819,23 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","xtjmp7ly4g");</script>
 <header><div class="wrap head"><div class="service-lockup"><img class="logo-img" src="/images/h_logo.png" alt="atLIB株式会社"><div class="service-name">InfraVision<small>Partner Program</small></div></div><a class="cta track" data-position="header" href="#apply">提案できるか相談する →</a></div></header>
 <main>
-<section class="hero hero-overlay" aria-labelledby="hero-title">
-  <div class="hero-bg" aria-hidden="true"><img src="/infravision-partner/assets/infravision-partner-hero-visual.png" alt=""></div>
-  <div class="wrap hero-overlay-inner"><div class="hero-copy">
-    <div class="hero-product"><span>atLIB</span><strong>InfraVision</strong><small>PARTNER PROGRAM</small></div><div class="hero-kicker"><span>販売・協業パートナー募集</span><b>ネットワーク監視・運用サービス</b></div>
-    <h1 id="hero-title" class="hero-headline"><span class="hero-line hero-line-1">新規顧客を増やす前に。</span><span class="hero-line hero-line-2">すでに取引のあるお客様の中に、</span><span class="hero-line hero-line-3">次の売上機会があります。</span></h1>
-    <p class="hero-definition">InfraVisionは、納品後のネットワークの変化を捉え、<b>更改・増設・改善の提案機会</b>につなげる監視・運用サービスです。</p>
-    <a class="cta track" data-position="hero" href="#apply">既存顧客に提案できるか相談する →</a>
-    <div class="hero-easy"><span class="hero-easy-mark" aria-hidden="true">✓</span><span><strong>NW専門部隊を持たずに始められます。</strong><small>まずは、御社の既存顧客1社から。</small></span></div>
-  </div></div>
+<section class="hero hero-comp" aria-labelledby="hero-title">
+  <div class="wrap hero-comp-inner">
+    <div class="hero-copy">
+      <div class="hero-brandline" aria-label="atLIB InfraVision Partner Program"><span>atLIB</span><strong>InfraVision</strong><small>PARTNER PROGRAM</small></div>
+      <p class="hero-subbrand">ITインフラの「見える化」で、パートナー様のビジネスを拡大する</p>
+      <h1 id="hero-title"><span>新規顧客を増やす前に。</span><strong><em>既存顧客</em>を、<b>次の売上へ。</b></strong></h1>
+      <p class="hero-definition">InfraVisionなら、納品後のお客様の変化を継続的に捉え、<br class="pc-only">更改・増設・改善の提案機会につなげられます。<br class="pc-only">NW専門部隊を持たずに始められる、ストック型ITサービスです。</p>
+      <div class="hero-benefits" aria-label="InfraVisionパートナープログラムのメリット">
+        <div><span aria-hidden="true">▥</span><b>既存顧客の<br>収益機会を広げる</b></div>
+        <div><span aria-hidden="true">●●●</span><b>専門知識不要<br>atLIBが技術支援</b></div>
+        <div><span aria-hidden="true">↻</span><b>継続収益モデル<br>ストックで安定</b></div>
+      </div>
+      <a class="cta track hero-primary-cta" data-position="hero" href="#apply">今すぐオンラインで相談する <span>→</span></a>
+    </div>
+    <div class="hero-visual" aria-hidden="true"><img src="/infravision-partner/assets/infravision-partner-hero-visual.png" alt=""></div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">SCROLL <span>⌄</span></div>
 </section>
 
 <section class="journey-section missed" aria-labelledby="missed-title"><div class="wrap">
