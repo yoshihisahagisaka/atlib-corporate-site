@@ -735,6 +735,31 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
   .hero-visual img{min-width:860px}
 }
 </style>
+<style>
+/* v10.6 dedicated hero visual layout */
+.hero{padding:34px 0 54px;background:linear-gradient(180deg,#fff 0%,#f8fbfd 100%);overflow:hidden}
+.hero .container{max-width:1380px}
+.hero-grid{display:grid;grid-template-columns:minmax(500px,.92fr) minmax(660px,1.18fr);gap:34px;align-items:center;min-height:660px}
+.hero-copy{max-width:640px;z-index:3}
+.hero h1{font-size:clamp(3rem,4.7vw,5.15rem);line-height:1.03;letter-spacing:-.045em}
+.hero h1 strong{color:var(--orange)}
+.hero .lead{max-width:610px}
+.hero-visual{margin:0;overflow:visible!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;align-self:stretch;display:flex;align-items:center;justify-content:flex-end}
+.hero-visual img{display:block;width:min(100%,980px);height:auto!important;max-height:none!important;object-fit:contain!important;object-position:right center!important;filter:none!important}
+.hero .hero-proof{max-width:620px}
+@media(max-width:1100px){
+  .hero-grid{grid-template-columns:1fr;min-height:auto;gap:26px}
+  .hero-copy{max-width:800px}
+  .hero-visual{justify-content:center}
+  .hero-visual img{width:100%;max-width:1050px}
+}
+@media(max-width:850px){
+  .hero{padding:22px 0 34px}
+  .hero h1{font-size:clamp(2.35rem,11vw,3.55rem)}
+  .hero-visual{margin-left:0!important;margin-right:0!important;overflow:visible!important}
+  .hero-visual img{min-width:0!important;width:100%!important;max-width:none!important}
+}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
@@ -743,7 +768,7 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
 <header><div class="wrap head"><div class="service-lockup"><img class="logo-img" src="/images/h_logo.png" alt="atLIB株式会社"><div class="service-name">InfraVision<small>Partner Program</small></div></div><a class="cta track" data-position="header" href="#apply">提案できるか相談する →</a></div></header>
 <main>
 <section class="hero hero-overlay" aria-labelledby="hero-title">
-  <div class="hero-bg" aria-hidden="true"><img src="/infravision-partner/assets/infravision-partner-hero-v2.png" alt=""></div>
+  <div class="hero-bg" aria-hidden="true"><img src="/infravision-partner/assets/infravision-partner-hero-visual.png" alt=""></div>
   <div class="wrap hero-overlay-inner"><div class="hero-copy">
     <div class="hero-product"><span>atLIB</span><strong>InfraVision</strong><small>PARTNER PROGRAM</small></div><div class="hero-kicker"><span>販売・協業パートナー募集</span><b>ネットワーク監視・運用サービス</b></div>
     <h1 id="hero-title" class="hero-headline"><span class="hero-line hero-line-1">新規顧客を増やす前に。</span><span class="hero-line hero-line-2">すでに取引のあるお客様の中に、</span><span class="hero-line hero-line-3">次の売上機会があります。</span></h1>
