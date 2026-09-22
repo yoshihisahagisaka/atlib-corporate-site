@@ -930,6 +930,27 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
  .hero-comp .hero-definition{max-width:960px!important;font-size:.92rem!important}
 }
 </style>
+<style>
+/* v10.14 scale desktop copy into widened field */
+@media(min-width:1201px){
+ .hero-brandmark{width:min(560px,70%)!important}
+ .hero-subbrand{font-size:.9rem!important;line-height:1.35!important;margin-top:4px!important;margin-bottom:30px!important}
+ .hero-comp h1{max-width:960px!important;font-size:clamp(2.85rem,3.55vw,4.05rem)!important;line-height:1.1!important;letter-spacing:-.035em!important}
+ .hero-comp h1>strong{margin-top:9px!important}
+ .hero-comp .hero-definition{max-width:920px!important;margin-top:20px!important;font-size:1.02rem!important;line-height:1.7!important}
+ .hero-benefits{margin-top:22px!important;gap:18px!important}
+ .hero-benefits>div{width:144px!important;height:144px!important}
+ .hero-benefits b{font-size:.88rem!important;line-height:1.42!important}
+ .hero-benefits span{font-size:1.45rem!important;height:34px!important}
+ .hero-primary-cta{min-width:540px!important;max-width:610px!important;padding:18px 30px!important;font-size:1.08rem!important}
+}
+@media(min-width:1600px){
+ .hero-brandmark{width:580px!important}
+ .hero-subbrand{font-size:.94rem!important}
+ .hero-comp h1{font-size:4.05rem!important;max-width:1000px!important}
+ .hero-comp .hero-definition{font-size:1.05rem!important;max-width:960px!important}
+}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
