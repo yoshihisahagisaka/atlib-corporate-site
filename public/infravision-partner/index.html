@@ -1064,6 +1064,50 @@ header{height:68px!important}.head{gap:22px}.header-nav{display:flex;align-items
   footer{padding-bottom:92px!important}
 }
 </style>
+<style>
+/* v10.20 mobile final density and visual-comprehension pass */
+@media(max-width:640px){
+  /* Stronger first-view hierarchy without making the entire page oversized. */
+  .hero-comp h1{font-size:clamp(2.55rem,12.4vw,3.2rem)!important;line-height:1.02!important}
+  .hero-comp h1>span{font-size:.78em!important;line-height:1.12!important}
+  .hero-comp h1>strong{font-size:1.04em!important;margin-top:8px!important}
+  .hero-comp .hero-definition{margin-top:17px!important}
+  .hero-benefits{margin-top:16px!important}
+  .hero-comp .hero-copy{padding-bottom:18px!important}
+
+  /* Mobile hero visual: show the useful right-hand story as one coherent composition. */
+  .hero-comp .hero-visual{aspect-ratio:1.32/1!important;margin-top:2px!important}
+  .hero-comp .hero-visual img{right:-8%!important;width:118%!important;height:118%!important;object-position:right center!important}
+
+  /* Reduce scroll fatigue while preserving clear section changes. */
+  .journey-section,.section,.problem,.gap,.collab,.plans,.benefits,.usecases,.reason,.support,.start,#faq,.apply,.close-story{padding-top:56px!important;padding-bottom:56px!important}
+  .journey-section.missed{padding-top:58px!important}
+  .journey-copy p{margin-top:14px!important}
+  .journey-punch{margin-top:18px!important}
+  .display-heading{margin-bottom:0!important}
+
+  /* Infographics: provide a complete overview first, then allow a deliberate zoom/scroll area. */
+  .service-flow-image,.visibility-gap-visual,.collaboration-flow-visual,.support-system-visual{
+    margin:22px -16px 0!important;padding:0 16px 8px!important;overflow-x:auto!important;scroll-snap-type:none!important
+  }
+  .service-flow-image img,.visibility-gap-visual img,.collaboration-flow-visual img,.support-system-visual img{
+    width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important
+  }
+  .service-flow-image:after,.visibility-gap-visual:after,.collaboration-flow-visual:after,.support-system-visual:after{display:none!important}
+
+  /* The explanatory HTML immediately after/before diagrams carries the detail on mobile. */
+  .iv-scope{margin-top:14px!important}
+  .iv-scope>div{padding:12px 4px!important}
+  .iv-scope b{font-size:.98rem!important}.iv-scope span{font-size:.82rem!important}
+  .detail-note{margin-top:12px!important}
+  .trust-strip{margin-top:16px!important}
+  .usecases{padding-top:54px!important;padding-bottom:54px!important}
+  .usecases .use-story article{padding:18px 0!important}
+  .close-story{padding-top:56px!important;padding-bottom:50px!important}
+  #faq{padding-top:54px!important;padding-bottom:54px!important}
+  .apply{padding-top:60px!important;padding-bottom:64px!important}
+}
+</style>
 </head>
 <body id="top">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
