@@ -951,6 +951,38 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
  .hero-comp .hero-definition{font-size:1.05rem!important;max-width:960px!important}
 }
 </style>
+<style>
+/* v10.15 final hero comp alignment */
+@media(min-width:1201px){
+ .hero-brandmark{width:min(610px,72%)!important;margin-bottom:0!important}
+ .hero-subbrand{margin:0 0 25px!important;padding-left:3px!important;font-size:.98rem!important;line-height:1.35!important}
+ .hero-comp h1{max-width:1040px!important;line-height:1.08!important;letter-spacing:-.04em!important}
+ .hero-comp h1>span{font-size:.88em!important;font-weight:850!important}
+ .hero-comp h1>strong{font-size:1.08em!important;margin-top:8px!important}
+ .hero-comp .hero-definition{max-width:980px!important;margin-top:22px!important;font-size:1.12rem!important;line-height:1.65!important}
+ .hero-comp .hero-definition strong{font-weight:900;color:#17375d}
+ .hero-benefits{width:min(720px,92%)!important;display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:0!important;margin:24px 0 22px!important}
+ .hero-benefits>div{width:auto!important;height:auto!important;min-height:128px!important;aspect-ratio:auto!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:8px 22px!important}
+ .hero-benefits>div+div{border-left:1px solid rgba(31,53,86,.22)!important}
+ .hero-benefits span{font-size:1.55rem!important;height:38px!important;color:#159f88!important}
+ .hero-benefits b{font-size:.96rem!important;line-height:1.45!important}
+ .hero-primary-cta{min-width:570px!important;max-width:650px!important;padding:19px 32px!important;font-size:1.12rem!important}
+}
+@media(min-width:1600px){
+ .hero-comp h1{font-size:4.45rem!important;max-width:1080px!important}
+ .hero-comp .hero-definition{font-size:1.15rem!important;max-width:1020px!important}
+ .hero-brandmark{width:630px!important}
+}
+@media(min-width:1201px) and (max-width:1599px){
+ .hero-comp h1{font-size:clamp(3.15rem,3.85vw,4.15rem)!important}
+}
+@media(max-width:850px){
+ .hero-benefits{display:grid!important;grid-template-columns:1fr!important;width:100%!important;gap:0!important}
+ .hero-benefits>div{width:100%!important;height:auto!important;aspect-ratio:auto!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:14px 8px!important}
+ .hero-benefits>div+div{border-left:0!important;border-top:1px solid rgba(31,53,86,.15)!important}
+ .hero-comp .hero-definition strong{font-weight:900}
+}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
@@ -963,7 +995,7 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
     <div class="hero-copy">
       <div class="hero-brandmark"><img src="/infravision-partner/assets/infravision-partner-logo.png" alt="atLIB InfraVision Partner Program"></div><p class="hero-subbrand">ITインフラの「見える化」で、パートナー様のビジネスを拡大する</p>
       <h1 id="hero-title"><span>新規顧客を増やす前に。</span><strong><em>既存顧客</em>を、<b>次の売上へ。</b></strong></h1>
-      <p class="hero-definition">InfraVisionなら、納品後のお客様の変化を継続的に捉え、<br class="pc-only">更改・増設・改善の提案機会につなげられます。<br class="pc-only">NW専門部隊を持たずに始められる、ストック型ITサービスです。</p>
+      <p class="hero-definition">InfraVisionなら、納品後のお客様の変化を継続的に捉え、<br class="pc-only"><strong>更改・増設・改善の提案機会へ。</strong><br class="pc-only">NW専門部隊を持たずに始められる、ストック型ITサービスです。</p>
       <div class="hero-benefits" aria-label="InfraVisionパートナープログラムのメリット">
         <div><span aria-hidden="true">▥</span><b>既存顧客の<br>収益機会を広げる</b></div>
         <div><span aria-hidden="true">●●●</span><b>専門知識不要<br>atLIBが技術支援</b></div>
