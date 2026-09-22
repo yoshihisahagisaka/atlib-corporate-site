@@ -143,6 +143,88 @@ Optimize production assets (WebP/AVIF where practical), specify dimensions, lazy
 11. Check desktop and mobile, then analytics, accessibility, SEO/AIO and structured data.
 12. Review the whole page as one scroll story before production deployment.
 
+
+## Size and proportion reference
+
+Do not treat the following as arbitrary pixel-perfect rules; they are the **starting proportions established by the completed InfraVision partner LP**. Tune them responsively while preserving the visual hierarchy.
+
+### Desktop hero proportions
+- Hero canvas: full-bleed / approximately `100vw`; intentionally wider than the body reading container.
+- Hero inner safe margin: roughly `5–7vw` on the left and `1–3vw` on the right on large desktop.
+- HTML copy field: approximately **55–57% of the hero width**, with a practical max width around **980–1,040px**.
+- Visual/background field: may occupy the full hero canvas underneath, but the meaningful visual subject should concentrate in the right **45–55%**.
+- White-to-visual transition: preserve a broad white reading field; the fade can extend to roughly **55–60%** of the canvas before the right visual becomes dominant.
+- Do not use `cover` when it crops critical top/right/bottom content. Prefer composition-aware `contain`/positioning or generate the asset to the required ratio.
+
+### Hero service mark and tagline
+- Service/program logo on large desktop: roughly **560–630px wide**, subject to the logo’s intrinsic aspect ratio.
+- Tagline: visually attached to the logo, not floating as a separate block; typical desktop size around **0.9–1.0rem**.
+- Keep logo-to-tagline spacing very tight (a few pixels), then use a larger gap before the headline.
+
+### Hero headline
+- Use the wide copy field; do not force narrow wrapping.
+- Large desktop headline reference: approximately **4.0–4.5rem** at 1600px-class viewport.
+- Mid desktop: approximately **3.1–4.1rem**, responsive with `clamp()`.
+- Line-height around **1.08–1.12** and moderately tight tracking.
+- The setup line can be about **88–92%** of the lead/value line.
+- The value line can be about **105–110%** of the base headline scale.
+- Judge size against the right-side visual: the headline should have comparable visual weight without covering the infographic.
+
+### Supporting copy
+- Desktop reference: approximately **1.05–1.15rem**, line-height around **1.6–1.7**.
+- Give it nearly the same usable width as the headline (roughly **900–1,020px** in the InfraVision reference).
+- Avoid a visible box/card behind the text. Readability should come from the hero asset’s white gradient.
+- Use selective bold emphasis rather than making the entire paragraph heavy.
+
+### Hero benefits
+- Benefits are subordinate to the headline.
+- Preferred desktop pattern: **three horizontal columns** across roughly **700–750px**, separated by thin vertical rules.
+- Avoid large circular cards when the visual already contains circular process icons.
+- Benefit label text reference: approximately **0.9–1.0rem**.
+- Icon emphasis reference: approximately **1.4–1.6rem**.
+- Keep enough whitespace that the benefits read as supporting proof, not a second headline.
+
+### Hero CTA
+- Desktop reference width: approximately **570–650px** when the left copy field is around 1,000px.
+- Text reference: approximately **1.05–1.15rem**.
+- The CTA should be unmistakable but narrower than the full copy field, leaving visible whitespace around it.
+
+### Infographic asset sizing
+- Do not default to 16:9.
+- Wide mechanism/collaboration diagrams: start around **2.5:1–3:1** when they are intended to sit inside the body flow.
+- Typical desktop display width: around **1,100–1,300px** depending on the body container.
+- Diagram text must remain readable at actual browser display size, not only when opening the source image at 100%.
+- Prefer shallow horizontal modules over tall slide-like blocks when the story continues vertically.
+- For white/transparent diagrams, let internal steps/cards carry borders or light shadows rather than framing the entire image.
+
+### Body typography and visual rhythm
+- Hero typography is intentionally larger than body section typography.
+- Body headings should remain strong enough to bridge from the hero, but should not repeat hero-scale type in every section.
+- Preserve generous section breathing room while avoiding identical top/bottom padding on every section; varied rhythm helps the LP feel continuous rather than slide-based.
+- Visual assets should usually occupy enough width to feel intentional; avoid small centered images floating inside large empty sections.
+
+### Mobile sizing principle
+Do not mechanically scale the desktop values. Recompose:
+- copy becomes full width,
+- headline uses a readable responsive scale (roughly **2.0–3.0rem** depending on viewport),
+- benefits stack or become compact rows,
+- CTA becomes full/near-full width,
+- background/right visual moves below or is cropped/repositioned intentionally,
+- Japanese diagram text must remain readable; use alternate/mobile assets if necessary.
+
+### Final size QA
+Before approval, compare the browser rendering directly against the approved visual comp at the target desktop viewport. Check:
+1. copy field width,
+2. logo scale,
+3. headline scale and line breaks,
+4. supporting-copy scale,
+5. benefits density,
+6. CTA width,
+7. right-side visual scale/cropping,
+8. balance of visual weight between left and right.
+
+**Important lesson:** widening a container without enlarging its typography does not improve balance. Width and type scale must be tuned together.
+
 ## Failure modes learned from InfraVision
 
 Do not repeat these:
