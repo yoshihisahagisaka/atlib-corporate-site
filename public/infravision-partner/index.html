@@ -866,6 +866,30 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
 @media(max-width:1200px){.hero-comp .hero-comp-inner{padding-left:34px!important;padding-right:24px!important}.hero-comp .hero-copy{width:48%!important}.hero-comp h1{font-size:clamp(1.9rem,3vw,2.7rem)!important}.hero-comp .hero-definition{font-size:.8rem!important}}
 @media(max-width:850px){.hero-comp .hero-comp-inner{padding-left:20px!important;padding-right:20px!important}.hero-comp .hero-copy{width:100%!important}.hero-comp h1{font-size:clamp(2rem,8.8vw,2.8rem)!important}.hero-comp .hero-definition{font-size:.9rem!important}.hero-benefits>div{width:31%!important;height:auto!important}}
 </style>
+<style>
+/* v10.11 full-bleed hero canvas */
+.hero.hero-comp{width:100%;max-width:none!important}
+.hero-comp .hero-comp-inner{width:100%!important;max-width:none!important;margin:0!important;padding-left:clamp(32px,5vw,96px)!important;padding-right:clamp(20px,2.5vw,48px)!important;box-sizing:border-box}
+.hero-comp .hero-copy{width:42%!important;max-width:680px!important}
+.hero-comp .hero-visual{width:100vw!important;right:0!important}
+.hero-comp .hero-visual img{width:100vw!important;max-width:none!important;object-fit:contain!important;object-position:right center!important}
+.hero-comp .hero-visual:after{width:49%!important}
+@media(min-width:1600px){
+ .hero-comp .hero-comp-inner{padding-left:clamp(72px,6vw,120px)!important}
+ .hero-comp .hero-copy{width:40%!important;max-width:700px!important}
+ .hero-comp .hero-visual:after{width:47%!important}
+}
+@media(max-width:1200px){
+ .hero-comp .hero-comp-inner{padding-left:32px!important;padding-right:24px!important}
+ .hero-comp .hero-copy{width:47%!important}
+}
+@media(max-width:850px){
+ .hero-comp .hero-comp-inner{padding-left:20px!important;padding-right:20px!important}
+ .hero-comp .hero-copy{width:100%!important;max-width:none!important}
+ .hero-comp .hero-visual{width:calc(100% + 40px)!important}
+ .hero-comp .hero-visual img{width:100%!important}
+}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
