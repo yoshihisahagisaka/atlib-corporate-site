@@ -672,6 +672,13 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
 .start-flow{padding-top:82px}.start-steps>div{position:relative;padding:26px 20px;background:#f8fafc;border-top:5px solid var(--green);min-height:128px}.start-steps>div:after{content:"";position:absolute;right:-18px;top:50%;transform:translateY(-50%);border-top:18px solid transparent;border-bottom:18px solid transparent;border-left:18px solid #f8fafc;z-index:2}.start-steps>div:last-child:after{display:none}.start-steps>i{position:relative;z-index:3}
 @media(max-width:850px){.hero-product{flex-wrap:wrap}.hero-product strong{font-size:36px}.hero-product small{width:100%;margin-top:-4px}.desktop-break{display:none}.flow-map{grid-template-columns:1fr}.flow-chevron{height:44px;transform:rotate(90deg);font-size:54px}.trust-stage{grid-template-columns:1fr;min-height:0}.trust-image img{height:auto;min-height:320px}.trust-promise{padding:28px}.trust-strip{margin-top:0}.start-steps>div:after{display:none}}
 </style>
+<style>
+/* v9.3 deliberate headline composition matched to visual width */
+.hero-overlay .wrap{width:min(1280px,calc(100% - 56px))}.hero-overlay .hero-copy{max-width:850px;width:68%;padding:52px 0}.hero-headline{max-width:none!important;margin:0}.hero-headline .hero-line{display:block;white-space:nowrap}.hero-headline .hero-line-1{font-size:.82em;line-height:1.24;color:var(--navy)}.hero-headline .hero-line-2{font-size:1em;line-height:1.17;color:var(--orange);margin-top:5px}.hero-headline .hero-line-3{font-size:.9em;line-height:1.2;color:var(--navy);margin-top:5px}.hero-overlay .hero-definition{max-width:760px}
+.display-heading{max-width:1120px!important;line-height:1.18!important}.display-heading span,.display-heading strong{display:block}.display-heading strong{margin-top:7px;color:var(--orange);font-weight:950}.display-heading.one-line{display:flex;align-items:baseline;gap:.24em;flex-wrap:wrap}.display-heading.one-line span,.display-heading.one-line strong{display:inline;margin-top:0}.missed .journey-copy,.partnership .journey-copy,.mechanism .journey-copy,.opportunity .journey-copy,.trust .journey-copy{max-width:1120px}.missed .journey-copy>p,.partnership .journey-copy>p,.mechanism .journey-copy>p,.opportunity .journey-copy>p,.trust .journey-copy>p{max-width:880px}
+@media(max-width:1100px){.hero-overlay .hero-copy{width:76%}.hero-headline .hero-line{white-space:normal}.hero-headline .hero-line-2{font-size:.92em}}
+@media(max-width:850px){.hero-overlay .wrap{width:min(100% - 32px,1160px)}.hero-overlay .hero-copy{width:100%}.hero-headline .hero-line{white-space:normal}.hero-headline .hero-line-1{font-size:.82em}.hero-headline .hero-line-2{font-size:1em}.hero-headline .hero-line-3{font-size:.9em}.display-heading.one-line{display:block}.display-heading.one-line span,.display-heading.one-line strong{display:block}.display-heading strong{margin-top:5px}}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
@@ -683,7 +690,7 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
   <div class="hero-bg" aria-hidden="true"><img src="/infravision-partner/assets/infravision-partner-hero.png" alt=""></div>
   <div class="wrap hero-overlay-inner"><div class="hero-copy">
     <div class="hero-product"><span>atLIB</span><strong>InfraVision</strong><small>PARTNER PROGRAM</small></div><div class="hero-kicker"><span>販売・協業パートナー募集</span><b>ネットワーク監視・運用サービス</b></div>
-    <h1 id="hero-title">新規顧客を増やす前に。<br><span class="accent">すでに取引のあるお客様</span>の中に、<br>次の売上機会があります。</h1>
+    <h1 id="hero-title" class="hero-headline"><span class="hero-line hero-line-1">新規顧客を増やす前に。</span><span class="hero-line hero-line-2">すでに取引のあるお客様の中に、</span><span class="hero-line hero-line-3">次の売上機会があります。</span></h1>
     <p class="hero-definition">InfraVisionは、納品後のネットワークの変化を捉え、<b>更改・増設・改善の提案機会</b>につなげる監視・運用サービスです。</p>
     <a class="cta track" data-position="hero" href="#apply">既存顧客に提案できるか相談する →</a>
     <div class="hero-easy"><span class="hero-easy-mark" aria-hidden="true">✓</span><span><strong>NW専門部隊を持たずに始められます。</strong><small>まずは、御社の既存顧客1社から。</small></span></div>
@@ -691,20 +698,20 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
 </section>
 
 <section class="journey-section missed" aria-labelledby="missed-title"><div class="wrap">
-  <div class="journey-copy"><h2 id="missed-title">納品したあと、お客様の変化が<br><span class="accent">見えなくなっていませんか？</span></h2>
+  <div class="journey-copy"><h2 id="missed-title" class="display-heading"><span>納品したあと、お客様の変化が</span><strong>見えなくなっていませんか？</strong></h2>
   <p>ルーターやUTM、Wi-Fi、ネットワークを納品した後も、お客様の環境は変わり続けます。ところが変化を把握する仕組みがなければ、更改・増設・改善の兆しがあっても、相談が来るまで気づけません。</p>
   <p class="journey-punch">つまり、売上機会がないのではなく、<b>「気づく仕組み」がない。</b></p></div>
   <div class="journey-visual"><img src="/infravision-partner/assets/infravision-partner-existing-customers.png" alt="納品後に見えなくなっている既存顧客の変化と売上機会を表したイメージ"></div>
 </div></section>
 
 <section class="journey-section partnership" id="partner-model" aria-labelledby="partner-model-title"><div class="wrap">
-  <div class="journey-copy compact"><h2 id="partner-model-title">御社は顧客との関係と提案に集中。<br><span class="accent">監視・運用・技術は、atLIBが補います。</span></h2>
+  <div class="journey-copy compact"><h2 id="partner-model-title" class="display-heading"><span>御社は顧客との関係と提案に集中。</span><strong>監視・運用・技術は、atLIBが補います。</strong></h2>
   <p>パートナー様にネットワーク監視・運用の専門部隊を新設していただく必要はありません。既存顧客との関係は御社のまま、提案前から導入・運用まで技術面を支援します。</p></div>
   <div class="journey-visual full"><img src="/infravision-partner/assets/infravision-partner-collaboration-model.png" alt="御社が顧客関係と営業を担い、技術・運用チームatLIBが監視・運用を支える協業モデル"></div>
 </div></section>
 
 <section class="journey-section mechanism" id="what-is-infravision" aria-labelledby="mechanism-title"><div class="wrap">
-  <div class="journey-copy"><h2 id="mechanism-title">待つ営業から、<span class="accent">変化に気づいて<br class="desktop-break">提案する営業へ。</span></h2>
+  <div class="journey-copy"><h2 id="mechanism-title" class="display-heading"><span>待つ営業から、</span><strong>変化に気づいて提案する営業へ。</strong></h2>
   <p>お客様のネットワークを24時間監視し、機器や構成、異常、EoL・脆弱性リスクを継続的に把握。月次レポートなどを通じて、「今、このお客様に連絡する理由」をつくります。</p></div>
   <div class="journey-visual"><img src="/infravision-partner/assets/infravision-partner-how-it-works.png" alt="顧客ネットワークの監視から可視化・分析・レポートを経て次の提案につなげるInfraVisionの仕組み"></div>
   <div class="offer-summary"><div><b>まず見えるようにする</b><span>監視・可視化・月次レポート</span></div><div><b>運用も任せる</b><span>定期運用・合意範囲の軽微作業</span></div><div><b>NW管理まで支える</b><span>一次切り分け・NW相談・継続管理</span></div></div>
@@ -712,7 +719,7 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
 </div></section>
 
 <section class="journey-section opportunity" aria-labelledby="opportunity-title"><div class="wrap">
-  <div class="journey-copy compact"><h2 id="opportunity-title">見つけた変化を、<span class="accent">次の商談に変える。</span></h2>
+  <div class="journey-copy compact"><h2 id="opportunity-title" class="display-heading one-line"><span>見つけた変化を、</span><strong>次の商談に変える。</strong></h2>
   <p>InfraVisionで見つけた変化は、監視結果で終わりません。顧客へ連絡する理由になり、更改・増設・改善の具体的な提案へつながります。</p></div>
   <div class="opportunity-map flow-map" aria-label="顧客環境の変化から次の商談につなげる例">
     <div class="opp-col"><small>気づいた変化</small><b>EoLが近い</b><b>Wi-Fi・機器が増えた</b><b>異常・リスクが見えた</b></div>
@@ -725,7 +732,7 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
 </div></section>
 
 <section class="journey-section trust" aria-labelledby="trust-title"><div class="wrap">
-  <div class="journey-copy"><h2 id="trust-title">御社の後ろに、<span class="accent">技術・運用チームがいる。</span></h2>
+  <div class="journey-copy"><h2 id="trust-title" class="display-heading one-line"><span>御社の後ろに、</span><strong>技術・運用チームがいる。</strong></h2>
   <p>「このお客様に提案できる？」という段階から、提案支援、導入、監視・運用、月次フォローまで支援。御社はお客様との関係づくりと提案に集中できます。</p></div>
   <div class="trust-stage">
     <div class="trust-image"><img src="/infravision-partner/assets/infravision-partner-support.png" alt="パートナー企業の営業活動をatLIBの技術・運用チームが後方支援するイメージ"></div>
