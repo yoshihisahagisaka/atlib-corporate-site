@@ -10,7 +10,7 @@
 <meta property="og:type" content="website"><meta property="og:site_name" content="atLIB株式会社"><meta property="og:locale" content="ja_JP">
 <meta property="og:url" content="https://www.atlib.jp/infravision-partner/">
 <meta property="og:title" content="InfraVision パートナー募集｜atLIB株式会社">
-<meta property="og:description" content="既存顧客へのIT提案を、売切りから毎月のストック収益へ。">
+<meta property="og:description" content="既存顧客へのIT提案を、売切りから毎月のストック収益へ。">\n<meta property="og:image" content="https://www.atlib.jp/infravision-partner/assets/infravision-partner-hero-visual-v2.png">\n<meta property="og:image:alt" content="InfraVisionで既存顧客の変化を捉え、次の提案機会につなげるパートナープログラム">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="author" content="atLIB株式会社">
 <meta name="theme-color" content="#F8FAFC">
@@ -987,17 +987,26 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
 /* v10.16 header home link */
 .home-link{color:inherit;text-decoration:none}.home-link:focus-visible{outline:3px solid rgba(242,140,56,.45);outline-offset:5px;border-radius:6px}
 </style>
+<style>
+/* v10.17 release polish: minimal nav, CTA consistency, mobile */
+header{height:68px!important}.head{gap:22px}.header-nav{display:flex;align-items:center;gap:24px;margin-left:auto}.header-nav>a:not(.cta){font-size:13px;font-weight:800;color:#38526f;white-space:nowrap;transition:color .2s}.header-nav>a:not(.cta):hover{color:var(--green)}.header-nav .cta{padding:12px 20px!important;font-size:13px!important;box-shadow:0 7px 18px rgba(242,140,56,.2)!important}
+.hero.hero-comp{border-bottom:1px solid rgba(31,53,86,.06)}
+.hero-scroll{bottom:8px!important}
+.journey-section.missed{padding-top:92px!important}
+@media(max-width:980px){.header-nav>a:not(.cta){display:none}.header-nav{gap:0}.header-nav .cta{display:inline-flex!important}}
+@media(max-width:640px){header{height:62px!important}.logo-img{width:108px}.service-name{font-size:15px}.service-name small{font-size:8px}.header-nav .cta{display:none!important}.hero-comp .hero-copy{padding-top:24px!important}.hero-brandmark{width:min(360px,94%)!important}.hero-comp h1{line-height:1.1!important}.hero-benefits{margin-top:20px!important;margin-bottom:18px!important}.hero-primary-cta{width:100%!important;min-width:0!important}.journey-section.missed{padding-top:68px!important}}
+</style>
 </head>
 <body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-BNM2L9LTL2');</script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","xtjmp7ly4g");</script>
-<header><div class="wrap head"><a class="service-lockup home-link" href="/" aria-label="atLIB株式会社 サイトトップへ"><img class="logo-img" src="/images/h_logo.png" alt="atLIB株式会社"><div class="service-name">InfraVision<small>Partner Program</small></div></a><a class="cta track" data-position="header" href="#apply">提案できるか相談する →</a></div></header>
+<header><div class="wrap head"><a class="service-lockup home-link" href="/" aria-label="atLIB株式会社 サイトトップへ"><img class="logo-img" src="/images/h_logo.png" alt="atLIB株式会社"><div class="service-name">InfraVision<small>Partner Program</small></div></a><nav class="header-nav" aria-label="ページ内メニュー"><a href="#partner-model">協業イメージ</a><a href="#faq">よくある質問</a><a class="cta track" data-position="header" href="#apply">既存顧客に提案できるか相談する →</a></nav></div></header>
 <main>
 <section class="hero hero-comp" aria-labelledby="hero-title">
   <div class="wrap hero-comp-inner">
     <div class="hero-copy">
-      <div class="hero-brandmark"><img src="/infravision-partner/assets/infravision-partner-logo.png" alt="atLIB InfraVision Partner Program"></div><p class="hero-subbrand">ITインフラの「見える化」で、パートナー様のビジネスを拡大する</p>
+      <div class="hero-brandmark"><img src="/infravision-partner/assets/infravision-partner-logo.png" alt="atLIB InfraVision Partner Program" decoding="async"></div><p class="hero-subbrand">ITインフラの「見える化」で、パートナー様のビジネスを拡大する</p>
       <h1 id="hero-title"><span>新規顧客を増やす前に。</span><strong><em>既存顧客</em>を、<b>次の売上へ。</b></strong></h1>
       <p class="hero-definition">InfraVisionなら、納品後のお客様の変化を継続的に捉え、<br class="pc-only"><strong>更改・増設・改善の提案機会へ。</strong><br class="pc-only">NW専門部隊を持たずに始められる、ストック型ITサービスです。</p>
       <div class="hero-benefits" aria-label="InfraVisionパートナープログラムのメリット">
@@ -1005,9 +1014,9 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
         <div><span aria-hidden="true">●●●</span><b>専門知識不要<br>atLIBが技術支援</b></div>
         <div><span aria-hidden="true">↻</span><b>継続収益モデル<br>ストックで安定</b></div>
       </div>
-      <a class="cta track hero-primary-cta" data-position="hero" href="#apply">今すぐオンラインで相談する <span>→</span></a>
+      <a class="cta track hero-primary-cta" data-position="hero" href="#apply">既存顧客に提案できるか相談する <span>→</span></a>
     </div>
-    <div class="hero-visual" aria-hidden="true"><img src="/infravision-partner/assets/infravision-partner-hero-visual-v2.png" alt=""></div>
+    <div class="hero-visual" aria-hidden="true"><img src="/infravision-partner/assets/infravision-partner-hero-visual-v2.png" alt="" fetchpriority="high" decoding="async"></div>
   </div>
   <div class="hero-scroll" aria-hidden="true">SCROLL <span>⌄</span></div>
 </section>
@@ -1016,19 +1025,19 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
   <div class="journey-copy"><h2 id="missed-title" class="display-heading"><span>納品したあと、お客様の変化が</span><strong>見えなくなっていませんか？</strong></h2>
   <p>ルーターやUTM、Wi-Fi、ネットワークを納品した後も、お客様の環境は変わり続けます。ところが変化を把握する仕組みがなければ、更改・増設・改善の兆しがあっても、相談が来るまで気づけません。</p>
   <p class="journey-punch">つまり、売上機会がないのではなく、<b>「気づく仕組み」がない。</b></p></div>
-  <div class="journey-visual integrated-visual visibility-gap-visual"><img src="/infravision-partner/assets/infravision-partner-customer-visibility-gap.png" alt="納品時には把握できていた顧客環境が、その後見えなくなり、増設・セキュリティ・クラウド活用・組織変化などの提案機会を取りこぼす構造"></div>
+  <div class="journey-visual integrated-visual visibility-gap-visual"><img loading="lazy" decoding="async" src="/infravision-partner/assets/infravision-partner-customer-visibility-gap.png" alt="納品時には把握できていた顧客環境が、その後見えなくなり、増設・セキュリティ・クラウド活用・組織変化などの提案機会を取りこぼす構造"></div>
 </div></section>
 
 <section class="journey-section mechanism" id="what-is-infravision" aria-labelledby="mechanism-title"><div class="wrap">
   <div class="journey-copy"><h2 id="mechanism-title" class="display-heading"><span>待つ営業から、</span><strong>変化に気づいて提案する営業へ。</strong></h2>
   <p>お客様のネットワークを24時間監視し、機器や構成、異常、EoL・脆弱性リスクを継続的に把握。月次レポートなどを通じて、「今、このお客様に連絡する理由」をつくります。</p></div>
-  <div class="service-flow-image"><img src="/infravision-partner/assets/infravision-partner-service-flow-2.png" alt="お客様のIT環境をInfraVisionで常時監視し、可視化・分析、レポート提供を経て次の提案へつなげる5ステップ"></div>
+  <div class="service-flow-image"><img loading="lazy" decoding="async" src="/infravision-partner/assets/infravision-partner-service-flow-2.png" alt="お客様のIT環境をInfraVisionで常時監視し、可視化・分析、レポート提供を経て次の提案へつなげる5ステップ"></div>
 <div class="iv-scope"><div><b>監視・可視化</b><span>まず見えるようにする</span></div><i>＋</i><div><b>運用支援</b><span>必要な運用も任せる</span></div><i>＋</i><div><b>NW管理</b><span>継続的な管理まで支える</span></div></div>
 <p class="detail-note">お客様に合わせてatLIBが担う範囲を選べます。料金・パートナー条件・販売方法の詳細はオンライン面談でご案内します。</p>
 </div></section><section class="journey-section partnership" id="partner-model" aria-labelledby="partner-model-title"><div class="wrap">
   <div class="journey-copy compact"><h2 id="partner-model-title" class="display-heading"><span>御社は顧客との関係と提案に集中。</span><strong>監視・運用・技術は、atLIBが補います。</strong></h2>
   <p>パートナー様にネットワーク監視・運用の専門部隊を新設していただく必要はありません。既存顧客との関係は御社のまま、提案前から導入・運用まで技術面を支援します。</p></div>
-  <div class="journey-visual full integrated-visual collaboration-flow-visual"><img src="/infravision-partner/assets/infravision-partner-collaboration-flow.png" alt="パートナー企業が顧客関係・営業・提案を担い、atLIBが監視・運用・技術を支援して、顧客環境の変化を次の提案機会につなげる協業モデル"></div>
+  <div class="journey-visual full integrated-visual collaboration-flow-visual"><img loading="lazy" decoding="async" src="/infravision-partner/assets/infravision-partner-collaboration-flow.png" alt="パートナー企業が顧客関係・営業・提案を担い、atLIBが監視・運用・技術を支援して、顧客環境の変化を次の提案機会につなげる協業モデル"></div>
 </div></section>
 
 
@@ -1049,7 +1058,7 @@ body{font-size:17px}.hero-overlay{position:relative;min-height:680px;padding:0;b
 <section class="journey-section trust" aria-labelledby="trust-title"><div class="wrap">
   <div class="journey-copy"><h2 id="trust-title" class="display-heading one-line"><span>御社の後ろに、</span><strong>技術・運用チームがいる。</strong></h2>
   <p>「このお客様に提案できる？」という段階から、提案支援、導入、監視・運用、月次フォローまで支援。御社はお客様との関係づくりと提案に集中できます。</p></div>
-  <div class="integrated-visual support-system-visual"><img src="/infravision-partner/assets/infravision-partner-support-system.png" alt="パートナー企業の課題に対してatLIBが技術・運用を支援し、提案力強化・運用負荷軽減・売上拡大・顧客関係継続につなげる支援体制"></div>
+  <div class="integrated-visual support-system-visual"><img loading="lazy" decoding="async" src="/infravision-partner/assets/infravision-partner-support-system.png" alt="パートナー企業の課題に対してatLIBが技術・運用を支援し、提案力強化・運用負荷軽減・売上拡大・顧客関係継続につなげる支援体制"></div>
   <div class="trust-strip"><span>提案前の相談</span><i>→</i><span>導入支援</span><i>→</i><span>監視・運用</span><i>→</i><span>月次フォロー</span></div>
 </div></section>
 
