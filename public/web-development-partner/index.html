@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Web Development Partner｜既存顧客の開発相談を自社の売上へ｜atLIB</title>
+<meta name="description" content="既存顧客から寄せられるシステム開発・業務効率化の相談を、atLIBとの協業で自社の売上へ。Excel・AccessからのWebシステム化、既存システム改修、API連携、業務自動化、AI活用まで支援します。">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Web Development Partner｜atLIB">
+<meta property="og:description" content="開発部門を持たなくても、既存顧客からの開発相談を自社の提案・売上につなげられます。">
+<meta property="og:image" content="/web-development-partner/assets/web-development-partner-hero-visual-v4.png">
+<link rel="icon" type="image/png" href="./assets/web-development-partner-logo-v1.png">
+
+<style>
+:root{
+  --navy:#1F3556;
+  --navy-dark:#142944;
+  --blue:#365D7D;
+  --blue-soft:#5C7489;
+  --orange:#F28C38;
+  --green:#2DBE9D;
+  --off:#F7FAFC;
+  --line:#DCE6ED;
+  --white:#fff;
+  --max:1180px;
+  --shadow:0 16px 44px rgba(31,53,86,.08);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+  line-break:strict;
+}
+
+body{
+  margin:0;
+  background:#fff;
+  color:var(--blue);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans JP",
+    "Hiragino Kaku Gothic ProN",
+    Meiryo,
+    sans-serif;
+  font-size:17px;
+  line-height:1.9;
+  font-weight:400;
+  letter-spacing:.01em;
+  word-break:normal;
+  overflow-wrap:break-word;
+}
+
+img{
+  display:block;
+  max-width:100%;
+  height:auto;
+}
+
+a{
+  color:inherit;
+}
+
+.container{
+  width:min(calc(100% - 48px),var(--max));
+  margin:auto;
+}
+
+h1,
+h2,
+h3,
+p{
+  margin-top:0;
+}
+
+h1{
+  margin-bottom:24px;
+  color:var(--navy-dark);
+  font-size:clamp(34px,3vw,50px);
+  line-height:1.42;
+  font-weight:800;
+  letter-spacing:-.025em;
+}
+
+h2{
+  margin-bottom:22px;
+  color:var(--navy);
+  font-size:clamp(31px,2.7vw,42px);
+  line-height:1.5;
+  font-weight:800;
+  letter-spacing:-.018em;
+}
+
+h3{
+  color:var(--navy);
+  font-weight:800;
+  line-height:1.55;
+}
+
+p{
+  margin-bottom:18px;
+  color:var(--blue);
+  font-size:17px;
+  line-height:1.95;
+  font-weight:400;
+}
+
+.lead{
+  color:var(--navy);
+  font-size:19px;
+  line-height:1.9;
+  font-weight:600;
+}
+
+.orange{
+  color:var(--orange);
+}
+
+.green{
+  color:var(--green);
+}
+
+.keep{
+  white-space:nowrap;
+}
+
+.section{
+  position:relative;
+  overflow:hidden;
+  padding:108px 0;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:58px;
+  padding:13px 30px;
+  border-radius:999px;
+  background:var(--orange);
+  box-shadow:0 12px 28px rgba(242,140,56,.25);
+  color:#fff;
+  font-size:15px;
+  font-weight:800;
+  text-decoration:none;
+  transition:.2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 34px rgba(242,140,56,.32);
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(31,53,86,.08);
+}
+
+.header-inner{
+  width:min(calc(100% - 48px),1380px);
+  min-height:76px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.logo{
+  width:min(360px,45vw);
+}
+
+.header .btn{
+  min-height:46px;
+  padding:9px 22px;
+  font-size:14px;
+}
+
+
+/* =========================
+   HERO
+   ========================= */
+
+.hero{
+  position:relative;
+  width:100%;
+  min-height:650px;
+  overflow:hidden;
+  background:#f4fafc;
+}
+
+.hero-image{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  max-width:none;
+  object-fit:cover;
+  object-position:center;
+}
+
+.hero-layer{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  display:flex;
+  align-items:center;
+}
+
+.hero-inner{
+  width:min(calc(100% - 80px),1480px);
+  margin:auto;
+}
+
+.hero-copy{
+  width:42%;
+  max-width:640px;
+}
+
+.hero-copy p{
+  max-width:610px;
+  margin-bottom:28px;
+  color:#365D7D;
+  font-size:17px;
+  line-height:1.95;
+}
+
+.hero-note{
+  margin-top:12px;
+  color:#5f7588;
+  font-size:13px;
+  line-height:1.7;
+}
+
+
+/* =========================
+   COMMON VISUAL SECTIONS
+   ========================= */
+
+.full-visual{
+  width:min(100%,1180px);
+  margin:0 auto;
+}
+
+.after-visual{
+  max-width:1040px;
+  margin:40px auto 0;
+}
+
+.conclusion{
+  max-width:1040px;
+  margin:20px auto 0;
+  color:var(--navy);
+  font-size:21px;
+  line-height:1.8;
+  font-weight:700;
+  text-align:center;
+}
+
+
+/* =========================
+   PROBLEM
+   ========================= */
+
+.problem{
+  background:#fff;
+}
+
+.problem-copy{
+  max-width:980px;
+  margin:0 auto 42px;
+  text-align:center;
+}
+
+.problem-copy h2{
+  max-width:980px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.problem-copy .lead{
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.problem-copy p{
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+
+/* =========================
+   VALUE
+   ========================= */
+
+.value-section{
+  padding:108px 0;
+  background:
+    radial-gradient(
+      circle at 12% 12%,
+      rgba(45,190,157,.07),
+      transparent 25%
+    ),
+    linear-gradient(
+      180deg,
+      #fff,
+      #f6fafc
+    );
+}
+
+.value-intro{
+  max-width:980px;
+  margin:0 auto;
+  text-align:center;
+}
+
+.value-intro h2{
+  max-width:980px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.value-intro .lead{
+  max-width:920px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.value-intro p{
+  max-width:920px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.value-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  margin-top:54px;
+}
+
+.value{
+  padding:34px 30px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 10px 30px rgba(31,53,86,.05);
+}
+
+.value-number{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  margin-bottom:20px;
+  border-radius:50%;
+  background:#e8f8f4;
+  color:#16836e;
+  font-size:13px;
+  font-weight:900;
+}
+
+.value strong{
+  display:block;
+  margin-bottom:12px;
+  color:var(--navy);
+  font-size:20px;
+  line-height:1.55;
+}
+
+.value p{
+  margin:0;
+  font-size:16px;
+  line-height:1.9;
+}
+
+
+/* =========================
+   DEVELOPMENT
+   ========================= */
+
+.development{
+  background:#fff;
+}
+
+.development-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  align-items:center;
+  gap:52px;
+}
+
+.development-copy p{
+  max-width:560px;
+}
+
+.development-copy .lead{
+  margin-bottom:15px;
+}
+
+.development-image{
+  width:108%;
+  max-width:none;
+}
+
+.dev-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:28px;
+}
+
+.dev-tag{
+  padding:8px 14px;
+  border:1px solid #d7e3eb;
+  border-radius:999px;
+  background:#f7fafc;
+  color:var(--navy);
+  font-size:13px;
+  font-weight:700;
+}
+
+
+/* =========================
+   SCALE
+   ========================= */
+
+.scale{
+  background:#f4f8fb;
+}
+
+.scale-grid{
+  display:grid;
+  grid-template-columns:1.08fr .92fr;
+  gap:68px;
+  align-items:center;
+}
+
+.scale-visual{
+  padding:40px 38px;
+  border:1px solid #e0e9ef;
+  border-radius:26px;
+  background:#fff;
+  box-shadow:var(--shadow);
+}
+
+.scale-label{
+  margin-bottom:30px;
+  color:var(--navy);
+  font-size:18px;
+  font-weight:800;
+}
+
+.scale-line{
+  position:relative;
+  height:8px;
+  margin:68px 12px 78px;
+  border-radius:999px;
+  background:linear-gradient(
+    90deg,
+    #8edfd0 0%,
+    var(--green) 30%,
+    #3b91c8 68%,
+    var(--navy) 100%
+  );
+}
+
+.scale-line::after{
+  content:"";
+  position:absolute;
+  right:-5px;
+  top:50%;
+  width:16px;
+  height:16px;
+  border-top:4px solid var(--navy);
+  border-right:4px solid var(--navy);
+  transform:translateY(-50%) rotate(45deg);
+}
+
+.scale-point{
+  position:absolute;
+  top:50%;
+  width:18px;
+  height:18px;
+  border:4px solid #fff;
+  border-radius:50%;
+  box-shadow:0 2px 9px rgba(31,53,86,.18);
+  transform:translate(-50%,-50%);
+}
+
+.scale-point.p1{
+  left:8%;
+  background:var(--green);
+}
+
+.scale-point.p2{
+  left:42%;
+  background:#299ec1;
+}
+
+.scale-point.p3{
+  left:82%;
+  background:var(--navy);
+}
+
+.scale-text{
+  position:absolute;
+  width:150px;
+  text-align:center;
+}
+
+.scale-text.top{
+  bottom:26px;
+  transform:translateX(-50%);
+}
+
+.scale-text.bottom{
+  top:26px;
+  transform:translateX(-50%);
+}
+
+.scale-text small{
+  display:block;
+  color:#6c8093;
+  font-size:12px;
+}
+
+.scale-text strong{
+  display:block;
+  margin-top:2px;
+  color:var(--navy);
+  font-size:16px;
+  line-height:1.5;
+}
+
+.scale-text.t1{
+  left:8%;
+}
+
+.scale-text.t2{
+  left:42%;
+}
+
+.scale-text.t3{
+  left:82%;
+}
+
+.scale-caption{
+  margin:0;
+  color:#60788b;
+  font-size:14px;
+  line-height:1.8;
+  text-align:center;
+}
+
+.scale-copy p{
+  margin-bottom:0;
+}
+
+.scale-copy .lead{
+  margin-bottom:15px;
+}
+
+
+/* =========================
+   COLLABORATION
+   ========================= */
+
+.collaboration{
+  background:#fff;
+}
+
+.collaboration-copy{
+  max-width:980px;
+  margin:0 auto 42px;
+  text-align:center;
+}
+
+.collaboration-copy h2{
+  max-width:980px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.collaboration-copy .lead{
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.collaboration-copy p{
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+
+/* =========================
+   PARTNER MODEL
+   ========================= */
+
+.model-section{
+  background:linear-gradient(
+    180deg,
+    #f6fafc,
+    #fff
+  );
+}
+
+.model-head{
+  max-width:940px;
+  margin:0 auto 44px;
+  text-align:center;
+}
+
+.model-head p{
+  max-width:850px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.model-question{
+  margin-bottom:25px;
+  color:var(--navy);
+  font-size:20px;
+  font-weight:700;
+  text-align:center;
+}
+
+.models{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:26px;
+}
+
+.model{
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:26px;
+  background:#fff;
+  box-shadow:0 14px 42px rgba(31,53,86,.07);
+}
+
+.model-top{
+  padding:28px 32px 23px;
+  background:#f3f7fa;
+  border-bottom:1px solid var(--line);
+}
+
+.model.main .model-top{
+  background:#edf9f6;
+}
+
+.model-choice{
+  margin-bottom:8px;
+  color:#536d83;
+  font-size:15px;
+  font-weight:600;
+}
+
+.model h3{
+  margin:0;
+  font-size:26px;
+}
+
+.model-body{
+  padding:29px 32px 32px;
+}
+
+.model-flow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:66px;
+  margin-bottom:23px;
+  padding:14px 16px;
+  border-radius:15px;
+  background:#f7fafc;
+  color:var(--navy);
+  font-size:17px;
+  font-weight:800;
+  text-align:center;
+}
+
+.model-flow span{
+  margin:0 7px;
+  color:var(--orange);
+}
+
+.model-benefit{
+  margin-bottom:15px;
+  color:var(--navy);
+  font-size:18px;
+  line-height:1.65;
+  font-weight:700;
+}
+
+.model-detail{
+  margin-bottom:12px;
+  font-size:16px;
+  line-height:1.9;
+}
+
+.model-footnote{
+  margin-top:22px;
+  color:#788798;
+  font-size:13px;
+  font-weight:400;
+  text-align:center;
+}
+
+
+/* =========================
+   USE CASE
+   ========================= */
+
+.usecase-section{
+  background:var(--off);
+}
+
+.usecase-head{
+  max-width:1040px;
+  margin-bottom:46px;
+}
+
+.usecase-head h2{
+  max-width:1040px;
+}
+
+.usecase-head p{
+  max-width:900px;
+}
+
+.usecases{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  width:92%;
+  margin-left:auto;
+}
+
+.usecase{
+  padding:29px 30px 29px 34px;
+  border-radius:0 20px 20px 0;
+  border-left:4px solid var(--orange);
+  background:#fff;
+  box-shadow:0 9px 28px rgba(31,53,86,.06);
+  color:var(--blue);
+  font-size:16px;
+  line-height:1.85;
+}
+
+.usecase:nth-child(2),
+.usecase:nth-child(3){
+  border-left-color:var(--green);
+}
+
+.usecase strong{
+  display:block;
+  margin-bottom:9px;
+  color:var(--navy);
+  font-size:20px;
+  line-height:1.55;
+}
+
+
+/* =========================
+   LIFECYCLE
+   ========================= */
+
+.lifecycle{
+  background:#fff;
+}
+
+.lifecycle-copy{
+  max-width:980px;
+  margin:0 auto 40px;
+  text-align:center;
+}
+
+.lifecycle-copy h2{
+  max-width:980px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.lifecycle-copy .lead{
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.lifecycle-copy p{
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.lifecycle-after{
+  max-width:1040px;
+  margin:38px auto 0;
+  text-align:center;
+}
+
+
+/* =========================
+   TRUST
+   ========================= */
+
+.trust{
+  background:linear-gradient(
+    180deg,
+    #f8fbfc,
+    #fff
+  );
+}
+
+.trust-head{
+  max-width:980px;
+  margin:auto;
+  text-align:center;
+}
+
+.trust-head h2{
+  max-width:980px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.trust-head p{
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.trust-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  margin-top:50px;
+}
+
+.trust-card{
+  position:relative;
+  padding:32px 30px 31px;
+  border:1px solid var(--line);
+  border-radius:21px;
+  background:#fff;
+  box-shadow:0 8px 28px rgba(31,53,86,.05);
+}
+
+.trust-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:30px;
+  width:50px;
+  height:4px;
+  border-radius:0 0 4px 4px;
+  background:var(--green);
+}
+
+.trust-card h3{
+  margin-bottom:12px;
+  font-size:22px;
+}
+
+.trust-card p{
+  margin:0;
+  font-size:16px;
+  line-height:1.9;
+}
+
+
+/* =========================
+   CTA
+   ========================= */
+
+.cta{
+  padding:100px 0;
+  overflow:hidden;
+  background:linear-gradient(
+    135deg,
+    #edf8fb,
+    #f8fcff
+  );
+}
+
+.cta-grid{
+  display:grid;
+  grid-template-columns:.86fr 1.14fr;
+  align-items:center;
+  gap:34px;
+}
+
+.cta-copy h2{
+  font-size:clamp(30px,2.7vw,42px);
+}
+
+.cta-copy p{
+  max-width:570px;
+}
+
+.cta-image{
+  width:110%;
+  max-width:none;
+  margin-left:-2%;
+}
+
+
+/* =========================
+   CONTACT
+   ========================= */
+
+.contact{
+  padding:84px 0;
+  text-align:center;
+}
+
+.contact-inner{
+  max-width:760px;
+  margin:auto;
+  padding:46px;
+  border-radius:27px;
+  background:var(--navy);
+  color:#fff;
+}
+
+.contact-inner h2{
+  color:#fff;
+}
+
+.contact-inner p{
+  margin-bottom:0;
+  color:rgba(255,255,255,.82);
+  font-size:15px;
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+footer{
+  padding:32px 0;
+  background:var(--navy-dark);
+  color:rgba(255,255,255,.72);
+  font-size:13px;
+}
+
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.footer-links{
+  display:flex;
+  gap:20px;
+}
+
+.footer-links a{
+  color:#fff;
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media(max-width:900px){
+
+  .header-inner{
+    min-height:66px;
+    width:min(calc(100% - 28px),1380px);
+  }
+
+  .logo{
+    width:min(310px,76vw);
+  }
+
+  .header .btn{
+    display:none;
+  }
+
+  .section{
+    padding:78px 0;
+  }
+
+  .hero{
+    min-height:0;
+  }
+
+  .hero-image{
+    position:relative;
+    width:100%;
+    height:auto;
+    object-fit:contain;
+  }
+
+  .hero-layer{
+    position:relative;
+    padding:40px 0 64px;
+    background:#f4fafc;
+  }
+
+  .hero-inner{
+    width:min(calc(100% - 32px),var(--max));
+  }
+
+  .hero-copy{
+    width:100%;
+    max-width:none;
+  }
+
+  .value-row,
+  .trust-row{
+    grid-template-columns:1fr;
+  }
+
+  .development-grid,
+  .scale-grid,
+  .cta-grid{
+    grid-template-columns:1fr;
+  }
+
+  .development-image,
+  .cta-image{
+    width:100%;
+    margin:25px auto 0;
+  }
+
+  .scale-visual{
+    order:2;
+  }
+
+  .scale-copy{
+    order:1;
+  }
+
+  .models{
+    grid-template-columns:1fr;
+  }
+
+  .usecases{
+    width:100%;
+    grid-template-columns:1fr;
+  }
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media(max-width:600px){
+
+  .container{
+    width:min(calc(100% - 30px),var(--max));
+  }
+
+  body{
+    font-size:16px;
+  }
+
+  h1{
+    font-size:31px;
+    line-height:1.5;
+  }
+
+  h2{
+    font-size:27px;
+    line-height:1.6;
+  }
+
+  p{
+    font-size:16px;
+    line-height:1.9;
+  }
+
+  .lead{
+    font-size:17px;
+  }
+
+  .conclusion{
+    font-size:18px;
+  }
+
+  .section{
+    padding:62px 0;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  .value-section{
+    padding:64px 0;
+  }
+
+  .value{
+    padding:27px 24px;
+  }
+
+  .dev-tag{
+    font-size:12px;
+  }
+
+  .scale-visual{
+    padding:28px 18px;
+  }
+
+  .scale-line{
+    margin-left:16px;
+    margin-right:16px;
+  }
+
+  .scale-text{
+    width:110px;
+  }
+
+  .scale-text strong{
+    font-size:13px;
+  }
+
+  .scale-text small{
+    font-size:10px;
+  }
+
+  .model-body,
+  .model-top,
+  .contact-inner{
+    padding-left:24px;
+    padding-right:24px;
+  }
+
+  .usecase{
+    font-size:16px;
+  }
+
+  .usecase strong{
+    font-size:19px;
+  }
+
+  .trust-card h3{
+    font-size:20px;
+  }
+
+  .keep{
+    white-space:normal;
+  }
+}
+
+
+/* Production-preserving visual updates */
+html {scroll-padding-top:84px;}
+.logo-link {display:block;flex:0 1 360px;max-width:45vw;text-decoration:none;}
+.logo-link .logo {width:100%;}
+.logo-link:focus-visible {outline:3px solid var(--green);outline-offset:5px;border-radius:5px;}
+.hero {min-height:690px;}
+.hero-inner {width:min(calc(100% - 96px),1480px);}
+.hero-copy {width:49%;max-width:690px;padding:46px 0 48px;transform:translate(-64px,32px);}
+.hero-copy h1 {font-size:clamp(32px,2.65vw,46px);line-height:1.48;}
+.hero-copy p {max-width:480px;}
+.scale-intro {max-width:1000px;margin:0 auto 26px;text-align:center;}
+.scale-intro p {max-width:900px;margin-left:auto;margin-right:auto;}
+.scale-infographic,.model-infographic {display:block;width:100%;height:auto;margin:0 auto;}
+.scale-domains {max-width:1050px;margin:24px auto 0;text-align:center;}
+.scale-domains h3 {margin-bottom:14px;font-size:19px;}
+.scale-domain-tags {display:flex;justify-content:center;flex-wrap:wrap;gap:9px;}
+.scale-domain-tags span {padding:7px 14px;border:1px solid #d7e3eb;border-radius:999px;background:#fff;color:var(--navy);font-size:13px;font-weight:700;}
+.model-infographic {max-width:1180px;}
+.model-details {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin:24px auto 0;}
+.model-details article {padding:24px 28px;border:1px solid var(--line);border-radius:18px;background:#fff;}
+.model-details h3 {margin-bottom:8px;font-size:21px;}
+.model-details p {margin:0;font-size:15px;}
+.contact-inner label {display:block;color:#fff;font-weight:600;}
+.contact-inner input,.contact-inner select,.contact-inner textarea {max-width:100%;border:1px solid #dce6ed;border-radius:7px;font:inherit;color:var(--navy);background:#fff;}
+.contact-inner textarea {min-height:110px;}
+.contact-inner #form-status {margin-top:12px;}
+@media(max-width:1100px) and (min-width:901px) {.hero-copy {width:48%;transform:translate(-24px,32px);}.hero-copy h1 {font-size:clamp(29px,3vw,38px);}}
+@media(max-width:900px) {
+  html {scroll-padding-top:72px;}
+  .logo-link {flex:0 1 310px;max-width:76vw;}
+  .hero {min-height:0;}
+  .hero-inner {width:min(calc(100% - 32px),var(--max));}
+  .hero-copy {width:100%;max-width:740px;padding:0;transform:none;}
+  .hero-copy h1 {font-size:clamp(30px,4.6vw,42px);}
+  .hero-layer {padding:36px 0 60px;}
+  .model-details {grid-template-columns:1fr;}
+}
+@media(max-width:600px) {
+  .logo-link {max-width:76vw;}
+  .hero-copy h1 {font-size:30px;line-height:1.5;}
+  .hero-layer {padding:30px 0 52px;}
+  .scale-intro {text-align:left;}
+  .scale-infographic,.model-infographic {width:100%;}
+  .scale-domains {margin-top:18px;}
+  .model-details article {padding:21px;}
+  .contact-inner {padding-top:34px;padding-bottom:34px;}
+  .contact-inner input,.contact-inner select,.contact-inner textarea {font-size:16px;}
+}
+
+#partner-form {scroll-margin-top:96px;}
+@media(max-width:900px) {#partner-form {scroll-margin-top:80px;}}
+/* Mobile infographic and rhythm refinements; desktop is unchanged. */
+.infographic-picture {display:block;width:100%;}
+@media (max-width:600px) {
+  .section {padding:52px 0;}
+  .value-section {padding:54px 0;}
+  .cta {padding:60px 0;}
+  .contact {padding:60px 0;}
+  .problem-copy,.collaboration-copy,.lifecycle-copy {margin-bottom:28px;}
+  .model-head {margin-bottom:26px;}
+  .value-row {margin-top:32px;gap:16px;}
+  .trust-row {margin-top:32px;gap:16px;}
+  .scale-intro {margin-bottom:16px;}
+  .scale-domains {margin-top:14px;}
+  .model-details {margin-top:16px;gap:14px;}
+  .infographic-picture img {width:100%;height:auto;}
+}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BNM2L9LTL2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-BNM2L9LTL2");</script><script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","xtjmp7ly4g");</script>
+<style>
+/* Laptop FV: preserve the complete artwork and keep HTML copy inside the viewport. */
+@media (min-width:901px) and (max-width:1599px) {
+  .hero { min-height:clamp(650px,56.25vw,850px); overflow:hidden; }
+  .hero-image { object-fit:contain; object-position:center center; }
+  .hero-inner { width:calc(100% - 64px); max-width:1480px; }
+  .hero-copy { transform:none; width:48%; max-width:650px; padding:24px 0; }
+  .hero-copy h1 { font-size:clamp(29px,2.65vw,40px); line-height:1.42; }
+  .hero-copy p { font-size:clamp(14px,1.15vw,17px); line-height:1.7; }
+}
+@media (min-width:901px) and (max-width:1200px) {
+  .hero-inner { width:calc(100% - 48px); }
+  .hero-copy { width:48%; }
+  .hero-copy h1 { font-size:clamp(27px,2.8vw,34px); }
+}
+/* Laptop FV copy safe area: keep the artwork unchanged and start below its embedded logo. */
+@media (min-width:901px) and (max-width:1599px) {
+  .hero-layer { align-items:flex-start; padding-top:clamp(108px,8.5vw,136px); }
+  .hero-copy { width:43%; max-width:570px; padding:0 0 28px; transform:none; }
+  .hero-copy h1 { font-size:clamp(27px,2.4vw,37px); line-height:1.42; }
+  .hero-copy p { max-width:460px; }
+}
+</style>
+</head>
+
+<body id="top">
+
+
+<header class="header">
+
+  <div class="header-inner">
+
+    <a class="logo-link" href="#top" aria-label="ページの先頭へ戻る">
+      <img class="logo" src="./assets/web-development-partner-logo-v1.png" alt="Web Development Partner by atLIB">
+    </a>
+
+    <a class="btn" href="#partner-form">
+      開発パートナーについて相談する
+    </a>
+
+  </div>
+
+</header>
+
+
+<main>
+
+
+<!-- =========================
+     HERO
+     ========================= -->
+
+<section class="hero">
+
+  <img
+    class="hero-image"
+    src="./assets/web-development-partner-hero-visual-v4.png"
+    alt="顧客から寄せられるシステム開発・業務効率化の相談">
+
+  <div class="hero-layer">
+
+    <div class="hero-inner">
+
+      <div class="hero-copy">
+
+        <h1>
+          既存顧客からの
+          <span class="keep">システム開発・業務効率化</span>の相談を、
+          断らず
+          <span class="orange keep">「自社の売上」</span>
+          <span class="keep">にしませんか？</span>
+        </h1>
+
+        <p>
+          開発部門を持たなくても大丈夫。
+          atLIBが貴社の技術パートナーとして、
+          商談・要件整理・設計・開発・導入後の運用まで支援します。
+        </p>
+
+        <a class="btn" href="#partner-form">
+          開発パートナーについて相談する
+        </a>
+
+        <div class="hero-note">
+          具体的な案件がなくてもご相談いただけます。
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PROBLEM
+     ========================= -->
+
+<section class="section problem">
+
+  <div class="container">
+
+    <div class="problem-copy">
+
+      <h2>
+        お客様からの相談を、新しい提案機会へ。
+      </h2>
+
+      <p class="lead">
+        既存顧客との日々の会話には、
+        新しい売上につながる開発ニーズが隠れています。
+      </p>
+
+      <p>
+        「Excelでの管理を何とかしたい」
+        「今使っているシステムに機能を追加したい」
+        「データをもっと活用したい」。
+        こうした相談は、最初から明確なシステム開発案件として
+        持ち込まれるとは限りません。
+      </p>
+
+      <p>
+        顧客の困りごとを聞いていても、
+        自社に開発機能がなければ、その先の提案まで踏み込めず、
+        他社へ相談をつなぐか、そこで会話が止まってしまいます。
+      </p>
+
+    </div>
+
+    <img
+      class="full-visual"
+      src="./assets/web-development-partner-opportunity-flow-v1.png"
+      alt="顧客からの相談を新しい提案機会へつなげる">
+
+    <div class="after-visual">
+
+      <div class="conclusion">
+        開発機能がないことで、本来は自社の提案になったはずの機会を
+        手放しているかもしれません。
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     VALUE
+     ========================= -->
+
+<section class="value-section">
+
+  <div class="container">
+
+    <div class="value-intro">
+
+      <h2>
+        開発部門を持たなくても、
+        <span class="green keep">atLIBを技術部門として。</span>
+      </h2>
+
+      <p class="lead">
+        貴社がこれまで築いてきた顧客との関係や営業力を、
+        変える必要はありません。
+      </p>
+
+      <p>
+        開発相談が出てきたときに、
+        atLIBを外部の技術部門として活用できます。
+        自社でエンジニアを採用したり、
+        開発組織を維持したりすることなく、
+        これまで対応できなかった相談まで提案領域を広げられます。
+      </p>
+
+    </div>
+
+
+    <div class="value-row">
+
+      <div class="value">
+
+        <div class="value-number">
+          01
+        </div>
+
+        <strong>
+          開発人材を抱えなくていい
+        </strong>
+
+        <p>
+          案件のために新たなエンジニアを採用したり、
+          固定費を増やしたりする必要はありません。
+          必要なときに必要な技術力を補完できます。
+        </p>
+
+      </div>
+
+
+      <div class="value">
+
+        <div class="value-number">
+          02
+        </div>
+
+        <strong>
+          貴社の商材として販売できる
+        </strong>
+
+        <p>
+          パートナー販売型なら、
+          顧客との関係を維持したまま開発を提案できます。
+          顧客への販売価格も貴社で設定できます。
+        </p>
+
+      </div>
+
+
+      <div class="value">
+
+        <div class="value-number">
+          03
+        </div>
+
+        <strong>
+          導入後も安心して任せられる
+        </strong>
+
+        <p>
+          システムを納品して終わりではありません。
+          運用・改善・追加開発まで、
+          顧客の変化に合わせて継続して支援します。
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     DEVELOPMENT
+     ========================= -->
+
+<section class="section development">
+
+  <div class="container development-grid">
+
+    <div class="development-copy">
+
+      <h2>
+        バラバラな業務を、
+        <span class="keep">自社に合ったWebシステムへ。</span>
+      </h2>
+
+      <p class="lead">
+        開発の入口は、
+        「新しいシステムを作りたい」という相談だけではありません。
+      </p>
+
+      <p>
+        Excelでの管理が複雑になっている。
+        複数のツールへの転記が発生している。
+        現在のシステムが今の業務に合わなくなってきた。
+        そうした日常の困りごとが、開発のきっかけになります。
+      </p>
+
+      <p>
+        atLIBでは特定のツールを導入することを目的にせず、
+        現在の業務と課題を整理したうえで、
+        必要な仕組みを設計・開発します。
+      </p>
+
+      <div class="dev-tags">
+
+        <span class="dev-tag">
+          Excel・Access → Web化
+        </span>
+
+        <span class="dev-tag">
+          ローコードからの移行・拡張
+        </span>
+
+        <span class="dev-tag">
+          既存システム改修
+        </span>
+
+        <span class="dev-tag">
+          SaaS・API連携
+        </span>
+
+        <span class="dev-tag">
+          業務自動化
+        </span>
+
+        <span class="dev-tag">
+          AI活用
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <img
+      class="development-image"
+      src="./assets/web-development-partner-development-conversion-v2.png"
+      alt="既存の業務やツールをWebシステムへ再設計する">
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     SCALE
+     ========================= -->
+
+<section class="section scale" aria-labelledby="scale-heading">
+  <div class="container">
+    <div class="scale-intro">
+      <h2 id="scale-heading">小さな開発から、<span class="keep">本格的な業務システムまで。</span></h2>
+      <p class="lead">「小さい相談だから頼みにくい」と考える必要はありません。</p>
+      <p>100万円未満の小規模な開発から、300万円程度の業務システム開発まで対応します。300万円を超える案件も、内容に応じてご相談いただけます。まず一つの業務から始め、利用状況に合わせて拡張する進め方も可能です。</p>
+    </div>
+    <picture class="infographic-picture"><source media="(max-width: 600px)" srcset="./assets/web-development-partner-project-scale-mobile-v1.png"><img class="scale-infographic" src="./assets/web-development-partner-project-scale-v1.png" alt="小さな開発・改善から300万円程度の業務システム開発、300万円超の案件相談までの対応規模を示す図" loading="lazy"></picture>
+    <div class="scale-domains" aria-label="対応領域の一例">
+      <h3>対応領域の一例</h3>
+      <div class="scale-domain-tags"><span>業務効率化</span><span>Webシステム開発</span><span>SaaS連携</span><span>データ活用</span><span>業務自動化</span><span>既存システム改修</span><span>AI活用</span><span>その他</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================
+     COLLABORATION
+     ========================= -->
+
+<section class="section collaboration">
+
+  <div class="container">
+
+    <div class="collaboration-copy">
+
+      <h2>
+        顧客との関係はそのまま。
+        <span class="keep">技術面をatLIBが支えます。</span>
+      </h2>
+
+      <p class="lead">
+        営業担当者だけで、技術的な質問に答える必要はありません。
+      </p>
+
+      <p>
+        パートナー販売型では、
+        お客様との契約・請求などの商流は貴社が中心です。
+        一方、要件整理や現行環境の確認、
+        実現方法について技術的な説明が必要な場面では、
+        atLIBが顧客との打ち合わせに参加できます。
+      </p>
+
+    </div>
+
+    <img
+      class="full-visual"
+      src="./assets/web-development-partner-collaboration-flow-v2.png"
+      alt="顧客・パートナー企業・atLIBの協業関係">
+
+    <div class="after-visual">
+
+      <div class="conclusion">
+        貴社の商流を維持したまま、
+        atLIBが一緒にお客様と向き合い、技術面を支援します。
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PARTNER MODEL
+     ========================= -->
+
+<section class="section model-section" aria-labelledby="model-heading">
+  <div class="container">
+    <div class="model-head">
+      <h2 id="model-heading">協業方法は、案件に合わせて選べます。</h2>
+      <p>「自社の顧客として提案を続けたい」のか、「案件を紹介した後はatLIBに任せたい」のか。貴社の営業方針や案件に合わせて、2つの協業方法をご用意しています。</p>
+    </div>
+    <picture class="infographic-picture"><source media="(max-width: 600px)" srcset="./assets/web-development-partner-collaboration-models-mobile-v1.png"><img class="model-infographic" src="./assets/web-development-partner-collaboration-models-v1.png" alt="パートナー販売型はお客様・パートナー企業・atLIBの商流を維持し、紹介型は紹介後の提案・契約・開発をatLIBが担当する2つの協業方法" loading="lazy"></picture>
+    <div class="model-details">
+      <article><h3>パートナー販売型</h3><p>貴社がお客様と契約し、atLIBは貴社へ提供します。お客様への販売価格は貴社で設定でき、開発・保守・運用も同じ商流で継続できます。技術的な打ち合わせにはatLIBが直接参加できます。</p></article>
+      <article><h3>紹介型</h3><p>貴社からお客様をご紹介いただき、その後の提案・見積・契約・開発・請求・保守はatLIBが担当します。成約時には紹介報酬をお支払いします。適用条件は別途ご案内します。</p></article>
+    </div>
+    <p class="model-footnote">※制度の詳細・適用条件はオンライン相談後にご案内します。</p>
+  </div>
+</section>
+
+
+<!-- =========================
+     USE CASE
+     ========================= -->
+
+<section class="section usecase-section">
+
+  <div class="container">
+
+    <div class="usecase-head">
+
+      <h2>
+        顧客からこんな相談が来たら、そのままatLIBへ。
+      </h2>
+
+      <p>
+        この段階で要件や予算が固まっている必要はありません。
+        「できるかどうか確認したい」という会話の段階から、
+        貴社と一緒に実現方法を整理します。
+      </p>
+
+    </div>
+
+
+    <div class="usecases">
+
+      <div class="usecase">
+
+        <strong>
+          「Excel管理が限界になってきた」
+        </strong>
+
+        複数人での利用、転記、集計など、
+        現在の業務を整理して専用Webシステムへ。
+
+      </div>
+
+
+      <div class="usecase">
+
+        <strong>
+          「もっと自社業務に合わせたい」
+        </strong>
+
+        現在の運用や利用中のツールを整理し、
+        必要な機能を持つ仕組みへ再設計。
+
+      </div>
+
+
+      <div class="usecase">
+
+        <strong>
+          「このシステム、改修できる？」
+        </strong>
+
+        現行環境を確認したうえで、
+        改修・機能追加・外部サービスとの連携を検討。
+
+      </div>
+
+
+      <div class="usecase">
+
+        <strong>
+          「AIでこの業務を効率化できない？」
+        </strong>
+
+        AIを入れること自体を目的にせず、
+        実際の業務削減につながる使い方から設計。
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     LIFECYCLE
+     ========================= -->
+
+<section class="section lifecycle">
+
+  <div class="container">
+
+    <div class="lifecycle-copy">
+
+      <h2>
+        <span class="green keep">
+          作って終わり
+        </span>
+        ではありません。
+      </h2>
+
+      <p class="lead">
+        システムは、使い始めてから見えてくる課題があります。
+      </p>
+
+      <p>
+        実際の運用が始まると、
+        「この作業も自動化したい」
+        「別の部署でも使いたい」
+        「このデータも連携したい」といった
+        次の改善テーマが生まれます。
+        atLIBは開発・導入だけでなく、
+        その後の運用、改善、追加開発まで継続して対応します。
+      </p>
+
+    </div>
+
+
+    <img
+      class="full-visual"
+      src="./assets/web-development-partner-lifecycle-support-v2.png"
+      alt="導入から運用・改善・拡張まで継続して支援">
+
+
+    <div class="lifecycle-after">
+
+      <div class="conclusion">
+        貴社が提案した大切なお客様を、
+        導入後も技術面から継続して支えます。
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     TRUST
+     ========================= -->
+
+<section class="section trust">
+
+  <div class="container">
+
+    <div class="trust-head">
+
+      <h2>
+        紹介した後も、安心して任せられる。
+      </h2>
+
+      <p>
+        開発だけを切り出して請け負うのではありません。
+        顧客の業務、既存のIT環境、
+        そして導入後の運用まで見据えて支援することで、
+        貴社がお客様と築いてきた関係を技術面から支えます。
+      </p>
+
+    </div>
+
+
+    <div class="trust-row">
+
+      <div class="trust-card">
+
+        <h3>
+          要件整理から伴走
+        </h3>
+
+        <p>
+          「何を作るか」が固まっていない段階から、
+          顧客とのヒアリングに参加し、
+          課題と実現方法を一緒に整理します。
+        </p>
+
+      </div>
+
+
+      <div class="trust-card">
+
+        <h3>
+          IT全体を見て設計
+        </h3>
+
+        <p>
+          Web開発だけでなく、
+          クラウド・インフラ・セキュリティ・IT運用も含めて、
+          実際に使い続けられる構成を検討します。
+        </p>
+
+      </div>
+
+
+      <div class="trust-card">
+
+        <h3>
+          導入後まで継続支援
+        </h3>
+
+        <p>
+          運用・改善・追加開発まで対応。
+          一度の開発で終わらず、
+          顧客との長期的な関係づくりを支援します。
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+     ========================= -->
+
+<section class="cta">
+
+  <div class="container cta-grid">
+
+    <div class="cta-copy">
+
+      <h2>
+        まずは、貴社のお客様から寄せられる相談をお聞かせください。
+      </h2>
+
+      <p>
+        具体的な案件が決まっていなくても構いません。
+        「最近こんな相談が増えている」
+        「この内容も対応できる？」
+        という段階からお話しいただけます。
+      </p>
+
+      <p>
+        貴社の顧客や営業スタイルに合わせて、
+        どのような形でatLIBを活用できるか一緒に整理します。
+      </p>
+
+      <a class="btn" href="#partner-form">
+        開発パートナーについて相談する
+      </a>
+
+    </div>
+
+
+    <img
+      class="cta-image"
+      src="./assets/web-development-partner-consultation-cta-v1.png"
+      alt="システム開発について相談する">
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CONTACT PLACEHOLDER
+     ========================= -->
+
+<section class="contact" id="partner-form">
+
+  <div class="container">
+
+    <div class="contact-inner"><h2>開発パートナーについて相談する</h2><p>貴社の顧客や営業スタイルに合わせて、どのような形でatLIBを活用できるか一緒に整理します。</p><form id="partner-lead-form" style="margin-top:28px;text-align:left"><input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_content"><input type="hidden" name="utm_term"><input type="hidden" name="cta_position"><input type="hidden" name="landing_url"><input type="hidden" name="referrer"><input type="text" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label>会社名<input required name="company" style="width:100%;margin:6px 0 14px;padding:12px"></label><label>お名前<input required name="name" style="width:100%;margin:6px 0 14px;padding:12px"></label><label>メールアドレス<input required type="email" name="email" style="width:100%;margin:6px 0 14px;padding:12px"></label><label>電話番号（任意）<input name="phone" style="width:100%;margin:6px 0 14px;padding:12px"></label><label>ご相談内容<select required name="consultationType" style="width:100%;margin:6px 0 14px;padding:12px"><option value="">選択してください</option><option>具体的な開発案件について相談したい</option><option>パートナー制度について詳しく知りたい</option><option>対応できる開発領域を確認したい</option><option>まだ案件はないが協業について相談したい</option><option>その他</option></select></label><label>お問い合わせ内容（任意）<textarea name="inquiry" style="width:100%;margin:6px 0 14px;padding:12px"></textarea></label><button class="btn" type="submit">送信して日程を選ぶ</button><p id="form-status" aria-live="polite"></p></form><div id="timerex-wrap" hidden><h3>お問い合わせありがとうございます。</h3><p>続けて、オンライン相談の日程をご予約ください。</p><a id="timerex-link" class="btn" target="_blank" rel="noopener noreferrer">オンライン相談の日程を選ぶ</a><p>※別ウィンドウで日程調整画面が開きます。</p></div></div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+  <div class="container footer-inner">
+
+    <div>
+      © atLIB Inc.
+    </div>
+
+    <div class="footer-links">
+      <a href="/privacy-policy/">
+        プライバシーポリシー
+      </a>
+      <a href="/">
+        atLIB株式会社
+      </a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script>(function(){const f=document.getElementById("partner-lead-form"),q=new URLSearchParams(location.search);let cta="";document.querySelectorAll("a[href=\"#contact\"],a[href=\"#partner-form\"]").forEach(a=>a.addEventListener("click",()=>{cta=a.textContent.trim();f.elements.cta_position.value=cta;if(typeof gtag==="function")gtag("event","cta_click",{section:cta,link_text:cta})}));["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(k=>f.elements[k].value=q.get(k)||"");f.elements.landing_url.value=location.href;f.elements.referrer.value=document.referrer||"";f.addEventListener("submit",async e=>{e.preventDefault();const d=new FormData(f),b=f.querySelector("button"),m=document.getElementById("form-status");b.disabled=true;m.textContent="送信しています…";const p={companyName:d.get("company"),contactName:d.get("name"),email:d.get("email"),phone:d.get("phone")||undefined,consultationType:d.get("consultationType"),inquiry:d.get("inquiry")||undefined,utmSource:d.get("utm_source")||undefined,utmMedium:d.get("utm_medium")||undefined,utmCampaign:d.get("utm_campaign")||undefined,utmContent:d.get("utm_content")||undefined,utmTerm:d.get("utm_term")||undefined,ctaSource:d.get("cta_position")||undefined,landingUrl:d.get("landing_url")||undefined,referrer:d.get("referrer")||undefined,hp:d.get("hp")||undefined};try{const r=await fetch("https://sales.atlib.jp/api/web-development-partner-leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(p)});if(!r.ok)throw 0;const x=await r.json(),w=document.getElementById("timerex-wrap");document.getElementById("timerex-link").href="https://timerex.net/s/yoshihisa.hagisaka_e611/4d232431?"+new URLSearchParams({lead_id:x.leadId});w.hidden=false;m.textContent="受付が完了しました。";if(typeof gtag==="function"){gtag("event","generate_lead",{section:"partner_form"});gtag("event","schedule_calendar_view",{section:"partner_form"})}w.scrollIntoView({behavior:"smooth",block:"start"})}catch{m.textContent="送信に失敗しました。時間をおいて再度お試しください。";b.disabled=false}})})()</script></body>
+</html>
