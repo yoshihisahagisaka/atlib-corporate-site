@@ -78,3 +78,164 @@ HTTP status、Server、ETag、Last-Modified、Locationを記録。Serverヘッ�
 ## 未確定
 
 WP管理バーのstaging表記の由来、各LPごとの配信元、Cloud Runの現在の役割、SCP実転送、Git mainと手動反映したHTML/画像の同期。これらを確認済みとして扱わない。
+
+
+---
+
+## 2026-10-05 Corporate Web 共通セキュリティ Canonical
+
+### 適用範囲
+
+本項は `corporate-site-wp` の本番 Apache HTTPS VirtualHost を利用する Corporate Web の共通セキュリティ設定を記録する。
+
+対象環境:
+
+- GCP project: `atlib-corporate-site`
+- VM: `corporate-site-wp`
+- zone: `asia-northeast1-a`
+- Apache config: `/etc/apache2/sites-available/production-le-ssl.conf`
+- ServerName: `www.atlib.jp`
+- ServerAlias: `atlib.jp`, `recruit.atlib.jp`, `www.recruit.atlib.jp`
+- DocumentRoot: `/var/www/html`
+
+同一 HTTPS vhost / DocumentRoot 配下へ配置される静的LPは、HTML個別実装ではなくApacheの共通レスポンスヘッダーを継承する。
+
+SEO / AIO（canonical、OGP、JSON-LD、meta等）は各LPのコード側で管理する。API、CORS、認証、rate limit、入力検証等は各アプリケーション側の責務とする。
+
+### 本番適用済み HTTP Security Headers
+
+2026-10-05時点で以下を本番適用し、公開レスポンスで確認済み。
+
+```apache
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+```
+
+Apache `headers_module` も有効化済み。
+
+適用時に以下を確認した。
+
+```bash
+sudo apache2ctl configtest
+sudo systemctl reload apache2
+systemctl is-active apache2
+sudo apache2ctl -M | grep headers
+```
+
+実測結果:
+
+- Apache config: `Syntax OK`
+- Apache: `active`
+- `headers_module (shared)`
+
+### HSTS導入前のHTTPS確認
+
+`includeSubDomains` 適用前に、把握している現存ホストについてHTTPS/TLSを実測した。
+
+確認対象:
+
+- `atlib.jp`
+- `www.atlib.jp`
+- `recruit.atlib.jp`
+- `www.recruit.atlib.jp`
+- `wp-test.atlib.jp`
+- `apps-dev.atlib.jp`
+- `apps-first.atlib.jp`
+- `cashflow.atlib.jp`
+- `ppap-upload.atlib.jp`
+- `topology.zabbix.atlib.jp`
+- `zabbix-admin.atlib.jp`
+- `files.atlib.jp`
+- `portal.atlib.jp`
+- `sales.atlib.jp`
+
+全対象でHTTPS接続が成立し、curl `ssl_verify_result=0` を確認した。HTTP statusは用途により200 / 301 / 302 / 401 / 403 / 404を含むが、TLS検証はいずれも正常だった。
+
+HSTS `preload` は現時点では採用しない。
+
+### `zabbix.atlib.jp` の整理
+
+旧 `zabbix.atlib.jp` はSquarespace DNSのAレコードでZabbix VMの外部IP `34.85.69.73` を直接参照していた。
+
+一方、現行FirewallではVMの80/443はGoogle Load Balancer系レンジからのみ許可されており、一般インターネットからのHTTP/HTTPSはtimeoutする構成だった。
+
+現行Zabbix管理経路は以下。
+
+`zabbix-admin.atlib.jp` → HTTPS Load Balancer → IAP → `zabbix-admin-bes` → `zabbix-server`
+
+`msp-iap-urlmap` に `zabbix-admin.atlib.jp` は存在するが、`zabbix.atlib.jp` は存在しないことを確認した。
+
+このためVMの80/443を再公開せず、不要となっていたSquarespace DNSの以下のレコードを2026-10-05に削除した。
+
+```text
+Type: A
+Host: zabbix
+Data: 34.85.69.73
+```
+
+削除後、`Resolve-DnsName zabbix.atlib.jp -Type A` でAレコードが返らないことを確認した。
+
+`zabbix-admin.atlib.jp` および `topology.zabbix.atlib.jp` は削除対象ではない。
+
+### 公開レスポンス検証
+
+以下で共通ヘッダーの本番配信を確認済み。
+
+- `https://www.atlib.jp/`
+- `https://www.atlib.jp/infravision-partner/`
+- `https://www.atlib.jp/web-development-partner/`
+
+3ページすべてでHTTP 200と以下を確認した。
+
+```text
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+```
+
+また `atlib.jp`、`www.atlib.jp`、`recruit.atlib.jp`、`www.recruit.atlib.jp` でもHSTSヘッダーの配信を確認済み。
+
+### Business Web / 今後のLP
+
+Business Webを同じ `www.atlib.jp` のApache HTTPS vhost / `/var/www/html` 配下へ公開する場合、上記HTTP Security Headersを継承する。
+
+Business Web側ではSEO / AIOとアプリ固有セキュリティを管理し、同じ共通ヘッダーをHTMLへ重複実装しない。
+
+ただし、配置先が同じDocumentRootであることだけを根拠に継承済みと判断せず、公開後に実レスポンスを確認する。
+
+### 意図的に未適用の設定
+
+以下は全サイト共通設定として現時点では適用しない。
+
+- `Content-Security-Policy`
+- `X-Frame-Options`
+- HSTS `preload`
+
+CSPはインラインJavaScript/CSS、外部サービス、各LP/Business Webへの影響を棚卸ししてから設計する。
+
+`X-Frame-Options` はiframe/埋め込み要件を確認してから判断する。
+
+HSTS `preload` は通常のHSTSより影響および解除コストが大きいため、別途判断する。
+
+### バックアップ / ロールバック
+
+HSTS導入前に以下のバックアップを作成した。
+
+`/etc/apache2/sites-available/production-le-ssl.conf.bak-20261003-hsts`
+
+Apache設定変更時は必ず `apache2ctl configtest` 成功後に `systemctl reload apache2` を実施する。構文エラー時はreloadしない。
+
+障害時はバックアップまたは直前の正常設定へ復元し、`configtest` 後にreloadして公開レスポンスを再確認する。
+
+### 運用上の重要事項
+
+Corporate Webの共通HTTPセキュリティ設定をLPごとに再実装しない。
+
+新規サブドメインを追加する場合、`Strict-Transport-Security: max-age=31536000; includeSubDomains` が既に運用されていることを前提とし、**公開開始時点から有効なHTTPS/TLSを必須とする**。
+
+`Permissions-Policy` により現在 `camera`、`microphone`、`geolocation` を無効化している。将来これらのブラウザ機能を必要とするWeb機能を公開する場合は、共通ポリシーを事前に再評価する。
+
+Apache / DNS / Load Balancerの構成変更時は、本RunbookとGit履歴を確認してから作業する。
