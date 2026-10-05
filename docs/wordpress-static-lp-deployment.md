@@ -119,6 +119,9 @@ SHA256が一致していれば、ローカルのindex.htmlと本番配置ファ�
 - 通知メール
 - GA4 / CTA計測
 - privacy-policyリンク
+- HTTPS/TLSが正常である
+- Corporate Web共通HTTP Security Headersを実レスポンスで確認する
+- 新規サブドメインの場合、HSTS `includeSubDomains` を前提として公開開始時点からHTTPSを有効にする
 
 サービス固有のE2E確認項目がある場合は追加する。
 
@@ -168,3 +171,5 @@ Git管理
 構成変更が必要な場合のみ、別途設計判断を行う。
 
 作業再開時は、インフラを再調査する前に本ドキュメントとGit履歴を確認する。
+
+Corporate Web共通セキュリティ設定、HSTS、DNS/HTTPS運用については `docs/atlib_site_delivery_runbook_20260929.md` の最新Canonicalを参照し、LPごとに独自設定を重複実装しない。
