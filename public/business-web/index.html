@@ -1168,5 +1168,20 @@ a{color:inherit}
 </div>
 </section></main>
 <footer class="footer"><div class="wrap"><div class="footer-brand"><img alt="atLIB株式会社" class="footer-logo" decoding="async" loading="lazy" src="assets/atlib-logo.png"/><span class="footer-message">ITで、企業に自由を。人々に未来をつくる。</span></div><div class="footer-meta">© atLIB株式会社　｜　<a href="/privacy-policy/">プライバシーポリシー</a></div></div></footer>
+<script>
+(() => {
+  const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  const incoming = new URLSearchParams(window.location.search);
+  if (!keys.some((key) => incoming.has(key))) return;
+  document.querySelectorAll('a[href^="/business-web/self-check/"]').forEach((anchor) => {
+    const target = new URL(anchor.href, window.location.origin);
+    keys.forEach((key) => {
+      const value = incoming.get(key);
+      if (value) target.searchParams.set(key, value);
+    });
+    anchor.href = `${target.pathname}${target.search}${target.hash}`;
+  });
+})();
+</script>
 </body>
 </html>
