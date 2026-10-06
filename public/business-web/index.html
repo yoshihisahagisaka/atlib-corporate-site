@@ -1,31 +1,1187 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="業務から考える、Webシステム開発・業務自動化。ツールを増やすのではなく、仕事を減らす。">
-  <title>業務KAIZEN｜Webシステム開発・業務自動化｜atLIB</title>
-  <style>
-    :root{--navy:#1F3556;--orange:#F28C38;--emerald:#2DBE9D;--offwhite:#F8FAFC;--ink:#17243a;--muted:#56657a;--line:#dce4ed}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Yu Gothic",sans-serif;line-height:1.8;background:#fff}a{color:inherit}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}.section{padding:88px 0}.pale{background:var(--offwhite)}.navy{background:var(--navy);color:#fff}.eyebrow{margin:0 0 10px;color:var(--emerald);font-size:.84rem;font-weight:800;letter-spacing:.09em}.section-title{margin:0 0 18px;font-size:clamp(1.85rem,3.8vw,2.8rem);line-height:1.35}.lead{max-width:760px;margin:0;color:var(--muted);font-size:1.07rem}.btn{display:inline-block;border:0;border-radius:999px;background:var(--orange);color:#fff;text-decoration:none;font-weight:800;padding:14px 27px;box-shadow:0 8px 18px #d66f2433}.site-header{position:sticky;top:0;z-index:5;background:#fffffff2;border-bottom:1px solid #e8edf3}.site-header .wrap{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:16px;text-decoration:none;font-weight:800}.brand img{width:105px;height:auto}.brand small{display:block;color:var(--muted);font-size:.72rem}.hero{overflow:hidden;background:linear-gradient(115deg,#f5f8fc 0%,#fff 48%,#e5f3f0 100%)}.hero .wrap{min-height:630px;display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center}.hero h1{margin:0 0 18px;color:var(--navy);font-size:clamp(2.35rem,4.4vw,3.55rem);line-height:1.18}.hero .value{margin:0 0 20px;color:var(--orange);font-size:clamp(1.25rem,2.2vw,1.65rem);font-weight:800}.hero .copy{max-width:550px;font-size:1.05rem}.hero .note{font-size:.9rem;color:var(--muted)}.visual{display:block;width:100%;height:auto;border-radius:22px;box-shadow:0 18px 45px #1f355622}.hero-image{width:calc(100% + 50px);max-width:none;margin-right:-50px}.tool-strip{padding:22px 0;border-bottom:1px solid var(--line)}.tool-strip .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}.tool-strip strong{font-size:.92rem}.chip{padding:5px 13px;border-radius:999px;background:#f1f5f8;font-size:.84rem;font-weight:700}.problem-grid,.capability,.diagnosis{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}.problem-copy{color:#d9e6f1}.problem-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}.problem-list span{padding:10px 12px;border-left:4px solid var(--orange);background:#ffffff12;font-size:.92rem}.problem-image{background:#fff;border-radius:22px;padding:10px}.problem-image img{box-shadow:none}.framing{max-width:850px;margin:auto;text-align:center}.framing .quote{margin:22px 0 0;color:var(--navy);font-size:1.23rem;font-weight:800}.diagram-mobile{display:none}.approach-copy{max-width:820px}.approach-note{max-width:820px;margin:25px 0 0;color:var(--muted)}.implementation-copy{max-width:850px}.selection-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:25px 0}.selection-grid span{padding:10px;border:1px solid var(--line);border-radius:11px;background:#fff;text-align:center;font-size:.88rem;font-weight:800}.ai-panel{margin-top:25px;padding:24px 27px;border-left:5px solid var(--emerald);border-radius:0 16px 16px 0;background:#edfaf7}.ai-panel h3{margin:0 0 7px;color:var(--navy);font-size:1.12rem}.ai-panel p{margin:0;color:var(--muted)}.before-after-copy{max-width:760px;margin-bottom:30px}.before-after-mobile{display:none}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}.step{border-top:5px solid var(--emerald);padding:18px;background:#fff;box-shadow:0 8px 20px #1f355610}.step b{display:block;color:var(--emerald);font-size:.82rem}.step h3{margin:8px 0;font-size:1.12rem;line-height:1.4}.step p{margin:0;color:var(--muted);font-size:.9rem}.capability-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:24px 0}.capability-flow span{padding:9px 11px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:.88rem;font-weight:800}.capability-flow i{color:var(--emerald);font-style:normal;font-weight:900}.capability figure{margin:0}.capability figure img{width:100%;border-radius:16px}.capability figcaption{margin-top:8px;color:var(--muted);font-size:.8rem}.axis-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.axis-grid div{padding:14px;border:1px solid var(--line);border-radius:10px;background:#fff;font-weight:800}.diagnosis-note{margin-top:20px;color:var(--muted);font-size:.94rem}.faq{max-width:860px;margin:auto}.faq details{padding:18px 0;border-bottom:1px solid var(--line)}.faq summary{cursor:pointer;font-weight:800}.faq p{margin:12px 0 0;color:var(--muted)}.cta{overflow:hidden;background:var(--navy);color:#fff}.cta .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}.cta h2{font-size:clamp(1.7rem,3.5vw,2.6rem);line-height:1.4}.cta p{color:#dbe7f0}.cta img{width:100%;border-radius:18px}.footer{padding:28px 0;background:#152740;color:#d8e5eb;font-size:.85rem}.footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
-    @media(max-width:760px){.wrap{width:min(100% - 28px,1120px)}.section{padding:62px 0}.site-header .wrap{height:65px}.brand img{width:82px}.brand span{display:none}.site-header .btn{padding:9px 12px;font-size:.74rem;white-space:nowrap}.hero .wrap,.problem-grid,.capability,.diagnosis,.cta .wrap{grid-template-columns:1fr}.hero .wrap{min-height:auto;padding:52px 0 0}.hero-image{width:calc(100% + 28px);margin:12px -14px 0;border-radius:0;box-shadow:none}.problem-list{grid-template-columns:1fr}.problem-image{padding:6px}.diagram-desktop{display:none}.diagram-mobile{display:grid;gap:8px;margin-top:28px}.diagram-mobile .node{padding:15px 16px;border:1px solid var(--line);border-radius:13px;background:#fff;text-align:center;font-weight:800;box-shadow:0 5px 14px #1f35560d}.diagram-mobile .node.keep{border-color:#8cdac7;background:#edfaf7}.diagram-mobile .node.build{border-color:var(--navy);background:var(--navy);color:#fff}.diagram-mobile .arrow{text-align:center;color:var(--emerald);font-weight:900}.selection-grid{grid-template-columns:1fr 1fr}.before-after-mobile{display:grid;gap:14px}.before-after-mobile article{padding:20px;border-radius:16px}.before-after-mobile .before{background:#eef2f6}.before-after-mobile .after{background:#edfaf7}.before-after-mobile h3{margin:0 0 10px}.before-after-mobile p{margin:0}.steps{grid-template-columns:1fr}.axis-grid{grid-template-columns:1fr}.cta{padding-top:54px}.cta .wrap{gap:22px}.cta img{margin-bottom:-35px}.section-title{font-size:clamp(1.75rem,8vw,2.2rem)}}
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>業務KAIZEN｜業務から考えるWebシステム開発・業務自動化｜atLIB</title>
+<meta content="業務KAIZENは、今の業務をそのままシステム化せず、残す仕事と減らす作業を整理してから、Webシステム開発・業務自動化・既存ツール連携を実装するatLIBのサービスです。15問の無料診断から始められます。" name="description"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
+<link href="https://www.atlib.jp/business-web/" rel="canonical"/>
+
+<meta content="website" property="og:type"/>
+<meta content="ja_JP" property="og:locale"/>
+<meta content="業務KAIZEN｜業務から考えるWebシステム開発・業務自動化｜atLIB" property="og:title"/>
+<meta content="今の業務をそのままシステム化しない。残す仕事と減らす作業を整理し、必要なWebシステム開発・業務自動化・既存ツール連携を実装します。" property="og:description"/>
+<meta content="https://www.atlib.jp/business-web/" property="og:url"/>
+<meta content="atLIB株式会社" property="og:site_name"/>
+<meta content="https://www.atlib.jp/business-web/assets/gyomu-kaizen-hero.png" property="og:image"/>
+<meta content="業務KAIZEN ― 業務から考えるWebシステム開発" property="og:image:alt"/>
+
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="業務KAIZEN｜業務から考えるWebシステム開発・業務自動化｜atLIB" name="twitter:title"/>
+<meta content="今の業務をそのままシステム化せず、仕事を減らすために必要な仕組みを設計・開発します。" name="twitter:description"/>
+<meta content="https://www.atlib.jp/business-web/assets/gyomu-kaizen-hero.png" name="twitter:image"/>
+<style>
+:root{
+  --navy:#1F3556;--orange:#F28C38;--emerald:#2DBE9D;--offwhite:#F8FAFC;
+  --ink:#17243a;--muted:#56657a;--line:#dce4ed
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Yu Gothic",sans-serif;
+  line-height:1.85;background:#fff
+}
+a{color:inherit}
+.wrap{width:min(1100px,calc(100% - 48px));margin:auto}
+.section{padding:58px 0}
+.pale{background:var(--offwhite)}
+.navy{background:var(--navy);color:#fff}
+.section-title{
+  margin:0 0 18px;font-size:clamp(1.9rem,3vw,2.65rem);
+  line-height:1.3;letter-spacing:-.025em
+}
+.body-copy{max-width:780px;margin:0;color:var(--muted);font-size:.98rem;line-height:2}
+.body-copy p{margin:0 0 1em}
+.btn{
+  display:inline-block;border:0;border-radius:999px;background:var(--orange);color:#fff;
+  text-decoration:none;font-weight:800;padding:12px 24px;box-shadow:0 7px 16px #d66f2430
+}
+.site-header{position:sticky;top:0;z-index:10;background:#fffffff4;border-bottom:1px solid #e8edf3}
+.site-header .wrap{height:66px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;font-weight:800}
+.brand img{width:96px;height:auto}
+.brand small{display:block;color:var(--muted);font-size:.68rem}
+.brand-service{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-service img{width:190px;height:auto;display:block}
+.brand-company{
+  flex:0 0 auto;
+  padding-left:10px;
+  border-left:1px solid #d7dee7;
+  color:var(--muted);
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.02em;
+  white-space:nowrap
+}
+
+/* FV: 1366x768-class notebook first */
+.hero{overflow:hidden;background:linear-gradient(115deg,#f5f8fc 0%,#fff 47%,#e5f3f0 100%)}
+.hero .wrap{position:relative;display:block;aspect-ratio:16/9;min-height:0}
+.hero-copy{position:relative;z-index:2;width:58%;padding:38px 0 34px}
+.hero-brand{margin:0 0 10px;color:var(--emerald);font-size:.82rem;font-weight:800}
+.hero h1{
+  margin:0 0 16px;color:var(--navy);font-size:clamp(2.5rem,4vw,3.45rem);
+  line-height:1.15;letter-spacing:-.045em
+}
+.hero .value{margin:0 0 16px;color:var(--orange);font-size:clamp(1.15rem,1.8vw,1.45rem);font-weight:800}
+.hero .copy{max-width:555px;margin:0 0 15px;font-size:.98rem;line-height:1.9}
+.hero .note{margin:12px 0 0;font-size:.82rem;color:var(--muted)}
+.hero-visual{
+  position:absolute;z-index:1;right:-7%;bottom:0;width:66%;height:100%;
+  display:flex;align-items:flex-end;justify-content:flex-end;pointer-events:none
+}
+.hero-image{
+  display:block;width:100%;max-width:none;height:auto;margin:0;
+  background:transparent;border:0;border-radius:0;box-shadow:none
+}
+.hero-tools{
+  margin:15px 0 0;padding-top:12px;border-top:1px solid #dbe6e8;
+  color:var(--muted);font-size:.78rem;line-height:1.7
+}
+.hero-tools strong{color:var(--navy)}
+.visual{display:block;width:100%;height:auto;border:0;border-radius:0;box-shadow:none;background:transparent}
+
+/* Problem */
+.problem-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:34px;align-items:center}
+.problem-copy{font-size:.98rem;line-height:2;color:#dce7f0}
+.problem-copy strong{color:#fff}
+.problem-image{background:transparent;padding:0}
+.problem-image img{width:100%;margin:0}
+
+/* text bridge */
+.bridge{padding:46px 0;background:#fff}
+.framing{max-width:900px;margin:auto;text-align:center}
+.framing .section-title{margin-bottom:16px}
+.framing .bridge-copy{max-width:760px;margin:0 auto;color:var(--muted);font-size:.98rem;line-height:2}
+.framing .quote{margin:18px 0 0;color:var(--navy);font-size:1.2rem;font-weight:900}
+
+/* Approach: visual first, text for deeper reading */
+.approach-layout{display:grid;grid-template-columns:1fr;gap:20px}
+.approach-visual{max-width:900px;margin:0 auto}
+.approach-text{max-width:900px;margin:0 auto;color:var(--muted);font-size:.96rem;line-height:2}
+.approach-text p{margin:0 0 .85em}
+.approach-text strong{color:var(--navy)}
+.diagram-mobile{display:none}
+
+/* Implementation: text + visual side-by-side */
+.implementation-grid{display:grid;grid-template-columns:1fr;gap:20px}
+.implementation-copy{max-width:900px;color:var(--muted);font-size:.95rem;line-height:1.95}
+.implementation-copy p{margin:0 0 .9em}
+.implementation-copy strong{color:var(--navy)}
+.implementation-visual{max-width:900px;margin:0 auto}.implementation-visual img{width:100%;margin:0}
+.ai-note{
+  max-width:900px;margin:0 auto;padding-top:14px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:.9rem;line-height:1.9
+}
+.ai-note strong{color:var(--navy)}
+
+/* Before / After */
+.outcome-head{max-width:760px}
+.outcome-copy{margin:0 0 18px;color:var(--muted);font-size:.96rem;line-height:1.95}
+.outcome-visual{max-width:900px;margin:0 auto}
+.before-after-mobile{display:none}
+
+/* Process */
+.process-intro{max-width:820px;color:var(--muted);font-size:.96rem;line-height:1.95;margin-bottom:25px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.step{border-top:4px solid var(--emerald);padding:16px;background:#fff;box-shadow:0 6px 18px #1f35560c}
+.step b{display:block;color:var(--emerald);font-size:.75rem}
+.step h3{margin:7px 0;font-size:1.03rem;line-height:1.4}
+.step p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.75}
+
+/* Capability: remove old deployment image; visual flow becomes the proof */
+.capability{display:grid;grid-template-columns:.9fr 1.1fr;gap:38px;align-items:center}
+.capability-map{
+  padding:24px;border:1px solid var(--line);background:#fff;box-shadow:0 8px 24px #1f35560b
+}
+.capability-flow{display:grid;grid-template-columns:1fr;gap:7px}
+.capability-flow span{
+  padding:10px 13px;border-radius:9px;background:#f5f9fb;border:1px solid var(--line);
+  font-size:.86rem;font-weight:800
+}
+.capability-flow i{text-align:center;color:var(--emerald);font-style:normal;font-weight:900;line-height:1}
+.capability-copy{color:var(--muted);font-size:.96rem;line-height:1.95}
+.capability-copy p{margin:0 0 .9em}
+
+/* Diagnosis */
+.diagnosis{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:center}
+.diagnosis-copy{color:var(--muted);font-size:.96rem;line-height:1.95}
+.diagnosis-copy p{margin:0 0 .9em}
+.diagnosis-visual img{width:108%;margin-left:-3%}
+
+/* FAQ */
+.faq{max-width:860px;margin:auto}
+.faq details{padding:15px 0;border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-weight:800}
+.faq p{margin:10px 0 0;color:var(--muted);font-size:.92rem}
+.faq-action{text-align:center;margin-top:28px}
+.footer{padding:24px 0;background:#152740;color:#d8e5eb;font-size:.8rem}
+.footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
+.footer-brand{display:flex;align-items:center;gap:18px;min-width:0}
+.footer-logo{display:block;width:108px;height:auto;flex:0 0 auto}
+.footer-message{white-space:nowrap}
+.footer-meta{text-align:right}
+.footer a{text-decoration:none}
+.footer a:hover{text-decoration:underline}
+
+/* Smaller notebook screens */
+@media(max-width:1180px) and (min-width:761px){
+  .wrap{width:min(1040px,calc(100% - 42px))}
+  .section{padding:50px 0}
+  .hero .wrap{min-height:535px}
+  .hero-copy{width:59%}
+  .hero h1{font-size:clamp(2.35rem,4vw,3.15rem)}
+  .hero-visual{right:-8%;width:67%}
+  .hero-image{width:100%;margin:0}
+  .problem-image img,.implementation-visual img,.diagnosis-visual img{width:104%;margin-left:0}
+}
+
+/* Mobile */
+@media(max-width:760px){
+  .wrap{width:min(100% - 28px,600px)}
+  .section{padding:52px 0}
+  .site-header .wrap{height:64px}.brand img{width:82px}.brand span{display:none}
+  .site-header .brand-service img{width:148px}
+  .site-header .brand-service{gap:7px}
+  .brand-company{padding-left:7px;font-size:.6rem}
+  .site-header .btn{padding:9px 12px;font-size:.74rem;white-space:nowrap}
+  .problem-grid,.implementation-grid,.diagnosis{grid-template-columns:1fr}
+  .hero .wrap{aspect-ratio:auto;min-height:auto;padding:40px 0 0}
+  .hero-copy{width:100%;padding:0}
+  .hero h1{font-size:clamp(2.15rem,10vw,2.8rem)}
+  .hero-visual{position:relative;inset:auto;width:100%;height:auto;display:block;overflow:visible}
+  .hero-image{width:calc(100% + 28px);height:auto;object-fit:contain;object-position:center;margin:12px -14px 0}
+  .hero-tools{margin-bottom:18px}
+  .problem-image img,.implementation-visual img,.diagnosis-visual img{width:100%;margin:0}
+  .diagram-desktop{display:none}
+  .diagram-mobile{display:grid;gap:8px;margin-top:24px}
+  .diagram-mobile .node{padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff;text-align:center;font-weight:800}
+  .diagram-mobile .node.keep{border-color:#8cdac7;background:#edfaf7}
+  .diagram-mobile .node.build{border-color:var(--navy);background:var(--navy);color:#fff}
+  .diagram-mobile .arrow{text-align:center;color:var(--emerald);font-weight:900}
+  .before-after-mobile{display:grid;gap:12px}
+  .before-after-mobile article{padding:18px;border-radius:14px}
+  .before-after-mobile .before{background:#eef2f6}.before-after-mobile .after{background:#edfaf7}
+  .before-after-mobile h3{margin:0 0 8px}.before-after-mobile p{margin:0}
+  .steps{grid-template-columns:1fr}
+  .capability{display:flex;flex-direction:column-reverse;align-items:stretch}
+  .section-title{font-size:clamp(1.75rem,8vw,2.2rem)}
+  .footer .wrap{display:block;text-align:center}
+  .footer-brand{justify-content:center;flex-wrap:wrap;gap:10px 14px}
+  .footer-logo{width:96px}
+  .footer-message{white-space:normal;width:100%}
+  .footer-meta{margin-top:14px;text-align:center}
+}
+
+.maintenance-note{
+  margin-top:18px;padding:14px 17px;border-left:4px solid var(--navy);
+  background:#f5f8fc;color:var(--muted);font-size:.86rem;line-height:1.8
+}
+.maintenance-note strong{color:var(--navy)}
+
+
+/* ===== FV: design-comp based integrated hero ===== */
+@media (min-width: 751px){
+  section.hero{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(110deg,#fff 5%,#f7fbfd 57%,#e3f2f5);
+  }
+  section.hero > .wrap{
+    position:relative;
+    width:min(1280px,calc(100% - 64px));
+    height:min(650px,calc((100vw - 64px) * 9 / 16));
+    min-height:560px;
+    max-height:650px;
+    margin:auto;
+    display:block;
+  }
+  section.hero .hero-visual{
+    position:absolute;
+    z-index:1;
+    inset:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    pointer-events:none;
+  }
+  section.hero .hero-visual img{
+    display:block;
+    width:100%;
+    height:100%;
+    max-width:none;
+    margin:0;
+    object-fit:cover;
+    object-position:center center;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    background:transparent;
+  }
+  section.hero .hero-copy{
+    position:relative;
+    z-index:3;
+    width:52%;
+    max-width:650px;
+    height:100%;
+    padding:44px 0 30px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  section.hero .hero-copy h1{
+    margin:10px 0 14px;
+  }
+  section.hero .hero-copy .hero-lead{
+    margin:8px 0 14px;
+  }
+  section.hero .hero-copy .hero-actions{
+    margin-top:8px;
+  }
+}
+@media (max-width: 750px){
+  section.hero > .wrap{
+    width:min(100% - 34px,600px);
+    height:auto;
+    min-height:0;
+    max-height:none;
+    padding:42px 0 30px;
+  }
+  section.hero .hero-copy{
+    width:100%;
+    max-width:none;
+    height:auto;
+    padding:0;
+    display:block;
+  }
+  section.hero .hero-visual{
+    display:none;
+  }
+}
+
+/* ===== FV final polish: right edge / copy width / remove eyebrow ===== */
+@media (min-width: 751px){
+  section.hero .hero-visual{
+    /* Anchor the 16:9 artwork to the right edge of the FV canvas. */
+    left:auto!important;
+    right:0!important;
+    top:0!important;
+    bottom:0!important;
+    width:100%!important;
+    height:100%!important;
+  }
+  section.hero .hero-visual img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+    object-position:right center!important;
+  }
+  section.hero .hero-copy{
+    width:50%!important;
+    max-width:610px!important;
+    padding-top:22px!important;
+    padding-bottom:24px!important;
+  }
+  section.hero .hero-copy h1{
+    margin-top:0!important;
+  }
+  section.hero .hero-copy > p:not(.hero-lead):not(.hero-note){
+    max-width:540px!important;
+  }
+  section.hero .hero-copy .hero-lead{
+    max-width:575px!important;
+  }
+  section.hero .hero-copy .hero-note{
+    max-width:520px!important;
+  }
+}
+
+/* ===== FV v8: authoritative composition — replaces prior FV geometry ===== */
+@media (min-width:751px){
+  section.hero{
+    position:relative!important;
+    overflow:hidden!important;
+    background:#f7fbfd!important;
+  }
+
+  /* The wrap IS the 16:9 artwork canvas. */
+  section.hero > .wrap{
+    position:relative!important;
+    display:block!important;
+    width:min(1280px,calc(100% - 64px))!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    aspect-ratio:16/9!important;
+    margin:0 auto!important;
+    padding:0!important;
+    overflow:hidden!important;
+  }
+
+  /* Artwork fills the same canvas and is pinned to the right edge. */
+  section.hero .hero-visual{
+    position:absolute!important;
+    z-index:1!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    pointer-events:none!important;
+    transform:none!important;
+    translate:none!important;
+  }
+  section.hero .hero-visual img{
+    position:absolute!important;
+    z-index:1!important;
+    top:0!important;
+    right:0!important;
+    bottom:0!important;
+    left:auto!important;
+    display:block!important;
+    width:auto!important;
+    height:100%!important;
+    min-width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+    object-fit:cover!important;
+    object-position:right center!important;
+    border:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+    transform:none!important;
+  }
+
+  /* Copy sits only in the transparent left portion of the artwork. */
+  section.hero .hero-copy{
+    position:absolute!important;
+    z-index:5!important;
+    top:0!important;
+    left:0!important;
+    bottom:0!important;
+    width:43%!important;
+    max-width:550px!important;
+    height:100%!important;
+    margin:0!important;
+    padding:34px 0 28px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:center!important;
+    align-items:flex-start!important;
+    isolation:isolate!important;
+  }
+
+  section.hero .fv-title{
+    width:100%!important;
+    max-width:none!important;
+    margin:0 0 15px!important;
+    font-size:clamp(40px,3.55vw,56px)!important;
+    line-height:1.28!important;
+    letter-spacing:-.05em!important;
+  }
+  section.hero .fv-lead{
+    width:100%!important;
+    max-width:520px!important;
+    margin:0 0 15px!important;
+    font-size:clamp(20px,1.65vw,26px)!important;
+    line-height:1.55!important;
+  }
+  section.hero .fv-body{
+    width:88%!important;
+    max-width:470px!important;
+    margin:0 0 18px!important;
+    font-size:14px!important;
+    line-height:1.9!important;
+  }
+  section.hero .fv-actions{
+    margin:0 0 11px!important;
+  }
+  section.hero .fv-note{
+    width:88%!important;
+    max-width:470px!important;
+    margin:0!important;
+    font-size:11px!important;
+    line-height:1.65!important;
+  }
+
+  /* Old FV eyebrow must never reserve space even if stale markup remains. */
+  section.hero .eyebrow{display:none!important;}
+}
+
+@media (max-width:750px){
+  section.hero > .wrap{
+    aspect-ratio:auto!important;
+    width:min(100% - 34px,600px)!important;
+    height:auto!important;
+    padding:42px 0 30px!important;
+    overflow:visible!important;
+  }
+  section.hero .hero-copy{
+    position:relative!important;
+    inset:auto!important;
+    width:100%!important;
+    max-width:none!important;
+    height:auto!important;
+    padding:0!important;
+    display:block!important;
+  }
+  section.hero .hero-visual{display:none!important;}
+}
+
+/* ===== FV v9: viewport-wide artwork + top-aligned copy ===== */
+@media (min-width:751px){
+  section.hero{
+    position:relative!important;
+    width:100%!important;
+    min-height:0!important;
+    aspect-ratio:16/9!important;
+    max-height:650px!important;
+    overflow:hidden!important;
+    background:#f7fbfd!important;
+  }
+
+  /* Content wrap no longer defines the image boundary. */
+  section.hero > .wrap{
+    position:relative!important;
+    z-index:2!important;
+    width:min(1280px,calc(100% - 64px))!important;
+    height:100%!important;
+    min-height:0!important;
+    max-height:none!important;
+    aspect-ratio:auto!important;
+    margin:0 auto!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
+
+  /* Break the visual out of .wrap so it reaches the actual hero right edge. */
+  section.hero .hero-visual{
+    position:absolute!important;
+    z-index:1!important;
+    top:0!important;
+    bottom:0!important;
+    left:50%!important;
+    right:auto!important;
+    width:100vw!important;
+    height:100%!important;
+    margin-left:-50vw!important;
+    overflow:hidden!important;
+    pointer-events:none!important;
+  }
+  section.hero .hero-visual img{
+    position:absolute!important;
+    top:0!important;
+    right:0!important;
+    bottom:0!important;
+    left:auto!important;
+    width:100%!important;
+    min-width:0!important;
+    height:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    object-fit:cover!important;
+    object-position:right center!important;
+    transform:none!important;
+  }
+
+  /* Intentionally top-align instead of vertical centering. */
+  section.hero .hero-copy{
+    position:absolute!important;
+    z-index:5!important;
+    top:54px!important;
+    left:0!important;
+    bottom:auto!important;
+    width:43%!important;
+    max-width:550px!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+    display:block!important;
+  }
+
+  section.hero .fv-title{margin:0 0 14px!important;}
+  section.hero .fv-lead{margin:0 0 14px!important;}
+  section.hero .fv-body{margin:0 0 17px!important;}
+  section.hero .fv-actions{margin:0 0 10px!important;}
+}
+
+@media (max-width:750px){
+  section.hero{
+    aspect-ratio:auto!important;
+    max-height:none!important;
+  }
+  section.hero .hero-visual{display:none!important;}
+  section.hero .hero-copy{
+    position:relative!important;
+    top:auto!important;
+    left:auto!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+}
+
+/* ===== FV v10: breathing room + slightly quieter artwork ===== */
+@media (min-width:751px){
+  /* Keep the established hero canvas; scale artwork down only slightly, from the right edge. */
+  section.hero .hero-visual img{
+    width:96%!important;
+    height:96%!important;
+    min-width:0!important;
+    top:2%!important;
+    right:0!important;
+    bottom:auto!important;
+    object-fit:cover!important;
+    object-position:right center!important;
+  }
+
+  /* Use the available vertical space instead of compressing the left copy. */
+  section.hero .hero-copy{
+    top:44px!important;
+    width:43%!important;
+    max-width:550px!important;
+  }
+  section.hero .fv-title{
+    margin:0 0 24px!important;
+  }
+  section.hero .fv-lead{
+    margin:0 0 24px!important;
+  }
+  section.hero .fv-body{
+    margin:0 0 28px!important;
+    line-height:2!important;
+  }
+  section.hero .fv-actions{
+    margin:0 0 20px!important;
+  }
+  section.hero .fv-note{
+    margin:0!important;
+  }
+}
+
+/* Existing-tool message is now a transition between FV and Problem, not part of the FV copy stack. */
+.existing-tools-bridge{
+  background:#fff;
+  border-top:1px solid #e7edf3;
+  border-bottom:1px solid #e7edf3;
+}
+.existing-tools-bridge > .wrap{
+  padding-top:16px;
+  padding-bottom:16px;
+}
+.existing-tools-bridge p,
+.existing-tools-bridge div{
+  margin-top:0;
+  margin-bottom:0;
+}
+@media (max-width:750px){
+  .existing-tools-bridge > .wrap{
+    padding-top:14px;
+    padding-bottom:14px;
+  }
+}
+
+/* ===== FV v11: compact height + existing-tools back inside FV ===== */
+@media (min-width:751px){
+  /* Reduce the FV height while keeping the image/copy as one canvas. */
+  section.hero{
+    aspect-ratio:auto!important;
+    height:590px!important;
+    max-height:590px!important;
+  }
+
+  /* Restore the artwork to fill the now-shorter FV cleanly. */
+  section.hero .hero-visual img{
+    width:100%!important;
+    height:100%!important;
+    top:0!important;
+    right:0!important;
+    object-fit:cover!important;
+    object-position:right center!important;
+  }
+
+  /* Keep the improved breathing room, but fit the tools note naturally at the bottom. */
+  section.hero .hero-copy{
+    top:34px!important;
+    width:43%!important;
+    max-width:550px!important;
+  }
+  section.hero .fv-title{margin-bottom:20px!important;}
+  section.hero .fv-lead{margin-bottom:20px!important;}
+  section.hero .fv-body{margin-bottom:22px!important;}
+  section.hero .fv-actions{margin-bottom:15px!important;}
+  section.hero .fv-note{margin-bottom:16px!important;}
+
+  section.hero .fv-existing-tools{
+    width:92%!important;
+    max-width:500px!important;
+    margin:0!important;
+    padding-top:14px!important;
+    border-top:1px solid rgba(31,53,86,.14)!important;
+    font-size:12px!important;
+    line-height:1.65!important;
+    color:#526174!important;
+  }
+  section.hero .fv-existing-tools strong{
+    display:block!important;
+    margin-bottom:2px!important;
+    color:#1f3556!important;
+    font-size:13px!important;
+  }
+  section.hero .fv-existing-tools p,
+  section.hero .fv-existing-tools div{
+    margin:0!important;
+  }
+}
+
+@media (max-width:750px){
+  section.hero{
+    height:auto!important;
+    max-height:none!important;
+  }
+  section.hero .fv-existing-tools{
+    margin-top:18px!important;
+    padding-top:14px!important;
+    border-top:1px solid rgba(31,53,86,.14)!important;
+  }
+}
+
+/* ===== FV v12: copy-height driven hero ===== */
+@media (min-width:751px){
+  section.hero{
+    position:relative!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    aspect-ratio:auto!important;
+    overflow:hidden!important;
+  }
+
+  section.hero > .wrap{
+    position:relative!important;
+    width:min(1280px,calc(100% - 64px))!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    margin:0 auto!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
+
+  /* Copy returns to normal flow so its real height determines the FV height. */
+  section.hero .hero-copy{
+    position:relative!important;
+    z-index:5!important;
+    top:auto!important;
+    left:auto!important;
+    bottom:auto!important;
+    width:43%!important;
+    max-width:550px!important;
+    height:auto!important;
+    margin:0!important;
+    padding:42px 0 38px!important;
+    display:block!important;
+  }
+
+  section.hero .fv-title{margin:0 0 20px!important;}
+  section.hero .fv-lead{margin:0 0 20px!important;}
+  section.hero .fv-body{margin:0 0 22px!important;line-height:2!important;}
+  section.hero .fv-actions{margin:0 0 15px!important;}
+  section.hero .fv-note{margin:0!important;}
+
+  /* The artwork follows the exact height created by the HTML copy. */
+  section.hero .hero-visual{
+    position:absolute!important;
+    z-index:1!important;
+    top:0!important;
+    bottom:0!important;
+    left:50%!important;
+    right:auto!important;
+    width:100vw!important;
+    height:100%!important;
+    margin-left:-50vw!important;
+    overflow:hidden!important;
+    pointer-events:none!important;
+  }
+  section.hero .hero-visual img{
+    position:absolute!important;
+    top:0!important;
+    right:0!important;
+    bottom:0!important;
+    left:auto!important;
+    width:100%!important;
+    height:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin:0!important;
+    object-fit:cover!important;
+    object-position:right center!important;
+  }
+}
+
+@media (max-width:750px){
+  section.hero .hero-copy{
+    padding:36px 0 30px!important;
+  }
+  section.hero .hero-visual{
+    display:none!important;
+  }
+}
+
+/* ===== FV v17: vertical framing only =====
+   Keep v13 dimensions/crop/HTML unchanged.
+   Use the spare upper background in the source artwork to reveal more of the lower "減らす" card. */
+@media (min-width:751px){
+  section.hero .hero-visual img{
+    object-position:right 25%!important;
+  }
+}
+
+</style>
+
+<style id="mobile-visual-story-v19">
+@media (max-width: 760px){
+  /* Problem: short lead -> visual -> detail */
+  .problem-grid{display:flex !important;flex-direction:column !important;}
+  .problem-grid>div:first-child{display:contents;}
+  .problem-grid .section-title{order:1;}
+  .problem-grid .problem-copy{display:contents;}
+  .problem-grid .problem-copy p:first-child{order:2;}
+  .problem-grid .problem-image{order:3;margin:18px 0 16px !important;}
+  .problem-grid .problem-copy p:last-child{order:4;}
+
+  /* Implementation: conclusion -> diagram -> detailed rationale -> AI */
+  .implementation-grid{display:flex !important;flex-direction:column !important;}
+  .implementation-grid>div:first-child{display:contents;}
+  .implementation-grid .section-title{order:1;}
+  .implementation-grid .implementation-copy{display:contents;}
+  .implementation-grid .implementation-copy p:first-child{order:2;margin-bottom:0 !important;}
+  .implementation-grid .implementation-visual{
+    order:3;
+    margin:26px 0 28px !important;
+  }
+  .implementation-grid .implementation-copy p:last-child{
+    order:4;
+    margin-top:0 !important;
+  }
+  .implementation-grid .ai-note{order:5;margin-top:22px !important;}
+
+  /* Diagnosis: promise -> short intro -> visual -> detail -> CTA */
+  .diagnosis{display:flex !important;flex-direction:column !important;}
+  .diagnosis>div:first-child{display:contents;}
+  .diagnosis .section-title{order:1;}
+  .diagnosis .diagnosis-copy{display:contents;}
+  .diagnosis .diagnosis-copy p:first-child{order:2;margin-bottom:0 !important;}
+  .diagnosis .diagnosis-visual{
+    order:3;
+    margin:24px 0 22px !important;
+  }
+  .diagnosis .diagnosis-copy p:last-child{order:4;margin:0 !important;}
+  .diagnosis .diagnosis-action{
+    order:5;
+    margin:24px 0 0 !important;
+  }
+
+  /* Latter-half rhythm: keep structure/copy, vary breathing space between sections. */
+  .implementation-section{padding-top:54px !important;padding-bottom:58px !important;}
+  .outcome-section{padding-top:58px !important;padding-bottom:58px !important;}
+  .process-section{padding-top:62px !important;padding-bottom:62px !important;}
+  .diagnosis-section{padding-top:58px !important;padding-bottom:62px !important;}
+}
+</style>
+
+<style id="mobile-spacing-v20">
+@media (max-width: 767px) {
+  /* v20: same-story content is tighter; major story changes keep breathing room. */
+  main > section:not(.hero):not(.problem-section) {
+    padding-top: 42px;
+    padding-bottom: 42px;
+  }
+
+  /* Keep the navy problem section as a stronger chapter break. */
+  .problem-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  /* Tighten local reading rhythm inside sections. */
+  main section:not(.hero) h2 {
+    margin-bottom: 16px;
+  }
+  main section:not(.hero) h2 + p,
+  main section:not(.hero) .section-lead,
+  main section:not(.hero) .lead {
+    margin-top: 0;
+  }
+  main section:not(.hero) p + p {
+    margin-top: 10px;
+  }
+
+  /* Visuals belong to the prose immediately around them. */
+  .section-visual,
+  .visual-wrap,
+  .image-wrap,
+  .implementation-visual,
+  .before-after-visual,
+  .diagnosis-visual {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* Implementation: explanation -> visual -> detail should read as one unit. */
+  .implementation-copy + .implementation-visual,
+  .implementation-intro + .implementation-visual {
+    margin-top: 18px;
+  }
+  .implementation-visual + p,
+  .implementation-visual + .implementation-detail {
+    margin-top: 18px;
+  }
+
+  /* Process/steps: make the six steps read as one continuous flow. */
+  .process-steps,
+  .steps,
+  .step-list,
+  .process-grid {
+    gap: 8px !important;
+    row-gap: 8px !important;
+  }
+  .process-steps > *,
+  .steps > *,
+  .step-list > *,
+  .process-grid > * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .process-step,
+  .step-card {
+    margin-bottom: 8px !important;
+  }
+  .process-step:last-child,
+  .step-card:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* Keep outcome/diagnosis visuals as intentional highlights, but not oversized gaps. */
+  .before-after-visual,
+  .diagnosis-visual {
+    margin-top: 22px;
+    margin-bottom: 22px;
+  }
+
+  /* FAQ should follow the diagnosis naturally rather than feeling detached. */
+  .faq-section,
+  #faq {
+    padding-top: 44px;
+  }
+}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.atlib.jp/#organization",
+      "name": "atLIB株式会社",
+      "url": "https://www.atlib.jp/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.atlib.jp/business-web/assets/atlib-logo.png"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.atlib.jp/business-web/#webpage",
+      "url": "https://www.atlib.jp/business-web/",
+      "name": "業務KAIZEN｜業務から考えるWebシステム開発・業務自動化｜atLIB",
+      "description": "今の業務をそのままシステム化せず、残す仕事と減らす作業を整理してから、Webシステム開発・業務自動化・既存ツール連携を実装するatLIBのサービスです。",
+      "inLanguage": "ja",
+      "isPartOf": {
+        "@id": "https://www.atlib.jp/#website"
+      },
+      "about": {
+        "@id": "https://www.atlib.jp/business-web/#service"
+      },
+      "publisher": {
+        "@id": "https://www.atlib.jp/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://www.atlib.jp/business-web/assets/gyomu-kaizen-hero.png"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.atlib.jp/#website",
+      "url": "https://www.atlib.jp/",
+      "name": "atLIB株式会社",
+      "publisher": {
+        "@id": "https://www.atlib.jp/#organization"
+      },
+      "inLanguage": "ja"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.atlib.jp/business-web/#service",
+      "name": "業務KAIZEN",
+      "serviceType": "Webシステム開発・業務自動化",
+      "provider": {
+        "@id": "https://www.atlib.jp/#organization"
+      },
+      "url": "https://www.atlib.jp/business-web/",
+      "description": "今の業務をそのままシステム化せず、業務を理解し、残す仕事と減らす作業を整理したうえで、既存環境の再設計、連携・自動化、Webシステム個別開発から合理的な方法を選び実装するサービスです。",
+      "areaServed": {
+        "@type": "Country",
+        "name": "日本"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.atlib.jp/business-web/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "atLIB株式会社",
+          "item": "https://www.atlib.jp/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "業務KAIZEN",
+          "item": "https://www.atlib.jp/business-web/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.atlib.jp/business-web/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "すでにSaaSやローコード・ノーコードツールを使っていますが、相談できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "はい。既存ツールを活かした改善、連携、自動化、必要な部分だけのWebシステム開発を含めて検討します。移行や全面刷新を前提にはしません。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "まだ、何を作ればよいか決まっていません。",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "問題ありません。今の業務を確認し、減らせる仕事と必要な仕組みを整理したうえで、実装範囲を考えます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "業務改善の提案だけで終わりますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "いいえ。業務理解・要件整理だけで終わらず、必要なWebシステム開発・自動化・導入まで実装します。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "既存システムは必ず入れ替えるのですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "いいえ。使い続ける方が合理的な環境は活かします。再設計、連携、自動化、個別開発を必要に応じて組み合わせます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AIを使うのですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "情報整理、要約、下書き、検索、提案など、人の業務を支援する用途として検討できます。重要な判断や承認をAIへ委ねる設計は行いません。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
-  <header class="site-header"><div class="wrap"><a class="brand" href="/business-web/" aria-label="業務KAIZEN トップ"><img src="assets/atlib-logo.png" alt="atLIB株式会社"><span>業務KAIZEN<small>Webシステム開発・業務自動化</small></span></a><a class="btn" href="/business-web/self-check/">無料診断をはじめる</a></div></header>
-  <main>
-    <section class="hero"><div class="wrap"><div><p class="eyebrow">業務KAIZEN　｜　Webシステム開発・業務自動化</p><h1>業務から考える、<br>Webシステム開発。</h1><p class="value">ツールを増やすのではなく、仕事を減らす。</p><p class="copy">今の業務を、そのままシステム化しません。その会社ならではの大切な仕事は残し、人がやらなくてもよい作業を減らす。業務を理解したうえで、本当に必要な仕組みを設計・開発します。</p><p><a class="btn" href="/business-web/self-check/">無料診断をはじめる →</a></p><p class="note">要件書は不要です。まずは、今の仕事で何が起きているかを整理するところから始めます。</p></div><img class="visual hero-image" src="assets/gyomu-kaizen-hero.png" alt="業務KAIZENで業務を理解し、仕組みを設計・開発するイメージ"></div></section>
-    <section class="tool-strip"><div class="wrap"><strong>今あるツールを活かしながら、仕事の進め方を見直します。</strong><span class="chip">Excel</span><span class="chip">ローコード・ノーコードツール</span><span class="chip">SaaS</span><span class="chip">Access</span><span class="chip">各種業務アプリ</span></div></section>
-    <section class="section navy"><div class="wrap problem-grid"><div><h2 class="section-title">ツールは導入した。<br>でも、仕事は減りましたか？</h2><p class="problem-copy">ツールとツールの間を、人が埋めている。転記、集計、検索、確認、再入力などが残ると、導入後も仕事そのものは減りません。</p><div class="problem-list"><span>Excelから別システムへの転記</span><span>同じ情報の二重入力</span><span>必要な情報を探す</span><span>定期集計・報告</span><span>確認・承認待ち</span><span>メール・チャットでの受け渡し</span><span>特定の人がいないと進まない</span><span>増えるほど増える管理負荷</span></div></div><div class="problem-image"><img class="visual" src="assets/gyomu-kaizen-problem.png" alt="ツール間を人が埋めることで、転記や確認が残る業務のイメージ"></div></div></section>
-    <section class="section"><div class="wrap framing"><h2 class="section-title">システム化しただけでは、<br>仕事が減らないことがあります。</h2><p class="lead">今の業務をそのままシステムに移すと、不要な転記や確認、重複入力まで仕組みの中に残ります。</p><p class="quote">だからatLIBは、「何を作るか」から始めません。</p></div></section>
-    <section class="section pale"><div class="wrap"><p class="eyebrow">atLIB APPROACH</p><h2 class="section-title">今の業務を、そのままシステム化しない。</h2><p class="lead approach-copy">顧客対応、専門性、判断、品質を守る確認など、その会社にとって大切な仕事は残します。何を残し、何を減らし、何を仕組みにするかを整理し、要件から一緒につくります。</p><img class="visual diagram-desktop" src="assets/gyomu-kaizen-approach.png" alt="今の業務を知り、残す仕事と減らす作業を整理して、要件を一緒につくり実装する流れ"><div class="diagram-mobile" aria-label="業務理解から実装までの流れ"><div class="node">今の業務を知る</div><div class="arrow">↓</div><div class="node">なぜ、この仕事がある？</div><div class="arrow">↓</div><div class="node keep">残す仕事 / 減らす作業</div><div class="arrow">↓</div><div class="node">仕事の流れを見直す</div><div class="arrow">↓</div><div class="node">要件を一緒につくる</div><div class="arrow">↓</div><div class="node build">実装</div></div><p class="approach-note">業務理解や要件定義が不十分なまま開発に入るのではなく、実際に使われ、仕事を減らせる仕組みをつくるための開発プロセスです。</p></div></section>
-    <section class="section"><div class="wrap"><p class="eyebrow">HOW WE IMPLEMENT</p><h2 class="section-title">最初から作り方を決めない。</h2><p class="lead implementation-copy">その会社の仕事と要件に合った、合理的な実現方法を選びます。既存環境を残すか、連携・自動化するか、必要な範囲を個別開発するかは、案件に応じて選択・組み合わせます。</p><img class="visual" src="assets/gyomu-kaizen-implementation.png" alt="既存環境の再設計、連携・自動化、Webシステム個別開発を組み合わせる実装方法"><div class="selection-grid"><span>業務への適合性</span><span>実装・接続負荷</span><span>初期・継続コスト</span><span>保守性・変更しやすさ</span><span>既存環境とのつながり</span><span>将来拡張性</span><span>データの扱い</span><span>運用体制</span></div><div class="ai-panel"><h3>AIに任せるのではなく、AIを活かす。</h3><p>情報整理、検索、要約、下書き、提案補助など、人の業務を支援する用途として組み込めます。重要な判断・承認をAIに委ねる設計は行いません。</p></div></div></section>
-    <section class="section pale"><div class="wrap"><h2 class="section-title">作った仕組みではなく、<br>減った仕事が成果です。</h2><p class="lead before-after-copy">価値ある仕事は人に残し、人がやらなくてもよい作業を仕組みに任せる。探す。転記する。集計する。確認を待つ。そんな仕事を減らします。</p><img class="visual diagram-desktop" src="assets/gyomu-kaizen-before-after.png" alt="不要な転記や集計を減らし、価値ある仕事を人に残すBefore After"><div class="before-after-mobile"><article class="before"><h3>Before</h3><p>入力 → 転記 → 確認 → 集計 → 再入力 → 報告</p></article><article class="after"><h3>After</h3><p><b>価値ある仕事は人に残す。</b><br>人がやらなくてもよい繰り返し作業を仕組みに任せる。</p></article></div></div></section>
-    <section class="section"><div class="wrap"><p class="eyebrow">PROCESS</p><h2 class="section-title">業務から理解し、実装まで進めます。</h2><div class="steps"><article class="step"><b>STEP 1</b><h3>業務を知る</h3><p>仕事の流れ、使っているツール、情報の持ち方、担当ごとの作業を確認します。</p></article><article class="step"><b>STEP 2</b><h3>減らせる仕事を見つける</h3><p>重複、転記、確認待ち、集計、属人化などを整理します。</p></article><article class="step"><b>STEP 3</b><h3>必要な仕組みを設計する</h3><p>残す仕事と減らす作業を整理し、要件を一緒につくります。</p></article><article class="step"><b>STEP 4</b><h3>自動化・Webシステムを実装する</h3><p>実際の業務で使える状態まで、設計・開発・導入します。導入後の運用についてもご相談いただけます。</p></article></div></div></section>
-    <section class="section pale"><div class="wrap capability"><div><p class="eyebrow">CAPABILITY</p><h2 class="section-title">考えるだけで終わらず、<br>実装まで進める。</h2><p class="lead">業務を理解し、必要なUI・システムを設計し、開発からクラウド構築、導入まで一貫して進められます。</p><div class="capability-flow"><span>業務理解</span><i>→</i><span>UI / システム設計</span><i>→</i><span>開発</span><i>→</i><span>クラウド構築</span><i>→</i><span>導入</span></div><p>既存インフラ、セキュリティ方針、運用体制に合わせて必要な範囲を設計します。</p></div><figure><img src="assets/deployment-options.png" alt="atLIB環境とお客様環境への構築・運用形態"><figcaption>構築環境は、必要な仕組みと既存環境に合わせて検討します。</figcaption></figure></div></section>
-    <section class="section"><div class="wrap diagnosis"><div><p class="eyebrow">FREE DIAGNOSIS</p><h2 class="section-title">普段の仕事について、<br>15問に答えるだけ。</h2><p class="lead">専門知識は必要ありません。普段の仕事の進め方について答えると、改善余地を6つの観点から整理します。</p><p class="diagnosis-note">この診断は、特定のWebシステム、AI、SaaSを自動で推奨するものではありません。今、何が見えているか、次に何を確認するかを整理する入口です。</p><p><a class="btn" href="/business-web/self-check/">業務KAIZEN 無料診断をはじめる →</a></p></div><div><img class="visual diagram-desktop" src="assets/gyomu-kaizen-diagnosis.png" alt="無料診断で仕事の流れなど6観点を整理するイメージ"><div class="axis-grid" aria-label="無料診断で整理する6観点"><div>仕事の流れ</div><div>情報の持ち方</div><div>判断や確認</div><div>人への依存</div><div>業務拡大への対応</div><div>現在のツールによる制約</div></div></div></div></section>
-    <section class="section pale"><div class="wrap faq"><h2 class="section-title">よくあるご質問</h2><details><summary>すでにSaaSやローコード・ノーコードツールを使っていますが、相談できますか？</summary><p>はい。既存ツールを活かした改善、連携、自動化、必要な部分だけのWebシステム開発を含めて検討します。移行や全面刷新を前提にはしません。</p></details><details><summary>まだ、何を作ればよいか決まっていません。</summary><p>問題ありません。今の業務を確認し、減らせる仕事と必要な仕組みを整理したうえで、実装範囲を考えます。</p></details><details><summary>業務改善の提案だけで終わりますか？</summary><p>いいえ。業務理解・要件整理だけで終わらず、必要なWebシステム開発・自動化・導入まで実装します。</p></details><details><summary>既存システムは必ず入れ替えるのですか？</summary><p>いいえ。使い続ける方が合理的な環境は活かします。再設計、連携、自動化、個別開発を必要に応じて組み合わせます。</p></details><details><summary>AIを使うのですか？</summary><p>情報整理、要約、下書き、検索、提案など、人の業務を支援する用途として検討できます。重要な判断や承認をAIへ委ねる設計は行いません。</p></details></div></section>
-    <section class="cta"><div class="wrap"><div><h2>ツールを増やす前に、<br>仕事を減らせる場所を見つけませんか？</h2><p>いきなり何を作るかを決めず、まず今の業務を整理します。診断後、必要に応じて結果を引き継いで無料相談へ進めます。</p><p><a class="btn" href="/business-web/self-check/">業務KAIZEN 無料診断をはじめる →</a></p></div><img src="assets/consultation-cta.png" alt="業務KAIZENの相談風景"></div></section>
-  </main>
-  <footer class="footer"><div class="wrap"><span>ITで、企業に自由を。人々に未来をつくる。</span><span>© atLIB株式会社　｜　<a href="/privacy-policy/">プライバシーポリシー</a></span></div></footer>
+<header class="site-header"><div class="wrap"><a aria-label="業務KAIZEN by atLIB株式会社 トップ" class="brand brand-service" href="/business-web/"><img alt="業務KAIZEN" decoding="async" src="assets/gyomu-kaizen-logo.png"/><span class="brand-company">by atLIB株式会社</span></a><a class="btn" href="/business-web/self-check/">無料診断をはじめる</a></div></header>
+<main><section class="hero">
+<div class="wrap">
+<div class="hero-copy">
+<h1 class="fv-title">業務から考える、<br/>Webシステム開発。</h1>
+<p class="fv-lead value">ツールを増やすのではなく、仕事を減らす。</p>
+<p class="fv-body copy">今の業務を、そのままシステム化しません。その会社ならではの大切な仕事は残し、人がやらなくてもよい作業を減らす。業務を理解したうえで、本当に必要な仕組みを設計・開発します。</p>
+<p><a class="btn" href="/business-web/self-check/">無料診断をはじめる →</a></p>
+<p class="fv-note note">要件書は不要です。今の仕事で何が起きているかを整理するところから始めます。</p>
+</div>
+<div></div>
+<div class="hero-visual"><img alt="業務KAIZENで業務を理解し、仕組みを設計・開発するイメージ" class="visual hero-image" decoding="async" fetchpriority="high" src="assets/gyomu-kaizen-hero.png"/></div></div>
+</section><section class="section navy">
+<div class="wrap problem-grid">
+<div>
+<h2 class="section-title">ツールは導入した。<br/>でも、仕事は減りましたか？</h2>
+<div class="problem-copy">
+<p>Excelをシステムに置き換えたり、SaaSやローコード・ノーコードツールを導入したりしても、仕事の流れそのものが変わっていなければ、業務負担は思ったほど減りません。</p>
+<p>システムとシステムの間を人がつなぎ、転記・集計・検索・確認・再入力といった作業が残っているケースもあります。大切なのは、ツールを導入したかではなく、<strong>実際に人の仕事が減ったか</strong>です。</p>
+</div>
+</div>
+<div class="problem-image"><img loading="lazy" decoding="async" alt="ツール間を人が埋めることで、転記や確認が残る業務のイメージ" class="visual" src="assets/gyomu-kaizen-problem.png"/></div>
+</div>
+</section><section class="bridge">
+<div class="wrap framing">
+<h2 class="section-title">システム化しただけでは、<br/>仕事が減らないことがあります。</h2>
+<p class="bridge-copy">今ある仕事をそのままデジタルに置き換えるだけでは、転記も、確認も、二重入力も、そのまま仕組みの中に残ります。業務を変えるべきところと、変えてはいけないところを見極めることが、システムを考える前に必要です。 <strong>だから、まず「仕事そのもの」を見ます。</strong></p>
+</div>
+</section><section class="section pale">
+<div class="wrap approach-layout">
+<h2 class="section-title">今の業務を、そのままシステム化しない。</h2>
+<div class="approach-visual">
+<img loading="lazy" decoding="async" alt="今の業務を知り、残す仕事と減らす作業を整理して、要件を一緒につくり実装する流れ" class="visual diagram-desktop" src="assets/gyomu-kaizen-approach.png"/>
+<div aria-label="業務理解から実装までの流れ" class="diagram-mobile">
+<div class="node">今の業務を知る</div><div class="arrow">↓</div>
+<div class="node">なぜ、この仕事がある？</div><div class="arrow">↓</div>
+<div class="node keep">残す仕事 / 減らす作業</div><div class="arrow">↓</div>
+<div class="node">仕事の流れを見直す</div><div class="arrow">↓</div>
+<div class="node">要件を一緒につくる</div><div class="arrow">↓</div>
+<div class="node build">実装</div>
+</div>
+</div>
+<div class="approach-text">
+<p>業務を見直すといっても、その会社ならではの仕事まで変えることが目的ではありません。お客様との接し方、現場で培われた専門的な判断、品質を守るための確認など、事業の価値につながっている仕事は残すべきだと考えています。</p>
+<p>一方で、転記、集計、二重入力、情報を探す作業、定型的な確認など、人がやらなくてもよい仕事は減らせます。atLIBは、まず実際の業務を理解し、<strong>「残す仕事」と「減らす作業」</strong>を整理してから、必要な仕組みと要件を一緒につくります。</p>
+</div>
+</div>
+</section><section class="section implementation-section">
+<div class="wrap implementation-grid">
+<div>
+<h2 class="section-title">最初から作り方を決めない。</h2>
+<div class="implementation-copy">
+<p><strong>「既存ツールを使う方が安い」「自動化なら簡単」「個別開発は高い」とは限りません。</strong> 複数のサービスを連携することで構成が複雑になったり、利用人数や追加機能によって継続コストが増えたりすることもあります。</p>
+<p>逆に、必要な機能を絞ってWebシステムとして開発した方が、シンプルで運用しやすい場合もあります。atLIBは特定の方法を前提にせず、業務への適合性、実装・接続の負荷、初期費用と継続費用、保守性、将来の変更まで考えて、合理的な方法を選びます。</p>
+</div>
+</div>
+<div class="implementation-visual"><img loading="lazy" decoding="async" alt="既存環境の再設計、連携・自動化、Webシステム個別開発を組み合わせる実装方法" class="visual" src="assets/gyomu-kaizen-implementation.png"/></div>
+<p class="ai-note">AIを利用する場合も考え方は同じです。AIを導入すること自体を目的にはせず、情報整理、検索、要約、下書きなど、業務を支援する用途として必要な場所に組み込みます。<strong>AIに任せるのではなく、AIを活かす。</strong> 重要な判断や承認はAIに委ねず、人が責任を持つ設計とします。</p>
+</div>
+</section><section class="section pale outcome-section">
+<div class="wrap">
+<div class="outcome-head">
+<h2 class="section-title">作った仕組みではなく、<br/>減った仕事が成果です。</h2>
+<p class="outcome-copy">価値ある仕事は人に残し、人がやらなくてもよい作業を仕組みに任せる。探す、転記する、集計する、確認を待つ。日々積み重なるこうした作業を減らし、本来の仕事に時間を使える状態を目指します。</p>
+</div>
+<div class="outcome-visual">
+<img loading="lazy" decoding="async" alt="不要な転記や集計を減らし、価値ある仕事を人に残すBefore After" class="visual diagram-desktop" src="assets/gyomu-kaizen-before-after.png"/>
+<div class="before-after-mobile"><article class="before"><h3>Before</h3><p>入力 → 転記 → 確認 → 集計 → 再入力 → 報告</p></article><article class="after"><h3>After</h3><p><b>価値ある仕事は人に残す。</b><br/>人がやらなくてもよい繰り返し作業を仕組みに任せる。</p></article></div>
+</div>
+</div>
+</section><section class="section process-section">
+<div class="wrap">
+<h2 class="section-title">業務から理解し、実際に使われるところまで。</h2>
+<p class="process-intro">「何を作ってほしいか」を聞くだけでは、仕事を減らせる仕組みにはなりません。現在の業務を理解し、減らせる作業を見つけ、必要な要件を一緒につくったうえで実装します。さらに、納品することをゴールにせず、現場で使い始められる状態まで導入・定着を支援します。</p>
+<div class="steps">
+<article class="step"><b>STEP 1</b><h3>業務を知る</h3><p>仕事の流れ、使っているツール、情報の持ち方、担当ごとの作業を確認します。</p></article>
+<article class="step"><b>STEP 2</b><h3>減らせる仕事を見つける</h3><p>重複、転記、確認待ち、集計、属人化などを整理します。</p></article>
+<article class="step"><b>STEP 3</b><h3>要件を一緒につくる</h3><p>何を残し、何を減らし、何を仕組みにするかを整理し、必要な要件を一緒に設計します。</p></article>
+<article class="step"><b>STEP 4</b><h3>自動化・Webシステムを実装する</h3><p>UI・システム設計から開発、クラウド環境の構築まで、実際に動く仕組みとして形にします。</p></article>
+<article class="step"><b>STEP 5</b><h3>導入・定着を支援する</h3><p>初期設定、データ移行、利用者への説明など、現場で使い始めるために必要な導入・定着を支援します。</p></article>
+</div>
+<div class="maintenance-note"><strong>導入後のシステム保守について</strong><br/>継続利用に必要なシステム保守についても、開発・導入とは別の保守契約としてご相談いただけます。</div>
+</div>
+</section><section class="section diagnosis-section">
+<div class="wrap diagnosis">
+<div>
+<h2 class="section-title">普段の仕事について、<br/>15問に答えるだけ。</h2>
+<div class="diagnosis-copy">
+<p>専門知識は必要ありません。普段の仕事の進め方について答えると、仕事の流れ、情報の持ち方、判断や確認、人への依存、業務拡大への対応、現在のツールによる制約という6つの観点から、改善余地を整理します。</p>
+<p>特定のWebシステム、AI、SaaSを自動でおすすめする診断ではありません。今、何が確認できていて、何がまだ分からないのかを分け、次に考えるべきことを整理する入口です。</p>
+</div>
+<p class="diagnosis-action"><a class="btn" href="/business-web/self-check/">業務KAIZEN 無料診断をはじめる →</a></p>
+</div>
+<div class="diagnosis-visual"><img loading="lazy" decoding="async" alt="無料診断で仕事の流れなど6観点を整理するイメージ" class="visual" src="assets/gyomu-kaizen-diagnosis.png"/></div>
+</div>
+</section><section aria-labelledby="faq-title" class="section pale" id="faq">
+<div class="wrap faq">
+<h2 class="section-title" id="faq-title">よくあるご質問</h2>
+<details><summary>すでにSaaSやローコード・ノーコードツールを使っていますが、相談できますか？</summary><p>はい。既存ツールを活かした改善、連携、自動化、必要な部分だけのWebシステム開発を含めて検討します。移行や全面刷新を前提にはしません。</p></details>
+<details><summary>まだ、何を作ればよいか決まっていません。</summary><p>問題ありません。今の業務を確認し、減らせる仕事と必要な仕組みを整理したうえで、実装範囲を考えます。</p></details>
+<details><summary>業務改善の提案だけで終わりますか？</summary><p>いいえ。業務理解・要件整理だけで終わらず、必要なWebシステム開発・自動化・導入まで実装します。</p></details>
+<details><summary>既存システムは必ず入れ替えるのですか？</summary><p>いいえ。使い続ける方が合理的な環境は活かします。再設計、連携、自動化、個別開発を必要に応じて組み合わせます。</p></details>
+<details><summary>AIを使うのですか？</summary><p>情報整理、要約、下書き、検索、提案など、人の業務を支援する用途として検討できます。重要な判断や承認をAIへ委ねる設計は行いません。</p></details>
+<div class="faq-action"><a class="btn" href="/business-web/self-check/">無料診断をはじめる →</a></div>
+</div>
+</section></main>
+<footer class="footer"><div class="wrap"><div class="footer-brand"><img alt="atLIB株式会社" class="footer-logo" decoding="async" loading="lazy" src="assets/atlib-logo.png"/><span class="footer-message">ITで、企業に自由を。人々に未来をつくる。</span></div><div class="footer-meta">© atLIB株式会社　｜　<a href="/privacy-policy/">プライバシーポリシー</a></div></div></footer>
+<script>
+(() => {
+  const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  const incoming = new URLSearchParams(window.location.search);
+  if (!keys.some((key) => incoming.has(key))) return;
+  document.querySelectorAll('a[href^="/business-web/self-check/"]').forEach((anchor) => {
+    const target = new URL(anchor.href, window.location.origin);
+    keys.forEach((key) => {
+      const value = incoming.get(key);
+      if (value) target.searchParams.set(key, value);
+    });
+    anchor.href = `${target.pathname}${target.search}${target.hash}`;
+  });
+})();
+</script>
 </body>
 </html>
