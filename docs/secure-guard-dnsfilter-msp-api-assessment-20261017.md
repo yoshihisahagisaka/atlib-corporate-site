@@ -295,6 +295,73 @@ DNSFilterから次のいずれかを取得するまでOrganization作成は保�
 
 これらを得た後にのみ、同名・External IDの重複GET→Organization POSTを1回→Organization GET→Network POSTを1回→Network GETの順で再開する。
 
+## P2 Site Key管理・導入自動化検証（2026-10-17）
+
+### 実行境界
+
+- 対象は Organization `10220954` 配下の API作成済みNetwork `10678582`（`Secure Guard API Test Site 03`）のみとした。
+- Windowsユーザーの暗号化済みAPIキーを同一ユーザー文脈でメモリ内にだけ読み込み、`GET /v1/networks/10678582` を1回実行した。APIキー、Site Keyの値、値の一部、長さはいずれも出力・保存・Git記録していない。
+- Site Keyの作成、発行、rotate、削除／失効、agentのインストール、既存Network・Organization・ポリシー・Block Pageの変更は実行していない。
+- P1.5のOrganization作成はTier 2回答待ちのため、本節では実施していない。
+
+### Site Key APIと安全な取得
+
+公開OpenAPIでは、NetworkのSite Keyライフサイクルとして次を定義している。
+
+| 操作 | OpenAPI endpoint | 結果 | P2での扱い |
+| --- | --- | --- | --- |
+| Network読取 | `GET /v1/networks/{id}` | **PASS** | HTTP 200。対象ID・名称・Organization関係を確認し、`secret_key`属性が存在し、空でない値が返ることだけを検証した。値は一切出力していない。 |
+| Key作成／発行 | `POST /v1/networks/{id}/secret_key` | 未検証 | 状態変更のため未実行。 |
+| Key再発行／rotate | `PATCH /v1/networks/{id}/secret_key` | 未検証 | 状態変更のため未実行。既存agentへの影響が確定していないため、承認なしには実行しない。 |
+| Key削除／失効 | `DELETE /v1/networks/{id}/secret_key` | 未検証 | 状態変更のため未実行。 |
+| 専用Key GET | なし | **PASS（代替経路）** | 専用のGET endpointは公開仕様にない。一方、Network GETの`secret_key`属性から既存値を非破壊で取得可能であることを確認した。取得側は値をログ・DB・Gitに永続化しない。 |
+
+この結果、ProvisioningサービスはNetwork作成後にNetwork GETからKeyを短時間だけ取得し、顧客専用の秘密ストアまたはRMM／MDMの保護変数へ直接受け渡す設計が可能である。ただし、このGET権限でKeyが返ること自体が高感度であるため、API JWTはKey閲覧を必要とする最小のautomation identityに限定し、応答本文をアプリケーションログ、監査ログ、例外トレースに残さない。
+
+### ローテーション・削除の影響
+
+| 確認項目 | 結果 | 根拠・判断 |
+| --- | --- | --- |
+| 対象Networkの既存agent | PASS | P0でOrganization `10220954` のagentは0件。今回もagent操作は行っていない。 |
+| rotate後の登録済みWindows agentの継続保護 | 未検証 | 対象にagentがなく、PATCHを実行していない。公開資料は新しいSite Keyへ置換してagentを再登録する手順を示すが、rotate単独で旧登録済みagentがいつ停止・再登録を要するかは明記していない。推測で運用手順を確定しない。 |
+| Key削除後の既存agentの継続保護 | 未検証 | DELETE未実行。ベンダー確認およびsandboxでのagent 1台による検証が必要。 |
+| Site削除の影響 | **FAIL（削除を運用手段にしない）** | DNSFilterはactive Roaming Clientを持つSiteの削除は全agentのoutageを生じ、復旧にはSite再作成と新しいSite Keyでの再インストールが必要と案内する。Site／Organization削除によるKeyの保持・失効状態を公開資料だけからは確定できないため、削除はKey revokeの代替にしない。 |
+
+漏えい時は、(1) 該当Networkへの新規配布を即時停止、(2) 影響端末・導入経路を把握、(3) vendor確認済みのrotateまたは削除手順を承認のうえ実行、(4) 必要な端末だけ新Keyで再登録、(5) 不明agentを削除／uninstallする、というrunbookにする。P2の対象Networkでは、発行・rotate・削除のいずれも未実行であり、切り戻しを要する変更はない。
+
+### Windows MSI導入と顧客別配布
+
+| 項目 | 結果 | 実装判断 |
+| --- | --- | --- |
+| Windows MSIサイレント導入 | **PASS（公式手順確認）** | DNSFilterは `msiexec /qn /i "<MSI>" NKEY="<Site Key>"` を公式手順として案内している。P2では実行・agent登録をしていない。 |
+| Intune配布 | **PASS（公式手順確認）** | Line-of-Business appのコマンドライン引数に `NKEY` を指定できる。引用符はstraight quoteが必要である。 |
+| MST方式 | **PASS（公式手順確認）** | DNSFilterはMSTを使う手順を案内する。一方、Keyを埋め込んだMSTは秘密情報を含む配布物になるため、顧客ごとの保護ストアから実行時に渡せない環境だけの例外とする。 |
+| RMM利用 | **PASS（公式手順確認）** | RMMの環境変数／保護変数からKeyを渡す例が公式手順にある。atLIBでは顧客・Networkごとに別の保護変数を作り、担当者の閲覧権限と配布対象を分離する。 |
+| 実機サイレント導入 | 未検証 | agentのインストールは今回の承認範囲外。P2ではMSI、MST、RMMの実行をしていない。 |
+
+推奨する最小構成は、顧客Organizationごとに標準Networkを1件作成し、そのNetworkのKeyをKey Vault相当の秘密ストアへ保管する構成である。Provisioning workerだけがKeyを取得し、MDM/RMMの顧客別シークレットへ直接設定する。利用者・営業・Git・チケット本文・メール添付・共有MST・一般ログにはKeyを渡さない。顧客が管理者権限で自己導入する必要がある場合も、期限付きの保護された配布ジョブを優先し、Keyを文章として配布しない。
+
+### 顧客別の不正登録・廃止対策
+
+- Site KeyはWindows Roaming Client／Relayの導入に必要な登録用秘密情報である。したがって、顧客間で共有せず、Networkを顧客単位で分離する。
+- 漏えいを検知または疑った場合、旧Keyを含む導入パッケージ・RMM変数・Intune設定を失効対象として扱う。新Keyを配布する前に、既存agentへの影響と再登録手順をsandboxで確認する。
+- agentの削除だけでは、端末上のagentが残っていれば再度DNS通信時に表示へ戻る場合がある。不要端末の廃止は対応versionでDelete & Uninstallまたは顧客RMM/MDMのuninstallを組み合わせる。
+- OrganizationまたはNetworkの削除時にKeyが自動失効するか、既存agentがどうなるかは**未確認**である。Site削除はoutageを生じるため、tenant廃止では先にagentをuninstallし、Key／Network削除は別途承認・vendor確認・復旧不能性を明示してから行う。
+
+### P2まとめと次の承認対象
+
+| 項目 | 状態 |
+| --- | --- |
+| 既存Site Keyを変更せずに取得可能か | **PASS**（Network GETのKey属性。値は非出力） |
+| Key作成・再発行・失効APIの公開仕様確認 | **PASS**（POST／PATCH／DELETE endpointを確認） |
+| Key作成・rotate・削除の実機検証 | **未検証**（状態変更の承認なし） |
+| rotationが登録済みagentに及ぼす影響 | **未検証**（対象agent 0件、vendorの明確な期限仕様なし） |
+| Windowsサイレント配布方式 | **PASS**（NKEY、Intune、MST、RMMの公式手順を確認） |
+| 顧客別の安全な配布設計 | **PASS（設計判断）**（顧客別Network + 秘密ストア + MDM/RMM保護変数） |
+| Organization／Network削除時のKeyライフサイクル | **未確認**（Site削除によるagent outageのみ公式確認） |
+
+次の実機検証は、P1.5とは独立に、agentを1台だけ登録できる隔離test Networkで実施する。実行前に「対象Network・発行／rotate／deleteのいずれか・既存agentへの想定影響・復旧としての新Key再登録・削除しないリソース」を提示し、個別承認を得る。公開APIにbulk Key操作は確認できないため、1,000社規模ではKey lifecycleをキュー単位で順次処理し、429/Retry-After、監査、手動承認を組み込む。
+
 ## 公式根拠
 
 - [DNSFilter一般API OpenAPI](https://api.dnsfilter.com/docs)（API仕様本体: `https://api.dnsfilter.com/docs/api.json`）
@@ -308,4 +375,6 @@ DNSFilterから次のいずれかを取得するまでOrganization作成は保�
 - [Windows agent v2.0.1+ uninstall](https://help.dnsfilter.com/hc/en-us/articles/34957633714707-Uninstall-Windows-Roaming-Client-v2-0-1-or-higher)
 - [Windows agent via Active Directory](https://help.dnsfilter.com/hc/en-us/community/posts/34246321821075)
 - [Windows agent via Intune](https://help.dnsfilter.com/hc/en-us/community/posts/34265444707347)
+- [Windows Roaming Client silent / RMM install](https://help.dnsfilter.com/hc/en-us/articles/31177309034899-Windows-Roaming-Client-Silent-Remote-tool-Install)
+- [Roaming ClientのSite／Organization移管](https://help.dnsfilter.com/hc/en-us/articles/49903446066835-Reassign-a-Roaming-Client-to-a-different-Site-or-Organization)
 
