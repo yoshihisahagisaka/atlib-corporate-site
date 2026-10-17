@@ -226,6 +226,49 @@ Distributorは別契約・別権限であり、`/v1/distributors/*`を使う。�
 - **Site Key**: endpointは公開仕様上存在するが、ライフサイクルを含む実機検証は未実施。値をDB／Gitへ永続化しない方針を維持する。
 - **1,000社展開**: Network部分はキュー型Provisioningで成立する見込み。ただしOrganization作成bulk不在、契約・SKU、課金台数、1,000 Organization上限はDNSFilter確認後に最終Go判断する。
 
+## P1.5 Organization自動作成・一貫Provisioning PoC（2026-10-17）
+
+### 事前確認
+
+作成候補は `atLIB Secure Guard - API Test Organization 03`、想定External IDは `SG-POC-ORG-003`、要求プランはCore / Monthly / 1 licenseである。
+
+`GET /v1/organizations?name=atLIB%20Secure%20Guard%20-%20API%20Test%20Organization%2003` はHTTP 200、該当件数0だった。同名Organizationは未作成であることを確認した。既存リソースに対する更新・削除は行っていない。
+
+### `POST /v1/organizations` 正式スキーマ確認
+
+公開OpenAPIの `OrganizationCreate` は次を示す。
+
+- 必須: `name`, `managed_by_msp_id`
+- 任意: `billing_contact_*`, `address`, `unique_id`, `sku`, `quantity`, `privacy_mode`, `enable_cybersight` 等
+- `sku` はenumなしの任意文字列。CoreまたはPlusに対応する有効値は公開されていない。
+- 契約期間・term・trial endを作成時に指定する公開フィールドはない。
+- `external_id` はOrganizationの取得レスポンスに存在するが、作成requestの公開スキーマにはない。`unique_id` はEnterprise SSOのcustom login URL用途であり、External IDの代替として扱わない。
+- SKU一覧を返す公開パスはDistributor APIの `/v1/distributors/skus_available` に限られる。atLIBのMSP JWTで利用できることは確認していない。
+
+### 実行結果
+
+| 項目 | 結果 | 根拠・判断 |
+| --- | --- | --- |
+| 重複防止の事前検索 | PASS | 指定名称のOrganizationは0件。 |
+| Core SKUの確定 | 未確認 | 公開OpenAPIにCoreのSKU enum／一覧がない。既存Organization 02のusage `plan=basic` をCoreと推測しない。 |
+| Monthly termの指定 | 未確認 | Organization作成スキーマにtermフィールドがない。 |
+| External IDの指定 | 未確認 | 作成スキーマに`external_id`がなく、既存の取得値を根拠に勝手なフィールド追加はしない。 |
+| Organization POST | **未実施** | 要求されたSKU・term・External IDを正確に指定できないため、試行錯誤的なPOSTを行わず停止。 |
+| Network作成／Global設定割当 | **未実施** | 前提となる新Organizationが未作成のため実施しない。 |
+| Site Key | **未実施** | 新規発行・参照を禁止する範囲のため実施しない。 |
+| 課金・ライセンス影響 | 未確認 | Organization POSTを行っていないため変化なし。作成時のSKU・quantityの請求動作はDNSFilter確認が必要。 |
+
+### P1.5を再開するためのDNSFilter確認事項
+
+1. MSP JWTで `POST /v1/organizations` を行う際のCore（Monthly、1 license）の正確な`sku`値。
+2. Monthly termを作成時にどのAPIフィールドまたは契約設定で指定するか。
+3. Organization作成時にExternal IDを保存する正式フィールド、または作成直後に安全に設定する正式API。
+4. `managed_by_msp_id=10220948` がatLIB MSP配下Organization作成の正しい指定か。
+5. `sku`と`quantity`を伴うOrganization作成による試験環境・請求・取消／削除の影響。
+6. MSPが利用可能なSKU一覧取得API、またはサポートから受ける固定SKUマッピング。
+
+回答を得た後、作成前に対象・正確なpayload・課金影響・切り戻し（新規OrganizationおよびそのNetworkのみを対象とする削除）の承認を改めて得る。その後にのみ、Organization作成→GET→Network作成→GETを1回ずつ実行する。
+
 ## 公式根拠
 
 - [DNSFilter一般API OpenAPI](https://api.dnsfilter.com/docs)（API仕様本体: `https://api.dnsfilter.com/docs/api.json`）
