@@ -1,0 +1,12 @@
+{
+  "priorSendCasesMatched": 9,
+  "dnsFloorOnce": true,
+  "sendOnlyNoDNS": true,
+  "discountFeeShareIdentity": true,
+  "serviceAllocationTotalIdentity": true,
+  "selectedBreakEven": {
+    "first": 25,
+    "sustained": 25,
+    "both": 53
+  }
+}

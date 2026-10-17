@@ -1,0 +1,11 @@
+{
+  "source": "Secure Send PR3 74facb2 / docs/evidence/20261018-billing/analysis.json",
+  "rates": {
+    "cpuActive": 0.0038862386161157524,
+    "memActive": 0.0003952686344456851,
+    "cpuIdle": 0.0004025249746223869,
+    "memIdle": 0.00040231957642843666,
+    "vmCore": 4.523448648744472,
+    "vmRam": 0.6034775409918889
+  }
+}
