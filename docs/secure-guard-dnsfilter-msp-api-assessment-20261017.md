@@ -160,6 +160,72 @@ Distributorは別契約・別権限であり、`/v1/distributors/*`を使う。�
 5. **P2 / device lifecycle**: test agentのSite移管、offline状態、dashboard deleteとremote uninstallを検証する。実端末の削除・uninstallは対象と影響を提示したうえで承認を得る。
 6. **P3 / scale rehearsal**: 10～20 Organization相当のsynthetic datasetで、レート制御、監査、冪等、例外、cleanupを検証する。1,000件書込みはDNSFilter確認後にのみ実施する。
 
+## P0 + P1 実機検証結果（2026-10-17）
+
+### 実行境界
+
+- APIキーはWindowsユーザーの暗号化ファイルから同一ユーザー文脈でメモリ内にだけ読み込み、値を出力・保存していない。
+- P0ではGETのみ、P1では承認済みの `POST /v1/networks` を1回だけ実行した。
+- 既存Network、Global Policy本体、Global Block Page本体、Organization設定、ライセンス設定、Site Keyには変更を加えていない。
+- PR #7が未統合のため、本節は同PRの既存評価記録へ追記する。別の重複文書は作成しない。
+
+### P0: 読み取りAPI
+
+| 検証項目 | 結果 | 実測結果 |
+| --- | --- | --- |
+| Organization 01取得 | PASS | `GET /v1/organizations/10220948` は200。`atLIB Inc.`、`current_license=msp_tier1`、trial 14日。 |
+| Organization 02取得 | PASS | `GET /v1/organizations/10220954` は200。External IDは `SG-POC-ORG-002`、Network作成権限はtrue。 |
+| MSP Network一覧 | PASS | `GET /v1/networks/msp/all?organization_id=10220948` は既存2件を返した。APIのこの`organization_id`はMSP親Organizationを渡す挙動であり、Organization 02を渡した場合は0件だった。 |
+| Organization別Network関係 | PASS | `GET /v1/networks/10678578` の `relationships.organization.id=10220954` を確認。既存Site `Secure Guard Test Site 02` のPolicyは`1510300`、Block Pageは`70676`。 |
+| Global Policy | PASS | `GET /v1/policies?organization_id=10220954&include_global_policies=true` は `1510300` / `atLIB Secure Guard - Standard Security` / `is_global_policy=true` を返した。 |
+| Global Block Page | PASS | `GET /v1/block_pages?organization_id=10220954` は `70676` / `atLIB Secure Guard - External Block Page PoC` / `is_global=true` / redirect URLを返した。 |
+| agent一覧 | PASS | Organization 01は1 agent（`active` / `protected`）、Organization 02は0 agent。削除済み・offline agentは今回の返却には含まれなかった。 |
+| usage | PASS | `GET /v1/metrics/organization_usage/{id}` は両Organizationで200。Organization 02は`plan=basic`、`term=monthly`、`user_count=1`、期間内DNS requestは0。 |
+| 請求対象ライセンスとの一致 | 未確認 | Organization 02の`current_license`は空、usageの`user_count=1`は得られたが、請求対象台数と同義である仕様は確認できない。 |
+
+### P1: Network作成と標準設定割当
+
+作成前にMSP親Organization配下のNetwork一覧を取得し、`Secure Guard API Test Site 03` と `SG-POC-SITE-003` の一致項目がないことを確認した。重複作成を避けたうえで、承認済みの次の内容だけを送信した。
+
+```json
+{
+  "network": {
+    "name": "Secure Guard API Test Site 03",
+    "organization_id": 10220954,
+    "external_id": "SG-POC-SITE-003",
+    "policy_ids": [1510300],
+    "block_page_id": 70676
+  }
+}
+```
+
+| 検証項目 | 結果 | 実測結果 |
+| --- | --- | --- |
+| API Network作成 | PASS | `POST /v1/networks` はHTTP 201。作成Network IDは `10678582`。 |
+| Organization紐付け | PASS | 作成レスポンスおよび再GETで`relationships.organization.id=10220954`。 |
+| External ID | PASS | 再GETで`SG-POC-SITE-003`。 |
+| Global Policy割当 | PASS | 作成レスポンスおよび `GET /v1/networks/10678582` でPolicy `1510300`。 |
+| Global Block Page割当 | PASS | 作成レスポンスおよび再GETでBlock Page `70676`。 |
+| 既存Networkへの変更 | PASS | 既存Networkの更新・削除は行っていない。 |
+| Site Key | 未検証 | 発行・取得は今回の承認範囲に含めず、秘密値は参照していない。 |
+| Dashboard表示 | 未検証 | DNSFilter dashboardの認証済みUIセッションがないため、画面での確認は行っていない。APIの再GETはPASS。 |
+| 課金・ライセンス影響 | 未確認 | ライセンス更新APIは呼んでいない。新NetworkはIP 0件・agent 0件で作成されたが、Network自体の課金影響は公開APIから確定できない。 |
+
+### 実測できたレスポンス構造（秘密値除外）
+
+- Organization: `data.id`, `data.attributes.name`, `external_id`, `current_license`, `current_mrr`, `allow_create_network`。
+- Network: `data.id`, `data.attributes.name`, `external_id`, `block_page_id` と、`relationships.organization`, `relationships.policy`, `relationships.policies`, `relationships.block_page`。
+- Policy: `data.id`, `attributes.name`, `organization_id`, `is_global_policy`。
+- Block Page: `data.id`, `attributes.name`, `organization_id`, `is_global`, `block_redirect_url`。
+- Usage: `organization_id`, `plan`, `term`, `user_count`, `wifi_count`, `total_requests`, `estimated_users`, `from`, `to`。
+
+### 更新した判断
+
+- **Provisioning可否**: Organization IDが確定した後のNetwork作成と、Global Policy／Block Pageの同時割当はAPIでPASS。顧客ごとの標準Networkを自動化する技術的前提は満たした。
+- **Organization作成**: 最終構成では顧客ごとにOrganizationを作成する。この実機検証は別P1.5として必須であり、SKU、契約期間、External ID、ライセンス・課金への影響を承認前に確定する。
+- **Site Key**: endpointは公開仕様上存在するが、ライフサイクルを含む実機検証は未実施。値をDB／Gitへ永続化しない方針を維持する。
+- **1,000社展開**: Network部分はキュー型Provisioningで成立する見込み。ただしOrganization作成bulk不在、契約・SKU、課金台数、1,000 Organization上限はDNSFilter確認後に最終Go判断する。
+
 ## 公式根拠
 
 - [DNSFilter一般API OpenAPI](https://api.dnsfilter.com/docs)（API仕様本体: `https://api.dnsfilter.com/docs/api.json`）
