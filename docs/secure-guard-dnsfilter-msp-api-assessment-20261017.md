@@ -477,6 +477,99 @@ P2-SKで、単一Network `10678570` の `PATCH /v1/networks/{id}/secret_key` は
 5. Site Key操作のrole別権限、rotate監査、旧Key受入期間、offline端末への影響、月次rotateの推奨頻度と上限をDNSFilter Tier 2へ確認する。
 6. Issue #8のP1.6で顧客固有例外とGlobal Policyの優先順位・監査を確認するまで、顧客AdminへPolicy編集権限を恒常付与しない。
 
+## MSP大量展開の成立性評価・RPA補完調査（2026-10-17）
+
+### 実行境界と既存判断
+
+- Canonical mainはPR #7を含む `1caa2eb`、PR #9は未マージの `cc00596` として確認した。Issue #8（顧客固有例外）、#10（Key最小権限）、#11/#12（顧客UX）、#13（提案資料先行）の方針と整合する。
+- Network作成、Global Policy／Block Page割当、Site Key取得、Windows agent保護、Key rotateは既存PoCの結論を再実行していない。
+- DNSFilter管理画面の認証済みセッションは利用できなかった。このためOrganization 02の画面参照、Core／Monthly／license数の実画面値、API作成後の編集可否は**実機未確認**である。Organization作成・契約更新・課金変更・RPA実装は実施していない。
+- P1.5の停止理由（公開APIの`OrganizationCreate`ではCore SKU、term、External IDの確定指定ができない）は変わらない。Tier 2の正式回答がない限り、`plan=basic`をCoreと推測しない。
+
+### Organization作成・契約設定の公式確認
+
+DNSFilter公式資料は、MSPダッシュボードの **Add Organization** でName、Address、External ID、Subscription Plan、任意featureを入力して保存する流れを案内する。またself-service MSPでは、既存OrganizationのplanをMSP > Billing > Subscriptionsから編集でき、保存後のsubscription更新は即時に反映され、prorated invoice／creditが作られると案内する。sales-managed MSPではMSP > SubscriptionsでPlan Type、License Count、External IDを扱う画面が案内されるが、画面操作が請求へ与える影響は「billing invoicesやsubscription accessへ影響しない」とされる。atLIBのトライアルがどちらの契約モデルかは未確認である。
+
+| 必要操作 | UI公式資料 | API | 実機確認 | 判断 |
+| --- | --- | --- | --- | --- |
+| Organization新規作成 | Add Organization手順あり | `POST /v1/organizations`は存在。ただしP1.5の契約値は未確定 | 未実施 | UIはFit（公式確認）、APIは条件付き |
+| Coreプラン選択 | Subscription Plan / Plan Typeの選択が案内される | SKU文字列の正式対応未確認 | 未確認 | **CONDITIONAL FIT** |
+| Monthly契約選択 | self-service UIでBilling Cycleを含むsubscription操作が案内される | OrganizationCreateにtermなし | 未確認 | **CONDITIONAL FIT** |
+| license数指定 | sales-managed UIはLicense Count、self-service UIはusers/access pointsを案内 | `quantity`はあるが課金マッピング未確認 | 未確認 | **CONDITIONAL FIT** |
+| External ID設定 | Add Organizationで入力、sales-managed Subscription画面でも扱う案内あり | Create/PATCH公開schemaには未確認 | 未確認 | UIはFit（公式確認）、API後更新は未確認 |
+| 保存後の設定照合 | Subscription grid／Organization画面の利用が前提 | GET Organizationは契約詳細を返さなかった | 未確認 | UI readback + atLIB台帳が必要 |
+| API作成後にUIでsubscriptionを設定 | 既存OrganizationのPlan編集は公式に案内あり | API created Organizationでの同一操作は未確認 | 未確認 | **CONDITIONAL FIT**。Tier 2回答または隔離trialでの承認済み検証が必要 |
+
+### API・RPA・手動のFit/Gap
+
+| 工程 | API | RPA（ブラウザ操作） | 手動 | 推奨判断 |
+| --- | --- | --- | --- | --- |
+| 顧客ID重複確認・Organization検索 | Fit（既存GET） | 不要 | Fit | API |
+| Organizationの器作成 | Conditional Fit（P1.5 blocker） | Fit見込み（公式UIあり） | Fit（公式UIあり） | Tier 2回答後はAPI優先。未解決ならattended RPAまたは人手 |
+| Core / Monthly / license / External ID | Gap（契約値のAPI指定が未確定） | Conditional Fit（UIは文書化、selectors・role・契約モデル未検証） | Fit（公式UIあり） | RPAは最小補完候補。初期は人の承認つき |
+| 保存値の照合 | 部分Fit（契約GET不足） | Conditional Fit（画面readback） | Fit | UI readbackを証跡化し、API/台帳と照合 |
+| Network + Global設定 | **PASS** | 不要 | 不要 | API |
+| Site Key取得・保護変数への投入 | **PASS** | 不要 | 緊急時のみ | API + secret store |
+| 顧客通知 | Gap（DNSFilterのKey通知を確認できない） | 不要 | Fit | atLIB通知基盤。Key本文は不可 |
+
+### RPA補完の実現性とガードレール
+
+**結論はCONDITIONAL FIT**。画面で行う契約設定は公式に文書化されているため、APIの契約設定だけを補うattended RPAは技術的に可能性がある。ただし、RPAはDNSFilterの公開APIの代替契約ではなく、正式なUIを人の権限・MFAの下で操作する限定手段とする。MFA回避、認証cookieの共有、非公開内部APIの呼出し、browser network interceptionは採用しない。
+
+- **技術方式**: API workerが重複確認とNetwork以降を実行し、RPA workerはOrganization作成／subscription設定画面だけを担当する。UIログインは専用MSP automation userが人のMFA承認後に開始し、操作後にlogoutまたは短いsession expiryとする。
+- **入力安全性**: `customer_request_id`、Organization name、External ID、Core、Monthly、license数を不変のprovisioning recordから画面へ投入する。自由入力・コピー貼付け元の変更を禁止し、Save直前とSave直後に画面値をOCRではなく安定selector／画面DOMで照合できるかをPoCで確認する。
+- **二重作成防止**: RPA開始前にAPI/UIでnameとExternal IDを検索する。Save失敗・timeoutでは再クリックせず、Organization一覧・Subscription grid・External IDで作成有無を照合し、`unknown`状態は人手レビューへ送る。
+- **監査**: atLIB側にrequest ID、操作者、UI画面識別子、開始／終了、入力値（Keyを除く）、readback、失敗理由、後続API resource IDを記録する。画面スクリーンショットにPII・契約金額が映る場合は保存先・アクセス権・保持期限を別途定義する。
+- **MFA／session**: MFAは人が実施する。毎月1,000社の無人RPAでMFAを回避する設計は不可。DNSFilter API keyはユーザー権限を継承するため、Network以降のAPIにはleast-privilege automation userを使い、RPA用のダッシュボード権限と分離する。
+- **利用条件**: 公開資料からRPAの可否・禁止を確定できない。商用利用前に、DNSFilterへ「公式UIをattended RPAでsubscription入力・readbackする運用」の許容、推奨service account、監査ログ、UI変更予告を確認する。
+
+### 1,000社規模の運用負荷（計画概算）
+
+これは実測ではなく、UI 1社あたりの作成・契約設定・readbackを **2〜5分**、例外対応を含まない前提とした概算である。RPA対象を契約画面だけに絞っても、1,000社では **約33〜83人時** の画面処理となる。APIでPASS済みのNetwork以降は数秒〜低分のキュー処理に分離できるが、画面変更、MFA再認証、契約値差異、Save不明は人手待ちになる。
+
+従ってRPAは初回の一括立上げまたはTier 2回答までの暫定補完には現実的だが、恒常的な無人基幹処理の根拠にはならない。商用の継続運用は、DNSFilterから契約設定APIまたはサポート付きbulk provisioning手段を得られることを前提にする。API rate limitはOrganizationあたり300秒2,000 requestであり、Network APIの1,000社処理は制御可能と見込むが、UI/RPAのスループット保証はない。
+
+### 推奨する最小構成（API／RPA／人手の分担）
+
+```text
+顧客申込
+  → atLIB台帳・重複判定（API / atLIB）
+  → Organization作成（Tier 2確定後はAPI、未確定時は承認済みattended RPAまたは人手）
+  → Core・Monthly・license・External IDの設定とreadback（RPAまたは人手）
+  → Organization ID確定・証跡保存（API + atLIB台帳）
+  → Network作成 + Global Policy / Block Page割当（API：PASS）
+  → Site Key取得 → 顧客別secret store / RMM・MDM保護変数（API：PASS）
+  → 導入案内（atLIB通知基盤、人手承認を含む）
+```
+
+RPAをNetwork、Site Key、agent、Policy操作へ広げない。これらはAPIで既に実機PASSであり、ブラウザ操作にするとKey露出、UI変更、監査欠落のリスクが増える。
+
+### 最終判定と商用Go前の課題
+
+| 判断対象 | 判定 | 根拠 |
+| --- | --- | --- |
+| A. 関係者／PIRA向け提案資料制作へ進む | **CONDITIONAL FIT — 進行可** | Network以降はAPI実機PASS、契約設定は公式UIで実行可能でRPA／人手の代替案がある。Issue #13の「技術成立性判断後に資料制作」を満たす合理的な見通しがある。資料にはTier 2待ち・RPA暫定・商用Go保留を明記する。 |
+| B. 1,000社の商用サービス開始 | **GAP — 保留** | Organization作成後のCore／Monthly／license／External IDをAPIで確定的に設定・照合する手段、契約モデル、請求反映、RPA許容・監査・UI安定性が未確定。無人での大量商用provisioningは開始しない。 |
+
+DNSFilter Tier 2へ確認する残課題は次のとおり。
+
+1. atLIB MSP trialの契約モデル（self-service / sales-managed / distributor）と、Core Monthly 1 licenseの正式SKU・term・license指定手段。
+2. APIでOrganization作成後、UIでCore・Monthly・license数・External IDを安全に設定・編集できるか。外部IDの正式なpost-create操作。
+3. Organization作成／subscription変更を支援する正式bulk provisioning、PSA、Distributor API、またはMSP automationの有無。
+4. attended RPAによる公開UI操作の許容、専用automation user、MFA、audit log、UI変更通知に関する推奨／制約。
+5. subscription更新の即時性、proration、next-cycle反映の適用条件、および1,000 Organizationの契約・サポート上限。
+6. subscription readback、Site Key操作、Organization作成／更新について、APIまたはダッシュボードで取得できる監査証跡。
+
+### 認証済み管理画面で行う最小確認（状態変更なし）
+
+1. MSP dashboardでOrganization 02を開き、Organization Profile、MSP > Billing / Subscriptions、Deployment画面を閲覧する。Save、Edit、Add Organizationは押さない。
+2. Core、Monthly、Allocated Licenses、External IDの**表示値と項目名**を記録し、P0 usageの`plan=basic`とは別物として扱う。
+3. Subscription画面で、既存OrganizationにPlan、term、license、External IDを編集できるUIがあるか、保存前の項目だけを確認する。
+4. Add Organization画面を保存せずに開き、Core、Monthly、license数、External IDが同一フローにあるかを確認して閉じる。
+5. DashboardのActivity／Audit導線でOrganization作成・subscription更新・Key操作を検索できるフィルタがあるかだけを確認する。
+
+上記の閲覧で表示された値・役割・画面導線が公式資料と一致した場合でも、保存操作とRPAの実機PoCは別承認とする。
+
 ## 公式根拠
 
 - [DNSFilter一般API OpenAPI](https://api.dnsfilter.com/docs)（API仕様本体: `https://api.dnsfilter.com/docs/api.json`）
@@ -501,4 +594,6 @@ P2-SKで、単一Network `10678570` の `PATCH /v1/networks/{id}/secret_key` は
 - [Pricing license types](https://help.dnsfilter.com/hc/en-us/articles/4991568454035-Pricing-license-types)
 - [Self-service MSP subscription management](https://help.dnsfilter.com/hc/en-us/articles/1500008111561-Self-service-MSP-subscription-management)
 - [Sales-managed MSP subscription management](https://help.dnsfilter.com/hc/en-us/articles/43809316077715-Sales-managed-MSP-subscription-management)
+- [Manage Organization settings](https://help.dnsfilter.com/hc/en-us/articles/1500008111201-Manage-Organization-settings)
+- [DNSFilter integrations / Rewst](https://www.dnsfilter.com/integrations)
 
