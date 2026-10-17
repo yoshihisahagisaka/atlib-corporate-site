@@ -269,6 +269,32 @@ Distributorは別契約・別権限であり、`/v1/distributors/*`を使う。�
 
 回答を得た後、作成前に対象・正確なpayload・課金影響・切り戻し（新規OrganizationおよびそのNetworkのみを対象とする削除）の承認を改めて得る。その後にのみ、Organization作成→GET→Network作成→GETを1回ずつ実行する。
 
+### P1.5 追加読み取り検証（2026-10-17）
+
+既存Organization 02（`10220954`）を、管理画面でCore / Monthly / 1 licenseとして作成済みであることを基準に、公開APIから作成payloadへ転記できる値が得られるか追加確認した。
+
+| 確認対象 | 結果 | 実測・判断 |
+| --- | --- | --- |
+| Organization詳細 | PASS | `GET /v1/organizations/10220954?include_current_mrr=true` は200。`external_id=SG-POC-ORG-002`、`current_license`空、`plan_details=null`、`current_mrr=0`、`trial_days=null`。 |
+| Organization Subscription relationship | PASS（存在確認） / 未確認（値） | relationship名は`subscription`だが、`data=null`でSubscription ID・SKU・term・license数は返らない。related URLも返らない。 |
+| Billing GET | PASS（API呼出） / 未確認（契約値） | `GET /v1/billing?organization_id=10220954` は200だが、返却bodyは空。支払方法・契約プランを返す値は得られない。 |
+| Usage | PASS | `GET /v1/metrics/organization_usage/10220954` は`plan=basic`、`term=monthly`、`user_count=1`を返す。 |
+| `basic`とCoreの同一性 | **未確認** | 現行価格資料はCoreを公開するが、OpenAPIの`sku`値／usage `plan=basic`／Coreの対応表を公開していない。既存のlegacy Basicと現行Coreを同一SKUと推測しない。 |
+| 作成時のterm指定 | **未確認** | OpenAPIにはSKU resourceの`term` enum（monthly/annual）がある一方、`OrganizationCreate`にtermフィールドはない。SKU文字列への符号化規則は公開されていない。 |
+| External IDの作成後設定 | **未確認** | `PATCH /v1/organizations/{id}`も`OrganizationCreateSpec`を使い、`external_id`を公開していない。Organization ProfileはdashboardでExternal IDを管理することを案内するが、公開APIの対応操作は確認できない。 |
+
+この追加確認後も、P1.5のPOST条件は満たさない。特に、trial期間中でも不正なSKUを含むPOSTは別SKU・想定外の契約状態を作るおそれがあり、実行しない。
+
+#### 再開条件（更新）
+
+DNSFilterから次のいずれかを取得するまでOrganization作成は保留とする。
+
+1. atLIB MSP用のCore Monthly SKU文字列と、`quantity=1`を含む正式なPOST例。
+2. MSP JWTで利用できるSKU／Subscription GET endpointと、Organization 02のCore設定を示す応答。
+3. trial中のMSP sub-organizationを、SKU・term・quantity・External IDを安全に指定して作成する公式手順。
+
+これらを得た後にのみ、同名・External IDの重複GET→Organization POSTを1回→Organization GET→Network POSTを1回→Network GETの順で再開する。
+
 ## 公式根拠
 
 - [DNSFilter一般API OpenAPI](https://api.dnsfilter.com/docs)（API仕様本体: `https://api.dnsfilter.com/docs/api.json`）
