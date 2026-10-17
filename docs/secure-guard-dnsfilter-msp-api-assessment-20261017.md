@@ -416,6 +416,67 @@ DNSFilterから次のいずれかを取得するまでOrganization作成は保�
 
 P2-SKは、既存agentを伴うKey rotate後にも保護状態とDNSFilter側の遮断記録が維持されることを実機APIで確認した。商用運用では、rotate直後にagent状態・Query Logs・端末ブラウザの3点を監視し、端末試験を自動化できる顧客RMM/MDM環境を標準にする。
 
+## 顧客セルフサービス・月次ローテーション・ライセンス管理調査（2026-10-17）
+
+### 実行境界と参照した既存結果
+
+- main Canonicalは `1caa2eb`（PR #7マージ済み）、P2-SK記録はPR #9の `74be22a` として確認した。P0/P1/P2/P2-SKの実機API操作は再実行していない。
+- Issue #8はGlobal Policyと顧客固有例外の共存を後工程とする。Global Policy本体・顧客設定は変更せず、顧客への権限委譲をP1.6結果後に判断する方針と整合する。
+- 顧客管理者の招待、Key rotate、agent削除、ライセンス更新、メール送信は今回実行していない。以下の「公式確認」はDNSFilter公式資料／公開OpenAPIに基づく設計評価であり、実機権限検証とは区別する。
+
+### A. 顧客Organization管理者のFit/Gap
+
+| 要求 | 状態 | 公式確認・判断 |
+| --- | --- | --- |
+| 顧客を自社Organizationへ招待 | Fit（公式確認） | MSPダッシュボードから対象Organizationへ移動してclient userを追加する手順がある。MSP側のUsersへ顧客を追加してはいけない。招待実機は未実施。 |
+| 自社Roaming Client／Deploymentの管理 | Fit（公式確認） | MSP client OrganizationのAdminはRoaming Clients、Deployments、Reportingを管理できる。 |
+| 自社Networkの最新Site Key閲覧 | 要実機検証 | 公式導入手順はDeploymentsのInstall Roaming Client画面でSite Keyをコピーすることを案内するが、MSP client Adminでの閲覧可否を明示していない。Admin招待後、対象Organizationだけで確認する。 |
+| 自社NetworkのSite Key rotate | Gap / 要ベンダー確認 | APIにはrotate endpointがあるが、顧客ダッシュボードのrole別UI権限および監査対象であることを確認できない。顧客へAPI JWTを渡す方式は採らない。 |
+| 他Organizationへのアクセス遮断 | Fit（公式確認） | client userは対象Organizationに追加する方式であり、MSP staff用のOrganizations横断権限とは分離される。実機で組織切替候補が出ないことは未確認。 |
+| MSP Global Policy／Block Pageの変更禁止 | Fit（公式確認） | MSP client AdminのGlobal Filtering Policies／Block Pagesはview-only。顧客AdminがGlobal Policyを複製できる新権限はあるため、複製物が標準運用から逸脱しない統制は別途必要。 |
+| 操作履歴をatLIBが確認 | 部分Fit（公式確認） | Policy Audit LogはCoreでpolicy・Universal Listの変更者／時刻／差分を1年記録する。Site Key閲覧・rotate、agent delete、ユーザー招待を同じ監査ログで追える根拠は確認できない。 |
+
+**権限モデルの判断:** 顧客には原則としてOrganizationの **Read Only** を渡し、例外申請はatLIBのワークフローで受ける。顧客自身に端末運用を許可する契約だけは、対象Organizationに限定した **Admin** を候補とするが、Site作成はMSPの `Client Admin Site Creation`（全Organizationに効くトグル）が既定offであることを維持する。Keyの閲覧・rotateをセルフサービス化するかは、上記の専用実機検証と監査取得可否がPASSになるまで保留する。
+
+### B. atLIB月次自動Site Keyローテーション設計
+
+P2-SKで、単一Network `10678570` の `PATCH /v1/networks/{id}/secret_key` はHTTP 200、既存Windows agentは直後および約1分後も`active / protected`、限定Query Logにもblocked記録があることを実機確認済みである。この結果を「全Networkへ同時実行してよい」根拠にはしない。
+
+| 設計項目 | 状態 | 安全な設計 |
+| --- | --- | --- |
+| 全顧客Network列挙 | Fit（既存P0 + 設計） | MSP親Organizationを使う `GET /v1/networks/msp/all` とNetwork個別GETで、Organizationとの関係を確認して対象表を作る。削除済み・例外Network・前回未完了を除外する。 |
+| Network単位のrotate | Fit（既存P2-SK） | `PATCH /v1/networks/{id}/secret_key` を1件ずつ実行する。リクエストbodyは不要。全件bulk rotateは公開OpenAPIで確認できない。 |
+| 二重実行防止 | atLIB実装Gap | APIの公開仕様にidempotency key／rotation versionは確認できない。`network_id + rotation_period`を一意キーにしたジョブ台帳、lease、開始／完了状態、operator approvalをatLIB側で持つ。timeout時はPATCHを再送せず、Network GET・監査記録・ベンダー照会で状態を確定する。 |
+| 成功後の検証 | Fit（設計、一部実機） | Network GETでPolicy／Block Page不変とKey属性の存在だけを確認し、agent GETで`active/protected`、Query Logでblocked DNSを確認する。P2-SKは1 agentでPASS。offline agent、端末ブラウザ、異なるagent versionは未検証。 |
+| 一部失敗時の停止・再開 | atLIB実装Gap | 失敗時は当該Organizationだけ保留にし、同一顧客の後続Networkを止める。全体は独立キューで継続可とするが、閾値超過（例: protected低下、429連続、異常率）では全ジョブを停止する。新Keyで再登録できない端末の復旧は顧客RMM/MDM経由で行う。 |
+| 1,000社のレート制御 | Fit（設計） | DNSFilterの公開上限であるOrganizationあたり300秒2,000 requestを上限に、429と`Retry-After`を尊重する。実装はOrganizationごとのtoken bucket、指数backoff、低並列（まず1 Networkずつ）にする。1,000社全件の実負荷試験は未実施。 |
+| 顧客通知 | atLIB実装Gap | Site Key API／DNSFilter公開資料から、rotate完了を顧客へメールする機能・テンプレートは確認できない。atLIBのメール基盤で「顧客ID、Network名、実行結果、取得方法、支援窓口」を送る。Key値は本文・添付へ含めない。 |
+| 顧客が最新Keyを取得 | 要実機検証 | 顧客AdminがInstall Roaming Client画面でKeyを閲覧できることを確認できた場合だけ、DNSFilter画面での自己取得を許可する。それまではatLIBのRMM/MDM保護変数へ直接投入し、値を人へ配布しない。 |
+| 監査 | 部分Fit | atLIBジョブ台帳へ対象・開始終了・HTTP結果・agent状態・通知結果を記録する。Key値は不可。DNSFilterのPolicy Audit LogはKey rotate／agent操作の完全な監査証跡としては未確認。 |
+
+月次rotateは「顧客ごとの隔離」「事前通知」「Network単位の低速キュー」「Keyをログに出さない直接シークレット連携」「P2-SKと同じ三点確認」「失敗した顧客だけを保留」の構成なら技術的に設計可能である。ただし、顧客自己取得、offline端末の復旧、ベンダー側監査は商用Go前に実機またはTier 2回答で閉じる必要がある。
+
+### C. ライセンス利用終了・課金除外のFit/Gap
+
+| 区別すべき対象 | DNSFilter上の意味 | 顧客Adminでの見込み | 課金への結論 |
+| --- | --- | --- | --- |
+| 1. Roaming Client登録情報の削除 | Dashboardからagentを削除／Clean Upする操作。端末のagentはアンインストールされない。端末がDNS通信すると再表示される。 | AdminはRoaming Clientsを管理できるためUI操作は可能と読める。顧客roleでの実機確認は未実施。 | 一時的に使用数表示へ影響し得るが、恒久的なライセンス終了ではない。 |
+| 2. 保護・登録状態の無効化 | 対応Windows agentはDelete & Uninstallで次回sync時にremote uninstallを実行できる。offline端末はPending Uninstallのまま。 | Admin以上で可能な公式手順。実機uninstallは未実施。 | 端末保護終了と、使用数低下は別確認が必要。 |
+| 3. Current License Usageの減少 | Roaming Clients in UseとNetwork Devices in Useの合計。Roaming Clientはアカウントに関連付くagent総数として表示され、inactiveも含む案内がある。 | 顧客Adminは閲覧・Roaming Client管理まで。正確な変化時刻・API値は未検証。 | Clean Up／Delete & Uninstall後に低下する見込みだが、仕様として即時性・確定条件は未確認。 |
+| 4. DNSFilter請求対象数の減少 | 契約のAllocated Licenses／subscription更新とは別。MSPの種類により次回請求サイクル反映、またはsubscription変更の即時反映・prorationという説明がある。 | 顧客client AdminのBilling操作権限は明示されず、Organization Settingsはview-only。 | agent削除だけでMSPのDNSFilter請求額が自動で減るとは確認できない。MSPがライセンス割当／契約を更新する別操作が必要。 |
+| 5. atLIBから顧客への月額請求額 | atLIBの契約・請求ルールでありDNSFilter利用数とは別系統。 | 範囲外。 | DNSFilterのagent削除・license usage低下だけで自動減額されない。atLIBの契約変更・日割り・翌月適用を別途定義する。 |
+
+**結論:** DNSFilterに「端末単位で恒久的にライセンスを無効化し、MSP請求とatLIB顧客請求を同時に減額する」単一機能は、公式資料・既存APIから確認できない。agentをDashboardから消す操作、端末保護を止める操作、Current License Usage、Allocated Licenses、DNSFilter MSP請求、atLIB顧客請求は別の状態であり、これを一つの「解約」ボタンとして扱うのはGapである。
+
+### 商用Go前の必須確認
+
+1. 隔離test Organizationへ顧客Adminを1名招待し、他Organization非表示、Global Policy／Block Page編集拒否、Site Key閲覧可否、rotate UI可否、Policy Audit Log／activity記録を実機確認する（招待・権限は個別承認後）。
+2. agent 1台をofflineにしてrotateし、復帰後の保護・再登録要否・旧Key新規登録拒否を確認する（状態変更の承認後）。
+3. Windows agentのDelete、Delete & Uninstall、Clean Upを別々の隔離端末で実施し、agent再出現、Current License Usage、Allocated Licenses、Usage API、請求画面を時系列で記録する。
+4. atLIBがself-service MSPかsales-managed MSPかをDNSFilterへ確認し、ライセンス数変更の請求反映・proration・next-cycleの正式ルールを確定する。既存トライアルの`user_count`を請求台数と同一視しない。
+5. Site Key操作のrole別権限、rotate監査、旧Key受入期間、offline端末への影響、月次rotateの推奨頻度と上限をDNSFilter Tier 2へ確認する。
+6. Issue #8のP1.6で顧客固有例外とGlobal Policyの優先順位・監査を確認するまで、顧客AdminへPolicy編集権限を恒常付与しない。
+
 ## 公式根拠
 
 - [DNSFilter一般API OpenAPI](https://api.dnsfilter.com/docs)（API仕様本体: `https://api.dnsfilter.com/docs/api.json`）
@@ -433,4 +494,11 @@ P2-SKは、既存agentを伴うKey rotate後にも保護状態とDNSFilter側の
 - [Roaming ClientのSite／Organization移管](https://help.dnsfilter.com/hc/en-us/articles/49903446066835-Reassign-a-Roaming-Client-to-a-different-Site-or-Organization)
 - [Filtering Policyの公式テストドメイン](https://help.dnsfilter.com/hc/en-us/articles/1500008110782-Example-domains-to-test-Filtering-Policies)
 - [Block Pageの作成とテスト](https://help.dnsfilter.com/hc/en-us/articles/1500008111221-Create-a-Block-Page)
+- [MSP Users management](https://help.dnsfilter.com/hc/en-us/articles/1500008108722-MSP-Users-management)
+- [MSP client user account permissions](https://help.dnsfilter.com/hc/en-us/articles/42633772754835-Manage-MSP-client-user-account-permissions)
+- [MSP dashboard management](https://help.dnsfilter.com/hc/en-us/articles/1500008111541-MSP-dashboard-management)
+- [Policy Audit Log](https://help.dnsfilter.com/hc/en-us/articles/1500008111441-Policy-Audit-Log)
+- [Pricing license types](https://help.dnsfilter.com/hc/en-us/articles/4991568454035-Pricing-license-types)
+- [Self-service MSP subscription management](https://help.dnsfilter.com/hc/en-us/articles/1500008111561-Self-service-MSP-subscription-management)
+- [Sales-managed MSP subscription management](https://help.dnsfilter.com/hc/en-us/articles/43809316077715-Sales-managed-MSP-subscription-management)
 
