@@ -362,6 +362,60 @@ DNSFilterから次のいずれかを取得するまでOrganization作成は保�
 
 次の実機検証は、P1.5とは独立に、agentを1台だけ登録できる隔離test Networkで実施する。実行前に「対象Network・発行／rotate／deleteのいずれか・既存agentへの想定影響・復旧としての新Key再登録・削除しないリソース」を提示し、個別承認を得る。公開APIにbulk Key操作は確認できないため、1,000社規模ではKey lifecycleをキュー単位で順次処理し、429/Retry-After、監査、手動承認を組み込む。
 
+## P2-SK Site Keyローテーション実機検証（2026-10-17）
+
+### 対象と実行境界
+
+- Corporate main CanonicalはPR #7マージ後の `1caa2eb` として確認した。P2-SKはそのP2結果に追記する別ブランチで実施した。
+- 変更対象は atLIB Inc.（Organization `10220948`）配下の既存検証Network `10678570`（`Your First Network`）だけである。Network／Organizationの削除、Policy／Block Pageの編集、Site Keyのrevoke/delete、agentの削除・uninstallは実施していない。
+- 既存Windows agentは `fab5ff1c-36c3-405d-ab49-f7ced202f309`（hostname `atl20260003`）と特定した。APIキー、旧Key、新Key、Keyの一部・長さは、画面、コマンド出力、Git、PRに一切記録していない。
+- 公開OpenAPIで `PATCH /v1/networks/{id}/secret_key` がrequest bodyなし、整数の`id`のみを受ける「Rotate key」操作であることを確認してから実行した。HTTPエラー時の無条件再実行は行わない設計とし、実際に再実行もしていない。
+
+### 変更前の確認
+
+| 項目 | 結果 | 実測 |
+| --- | --- | --- |
+| NetworkとOrganizationの関係 | PASS | Network `10678570` はOrganization `10220948` 配下。 |
+| 共通設定 | PASS | Network GETでGlobal Policy `1510300`、External Block Page `70676` の割当を確認。 |
+| agent状態 | PASS | agent GETで `status=active`、`agent_state=protected`。Network `10678570` に紐付く。 |
+| Site Keyの既存値確認 | PASS（非出力） | Network GETの`secret_key`属性に空でない値があることだけを確認。値は保持・出力していない。 |
+| 実端末でのPhishingページ表示 | 未確認 | この実行環境の端末名は`atl20260003`と一致せず、ローカルからのHTTP試験は503となった。その結果をagent試験として扱わない。 |
+
+### rotate実行と直後の結果
+
+承認済みの `PATCH /v1/networks/10678570/secret_key` を1回だけ実行し、HTTP 200を得た。応答にKey関連情報が含まれることは検知したが、値は解析・出力・保存しなかった。
+
+| 項目 | 結果 | 実測 |
+| --- | --- | --- |
+| Site Key rotate API | PASS | HTTP 200。対象はNetwork `10678570` のみ。retry 0回。 |
+| Network設定の保持 | PASS | rotate直後のGETでOrganization `10220948`、Policy `1510300`、Block Page `70676`、Key属性の存在を確認。 |
+| agent保護の直後状態 | PASS | rotate直後に `active / protected`、Network `10678570`。 |
+| agent保護の時間経過後状態 | PASS | 約1分後の再GETでも `active / protected`、同一Network。保護停止、再設定、再インストールは不要だった。 |
+| DNSFilter管理ログの遮断記録 | PASS（限定確認） | Query Logsをagent ID、公式`phishing.filterdns.net`、`result=blocked`、直近15分に限定してGETし、blocked記録1件を確認。ドメイン以外の閲覧内容・行値は出力していない。 |
+| 実端末ブラウザの日本語External Block Page表示 | 未確認 | `atl20260003` の対話セッション／ブラウザには接続できなかった。別途、その端末で公式テストドメインを開き、HTTPS警告なしで atLIB日本語Block Pageが表示されることを目視確認する。 |
+
+### 観測された挙動と復旧runbook
+
+今回の範囲では、Key rotate後も既存agentは保護状態を維持し、再登録や再インストールを要しなかった。従って少なくとも対象version・対象agentでは、rotateが即時に既存登録を停止させる挙動は観測されなかった。ただし、Key漏えい後の旧Keyによる新規登録拒否、agentが長時間offlineの場合、agent version差、rotate後に保護が落ちる条件は**未確認**であり、一般化しない。
+
+将来の障害時は、対象agentが`protected`でなくなったことをAPIと端末で確認してから、新Keyを秘密ストアから当該端末の設定へ投入し、DNSFilter公式の再登録手順（Windows agent停止、Site Keyを含む設定へ置換、agent再起動）を実施する。再設定後にagent GET、Query Logs、公式Phishingテストドメイン、HTTPSのBlock Page表示を確認する。旧Keyの復元、Key delete、Network／Organization削除はこのrunbookに含めない。
+
+### P2-SK結論
+
+| 項目 | 状態 |
+| --- | --- |
+| 対象Network／agentの特定 | PASS |
+| 変更前のProtected・Policy・Block Page確認 | PASS |
+| 旧Keyを非出力で確認し、新Keyを非出力で扱う | PASS |
+| Key rotate | PASS（HTTP 200、1回のみ） |
+| rotate後の既存agent保護 | PASS（直後および約1分後 `active / protected`） |
+| DNSFilter Query LogへのPhishing遮断反映 | PASS（対象agentに限定したblocked記録1件） |
+| 保護停止時の再設定／再インストール | 未実施（停止が発生しなかった） |
+| 旧Keyでの新規登録拒否 | 未確認（別端末が必要） |
+| 実端末での日本語表示・HTTPS証明書エラーなし | 未確認（検証端末の対話アクセスなし） |
+
+P2-SKは、既存agentを伴うKey rotate後にも保護状態とDNSFilter側の遮断記録が維持されることを実機APIで確認した。商用運用では、rotate直後にagent状態・Query Logs・端末ブラウザの3点を監視し、端末試験を自動化できる顧客RMM/MDM環境を標準にする。
+
 ## 公式根拠
 
 - [DNSFilter一般API OpenAPI](https://api.dnsfilter.com/docs)（API仕様本体: `https://api.dnsfilter.com/docs/api.json`）
@@ -377,4 +431,6 @@ DNSFilterから次のいずれかを取得するまでOrganization作成は保�
 - [Windows agent via Intune](https://help.dnsfilter.com/hc/en-us/community/posts/34265444707347)
 - [Windows Roaming Client silent / RMM install](https://help.dnsfilter.com/hc/en-us/articles/31177309034899-Windows-Roaming-Client-Silent-Remote-tool-Install)
 - [Roaming ClientのSite／Organization移管](https://help.dnsfilter.com/hc/en-us/articles/49903446066835-Reassign-a-Roaming-Client-to-a-different-Site-or-Organization)
+- [Filtering Policyの公式テストドメイン](https://help.dnsfilter.com/hc/en-us/articles/1500008110782-Example-domains-to-test-Filtering-Policies)
+- [Block Pageの作成とテスト](https://help.dnsfilter.com/hc/en-us/articles/1500008111221-Create-a-Block-Page)
 
