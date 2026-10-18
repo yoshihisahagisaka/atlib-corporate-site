@@ -1,0 +1,95 @@
+{
+  "issues": [
+    {
+      "url": "https://github.com/yoshihisahagisaka/atlib-corporate-site/issues/16",
+      "title": "Secure Services共通顧客・契約・請求管理基盤｜後工程実装チェックポイント",
+      "issue_number": 16,
+      "body": "## Business Decision（2026-10-18）\nSecure GuardとSecure Sendの顧客・契約・利用量・請求計算・紹介元・レベニューシェア管理は共通化する。一方、実際のサービス提供基盤（DNSFilter MSP連携／Secure Sendのファイル転送・テナント分離・認証・Storage等）は独立させる。一般的な大型CRMではなく、atLIBサブスクリプションサービス向けの簡素な社内管理台帳とする。\n\n## 責任分担\n- 共通管理：企業ID、担当者、PIRA/組合/紹介者/UTM等の流入、複数サービス契約、プラン、契約状態、利用数スナップショット、料金算定根拠、請求連携・照合、レベニューシェア原資・計算額・精算状態、変更/解約/監査\n- Secure Guard：DNSFilter Organization/Network/Site Key/agent/usage等の運用（既存PoCとIssue #15参照）\n- Secure Send：独立テナント/ユーザー/送信者seat/利用量/ファイル/SSO等の運用（atlib-ppap-file-transfer PR #1等参照）\n- サブスクペイ：決済、請求書発行、入金管理。atLIB側で請求書発行・振込自動化を重複開発しない。現行は管理画面で月額変更を手動実施。将来の自動連携可否は正式仕様で確認する。\n- レベニューシェア：計算・精算管理まで自動化候補。実際の振込は人手。Secure Guard基本料金5,000円の50%を原資とする既決定を維持。Secure Send配分率は原価確認後に決定。\n\n## 実装順序（後工程）\n1. 既存Sales Tools/main、InfraVision顧客ポータル、Canonical/ADR/Decision Log、既存顧客/監査/認証/UTM/匿名KPI資産を調査しFit/Gapを記録。実施済みを推測で作り直さない。\n2. 共通顧客企業IDと各サービス固有のOrganization/Tenant ID、サブスクペイ契約IDを外部参照で対応付ける。各サービスのDB/認証を無条件に統合しない。\n3. 顧客・サービス契約・紹介元の最小共通台帳。\n4. 利用量取得・料金計算・請求締めスナップショット・差異検知・請求反映と結果照合。請求基準日、追加/削除、返金/訂正、税、月途中日割り、入出金タイミングは契約条件確認後に決定。\n5. レベニューシェア計算・精算管理（振込は手動）。\n6. 顧客向け簡易ポータルとの連携は後工程。\n\n## 必須設計条件\n- 同一企業がGuard/Send双方を契約しても企業台帳は一つ。各サービスのテナント/契約/課金は独立管理。\n- 顧客間越境否認、RBAC、監査、保持削除、冪等な処理、重複請求防止、失敗時再実行、権限分離。\n- 利用実績、請求確定額、DNSFilter仕入請求、サブスクペイ請求/入金を混同しない。履歴と計算根拠を保存。\n- Secure Guardの端末削除を即時の課金停止と見なさない。Secure Sendの料金・利用枠は未確定として設定可能な構造にする。\n- 初回決済成功後Provisioningという仮決定を尊重し、決済成功と実入金のタイミング差・失敗時対応を別途評価。\n- サービス別商用化開発を止めない。共通基盤は後工程で、PIRA提案資料制作の優先順位を維持。\n\n## Acceptance / 再開時\n現行Git・Production Canonicalのfresh readから開始し、Fit/Gap→最小実装範囲→migration/監査/回帰→SHA固定。既存Sales Toolsへ直接追加するか独立管理アプリにするかは調査後に判断。今回のIssueは設計決定の記録であり実装承認ではない。",
+      "state": "open",
+      "user": {
+        "login": "yoshihisahagisaka",
+        "name": "yoshihisahagisaka",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/299964096?v=4",
+        "id": 299964096
+      },
+      "assignees": null,
+      "labels": null,
+      "milestone": null,
+      "state_reason": null,
+      "comments": 0,
+      "created_at": "2026-10-17T21:39:58Z",
+      "updated_at": "2026-10-17T21:39:58Z",
+      "closed_at": null,
+      "display_url": "https://github.com/yoshihisahagisaka/atlib-corporate-site/issues/16",
+      "display_title": "Secure Services共通顧客・契約・請求管理基盤｜後工程実装チェックポイント"
+    },
+    {
+      "url": "https://github.com/yoshihisahagisaka/atlib-corporate-site/issues/17",
+      "title": "Secure Guard / Send 共通料金・レベニューシェア設計原則",
+      "issue_number": 17,
+      "body": "## Business Decision（2026-10-18）\nSecure GuardとSecure Sendの料金体系・収益配分を共通の考え方で設計する。料金体系は「基本料金＋従量料金」。基本料金は利用規模に応じた少数レンジを検討し、基本料金のみを両サービス共通の一定割合でレベニューシェア原資とする。Guardの端末台数課金、Sendの送信者人数課金は100% atLIB帰属。サービス原価・決済手数料・運用費はatLIB負担。PIRA・組合・紹介者間の配分は別途関係者で決める。\n\n## セット割引\n両サービス契約時のセット割引を導入候補とし、基本料金部分から控除する。シェア原資は割引後の基本料金に共通シェア率を乗じる。端末・人数の従量料金は割引対象にしない。割引の各サービスへの按分、途中追加・解約・請求訂正時の扱いは後工程で決定する。\n\n## 未決定\n共通シェア率（30/40/50%等を比較）、Guard/Send各基本料金と境界、従量単価、Sendの転送・保存容量上限、セット割引額、最終損益分岐点。従前のGuard基本料金5,000円・端末300円・基本料金50%シェアは比較基準として保持し、共通率の正式決定まで既決定値を無断変更しない。\n\n## 次の分析\n進行中のWorkのPIRA傘下企業規模・PC台数・送信者人数分布とSecure Send実測/推計原価・Cloud Runスケール評価を受け、Guard単独、Send単独、セットの料金・限界利益・損益分岐企業数・シェア原資・高利用時赤字・顧客心理（レンジ境界）を比較する。実測と推計を区別し、料金表は単純さを優先。商用化実装・既存Productionは変更しない。\n\n## 関連\n共通顧客契約請求基盤 Issue #16、Guard顧客ポータル Issue #15、PIRA事業化順序 Issue #13、Secure Send商用化PR #1〜#3。後工程でGit/Canonicalを再読し二重設計を避ける。",
+      "state": "open",
+      "user": {
+        "login": "yoshihisahagisaka",
+        "name": "yoshihisahagisaka",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/299964096?v=4",
+        "id": 299964096
+      },
+      "assignees": null,
+      "labels": null,
+      "milestone": null,
+      "state_reason": null,
+      "comments": 0,
+      "created_at": "2026-10-17T22:08:51Z",
+      "updated_at": "2026-10-17T22:08:51Z",
+      "closed_at": null,
+      "display_url": "https://github.com/yoshihisahagisaka/atlib-corporate-site/issues/17",
+      "display_title": "Secure Guard / Send 共通料金・レベニューシェア設計原則"
+    }
+  ],
+  "corporatePRs": [
+    {
+      "number": 7,
+      "url": "https://github.com/yoshihisahagisaka/atlib-corporate-site/pull/7",
+      "headSHA": "23b887d124a0b7915af9d74485c8903409d784f1",
+      "state": "closed",
+      "merged": true,
+      "mergeCommit": "1caa2eb1fec2d887a41130b0aa0fdf102493562b",
+      "title": "docs: assess DNSFilter MSP API for Secure Guard scale"
+    },
+    {
+      "number": 9,
+      "url": "https://github.com/yoshihisahagisaka/atlib-corporate-site/pull/9",
+      "headSHA": "932bf38662fe8c3db9eb27d97032ef72bc632abc",
+      "state": "open",
+      "merged": false,
+      "mergeCommit": "a6c096d73e21ad720f174c5e42cec3cee96ad64b",
+      "title": "docs: record DNSFilter Site Key rotation PoC"
+    },
+    {
+      "number": 14,
+      "url": "https://github.com/yoshihisahagisaka/atlib-corporate-site/pull/14",
+      "headSHA": "40b7610f78e4e92702150cc73633688795bed459",
+      "state": "open",
+      "merged": false,
+      "mergeCommit": "c934ea11643464e504d59c787ece4373b9fda8a2",
+      "title": "docs: PIRA market and pricing analysis"
+    }
+  ],
+  "sendPRs": [
+    {
+      "number": 2,
+      "url": "https://github.com/yoshihisahagisaka/atlib-ppap-file-transfer/pull/2",
+      "headSHA": "caea47b7dad8efc7902ba165d74ebea7a244b2fa",
+      "base": "docs/secure-send-commercialization-fit-gap-20261017"
+    },
+    {
+      "number": 3,
+      "url": "https://github.com/yoshihisahagisaka/atlib-ppap-file-transfer/pull/3",
+      "headSHA": "74facb2fd202b697f288701bca670f7bc70c86b5",
+      "base": "analysis/secure-send-cost-20261017"
+    }
+  ]
+}

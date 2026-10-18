@@ -1,0 +1,252 @@
+{
+  "jointSummary": [
+    {
+      "sc": 0,
+      "stats": [
+        {
+          "eligible": 0.799,
+          "pc": 7.221526908635793,
+          "senders": 0,
+          "gBase": 2704.630788485607,
+          "sBase": 0,
+          "gUsage": 2058.8235294117644,
+          "sUsage": 0,
+          "gDiscount": 0,
+          "sDiscount": 0,
+          "gVariable": 57.2215269086358,
+          "sVariable": 0,
+          "gSupport": 581.4768460575721,
+          "sSupport": 0
+        },
+        {
+          "eligible": 1,
+          "pc": 0,
+          "senders": 2.1026,
+          "gBase": 0,
+          "sBase": 1212.35,
+          "gUsage": 0,
+          "sUsage": 420.5199999999999,
+          "gDiscount": 0,
+          "sDiscount": 0,
+          "gVariable": 0,
+          "sVariable": 91.57055606978103,
+          "gSupport": 0,
+          "sSupport": 547.3506666666666
+        },
+        {
+          "eligible": 0.799,
+          "pc": 7.221526908635793,
+          "senders": 2.3380475594493113,
+          "gBase": 2361.2298637329923,
+          "sBase": 1057.2307119866573,
+          "gUsage": 2058.8235294117644,
+          "sUsage": 467.6095118898623,
+          "gDiscount": 343.40092475261434,
+          "sDiscount": 156.5990752473856,
+          "gVariable": 57.2215269086358,
+          "sVariable": 96.22559553120054,
+          "gSupport": 581.4768460575721,
+          "sSupport": 548.9203170629954
+        }
+      ],
+      "correlation": 0.9451618877102902,
+      "quotedGuard": 0.20099999999999996,
+      "quotedSend": 0,
+      "eligibleSet": 0.799
+    },
+    {
+      "sc": 1,
+      "stats": [
+        {
+          "eligible": 0.8950000000000001,
+          "pc": 10.279329608938546,
+          "senders": 0,
+          "gBase": 2910.6145251396642,
+          "sBase": 0,
+          "gUsage": 2843.575418994413,
+          "sUsage": 0,
+          "gDiscount": 0,
+          "sDiscount": 0,
+          "gVariable": 60.27932960893854,
+          "sVariable": 0,
+          "gSupport": 601.8621973929236,
+          "sSupport": 0
+        },
+        {
+          "eligible": 0.995,
+          "pc": 0,
+          "senders": 5.505025125628141,
+          "gBase": 0,
+          "sBase": 1337.1859296482414,
+          "gUsage": 0,
+          "sUsage": 1101.0050251256282,
+          "gDiscount": 0,
+          "sDiscount": 0,
+          "gVariable": 0,
+          "sVariable": 158.83998651692093,
+          "gSupport": 0,
+          "sSupport": 570.0335008375209
+        },
+        {
+          "eligible": 0.8950000000000001,
+          "pc": 10.279329608938546,
+          "senders": 6.0083798882681565,
+          "gBase": 2568.9961555883337,
+          "sBase": 1194.1323360317772,
+          "gUsage": 2843.575418994413,
+          "sUsage": 1201.6759776536308,
+          "gDiscount": 341.6183695513304,
+          "sDiscount": 158.38163044866954,
+          "gVariable": 60.27932960893854,
+          "sVariable": 168.7918258507543,
+          "gSupport": 601.8621973929236,
+          "sSupport": 573.3891992551211
+        }
+      ],
+      "correlation": 0.9551179699692084,
+      "quotedGuard": 0.10499999999999987,
+      "quotedSend": 0.0050000000000000044,
+      "eligibleSet": 0.8950000000000001
+    },
+    {
+      "sc": 2,
+      "stats": [
+        {
+          "eligible": 0.93,
+          "pc": 15.64516129032258,
+          "senders": 0,
+          "gBase": 3193.548387096774,
+          "sBase": 0,
+          "gUsage": 4155.913978494624,
+          "sUsage": 0,
+          "gDiscount": 0,
+          "sDiscount": 0,
+          "gVariable": 65.64516129032256,
+          "sVariable": 0,
+          "gSupport": 637.6344086021506,
+          "sSupport": 0
+        },
+        {
+          "eligible": 0.9680000000000001,
+          "pc": 0,
+          "senders": 11.893595041322314,
+          "gBase": 0,
+          "sBase": 1761.3636363636363,
+          "gUsage": 0,
+          "sUsage": 2378.7190082644624,
+          "gDiscount": 0,
+          "sDiscount": 0,
+          "gVariable": 0,
+          "sVariable": 285.1485587066293,
+          "gSupport": 0,
+          "sSupport": 612.6239669421487
+        },
+        {
+          "eligible": 0.918,
+          "pc": 14.934640522875814,
+          "senders": 12.470588235294118,
+          "gBase": 2858.8950941892117,
+          "sBase": 1616.0504395798512,
+          "gUsage": 4001.0893246187356,
+          "sUsage": 2494.1176470588234,
+          "gDiscount": 324.1114417585006,
+          "sDiscount": 175.88855824149945,
+          "gVariable": 64.93464052287581,
+          "sVariable": 296.55630526892685,
+          "gSupport": 632.8976034858388,
+          "sSupport": 616.4705882352941
+        }
+      ],
+      "correlation": 0.9524578104693309,
+      "quotedGuard": 0.06999999999999995,
+      "quotedSend": 0.03199999999999992,
+      "eligibleSet": 0.918
+    }
+  ],
+  "sensitivity": [
+    {
+      "fx": 130,
+      "unit": 0.92,
+      "p100": 179939.78162315313,
+      "be": {
+        "first": 24,
+        "sustained": 24,
+        "both": 53
+      }
+    },
+    {
+      "fx": 130,
+      "unit": 1.15,
+      "p100": 158425.14475164478,
+      "be": {
+        "first": 26,
+        "sustained": 26,
+        "both": 53
+      }
+    },
+    {
+      "fx": 150,
+      "unit": 0.92,
+      "p100": 166147.98665653652,
+      "be": {
+        "first": 25,
+        "sustained": 25,
+        "both": 53
+      }
+    },
+    {
+      "fx": 150,
+      "unit": 1.15,
+      "p100": 141323.40565094992,
+      "be": {
+        "first": 28,
+        "sustained": 28,
+        "both": 53
+      }
+    },
+    {
+      "fx": 170,
+      "unit": 0.92,
+      "p100": 152356.19168991983,
+      "be": {
+        "first": 27,
+        "sustained": 27,
+        "both": 54
+      }
+    },
+    {
+      "fx": 170,
+      "unit": 1.15,
+      "p100": 124221.66655025505,
+      "be": {
+        "first": 31,
+        "sustained": 31,
+        "both": 54
+      }
+    }
+  ],
+  "currentGuardReference": {
+    "basic5000": true,
+    "unitFlat300": true,
+    "share": 0.5,
+    "be": {
+      "first": 8,
+      "sustained": 8,
+      "both": 8
+    }
+  },
+  "minimumAdd": {
+    "be": {
+      "first": 35,
+      "sustained": 35,
+      "both": 53
+    }
+  },
+  "allocationGuard": {
+    "be": {
+      "first": 25,
+      "sustained": 25,
+      "both": 51
+    }
+  }
+}

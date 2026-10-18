@@ -1,0 +1,291 @@
+{
+  "fx": 150,
+  "dnsUnit": 0.92,
+  "dnsMinimum": 150,
+  "dnsMode": "floor",
+  "fee": 0.036,
+  "opsHourly": 4000,
+  "fieldShare": 0.7,
+  "sectorEmployeeFactors": [
+    1.5,
+    0.75
+  ],
+  "senderRates": [
+    0.1,
+    0.3
+  ],
+  "intensity": [
+    0.5,
+    1,
+    1.5
+  ],
+  "senderPrice": 200,
+  "guardProgressive": true,
+  "guardSupportMinutes": 8,
+  "guardSupportPerPC": 0.1,
+  "guardVariableCompany": 50,
+  "guardVariablePC": 1,
+  "discountMode": "proportional",
+  "uploadCap": 1,
+  "downloadCap": 2,
+  "market": 10000,
+  "adoption": 0.01,
+  "newPerMonth": 3,
+  "churn": 0,
+  "initialInvestment": null,
+  "pc": [
+    0,
+    3,
+    8,
+    18,
+    40,
+    70,
+    130
+  ],
+  "employeeAnchor": [
+    4,
+    10,
+    25,
+    60,
+    120,
+    200,
+    400
+  ],
+  "pcWeights": [
+    [
+      0.2,
+      0.45,
+      0.24,
+      0.09,
+      0.015,
+      0.004,
+      0.001
+    ],
+    [
+      0.1,
+      0.37,
+      0.28,
+      0.2,
+      0.03,
+      0.015,
+      0.005
+    ],
+    [
+      0.05,
+      0.25,
+      0.25,
+      0.3,
+      0.09,
+      0.04,
+      0.02
+    ]
+  ],
+  "guardPlans": [
+    {
+      "name": "G0現行基準",
+      "bands": [
+        [
+          100,
+          5000
+        ]
+      ]
+    },
+    {
+      "name": "G2二段階",
+      "bands": [
+        [
+          10,
+          2500
+        ],
+        [
+          100,
+          4000
+        ]
+      ]
+    },
+    {
+      "name": "G3三段階",
+      "bands": [
+        [
+          5,
+          2000
+        ],
+        [
+          20,
+          3000
+        ],
+        [
+          100,
+          4500
+        ]
+      ]
+    }
+  ],
+  "sendPlans": [
+    {
+      "name": "A",
+      "bands": [
+        [
+          10,
+          1500
+        ],
+        [
+          50,
+          3000
+        ]
+      ]
+    },
+    {
+      "name": "C",
+      "bands": [
+        [
+          5,
+          1000
+        ],
+        [
+          10,
+          1500
+        ],
+        [
+          30,
+          2500
+        ],
+        [
+          50,
+          4000
+        ]
+      ]
+    },
+    {
+      "name": "D",
+      "bands": [
+        [
+          10,
+          1200
+        ],
+        [
+          50,
+          2500
+        ]
+      ]
+    }
+  ],
+  "sendRates": {
+    "cpuActive": 0.0038862386161157524,
+    "memActive": 0.0003952686344456851,
+    "cpuIdle": 0.0004025249746223869,
+    "memIdle": 0.00040231957642843666,
+    "vmCore": 4.523448648744472,
+    "vmRam": 0.6034775409918889
+  },
+  "sendStages": [
+    [
+      10,
+      22010.934626307797,
+      8000
+    ],
+    [
+      100,
+      26510.934626307797,
+      8000
+    ],
+    [
+      500,
+      48510.9346263078,
+      8000
+    ],
+    [
+      1000,
+      78510.9346263078,
+      8000
+    ]
+  ],
+  "guardStages": [
+    [
+      10,
+      2000,
+      8000
+    ],
+    [
+      100,
+      4000,
+      16000
+    ],
+    [
+      500,
+      8000,
+      32000
+    ],
+    [
+      1000,
+      16000,
+      64000
+    ]
+  ],
+  "mixes": [
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      0.4,
+      0.3,
+      0.3
+    ]
+  ],
+  "counts": [
+    10,
+    30,
+    50,
+    100,
+    300,
+    1000
+  ],
+  "usage": [
+    [
+      5,
+      1,
+      2,
+      1,
+      1.1,
+      1,
+      3
+    ],
+    [
+      20,
+      2,
+      10,
+      1.5,
+      1.8,
+      2,
+      8
+    ],
+    [
+      80,
+      3,
+      50,
+      2,
+      2.5,
+      5,
+      20
+    ]
+  ],
+  "evidence": {
+    "pcWeights": "PR14 hypothetical Windows distributions",
+    "joint": "New correlated scenario, not PIRA measured",
+    "send": "PR3 74facb2 / billing-calibrated rates, dedicated async budgets",
+    "dnsUnit": "User display .92 USD, not confirmed MSP contract",
+    "dnsMinimum": "Official starts150 USD; floor vs add unconfirmed"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "export": "offline openpyxl plus OOXML numeric caches",
+  "network": "none in generation scripts",
+  "formulaCells": 36402,
+  "cachedValues": "independent JS model; earlier authored formulas verified with Artifact Tool before blocked export",
+  "selectedBE40": 25,
+  "bothServicesBE40": 53,
+  "nativeExcelRecalculation": "not verified",
+  "reason": "Automatic approval review rejected initial export after detecting an external Visual Studio telemetry request with unknown payload. Initial process ended; no bypass of that exporter was attempted."
+}

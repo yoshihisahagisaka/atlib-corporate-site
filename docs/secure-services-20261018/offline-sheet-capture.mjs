@@ -1,0 +1,6 @@
+// Pure in-memory capture only. No network clients, telemetry or spreadsheet packages.
+const pos=a=>{const m=a.match(/^([A-Z]+)(\d+)$/);let c=0;for(const x of m[1])c=c*26+x.charCodeAt(0)-64;return[Number(m[2]),c];};
+const addr=(r,c)=>{let s='';for(;c;c=Math.floor((c-1)/26))s=String.fromCharCode(65+(c-1)%26)+s;return s+r;};
+class Range{constructor(sheet,a){this.sheet=sheet;this.a=a;this._format={font:{}};this.conditionalFormats={add(){}};}set values(v){this.write(v,false);}set formulas(v){this.write(v,true);}write(v,formula){const[r,c]=pos(this.a.split(':')[0]);for(let y=0;y<v.length;y++)for(let x=0;x<v[y].length;x++)this.sheet.cells[addr(r+y,c+x)]={value:v[y][x],formula};}set format(v){this._format={font:{},...v};}get format(){return this._format;}setNumberFormat(f){this.sheet.formats.push([this.a,f]);}}
+class Sheet{constructor(name){this.name=name;this.cells={};this.formats=[];this.freeze=0;this.freezePanes={freezeRows:n=>this.freeze=n,freezeColumns:()=>{}};}getRange(a){return new Range(this,a);}getRangeByIndexes(r,c,h,w){return new Range(this,addr(r+1,c+1)+':'+addr(r+h,c+w));}}
+export const Workbook={create(){const sheets=[];return{worksheets:{add(name){const s=new Sheet(name);sheets.push(s);return s;}},dump(){return sheets.map(({name,cells,formats,freeze})=>({name,cells,formats,freeze}));}};}};

@@ -1,0 +1,8 @@
+{
+  "independentDetailRows": 864,
+  "growthCases": 36,
+  "tolerance": "1e-6 relative",
+  "status": "passed",
+  "scope": "Independent Python company-level prices/costs/DNS/stage/discount/payment and 36-month cumulative checks",
+  "nativeExcelRecalculation": "not verified"
+}

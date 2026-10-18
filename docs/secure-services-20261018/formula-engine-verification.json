@@ -1,0 +1,7 @@
+{
+  "ratesChecked": 3,
+  "serviceReconciliation": true,
+  "fxAndDiscountSensitivity": true,
+  "sendOnlyNoDNS": true,
+  "errors": "{\"kind\":\"notice\",\"message\":\"Cell search matched 0 entries.\"}"
+}
