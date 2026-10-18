@@ -24,3 +24,13 @@
 ## Gitの位置付け
 
 Corporate PR14のbranchをbaseに専用分析branch/PRとして記録する。PR14を変更せず、本PRの差分だけを追加。mainマージと料金の採用は別承認。
+
+## 2026-10-18 C-40 / C-50追補（今回指定C案）
+
+最新比較は [c40-c50/c40-c50-analysis.md](c40-c50/c40-c50-analysis.md)、同フォルダのHTMLとExcelを参照。旧統合分析の候補と結果は履歴として保持。
+
+標準・基準混在ではC-40は全体22社／両サービス55社、C-50は25社／62社。月3社獲得の36月モデルで累積回収14月／16月。40%を第一候補とするが、高利用30%混在ではSendが1,000社まで継続黒字化しない。正式決定ではない。
+
+追加144ケース、6顧客数、価格20円差、高利用混在、運用費有無、DNS仕入・為替、パック比率30/50/70%、月3/5/10社獲得を収録。独立Python計算で864収支と36成長ケースを照合。Excelネイティブ再計算は未検証。
+
+再現手順は従前同様、この会話workspace構成（services-workとsecure-services-business-analysis）を前提。model.mjs/source-send-rates.json等の既存ソースを再利用。c-analysis.mjs → c-report.mjs → c-verify.py、prepare-c-workbook.mjs → c-generate.mjs → c-cache.mjs → c-export.py → c-preview.pyの順。API/クラウドアクセスのないオフライン計算。c-results.jsonは固定結果、Excel主要3表は入力連動。
