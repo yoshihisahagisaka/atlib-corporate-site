@@ -226,3 +226,84 @@ Production/main/既存顧客設定の変更なし。
 実行例: `powershell -NoProfile -File .\get-cleanup-inventory.ps1` またはPowerShell 7の `pwsh -NoProfile -File .\get-cleanup-inventory.ps1`。実行ポリシーを変更/回避しない。
 **現時点では単一応答の補助収集であり、ページングの完了・重複不存在・API契約値・保護非影響・DELETE適格性を証明しない。** 参照関係が不明な行や次ページがある場合は追加確認する。
 PowerShell AST構文解析はPASS。実API/実レスポンスとの適合は未検証。実行後はキーを含まない上記の限定出力と、dashboardのtrial終了/契約条件を照合してDを確定する。
+
+## 13. 2026-10-22 JST ユーザー実機棚卸し受領・残ゲート集中
+本節は第12節の該当する未確認項目を更新する。ユーザーの実機報告を証跡として受領し、当方による再実行はしていない。
+- API接続・認証: **PASS（ユーザー実機）**。当方のプロセスへのキー供給とは別であり、接続失敗扱いに戻さない。
+- Organization 10220954、既存Site 10678578 / 10678582: **PASS（ユーザー実機）**。
+- 所属2端末 Active / Protected: **PASS（ユーザー実機）**。
+- 会社PC agent ID先頭: 82500d2b…、自宅PC: 2a7659c5…。完全UUID、各端末の現在Site、version、OS/設定パスは未提示。省略IDをAPI操作へ使わない。
+- 既存確認済みGETを繰り返さない。下記だけを残条件として扱う。
+
+### A残条件の現在の判断
+|残条件|今回の確認・必要証跡|判断|
+|---|---|---|
+|全ページ重複確認|MSP親10220948のNetwork一覧を全ページ走査。対象名2種とSG-P1-SITE-004/005を完全一致検索、各親Organizationを照合。現時点で単一応答の2 Site確認しか受領していない|未確認|
+|最新Network作成仕様|公式API Docsはhttps://apidocs.dnsfilter.com/ → https://api.dnsfilter.com/docs。JSON本文は取得不可。公式UI資料ではRC専用SiteのIP空欄を許容するが、最新POST schemaの代用とはしない|未確認|
+|Global Policy 1510300現在値|GET /v1/policies?organization_id=10220954&include_global_policies=true の必要ページでID/名称/is_global_policy/所有関係を確認。設定の本文を出力せず、変更しない|未確認|
+|Block Page 70676現在値|GET /v1/block_pages?organization_id=10220954 の必要ページでID/名称/is_global/所属/redirect先の既定公開URLを確認。設定を変更しない|未確認|
+|Site追加の課金影響|公式価格説明はRC端末単位、Networkは非agent通信量単位。空Siteそのものを課金単位とする記載は確認されなかった。ただしatLIB固有契約・自動割当・最低額への影響なしは未確定|未確認・推論のみ|
+
+既存成功payloadは第5節Aから変更しない。現在の作成schemaでname、organization_id、external_id、policy_ids配列、block_page_idが受理されるか、IP/agent/契約を追加しない入力が許容されるか、成功201と返却IDの構造を確認する。schema差異があれば送信しない。
+最新仕様取得はGET https://api.dnsfilter.com/docs/api.json の networks POST request定義と参照schemaだけを抽出する。Core SKUや契約変更はこのSite確認へ混ぜない。
+全ページ確認はresponseのlinks/metaと公式ページング仕様に従う。nextリンク終端、取得ページ数、総件数/重複ID、同一ID再出現、最終ページを記録。ページング仕様不明・途中失敗・走査ループ時は「重複なし」を出さない。既存補助ps1は単一応答のためこれをPASSにできない。
+候補名:
+- Secure Guard Phase1 Standard Site 04 / SG-P1-SITE-004
+- Secure Guard Phase1 Exception Site 05 / SG-P1-SITE-005
+名前またはExternal IDが1件でも一致したら、POSTを止めて既存IDと所属を照合する。今回未作成のため、既存一致を勝手に「今回成功」としない。
+
+当方環境には引き続き認証キーが供給されていないため、残GETは実行できていない。認証済みユーザーセッションから残対象のみ取得して引き継ぐ必要がある。ユーザーの接続PASS自体を再確認する作業は依頼しない。
+課金については既存サポート質問への回答またはatLIB契約条件で「10220954にIP0/agent0、既存Global設定参照のSiteを2件追加し、plan/allocated/featuresを変えない場合」の影響を照合する。無断の追加問い合わせ送信はしない。
+**現時点: 残ゲート未充足のためPOST 0/2、新規IDなし。A条件付き承認は継続、再承認依頼なし。**
+
+### Organization削除試験 D-v2: 会社PC/自宅PCの保護継続と復旧
+2台は実利用の会社PC・自宅PCと判明した。廃棄可能な隔離試験端末とみなさない。
+推奨は先に両端末を存続する保護先へ退避してから、不要になった10220954を削除する計画。Organization削除で実利用PCの障害を意図的に起こす試験は、現在の承認範囲に含まない。
+「削除に伴う障害挙動そのもの」の検証が必要なら、別の廃棄可能端末と隔離Organizationによる新規パッケージを作る。今回A承認でその準備を実行しない。
+
+|準備|会社PC|自宅PC|
+|---|---|---|
+|端末識別|82500d2b…の完全UUID/現在Site/versionを確定|2a7659c5…の完全UUID/現在Site/versionを確定|
+|操作権限|現地/ローカル管理者、業務停止可能な時間帯を確保|現地/ローカル管理者、在宅利用停止可能な時間帯を確保|
+|復旧資材|対応する公式MSI、必要runtime、秘密供給手段、設定控えを端末から利用可能にする|同左。会社PCだけに復旧資材を置かない|
+|復旧通信|DNS障害時もローカル操作と必要な配布手段が利用できることを事前確認|同左。インターネット経由の遠隔操作だけに依存しない|
+|存続保護先|削除対象外Organization/Siteの正確なID、Policy/Block Page、契約、利用可能な現Keyを確定|同左。共通保護先でも双方の実通信/ログを別々に照合|
+
+保護先は未決定。親10220948/既存10678570を無断で利用・変更しない。新Organization/Site作成、Key取得、端末再登録、uninstall/reinstall、設定変更はA対象外であり、D最終版にまとめて明示承認を得る。
+Key本文・設定ファイル本文はGit/PRへ保存しない。設定控えに秘密があれば既存の保護された保存先だけで扱う。
+
+#### 案1: 削除前に退避する（推奨、未実行）
+1. 正確な端末UUIDと存続保護先ID、現行の個別設定/有効Policy、復旧資材・操作者・保護停止許容時間を固定する。
+2. 別途承認後、1台ずつ公式の再登録手順で存続Siteへ移す。Windowsではサービス停止→該当versionのappsettings.jsonに存続先Site Keyを設定→サービス開始という公式案内がある。実際のファイルパス・サービス名は端末で特定してから手順確定する。
+3. 再登録でUUIDが変わり得るので旧/新IDと物理PCの対応を記録。Active/Protected、有効設定、通常DNS、公式テストの遮断、該当端末のQuery Logを確認してから次の1台へ進む。
+4. 10220954のactive agentだけでなく全登録・offline端末・全Site/IP/例外・利用者を棚卸しし、保護依存が残らないことを確認。削除する登録残骸の扱いも承認範囲を明示する。
+5. その状態のsnapshot、正確な削除対象、削除の課金停止/credit、不可逆性を添えてOrganization DELETEを別途明示承認依頼する。
+6. 承認後のみ削除。退避済み2台が削除後もActive/Protected、通信/遮断/ログを維持することを観測する。
+
+#### 案2: 削除後に保護を復旧する（障害時の計画、実行未承認）
+- Site削除によるoutageは公式明記。一方、Organization DELETEの端末挙動/猶予は今回公式根拠を得ていないため、同一挙動を実測事実として扱わない。最悪のDNS保護/名前解決停止に備える。
+- 旧Organization/Site/旧Keyが復元可能とは仮定しない。必要な契約条件を満たす存続先または新規保護先を承認後に用意する。
+- 削除済みSiteに依存する場合の公式復旧はSite再作成と新Keyを用いたagent再インストール。Organization再作成の契約/請求は別確認。単なる設定書換えだけで復旧できると保証しない。
+- ローカル管理者が対応MSIで再導入し、存続先のKeyを秘密非記録で投入。サービス・DNS・保護・遮断・ログを確認する。必要なアンインストールの保護解除/パスワードも事前確保する。
+- 保護/通信が戻らなければ次端末へ進まず、既知の保護経路へ戻すかベンダー手順へ切り替える。DNSを公共resolverへ変更して「保護復旧PASS」としない。
+- この計画は案内のみ。DELETE、端末設定、Key取得/変更、インストール/アンインストールはいずれも未実行。
+
+#### 削除前後の観測表（案1、監視時点はatLIB試験計画でありベンダーSLAではない）
+|観測対象|削除前|削除直後/1分/5分/15分/30分/翌日|
+|---|---|---|
+|Organization/Site|削除対象全ID、存続先ID、親子関係、依存0、承認version|対象GETの結果と不存在の意味を確認。403/権限エラーを404不存在と混同しない。親/存続先が維持|
+|会社PC・自宅PC|物理PC↔旧/新UUID、所属、version、Active/Protected、last seen|双方を個別に追跡。同一のstale statusだけで保護PASSとしない|
+|端末通信|通常名前解決、許可ドメイン、ブラウザ、社内/VPN用途があればそれも基準化|同条件で比較。業務通信支障と保護状態を別記録|
+|保護の実効性|公式無害なテストドメインの期待結果、Block Page、当該端末の限定Query Log|新しい通信の時刻と同端末ログを照合。前回のblocked履歴を流用しない|
+|Site/Policy|有効Policy/Block Page/端末override、Global本体の比較基準|Global本体/他Site不変。変更をしない|
+|数量/課金|Allocated、In Use、登録総数、MSP契約・trial期限、表示時刻|それぞれ独立観測。削除直後の表示で確定請求creditや顧客請求減額を断定しない|
+|監査/復旧|実行者、承認、対象、復旧資材と担当|HTTP/時刻/結果/障害/対処を秘密非記録で保存。後日のinvoice/creditを照合|
+
+Dの承認提出前に必要: 完全UUID/各所属、version/復旧パス、存続保護先の許可、両端末の復旧担当/時間帯、trial終了日時、Organization削除課金停止日/credit、正確なDELETE仕様。これが揃うまでDELETE禁止。
+
+### 今回参照した公式資料（2026-10-22取得）
+- https://help.dnsfilter.com/hc/en-us/articles/1500008110281-Create-a-Network-Site （RC専用SiteのIP空欄を許容。UI仕様）
+- https://help.dnsfilter.com/hc/en-us/articles/4991568454035-Pricing-license-types （RC端末数/Network通信量の基準。atLIB契約の最終請求条件ではない）
+- https://help.dnsfilter.com/hc/en-us/articles/43809316077715-Sales-managed-MSP-subscription-management （sales-managedの割当/使用数説明。atLIBがこの契約型とは未確定）
+- https://help.dnsfilter.com/hc/en-us/articles/49903446066835-Reassign-a-Roaming-Client-to-a-different-Site-or-Organization （Site削除outage/再導入、削除前再登録の公式手順）
+- https://help.dnsfilter.com/hc/en-us/articles/1500008104822-Install-Windows-Roaming-Client （対応installer、現地導入、通信/フィルタ確認）
