@@ -1,3 +1,7 @@
+# 旧単一Agent手順（現行手順ではありません）
+
+2026-10-22のOrganization起点・無人認証要件により退役。現行は [organization-offboarding-runbook.md](organization-offboarding-runbook.md)。旧スクリプトは停止案内に置換。以下は過去の検討記録であり、手入力認証・UUID固定手順を実行しない。
+
 # Secure Guard API解約・削除E2E｜実行Runbook
 2026-10-22 JST / 実機変更未実施 / Organization DELETEは未承認
 

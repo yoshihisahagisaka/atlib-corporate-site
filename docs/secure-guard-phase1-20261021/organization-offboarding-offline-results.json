@@ -1,0 +1,87 @@
+{
+  "kind": "offline_fixtures_not_live_api",
+  "live_requests": 0,
+  "total": 20,
+  "results": [
+    {
+      "result": "PASS",
+      "name": "Organization discovery, two Site pages, empty Site and one dynamic agent"
+    },
+    {
+      "result": "PASS",
+      "name": "Unknown pagination proof stops even when only one row"
+    },
+    {
+      "result": "PASS",
+      "name": "Duplicate Site ID across pages stops"
+    },
+    {
+      "result": "PASS",
+      "name": "Parent relation mismatch stops"
+    },
+    {
+      "result": "PASS",
+      "name": "Cross-Organization Site stops"
+    },
+    {
+      "result": "PASS",
+      "name": "Agent belongs to a different Site stops"
+    },
+    {
+      "result": "PASS",
+      "name": "Organization-only orphan agent catches omitted Site"
+    },
+    {
+      "result": "PASS",
+      "name": "Pagination next link cannot cross host"
+    },
+    {
+      "result": "PASS",
+      "name": "Pagination next link cannot change scope"
+    },
+    {
+      "result": "PASS",
+      "name": "API failure prevents a completed inventory"
+    },
+    {
+      "result": "PASS",
+      "name": "Uninstall semantics and UUID path confirmed from mock spec"
+    },
+    {
+      "result": "PASS",
+      "name": "Missing queue_uninstall blocks mutation readiness"
+    },
+    {
+      "result": "PASS",
+      "name": "Serialization roundtrip keeps reviewed plan hash stable"
+    },
+    {
+      "result": "PASS",
+      "name": "Atomic claim cannot be overwritten by repeated request"
+    },
+    {
+      "result": "PASS",
+      "name": "Unattended authentication rejects unknown runtime identity without reading a key"
+    },
+    {
+      "result": "PASS",
+      "name": "Unattended authentication rejects latest alias"
+    },
+    {
+      "result": "PASS",
+      "name": "Unattended authentication refuses missing mount with no interactive fallback"
+    },
+    {
+      "result": "PASS",
+      "name": "Unattended authentication returns only injected fixture value in memory"
+    },
+    {
+      "result": "PASS",
+      "name": "DNSFilter 401 stops inventory before any later action"
+    },
+    {
+      "result": "PASS",
+      "name": "Secret-like API fields are excluded from the frozen inventory"
+    }
+  ]
+}

@@ -318,3 +318,20 @@ Organization 10220954 DELETEは削除直前の最終明示承認待ち。親1022
 検証: PowerShell AST PASS、モック正常GET preflight PASS、queue_uninstall欠落時STOP/exit1 PASS。実HTTP/実Windows適合は未検証。モック中のlive request 0。
 当方プロセスに認証情報なし・端末制御なしのため実機GET/要求/Windows確認/全ページゼロ確認/Organization削除は未実施。今回の変更系HTTPは0件。API不存在と断定したものではない。
 公開API経路の確認不能時は停止する。代替は公式UI Delete & Uninstallまたは現地MSI uninstallだが、API E2Eの成功に算入せず、勝手に代替実行しない。
+
+## 15. Organization起点・無人認証要件への更新（2026-10-22）
+現行Runbookを [organization-offboarding-runbook.md](organization-offboarding-runbook.md) とする。
+入力Organization→親子関係→全Site→各Site全Agent→Org全Agentとの集合照合→操作ID/plan hash/許可属性固定、というGET-only prototypeを追加。
+Agent UUID/Site ID/HostnameはハードコードせずAPI値を使用。重複/所属矛盾/ページング未知/件数不一致/HTTP失敗で停止する。
+最新APIの実response/paginationは未取得。prototypeの明示next終端+meta.total_countによる厳格adapterが現APIへ適合するとはまだ確認していない。
+自宅PC1台を期待するが、対象UUIDを事前選別しない。会社PCはユーザー報告で手動uninstall済み。
+
+無人認証必須: キー手入力fallbackを廃止し、専用Cloud Run Jobの実行SA＋Secret Manager mountを採用候補とした。runtime SA照合と数値version固定をコードの前提にする。
+旧agent-uninstall-once.ps1/get-cleanup-inventory.ps1は停止案内へ置換し、旧手入力/単一UUID固定の手順は現行基準として使わない。
+既存Corporate/Sales Tools/SendのSecret連携方式、Sendのmsp-zabbix東京Registry/Cloud Build、Corporate Issue15の分離方針をfresh sourceで確認。実GCPのSecret名/専用SA/Job/IAMはgcloud credentials.dbアクセス拒否で未確認。
+詳細Fit/Gap、対象確定後の最小GCP差分、最小権限、数値Secret version更新、Scheduler OAuth起動、永続監査/claim案を現行Runbookに記載。
+現在のローカルplanファイルはCloud Run間の分散排他ではない。永続adapter未接続のためRequestUninstall modeはSTOP、Organization DELETEは未実装・最終承認待ち。
+
+今回検証: オフライン20/20 PASS（fixtureのみ、実HTTP0）、PowerShell3ファイル構文PASS。実GCP/実DNSFilter GET DryRun、Secret実取得、uninstall/Pending、Org削除後のWindows/DNS/通信/課金は未実施。
+実測PASSのSHA/Job execution/image digest/Secret数値version参照/plan hash/対象前後/Windows証跡を揃えたものだけ、将来の解約Runbookの実機基準へ採用する。
+次の作業は gcp-auth-fitgap-readonly.ps1 による実metadata取得と、正確な専用ID/Secret/IAM/Job/監査storeを確定すること。APIキーpayloadや手入力は要求しない。
