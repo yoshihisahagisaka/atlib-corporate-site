@@ -307,3 +307,14 @@ Dの承認提出前に必要: 完全UUID/各所属、version/復旧パス、存�
 - https://help.dnsfilter.com/hc/en-us/articles/43809316077715-Sales-managed-MSP-subscription-management （sales-managedの割当/使用数説明。atLIBがこの契約型とは未確定）
 - https://help.dnsfilter.com/hc/en-us/articles/49903446066835-Reassign-a-Roaming-Client-to-a-different-Site-or-Organization （Site削除outage/再導入、削除前再登録の公式手順）
 - https://help.dnsfilter.com/hc/en-us/articles/1500008104822-Install-Windows-Roaming-Client （対応installer、現地導入、通信/フィルタ確認）
+
+## 14. API解約・削除E2E指示受領（2026-10-22）
+新たなユーザー指示により、自宅PC atI20260003 / agent 2a7659c5-68ec-4704-850f-e0f65347b2ee / Site 10678578 に対する正式APIのremote uninstall要求1回は承認済み。会社PC atI2024011はユーザー報告でuninstall済み。従前の「2台とも保護中」を現在状態として扱わない。
+Organization 10220954 DELETEは削除直前の最終明示承認待ち。親10220948書込み禁止。
+
+実行手順・観測・復旧・削除ゲートは [offboarding-e2e-runbook.md](offboarding-e2e-runbook.md)、実行補助は [agent-uninstall-once.ps1](agent-uninstall-once.ps1)。
+正式Help CenterでWindows対応条件/Pending挙動、Organization削除の全データ消失・DNS応答即停止を確認。最新API JSONの今回取得は失敗しており、queue_uninstall APIの現在仕様は実行時の公式schemaで検証する。第三者API転載を実行根拠にしていない。
+デフォルトGET、変更は指定Agentのqueue_uninstall候補1回に限定。markerと不明結果時停止。Organization DELETEはコードに含めない。
+検証: PowerShell AST PASS、モック正常GET preflight PASS、queue_uninstall欠落時STOP/exit1 PASS。実HTTP/実Windows適合は未検証。モック中のlive request 0。
+当方プロセスに認証情報なし・端末制御なしのため実機GET/要求/Windows確認/全ページゼロ確認/Organization削除は未実施。今回の変更系HTTPは0件。API不存在と断定したものではない。
+公開API経路の確認不能時は停止する。代替は公式UI Delete & Uninstallまたは現地MSI uninstallだが、API E2Eの成功に算入せず、勝手に代替実行しない。
