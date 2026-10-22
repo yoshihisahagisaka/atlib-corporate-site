@@ -362,6 +362,214 @@ DNSFilterから次のいずれかを取得するまでOrganization作成は保�
 
 次の実機検証は、P1.5とは独立に、agentを1台だけ登録できる隔離test Networkで実施する。実行前に「対象Network・発行／rotate／deleteのいずれか・既存agentへの想定影響・復旧としての新Key再登録・削除しないリソース」を提示し、個別承認を得る。公開APIにbulk Key操作は確認できないため、1,000社規模ではKey lifecycleをキュー単位で順次処理し、429/Retry-After、監査、手動承認を組み込む。
 
+## P2-SK Site Keyローテーション実機検証（2026-10-17）
+
+### 対象と実行境界
+
+- Corporate main CanonicalはPR #7マージ後の `1caa2eb` として確認した。P2-SKはそのP2結果に追記する別ブランチで実施した。
+- 変更対象は atLIB Inc.（Organization `10220948`）配下の既存検証Network `10678570`（`Your First Network`）だけである。Network／Organizationの削除、Policy／Block Pageの編集、Site Keyのrevoke/delete、agentの削除・uninstallは実施していない。
+- 既存Windows agentは `fab5ff1c-36c3-405d-ab49-f7ced202f309`（hostname `atl20260003`）と特定した。APIキー、旧Key、新Key、Keyの一部・長さは、画面、コマンド出力、Git、PRに一切記録していない。
+- 公開OpenAPIで `PATCH /v1/networks/{id}/secret_key` がrequest bodyなし、整数の`id`のみを受ける「Rotate key」操作であることを確認してから実行した。HTTPエラー時の無条件再実行は行わない設計とし、実際に再実行もしていない。
+
+### 変更前の確認
+
+| 項目 | 結果 | 実測 |
+| --- | --- | --- |
+| NetworkとOrganizationの関係 | PASS | Network `10678570` はOrganization `10220948` 配下。 |
+| 共通設定 | PASS | Network GETでGlobal Policy `1510300`、External Block Page `70676` の割当を確認。 |
+| agent状態 | PASS | agent GETで `status=active`、`agent_state=protected`。Network `10678570` に紐付く。 |
+| Site Keyの既存値確認 | PASS（非出力） | Network GETの`secret_key`属性に空でない値があることだけを確認。値は保持・出力していない。 |
+| 実端末でのPhishingページ表示 | 未確認 | この実行環境の端末名は`atl20260003`と一致せず、ローカルからのHTTP試験は503となった。その結果をagent試験として扱わない。 |
+
+### rotate実行と直後の結果
+
+承認済みの `PATCH /v1/networks/10678570/secret_key` を1回だけ実行し、HTTP 200を得た。応答にKey関連情報が含まれることは検知したが、値は解析・出力・保存しなかった。
+
+| 項目 | 結果 | 実測 |
+| --- | --- | --- |
+| Site Key rotate API | PASS | HTTP 200。対象はNetwork `10678570` のみ。retry 0回。 |
+| Network設定の保持 | PASS | rotate直後のGETでOrganization `10220948`、Policy `1510300`、Block Page `70676`、Key属性の存在を確認。 |
+| agent保護の直後状態 | PASS | rotate直後に `active / protected`、Network `10678570`。 |
+| agent保護の時間経過後状態 | PASS | 約1分後の再GETでも `active / protected`、同一Network。保護停止、再設定、再インストールは不要だった。 |
+| DNSFilter管理ログの遮断記録 | PASS（限定確認） | Query Logsをagent ID、公式`phishing.filterdns.net`、`result=blocked`、直近15分に限定してGETし、blocked記録1件を確認。ドメイン以外の閲覧内容・行値は出力していない。 |
+| 実端末ブラウザの日本語External Block Page表示 | 未確認 | `atl20260003` の対話セッション／ブラウザには接続できなかった。別途、その端末で公式テストドメインを開き、HTTPS警告なしで atLIB日本語Block Pageが表示されることを目視確認する。 |
+
+### 観測された挙動と復旧runbook
+
+今回の範囲では、Key rotate後も既存agentは保護状態を維持し、再登録や再インストールを要しなかった。従って少なくとも対象version・対象agentでは、rotateが即時に既存登録を停止させる挙動は観測されなかった。ただし、Key漏えい後の旧Keyによる新規登録拒否、agentが長時間offlineの場合、agent version差、rotate後に保護が落ちる条件は**未確認**であり、一般化しない。
+
+将来の障害時は、対象agentが`protected`でなくなったことをAPIと端末で確認してから、新Keyを秘密ストアから当該端末の設定へ投入し、DNSFilter公式の再登録手順（Windows agent停止、Site Keyを含む設定へ置換、agent再起動）を実施する。再設定後にagent GET、Query Logs、公式Phishingテストドメイン、HTTPSのBlock Page表示を確認する。旧Keyの復元、Key delete、Network／Organization削除はこのrunbookに含めない。
+
+### P2-SK結論
+
+| 項目 | 状態 |
+| --- | --- |
+| 対象Network／agentの特定 | PASS |
+| 変更前のProtected・Policy・Block Page確認 | PASS |
+| 旧Keyを非出力で確認し、新Keyを非出力で扱う | PASS |
+| Key rotate | PASS（HTTP 200、1回のみ） |
+| rotate後の既存agent保護 | PASS（直後および約1分後 `active / protected`） |
+| DNSFilter Query LogへのPhishing遮断反映 | PASS（対象agentに限定したblocked記録1件） |
+| 保護停止時の再設定／再インストール | 未実施（停止が発生しなかった） |
+| 旧Keyでの新規登録拒否 | 未確認（別端末が必要） |
+| 実端末での日本語表示・HTTPS証明書エラーなし | 未確認（検証端末の対話アクセスなし） |
+
+P2-SKは、既存agentを伴うKey rotate後にも保護状態とDNSFilter側の遮断記録が維持されることを実機APIで確認した。商用運用では、rotate直後にagent状態・Query Logs・端末ブラウザの3点を監視し、端末試験を自動化できる顧客RMM/MDM環境を標準にする。
+
+## 顧客セルフサービス・月次ローテーション・ライセンス管理調査（2026-10-17）
+
+### 実行境界と参照した既存結果
+
+- main Canonicalは `1caa2eb`（PR #7マージ済み）、P2-SK記録はPR #9の `74be22a` として確認した。P0/P1/P2/P2-SKの実機API操作は再実行していない。
+- Issue #8はGlobal Policyと顧客固有例外の共存を後工程とする。Global Policy本体・顧客設定は変更せず、顧客への権限委譲をP1.6結果後に判断する方針と整合する。
+- 顧客管理者の招待、Key rotate、agent削除、ライセンス更新、メール送信は今回実行していない。以下の「公式確認」はDNSFilter公式資料／公開OpenAPIに基づく設計評価であり、実機権限検証とは区別する。
+
+### A. 顧客Organization管理者のFit/Gap
+
+| 要求 | 状態 | 公式確認・判断 |
+| --- | --- | --- |
+| 顧客を自社Organizationへ招待 | Fit（公式確認） | MSPダッシュボードから対象Organizationへ移動してclient userを追加する手順がある。MSP側のUsersへ顧客を追加してはいけない。招待実機は未実施。 |
+| 自社Roaming Client／Deploymentの管理 | Fit（公式確認） | MSP client OrganizationのAdminはRoaming Clients、Deployments、Reportingを管理できる。 |
+| 自社Networkの最新Site Key閲覧 | 要実機検証 | 公式導入手順はDeploymentsのInstall Roaming Client画面でSite Keyをコピーすることを案内するが、MSP client Adminでの閲覧可否を明示していない。Admin招待後、対象Organizationだけで確認する。 |
+| 自社NetworkのSite Key rotate | Gap / 要ベンダー確認 | APIにはrotate endpointがあるが、顧客ダッシュボードのrole別UI権限および監査対象であることを確認できない。顧客へAPI JWTを渡す方式は採らない。 |
+| 他Organizationへのアクセス遮断 | Fit（公式確認） | client userは対象Organizationに追加する方式であり、MSP staff用のOrganizations横断権限とは分離される。実機で組織切替候補が出ないことは未確認。 |
+| MSP Global Policy／Block Pageの変更禁止 | Fit（公式確認） | MSP client AdminのGlobal Filtering Policies／Block Pagesはview-only。顧客AdminがGlobal Policyを複製できる新権限はあるため、複製物が標準運用から逸脱しない統制は別途必要。 |
+| 操作履歴をatLIBが確認 | 部分Fit（公式確認） | Policy Audit LogはCoreでpolicy・Universal Listの変更者／時刻／差分を1年記録する。Site Key閲覧・rotate、agent delete、ユーザー招待を同じ監査ログで追える根拠は確認できない。 |
+
+**権限モデルの判断:** 顧客には原則としてOrganizationの **Read Only** を渡し、例外申請はatLIBのワークフローで受ける。顧客自身に端末運用を許可する契約だけは、対象Organizationに限定した **Admin** を候補とするが、Site作成はMSPの `Client Admin Site Creation`（全Organizationに効くトグル）が既定offであることを維持する。Keyの閲覧・rotateをセルフサービス化するかは、上記の専用実機検証と監査取得可否がPASSになるまで保留する。
+
+### B. atLIB月次自動Site Keyローテーション設計
+
+P2-SKで、単一Network `10678570` の `PATCH /v1/networks/{id}/secret_key` はHTTP 200、既存Windows agentは直後および約1分後も`active / protected`、限定Query Logにもblocked記録があることを実機確認済みである。この結果を「全Networkへ同時実行してよい」根拠にはしない。
+
+| 設計項目 | 状態 | 安全な設計 |
+| --- | --- | --- |
+| 全顧客Network列挙 | Fit（既存P0 + 設計） | MSP親Organizationを使う `GET /v1/networks/msp/all` とNetwork個別GETで、Organizationとの関係を確認して対象表を作る。削除済み・例外Network・前回未完了を除外する。 |
+| Network単位のrotate | Fit（既存P2-SK） | `PATCH /v1/networks/{id}/secret_key` を1件ずつ実行する。リクエストbodyは不要。全件bulk rotateは公開OpenAPIで確認できない。 |
+| 二重実行防止 | atLIB実装Gap | APIの公開仕様にidempotency key／rotation versionは確認できない。`network_id + rotation_period`を一意キーにしたジョブ台帳、lease、開始／完了状態、operator approvalをatLIB側で持つ。timeout時はPATCHを再送せず、Network GET・監査記録・ベンダー照会で状態を確定する。 |
+| 成功後の検証 | Fit（設計、一部実機） | Network GETでPolicy／Block Page不変とKey属性の存在だけを確認し、agent GETで`active/protected`、Query Logでblocked DNSを確認する。P2-SKは1 agentでPASS。offline agent、端末ブラウザ、異なるagent versionは未検証。 |
+| 一部失敗時の停止・再開 | atLIB実装Gap | 失敗時は当該Organizationだけ保留にし、同一顧客の後続Networkを止める。全体は独立キューで継続可とするが、閾値超過（例: protected低下、429連続、異常率）では全ジョブを停止する。新Keyで再登録できない端末の復旧は顧客RMM/MDM経由で行う。 |
+| 1,000社のレート制御 | Fit（設計） | DNSFilterの公開上限であるOrganizationあたり300秒2,000 requestを上限に、429と`Retry-After`を尊重する。実装はOrganizationごとのtoken bucket、指数backoff、低並列（まず1 Networkずつ）にする。1,000社全件の実負荷試験は未実施。 |
+| 顧客通知 | atLIB実装Gap | Site Key API／DNSFilter公開資料から、rotate完了を顧客へメールする機能・テンプレートは確認できない。atLIBのメール基盤で「顧客ID、Network名、実行結果、取得方法、支援窓口」を送る。Key値は本文・添付へ含めない。 |
+| 顧客が最新Keyを取得 | 要実機検証 | 顧客AdminがInstall Roaming Client画面でKeyを閲覧できることを確認できた場合だけ、DNSFilter画面での自己取得を許可する。それまではatLIBのRMM/MDM保護変数へ直接投入し、値を人へ配布しない。 |
+| 監査 | 部分Fit | atLIBジョブ台帳へ対象・開始終了・HTTP結果・agent状態・通知結果を記録する。Key値は不可。DNSFilterのPolicy Audit LogはKey rotate／agent操作の完全な監査証跡としては未確認。 |
+
+月次rotateは「顧客ごとの隔離」「事前通知」「Network単位の低速キュー」「Keyをログに出さない直接シークレット連携」「P2-SKと同じ三点確認」「失敗した顧客だけを保留」の構成なら技術的に設計可能である。ただし、顧客自己取得、offline端末の復旧、ベンダー側監査は商用Go前に実機またはTier 2回答で閉じる必要がある。
+
+### C. ライセンス利用終了・課金除外のFit/Gap
+
+| 区別すべき対象 | DNSFilter上の意味 | 顧客Adminでの見込み | 課金への結論 |
+| --- | --- | --- | --- |
+| 1. Roaming Client登録情報の削除 | Dashboardからagentを削除／Clean Upする操作。端末のagentはアンインストールされない。端末がDNS通信すると再表示される。 | AdminはRoaming Clientsを管理できるためUI操作は可能と読める。顧客roleでの実機確認は未実施。 | 一時的に使用数表示へ影響し得るが、恒久的なライセンス終了ではない。 |
+| 2. 保護・登録状態の無効化 | 対応Windows agentはDelete & Uninstallで次回sync時にremote uninstallを実行できる。offline端末はPending Uninstallのまま。 | Admin以上で可能な公式手順。実機uninstallは未実施。 | 端末保護終了と、使用数低下は別確認が必要。 |
+| 3. Current License Usageの減少 | Roaming Clients in UseとNetwork Devices in Useの合計。Roaming Clientはアカウントに関連付くagent総数として表示され、inactiveも含む案内がある。 | 顧客Adminは閲覧・Roaming Client管理まで。正確な変化時刻・API値は未検証。 | Clean Up／Delete & Uninstall後に低下する見込みだが、仕様として即時性・確定条件は未確認。 |
+| 4. DNSFilter請求対象数の減少 | 契約のAllocated Licenses／subscription更新とは別。MSPの種類により次回請求サイクル反映、またはsubscription変更の即時反映・prorationという説明がある。 | 顧客client AdminのBilling操作権限は明示されず、Organization Settingsはview-only。 | agent削除だけでMSPのDNSFilter請求額が自動で減るとは確認できない。MSPがライセンス割当／契約を更新する別操作が必要。 |
+| 5. atLIBから顧客への月額請求額 | atLIBの契約・請求ルールでありDNSFilter利用数とは別系統。 | 範囲外。 | DNSFilterのagent削除・license usage低下だけで自動減額されない。atLIBの契約変更・日割り・翌月適用を別途定義する。 |
+
+**結論:** DNSFilterに「端末単位で恒久的にライセンスを無効化し、MSP請求とatLIB顧客請求を同時に減額する」単一機能は、公式資料・既存APIから確認できない。agentをDashboardから消す操作、端末保護を止める操作、Current License Usage、Allocated Licenses、DNSFilter MSP請求、atLIB顧客請求は別の状態であり、これを一つの「解約」ボタンとして扱うのはGapである。
+
+### 商用Go前の必須確認
+
+1. 隔離test Organizationへ顧客Adminを1名招待し、他Organization非表示、Global Policy／Block Page編集拒否、Site Key閲覧可否、rotate UI可否、Policy Audit Log／activity記録を実機確認する（招待・権限は個別承認後）。
+2. agent 1台をofflineにしてrotateし、復帰後の保護・再登録要否・旧Key新規登録拒否を確認する（状態変更の承認後）。
+3. Windows agentのDelete、Delete & Uninstall、Clean Upを別々の隔離端末で実施し、agent再出現、Current License Usage、Allocated Licenses、Usage API、請求画面を時系列で記録する。
+4. atLIBがself-service MSPかsales-managed MSPかをDNSFilterへ確認し、ライセンス数変更の請求反映・proration・next-cycleの正式ルールを確定する。既存トライアルの`user_count`を請求台数と同一視しない。
+5. Site Key操作のrole別権限、rotate監査、旧Key受入期間、offline端末への影響、月次rotateの推奨頻度と上限をDNSFilter Tier 2へ確認する。
+6. Issue #8のP1.6で顧客固有例外とGlobal Policyの優先順位・監査を確認するまで、顧客AdminへPolicy編集権限を恒常付与しない。
+
+## MSP大量展開の成立性評価・RPA補完調査（2026-10-17）
+
+### 実行境界と既存判断
+
+- Canonical mainはPR #7を含む `1caa2eb`、PR #9は未マージの `cc00596` として確認した。Issue #8（顧客固有例外）、#10（Key最小権限）、#11/#12（顧客UX）、#13（提案資料先行）の方針と整合する。
+- Network作成、Global Policy／Block Page割当、Site Key取得、Windows agent保護、Key rotateは既存PoCの結論を再実行していない。
+- DNSFilter管理画面の認証済みセッションは利用できなかった。このためOrganization 02の画面参照、Core／Monthly／license数の実画面値、API作成後の編集可否は**実機未確認**である。Organization作成・契約更新・課金変更・RPA実装は実施していない。
+- P1.5の停止理由（公開APIの`OrganizationCreate`ではCore SKU、term、External IDの確定指定ができない）は変わらない。Tier 2の正式回答がない限り、`plan=basic`をCoreと推測しない。
+
+### Organization作成・契約設定の公式確認
+
+DNSFilter公式資料は、MSPダッシュボードの **Add Organization** でName、Address、External ID、Subscription Plan、任意featureを入力して保存する流れを案内する。またself-service MSPでは、既存OrganizationのplanをMSP > Billing > Subscriptionsから編集でき、保存後のsubscription更新は即時に反映され、prorated invoice／creditが作られると案内する。sales-managed MSPではMSP > SubscriptionsでPlan Type、License Count、External IDを扱う画面が案内されるが、画面操作が請求へ与える影響は「billing invoicesやsubscription accessへ影響しない」とされる。atLIBのトライアルがどちらの契約モデルかは未確認である。
+
+| 必要操作 | UI公式資料 | API | 実機確認 | 判断 |
+| --- | --- | --- | --- | --- |
+| Organization新規作成 | Add Organization手順あり | `POST /v1/organizations`は存在。ただしP1.5の契約値は未確定 | 未実施 | UIはFit（公式確認）、APIは条件付き |
+| Coreプラン選択 | Subscription Plan / Plan Typeの選択が案内される | SKU文字列の正式対応未確認 | 未確認 | **CONDITIONAL FIT** |
+| Monthly契約選択 | self-service UIでBilling Cycleを含むsubscription操作が案内される | OrganizationCreateにtermなし | 未確認 | **CONDITIONAL FIT** |
+| license数指定 | sales-managed UIはLicense Count、self-service UIはusers/access pointsを案内 | `quantity`はあるが課金マッピング未確認 | 未確認 | **CONDITIONAL FIT** |
+| External ID設定 | Add Organizationで入力、sales-managed Subscription画面でも扱う案内あり | Create/PATCH公開schemaには未確認 | 未確認 | UIはFit（公式確認）、API後更新は未確認 |
+| 保存後の設定照合 | Subscription grid／Organization画面の利用が前提 | GET Organizationは契約詳細を返さなかった | 未確認 | UI readback + atLIB台帳が必要 |
+| API作成後にUIでsubscriptionを設定 | 既存OrganizationのPlan編集は公式に案内あり | API created Organizationでの同一操作は未確認 | 未確認 | **CONDITIONAL FIT**。Tier 2回答または隔離trialでの承認済み検証が必要 |
+
+### API・RPA・手動のFit/Gap
+
+| 工程 | API | RPA（ブラウザ操作） | 手動 | 推奨判断 |
+| --- | --- | --- | --- | --- |
+| 顧客ID重複確認・Organization検索 | Fit（既存GET） | 不要 | Fit | API |
+| Organizationの器作成 | Conditional Fit（P1.5 blocker） | Fit見込み（公式UIあり） | Fit（公式UIあり） | Tier 2回答後はAPI優先。未解決ならattended RPAまたは人手 |
+| Core / Monthly / license / External ID | Gap（契約値のAPI指定が未確定） | Conditional Fit（UIは文書化、selectors・role・契約モデル未検証） | Fit（公式UIあり） | RPAは最小補完候補。初期は人の承認つき |
+| 保存値の照合 | 部分Fit（契約GET不足） | Conditional Fit（画面readback） | Fit | UI readbackを証跡化し、API/台帳と照合 |
+| Network + Global設定 | **PASS** | 不要 | 不要 | API |
+| Site Key取得・保護変数への投入 | **PASS** | 不要 | 緊急時のみ | API + secret store |
+| 顧客通知 | Gap（DNSFilterのKey通知を確認できない） | 不要 | Fit | atLIB通知基盤。Key本文は不可 |
+
+### RPA補完の実現性とガードレール
+
+**結論はCONDITIONAL FIT**。画面で行う契約設定は公式に文書化されているため、APIの契約設定だけを補うattended RPAは技術的に可能性がある。ただし、RPAはDNSFilterの公開APIの代替契約ではなく、正式なUIを人の権限・MFAの下で操作する限定手段とする。MFA回避、認証cookieの共有、非公開内部APIの呼出し、browser network interceptionは採用しない。
+
+- **技術方式**: API workerが重複確認とNetwork以降を実行し、RPA workerはOrganization作成／subscription設定画面だけを担当する。UIログインは専用MSP automation userが人のMFA承認後に開始し、操作後にlogoutまたは短いsession expiryとする。
+- **入力安全性**: `customer_request_id`、Organization name、External ID、Core、Monthly、license数を不変のprovisioning recordから画面へ投入する。自由入力・コピー貼付け元の変更を禁止し、Save直前とSave直後に画面値をOCRではなく安定selector／画面DOMで照合できるかをPoCで確認する。
+- **二重作成防止**: RPA開始前にAPI/UIでnameとExternal IDを検索する。Save失敗・timeoutでは再クリックせず、Organization一覧・Subscription grid・External IDで作成有無を照合し、`unknown`状態は人手レビューへ送る。
+- **監査**: atLIB側にrequest ID、操作者、UI画面識別子、開始／終了、入力値（Keyを除く）、readback、失敗理由、後続API resource IDを記録する。画面スクリーンショットにPII・契約金額が映る場合は保存先・アクセス権・保持期限を別途定義する。
+- **MFA／session**: MFAは人が実施する。毎月1,000社の無人RPAでMFAを回避する設計は不可。DNSFilter API keyはユーザー権限を継承するため、Network以降のAPIにはleast-privilege automation userを使い、RPA用のダッシュボード権限と分離する。
+- **利用条件**: 公開資料からRPAの可否・禁止を確定できない。商用利用前に、DNSFilterへ「公式UIをattended RPAでsubscription入力・readbackする運用」の許容、推奨service account、監査ログ、UI変更予告を確認する。
+
+### 1,000社規模の運用負荷（計画概算）
+
+これは実測ではなく、UI 1社あたりの作成・契約設定・readbackを **2〜5分**、例外対応を含まない前提とした概算である。RPA対象を契約画面だけに絞っても、1,000社では **約33〜83人時** の画面処理となる。APIでPASS済みのNetwork以降は数秒〜低分のキュー処理に分離できるが、画面変更、MFA再認証、契約値差異、Save不明は人手待ちになる。
+
+従ってRPAは初回の一括立上げまたはTier 2回答までの暫定補完には現実的だが、恒常的な無人基幹処理の根拠にはならない。商用の継続運用は、DNSFilterから契約設定APIまたはサポート付きbulk provisioning手段を得られることを前提にする。API rate limitはOrganizationあたり300秒2,000 requestであり、Network APIの1,000社処理は制御可能と見込むが、UI/RPAのスループット保証はない。
+
+### 推奨する最小構成（API／RPA／人手の分担）
+
+```text
+顧客申込
+  → atLIB台帳・重複判定（API / atLIB）
+  → Organization作成（Tier 2確定後はAPI、未確定時は承認済みattended RPAまたは人手）
+  → Core・Monthly・license・External IDの設定とreadback（RPAまたは人手）
+  → Organization ID確定・証跡保存（API + atLIB台帳）
+  → Network作成 + Global Policy / Block Page割当（API：PASS）
+  → Site Key取得 → 顧客別secret store / RMM・MDM保護変数（API：PASS）
+  → 導入案内（atLIB通知基盤、人手承認を含む）
+```
+
+RPAをNetwork、Site Key、agent、Policy操作へ広げない。これらはAPIで既に実機PASSであり、ブラウザ操作にするとKey露出、UI変更、監査欠落のリスクが増える。
+
+### 最終判定と商用Go前の課題
+
+| 判断対象 | 判定 | 根拠 |
+| --- | --- | --- |
+| A. 関係者／PIRA向け提案資料制作へ進む | **CONDITIONAL FIT — 進行可** | Network以降はAPI実機PASS、契約設定は公式UIで実行可能でRPA／人手の代替案がある。Issue #13の「技術成立性判断後に資料制作」を満たす合理的な見通しがある。資料にはTier 2待ち・RPA暫定・商用Go保留を明記する。 |
+| B. 1,000社の商用サービス開始 | **GAP — 保留** | Organization作成後のCore／Monthly／license／External IDをAPIで確定的に設定・照合する手段、契約モデル、請求反映、RPA許容・監査・UI安定性が未確定。無人での大量商用provisioningは開始しない。 |
+
+DNSFilter Tier 2へ確認する残課題は次のとおり。
+
+1. atLIB MSP trialの契約モデル（self-service / sales-managed / distributor）と、Core Monthly 1 licenseの正式SKU・term・license指定手段。
+2. APIでOrganization作成後、UIでCore・Monthly・license数・External IDを安全に設定・編集できるか。外部IDの正式なpost-create操作。
+3. Organization作成／subscription変更を支援する正式bulk provisioning、PSA、Distributor API、またはMSP automationの有無。
+4. attended RPAによる公開UI操作の許容、専用automation user、MFA、audit log、UI変更通知に関する推奨／制約。
+5. subscription更新の即時性、proration、next-cycle反映の適用条件、および1,000 Organizationの契約・サポート上限。
+6. subscription readback、Site Key操作、Organization作成／更新について、APIまたはダッシュボードで取得できる監査証跡。
+
+### 認証済み管理画面で行う最小確認（状態変更なし）
+
+1. MSP dashboardでOrganization 02を開き、Organization Profile、MSP > Billing / Subscriptions、Deployment画面を閲覧する。Save、Edit、Add Organizationは押さない。
+2. Core、Monthly、Allocated Licenses、External IDの**表示値と項目名**を記録し、P0 usageの`plan=basic`とは別物として扱う。
+3. Subscription画面で、既存OrganizationにPlan、term、license、External IDを編集できるUIがあるか、保存前の項目だけを確認する。
+4. Add Organization画面を保存せずに開き、Core、Monthly、license数、External IDが同一フローにあるかを確認して閉じる。
+5. DashboardのActivity／Audit導線でOrganization作成・subscription更新・Key操作を検索できるフィルタがあるかだけを確認する。
+
+上記の閲覧で表示された値・役割・画面導線が公式資料と一致した場合でも、保存操作とRPAの実機PoCは別承認とする。
+
 ## 公式根拠
 
 - [DNSFilter一般API OpenAPI](https://api.dnsfilter.com/docs)（API仕様本体: `https://api.dnsfilter.com/docs/api.json`）
@@ -377,4 +585,15 @@ DNSFilterから次のいずれかを取得するまでOrganization作成は保�
 - [Windows agent via Intune](https://help.dnsfilter.com/hc/en-us/community/posts/34265444707347)
 - [Windows Roaming Client silent / RMM install](https://help.dnsfilter.com/hc/en-us/articles/31177309034899-Windows-Roaming-Client-Silent-Remote-tool-Install)
 - [Roaming ClientのSite／Organization移管](https://help.dnsfilter.com/hc/en-us/articles/49903446066835-Reassign-a-Roaming-Client-to-a-different-Site-or-Organization)
+- [Filtering Policyの公式テストドメイン](https://help.dnsfilter.com/hc/en-us/articles/1500008110782-Example-domains-to-test-Filtering-Policies)
+- [Block Pageの作成とテスト](https://help.dnsfilter.com/hc/en-us/articles/1500008111221-Create-a-Block-Page)
+- [MSP Users management](https://help.dnsfilter.com/hc/en-us/articles/1500008108722-MSP-Users-management)
+- [MSP client user account permissions](https://help.dnsfilter.com/hc/en-us/articles/42633772754835-Manage-MSP-client-user-account-permissions)
+- [MSP dashboard management](https://help.dnsfilter.com/hc/en-us/articles/1500008111541-MSP-dashboard-management)
+- [Policy Audit Log](https://help.dnsfilter.com/hc/en-us/articles/1500008111441-Policy-Audit-Log)
+- [Pricing license types](https://help.dnsfilter.com/hc/en-us/articles/4991568454035-Pricing-license-types)
+- [Self-service MSP subscription management](https://help.dnsfilter.com/hc/en-us/articles/1500008111561-Self-service-MSP-subscription-management)
+- [Sales-managed MSP subscription management](https://help.dnsfilter.com/hc/en-us/articles/43809316077715-Sales-managed-MSP-subscription-management)
+- [Manage Organization settings](https://help.dnsfilter.com/hc/en-us/articles/1500008111201-Manage-Organization-settings)
+- [DNSFilter integrations / Rewst](https://www.dnsfilter.com/integrations)
 
