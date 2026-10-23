@@ -148,3 +148,28 @@ GCSはSDKまたは正式RESTのpreconditionを利用し、FUSE上のローカル
 - gcloud auth listの読取試行以外の実GCP追加要求は未実施。Secret payload/token取得、resource/IAM/Secret登録/deploy、DNSFilter変更APIは0。
 - C0-3の実測は未完。実metadataが到着するまで、再利用可否/IAM最小性/最終費用/名前衝突をPASSにしない。
 - 一次棚卸しの成功・既存承認履歴は維持。C1具体案は準備したが、未知設定を埋めた最終承認パッケージとはしない。
+
+
+## 11. 2026-10-23 実GCP C0-3補完結果（ユーザー正規セッション）
+
+証跡: ユーザー取得の `sg-gcp-c03-detail-result.json`（2026-10-23T02:14:45Z、内部資料。Gitには格納しない）および東京Artifact Registryの個別CLI照会。既存一次棚卸しを再実施したものではない。
+
+- 詳細collector: 225セクション中READ 224、UNAVAILABLE 1（artifact_repositories）。READは照会成功でありIAM実効性のPASSではない。
+- 不足分の独立GET: `gcloud artifacts repositories list --project=msp-zabbix --location=asia-northeast1` で `cloud-run-source-deploy` / DOCKERを確認。Repository個別IAM・cleanup policyは未取得なので権限評価は未完。
+- Project `msp-zabbix` はACTIVE。Cloud Buildで東京Registryへのimage push SUCCESSの実績あり。ただし既存build SAの権限をGuard runtimeへ転用しない。
+- Cloud Run Jobs 59、Services 7、Secret 33、Service Accounts 10、Scheduler 4。名称一覧上Guard専用Job/Secret/SAなし。新設候補の名前衝突は構築直前に再確認。
+- GCS bucket 7。既存bucketはCashflow/PPAP/Portal/Sales Tools/Build用。特にPPAPは21日削除ルールを持ち、Guardの永続claim/audit用途に不適。既存bucketのIAM・retentionを変更せず、専用bucket新設を推奨。
+- Cloud SQLは既存2インスタンス。共有DBへGuard用schemaを追加しない。Scheduler既存4件は変更せず、新規SchedulerもC1では作らない。
+- Secret Managerの33 Secretでversion stateと個別IAM metadataを取得。Guard専用Secretは一覧上なし。新規SecretはGuard runtime SAだけへ個別Accessorを付与し、数値version固定。project IAMの既存editor/owner等による広い権限・上位継承・denyを含む実効権限は別途評価する。
+- 既存Project IAMにはdefault Compute SAのEditor bindingがある。Guard Jobには流用しない。既存本番サービス・SA・SecretのIAMを今回変更しない。
+
+### C1最小差分・承認前ゲート
+
+1. 既存Registry `asia-northeast1-docker.pkg.dev/msp-zabbix/cloud-run-source-deploy` 内へ専用image `secure-guard-cancellation` を新規配置する候補。個別IAM/write経路・cleanup・digest固定を確認してから構築。
+2. 新規候補: runtime SA `secure-guard-job-sa@msp-zabbix.iam.gserviceaccount.com`、Secret `secure-guard-dnsfilter-api-key`、Cloud Run Job `secure-guard-cancellation`、専用GCS bucket `msp-zabbix-secure-guard-offboarding-audit`。いずれも未作成。GCS bucketのglobal name availability/retention・UBLA・public access preventionを事前検証。
+3. IAMはSecret単位Accessor、監査bucketへの限定get/createと原子的generation precondition、対象Jobの限定起動権限。実行SAにEditor、Secret Admin、既存本番DB権限、広域Storage Adminを付与しない。
+4. JobはDryRun既定、task=1/retry=0、数値Secret version mount、実行SA照合、Org allowlistと承認plan hashを強制。Cloud Run local fileだけでは排他不可。永続claim/audit adapterがPASSするまで変更APIをSTOP。
+5. C1構築・IAM変更・Secret登録・deployは未承認。C2 live GET、C4 uninstall、C5 Organization DELETEも未実施。親Organization 10220948変更禁止、テストOrganization 10220954のみ対象。Organization DELETEは別途最終明示承認。
+6. 構築前にRegistry個別IAMと専用新規資産の名称衝突・GCS設計・project/上位IAM影響を最小限確認し、正確な変更前後差分と復旧手順を提示する。C0-3のmetadata収集は実施済みとし、全件再調査はしない。
+
+判定: **C0-3 metadata収集は補完完了。C1構成案は実測に基づき具体化済み。ただしRegistry IAM・実効権限・bucket設定等の最終ゲートが残るため、C1変更実行はHOLD。**
