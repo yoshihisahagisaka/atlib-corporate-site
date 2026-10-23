@@ -20,7 +20,8 @@ export async function makePlan(sourceSha:string,inv:Awaited<ReturnType<typeof in
  const payload={source_sha:sourceSha,mode:'DryRun' as const,inventory:inv,mutations_enabled:false as const};
  return {plan_hash:await hashOrdered(payload),payload};
 }
-export async function getOnlyPlan(p:Policy,identity:()=>Promise<string>,secret:()=>Promise<string>,fetch:Get){
+export type AuthenticatedGet=(url:string,headers:Readonly<Record<string,string>>)=>ReturnType<Get>;
+export async function getOnlyPlan(p:Policy,identity:()=>Promise<string>,secret:()=>Promise<string>,fetch:AuthenticatedGet){
  checkPolicy(p);
  if(await identity()!==p.runtime_service_account)fail('RUNTIME_SERVICE_IDENTITY_MISMATCH');
  const key=await secret();
@@ -28,7 +29,7 @@ export async function getOnlyPlan(p:Policy,identity:()=>Promise<string>,secret:(
  const get:Get=async url=>{
   const u=new URL(url);
   if(u.protocol!=='https:'||u.hostname!=='api.dnsfilter.com'||u.port||u.username||u.password||u.hash)fail('DNS_URI_NOT_ALLOWED');
-  return fetch(url);
+  return fetch(url,{Authorization:'Bearer '+key,Accept:'application/json'});
  };
  const specResult=await get('https://api.dnsfilter.com/docs/api.json');
  if(specResult.status!==200)fail('GET_HTTP_'+specResult.status);
