@@ -33,7 +33,7 @@ export async function getOnlyPlan(p:Policy,identity:()=>Promise<string>,secret:(
  };
  const specResult=await get('https://api.dnsfilter.com/docs/api.json');
  if(specResult.status!==200)fail('GET_HTTP_'+specResult.status);
- if(!specResult.body||typeof specResult.body!=='object'||Array.isArray(specResult.body))fail('UNKNOWN_OPENAPI');
+ if(!specResult.body||typeof specResult.body!=='object'||Array.isArray(specResult.body))fail('MISSING_OPERATION_get_/v1/organizations/{id}');
  const inv=await inventory(get,specResult.body as Record<string,unknown>,p.organization_id,p.msp_parent_id);
  return makePlan(p.source_sha,inv);
 }
