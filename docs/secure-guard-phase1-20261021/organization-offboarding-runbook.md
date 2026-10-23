@@ -148,3 +148,12 @@ Pending命令が失われサービス/loopback DNSが残った場合は仮説FAI
 詳細は [C0-3 Fit/Gap・C1計画](gcp-c03-fitgap-c1-plan-20261023.md) を参照。
 既存一次棚卸しと20/20 PASSを継承。追加metadataは実行環境のgcloud認証DBアクセス制約で未取得。詳細collectorの新規オフライン8/8 PASSは実GCP認証・実API・永続排他のPASSではない。
 GCP/DNSFilter変更0件。C1具体名/IAM/監査/費用/切戻し案は条件付き計画であり作成承認前。Organization DELETEは別途最終承認が必要。
+
+
+## 2026-10-23 C1固定契約のコード実装（最新）
+
+[C1実装結果](c1-implementation-report-20261023.md) / [build・構築準備手順](c1-build-runbook.md) を追加。
+C0-3の実測はFit/Gap報告の第11章で補完済み。本Runbookの過去の「アクセス待ち」「未実装」記録は各時点の履歴であり、最新状態は本追記と固定契約を優先する。
+C1はGET専用entrypoint、数値Secret mount/実SA確認、専用image/Jobテンプレート、分離したGCS claim/audit adapterを実装。新46＋関連回帰20=66 PASS/0 FAIL、過去metadata8 PASSは継承。実BuildはDocker Engineアクセス拒否により未実測。
+GCS adapterのJob接続・実GCP認証GET・永続排他・uninstall/Pending/Org DELETEは未実施。新GET経路はDryRun以外STOP。prototypeのRequestUninstall STOPも維持。Organization DELETEは未実装・別途最終承認。
+キー/Secret payload取得、GCP/IAM/deploy、DNSFilter実要求は0件。正式保持/手動解除、Registry IAM/実効権限、実version/image digestは保留ゲート。統括レビュー待ちで停止。

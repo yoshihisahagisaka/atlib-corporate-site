@@ -1,0 +1,19 @@
+# Build only; no deployment, secret access or IAM change steps.
+# Submit this DIRECTORY, not repository root. All substitutions are non-secret.
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --build-arg
+      - 'POWERSHELL_BASE_IMAGE=${_POWERSHELL_BASE_IMAGE}'
+      - --build-arg
+      - 'SOURCE_SHA=${_SOURCE_SHA}'
+      - --tag
+      - 'asia-northeast1-docker.pkg.dev/msp-zabbix/cloud-run-source-deploy/secure-guard-cancellation:${_SOURCE_SHA}'
+      - .
+images:
+  - 'asia-northeast1-docker.pkg.dev/msp-zabbix/cloud-run-source-deploy/secure-guard-cancellation:${_SOURCE_SHA}'
+timeout: 900s
+options:
+  logging: CLOUD_LOGGING_ONLY
+# Build SA selected explicitly at approved submission; never runtime SA.

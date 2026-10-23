@@ -1,0 +1,193 @@
+{
+  "kind": "C1_OFFLINE_FIXTURES",
+  "live_requests": 0,
+  "total": 46,
+  "passed": 46,
+  "failed": 0,
+  "results": [
+    {
+      "result": "PASS",
+      "name": "GET-only discovery reuses prototype and returns real fixture hostname"
+    },
+    {
+      "result": "PASS",
+      "name": "All argument overrides rejected before identity or secret access"
+    },
+    {
+      "result": "PASS",
+      "name": "Every non-DryRun mode stops unconditionally"
+    },
+    {
+      "result": "PASS",
+      "name": "Parent Organization cannot be target"
+    },
+    {
+      "result": "PASS",
+      "name": "Outside baked allowlist stops"
+    },
+    {
+      "result": "PASS",
+      "name": "Runtime identity mismatch does not read secret"
+    },
+    {
+      "result": "PASS",
+      "name": "Missing runtime authentication stops"
+    },
+    {
+      "result": "PASS",
+      "name": "Missing mounted Secret fails with no fallback"
+    },
+    {
+      "result": "PASS",
+      "name": "Empty Secret rejected without request"
+    },
+    {
+      "result": "PASS",
+      "name": "Latest Secret alias rejected"
+    },
+    {
+      "result": "PASS",
+      "name": "Numeric version reference mismatch rejected"
+    },
+    {
+      "result": "PASS",
+      "name": "Mount version path mismatch rejected"
+    },
+    {
+      "result": "PASS",
+      "name": "DNS authentication 401 stops without retry"
+    },
+    {
+      "result": "PASS",
+      "name": "DNS authentication 403 stops without retry"
+    },
+    {
+      "result": "PASS",
+      "name": "Unknown OpenAPI shape stops"
+    },
+    {
+      "result": "PASS",
+      "name": "Unproven pagination stops"
+    },
+    {
+      "result": "PASS",
+      "name": "Organization parent mismatch stops"
+    },
+    {
+      "result": "PASS",
+      "name": "Site membership mismatch stops"
+    },
+    {
+      "result": "PASS",
+      "name": "Agent membership mismatch stops"
+    },
+    {
+      "result": "PASS",
+      "name": "Agent Site mismatch stops"
+    },
+    {
+      "result": "PASS",
+      "name": "Plan contains neither key nor raw response fields"
+    },
+    {
+      "result": "PASS",
+      "name": "Stable operation binds event contract and Organization"
+    },
+    {
+      "result": "PASS",
+      "name": "Org claim then snapshot then Agent claim then send boundary only"
+    },
+    {
+      "result": "PASS",
+      "name": "Repeated Org claim conflicts even with a new operation event"
+    },
+    {
+      "result": "PASS",
+      "name": "Repeated Agent claim conflicts without second begin event"
+    },
+    {
+      "result": "PASS",
+      "name": "Restart after Org claim before audit remains UNKNOWN"
+    },
+    {
+      "result": "PASS",
+      "name": "Restart after Agent claim before send boundary remains UNKNOWN"
+    },
+    {
+      "result": "PASS",
+      "name": "Audit permission failure stops without a mutation"
+    },
+    {
+      "result": "PASS",
+      "name": "Plan hash mismatch stops before storage"
+    },
+    {
+      "result": "PASS",
+      "name": "Changed plan body stops before storage"
+    },
+    {
+      "result": "PASS",
+      "name": "GCP missing authentication stops without storage"
+    },
+    {
+      "result": "PASS",
+      "name": "Unknown write response never retried"
+    },
+    {
+      "result": "PASS",
+      "name": "Result audit records HTTP acceptance without claiming uninstall completion"
+    },
+    {
+      "result": "PASS",
+      "name": "Crash or unknown response after simulated request never enables resend"
+    },
+    {
+      "result": "PASS",
+      "name": "Result audit failure after simulated request leaves occupied UNKNOWN claim"
+    },
+    {
+      "result": "PASS",
+      "name": "Audit snapshot excludes unknown Secret payload properties"
+    },
+    {
+      "result": "PASS",
+      "name": "STOP logging hides untrusted exception text"
+    },
+    {
+      "result": "PASS",
+      "name": "HTTP wrapper never emits secret-bearing exception body"
+    },
+    {
+      "result": "PASS",
+      "name": "Transport rejects DNSFilter POST and every DELETE"
+    },
+    {
+      "result": "PASS",
+      "name": "Freeze checks Organization against baked policy before storage"
+    },
+    {
+      "result": "PASS",
+      "name": "Agent identity must exactly match frozen snapshot"
+    },
+    {
+      "result": "PASS",
+      "name": "Changed frozen snapshot hash fails before Agent claim"
+    },
+    {
+      "result": "PASS",
+      "name": "Environment target or Mode override cannot replace baked policy"
+    },
+    {
+      "result": "PASS",
+      "name": "Actual entrypoint rejects override before runtime or Secret I/O"
+    },
+    {
+      "result": "PASS",
+      "name": "Renderer pins matching numeric version source and digest"
+    },
+    {
+      "result": "PASS",
+      "name": "Concurrent workers have one atomic create winner"
+    }
+  ]
+}
