@@ -77,3 +77,10 @@ FixtureでsimulateしたHTTP受付は完了/Pendingとは扱わず、実行再�
 - https://docs.cloud.google.com/run/docs/reference/yaml/v1 （Job構造）
 - https://docs.cloud.google.com/run/docs/configuring/jobs/secrets （Secret volume）
 - https://learn.microsoft.com/en-us/powershell/scripting/install/powershell-in-docker （SDK内PowerShell）
+
+
+## 2026-10-23 C2固定契約による更新（最新）
+
+[C2実装結果・手順](c2-implementation-report-20261023.md) を参照。GET成功後の一時plan.jsonのみでの成功判定を廃止し、専用GCSのdryruns prefixへcreate-only保存→作成metadataのbucket/name/generation照合→同一generationのread-back→payload/hash/内容照合→安全なreceiptを成功条件にした。
+Jobから呼ぶstoreはDryRun scopeに限定し、Org/Agent claim・auditのlive接続は引き続き無効。追加権限なし（既存専用bucket get/create案のみ）。prefix分離はアプリの境界でありIAMによるprefix限定を当然視しない。
+Dockerfile/.dockerignoreにはc2-durable-plan.ps1を追加。既存manifestのSA/Secret数値版/CPU/retry等に差分なし。今回Build/deploy/Secret取得/GCP書込は未実施。既存の構築前ゲートとC3以降の独立承認を維持する。

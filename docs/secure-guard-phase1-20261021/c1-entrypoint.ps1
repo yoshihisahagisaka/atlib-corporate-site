@@ -2,7 +2,7 @@
 $ErrorActionPreference='Stop'
 $entryArguments=@($args)
 $VerbosePreference='SilentlyContinue';$DebugPreference='SilentlyContinue';$ProgressPreference='SilentlyContinue'
-. (Join-Path $PSScriptRoot 'c1-runtime.ps1')
+. (Join-Path $PSScriptRoot 'c2-durable-plan.ps1')
 try {
   if ($entryArguments.Count) { SG-Fail 'ARGUMENT_OVERRIDE_FORBIDDEN' }
   $policy=Get-Content -LiteralPath (Join-Path $PSScriptRoot 'runtime-policy.json') -Raw | ConvertFrom-Json
@@ -15,11 +15,8 @@ try {
   $secretReader={param($path,$version,$expected)
     SG-MountedSecret $path $version $expected $identityReader
   }
-  $plan=SG-C1DryRun $policy @() $identityReader $secretReader ${function:SG-C1Http}
-  # Private local review artifact only; GCS live adapter is NOT wired in C1.
-  $directory='/work/review';$null=[IO.Directory]::CreateDirectory($directory)
-  SG-WriteJson (Join-Path $directory 'plan.json') $plan
-  [ordered]@{state='DRYRUN_COMPLETE';source_sha=$policy.source_sha;plan_hash=$plan.plan_hash;site_count=@($plan.payload.inventory.sites).Count;agent_count=@($plan.payload.inventory.agents).Count;review_artifact='ephemeral:/work/review/plan.json';durable_audit='NOT_CONNECTED_C3_GATE';mutations=0} | ConvertTo-Json -Compress
+  $store=SG-C1Store 'msp-zabbix-secure-guard-offboarding-audit' ${function:SG-C1Http} ${function:SG-C1MetadataToken} 'DryRun'
+  SG-C2Run $policy @() $identityReader $secretReader ${function:SG-C1Http} $store | ConvertTo-Json -Compress
   exit 0
 } catch {
   [ordered]@{state='STOP';code=(SG-C1StopCode $_);mutations=0} | ConvertTo-Json -Compress

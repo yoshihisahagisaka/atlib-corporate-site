@@ -1,19 +1,22 @@
-# Detached adapter. Not imported by the Job entrypoint and no DNS transport.
+# Claim adapter remains detached. C2 uses the DryRun-scoped storage primitives only.
 . (Join-Path $PSScriptRoot 'c1-runtime.ps1')
 
 function SG-C1OperationId([string]$Org,[string]$CancellationEventId,[string]$ContractVersion) {
   if ($Org -notmatch '^\d+$' -or [string]::IsNullOrWhiteSpace($CancellationEventId) -or [string]::IsNullOrWhiteSpace($ContractVersion)) { SG-Fail 'STABLE_OPERATION_INPUT_REQUIRED' }
   return (SG-Hash ([ordered]@{organization_id=$Org;cancellation_event_id=$CancellationEventId;contract_version=$ContractVersion}))
 }
-function SG-C1Store([string]$Bucket,$Transport,$TokenReader) {
+function SG-C1Store([string]$Bucket,$Transport,$TokenReader,[ValidateSet('Claims','DryRun')][string]$Scope='Claims') {
   if ($Bucket -cne 'msp-zabbix-secure-guard-offboarding-audit') { SG-Fail 'AUDIT_BUCKET_NOT_ALLOWED' }
-  return @{bucket=$Bucket;transport=$Transport;token_reader=$TokenReader}
+  return @{bucket=$Bucket;transport=$Transport;token_reader=$TokenReader;scope=$Scope}
 }
 function SG-C1ObjectPath([string]$Path) {
-  if ($Path -notmatch '^(claims/organizations/[0-9]+/current|claims/operations/[a-f0-9]{64}/agents/[a-zA-Z0-9-]+/uninstall|audit/[a-f0-9]{64}/[a-zA-Z0-9-]+\.json)$') { SG-Fail 'AUDIT_OBJECT_PATH_INVALID' }
+  if ($Path -cnotmatch '^(claims/organizations/[0-9]+/current|claims/operations/[a-f0-9]{64}/agents/[a-zA-Z0-9-]+/uninstall|audit/[a-f0-9]{64}/[a-zA-Z0-9-]+\.json|dryruns/organizations/[0-9]+/plans/[a-f0-9]{64}\.json)$') { SG-Fail 'AUDIT_OBJECT_PATH_INVALID' }
 }
-function SG-C1StorageRequest($Store,[string]$Method,[string]$Path,$Value=$null) {
+function SG-C1StorageRequest($Store,[string]$Method,[string]$Path,$Value=$null,[string]$Generation) {
   SG-C1ObjectPath $Path
+  $dry=$Path.StartsWith('dryruns/')
+  if (($Store.scope -ceq 'DryRun' -and !$dry) -or ($Store.scope -cne 'DryRun' -and $dry)) { SG-Fail 'AUDIT_STORE_SCOPE_INVALID' }
+  if ($Generation -and ($Method -cne 'GET' -or $Generation -cnotmatch '^[1-9][0-9]*$')) { SG-Fail 'AUDIT_STORE_SCOPE_INVALID' }
   if ($Store.bucket -cne 'msp-zabbix-secure-guard-offboarding-audit' -or $Method -notin @('GET','POST')) { SG-Fail 'AUDIT_STORE_SCOPE_INVALID' }
   $encoded=[Uri]::EscapeDataString($Path);$token=$null;$body=$null;$headers=$null
   try {
@@ -23,7 +26,10 @@ function SG-C1StorageRequest($Store,[string]$Method,[string]$Path,$Value=$null) 
     if ($Method -eq 'POST') {
       $uri='https://storage.googleapis.com/upload/storage/v1/b/'+$Store.bucket+'/o?uploadType=media&name='+$encoded+'&ifGenerationMatch=0'
       $body=ConvertTo-Json -InputObject $Value -Compress -Depth 30
-    } else { $uri='https://storage.googleapis.com/storage/v1/b/'+$Store.bucket+'/o/'+$encoded+'?alt=media' }
+    } else {
+      $uri='https://storage.googleapis.com/storage/v1/b/'+$Store.bucket+'/o/'+$encoded+'?alt=media'
+      if ($Generation) { $uri+='&generation='+$Generation }
+    }
     $r=& $Store.transport $Method $uri $headers $body
     if ($Method -eq 'GET' -and $r.status -eq 404) { return $null }
     if ($r.status -eq 412) { SG-Fail 'CLAIM_CONFLICT_UNKNOWN_NO_RESEND' }

@@ -157,3 +157,10 @@ C0-3の実測はFit/Gap報告の第11章で補完済み。本Runbookの過去の
 C1はGET専用entrypoint、数値Secret mount/実SA確認、専用image/Jobテンプレート、分離したGCS claim/audit adapterを実装。新46＋関連回帰20=66 PASS/0 FAIL、過去metadata8 PASSは継承。実BuildはDocker Engineアクセス拒否により未実測。
 GCS adapterのJob接続・実GCP認証GET・永続排他・uninstall/Pending/Org DELETEは未実施。新GET経路はDryRun以外STOP。prototypeのRequestUninstall STOPも維持。Organization DELETEは未実装・別途最終承認。
 キー/Secret payload取得、GCP/IAM/deploy、DNSFilter実要求は0件。正式保持/手動解除、Registry IAM/実効権限、実version/image digestは保留ゲート。統括レビュー待ちで停止。
+
+
+## 2026-10-23 C2永続DryRun計画（最新）
+
+[C2固定契約](c2-dryrun-durable-plan-contract-20261023.md) / [実装結果](c2-implementation-report-20261023.md)。最新entrypointはGET結果をGCS dryruns/organizations/{org}/plans/{hash}.jsonへcreate-only保存し、作成metadataとgeneration固定read-back/hash/内容の一致後だけ成功receiptを返す。一時ファイルだけでの成功判定は廃止。
+新34＋C1関連回帰46=80 PASS/0 FAIL（offline、実要求0）。以前のprototype20とmetadata8は履歴PASSを継承し再実行なし。C2実GCP PASSは未付与。実Build/Secret mount/DNSFilter GET/GCS保存と照合は別承認のゲート。
+Org/Agent claim・変更APIのlive接続は無効。Uninstall/Organization DELETE/自動claim解除は実装・有効化しない。GCP/DNSFilter変更0件、main変更なし。統括レビュー待ちで停止。

@@ -9,7 +9,10 @@
   "bucket_custom_role": {
     "proposed_role_id": "secureGuardAuditCreateRead",
     "title": "Secure Guard audit create and read",
-    "includedPermissions": ["storage.objects.get", "storage.objects.create"],
+    "includedPermissions": [
+      "storage.objects.get",
+      "storage.objects.create"
+    ],
     "bind_only_to": "msp-zabbix-secure-guard-offboarding-audit"
   },
   "manual_job_caller": {
@@ -19,5 +22,24 @@
     "run_with_overrides": "NOT_GRANTED"
   },
   "build_deploy_identity": "UNRESOLVED_EXISTING_APPROVED_PIPELINE",
-  "gates": ["Registry individual/inherited IAM and deny", "Dedicated bucket name availability", "Retention and manual claim resolution are pending governance", "UBLA/public access prevention and inherited access review", "Do not replace existing project policies", "No default Compute Editor runtime", "No Scheduler", "No application commands in C1"]
+  "gates": [
+    "Registry individual/inherited IAM and deny",
+    "Dedicated bucket name availability",
+    "Retention and manual claim resolution are pending governance",
+    "UBLA/public access prevention and inherited access review",
+    "Do not replace existing project policies",
+    "No default Compute Editor runtime",
+    "No Scheduler",
+    "No application commands in C1"
+  ],
+  "c2_scope": {
+    "job_writes": "dryruns/organizations/{org-id}/plans/{plan-hash}.json",
+    "operations": [
+      "storage.objects.create with ifGenerationMatch=0",
+      "storage.objects.get pinned generation"
+    ],
+    "prefix_is_application_boundary_not_implicit_iam_guarantee": true,
+    "claim_audit_live_connection": "DISABLED_C3_GATE",
+    "additional_permissions": []
+  }
 }
