@@ -141,3 +141,10 @@ Pending命令が失われサービス/loopback DNSが残った場合は仮説FAI
 - https://docs.cloud.google.com/run/docs/execute/jobs-on-schedule
 - https://docs.cloud.google.com/run/docs/container-contract
 - https://docs.cloud.google.com/secret-manager/docs/manage-access-to-secrets
+
+
+## 2026-10-23 C0-3 / C1再開記録
+
+詳細は [C0-3 Fit/Gap・C1計画](gcp-c03-fitgap-c1-plan-20261023.md) を参照。
+既存一次棚卸しと20/20 PASSを継承。追加metadataは実行環境のgcloud認証DBアクセス制約で未取得。詳細collectorの新規オフライン8/8 PASSは実GCP認証・実API・永続排他のPASSではない。
+GCP/DNSFilter変更0件。C1具体名/IAM/監査/費用/切戻し案は条件付き計画であり作成承認前。Organization DELETEは別途最終承認が必要。
