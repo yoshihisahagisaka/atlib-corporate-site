@@ -1,4 +1,3 @@
-import {createHash} from 'node:crypto';
 import type {Get} from './inventory';
 import {GuardStop,inventory} from './inventory';
 
@@ -16,10 +15,10 @@ export function checkPolicy(p:Policy,args:string[]=[]):void{
 }
 /** Matches the PowerShell ordered-property JSON contract for the ASCII fixture subset.
  * Cross-runtime PowerShell hash equivalence is a separate mandatory gate. */
-export function hashOrdered(value:unknown):string{return createHash('sha256').update(JSON.stringify(value),'utf8').digest('hex');}
-export function makePlan(sourceSha:string,inv:Awaited<ReturnType<typeof inventory>>){
+export async function hashOrdered(value:unknown):Promise<string>{const bytes=new TextEncoder().encode(JSON.stringify(value));const digest=await crypto.subtle.digest('SHA-256',bytes);return Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');}
+export async function makePlan(sourceSha:string,inv:Awaited<ReturnType<typeof inventory>>){
  const payload={source_sha:sourceSha,mode:'DryRun' as const,inventory:inv,mutations_enabled:false as const};
- return {plan_hash:hashOrdered(payload),payload};
+ return {plan_hash:await hashOrdered(payload),payload};
 }
 export async function getOnlyPlan(p:Policy,identity:()=>Promise<string>,secret:()=>Promise<string>,fetch:Get){
  checkPolicy(p);
