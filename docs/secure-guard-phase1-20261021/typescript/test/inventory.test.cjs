@@ -1,6 +1,6 @@
 const {inventory}=require('../dist/inventory.js');
 const assert=require('node:assert/strict');const test=require('node:test');
-const org='10220954',parent='10220948',base='https://api.dnsfilter.com';
+const org='10220954',parent='11473',base='https://api.dnsfilter.com';
 const spec={paths:{'/v1/organizations/{id}':{get:{parameters:[]}},'/v1/networks':{get:{parameters:[{name:'organization_id',in:'query',type:'integer'},{name:'page',in:'query',type:'integer'}]}},'/v1/user_agents':{get:{parameters:[{name:'organization_ids',in:'query',type:'array'},{name:'network_ids',in:'query',type:'array'},{name:'page',in:'query',type:'integer'}]}}}};
 const page=(data,total,next=null)=>({data,links:{next},meta:{total_count:total}});
 const site=id=>({id,attributes:{name:'Site '+id,organization_id:org}});
@@ -17,3 +17,7 @@ test('reject cross-host pagination',async()=>{const m=fixtures();m.get(base+'/v1
 test('null OpenAPI parameters are skipped as in PowerShell',async()=>{const s=structuredClone(spec);s.paths['/v1/networks'].get.parameters.unshift(null);const x=await inventory(getter(fixtures()),s,org,parent);assert.equal(x.sites.length,2);});
 test('site IDs differing only in case are duplicate',async()=>{const m=fixtures();m.set(base+'/v1/networks?organization_id='+org+'&page=2',page([site('s1')],2));await assert.rejects(()=>inventory(getter(m),spec,org,parent),{code:'DUPLICATE_OR_MISSING_RESOURCE_ID'});});
 test('signed positive total count matches legacy parser',async()=>{const m=fixtures();m.get(base+'/v1/networks?organization_id='+org).meta.total_count='+2';const x=await inventory(getter(m),spec,org,parent);assert.equal(x.sites.length,2);});
+
+test('accepts a different customer organization with the same MSP without a customer-specific code path',async()=>{const other='20990001';const m=fixtures();const orgBody=m.get(base+'/v1/organizations/'+org);m.delete(base+'/v1/organizations/'+org);m.set(base+'/v1/organizations/'+other,{data:{...orgBody.data,id:other}});await assert.rejects(()=>inventory(getter(m),spec,other,parent),{code:'PAGINATION_SCOPE_CHANGED'});});
+test('rejects the atLIB Organization ID when used as an MSP ID',async()=>{await assert.rejects(()=>inventory(getter(fixtures()),spec,org,'10220948'),{code:'ORG_PARENT_MISMATCH_OR_UNKNOWN'});});
+test('rejects missing or conflicting MSP relations',async()=>{const a=fixtures();delete a.get(base+'/v1/organizations/'+org).data.attributes.managed_by_msp_id;await assert.rejects(()=>inventory(getter(a),spec,org,parent),{code:'RELATION_UNKNOWN_OR_CONFLICT_managed_by_msp'});const b=fixtures();b.get(base+'/v1/organizations/'+org).data.relationships={managed_by_msp:{data:{id:'other'}}};await assert.rejects(()=>inventory(getter(b),spec,org,parent),{code:'RELATION_UNKNOWN_OR_CONFLICT_managed_by_msp'});});
