@@ -3,7 +3,7 @@ import {GuardStore,GUARD_BUCKET,type StorageTransport} from './gcs';
 import {saveDryRun} from './durable';
 import {GuardStop} from './inventory';
 
-declare const require:(name:string)=>any;
+declare const require:((name:string)=>any)&{main:unknown};
 declare const process:{argv:string[];env:Record<string,string|undefined>;stdout:{write:(s:string)=>void};stderr:{write:(s:string)=>void};exitCode:number};
 const fs=require('node:fs') as {readFileSync:(path:string,encoding:string)=>string};
 const metadata='http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/';
