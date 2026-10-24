@@ -1,0 +1,35 @@
+apiVersion: run.googleapis.com/v1
+kind: Job
+metadata:
+  name: secure-guard-cancellation
+  namespace: '__PROJECT_NUMBER__'
+  labels:
+    cloud.googleapis.com/location: asia-northeast1
+  annotations:
+    atlib.jp/source-sha: '__SOURCE_SHA__'
+spec:
+  template:
+    spec:
+      taskCount: 1
+      parallelism: 1
+      template:
+        spec:
+          serviceAccountName: secure-guard-job-sa@msp-zabbix.iam.gserviceaccount.com
+          maxRetries: 0
+          timeoutSeconds: '900'
+          containers:
+            - image: 'asia-northeast1-docker.pkg.dev/msp-zabbix/cloud-run-source-deploy/secure-guard-cancellation@__IMAGE_DIGEST__'
+              resources:
+                limits:
+                  cpu: '1'
+                  memory: 1Gi
+              volumeMounts:
+                - name: dnsfilter-key
+                  mountPath: /var/run/guard-secrets
+          volumes:
+            - name: dnsfilter-key
+              secret:
+                secretName: secure-guard-dnsfilter-api-key
+                items:
+                  - key: '__SECRET_VERSION__'
+                    path: '__SECRET_VERSION__'

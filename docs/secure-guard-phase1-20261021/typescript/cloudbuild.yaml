@@ -1,0 +1,12 @@
+# Build and push only. No deployment or GCP resource changes.
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ['build','--platform','linux/amd64','--build-arg','NODE_BASE_IMAGE=${_NODE_BASE_IMAGE}','--build-arg','SOURCE_SHA=${_SOURCE_SHA}','-t','asia-northeast1-docker.pkg.dev/msp-zabbix/cloud-run-source-deploy/secure-guard-cancellation:${_SOURCE_SHA}','.']
+substitutions:
+  _NODE_BASE_IMAGE: 'node@sha256:3d0f05455dea2c82e2f76e7e2543964c30f6b7d673fc1a83286736d44fe4c41c'
+images:
+  - 'asia-northeast1-docker.pkg.dev/msp-zabbix/cloud-run-source-deploy/secure-guard-cancellation:${_SOURCE_SHA}'
+timeout: 900s
+options:
+  logging: CLOUD_LOGGING_ONLY
+

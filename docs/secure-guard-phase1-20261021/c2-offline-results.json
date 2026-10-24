@@ -1,0 +1,146 @@
+{
+  "kind": "C2_OFFLINE_FIXTURES",
+  "live_requests": 0,
+  "new_passed": 34,
+  "new_failed": 0,
+  "c1_regression_passed": 46,
+  "total_passed": 80,
+  "results": [
+    {
+      "name": "Create-only save then generation-pinned read-back and safe receipt",
+      "result": "PASS"
+    },
+    {
+      "name": "Existing same hash conflicts and is never treated as success",
+      "result": "PASS"
+    },
+    {
+      "name": "Empty Organization inventory preserves arrays and verifies roundtrip",
+      "result": "PASS"
+    },
+    {
+      "name": "Different hash uses different object without replacing first plan",
+      "result": "PASS"
+    },
+    {
+      "name": "Unknown create response is not retried or read back",
+      "result": "PASS"
+    },
+    {
+      "name": "Storage create failure 401 stops without read-back or retry",
+      "result": "PASS"
+    },
+    {
+      "name": "Storage create failure 403 stops without read-back or retry",
+      "result": "PASS"
+    },
+    {
+      "name": "Storage create failure 0 stops without read-back or retry",
+      "result": "PASS"
+    },
+    {
+      "name": "Read-back failure 401 leaves saved object and stops",
+      "result": "PASS"
+    },
+    {
+      "name": "Read-back failure 403 leaves saved object and stops",
+      "result": "PASS"
+    },
+    {
+      "name": "Read-back failure 0 leaves saved object and stops",
+      "result": "PASS"
+    },
+    {
+      "name": "Read-back 404 is not success and does not re-create",
+      "result": "PASS"
+    },
+    {
+      "name": "Create response bucket mismatch stops UNKNOWN before read-back",
+      "result": "PASS"
+    },
+    {
+      "name": "Create response path mismatch stops UNKNOWN before read-back",
+      "result": "PASS"
+    },
+    {
+      "name": "Create response generation mismatch stops UNKNOWN before read-back",
+      "result": "PASS"
+    },
+    {
+      "name": "Create response empty mismatch stops UNKNOWN before read-back",
+      "result": "PASS"
+    },
+    {
+      "name": "Read-back changed content with stale hash rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "Read-back changed content and recomputed hash still rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "Read-back changed hash rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "Read-back Organization mismatch rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "Unknown secret-bearing field rejected before write",
+      "result": "PASS"
+    },
+    {
+      "name": "Unknown secret-bearing read-back field rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "Plan Organization outside allowlist rejected before write",
+      "result": "PASS"
+    },
+    {
+      "name": "Missing GCP authentication does not invoke transport",
+      "result": "PASS"
+    },
+    {
+      "name": "DryRun storage scope refuses Org claim and Agent claim paths",
+      "result": "PASS"
+    },
+    {
+      "name": "Claim scope cannot save a DryRun plan",
+      "result": "PASS"
+    },
+    {
+      "name": "Full offline pipeline returns no plan or hostname in receipt",
+      "result": "PASS"
+    },
+    {
+      "name": "DNSFilter 401 prevents any GCS write",
+      "result": "PASS"
+    },
+    {
+      "name": "DNSFilter 403 prevents any GCS write",
+      "result": "PASS"
+    },
+    {
+      "name": "Secret failure prevents all GCS and DNS requests",
+      "result": "PASS"
+    },
+    {
+      "name": "Runtime identity failure prevents Secret and GCS access",
+      "result": "PASS"
+    },
+    {
+      "name": "Argument override prevents all work in integrated pipeline",
+      "result": "PASS"
+    },
+    {
+      "name": "DNSFilter change APIs remain forbidden",
+      "result": "PASS"
+    },
+    {
+      "name": "Safe STOP code excludes write exception and Secret data",
+      "result": "PASS"
+    }
+  ]
+}
