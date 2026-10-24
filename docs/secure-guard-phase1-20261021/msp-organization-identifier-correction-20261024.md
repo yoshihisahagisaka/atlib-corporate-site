@@ -22,3 +22,9 @@ Verification on 2026-10-24: strict TypeScript check, build, and 73 tests passed 
 
 
 PowerShell compatibility verification was also rerun after its C1 fixture was aligned: 47 offline fixtures passed, including rejection of `10220948` when supplied as the MSP relation, GET-only behavior, secret non-disclosure, and no-resend UNKNOWN handling. Live DNSFilter and GCP requests remained zero.
+
+
+## Node.js 20 verification-only Cloud Build
+On 2026-10-24 JST, verification-only Build `f48195d9-b8a7-4810-bea9-4c812d508bc2` completed successfully in `asia-northeast1` using Build SA `135863453696-compute@developer.gserviceaccount.com`. It used the fixed Node image digest `sha256:3d0f05455dea2c82e2f76e7e2543964c30f6b7d673fc1a83286736d44fe4c41c` and reported Node.js `v20.20.2`, npm `10.8.2`, and TypeScript `7.0.2` from the lockfile. The source archive was generation `1792843601083307` with Cloud Build provenance SHA-256 `r5WJU7o7TevYmd3IzFq-L_vXWE4x2flkMogICHK87jQ=`; it was submitted from checked-out source SHA `9879572013769a07f195b42872fb4da7f8bb2268`.
+
+The separate verification configuration ran only `npm ci`, `npm run typecheck`, `npm run build`, and `npm test`. All 73 tests passed with 0 failures, skips, or todos. It contained no image output/push or deploy step, no secret reference, and did not alter the Cloud Run Job. The verification configuration was temporary and was not added to product source.
