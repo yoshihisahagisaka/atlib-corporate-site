@@ -67,7 +67,7 @@ function stageFor(code:string):Stage{
  if(/^(PAGINATION_|UNSAFE_NEXT_LINK|UNDOCUMENTED_|NEXT_LINK_|EMPTY_NEXT|LIST_SHAPE|DUPLICATE_|SITE_|AGENT_|ORG_SITE)/.test(code))return 'INVENTORY';
  if(/^(HASH_|DRYRUN_PLAN_|DRYRUN_PLAN_SCOPE)/.test(code))return 'PLAN';
  if(/^(CLAIM_CONFLICT|DRYRUN_CREATE|AUDIT_IO)/.test(code))return 'GCS_CREATE';
- if(/^(DRYRUN_READBACK|DRYRUN_READ|GCP_TOKEN)/.test(code))return 'GCS_READBACK';
+ if(/^(DRYRUN_READBACK|DRYRUN_READ)/.test(code))return 'GCS_READBACK';
  return 'UNKNOWN';
 }
 if(typeof require!=='undefined'&&require.main===module){
