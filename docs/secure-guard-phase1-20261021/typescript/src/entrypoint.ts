@@ -1,4 +1,4 @@
-import {checkPolicy,getOnlyPlan,type Policy} from './plan';
+import {checkPolicy,getOnlyPlan,observe,type Phase,type PhaseObserver,type PhaseStatus,type Policy} from './plan';
 import {GuardStore,GUARD_BUCKET,type StorageTransport} from './gcs';
 import {saveDryRun} from './durable';
 import {GuardStop} from './inventory';
@@ -45,19 +45,19 @@ export const gcsTransport:StorageTransport=async(method,url,headers,body)=>{
   return {status:response.status,body:(response.status===200||response.status===201)?await response.json().catch(()=>null):null};
  }catch{return {status:0,body:null};}
 };
-export async function execute():Promise<unknown>{
+export async function execute(observer?:PhaseObserver):Promise<unknown>{
+ observe(observer,'POLICY','ENTER');
  if(process.argv.length!==2)throw new GuardStop('ARGUMENT_OVERRIDE_FORBIDDEN');
  const p=JSON.parse(fs.readFileSync('/app/runtime-policy.json','utf8')) as Policy;
  checkPolicy(p);
  if(process.env.CLOUD_RUN_JOB!==p.job||!process.env.CLOUD_RUN_EXECUTION)throw new GuardStop('EXPECTED_CLOUD_RUN_JOB_REQUIRED');
- const identity=await metadataEmail();
- if(!identity)throw new GuardStop('RUNTIME_IDENTITY_UNAVAILABLE');
+ observe(observer,'POLICY','COMPLETE');
  const secret=async()=>{try{return fs.readFileSync(p.secret_path,'utf8');}catch{throw new GuardStop('SECRET_MOUNT_UNAVAILABLE');}};
- const plan=await getOnlyPlan(p,async()=>identity,secret,dnsGet);
+ const plan=await getOnlyPlan(p,metadataEmail,secret,dnsGet,observer);
  const store=new GuardStore(GUARD_BUCKET,'DryRun',gcsTransport,token);
- return saveDryRun(store,plan,p);
+ return saveDryRun(store,plan,p,observer);
 }
-type Stage='POLICY'|'IDENTITY'|'SECRET'|'OPENAPI'|'ORGANIZATION'|'INVENTORY'|'PLAN'|'GCS_CREATE'|'GCS_READBACK'|'UNKNOWN';
+type Stage=Phase|'UNKNOWN';
 function stageFor(code:string):Stage{
  if(/^(ARGUMENT_OVERRIDE|C1_DRYRUN|DEPLOYMENT_SCOPE|EXPECTED_IDENTITY|ORGANIZATION_NOT_ALLOWED|SOURCE_SHA|PINNED_SECRET_VERSION|SECRET_VERSION)_/.test(code))return 'POLICY';
  if(/^RUNTIME_(SERVICE_)?IDENTITY/.test(code))return 'IDENTITY';
@@ -71,9 +71,11 @@ function stageFor(code:string):Stage{
  return 'UNKNOWN';
 }
 if(typeof require!=='undefined'&&require.main===module){
- execute().then(receipt=>{process.stdout.write(JSON.stringify(receipt)+'\n');}).catch((e:unknown)=>{
+ let lastPhase:{phase:Phase|"UNKNOWN";status:PhaseStatus}={phase:'UNKNOWN',status:'ENTER'};
+ const phaseObserver:PhaseObserver=(phase,status)=>{lastPhase={phase,status};process.stdout.write(JSON.stringify({event:'SG_PHASE',phase,status})+'\n');};
+ execute(phaseObserver).then(receipt=>{process.stdout.write(JSON.stringify(receipt)+'\n');}).catch((e:unknown)=>{
   const code=e instanceof GuardStop&&/^[A-Z][A-Z0-9_]+$/.test(e.code)?e.code:'UNEXPECTED_ERROR_DETAILS_WITHHELD';
-  process.stdout.write(JSON.stringify({state:'STOP',code,stage:stageFor(code),mutations:0})+'\n');process.exitCode=1;
+  process.stdout.write(JSON.stringify({state:'STOP',code,stage:stageFor(code),last_phase:lastPhase,mutations:0})+'\n');process.exitCode=1;
  });
 }
 declare const module:unknown;

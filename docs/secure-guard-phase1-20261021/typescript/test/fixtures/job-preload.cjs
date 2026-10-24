@@ -32,7 +32,7 @@ global.fetch=async(url,options)=>{
   if(scenario==='timeout'||scenario==='network')throw Error('synthetic-secret-marker');
   if(['401','403','redirect'].includes(scenario))return response(scenario==='redirect'?302:Number(scenario),null);
   if(u.pathname==='/docs/api.json')return response(200,spec);
-  if(u.pathname.startsWith('/v1/organizations/'))return response(200,{data:{id:policy.organization_id,attributes:{managed_by_msp_id:policy.msp_parent_id}}});
+  if(u.pathname.startsWith('/v1/organizations/'))return response(200,{data:{id:policy.organization_id,attributes:{managed_by_msp_id:scenario==='org-mismatch'?'other-msp':policy.msp_parent_id}}});
   if(u.pathname==='/v1/networks'){const body=page([{id:'S1',attributes:{name:'Synthetic Site',organization_id:policy.organization_id}}]);if(scenario==='bad-page-url')body.links.next='http://[';return response(200,body);}
   if(u.pathname==='/v1/user_agents')return response(200,page([agent]));
   throw Error('unexpected DNS path');

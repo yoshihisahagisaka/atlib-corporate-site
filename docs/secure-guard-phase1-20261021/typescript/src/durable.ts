@@ -1,9 +1,10 @@
 import {GuardStop} from './inventory';
 import {GuardStore} from './gcs';
-import {checkPolicy,hashOrdered,type Policy} from './plan';
+import {checkPolicy,hashOrdered,type PhaseObserver,type Policy} from './plan';
 
 const fail=(code:string):never=>{throw new GuardStop(code)};
 type Obj=Record<string,any>;
+const observe=(observer:PhaseObserver|undefined,phase:'GCS_CREATE'|'GCS_READBACK',status:'ENTER'|'COMPLETE'):void=>{try{observer?.(phase,status);}catch{/* diagnostics are observational only */}};
 const object=(v:unknown):Obj=>v!==null&&typeof v==='object'&&!Array.isArray(v)?v as Obj:fail('DRYRUN_PLAN_SCHEMA_INVALID');
 const keys=(v:unknown,expected:string[]):Obj=>{
  const o=object(v),actual=Object.keys(o);
@@ -59,18 +60,22 @@ export async function projectPlan(plan:unknown,policy:Policy){
  if(await hashOrdered(payload)!==p0.plan_hash||await hashOrdered(p)!==p0.plan_hash)fail('DRYRUN_PLAN_HASH_MISMATCH');
  return {plan_hash:txt(p0.plan_hash),payload};
 }
-export async function saveDryRun(store:GuardStore,plan:unknown,policy:Policy){
+export async function saveDryRun(store:GuardStore,plan:unknown,policy:Policy,observer?:PhaseObserver){
  if(store.scope!=='DryRun')fail('AUDIT_STORE_SCOPE_INVALID');
  const safe=await projectPlan(plan,policy);
  const path=`dryruns/organizations/${safe.payload.inventory.organization_id}/plans/${safe.plan_hash}.json`;
+ observe(observer,'GCS_CREATE','ENTER');
  const response=await store.request('POST',path,safe);
  if(response===null||typeof response!=='object'||Array.isArray(response))fail('DRYRUN_CREATE_RESULT_UNKNOWN_NO_RESEND');
  const created=response as Obj;
  if(created.bucket!==store.bucket||created.name!==path||!(/^[1-9][0-9]*$/.test(String(created.generation))))fail('DRYRUN_CREATE_RESULT_UNKNOWN_NO_RESEND');
  const generation=String(created.generation);
+ observe(observer,'GCS_CREATE','COMPLETE');
+ observe(observer,'GCS_READBACK','ENTER');
  const read=await store.request('GET',path,null,generation);
  if(read===null)fail('DRYRUN_READBACK_MISSING');
  const verified=await projectPlan(read,policy);
  if(verified.plan_hash!==safe.plan_hash||await hashOrdered(verified)!==await hashOrdered(safe))fail('DRYRUN_READBACK_CONTENT_MISMATCH');
+ observe(observer,'GCS_READBACK','COMPLETE');
  return {status:'DRYRUN_DURABLE_VERIFIED',source_sha:policy.source_sha,plan_hash:safe.plan_hash,gcs_object:`gs://${store.bucket}/${path}`,generation,site_count:safe.payload.inventory.sites.length,agent_count:safe.payload.inventory.agents.length,mutations:0};
 }

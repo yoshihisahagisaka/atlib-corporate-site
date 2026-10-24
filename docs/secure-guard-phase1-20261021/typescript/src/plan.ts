@@ -2,6 +2,10 @@ import type {Get} from './inventory';
 import {GuardStop,inventory} from './inventory';
 
 export type Policy={project:string;region:string;job:string;mode:string;organization_id:string;organization_allowlist:string[];msp_parent_id:string;runtime_service_account:string;source_sha:string;secret_version:string;secret_version_resource:string;secret_path:string};
+export type Phase='POLICY'|'IDENTITY'|'SECRET'|'OPENAPI'|'ORGANIZATION'|'INVENTORY'|'PLAN'|'GCS_CREATE'|'GCS_READBACK';
+export type PhaseStatus='ENTER'|'COMPLETE';
+export type PhaseObserver=(phase:Phase,status:PhaseStatus)=>void;
+export function observe(observer:PhaseObserver|undefined,phase:Phase,status:PhaseStatus):void{try{observer?.(phase,status);}catch{/* diagnostics are observational only */}}
 const fail=(s:string):never=>{throw new GuardStop(s)};
 export function checkPolicy(p:Policy,args:string[]=[]):void{
  if(args.length)fail('ARGUMENT_OVERRIDE_FORBIDDEN');
@@ -32,24 +36,35 @@ function psJson(value:unknown):string {
  return visit(value);
 }
 export async function hashOrdered(value:unknown):Promise<string>{const bytes=new TextEncoder().encode(psJson(value));const digest=await crypto.subtle.digest('SHA-256',bytes);return Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');}
-export async function makePlan(sourceSha:string,inv:Awaited<ReturnType<typeof inventory>>){
+export async function makePlan(sourceSha:string,inv:Awaited<ReturnType<typeof inventory>>,observer?:PhaseObserver){
+ observe(observer,'PLAN','ENTER');
  const payload={source_sha:sourceSha,mode:'DryRun' as const,inventory:inv,mutations_enabled:false as const};
- return {plan_hash:await hashOrdered(payload),payload};
+ const plan={plan_hash:await hashOrdered(payload),payload};
+ observe(observer,'PLAN','COMPLETE');
+ return plan;
 }
 export type AuthenticatedGet=(url:string,headers:Readonly<Record<string,string>>)=>ReturnType<Get>;
-export async function getOnlyPlan(p:Policy,identity:()=>Promise<string>,secret:()=>Promise<string>,fetch:AuthenticatedGet){
+export async function getOnlyPlan(p:Policy,identity:()=>Promise<string>,secret:()=>Promise<string>,fetch:AuthenticatedGet,observer?:PhaseObserver){
  checkPolicy(p);
- if(await identity()!==p.runtime_service_account)fail('RUNTIME_SERVICE_IDENTITY_MISMATCH');
+ observe(observer,'IDENTITY','ENTER');
+ const actualIdentity=await identity();
+ if(!actualIdentity)fail('RUNTIME_IDENTITY_UNAVAILABLE');
+ if(actualIdentity!==p.runtime_service_account)fail('RUNTIME_SERVICE_IDENTITY_MISMATCH');
+ observe(observer,'IDENTITY','COMPLETE');
+ observe(observer,'SECRET','ENTER');
  const key=await secret();
  if(!key||!key.trim()||/[\r\n]/.test(key))fail('SECRET_PAYLOAD_EMPTY_OR_INVALID');
+ observe(observer,'SECRET','COMPLETE');
  const get:Get=async url=>{
   const u=new URL(url);
   if(u.protocol!=='https:'||u.hostname!=='api.dnsfilter.com'||u.port||u.username||u.password||u.hash)fail('DNS_URI_NOT_ALLOWED');
   return fetch(url,{Authorization:'Bearer '+key,Accept:'application/json'});
  };
+ observe(observer,'OPENAPI','ENTER');
  const specResult=await get('https://api.dnsfilter.com/docs/api.json');
  if(specResult.status!==200)fail('GET_HTTP_'+specResult.status);
  if(!specResult.body||typeof specResult.body!=='object'||Array.isArray(specResult.body))fail('MISSING_OPERATION_get_/v1/organizations/{id}');
- const inv=await inventory(get,specResult.body as Record<string,unknown>,p.organization_id,p.msp_parent_id);
- return makePlan(p.source_sha,inv);
+ observe(observer,'OPENAPI','COMPLETE');
+ const inv=await inventory(get,specResult.body as Record<string,unknown>,p.organization_id,p.msp_parent_id,observer);
+ return makePlan(p.source_sha,inv,observer);
 }
