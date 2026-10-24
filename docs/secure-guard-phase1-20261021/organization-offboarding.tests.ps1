@@ -19,7 +19,7 @@ $invoke={param($method,$uri)
 }
 function Baseline {
  $script:calls=@();$script:responses=@{}
- $script:responses['https://api.dnsfilter.com/v1/organizations/10220954']=Obj @{data=@{id='10220954';attributes=@{managed_by_msp_id='10220948'}}}
+ $script:responses['https://api.dnsfilter.com/v1/organizations/10220954']=Obj @{data=@{id='10220954';attributes=@{managed_by_msp_id='11473'}}}
  $script:responses['https://api.dnsfilter.com/v1/networks?organization_id=10220954']=Page @((Site 'S1')) 2 'https://api.dnsfilter.com/v1/networks?organization_id=10220954&page=2'
  $script:responses['https://api.dnsfilter.com/v1/networks?organization_id=10220954&page=2']=Page @((Site 'S2')) 2
  $script:responses['https://api.dnsfilter.com/v1/user_agents?organization_ids=10220954&network_ids=S1']=Page @((Agent 'dynamic-uuid')) 1
@@ -33,45 +33,45 @@ function ExpectStop([string]$expected,[scriptblock]$body) {
  throw ('Expected STOP: '+$expected)
 }
 Check 'Organization discovery, two Site pages, empty Site and one dynamic agent' {
- Baseline; $x=SG-Inventory $invoke $spec '10220954' '10220948'
+ Baseline; $x=SG-Inventory $invoke $spec '10220954' '11473'
  if ($x.sites.Count -ne 2 -or $x.agents.Count -ne 1 -or $x.agents[0].uuid -ne 'dynamic-uuid' -or $x.agents[0].hostname -cne 'Actual-HOST-l-I') { throw 'Inventory mismatch' }
  if (@($script:calls | Where-Object method -ne 'GET').Count) { throw 'Mutation during Dry Run' }
 }
 Check 'Unknown pagination proof stops even when only one row' {
  Baseline;$script:responses['https://api.dnsfilter.com/v1/user_agents?organization_ids=10220954&network_ids=S1'].meta=Obj @{}
- ExpectStop 'PAGINATION_TOTAL_UNVERIFIED' { SG-Inventory $invoke $spec '10220954' '10220948' }
+ ExpectStop 'PAGINATION_TOTAL_UNVERIFIED' { SG-Inventory $invoke $spec '10220954' '11473' }
 }
 Check 'Duplicate Site ID across pages stops' {
  Baseline;$script:responses['https://api.dnsfilter.com/v1/networks?organization_id=10220954&page=2']=Page @((Site 'S1')) 2
- ExpectStop 'DUPLICATE_OR_MISSING_RESOURCE_ID' { SG-Inventory $invoke $spec '10220954' '10220948' }
+ ExpectStop 'DUPLICATE_OR_MISSING_RESOURCE_ID' { SG-Inventory $invoke $spec '10220954' '11473' }
 }
 Check 'Parent relation mismatch stops' {
  Baseline;$script:responses['https://api.dnsfilter.com/v1/organizations/10220954'].data.attributes.managed_by_msp_id='other'
- ExpectStop 'ORG_PARENT_MISMATCH_OR_UNKNOWN' { SG-Inventory $invoke $spec '10220954' '10220948' }
+ ExpectStop 'ORG_PARENT_MISMATCH_OR_UNKNOWN' { SG-Inventory $invoke $spec '10220954' '11473' }
 }
 Check 'Cross-Organization Site stops' {
  Baseline;$script:responses['https://api.dnsfilter.com/v1/networks?organization_id=10220954&page=2']=Page @((Site 'S2' 'other')) 2
- ExpectStop 'SITE_ORG_MISMATCH' { SG-Inventory $invoke $spec '10220954' '10220948' }
+ ExpectStop 'SITE_ORG_MISMATCH' { SG-Inventory $invoke $spec '10220954' '11473' }
 }
 Check 'Agent belongs to a different Site stops' {
  Baseline;$script:responses['https://api.dnsfilter.com/v1/user_agents?organization_ids=10220954&network_ids=S1']=Page @((Agent 'dynamic-uuid' 'S2')) 1
- ExpectStop 'AGENT_SITE_MISMATCH' { SG-Inventory $invoke $spec '10220954' '10220948' }
+ ExpectStop 'AGENT_SITE_MISMATCH' { SG-Inventory $invoke $spec '10220954' '11473' }
 }
 Check 'Organization-only orphan agent catches omitted Site' {
  Baseline;$script:responses['https://api.dnsfilter.com/v1/user_agents?organization_ids=10220954']=Page @((Agent 'dynamic-uuid'),(Agent 'orphan' 'S9')) 2
- ExpectStop 'ORG_SITE_INVENTORY_MISMATCH' { SG-Inventory $invoke $spec '10220954' '10220948' }
+ ExpectStop 'ORG_SITE_INVENTORY_MISMATCH' { SG-Inventory $invoke $spec '10220954' '11473' }
 }
 Check 'Pagination next link cannot cross host' {
  Baseline;$script:responses['https://api.dnsfilter.com/v1/networks?organization_id=10220954'].links.next='https://evil.example/v1/networks?organization_id=10220954&page=2'
- ExpectStop 'UNSAFE_NEXT_LINK' { SG-Inventory $invoke $spec '10220954' '10220948' }
+ ExpectStop 'UNSAFE_NEXT_LINK' { SG-Inventory $invoke $spec '10220954' '11473' }
 }
 Check 'Pagination next link cannot change scope' {
  Baseline;$script:responses['https://api.dnsfilter.com/v1/networks?organization_id=10220954'].links.next='https://api.dnsfilter.com/v1/networks?organization_id=other&page=2'
- ExpectStop 'PAGINATION_SCOPE_CHANGED' { SG-Inventory $invoke $spec '10220954' '10220948' }
+ ExpectStop 'PAGINATION_SCOPE_CHANGED' { SG-Inventory $invoke $spec '10220954' '11473' }
 }
 Check 'API failure prevents a completed inventory' {
  Baseline;$script:responses.Remove('https://api.dnsfilter.com/v1/networks?organization_id=10220954&page=2')
- ExpectStop 'GET_HTTP_500' { SG-Inventory $invoke $spec '10220954' '10220948' }
+ ExpectStop 'GET_HTTP_500' { SG-Inventory $invoke $spec '10220954' '11473' }
 }
 Check 'Uninstall semantics and UUID path confirmed from mock spec' { SG-UninstallSchema $spec }
 Check 'Missing queue_uninstall blocks mutation readiness' {
@@ -79,7 +79,7 @@ Check 'Missing queue_uninstall blocks mutation readiness' {
  ExpectStop 'QUERY_NOT_DOCUMENTED_queue_uninstall' { SG-UninstallSchema $bad }
 }
 Check 'Serialization roundtrip keeps reviewed plan hash stable' {
- Baseline;$payload=[ordered]@{operation_id='offline';inventory=(SG-Inventory $invoke $spec '10220954' '10220948')}
+ Baseline;$payload=[ordered]@{operation_id='offline';inventory=(SG-Inventory $invoke $spec '10220954' '11473')}
  if ((SG-Hash $payload) -cne (SG-Hash (Obj $payload))) { throw 'Hash roundtrip mismatch' }
 }
 Check 'Atomic claim cannot be overwritten by repeated request' {
@@ -108,12 +108,16 @@ Check 'Unattended authentication returns only injected fixture value in memory' 
 Check 'DNSFilter 401 stops inventory before any later action' {
  Baseline
  $unauthorized={param($method,$uri) return [pscustomobject]@{status=401;body=$null}}
- ExpectStop 'GET_HTTP_401' { SG-Inventory $unauthorized $spec '10220954' '10220948' }
+ ExpectStop 'GET_HTTP_401' { SG-Inventory $unauthorized $spec '10220954' '11473' }
 }
 Check 'Secret-like API fields are excluded from the frozen inventory' {
  Baseline
  $script:responses['https://api.dnsfilter.com/v1/networks?organization_id=10220954'].data[0].attributes | Add-Member -NotePropertyName secret_key -NotePropertyValue 'synthetic-must-not-appear'
- $json=SG-Inventory $invoke $spec '10220954' '10220948' | ConvertTo-Json -Depth 20
+ $json=SG-Inventory $invoke $spec '10220954' '11473' | ConvertTo-Json -Depth 20
  if ($json -match 'secret_key|synthetic-must-not-appear') { throw 'Unsafe inventory projection' }
 }
 [ordered]@{kind='offline_fixtures_not_live_api';live_requests=0;total=$script:results.Count;results=$script:results} | ConvertTo-Json -Depth 8
+
+# MSP ID is distinct from atLIB Organization ID; the legacy Organization ID must fail as an MSP relation.
+Baseline;$script:responses['https://api.dnsfilter.com/v1/organizations/10220954'].data.attributes.managed_by_msp_id='10220948'
+ExpectStop 'ORG_PARENT_MISMATCH_OR_UNKNOWN' { SG-Inventory $invoke $spec '10220954' '11473' }
