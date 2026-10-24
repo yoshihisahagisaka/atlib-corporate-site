@@ -10,3 +10,6 @@ test('scope prevents claims in dryrun',async()=>{let n=0;const s=store(async()=>
 test('invalid path rejected before token',async()=>{const s=store(async()=>{throw Error('called');});await assert.rejects(()=>s.request('GET','../../secrets'),{code:'AUDIT_OBJECT_PATH_INVALID'});});
 test('token failure stops before HTTP',async()=>{let n=0;const s=store(async()=>{n++;return {status:200,body:{}};},'DryRun',async()=>{throw Error('token detail');});await assert.rejects(()=>s.request('GET',path),{code:'GCP_TOKEN_UNAVAILABLE'});assert.equal(n,0);});
 test('404 read returns null',async()=>{const s=store(async()=>({status:404,body:null}));assert.equal(await s.request('GET',path),null);});
+
+test('null transport response fails with safe UNKNOWN code',async()=>{let n=0;const s=store(async()=>{n++;return null;});await assert.rejects(()=>s.request('POST',path,{}),{code:'AUDIT_IO_FAILED_UNKNOWN_NO_RESEND'});assert.equal(n,1);});
+test('undefined transport response fails with safe UNKNOWN code',async()=>{let n=0;const s=store(async()=>{n++;return undefined;});await assert.rejects(()=>s.request('POST',path,{}),{code:'AUDIT_IO_FAILED_UNKNOWN_NO_RESEND'});assert.equal(n,1);});
