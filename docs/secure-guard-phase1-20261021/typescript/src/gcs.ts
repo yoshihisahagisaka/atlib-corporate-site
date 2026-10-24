@@ -29,6 +29,7 @@ export class GuardStore {
   try{
    response=await this.transport(method,url,{Authorization:'Bearer '+token,...(method==='POST'?{'Content-Type':'application/json'}:{})},method==='POST'?JSON.stringify(value):null);
   }catch{return fail('AUDIT_IO_FAILED_UNKNOWN_NO_RESEND');}
+  if(!response||typeof response!=='object'||typeof response.status!=='number'||!Number.isInteger(response.status))fail('AUDIT_IO_FAILED_UNKNOWN_NO_RESEND');
   if(method==='GET'&&response.status===404)return null;
   if(response.status===412)fail('CLAIM_CONFLICT_UNKNOWN_NO_RESEND');
   if(response.status!==200&&response.status!==201)fail('AUDIT_IO_FAILED_UNKNOWN_NO_RESEND');
