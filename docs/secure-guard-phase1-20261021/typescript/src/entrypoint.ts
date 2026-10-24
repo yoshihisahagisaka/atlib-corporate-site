@@ -57,10 +57,23 @@ export async function execute():Promise<unknown>{
  const store=new GuardStore(GUARD_BUCKET,'DryRun',gcsTransport,token);
  return saveDryRun(store,plan,p);
 }
+type Stage='POLICY'|'IDENTITY'|'SECRET'|'OPENAPI'|'ORGANIZATION'|'INVENTORY'|'PLAN'|'GCS_CREATE'|'GCS_READBACK'|'UNKNOWN';
+function stageFor(code:string):Stage{
+ if(/^(ARGUMENT_OVERRIDE|C1_DRYRUN|DEPLOYMENT_SCOPE|EXPECTED_IDENTITY|ORGANIZATION_NOT_ALLOWED|SOURCE_SHA|PINNED_SECRET_VERSION|SECRET_VERSION)_/.test(code))return 'POLICY';
+ if(/^RUNTIME_(SERVICE_)?IDENTITY/.test(code))return 'IDENTITY';
+ if(/^SECRET_/.test(code))return 'SECRET';
+ if(/^(OPENAPI_|MISSING_OPERATION|QUERY_|EXTERNAL_SCHEMA_REF|UNRESOLVED_SCHEMA_REF|SCHEMA_REF_LOOP|DNS_URI_NOT_ALLOWED|GET_HTTP_)/.test(code))return 'OPENAPI';
+ if(/^(ORG_PARENT|RELATION_UNKNOWN|INVALID_OR_PARENT)/.test(code))return 'ORGANIZATION';
+ if(/^(PAGINATION_|UNSAFE_NEXT_LINK|UNDOCUMENTED_|NEXT_LINK_|EMPTY_NEXT|LIST_SHAPE|DUPLICATE_|SITE_|AGENT_|ORG_SITE)/.test(code))return 'INVENTORY';
+ if(/^(HASH_|DRYRUN_PLAN_|DRYRUN_PLAN_SCOPE)/.test(code))return 'PLAN';
+ if(/^(CLAIM_CONFLICT|DRYRUN_CREATE|AUDIT_IO)/.test(code))return 'GCS_CREATE';
+ if(/^(DRYRUN_READBACK|DRYRUN_READ|GCP_TOKEN)/.test(code))return 'GCS_READBACK';
+ return 'UNKNOWN';
+}
 if(typeof require!=='undefined'&&require.main===module){
  execute().then(receipt=>{process.stdout.write(JSON.stringify(receipt)+'\n');}).catch((e:unknown)=>{
   const code=e instanceof GuardStop&&/^[A-Z][A-Z0-9_]+$/.test(e.code)?e.code:'UNEXPECTED_ERROR_DETAILS_WITHHELD';
-  process.stdout.write(JSON.stringify({state:'STOP',code,mutations:0})+'\n');process.exitCode=1;
+  process.stdout.write(JSON.stringify({state:'STOP',code,stage:stageFor(code),mutations:0})+'\n');process.exitCode=1;
  });
 }
 declare const module:unknown;

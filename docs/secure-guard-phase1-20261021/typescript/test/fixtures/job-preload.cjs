@@ -14,6 +14,8 @@ if(scenario==='execution')delete process.env.CLOUD_RUN_EXECUTION;else process.en
 const page=(data)=>({data,links:{next:null},meta:{total_count:data.length}});
 const agent={id:'synthetic-agent',attributes:{hostname:'Host\u2028Synthetic',organization_id:policy.organization_id,network_id:'S1',status:'active',agent_state:'protected'}};
 const spec={paths:{'/v1/organizations/{id}':{get:{parameters:[]}},'/v1/networks':{get:{parameters:[{name:'organization_id',in:'query',type:'string'}]}},'/v1/user_agents':{get:{parameters:[{name:'organization_ids',in:'query',type:'array'},{name:'network_ids',in:'query',type:'array'}]}}}};
+if(scenario==='parameters-shape')spec.paths['/v1/networks'].get.parameters={name:'organization_id'};
+if(scenario==='unexpected')Object.hasOwn=undefined;
 let saved=null,objectName=null;
 const response=(status,body)=>({status,json:async()=>body,text:async()=>String(body)});
 global.fetch=async(url,options)=>{
@@ -31,7 +33,7 @@ global.fetch=async(url,options)=>{
   if(['401','403','redirect'].includes(scenario))return response(scenario==='redirect'?302:Number(scenario),null);
   if(u.pathname==='/docs/api.json')return response(200,spec);
   if(u.pathname.startsWith('/v1/organizations/'))return response(200,{data:{id:policy.organization_id,attributes:{managed_by_msp_id:policy.msp_parent_id}}});
-  if(u.pathname==='/v1/networks')return response(200,page([{id:'S1',attributes:{name:'Synthetic Site',organization_id:policy.organization_id}}]));
+  if(u.pathname==='/v1/networks'){const body=page([{id:'S1',attributes:{name:'Synthetic Site',organization_id:policy.organization_id}}]);if(scenario==='bad-page-url')body.links.next='http://[';return response(200,body);}
   if(u.pathname==='/v1/user_agents')return response(200,page([agent]));
   throw Error('unexpected DNS path');
  }
