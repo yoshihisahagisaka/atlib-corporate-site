@@ -13,3 +13,9 @@ The inventory algorithm takes an Organization ID and an MSP ID as separate input
 
 ## Safety and next gate
 GET-only DryRun, no overrides, create-only GCS readback, no resend on UNKNOWN, and disabled uninstall/delete paths are unchanged. A new build, new immutable image digest, and an approved Job update are required before another live E2E. No GCP, DNSFilter configuration, Cloud Build, or Job change is made by this correction.
+
+
+## C1/C2 integration verification
+The offline Job integration harness was rerun after the fixture correction. It exercises policy validation, authenticated GET-only Organization/Site/Agent inventory, DryRun plan hashing, create-only claim, generation-pinned readback, content/hash verification, and receipt generation. The normal scenario and an independently synthesized customer Organization 20990001 (with its own synthetic policy allowlist) both reached `DRYRUN_DURABLE_VERIFIED`; the latter uses the same runtime code path and writes only within its own synthetic Organization path. The suite also retains rejection of atLIB Organization ID 10220948 when presented as an MSP ID, foreign MSP relationships, missing/conflicting relations, and no-resend behavior after uncertain creation results.
+
+Verification on 2026-10-24: strict TypeScript check, build, and 73 tests passed with 0 failures in an isolated copy of this PR. Node.js 20 was not installed in the authorized environment; the available runtime was Node.js 24.18.0, so a Node 20 rerun remains a release-gate follow-up rather than a PASS assertion. The requested `npm ci` could not download TypeScript because registry DNS resolution failed; verification used the lockfile-matched TypeScript 7.0.2 compiler already present in an earlier local validation copy. No secrets or tokens were emitted.
