@@ -24,7 +24,7 @@ function Reset {
   $script:agent=O @{id='discovered-uuid';attributes=@{organization_id='10220954';network_id='discovered-site';hostname='Actual-I-l-HOST';status='active';agent_state='protected';api_key='synthetic-hidden-response'}}
   $script:responses=@{
     'https://api.dnsfilter.com/docs/api.json'=$script:spec
-    'https://api.dnsfilter.com/v1/organizations/10220954'=(O @{data=@{id='10220954';attributes=@{managed_by_msp_id='10220948'}}})
+    'https://api.dnsfilter.com/v1/organizations/10220954'=(O @{data=@{id='10220954';attributes=@{managed_by_msp_id='11473'}}})
     'https://api.dnsfilter.com/v1/networks?organization_id=10220954'=(P @((O @{id='discovered-site';attributes=@{name='Fixture Site';organization_id='10220954';secret_key='synthetic-hidden-response'}})))
     'https://api.dnsfilter.com/v1/user_agents?organization_ids=10220954&network_ids=discovered-site'=(P @($script:agent))
     'https://api.dnsfilter.com/v1/user_agents?organization_ids=10220954'=(P @($script:agent))
@@ -78,6 +78,7 @@ foreach ($status in @(401,403)) {
 }
 Check 'Unknown OpenAPI shape stops' { Reset;$script:spec.paths='/unknown';StopIs 'MISSING_OPERATION_get_/v1/organizations/{id}' { Plan } }
 Check 'Unproven pagination stops' { Reset;$script:responses['https://api.dnsfilter.com/v1/networks?organization_id=10220954'].links=O @{};StopIs 'PAGINATION_TERMINATOR_UNVERIFIED' { Plan } }
+Check 'atLIB Organization ID is rejected when used as MSP ID' { Reset;$script:responses['https://api.dnsfilter.com/v1/organizations/10220954'].data.attributes.managed_by_msp_id='10220948';StopIs 'ORG_PARENT_MISMATCH_OR_UNKNOWN' { Plan } }
 Check 'Organization parent mismatch stops' { Reset;$script:responses['https://api.dnsfilter.com/v1/organizations/10220954'].data.attributes.managed_by_msp_id='other';StopIs 'ORG_PARENT_MISMATCH_OR_UNKNOWN' { Plan } }
 Check 'Site membership mismatch stops' { Reset;$script:responses['https://api.dnsfilter.com/v1/networks?organization_id=10220954'].data[0].attributes.organization_id='other';StopIs 'SITE_ORG_MISMATCH' { Plan } }
 Check 'Agent membership mismatch stops' { Reset;$script:responses['https://api.dnsfilter.com/v1/user_agents?organization_ids=10220954&network_ids=discovered-site'].data[0].attributes.organization_id='other';StopIs 'AGENT_ORG_MISMATCH' { Plan } }
