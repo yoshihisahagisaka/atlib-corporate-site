@@ -16,6 +16,11 @@ const decimal=(v:unknown,positive=false):number=>{
  if(!Number.isSafeInteger(n)||n<(positive?1:0))fail('DRYRUN_PLAN_SCHEMA_INVALID');
  return n;
 };
+const numericShape=(v:unknown,positive=false):void=>{
+ const raw=String(v);
+ if(!/^[0-9]+$/.test(raw)|| (positive&&!/^[1-9][0-9]*$/.test(raw)))fail('DRYRUN_PLAN_SCHEMA_INVALID');
+ decimal(v,positive);
+};
 const txt=(v:unknown):string=>typeof v==='string'?v:fail('DRYRUN_PLAN_SCHEMA_INVALID');
 export async function projectPlan(plan:unknown,policy:Policy){
  checkPolicy(policy);
@@ -38,13 +43,15 @@ export async function projectPlan(plan:unknown,policy:Policy){
   agentIds.add(uuid.toLowerCase());agents.push({uuid,hostname,organization_id:txt(a.organization_id),site_id:site,status,agent_state:state});
  }
  const g=keys(i.paging,['site_pages','site_total','org_agent_pages','org_agent_total','per_site']);
- const sitePages=decimal(g.site_pages),siteTotal=decimal(g.site_total),orgPages=decimal(g.org_agent_pages),orgTotal=decimal(g.org_agent_total);
- if(!Array.isArray(g.per_site)||siteTotal!==sites.length||orgTotal!==agents.length||g.per_site.length!==sites.length)fail('DRYRUN_PLAN_SCHEMA_INVALID');
+ for(const field of ['site_pages','site_total','org_agent_pages','org_agent_total'])numericShape(g[field]);
+ const sitePages=g.site_pages,siteTotal=g.site_total,orgPages=g.org_agent_pages,orgTotal=g.org_agent_total;
+ if(!Array.isArray(g.per_site)||Number(siteTotal)!==sites.length||Number(orgTotal)!==agents.length||g.per_site.length!==sites.length)fail('DRYRUN_PLAN_SCHEMA_INVALID');
  const proofIds=new Set<string>(),perSite:Obj[]=[];
  for(const raw of g.per_site){
   const e=keys(raw,['scope','site_id','pages','total','proof']),id=txt(e.site_id);
-  const pages=decimal(e.pages,true),total=decimal(e.total);
-  if(e.scope!=='site'||!siteIds.has(id.toLowerCase())||proofIds.has(id.toLowerCase())||e.proof!=='explicit-next-null+stable-total_count+unique-ids'||agents.filter(a=>a.site_id===id).length!==total)fail('DRYRUN_PLAN_SCHEMA_INVALID');
+  numericShape(e.pages,true);numericShape(e.total);
+  const pages=e.pages,total=e.total;
+  if(e.scope!=='site'||!siteIds.has(id.toLowerCase())||proofIds.has(id.toLowerCase())||e.proof!=='explicit-next-null+stable-total_count+unique-ids'||agents.filter(a=>a.site_id===id).length!==Number(total))fail('DRYRUN_PLAN_SCHEMA_INVALID');
   proofIds.add(id.toLowerCase());perSite.push({scope:'site',site_id:id,pages,total,proof:txt(e.proof)});
  }
  if(i.visibility!=='API default documented collection only; relay/deleted visibility requires review')fail('DRYRUN_PLAN_SCHEMA_INVALID');
@@ -56,7 +63,9 @@ export async function saveDryRun(store:GuardStore,plan:unknown,policy:Policy){
  if(store.scope!=='DryRun')fail('AUDIT_STORE_SCOPE_INVALID');
  const safe=await projectPlan(plan,policy);
  const path=`dryruns/organizations/${safe.payload.inventory.organization_id}/plans/${safe.plan_hash}.json`;
- const created=object(await store.request('POST',path,safe));
+ const response=await store.request('POST',path,safe);
+ if(response===null||typeof response!=='object'||Array.isArray(response))fail('DRYRUN_CREATE_RESULT_UNKNOWN_NO_RESEND');
+ const created=response as Obj;
  if(created.bucket!==store.bucket||created.name!==path||!(/^[1-9][0-9]*$/.test(String(created.generation))))fail('DRYRUN_CREATE_RESULT_UNKNOWN_NO_RESEND');
  const generation=String(created.generation);
  const read=await store.request('GET',path,null,generation);
