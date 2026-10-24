@@ -1,7 +1,8 @@
 // Synthetic subprocess boundary. Never performs network or reads a real mounted secret.
 const fs=require('node:fs');
 const scenario=process.env.SG_TEST_SCENARIO||'success';
-const policy={project:'msp-zabbix',region:'asia-northeast1',job:'secure-guard-cancellation',mode:'DryRun',organization_id:'10220954',organization_allowlist:['10220954'],msp_parent_id:'10220948',runtime_service_account:'secure-guard-job-sa@msp-zabbix.iam.gserviceaccount.com',source_sha:'a'.repeat(40),secret_version:'7',secret_version_resource:'projects/msp-zabbix/secrets/secure-guard-dnsfilter-api-key/versions/7',secret_path:'/var/run/guard-secrets/7'};
+const policy={project:'msp-zabbix',region:'asia-northeast1',job:'secure-guard-cancellation',mode:'DryRun',organization_id:'10220954',organization_allowlist:['10220954'],msp_parent_id:'11473',runtime_service_account:'secure-guard-job-sa@msp-zabbix.iam.gserviceaccount.com',source_sha:'a'.repeat(40),secret_version:'7',secret_version_resource:'projects/msp-zabbix/secrets/secure-guard-dnsfilter-api-key/versions/7',secret_path:'/var/run/guard-secrets/7'};
+if(scenario==='other-customer'){policy.organization_id='20990001';policy.organization_allowlist=['20990001'];}
 if(scenario==='latest')policy.secret_version='latest';
 if(scenario==='parent')policy.organization_id=policy.msp_parent_id;
 if(scenario==='mode')policy.mode='RequestUninstall';
