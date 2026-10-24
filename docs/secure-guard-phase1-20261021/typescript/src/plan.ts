@@ -16,7 +16,7 @@ export function checkPolicy(p:Policy,args:string[]=[]):void{
 /** Matches the PowerShell ordered-property JSON contract for the ASCII fixture subset.
  * Cross-runtime PowerShell hash equivalence is a separate mandatory gate. */
 function psJson(value:unknown):string {
- const quote=(s:string)=>JSON.stringify(s).replace(/[\u0085\u2028\u2029]/g,c=>'\\\\u'+c.charCodeAt(0).toString(16).padStart(4,'0'));
+ const quote=(s:string)=>JSON.stringify(s).replace(/[\u0085\u2028\u2029]/g,c=>'\\u'+c.charCodeAt(0).toString(16).padStart(4,'0'));
  const visit=(v:unknown):string=>{
   if(v===null)return 'null';
   if(typeof v==='string')return quote(v);
