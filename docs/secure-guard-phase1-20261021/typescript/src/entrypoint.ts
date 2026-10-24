@@ -25,7 +25,7 @@ async function token():Promise<string>{
  if(!v||typeof v.access_token!=='string'||!v.access_token)throw new GuardStop('GCP_TOKEN_UNAVAILABLE');
  return v.access_token;
 }
-async function dnsGet(url:string,headers:Readonly<Record<string,string>>){
+export async function dnsGet(url:string,headers:Readonly<Record<string,string>>){
  try{
   const u=new URL(url);
   if(u.protocol!=='https:'||u.hostname!=='api.dnsfilter.com'||u.port||u.username||u.password||u.hash)throw new GuardStop('DNS_URI_NOT_ALLOWED');
@@ -33,10 +33,14 @@ async function dnsGet(url:string,headers:Readonly<Record<string,string>>){
   return {status:response.status,body:response.status===200?await response.json().catch(()=>null):null};
  }catch{return {status:0,body:null};}
 }
-const gcsTransport:StorageTransport=async(method,url,headers,body)=>{
+export const gcsTransport:StorageTransport=async(method,url,headers,body)=>{
  try{
   const u=new URL(url);
   if(u.protocol!=='https:'||u.hostname!=='storage.googleapis.com'||u.port||u.username||u.password||u.hash)throw Error('forbidden');
+  const prefix='/storage/v1/b/'+GUARD_BUCKET+'/o/';
+  const read=method==='GET'&&u.pathname.startsWith(prefix);
+  const create=method==='POST'&&u.pathname==='/upload/storage/v1/b/'+GUARD_BUCKET+'/o'&&u.searchParams.get('uploadType')==='media'&&u.searchParams.get('ifGenerationMatch')==='0';
+  if(!read&&!create)throw Error('forbidden');
   const response=await fetch(url,{method,headers,body:method==='POST'?body:undefined,redirect:'manual',signal:AbortSignal.timeout(30000)});
   return {status:response.status,body:(response.status===200||response.status===201)?await response.json().catch(()=>null):null};
  }catch{return {status:0,body:null};}
@@ -48,7 +52,7 @@ export async function execute():Promise<unknown>{
  if(process.env.CLOUD_RUN_JOB!==p.job||!process.env.CLOUD_RUN_EXECUTION)throw new GuardStop('EXPECTED_CLOUD_RUN_JOB_REQUIRED');
  const identity=await metadataEmail();
  if(!identity)throw new GuardStop('RUNTIME_IDENTITY_UNAVAILABLE');
- const secret=async()=>fs.readFileSync(p.secret_path,'utf8');
+ const secret=async()=>{try{return fs.readFileSync(p.secret_path,'utf8');}catch{throw new GuardStop('SECRET_MOUNT_UNAVAILABLE');}};
  const plan=await getOnlyPlan(p,async()=>identity,secret,dnsGet);
  const store=new GuardStore(GUARD_BUCKET,'DryRun',gcsTransport,token);
  return saveDryRun(store,plan,p);
@@ -60,3 +64,4 @@ if(typeof require!=='undefined'&&require.main===module){
  });
 }
 declare const module:unknown;
+
