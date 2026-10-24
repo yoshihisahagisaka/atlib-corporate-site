@@ -5,7 +5,7 @@
   "mode": "DryRun",
   "organization_id": "10220954",
   "organization_allowlist": ["10220954"],
-  "msp_parent_id": "10220948",
+  "msp_parent_id": "11473",
   "runtime_service_account": "secure-guard-job-sa@msp-zabbix.iam.gserviceaccount.com",
   "source_sha": "__SOURCE_SHA__",
   "secret_version": "__SECRET_VERSION__",
