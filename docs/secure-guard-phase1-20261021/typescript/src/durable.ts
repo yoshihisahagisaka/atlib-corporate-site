@@ -52,7 +52,7 @@ export async function projectPlan(plan:unknown,policy:Policy){
   const e=keys(raw,['scope','site_id','pages','total','proof']),id=txt(e.site_id);
   numericShape(e.pages,true);numericShape(e.total);
   const pages=e.pages,total=e.total;
-  if(e.scope!=='site'||!siteIds.has(id.toLowerCase())||proofIds.has(id.toLowerCase())||e.proof!=='explicit-next-null+stable-total_count+unique-ids'||agents.filter(a=>a.site_id===id).length!==Number(total))fail('DRYRUN_PLAN_SCHEMA_INVALID');
+  if(e.scope!=='site'||!siteIds.has(id.toLowerCase())||proofIds.has(id.toLowerCase())||!['explicit-next-null+stable-total_count+unique-ids','explicit-next-null+unique-ids'].includes(txt(e.proof))||agents.filter(a=>a.site_id===id).length!==Number(total))fail('DRYRUN_PLAN_SCHEMA_INVALID');
   proofIds.add(id.toLowerCase());perSite.push({scope:'site',site_id:id,pages,total,proof:txt(e.proof)});
  }
  if(i.visibility!=='API default documented collection only; relay/deleted visibility requires review')fail('DRYRUN_PLAN_SCHEMA_INVALID');
