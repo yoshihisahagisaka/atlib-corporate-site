@@ -13,7 +13,7 @@ process.env.CLOUD_RUN_JOB=scenario==='job'?'other':policy.job;
 if(scenario==='execution')delete process.env.CLOUD_RUN_EXECUTION;else process.env.CLOUD_RUN_EXECUTION='synthetic-execution';
 const page=(data)=>({data,links:{next:null},meta:{total_count:data.length}});
 const agent={id:'synthetic-agent',attributes:{hostname:'Host\u2028Synthetic',organization_id:policy.organization_id,network_id:'S1',status:'active',agent_state:'protected'}};
-const spec={paths:{'/v1/organizations/{id}':{get:{parameters:[]}},'/v1/networks':{get:{parameters:[{name:'organization_id',in:'query',type:'string'}]}},'/v1/user_agents':{get:{parameters:[{name:'organization_ids',in:'query',type:'array'},{name:'network_ids',in:'query',type:'array'}]}}}};
+const spec={paths:{'/v1/organizations/{id}':{get:{parameters:[]}},'/v1/networks':{get:{parameters:[]}},'/v1/user_agents':{get:{parameters:[{name:'organization_ids',in:'query',type:'array'},{name:'network_ids',in:'query',type:'array'}]}}}};
 if(scenario==='parameters-shape')spec.paths['/v1/networks'].get.parameters={name:'organization_id'};
 if(scenario==='unexpected')Object.hasOwn=undefined;
 let saved=null,objectName=null;
