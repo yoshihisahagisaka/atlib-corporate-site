@@ -2,7 +2,7 @@ import type {Get} from './inventory';
 import {GuardStop,inventory} from './inventory';
 
 export type Policy={project:string;region:string;job:string;mode:string;organization_id:string;organization_allowlist:string[];msp_parent_id:string;runtime_service_account:string;source_sha:string;secret_version:string;secret_version_resource:string;secret_path:string};
-export type Phase='POLICY'|'IDENTITY'|'SECRET'|'OPENAPI'|'ORGANIZATION'|'INVENTORY'|'PLAN'|'GCS_CREATE'|'GCS_READBACK';
+export type Phase='POLICY'|'IDENTITY'|'SECRET'|'OPENAPI'|'ORGANIZATION'|'INVENTORY'|'NETWORK_GET'|'PLAN'|'GCS_CREATE'|'GCS_READBACK';
 export type PhaseStatus='ENTER'|'COMPLETE';
 export type PhaseObserver=(phase:Phase,status:PhaseStatus)=>void;
 export function observe(observer:PhaseObserver|undefined,phase:Phase,status:PhaseStatus):void{try{observer?.(phase,status);}catch{/* diagnostics are observational only */}}
