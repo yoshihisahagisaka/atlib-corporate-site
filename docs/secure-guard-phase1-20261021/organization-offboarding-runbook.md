@@ -164,3 +164,11 @@ GCS adapterのJob接続・実GCP認証GET・永続排他・uninstall/Pending/Org
 [C2固定契約](c2-dryrun-durable-plan-contract-20261023.md) / [実装結果](c2-implementation-report-20261023.md)。最新entrypointはGET結果をGCS dryruns/organizations/{org}/plans/{hash}.jsonへcreate-only保存し、作成metadataとgeneration固定read-back/hash/内容の一致後だけ成功receiptを返す。一時ファイルだけでの成功判定は廃止。
 新34＋C1関連回帰46=80 PASS/0 FAIL（offline、実要求0）。以前のprototype20とmetadata8は履歴PASSを継承し再実行なし。C2実GCP PASSは未付与。実Build/Secret mount/DNSFilter GET/GCS保存と照合は別承認のゲート。
 Org/Agent claim・変更APIのlive接続は無効。Uninstall/Organization DELETE/自動claim解除は実装・有効化しない。GCP/DNSFilter変更0件、main変更なし。統括レビュー待ちで停止。
+
+## 2026-10-25 C2実環境E2E成功（最新追記）
+
+`secure-guard-cancellation-zk95b` はexit 0で完了した。実行Imageは`sha256:bf7c4626bc426a7940d0703124b6290f3ed67f77b138280b91806db3bf47731c`、Source SHAは`230865cf4649228872ff81aad27cfd90c0884020`である。
+
+Cloud LoggingでPOLICYからGCS_READBACKまでの全SG_PHASE COMPLETE、NETWORK_GET COMPLETE、Site 2、Agent 1、DryRun `mutations: 0`を確認した。plan hash `6eebef76bc63ae3a468854306b4f32dbe66e77ceee78f975038d6b5cbe307169`は、`dryruns/organizations/10220954/plans/`配下のgeneration `1792936630217425`のcreate-only objectと一致する。GCS_READBACK COMPLETEおよび`DRYRUN_DURABLE_VERIFIED` receiptを確認した。本文、hostname、Agent UUID、Secret、Token、DNSFilter生応答はRunbookへ記録しない。
+
+この成功はC2に限定する。再実行、C3 claim/audit、C4 Agent uninstall、C5 Organization DELETE、Scheduler、商用開始は別承認であり、今回の成功を根拠に自動的に有効化しない。

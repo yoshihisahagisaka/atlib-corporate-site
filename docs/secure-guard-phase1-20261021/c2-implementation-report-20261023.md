@@ -66,3 +66,19 @@ mockメモリ保存の結果であり、GCSサービスや実IAMのPASSではな
 **GCPリソース変更0、Cloud Build実行0、IAM変更0、Secret登録/実取得0、deploy0、DNSFilter実API要求0、Agent操作0、Organization DELETE0、Production/main変更0。** Draft PR #44更新後、統括レビュー待ちで停止。
 
 generation指定GETの根拠: https://docs.cloud.google.com/storage/docs/json_api/v1/objects/get
+
+## 2026-10-25 C2実環境E2E成功証跡（追記）
+
+この節は上記の実装時点の「未実測」記録を改変せず、その後に別途承認されたDryRun実行の非秘密証跡を固定する。実行を再送・再実行していない。
+
+|項目|確認結果|
+|---|---|
+|Execution|`secure-guard-cancellation-zk95b`、Completed=True、exit 0、task 1/1 succeeded|
+|実行Image / Source|`sha256:bf7c4626bc426a7940d0703124b6290f3ed67f77b138280b91806db3bf47731c` / `230865cf4649228872ff81aad27cfd90c0884020`|
+|処理段階|POLICY、IDENTITY、SECRET、OPENAPI、ORGANIZATION、INVENTORY、PLAN、GCS_CREATE、GCS_READBACKの全てでENTER/COMPLETEを確認。NETWORK_GETもENTER/COMPLETEを確認|
+|Inventory / DryRun|Site 2、Agent 1、`mutations: 0`|
+|耐久保存|plan hash `6eebef76bc63ae3a468854306b4f32dbe66e77ceee78f975038d6b5cbe307169`、GCS generation `1792936630217425`。create-only後、同一generationのread-back COMPLETEと`DRYRUN_DURABLE_VERIFIED` receiptを確認|
+
+GCS objectの本文、DNSFilter応答本文、hostname、Agent UUID、Secret/Token/Authorizationは取得・記録しない。成功receiptはHash・generation・件数・`mutations: 0`だけを出力する既存契約に従う。
+
+この実行はC2（GET-only inventory、DryRun計画、create-only保存、generation固定read-back）の正式PASSである。C3のclaim/audit live接続、C4のAgent操作、C5のOrganization DELETE、Scheduler化、商用運用開始をPASSには含めない。DNSFilter変更APIが0件であることは、JobのGET-only transport契約と`mutations: 0`を確認した範囲であり、DNSFilter側の独立監査記録は本証跡には含まれない。
