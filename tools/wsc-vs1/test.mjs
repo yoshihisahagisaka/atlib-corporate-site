@@ -23,6 +23,9 @@ assert.ok(first.includes('WebサイトのURLだけで、ここまで分かるこ
 assert.equal(APPROVED_INTRO, fs.readFileSync(path.join(root, 'approved-introduction-v7.html'), 'utf8').replace(/\r\n/g, '\n').trimEnd(), 'v7 approved introduction is exact');
 assert.match(first, /@media print/, 'print stylesheet is included');
 assert.match(first, /window\.print\(\)/, 'browser print control is included');
+assert.match(first, /\.report-section:not\(\.cover\)\{break-before:page/, 'print section starts');
+assert.match(first, /grid-template-columns:minmax\(0,1fr\) minmax\(0,1fr\)!important/, 'print overview two columns');
+assert.match(first, /\.finding\{break-inside:avoid/, 'print card protection');
 assert.match(first, /PUBLIC WEBSITE &amp; EMAIL SECURITY REVIEW/, 'v7 cover is included');
 for (const approved of ['通信の暗号化ができています','暗号化通信を継続する設定があります','ファイルの誤った取り扱いを抑える設定があります','プログラムの読み込み制限について確認をおすすめします','他サイトへの画面表示の制限について確認をおすすめします','メールの送信元を示す設定があります','偽メールの隔離・拒否を求める設定にはなっていません']) assert.ok(render(evaluate(json('atlib-security-check-v2.json'), opts), json('atlib-company.json')).includes(approved), `approved atLIB FV: ${approved}`);
 const protectedCompany = {name:'別企業', headOffice:'大阪府大阪市', url:'https://example-protected.test/'};
