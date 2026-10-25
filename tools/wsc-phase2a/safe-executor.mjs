@@ -1,8 +1,15 @@
 import net from 'node:net';
 
-const privateV4 = (ip) => /^(10\.|127\.|0\.|169\.254\.|172\.(1[6-9]|2\d|3[0-1])\.|192\.168\.|198\.1[89]\.|100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\.)/.test(ip);
-const privateV6 = (ip) => ip === '::1' || ip.startsWith('fc') || ip.startsWith('fd') || ip.startsWith('fe80:') || ip.startsWith('::ffff:127.');
-export const isPublicAddress = (ip) => net.isIP(ip) !== 0 && !privateV4(ip) && !privateV6(ip);
+const ipv4 = (ip) => ip.split('.').map(Number);
+const privateV4 = (ip) => {
+  const [a, b, c] = ipv4(ip);
+  return a === 0 || a === 10 || a === 127 || (a === 100 && b >= 64 && b <= 127) || (a === 169 && b === 254) || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 0 && c === 0) || (a === 192 && b === 0 && c === 2) || (a === 192 && b === 88 && c === 99) || (a === 192 && b === 168) || (a === 198 && (b === 18 || b === 19)) || (a === 198 && b === 51 && c === 100) || (a === 203 && b === 0 && c === 113) || a >= 224;
+};
+const privateV6 = (ip) => {
+  const value = ip.toLowerCase();
+  return value === '::' || value === '::1' || value.startsWith('::ffff:') || value.startsWith('::') || value.startsWith('fc') || value.startsWith('fd') || value.startsWith('fe80:') || value.startsWith('ff') || value.startsWith('64:ff9b:') || value.startsWith('64:ff9b:1:') || value.startsWith('100:') || value.startsWith('2001:db8:') || value.startsWith('2001:10:');
+};
+export const isPublicAddress = (ip) => net.isIP(ip) === 4 ? !privateV4(ip) : net.isIP(ip) === 6 && !privateV6(ip);
 
 export function validatePublicTarget(value, resolve) {
   let url;

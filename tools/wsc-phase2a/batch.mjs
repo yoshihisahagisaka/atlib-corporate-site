@@ -11,7 +11,12 @@ export async function runSyntheticBatch({ csv, executor, store, batchId, stopAft
   store.startBatch(batch); const state = store.readState(batch_id); let processed = 0;
   for (const company of parsed.companies) {
     const report_id = id('rpt', `${batch_id}\u0000${company.company_id}`); const current = state.reports[company.company_id];
-    if (current?.status === 'REPORT_READY' && store.verifyReport(batch_id, report_id)) continue;
+    if (current?.status === 'REPORT_READY') {
+      if (store.verifyReport(batch_id, report_id)) continue;
+      state.reports[company.company_id] = { ...current, status: 'REPORT_CORRUPT', completed_at: now(), error_code: 'STORED_ARTIFACT_INTEGRITY_FAILED' };
+      store.writeState(batch_id, state); processed += 1; continue;
+    }
+    if (current?.status === 'REPORT_CORRUPT') continue;
     if (processed >= stopAfter) { state.interrupted_at = now(); store.writeState(batch_id, state); break; }
     const diagnosis_run_id = id('run', `${batch_id}\u0000${company.company_id}\u0000${current?.attempts || 0}`); state.reports[company.company_id] = { company_id: company.company_id, report_id, diagnosis_run_id, status: 'RUNNING', attempts: (current?.attempts || 0) + 1, started_at: now() }; store.writeState(batch_id, state);
     try {

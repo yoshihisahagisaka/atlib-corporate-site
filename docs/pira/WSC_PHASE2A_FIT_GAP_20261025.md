@@ -10,10 +10,10 @@ PowerShell v2原本は `C:\Users\YoshihisaHagisaka\Downloads\atlib-security-chec
 
 - CSVはUTF-8（BOM有無）で、必須3列 `企業名,本店所在地,URL` を厳格に検証する。将来の任意4列目 `メールアドレス` は受け付けるが、診断・送信には使用しない。
 - CSV行番号、入力原本、正規化URL、決定論的な `company_id` を保持し、不正行と重複行を隔離する。同一URLの別企業を統合しない。
-- Synthetic executorはHTTPS、443、認証情報なし、公開IPだけを許可する。localhost・私設IP・メタデータ系IP、DNS再束縛、接続先IP不一致、リダイレクトを拒否する。
+- Synthetic executorはHTTPS、443、認証情報なし、公開IPだけを許可する。IPv4/IPv6の私設・ループバック・リンクローカル・CGNAT・文書用・ベンチマーク用・マルチキャスト・予約・IPv4-mapped IPv6等、localhost、DNS再束縛、接続先IP不一致、リダイレクトを拒否する。
 - executorは実際のネットワークtransportを実装しない。Synthetic probeだけを受け付けるため、未承認の外部アクセスは不可能である。
 - `batch_id`、`company_id`、`diagnosis_run_id`、`report_id` と状態を分離する。中断後の再開、`RETRY_PENDING`、最大再試行後の `FAILED`、`REPORT_READY` の再実行抑止を実装する。
-- ローカル隔離保管は企業別に診断JSON、判定JSON、HTML、企業入力、SHA-256整合性情報を保存し、パス逸脱と成果物上書きを拒否する。
+- ローカル隔離保管は企業別に診断JSON、判定JSON、HTML、企業入力、SHA-256整合性情報を保存し、パス逸脱と成果物上書きを拒否する。一時領域で全成果物を作成・検証後に正式領域へ確定し、途中失敗の一時領域は削除する。`REPORT_READY` が破損・欠損した場合は `REPORT_CORRUPT` として記録し、自動上書き・自動再生成しない。
 
 ## Synthetic検証
 
