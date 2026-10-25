@@ -29,9 +29,9 @@ const protectedCompany = {name:'別企業', headOffice:'大阪府大阪市', url
 const protectedHtml = render(evaluate(json('synthetic-protected.json'), opts), protectedCompany);
 assert.ok(protectedHtml.includes('認証に失敗したメールへの対応方針が公開されています。'), 'unapproved FV IDs retain fixed observation');
 assert.ok(!protectedHtml.includes('偽メールの隔離・拒否を求める設定にはなっていません'), 'absent finding is not rendered');
-assert.match(protectedHtml, /暗号化された通信/, 'HTTPS SVG label');
-assert.match(protectedHtml, /読み込み・表示の制御/, 'Web SVG label');
-assert.match(protectedHtml, /SPF \/ DMARC/, 'mail SVG label');
+assert.ok(!protectedHtml.includes('<svg'), 'detail SVG illustrations removed');
+assert.match(protectedHtml, /data:image\/png;base64,/, 'FV icons embedded');
+assert.match(protectedHtml, /data:image\/jpeg;base64,/, 'cover image embedded');
 const atlibHtml = render(evaluate(json('atlib-security-check-v2.json'), opts), json('atlib-company.json'));
 assert.match(atlibHtml, /証明書検証.*成功/, 'Japanese TLS result');
 assert.match(atlibHtml, /通信方式.*TLS 1\.3/, 'Japanese protocol');
