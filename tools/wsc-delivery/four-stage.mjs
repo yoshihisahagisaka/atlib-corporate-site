@@ -9,9 +9,9 @@ import { evaluate, render, normalizeDiagnosisUrl } from '../wsc-vs1/engine.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url)); const id = (prefix, value) => `${prefix}_${crypto.createHash('sha256').update(value).digest('hex').slice(0, 20)}`;
 export async function runSingleUrl({ url, name, headOffice, storageRoot, approvalRoot, executor = 'local-single-url', now = () => Date.now() }) {
-  if (!name || !headOffice) throw new Error('COMPANY_NAME_AND_HEAD_OFFICE_REQUIRED'); const targetUrl = normalizeDiagnosisUrl(url);
+  if (!name) throw new Error('COMPANY_NAME_REQUIRED'); const targetUrl = normalizeDiagnosisUrl(url);
   const approvals = createLocalApprovalStore(approvalRoot, { clock: now }); const grant = approvals.issue({ targetUrl, executor, expiresAt: now() + 60_000 }); const probe = createRestrictedNetworkProbe({ approvalStore: approvals, clock: now });
-  const diagnosis = await probe({ url: targetUrl, mailDomain: null, approvalId: grant.approvalId, executor }); const company = { name, headOffice, url: targetUrl, normalizedUrl: targetUrl, company_id: id('cmp', `${name}\u0000${headOffice}\u0000${targetUrl}`) }; const store = createLocalPrivateStore(storageRoot); const batchId = id('bat', targetUrl); const reportId = id('rpt', `${batchId}\u0000${company.company_id}`); const runId = id('run', `${batchId}\u0000${company.company_id}`); store.startBatch({ batch_id: batchId, mode: 'SINGLE_URL' });
+  const acquisition = await probe({ url: targetUrl, mailDomain: null, approvalId: grant.approvalId, executor }); const diagnosis = acquisition?.diagnosis; if (!diagnosis?.targetUrl || !diagnosis?.checkedAt) throw new Error('ACQUISITION_DIAGNOSIS_CONTRACT_INVALID'); const company = { name, ...(headOffice ? { headOffice } : {}), url: targetUrl, normalizedUrl: targetUrl, company_id: id('cmp', `${name}\u0000${headOffice || ''}\u0000${targetUrl}`) }; const store = createLocalPrivateStore(storageRoot); const batchId = id('bat', targetUrl); const reportId = id('rpt', `${batchId}\u0000${company.company_id}`); const runId = id('run', `${batchId}\u0000${company.company_id}`); store.startBatch({ batch_id: batchId, mode: 'SINGLE_URL' });
   const report = evaluate(diagnosis, { rulesPath: path.join(root, '..', 'wsc-vs1', 'rules.json'), explanationsPath: path.join(root, '..', 'wsc-vs1', 'explanations.json') }); const html = render(report, company); const stored = store.saveReport(batchId, { company_id: company.company_id, diagnosis_run_id: runId, report_id: reportId }, { 'company.json': company, 'diagnosis.json': diagnosis, 'result.json': report, 'report.html': html }); return { batchId, reportId, company, diagnosis, report, htmlPath: path.join(storageRoot, stored.relative_path, 'report.html'), stored };
 }
 
@@ -23,6 +23,6 @@ export async function runSingleUrlToPdf({ pdfExporter, pdfOutputPath, ...options
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const [url, name, headOffice, storageRoot, approvalRoot] = process.argv.slice(2); if (!url || !name || !headOffice || !storageRoot || !approvalRoot) throw new Error('使い方: node four-stage.mjs URL 企業名 本店所在地 保存先 承認保存先');
-  const result = await runSingleUrl({ url, name, headOffice, storageRoot, approvalRoot }); console.log(JSON.stringify({ targetUrl: result.diagnosis.targetUrl, reportId: result.reportId, htmlPath: result.htmlPath }, null, 2));
+  const [url, name, storageRoot, approvalRoot] = process.argv.slice(2); if (!url || !name || !storageRoot || !approvalRoot) throw new Error('使い方: node four-stage.mjs URL 企業名 保存先 承認保存先');
+  const result = await runSingleUrl({ url, name, storageRoot, approvalRoot }); console.log(JSON.stringify({ targetUrl: result.diagnosis.targetUrl, reportId: result.reportId, htmlPath: result.htmlPath }, null, 2));
 }

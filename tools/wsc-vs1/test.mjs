@@ -30,6 +30,8 @@ assert.match(first, /PUBLIC WEBSITE &amp; EMAIL SECURITY REVIEW/, 'v7 cover is i
 for (const approved of ['通信の暗号化ができています','暗号化通信を継続する設定があります','ファイルの誤った取り扱いを抑える設定があります','プログラムの読み込み制限について確認をおすすめします','他サイトへの画面表示の制限について確認をおすすめします','メールの送信元を示す設定があります','偽メールの隔離・拒否を求める設定にはなっていません']) assert.ok(render(evaluate(json('atlib-security-check-v2.json'), opts), json('atlib-company.json')).includes(approved), `approved atLIB FV: ${approved}`);
 const protectedCompany = {name:'別企業', headOffice:'大阪府大阪市', url:'https://example-protected.test/'};
 const protectedHtml = render(evaluate(json('synthetic-protected.json'), opts), protectedCompany);
+const noAddressHtml = render(evaluate(json('synthetic-protected.json'), opts), { name:'所在地なし検証', url:'https://example-protected.test/' });
+assert.ok(!noAddressHtml.includes('本店所在地'), 'head office is not rendered and is not required');
 assert.ok(protectedHtml.includes('認証に失敗したメールへの対応方針が公開されています。'), 'unapproved FV IDs retain fixed observation');
 assert.ok(!protectedHtml.includes('偽メールの隔離・拒否を求める設定にはなっていません'), 'absent finding is not rendered');
 assert.ok(!protectedHtml.includes('<svg'), 'detail SVG illustrations removed');
