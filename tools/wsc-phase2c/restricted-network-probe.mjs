@@ -29,15 +29,16 @@ export const collectMailDns = async (mailDomain, resolveTxt, options = {}) => {
 // Network code is present for review, but disabled unless an exact target and
 // one-use approval are both injected by a later, separately approved runner.
 export function createRestrictedNetworkProbe({ approvalStore, clock = () => Date.now(), lookup = dns.lookup, resolveTxt = dns.resolveTxt, dnsTimeoutMs = 5_000, maxResponseBytes = 1_000_000, networkExchange } = {}) {
-  return async ({ url, addresses, mailDomain, signal, approvalId }) => {
+  return async ({ url, addresses, mailDomain, signal, approvalId, executor }) => {
     // approvalStore is an injected, non-logging capability store. It must consume
     // the one-use grant before any DNS lookup; this module never issues grants.
     const now = clock();
-    const grant = approvalStore?.consume?.({ approvalId, url, now });
+    const grant = approvalStore?.consume?.({ approvalId, url, now, executor });
     if (!grant || grant.targetUrl !== url || !Number.isFinite(grant.expiresAt) || grant.expiresAt <= now) throw new Error('EXTERNAL_NETWORK_DISABLED_PENDING_APPROVAL');
+    const initial = addresses || (await withDnsDeadline(() => lookup(new URL(url).hostname, { all: true, verbatim: true }), { timeoutMs: dnsTimeoutMs, signal })).map(row => row.address);
     const current = await withDnsDeadline(() => lookup(new URL(url).hostname, { all: true, verbatim: true }), { timeoutMs: dnsTimeoutMs, signal }); const resolved = current.map(row => row.address);
     const target = validatePublicTarget(url, () => resolved);
-    if (target.addresses.join(',') !== [...new Set(addresses)].sort().join(',')) throw new Error('DNS_REBIND_DETECTED');
+    if (target.addresses.join(',') !== [...new Set(initial)].sort().join(',')) throw new Error('DNS_REBIND_DETECTED');
     const ip = target.addresses[0]; if (!isPublicAddress(ip)) throw new Error('DNS_NOT_PUBLIC');
     const connection = { host: ip, port: 443, servername: target.host, hostHeader: new URL(url).host, rejectUnauthorized: true };
     if (networkExchange) return networkExchange({ url, ip, addresses: target.addresses, mailDomain, signal, connection, maxResponseBytes });
