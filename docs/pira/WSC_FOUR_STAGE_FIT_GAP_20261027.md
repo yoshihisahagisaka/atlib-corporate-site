@@ -2,7 +2,7 @@
 
 ## 接続した4工程
 
-1. 単一URLは `tools/wsc-delivery/four-stage.mjs` の必須引数（URL、企業名、本店所在地）で受け付ける。CSVは既存Phase 2Aの必須3列を再利用する。
+1. 単一URLは `tools/wsc-delivery/four-stage.mjs` の必須引数（URL、企業名）で受け付ける。本店所在地は任意であり、レポートには表示しない。CSVは既存Phase 2Aの必須3列を再利用する。
 2. 単一URLは既存Phase 2Cの `createRestrictedNetworkProbe` に、既存Phase 2Dの一回限りURL拘束承認ストアを注入して取得する。
 3. JSON 2.0を既存VS1の `evaluate` / `render` へ渡し、既存Phase 2Aの隔離ストアに診断JSON、判定JSON、HTML、整合性情報を保存する。
 4. `runSingleUrlToPdf` は生成済みHTMLを明示注入されたブラウザPDFアダプターへ渡し、`%PDF`署名を確認して保存する。`browser-pdf.mjs` はローカルHTMLだけをEdge/Chrome互換のヘッドレス印刷へ渡し、URLを開かない。
@@ -27,3 +27,17 @@ Synthetic HTMLからのPDF印刷をローカルEdgeヘッドレスで試行し�
 今回のGoogle実測は最後のSTOP条件に該当する。外部ネットワーク経路でDNS IPとソケット接続先を拘束できる構成が確認されるまで、実測を再試行しない。
 
 2026-10-27のPIRA単発実行では、公開取得後にVS1 HTMLを組み立てる接続で `checkedAt と targetUrl が必要です` が発生し、HTML生成前に停止した。自動再試行は禁止のため、同一URLの再実行、残りの指定URLへの実測、PDF保存は行っていない。取得結果JSONの実際の形状と単一URLランナー間の接続契約を確認し、既存仕様に沿う最小修正が統括承認されるまでSTOPする。
+
+## 指定3サイト実測（2026-10-27）
+
+統括の実測再開指示に基づき、修正済み単一URLランナーで以下を各1回、同時実行なし・自動再試行なしで実行した。各サイトで公開DNSとHTTPS GETを既存の公開IP、TLS、時間、容量、リダイレクト安全制御の下で取得し、JSON 2.0、既存VS1の判定JSON、HTMLをローカル隔離ストアへ保存した。
+
+| 企業・団体名 | 対象URL | HTTP | 結果 |
+| --- | --- | ---: | --- |
+| 一般社団法人 国際連携推進協会 | `https://pira.or.jp/` | 200 | TLS確認済み、HSTS/CSP/画面埋め込み制御は追加確認推奨 |
+| 株式会社YOｰZAN | `https://yo-zan.com/` | 200 | TLS確認済み、HSTS/CSP/画面埋め込み制御は追加確認推奨 |
+| 東京ビジネス交流会 | `https://e-tbk.com/` | 200 | TLS確認済み、HSTS/CSP/画面埋め込み制御は追加確認推奨 |
+
+HTMLファイルの存在、SHA-256、入力URLと診断JSONの対象URL、および判定JSONの整合性を確認した。本店所在地は入力・診断JSON・HTMLへ追加していない。
+
+PDFは、通常印刷による保存を試みる前段で、実行環境のブラウザポリシーがローカル `file:` URLの表示を拒否したため未検証である。ポリシーの回避や別のPDF変換基盤の追加は行っていない。したがって、PDF保存結果は未生成であり、ユーザーがローカルブラウザでHTMLを開いて通常印刷を実行できる環境、または承認済みのPDFアダプターが必要である。
