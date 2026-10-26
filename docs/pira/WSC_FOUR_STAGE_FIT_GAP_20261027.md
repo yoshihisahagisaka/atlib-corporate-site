@@ -41,3 +41,17 @@ Synthetic HTMLからのPDF印刷をローカルEdgeヘッドレスで試行し�
 HTMLファイルの存在、SHA-256、入力URLと診断JSONの対象URL、および判定JSONの整合性を確認した。本店所在地は入力・診断JSON・HTMLへ追加していない。
 
 PDFは、通常印刷による保存を試みる前段で、実行環境のブラウザポリシーがローカル `file:` URLの表示を拒否したため未検証である。ポリシーの回避や別のPDF変換基盤の追加は行っていない。したがって、PDF保存結果は未生成であり、ユーザーがローカルブラウザでHTMLを開いて通常印刷を実行できる環境、または承認済みのPDFアダプターが必要である。
+
+## メールDNS照会の再開（2026-10-27）
+
+単一URLランナーの固定 `mailDomain: null` を撤去し、既存のURL正規化結果の `hostname` を既存Phase 2CのSPF・DMARC照会処理へ渡すようにした。ポート、パス、クエリは照会対象に含めず、`www` の削除や別ドメインへの置換は行わない。
+
+Node DNSの `ENODATA` と `ENOTFOUND` は、該当TXTレコードが存在しないことを示す否定応答として `NO_RECORD` に分類した。タイムアウトその他のDNS失敗は従来どおり `UNVERIFIED` としており、取得失敗を未設定と扱わない。
+
+| 対象URL | SPF | DMARC | 既存VS1への反映 |
+| --- | --- | --- | --- |
+| `https://pira.or.jp/` | `v=spf1 a:www3859.sakura.ne.jp mx ~all` | `NO_RECORD` | `SPF_PRESENT`、`DMARC_ABSENT` |
+| `https://yo-zan.com/` | `v=spf1 include:_spf.onamae.ne.jp include:_spf.ex-pa.jp ~all` | `NO_RECORD` | `SPF_PRESENT`、`DMARC_ABSENT` |
+| `https://e-tbk.com/` | `v=spf1 a:www522b.sakura.ne.jp mx ~all` | `NO_RECORD` | `SPF_PRESENT`、`DMARC_ABSENT` |
+
+PIRAのSPF値とDMARC不存在は、指定されたPowerShell確認結果と一致した。3サイトすべてで取得結果JSON、判定JSON、HTMLをローカル隔離ストアへ保存し、既存VS1の固定文章・判定ルール・デザインは変更していない。

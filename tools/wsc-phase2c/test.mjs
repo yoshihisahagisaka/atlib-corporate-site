@@ -26,6 +26,7 @@ assert.equal(mismatchLookupCalled, false, 'target mismatch is rejected before DN
 const records = await collectMailDns('mail.example', async name => name.startsWith('_dmarc') ? [['v=DMARC1; p=reject']] : [['v=spf1 -all']]);
 assert.equal(records.spf.lookupStatus, 'FOUND'); assert.equal(records.dmarc.tags.p, 'reject');
 const absent = await collectMailDns('mail.example', async () => []); assert.equal(absent.spf.lookupStatus, 'NO_RECORD'); assert.equal(absent.dmarc.lookupStatus, 'NO_RECORD');
+const nxdomain = await collectMailDns('mail.example', async () => { throw Object.assign(new Error('not found'), { code: 'ENOTFOUND' }); }); assert.equal(nxdomain.spf.lookupStatus, 'NO_RECORD'); assert.equal(nxdomain.dmarc.lookupStatus, 'NO_RECORD');
 const failure = await collectMailDns('mail.example', async () => { throw Object.assign(new Error('dns fail'), { code: 'ETIMEOUT' }); }); assert.equal(failure.spf.lookupStatus, 'UNVERIFIED');
 const invalid = await collectMailDns('mail.example', async () => [['invalid']]); assert.equal(invalid.spf.error, 'RECORD_FORMAT_INVALID'); assert.equal(invalid.spf.lookupStatus, 'UNVERIFIED'); assert.equal(invalid.dmarc.lookupStatus, 'UNVERIFIED');
 const invalidReport = evaluate({ ...diagnosis(), mailDomain: 'mail.example', dns: invalid }, { rulesPath: path.join(root, '..', 'wsc-vs1', 'rules.json'), explanationsPath: path.join(root, '..', 'wsc-vs1', 'explanations.json') });

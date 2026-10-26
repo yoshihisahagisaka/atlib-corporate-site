@@ -16,7 +16,7 @@ export const withDnsDeadline = (query, { timeoutMs = 5_000, signal } = {}) => ne
   signal?.addEventListener('abort', abort, { once: true });
   Promise.resolve().then(query).then(value => finish(resolve, value), error => finish(reject, error));
 });
-const txt = async (name, resolveTxt, options) => { try { return { status: 'FOUND', values: (await withDnsDeadline(() => resolveTxt(name), options)).map(row => row.join('')) }; } catch (error) { return { status: 'UNVERIFIED', values: [], error: error.code || error.message }; } };
+const txt = async (name, resolveTxt, options) => { try { return { status: 'FOUND', values: (await withDnsDeadline(() => resolveTxt(name), options)).map(row => row.join('')) }; } catch (error) { if (error?.code === 'ENODATA' || error?.code === 'ENOTFOUND') return { status: 'NO_RECORD', values: [] }; return { status: 'UNVERIFIED', values: [], error: error.code || error.message }; } };
 export const collectMailDns = async (mailDomain, resolveTxt, options = {}) => {
   if (!mailDomain) return absentDns(); const spfSource = await txt(mailDomain, resolveTxt, options); const dmarcSource = await txt(`_dmarc.${mailDomain}`, resolveTxt, options);
   const spf = spfSource.values.filter(value => /^v=spf1(?:\s|$)/i.test(value)); const dmarc = dmarcSource.values.filter(value => /^v=DMARC1(?:;|$)/i.test(value)); const tags = {};
