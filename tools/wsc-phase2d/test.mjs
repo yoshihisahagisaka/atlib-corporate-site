@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createPreflightEnvironment } from './preflight-environment.mjs';
+import { evaluate, render } from '../wsc-vs1/engine.mjs';
+
+const root = path.dirname(fileURLToPath(import.meta.url)); const temp = fs.mkdtempSync(path.join(root, '.test-preflight-')); let now = 1_000;
+const environment = createPreflightEnvironment(temp, { clock: () => now }); const url = 'https://synthetic-approved.example/';
+assert.throws(() => environment.approvals.issue({ approvalId: 'too-short', targetUrl: url, expiresAt: 2_000, executor: 'tester' }), /APPROVAL_GRANT_INVALID/);
+const grant = environment.approvals.issue({ approvalId: 'synthetic_grant_0001', targetUrl: url, expiresAt: 2_000, executor: 'tester' });
+assert.equal(environment.approvals.consume({ approvalId: grant.approvalId, url: 'https://other.example/', executor: 'tester' }), null, 'URL mismatch is rejected');
+assert.equal(environment.approvals.consume({ approvalId: grant.approvalId, url, executor: 'tester' }), null, 'mismatched grant is never reusable');
+const single = environment.approvals.issue({ approvalId: 'synthetic_grant_0002', targetUrl: url, expiresAt: 2_000, executor: 'tester' });
+const concurrent = await Promise.all(Array.from({ length: 8 }, () => Promise.resolve(environment.approvals.consume({ approvalId: single.approvalId, url, executor: 'tester' })))); assert.equal(concurrent.filter(Boolean).length, 1, 'only one concurrent consumer succeeds');
+const expired = environment.approvals.issue({ approvalId: 'synthetic_grant_0003', targetUrl: url, expiresAt: 1_001, executor: 'tester' }); now = 1_001; assert.equal(environment.approvals.consume({ approvalId: expired.approvalId, url, executor: 'tester' }), null, 'expired approval is rejected'); now = 1_000;
+const revoked = environment.approvals.issue({ approvalId: 'synthetic_grant_0004', targetUrl: url, expiresAt: 2_000, executor: 'tester' }); assert.equal(environment.approvals.cancel({ approvalId: revoked.approvalId, executor: 'reviewer' }), true); assert.equal(environment.approvals.consume({ approvalId: revoked.approvalId, url, executor: 'tester' }), null, 'revoked approval is rejected');
+const audit = environment.approvals.auditEntries(); assert.ok(audit.some(entry => entry.event === 'CONSUMED')); assert.ok(audit.every(entry => !JSON.stringify(entry).includes('synthetic_grant_')), 'audit omits approval values');
+const fixture = JSON.parse(fs.readFileSync(path.join(root, '..', 'wsc-vs1', 'fixtures', 'synthetic-protected.json'), 'utf8')); const diagnosis = { ...fixture, targetUrl: url, mailDomain: null, checkedAt: '2026-10-27T00:00:00.000Z' };
+const report = evaluate(diagnosis, { rulesPath: path.join(root, '..', 'wsc-vs1', 'rules.json'), explanationsPath: path.join(root, '..', 'wsc-vs1', 'explanations.json') }); const html = render(report, { name: 'Synthetic PIRA Test', headOffice: 'Tokyo', url });
+environment.artifacts.startBatch({ batch_id: 'bat_phase2d', mode: 'SYNTHETIC_ONLY' }); const stored = environment.artifacts.saveReport('bat_phase2d', { company_id: 'cmp_synthetic', diagnosis_run_id: 'run_synthetic', report_id: 'rpt_synthetic' }, { 'company.json': { name: 'Synthetic PIRA Test', headOffice: 'Tokyo', url }, 'diagnosis.json': diagnosis, 'result.json': report, 'report.html': html });
+assert.ok(environment.artifacts.verifyReport('bat_phase2d', 'rpt_synthetic')); environment.log('SYNTHETIC_REPORT_READY', { actor: 'tester', targetUrl: url, approvalId: 'synthetic_grant_0002', reportId: 'rpt_synthetic' }); const log = fs.readFileSync(path.join(temp, 'logs', 'execution.jsonl'), 'utf8'); assert.ok(log.includes('SYNTHETIC_REPORT_READY')); assert.equal(log.includes('synthetic_grant_0002'), false, 'execution log omits approval values'); assert.ok(stored.checksums['report.html']);
+fs.rmSync(temp, { recursive: true, force: true }); console.log('WSC Phase 2D preflight tests: PASS');
