@@ -27,6 +27,10 @@ const records = await collectMailDns('mail.example', async name => name.startsWi
 assert.equal(records.spf.lookupStatus, 'FOUND'); assert.equal(records.dmarc.tags.p, 'reject');
 const absent = await collectMailDns('mail.example', async () => []); assert.equal(absent.spf.lookupStatus, 'NO_RECORD'); assert.equal(absent.dmarc.lookupStatus, 'NO_RECORD');
 const nxdomain = await collectMailDns('mail.example', async () => { throw Object.assign(new Error('not found'), { code: 'ENOTFOUND' }); }); assert.equal(nxdomain.spf.lookupStatus, 'NO_RECORD'); assert.equal(nxdomain.dmarc.lookupStatus, 'NO_RECORD');
+const piraDns = await collectMailDns('pira.or.jp', async name => { if (name === '_dmarc.pira.or.jp') throw Object.assign(new Error('NXDOMAIN'), { code: 'ENOTFOUND' }); return [['v=spf1 a:www3859.sakura.ne.jp mx ~all']]; });
+const piraReport = evaluate({ ...diagnosis(), mailDomain: 'pira.or.jp', dns: piraDns }, { rulesPath: path.join(root, '..', 'wsc-vs1', 'rules.json'), explanationsPath: path.join(root, '..', 'wsc-vs1', 'explanations.json') });
+const piraHtml = render(piraReport, { name: 'PIRA相当テスト', url });
+assert.ok(piraReport.findings.some(finding => finding.id === 'SPF_PRESENT')); assert.ok(piraReport.findings.some(finding => finding.id === 'DMARC_ABSENT')); assert.ok(piraHtml.includes('メールの送信元を示す設定があります')); assert.ok(piraHtml.includes('対象ドメインのDMARCレコードが存在しないというDNS応答でした。'));
 const failure = await collectMailDns('mail.example', async () => { throw Object.assign(new Error('dns fail'), { code: 'ETIMEOUT' }); }); assert.equal(failure.spf.lookupStatus, 'UNVERIFIED');
 const invalid = await collectMailDns('mail.example', async () => [['invalid']]); assert.equal(invalid.spf.error, 'RECORD_FORMAT_INVALID'); assert.equal(invalid.spf.lookupStatus, 'UNVERIFIED'); assert.equal(invalid.dmarc.lookupStatus, 'UNVERIFIED');
 const invalidReport = evaluate({ ...diagnosis(), mailDomain: 'mail.example', dns: invalid }, { rulesPath: path.join(root, '..', 'wsc-vs1', 'rules.json'), explanationsPath: path.join(root, '..', 'wsc-vs1', 'explanations.json') });
