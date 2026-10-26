@@ -8,7 +8,9 @@ Phase 2Bはv2の取得範囲・JSON契約を参照し、外部通信を持たな
 
 ## 安全アーキテクチャ
 
-`isolated-acquirer.mjs` はPhase 2AのURL・特殊用途IP検証を再利用し、モックprobeの応答について、DNSの事前・事後一致、接続先IP一致、HTTPS/443、無認証URL、リダイレクト拒否、タイムアウト、応答サイズ上限を検証する。実transportは実装せず、`externalTransport()` は常に拒否する。
+`isolated-acquirer.mjs` はPhase 2AのURL・特殊用途IP検証を再利用し、モックprobeの応答について、DNSの事前・事後一致、接続先IP一致、HTTPS/443、無認証URL、リダイレクト拒否、タイムアウト、応答サイズ上限を検証する。probeには`AbortSignal`を渡し、期限超過または実ボディ上限超過時に中止を通知する。probeが中止に応答しない場合も、期限超過後の結果は採用せず、タイマーは必ず解放する。
+
+`responseBytes`はtransportが申告するヘッダー等の値として別途上限検証する。`bodyChunks`は受信済み実データの反復可能なチャンク契約であり、アダプターが合計バイト数を測定する。将来の実transportは、このsignalを監視してチャンク受信を直ちに停止し、申告値と実測値をログに分離して記録しなければならない。Phase 2Bは実HTTP／ストリームを実装しない。
 
 ## メールドメイン入力契約
 
@@ -18,7 +20,7 @@ Phase 2Bはv2の取得範囲・JSON契約を参照し、外部通信を持たな
 | 任意の明示列 `メールドメイン` | 互換拡張 | 指定されたドメインだけを診断 | 将来の統括承認が必要 |
 | URLホストから推測 | 表面上は維持 | 誤ったメール対象の危険 | 禁止 |
 
-未指定時は`mailDomain=null`とし、SPF/DMARCは `UNVERIFIED` / `MAIL_DOMAIN_UNSPECIFIED` と内部証跡に残す。VS1のメール判定を追加・変更しない。
+未指定時は`mailDomain=null`とし、SPF/DMARCは `UNVERIFIED` / `MAIL_DOMAIN_UNSPECIFIED` と内部証跡に残す。VS1のメール判定を追加・変更せず、Web診断だけを通常どおり生成する。任意列 `メールドメイン` の導入は将来の統括承認が必要である。
 
 ## 隔離検証とSTOP
 
