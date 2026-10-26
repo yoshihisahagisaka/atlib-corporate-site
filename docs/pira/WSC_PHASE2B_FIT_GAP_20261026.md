@@ -1,0 +1,27 @@
+# WSC Phase 2B Fit / Gap（2026-10-26）
+
+## v2再利用評価
+
+PowerShell v2原本（SHA-256 `9B679A6EFD9B9D32331D229BC4ED235B51A3E20950C6A88F0B66A8854A8F325E`）は、HTTP GET（15秒・リダイレクト追跡なし）、TLS SslStream（10秒・証明書検証）、TXT/MX/DS DNS、SPF・DMARCの基本解析、JSON 2.0出力を持つ。一方、atLIBドメインとメールドメインに固定され、DNS結果と実ソケット接続先の拘束を保証しない。原本の直接再利用は任意企業向けには安全でないため、原本は不変の回帰基準として維持する。
+
+Phase 2Bはv2の取得範囲・JSON契約を参照し、外部通信を持たない隔離アダプターを追加する。HTTP/TLS/DNS取得ロジックを再実装したものではない。将来の実transportは、承認済みの接続IP拘束方式を別設計・別レビューで実装する。
+
+## 安全アーキテクチャ
+
+`isolated-acquirer.mjs` はPhase 2AのURL・特殊用途IP検証を再利用し、モックprobeの応答について、DNSの事前・事後一致、接続先IP一致、HTTPS/443、無認証URL、リダイレクト拒否、タイムアウト、応答サイズ上限を検証する。実transportは実装せず、`externalTransport()` は常に拒否する。
+
+## メールドメイン入力契約
+
+| 案 | 3列CSVとの互換性 | メール診断 | 判定 |
+|---|---|---|---|
+| 現行3列のみ | 維持 | メールドメイン未指定では実施しない | Phase 2B隔離検証に採用 |
+| 任意の明示列 `メールドメイン` | 互換拡張 | 指定されたドメインだけを診断 | 将来の統括承認が必要 |
+| URLホストから推測 | 表面上は維持 | 誤ったメール対象の危険 | 禁止 |
+
+未指定時は`mailDomain=null`とし、SPF/DMARCは `UNVERIFIED` / `MAIL_DOMAIN_UNSPECIFIED` と内部証跡に残す。VS1のメール判定を追加・変更しない。
+
+## 隔離検証とSTOP
+
+正常なHTTPS契約、証明書検証済みSynthetic JSON、メール指定／未指定、DNS再束縛、接続IP不一致、リダイレクト、タイムアウト、応答過大を自動テストする。DNS取得失敗・特殊用途IPはPhase 2Aテストで回帰する。実サイト接続、PowerShell v2改修、GCP、Productionは未実施。
+
+実transport、メールドメイン列の導入、実サイト試験には統括承認が必要。特にDNS/IP拘束を実接続で保証できない場合はSTOPする。

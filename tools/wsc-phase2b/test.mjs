@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createIsolatedAcquirer, externalTransport } from './isolated-acquirer.mjs';
+
+const root = path.dirname(fileURLToPath(import.meta.url));
+const fixture = JSON.parse(fs.readFileSync(path.join(root, '..', 'wsc-vs1', 'fixtures', 'synthetic-protected.json'), 'utf8'));
+const url = 'https://example-protected.test/';
+const diagnosis = () => ({ ...structuredClone(fixture), targetUrl: url, mailDomain: 'example-protected.test', checkedAt: '2026-10-25T00:00:00.000Z' });
+const resolve = () => ['93.184.216.34'];
+const ok = createIsolatedAcquirer({ resolve, probe: async () => ({ remoteAddress: '93.184.216.34', responseBytes: 512, diagnosis: diagnosis() }) });
+const result = await ok({ url, mailDomain: 'example-protected.test' });
+assert.equal(result.targetUrl, url); assert.equal(result.dns.dmarc.lookupStatus, 'FOUND');
+const invalidTls = { ...JSON.parse(fs.readFileSync(path.join(root, '..', 'wsc-vs1', 'fixtures', 'synthetic-gaps.json'), 'utf8')), targetUrl: url, mailDomain: 'example-protected.test', checkedAt: '2026-10-25T00:00:00.000Z' };
+const tlsFailure = await createIsolatedAcquirer({ resolve, probe: async () => ({ remoteAddress: '93.184.216.34', responseBytes: 1, diagnosis: invalidTls }) })({ url, mailDomain: 'example-protected.test' });
+assert.equal(tlsFailure.tls.status, 'VALIDATION_FAILED'); assert.equal(tlsFailure.dns.dmarc.lookupStatus, 'NO_RECORD');
+const noMail = await ok({ url });
+assert.equal(noMail.mailDomain, null); assert.equal(noMail.dns.spf.error, 'MAIL_DOMAIN_UNSPECIFIED');
+await assert.rejects(() => ok({ url, mailDomain: 'not a domain' }), /MAIL_DOMAIN_INVALID/);
+await assert.rejects(() => createIsolatedAcquirer({ resolve, maxResponseBytes: 100, probe: async () => ({ remoteAddress: '93.184.216.34', responseBytes: 101, diagnosis: diagnosis() }) })({ url, mailDomain: 'example-protected.test' }), /HTTP_RESPONSE_SIZE_LIMIT/);
+await assert.rejects(() => createIsolatedAcquirer({ resolve, timeoutMs: 1, probe: async () => new Promise(() => {}) })({ url }), /ACQUISITION_TIMEOUT/);
+await assert.rejects(() => createIsolatedAcquirer({ resolve: () => [], probe: async () => ({}) })({ url }), /DNS_NOT_PUBLIC/);
+await assert.rejects(() => createIsolatedAcquirer({ resolve: (() => { let count = 0; return () => count++ ? ['93.184.216.35'] : ['93.184.216.34']; })(), probe: async () => ({ remoteAddress: '93.184.216.34', responseBytes: 1, diagnosis: diagnosis() }) })({ url }), /DNS_REBIND_DETECTED/);
+await assert.rejects(() => createIsolatedAcquirer({ resolve, probe: async () => ({ remoteAddress: '93.184.216.35', responseBytes: 1, diagnosis: diagnosis() }) })({ url }), /CONNECTION_IP_MISMATCH/);
+await assert.rejects(() => createIsolatedAcquirer({ resolve, probe: async () => ({ remoteAddress: '93.184.216.34', responseBytes: 1, redirectUrl: 'https://other.example/', diagnosis: diagnosis() }) })({ url }), /REDIRECT_REQUIRES_SEPARATE_APPROVAL/);
+assert.throws(() => externalTransport(), /EXTERNAL_TRANSPORT_DISABLED_PENDING_APPROVAL/);
+console.log('WSC Phase 2B isolated-acquisition tests: PASS');
