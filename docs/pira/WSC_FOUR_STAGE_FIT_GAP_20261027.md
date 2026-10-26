@@ -55,3 +55,15 @@ Node DNSの `ENODATA` と `ENOTFOUND` は、該当TXTレコードが存在しな
 | `https://e-tbk.com/` | `v=spf1 a:www522b.sakura.ne.jp mx ~all` | `NO_RECORD` | `SPF_PRESENT`、`DMARC_ABSENT` |
 
 PIRAのSPF値とDMARC不存在は、指定されたPowerShell確認結果と一致した。3サイトすべてで取得結果JSON、判定JSON、HTMLをローカル隔離ストアへ保存し、既存VS1の固定文章・判定ルール・デザインは変更していない。
+
+## Web・メール公開設定の再実測（2026-10-27）
+
+承認済みSHA `0233028f7abb95f2ca349290cf713487c2e49e6b` を用い、各サイトを同時実行なし・自動再試行なしで再測定した。既存の公開IP、TLS、時間、容量、リダイレクト安全制御を維持し、HTTPS GET、対象ホスト名のSPF TXT照会、DMARC TXT照会を実行した。各結果からJSON 2.0、既存VS1判定JSON、HTML、既存Edge印刷方式のPDFをローカル隔離領域へ保存した。
+
+| 企業・団体名 | 実測日時（JST） | HTTP / TLS | SPF | DMARC | Finding ID |
+| --- | --- | --- | --- | --- | --- |
+| 一般社団法人 国際連携推進協会 | 2026-10-27 07:24:18 | 200 / VALIDATED / TLSv1.3 | `v=spf1 a:www3859.sakura.ne.jp mx ~all` | `NO_RECORD` | `TLS_VALID,HSTS_DISABLED,CSP_HEADER_ABSENT,FRAME_HEADER_ABSENT,SPF_PRESENT,DMARC_ABSENT` |
+| 株式会社YOｰZAN | 2026-10-27 07:24:29 | 200 / VALIDATED / TLSv1.3 | `v=spf1 include:_spf.onamae.ne.jp include:_spf.ex-pa.jp ~all` | `NO_RECORD` | `TLS_VALID,HSTS_DISABLED,CSP_HEADER_ABSENT,FRAME_HEADER_ABSENT,SPF_PRESENT,DMARC_ABSENT` |
+| 東京ビジネス交流会 | 2026-10-27 07:24:38 | 200 / VALIDATED / TLSv1.3 | `v=spf1 a:www522b.sakura.ne.jp mx ~all` | `NO_RECORD` | `TLS_VALID,HSTS_DISABLED,CSP_HEADER_ABSENT,FRAME_HEADER_ABSENT,SPF_PRESENT,DMARC_ABSENT` |
+
+PIRAのSPF値と `_dmarc.pira.or.jp` の不存在は、指定されたPowerShell確認結果と一致した。取得失敗・未確認は今回の実測JSONにはなく、顧客向けHTMLにも未確認表示を追加していない。HTMLの企業名・対象URLと診断JSONを照合し、各PDFはA4・8ページ、PDF署名、SHA-256を確認した。PIRA PDFは表紙、はじめに、診断概要、詳細、最終ページを画像で確認し、メール欄と既存固定文章の反映、文字・カードの欠落がないことを確認した。
