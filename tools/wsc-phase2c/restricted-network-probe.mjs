@@ -16,7 +16,7 @@ export const withDnsDeadline = (query, { timeoutMs = 5_000, signal } = {}) => ne
   signal?.addEventListener('abort', abort, { once: true });
   Promise.resolve().then(query).then(value => finish(resolve, value), error => finish(reject, error));
 });
-const txt = async (name, resolveTxt, options) => { try { return { status: 'FOUND', values: (await withDnsDeadline(() => resolveTxt(name), options)).map(row => row.join('')) }; } catch (error) { return { status: 'UNVERIFIED', values: [], error: error.code || error.message }; } };
+const txt = async (name, resolveTxt, options) => { try { return { status: 'FOUND', values: (await withDnsDeadline(() => resolveTxt(name), options)).map(row => row.join('')) }; } catch (error) { if (error?.code === 'ENODATA' || error?.code === 'ENOTFOUND') return { status: 'NO_RECORD', values: [] }; return { status: 'UNVERIFIED', values: [], error: error.code || error.message }; } };
 export const collectMailDns = async (mailDomain, resolveTxt, options = {}) => {
   if (!mailDomain) return absentDns(); const spfSource = await txt(mailDomain, resolveTxt, options); const dmarcSource = await txt(`_dmarc.${mailDomain}`, resolveTxt, options);
   const spf = spfSource.values.filter(value => /^v=spf1(?:\s|$)/i.test(value)); const dmarc = dmarcSource.values.filter(value => /^v=DMARC1(?:;|$)/i.test(value)); const tags = {};
@@ -29,15 +29,16 @@ export const collectMailDns = async (mailDomain, resolveTxt, options = {}) => {
 // Network code is present for review, but disabled unless an exact target and
 // one-use approval are both injected by a later, separately approved runner.
 export function createRestrictedNetworkProbe({ approvalStore, clock = () => Date.now(), lookup = dns.lookup, resolveTxt = dns.resolveTxt, dnsTimeoutMs = 5_000, maxResponseBytes = 1_000_000, networkExchange } = {}) {
-  return async ({ url, addresses, mailDomain, signal, approvalId }) => {
+  return async ({ url, addresses, mailDomain, signal, approvalId, executor }) => {
     // approvalStore is an injected, non-logging capability store. It must consume
     // the one-use grant before any DNS lookup; this module never issues grants.
     const now = clock();
-    const grant = approvalStore?.consume?.({ approvalId, url, now });
+    const grant = approvalStore?.consume?.({ approvalId, url, now, executor });
     if (!grant || grant.targetUrl !== url || !Number.isFinite(grant.expiresAt) || grant.expiresAt <= now) throw new Error('EXTERNAL_NETWORK_DISABLED_PENDING_APPROVAL');
+    const initial = addresses || (await withDnsDeadline(() => lookup(new URL(url).hostname, { all: true, verbatim: true }), { timeoutMs: dnsTimeoutMs, signal })).map(row => row.address);
     const current = await withDnsDeadline(() => lookup(new URL(url).hostname, { all: true, verbatim: true }), { timeoutMs: dnsTimeoutMs, signal }); const resolved = current.map(row => row.address);
     const target = validatePublicTarget(url, () => resolved);
-    if (target.addresses.join(',') !== [...new Set(addresses)].sort().join(',')) throw new Error('DNS_REBIND_DETECTED');
+    if (target.addresses.join(',') !== [...new Set(initial)].sort().join(',')) throw new Error('DNS_REBIND_DETECTED');
     const ip = target.addresses[0]; if (!isPublicAddress(ip)) throw new Error('DNS_NOT_PUBLIC');
     const connection = { host: ip, port: 443, servername: target.host, hostHeader: new URL(url).host, rejectUnauthorized: true };
     if (networkExchange) return networkExchange({ url, ip, addresses: target.addresses, mailDomain, signal, connection, maxResponseBytes });
