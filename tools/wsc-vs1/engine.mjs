@@ -130,6 +130,15 @@ render = (report, company) => {
   return baseRender(report, company).replace('</style>', `.fv-icon{width:32px;height:32px;object-fit:contain;flex:none}.ov-item{align-items:flex-start}.cover{background-image:linear-gradient(90deg,#152743e8,#1F3556bf 48%,#287F7866),url('${cover}')!important;background-size:cover!important;background-position:center!important}@media print{.report-section:not(.cover){break-before:page;page-break-before:always}.cover{break-before:auto;page-break-before:auto;background-position:center!important}.overview{padding:4mm 0!important}.overview h2{font-size:23pt;margin:0 0 2mm}.overview>p{font-size:9pt;margin:0 0 3mm}.overview-main{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:5mm!important}.overview-card{min-width:0;break-inside:auto;page-break-inside:auto}.ov-head{padding:3mm}.ov-head h3{font-size:13pt}.ov-list{padding:1mm 3mm}.ov-item{min-width:0;overflow-wrap:anywhere;padding:2mm 0;gap:2mm}.ov-item b{font-size:9.5pt;line-height:1.35}.ov-item small{font-size:7.5pt;line-height:1.3}.ov-status{font-size:7pt;padding:1px 5px}.fv-icon{width:6mm;height:6mm}.ov-item b,.ov-item small,.value,.raw{overflow-wrap:anywhere;word-break:break-word}.attention{break-inside:avoid;page-break-inside:avoid;margin-top:3mm;padding:3mm 4mm}.attention h3{font-size:12pt}.attention li{font-size:9pt;margin:1mm 0}.intro-copy{font-size:10.5pt;line-height:1.55}.intro-copy h3,.detail h2,.finding h3,.finding h4{break-after:avoid;page-break-after:avoid}.finding{break-inside:avoid;page-break-inside:avoid;padding:3mm 4mm;margin:3mm 0}.finding+.finding{break-inside:auto;page-break-inside:auto;padding-bottom:2mm}.finding+.finding .source{font-size:6.5pt;margin:0!important}.finding h3{font-size:13pt;margin:2mm 0}.finding h4{font-size:9pt;margin:2mm 0 1mm}.finding p{font-size:9.5pt;line-height:1.5;margin:0 0 1.5mm}.tag{font-size:7pt;padding:1px 5px}.evidence{padding:2.5mm 3mm;margin:2mm 0}.evidence li{font-size:8.5pt;line-height:1.4}.action{padding:2.5mm 3mm;margin-top:2mm}.source{font-size:7pt}.report-section{overflow:visible!important}.detail{padding:5mm 0!important}.detail h2{margin-top:0;font-size:20pt}.lead{font-size:9.5pt;margin:0 0 3mm}.cover-bottom{margin-top:75mm}}</style>`);
 };
 
+const assetDecoratedRender = render;
+render = (report, company) => {
+  const originalName = text(company?.name) || '';
+  const coverName = /御中\s*$/u.test(originalName) ? originalName.trimEnd() : `${originalName} 御中`;
+  return assetDecoratedRender(report, company)
+    .replace(`<strong>${html(originalName)}</strong>`, `<strong>${html(coverName)}</strong>`)
+    .replace(`<span>${html(company.url)}</span><span>`, `<span>調査対象URL：${html(company.url)}</span><span>`);
+};
+
 function main() {
   const [inputPath, companyPath, outputPath, resultPath] = process.argv.slice(2);
   if (!inputPath || !companyPath || !outputPath) throw new Error('使い方: node engine.mjs input.json company.json output.html');
