@@ -1,6 +1,7 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import http from 'node:http';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
@@ -23,6 +24,9 @@ const mustAbsoluteDirectory = value => {
   return target;
 };
 const deliveryAttemptRoot = (runRoot, batch) => path.join(runRoot, `delivery_${Date.now()}_${hash(JSON.stringify(batch.reports))}_${crypto.randomUUID()}`);
+const publicDeliveryRoot = (outputRoot, batch) => path.join(outputRoot, `WSC_${hash(batch.batch_id)}_${Date.now()}_${crypto.randomUUID()}`);
+
+export const localInternalWorkspaceRoot = () => path.join(process.env.LOCALAPPDATA || path.join(os.homedir(), 'AppData', 'Local'), 'atLIB', 'WSC', 'local-ui');
 
 export function findWindowsBrowser() {
   const candidates = [
@@ -40,9 +44,9 @@ export function createPdfExporter() {
   return createBrowserPdfExporter({ browserPath });
 }
 
-export async function runCsvSequential({ csv, outputRoot, pdfExporter = createPdfExporter(), singleRunner = runSingleUrl, onProgress = () => {} }) {
+export async function runCsvSequential({ csv, outputRoot, internalWorkspaceRoot = localInternalWorkspaceRoot(), pdfExporter = createPdfExporter(), singleRunner = runSingleUrl, onProgress = () => {} }) {
   const parsed = parseCompaniesCsv(csv); const base = mustAbsoluteDirectory(outputRoot);
-  const batchId = `bat_ui_${hash(csv)}`; const runRoot = path.join(base, `WSC_${hash(csv)}`); const storageRoot = path.join(runRoot, '.wsc-private'); const approvalRoot = path.join(runRoot, '.wsc-approvals');
+  const batchId = `bat_ui_${hash(csv)}`; const internalRunRoot = path.join(path.resolve(internalWorkspaceRoot), 'csv', hash(csv)); const storageRoot = path.join(internalRunRoot, '.wsc-private'); const approvalRoot = path.join(internalRunRoot, '.wsc-approvals');
   const store = createLocalPrivateStore(storageRoot); store.startBatch({ batch_id: batchId, mode: 'CSV_SEQUENTIAL_UI', csv_contract: parsed.header, rejected_rows: parsed.errors });
   let state = store.readState(batchId); let completed = 0; let failed = 0;
   for (const company of parsed.companies) {
@@ -61,15 +65,15 @@ export async function runCsvSequential({ csv, outputRoot, pdfExporter = createPd
     }
     store.writeState(batchId, state); onProgress({ company: company.name, completed, failed, total: parsed.companies.length, status: state.reports[company.company_id].status });
   }
-  const batch = store.readState(batchId); const deliveryRoot = deliveryAttemptRoot(runRoot, batch);
+  const batch = store.readState(batchId); const deliveryRoot = publicDeliveryRoot(base, batch);
   onProgress({ completed, failed, total: parsed.companies.length, status: 'PDF_EXPORTING' });
   try {
     const delivery = await createDeliveryPackage({ batch, storageRoot, outputRoot: deliveryRoot, pdfExporter });
     onProgress({ completed, failed, total: parsed.companies.length, status: 'DELIVERY_READY' });
-    return { batch, intake: parsed, runRoot, deliveryRoot, delivery, completed, failed, deliveryStatus: 'READY' };
+    return { batch, intake: parsed, internalRunRoot, publicOutputRoot: deliveryRoot, deliveryRoot, delivery, completed, failed, deliveryStatus: 'READY' };
   } catch (error) {
     onProgress({ completed, failed, total: parsed.companies.length, status: 'PDF_EXPORT_FAILED', error: error.message });
-    return { batch, intake: parsed, runRoot, deliveryRoot, delivery: null, completed, failed, deliveryStatus: 'FAILED', deliveryError: error.message };
+    return { batch, intake: parsed, internalRunRoot, publicOutputRoot: deliveryRoot, deliveryRoot, delivery: null, completed, failed, deliveryStatus: 'FAILED', deliveryError: error.message };
   }
 }
 
@@ -88,8 +92,8 @@ export async function replaySavedJson({ csv, diagnosesByUrl, outputRoot, pdfExpo
 }
 
 export const dialogScript = mode => mode === 'csv'
-  ? "Add-Type -AssemblyName System.Windows.Forms;$d=New-Object System.Windows.Forms.OpenFileDialog;$d.Filter='CSV files (*.csv)|*.csv';if($d.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK){[Console]::Out.Write($d.FileName)}"
-  : "Add-Type -AssemblyName System.Windows.Forms;$d=New-Object System.Windows.Forms.FolderBrowserDialog;if($d.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK){[Console]::Out.Write($d.SelectedPath)}";
+  ? "Add-Type -AssemblyName System.Windows.Forms;$owner=New-Object System.Windows.Forms.Form;$owner.TopMost=$true;$owner.ShowInTaskbar=$false;$owner.Opacity=0;$owner.Show();$owner.Activate();$d=New-Object System.Windows.Forms.OpenFileDialog;$d.Filter='CSV files (*.csv)|*.csv';try{if($d.ShowDialog($owner) -eq [System.Windows.Forms.DialogResult]::OK){[Console]::Out.Write($d.FileName)}}finally{$owner.Close();$owner.Dispose()}"
+  : "Add-Type -AssemblyName System.Windows.Forms;$owner=New-Object System.Windows.Forms.Form;$owner.TopMost=$true;$owner.ShowInTaskbar=$false;$owner.Opacity=0;$owner.Show();$owner.Activate();$d=New-Object System.Windows.Forms.FolderBrowserDialog;try{if($d.ShowDialog($owner) -eq [System.Windows.Forms.DialogResult]::OK){[Console]::Out.Write($d.SelectedPath)}}finally{$owner.Close();$owner.Dispose()}";
 export const dialogPowerShellArgs = mode => ['-NoProfile', '-STA', '-Command', dialogScript(mode)];
 export const choose = mode => new Promise((resolve, reject) => {
   const child = spawn('powershell.exe', dialogPowerShellArgs(mode), { windowsHide: false });
@@ -99,6 +103,12 @@ export const choose = mode => new Promise((resolve, reject) => {
   // `close` waits for standard output to close, so the selected path is not
   // lost when PowerShell exits immediately after the user presses OK.
   child.on('close', code => code === 0 ? resolve(output.trim()) : reject(new Error('WINDOWS_DIALOG_FAILED')));
+});
+const explorerScript = "param([string]$target)$shell=New-Object -ComObject Shell.Application;$shell.Explore($target);Start-Sleep -Milliseconds 300;$window=$shell.Windows()|Where-Object{$_.Document.Folder.Self.Path -eq $target}|Select-Object -First 1;if($window){(New-Object -ComObject WScript.Shell).AppActivate([int]$window.HWND)|Out-Null}";
+export const openOutputFolder = target => new Promise((resolve, reject) => {
+  const child = spawn('powershell.exe', ['-NoProfile', '-STA', '-Command', explorerScript, target], { windowsHide: false });
+  child.on('error', () => reject(new Error('WINDOWS_EXPLORER_FAILED')));
+  child.on('close', code => code === 0 ? resolve() : reject(new Error('WINDOWS_EXPLORER_FAILED')));
 });
 const readBody = request => new Promise((resolve, reject) => { let body = ''; request.on('data', chunk => { body += chunk; if (body.length > 1_000_000) request.destroy(); }); request.on('end', () => { try { resolve(body ? JSON.parse(body) : {}); } catch { reject(new Error('REQUEST_JSON_INVALID')); } }); request.on('error', reject); });
 const send = (response, status, value) => { response.writeHead(status, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' }); response.end(JSON.stringify(value)); };
@@ -132,8 +142,8 @@ export function createLocalUiServer() {
       const body = await readBody(request);
       if (request.url === '/api/choose-csv') return send(response, 200, { path: await choose('csv') });
       if (request.url === '/api/choose-folder') return send(response, 200, { path: await choose('folder') });
-      if (request.url === '/api/open-folder') { const target = mustAbsoluteDirectory(body.path); spawn('explorer.exe', [target], { windowsHide: false }); return send(response, 200, { ok: true }); }
-      if (request.url === '/api/run-single') { const outputRoot = mustAbsoluteDirectory(body.outputRoot); const runRoot = path.join(outputRoot, `WSC_${Date.now()}`); fs.mkdirSync(runRoot, { recursive: true, mode: 0o700 }); const jobId = 'single'; if (!executionLock.acquire(jobId)) return send(response, 409, { error: 'ANOTHER_WSC_JOB_RUNNING' }); const pdfPath = path.join(runRoot, `${safeName(body.name)}_Webセキュリティ診断レポート.pdf`); try { const result = await runSingleUrlToPdf({ url: body.url, name: body.name, storageRoot: path.join(runRoot, '.wsc-private'), approvalRoot: path.join(runRoot, '.wsc-approvals'), pdfExporter: createPdfExporter(), pdfOutputPath: pdfPath, executor: 'wsc-local-ui-single' }); return send(response, 200, { runRoot, pdfPath: result.pdfPath, reportId: result.reportId, deliveryStatus: 'READY' }); } finally { executionLock.release(jobId); } }
+      if (request.url === '/api/open-folder') { const target = mustAbsoluteDirectory(body.path); await openOutputFolder(target); return send(response, 200, { ok: true }); }
+      if (request.url === '/api/run-single') { const outputRoot = mustAbsoluteDirectory(body.outputRoot); const runRoot = path.join(outputRoot, `WSC_${Date.now()}`); fs.mkdirSync(runRoot, { recursive: true, mode: 0o700 }); const internalRunRoot = path.join(localInternalWorkspaceRoot(), 'single', `${Date.now()}_${crypto.randomUUID()}`); const jobId = 'single'; if (!executionLock.acquire(jobId)) return send(response, 409, { error: 'ANOTHER_WSC_JOB_RUNNING' }); const pdfPath = path.join(runRoot, `${safeName(body.name)}_Webセキュリティ診断レポート.pdf`); try { const result = await runSingleUrlToPdf({ url: body.url, name: body.name, storageRoot: path.join(internalRunRoot, '.wsc-private'), approvalRoot: path.join(internalRunRoot, '.wsc-approvals'), pdfExporter: createPdfExporter(), pdfOutputPath: pdfPath, executor: 'wsc-local-ui-single' }); return send(response, 200, { runRoot, pdfPath: result.pdfPath, reportId: result.reportId, deliveryStatus: 'READY' }); } finally { executionLock.release(jobId); } }
       if (request.url === '/api/run-csv') { if (typeof body.csvPath !== 'string' || !path.isAbsolute(body.csvPath) || path.extname(body.csvPath).toLowerCase() !== '.csv' || !fs.existsSync(body.csvPath)) throw new Error('CSV_FILE_INVALID'); const csv = fs.readFileSync(body.csvPath, 'utf8'); const jobId = crypto.randomUUID(); if (!executionLock.acquire(jobId)) return send(response, 409, { error: 'ANOTHER_WSC_JOB_RUNNING' }); jobs.set(jobId, { status: 'RUNNING', events: [] }); runCsvSequential({ csv, outputRoot: body.outputRoot, onProgress: event => jobs.get(jobId)?.events.push(event) }).then(result => jobs.set(jobId, { status: result.deliveryStatus === 'READY' ? 'COMPLETE' : 'FAILED_DELIVERY', result, events: jobs.get(jobId)?.events || [] }), error => jobs.set(jobId, { status: 'FAILED', error: error.message, events: jobs.get(jobId)?.events || [] })).finally(() => { executionLock.release(jobId); }); return send(response, 202, { jobId }); }
       return send(response, 404, { error: 'NOT_FOUND' });
     } catch (error) { return send(response, 400, { error: error.message }); }

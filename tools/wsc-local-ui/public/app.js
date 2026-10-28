@@ -42,8 +42,8 @@ $('start').onclick = async () => {
       if (!$('csvPath').value) throw Error('CSV_FILE_REQUIRED');
       const { jobId } = await api('/api/run-csv', { csvPath: $('csvPath').value, outputRoot });
       const job = await waitForCsvJob(jobId);
-      lastOutput = job.result.runRoot;
-      status(`${$('status').textContent}\n完了: HTML成功 ${job.result.completed}／取得失敗 ${job.result.failed}\nPDF・ZIP: 完了\n出力: ${job.result.runRoot}`);
+      lastOutput = job.result.publicOutputRoot;
+      status(`${$('status').textContent}\n完了: HTML成功 ${job.result.completed}／取得失敗 ${job.result.failed}\nPDF・ZIP: 完了\n出力: ${job.result.publicOutputRoot}`);
     }
   } catch (error) { status(`失敗: ${error.message}`); } finally { $('start').disabled = false; }
 };
