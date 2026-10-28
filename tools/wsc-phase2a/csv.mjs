@@ -23,7 +23,7 @@ export function parseCompaniesCsv(source) {
     try {
       const values = parseLine(line); if (values.length !== header.length) throw new Error('CSV_COLUMN_COUNT_INVALID');
       const [name, headOffice, url, email] = values.map(v => v.trim());
-      if (!name || !headOffice || !url) throw new Error('CSV_REQUIRED_VALUE_MISSING');
+      if (!name || !url) throw new Error('CSV_REQUIRED_VALUE_MISSING');
       const normalizedUrl = normalizeDiagnosisUrl(url);
       if (!/^https:\/\//.test(normalizedUrl)) throw new Error('CSV_URL_HTTPS_REQUIRED');
       const fingerprint = `${name}\u0000${headOffice}\u0000${normalizedUrl}`;
