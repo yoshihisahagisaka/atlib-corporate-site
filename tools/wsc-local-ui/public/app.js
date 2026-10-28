@@ -28,6 +28,7 @@ const waitForCsvJob = async jobId => {
   }
 };
 document.querySelectorAll('[data-mode]').forEach(button => button.onclick = () => { mode = button.dataset.mode; document.querySelectorAll('[data-mode]').forEach(item => item.classList.toggle('selected', item === button)); $('single').hidden = mode !== 'single'; $('csv').hidden = mode !== 'csv'; });
+$('chooseFolder').onclick = async () => { const selected = (await api('/api/choose-folder')).path; if (selected) $('outputRoot').value = selected; };
 $('openFolder').onclick = async () => { try { await api('/api/open-folder', { path: lastOutput }); } catch (error) { status(`出力先フォルダを開けませんでした: ${error.message}`); } };
 $('start').onclick = async () => {
   const outputRoot = $('outputRoot').value;
