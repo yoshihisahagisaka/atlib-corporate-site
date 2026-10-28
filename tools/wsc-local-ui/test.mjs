@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createLocalPrivateStore } from '../wsc-phase2a/local-store.mjs';
 import { browserPdfArgs } from '../wsc-delivery/browser-pdf.mjs';
-import { createExecutionLock, createLocalUiServer, csvFromRequest, dialogPowerShellArgs, dialogScript, explorerArgs, isLocalUiApiRequest, replaySavedJson, runCsvSequential } from './server.mjs';
+import { createExecutionLock, createLocalUiServer, csvFromRequest, explorerArgs, isLocalUiApiRequest, replaySavedJson, runCsvSequential } from './server.mjs';
 
 const temp = fs.mkdtempSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '.test-ui-'));
 const url = 'https://ui-replay.example/';
@@ -30,19 +30,15 @@ assert.equal(progressResponse.body.status, 'NOT_FOUND');
 const foreignResponse = await requestApi(localServer, { host: '127.0.0.1:38152', referer: 'https://example.invalid/' });
 assert.equal(foreignResponse.status, 403);
 
-const folderDialogArgs = dialogPowerShellArgs();
-assert.deepEqual(folderDialogArgs.slice(0, 3), ['-NoProfile', '-STA', '-Command']);
-assert.match(dialogScript(), /FolderBrowserDialog/);
-assert.match(dialogScript(), /SelectedPath/);
-assert.doesNotMatch(dialogScript(), /OpenFileDialog|TopMost|Opacity/);
 assert.deepEqual(explorerArgs('C:\\Users\\example\\Downloads'), ['C:\\Users\\example\\Downloads']);
 assert.equal(csvFromRequest({ csv }), csv);
 assert.throws(() => csvFromRequest({ csv: '' }), /CSV_CONTENT_INVALID/);
 const uiHtml = fs.readFileSync(new URL('./public/index.html', import.meta.url), 'utf8');
 const uiScript = fs.readFileSync(new URL('./public/app.js', import.meta.url), 'utf8');
 assert.match(uiHtml, /id="csvFile" type="file" accept="\.csv,text\/csv"/);
-assert.doesNotMatch(uiHtml, /chooseCsv|csvPath/);
+assert.doesNotMatch(uiHtml, /chooseCsv|csvPath|chooseFolder/);
 assert.match(uiScript, /csvFile\.text\(\)/);
+assert.doesNotMatch(uiScript, /chooseFolder|chooseOutputFolder|choose-csv/);
 assert.ok(browserPdfArgs({ htmlPath: 'C:\\report.html', pdfPath: 'C:\\report.pdf' }).includes('--print-to-pdf-no-header'));
 
 const lock = createExecutionLock();

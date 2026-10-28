@@ -91,17 +91,6 @@ export async function replaySavedJson({ csv, diagnosesByUrl, outputRoot, pdfExpo
   }
 }
 
-export const dialogScript = () => "Add-Type -AssemblyName System.Windows.Forms;[System.Windows.Forms.Application]::EnableVisualStyles();$d=New-Object System.Windows.Forms.FolderBrowserDialog;if($d.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK){[Console]::Out.Write($d.SelectedPath)}";
-export const dialogPowerShellArgs = () => ['-NoProfile', '-STA', '-Command', dialogScript()];
-export const chooseOutputFolder = () => new Promise((resolve, reject) => {
-  const child = spawn('powershell.exe', dialogPowerShellArgs(), { windowsHide: false });
-  let output = '';
-  child.stdout.on('data', chunk => { output += chunk; });
-  child.on('error', () => reject(new Error('WINDOWS_DIALOG_FAILED')));
-  // `close` waits for standard output to close, so the selected path is not
-  // lost when PowerShell exits immediately after the user presses OK.
-  child.on('close', code => code === 0 ? resolve(output.trim()) : reject(new Error('WINDOWS_DIALOG_FAILED')));
-});
 export const explorerArgs = target => [target];
 export const openOutputFolder = target => new Promise((resolve, reject) => {
   const child = spawn('explorer.exe', explorerArgs(target), { windowsHide: false });
@@ -142,7 +131,6 @@ export function createLocalUiServer() {
       if (request.method === 'GET') { const file = request.url === '/' ? 'index.html' : request.url.slice(1); const target = path.resolve(publicRoot, file); if (!target.startsWith(`${publicRoot}${path.sep}`) || !fs.existsSync(target)) return send(response, 404, { error: 'NOT_FOUND' }); response.writeHead(200, { 'content-type': file.endsWith('.css') ? 'text/css; charset=utf-8' : file.endsWith('.js') ? 'text/javascript; charset=utf-8' : 'text/html; charset=utf-8' }); return fs.createReadStream(target).pipe(response); }
       if (!isLocalUiApiRequest(request)) return send(response, 403, { error: 'LOCAL_UI_REQUEST_REQUIRED' });
       const body = await readBody(request);
-      if (request.url === '/api/choose-folder') return send(response, 200, { path: await chooseOutputFolder() });
       if (request.url === '/api/open-folder') { const target = mustAbsoluteDirectory(body.path); await openOutputFolder(target); return send(response, 200, { ok: true }); }
       if (request.url === '/api/run-single') { const outputRoot = mustAbsoluteDirectory(body.outputRoot); const runRoot = path.join(outputRoot, `WSC_${Date.now()}`); fs.mkdirSync(runRoot, { recursive: true, mode: 0o700 }); const internalRunRoot = path.join(localInternalWorkspaceRoot(), 'single', `${Date.now()}_${crypto.randomUUID()}`); const jobId = 'single'; if (!executionLock.acquire(jobId)) return send(response, 409, { error: 'ANOTHER_WSC_JOB_RUNNING' }); const pdfPath = path.join(runRoot, `${safeName(body.name)}_Webセキュリティ診断レポート.pdf`); try { const result = await runSingleUrlToPdf({ url: body.url, name: body.name, storageRoot: path.join(internalRunRoot, '.wsc-private'), approvalRoot: path.join(internalRunRoot, '.wsc-approvals'), pdfExporter: createPdfExporter(), pdfOutputPath: pdfPath, executor: 'wsc-local-ui-single' }); return send(response, 200, { runRoot, pdfPath: result.pdfPath, reportId: result.reportId, deliveryStatus: 'READY' }); } finally { executionLock.release(jobId); } }
       if (request.url === '/api/run-csv') { const csv = csvFromRequest(body); const jobId = crypto.randomUUID(); if (!executionLock.acquire(jobId)) return send(response, 409, { error: 'ANOTHER_WSC_JOB_RUNNING' }); jobs.set(jobId, { status: 'RUNNING', events: [] }); runCsvSequential({ csv, outputRoot: body.outputRoot, onProgress: event => jobs.get(jobId)?.events.push(event) }).then(result => jobs.set(jobId, { status: result.deliveryStatus === 'READY' ? 'COMPLETE' : 'FAILED_DELIVERY', result, events: jobs.get(jobId)?.events || [] }), error => jobs.set(jobId, { status: 'FAILED', error: error.message, events: jobs.get(jobId)?.events || [] })).finally(() => { executionLock.release(jobId); }); return send(response, 202, { jobId }); }
