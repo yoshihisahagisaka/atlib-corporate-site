@@ -2,10 +2,17 @@ const $ = id => document.getElementById(id);
 let mode = 'single';
 let outputDirectory = null;
 let pendingDelivery = null;
-const api = (url, body = {}) => fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }).then(async response => { const data = await response.json(); if (!response.ok) throw Error(data.error || 'REQUEST_FAILED'); return data; });
+const api = (url, body = {}) => fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }).then(async response => { const data = await response.json(); if (!response.ok) { const error = Error(data.error || 'REQUEST_FAILED'); error.details = data; throw error; } return data; });
 const status = value => { $('status').textContent = value; };
 const wait = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
-const progress = events => status(events.map(event => `${event.status}: ${event.company || '配送処理'}（成功 ${event.completed}／失敗 ${event.failed}／全 ${event.total}）`).join('\n') || 'CSVを開始しました…');
+const exclusion = event => event.rejectedCount ? `／除外 ${event.rejectedCount}件（${event.rejectionReasons.map(reason => `${reason.code}: ${reason.count}件`).join('、')}）` : '';
+const progress = events => status(events.map(event => `${event.status}: ${event.company || '配送処理'}（成功 ${event.completed}／失敗 ${event.failed}／全 ${event.total}${exclusion(event)}）`).join('\n') || 'CSVを開始しました…');
+const inputError = error => {
+  const rejected = error.details?.rejectedRows;
+  if (!rejected?.length) return error.message;
+  const reasons = Object.entries(rejected.reduce((counts, row) => ({ ...counts, [row.code]: (counts[row.code] || 0) + 1 }), {})).map(([code, count]) => `${code}: ${count}件`);
+  return `${error.message}\n除外 ${rejected.length}件（${reasons.join('、')}）`;
+};
 const requireOutputPermission = async () => outputDirectory && (await outputDirectory.queryPermission({ mode: 'readwrite' }) === 'granted' || await outputDirectory.requestPermission({ mode: 'readwrite' }) === 'granted');
 const saveArtifacts = async delivery => {
   if (!await requireOutputPermission()) throw Error('OUTPUT_FOLDER_PERMISSION_REQUIRED');
@@ -58,5 +65,5 @@ $('start').onclick = async () => {
       pendingDelivery = { artifacts: job.result.artifacts, saved: new Set() }; await saveArtifacts(pendingDelivery); pendingDelivery = null;
       status(`${$('status').textContent}\n完了: HTML成功 ${job.result.completed}／取得失敗 ${job.result.failed}\nPDF・ZIPの保存が完了しました。`);
     }
-  } catch (error) { status(`失敗: ${error.message}`); } finally { $('start').disabled = false; }
+  } catch (error) { status(`失敗: ${inputError(error)}`); } finally { $('start').disabled = false; }
 };

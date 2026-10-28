@@ -24,6 +24,7 @@ const mustAbsoluteDirectory = value => {
   return target;
 };
 const deliveryAttemptRoot = (runRoot, batch) => path.join(runRoot, `delivery_${Date.now()}_${hash(JSON.stringify(batch.reports))}_${crypto.randomUUID()}`);
+const rejectionSummary = errors => Object.entries(errors.reduce((counts, error) => ({ ...counts, [error.code]: (counts[error.code] || 0) + 1 }), {})).map(([code, count]) => ({ code, count }));
 
 export const localInternalWorkspaceRoot = () => path.join(process.env.LOCALAPPDATA || path.join(os.homedir(), 'AppData', 'Local'), 'atLIB', 'WSC', 'local-ui');
 
@@ -45,9 +46,11 @@ export function createPdfExporter() {
 
 export async function runCsvSequential({ csv, internalWorkspaceRoot = localInternalWorkspaceRoot(), pdfExporter = createPdfExporter(), singleRunner = runSingleUrl, onProgress = () => {} }) {
   const parsed = parseCompaniesCsv(csv);
+  if (!parsed.companies.length) throw new Error('CSV_NO_VALID_COMPANIES');
   const batchId = `bat_ui_${hash(csv)}`; const internalRunRoot = path.join(path.resolve(internalWorkspaceRoot), 'csv', hash(csv)); const storageRoot = path.join(internalRunRoot, '.wsc-private'); const approvalRoot = path.join(internalRunRoot, '.wsc-approvals');
   const store = createLocalPrivateStore(storageRoot); store.startBatch({ batch_id: batchId, mode: 'CSV_SEQUENTIAL_UI', csv_contract: parsed.header, rejected_rows: parsed.errors });
   let state = store.readState(batchId); let completed = 0; let failed = 0;
+  onProgress({ completed, failed, total: parsed.companies.length, status: 'CSV_VALIDATED', rejectedCount: parsed.errors.length, rejectionReasons: rejectionSummary(parsed.errors) });
   for (const company of parsed.companies) {
     const current = state.reports[company.company_id];
     if (current?.status === 'REPORT_READY' && current.storage_batch_id && store.verifyReport(current.storage_batch_id, current.report_id)) { completed += 1; onProgress({ company: company.name, completed, failed, total: parsed.companies.length, status: 'SKIPPED_READY' }); continue; }
@@ -137,7 +140,7 @@ export function createLocalUiServer() {
       if (!isLocalUiApiRequest(request)) return send(response, 403, { error: 'LOCAL_UI_REQUEST_REQUIRED' });
       const body = await readBody(request);
       if (request.url === '/api/run-single') { const internalRunRoot = path.join(localInternalWorkspaceRoot(), 'single', `${Date.now()}_${crypto.randomUUID()}`); fs.mkdirSync(internalRunRoot, { recursive: true, mode: 0o700 }); const jobId = 'single'; if (!executionLock.acquire(jobId)) return send(response, 409, { error: 'ANOTHER_WSC_JOB_RUNNING' }); const pdfPath = path.join(internalRunRoot, `${safeName(body.name)}_Webセキュリティ診断レポート.pdf`); try { const result = await runSingleUrlToPdf({ url: body.url, name: body.name, storageRoot: path.join(internalRunRoot, '.wsc-private'), approvalRoot: path.join(internalRunRoot, '.wsc-approvals'), pdfExporter: createPdfExporter(), pdfOutputPath: pdfPath, executor: 'wsc-local-ui-single' }); return send(response, 200, registerArtifacts([{ name: path.basename(result.pdfPath), path: result.pdfPath }])); } finally { executionLock.release(jobId); } }
-      if (request.url === '/api/run-csv') { const csv = csvFromRequest(body); const jobId = crypto.randomUUID(); if (!executionLock.acquire(jobId)) return send(response, 409, { error: 'ANOTHER_WSC_JOB_RUNNING' }); jobs.set(jobId, { status: 'RUNNING', events: [] }); runCsvSequential({ csv, onProgress: event => jobs.get(jobId)?.events.push(event) }).then(result => { const events = jobs.get(jobId)?.events || []; if (result.deliveryStatus !== 'READY') return jobs.set(jobId, { status: 'FAILED_DELIVERY', result: { completed: result.completed, failed: result.failed, deliveryError: result.deliveryError }, events }); const artifacts = registerArtifacts(deliveryFiles(result.delivery)); return jobs.set(jobId, { status: 'COMPLETE', result: clientResult({ ...result, artifacts: artifacts.artifacts }), events }); }, error => jobs.set(jobId, { status: 'FAILED', error: error.message, events: jobs.get(jobId)?.events || [] })).finally(() => { executionLock.release(jobId); }); return send(response, 202, { jobId }); }
+      if (request.url === '/api/run-csv') { const csv = csvFromRequest(body); const intake = parseCompaniesCsv(csv); if (!intake.companies.length) return send(response, 400, { error: 'CSV_NO_VALID_COMPANIES', rejectedRows: intake.errors }); const jobId = crypto.randomUUID(); if (!executionLock.acquire(jobId)) return send(response, 409, { error: 'ANOTHER_WSC_JOB_RUNNING' }); jobs.set(jobId, { status: 'RUNNING', events: [] }); runCsvSequential({ csv, onProgress: event => jobs.get(jobId)?.events.push(event) }).then(result => { const events = jobs.get(jobId)?.events || []; if (result.deliveryStatus !== 'READY') return jobs.set(jobId, { status: 'FAILED_DELIVERY', result: { completed: result.completed, failed: result.failed, deliveryError: result.deliveryError }, events }); const artifacts = registerArtifacts(deliveryFiles(result.delivery)); return jobs.set(jobId, { status: 'COMPLETE', result: clientResult({ ...result, artifacts: artifacts.artifacts }), events }); }, error => jobs.set(jobId, { status: 'FAILED', error: error.message, events: jobs.get(jobId)?.events || [] })).finally(() => { executionLock.release(jobId); }); return send(response, 202, { jobId }); }
       return send(response, 404, { error: 'NOT_FOUND' });
     } catch (error) { return send(response, 400, { error: error.message }); }
   });
