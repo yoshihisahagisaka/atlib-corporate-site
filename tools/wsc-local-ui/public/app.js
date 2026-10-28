@@ -28,7 +28,6 @@ const waitForCsvJob = async jobId => {
   }
 };
 document.querySelectorAll('[data-mode]').forEach(button => button.onclick = () => { mode = button.dataset.mode; document.querySelectorAll('[data-mode]').forEach(item => item.classList.toggle('selected', item === button)); $('single').hidden = mode !== 'single'; $('csv').hidden = mode !== 'csv'; });
-$('chooseCsv').onclick = async () => { $('csvPath').value = (await api('/api/choose-csv')).path || $('csvPath').value; };
 $('chooseFolder').onclick = async () => { $('outputRoot').value = (await api('/api/choose-folder')).path || $('outputRoot').value; };
 $('openFolder').onclick = () => api('/api/open-folder', { path: lastOutput });
 $('start').onclick = async () => {
@@ -39,8 +38,9 @@ $('start').onclick = async () => {
     if (mode === 'single') {
       status('診断を実行しています…'); const result = await api('/api/run-single', { name: $('name').value, url: $('url').value, outputRoot }); status(`完了\nPDF: ${result.pdfPath}`); lastOutput = result.runRoot;
     } else {
-      if (!$('csvPath').value) throw Error('CSV_FILE_REQUIRED');
-      const { jobId } = await api('/api/run-csv', { csvPath: $('csvPath').value, outputRoot });
+      const csvFile = $('csvFile').files[0];
+      if (!csvFile) throw Error('CSV_FILE_REQUIRED');
+      const { jobId } = await api('/api/run-csv', { csv: await csvFile.text(), outputRoot });
       const job = await waitForCsvJob(jobId);
       lastOutput = job.result.publicOutputRoot;
       status(`${$('status').textContent}\n完了: HTML成功 ${job.result.completed}／取得失敗 ${job.result.failed}\nPDF・ZIP: 完了\n出力: ${job.result.publicOutputRoot}`);
