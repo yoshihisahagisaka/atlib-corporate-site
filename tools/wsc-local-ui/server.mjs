@@ -87,10 +87,19 @@ export async function replaySavedJson({ csv, diagnosesByUrl, outputRoot, pdfExpo
   }
 }
 
-const dialogScript = mode => mode === 'csv'
+export const dialogScript = mode => mode === 'csv'
   ? "Add-Type -AssemblyName System.Windows.Forms;$d=New-Object System.Windows.Forms.OpenFileDialog;$d.Filter='CSV files (*.csv)|*.csv';if($d.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK){[Console]::Out.Write($d.FileName)}"
   : "Add-Type -AssemblyName System.Windows.Forms;$d=New-Object System.Windows.Forms.FolderBrowserDialog;if($d.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK){[Console]::Out.Write($d.SelectedPath)}";
-const choose = mode => new Promise((resolve, reject) => { const child = spawn('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', dialogScript(mode)], { windowsHide: false }); let output = ''; child.stdout.on('data', chunk => { output += chunk; }); child.on('error', reject); child.on('exit', code => code === 0 ? resolve(output.trim()) : reject(new Error('WINDOWS_DIALOG_FAILED'))); });
+export const dialogPowerShellArgs = mode => ['-NoProfile', '-STA', '-Command', dialogScript(mode)];
+export const choose = mode => new Promise((resolve, reject) => {
+  const child = spawn('powershell.exe', dialogPowerShellArgs(mode), { windowsHide: false });
+  let output = '';
+  child.stdout.on('data', chunk => { output += chunk; });
+  child.on('error', () => reject(new Error('WINDOWS_DIALOG_FAILED')));
+  // `close` waits for standard output to close, so the selected path is not
+  // lost when PowerShell exits immediately after the user presses OK.
+  child.on('close', code => code === 0 ? resolve(output.trim()) : reject(new Error('WINDOWS_DIALOG_FAILED')));
+});
 const readBody = request => new Promise((resolve, reject) => { let body = ''; request.on('data', chunk => { body += chunk; if (body.length > 1_000_000) request.destroy(); }); request.on('end', () => { try { resolve(body ? JSON.parse(body) : {}); } catch { reject(new Error('REQUEST_JSON_INVALID')); } }); request.on('error', reject); });
 const send = (response, status, value) => { response.writeHead(status, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' }); response.end(JSON.stringify(value)); };
 const localUiOrigin = 'http://127.0.0.1:38152';

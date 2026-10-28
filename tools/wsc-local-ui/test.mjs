@@ -3,7 +3,7 @@ import { EventEmitter } from 'node:events';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createExecutionLock, createLocalUiServer, isLocalUiApiRequest, replaySavedJson } from './server.mjs';
+import { createExecutionLock, createLocalUiServer, dialogPowerShellArgs, dialogScript, isLocalUiApiRequest, replaySavedJson } from './server.mjs';
 
 const temp = fs.mkdtempSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '.test-ui-'));
 const url = 'https://ui-replay.example/';
@@ -27,6 +27,14 @@ assert.equal(progressResponse.status, 200);
 assert.equal(progressResponse.body.status, 'NOT_FOUND');
 const foreignResponse = await requestApi(localServer, { host: '127.0.0.1:38152', referer: 'https://example.invalid/' });
 assert.equal(foreignResponse.status, 403);
+
+const csvDialogArgs = dialogPowerShellArgs('csv');
+const folderDialogArgs = dialogPowerShellArgs('folder');
+assert.deepEqual(csvDialogArgs.slice(0, 3), ['-NoProfile', '-STA', '-Command']);
+assert.match(dialogScript('csv'), /OpenFileDialog/);
+assert.match(dialogScript('folder'), /FolderBrowserDialog/);
+assert.match(dialogScript('csv'), /FileName/);
+assert.match(dialogScript('folder'), /SelectedPath/);
 
 const lock = createExecutionLock();
 assert.equal(lock.acquire('csv-1'), true);
