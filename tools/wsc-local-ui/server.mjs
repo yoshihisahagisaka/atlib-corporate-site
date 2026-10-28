@@ -24,7 +24,6 @@ const mustAbsoluteDirectory = value => {
   return target;
 };
 const deliveryAttemptRoot = (runRoot, batch) => path.join(runRoot, `delivery_${Date.now()}_${hash(JSON.stringify(batch.reports))}_${crypto.randomUUID()}`);
-const publicDeliveryRoot = (outputRoot, batch) => path.join(outputRoot, `WSC_${hash(batch.batch_id)}_${Date.now()}_${crypto.randomUUID()}`);
 
 export const localInternalWorkspaceRoot = () => path.join(process.env.LOCALAPPDATA || path.join(os.homedir(), 'AppData', 'Local'), 'atLIB', 'WSC', 'local-ui');
 
@@ -44,8 +43,8 @@ export function createPdfExporter() {
   return createBrowserPdfExporter({ browserPath });
 }
 
-export async function runCsvSequential({ csv, outputRoot, internalWorkspaceRoot = localInternalWorkspaceRoot(), pdfExporter = createPdfExporter(), singleRunner = runSingleUrl, onProgress = () => {} }) {
-  const parsed = parseCompaniesCsv(csv); const base = mustAbsoluteDirectory(outputRoot);
+export async function runCsvSequential({ csv, internalWorkspaceRoot = localInternalWorkspaceRoot(), pdfExporter = createPdfExporter(), singleRunner = runSingleUrl, onProgress = () => {} }) {
+  const parsed = parseCompaniesCsv(csv);
   const batchId = `bat_ui_${hash(csv)}`; const internalRunRoot = path.join(path.resolve(internalWorkspaceRoot), 'csv', hash(csv)); const storageRoot = path.join(internalRunRoot, '.wsc-private'); const approvalRoot = path.join(internalRunRoot, '.wsc-approvals');
   const store = createLocalPrivateStore(storageRoot); store.startBatch({ batch_id: batchId, mode: 'CSV_SEQUENTIAL_UI', csv_contract: parsed.header, rejected_rows: parsed.errors });
   let state = store.readState(batchId); let completed = 0; let failed = 0;
@@ -65,15 +64,15 @@ export async function runCsvSequential({ csv, outputRoot, internalWorkspaceRoot 
     }
     store.writeState(batchId, state); onProgress({ company: company.name, completed, failed, total: parsed.companies.length, status: state.reports[company.company_id].status });
   }
-  const batch = store.readState(batchId); const deliveryRoot = publicDeliveryRoot(base, batch);
+  const batch = store.readState(batchId); const deliveryRoot = deliveryAttemptRoot(internalRunRoot, batch);
   onProgress({ completed, failed, total: parsed.companies.length, status: 'PDF_EXPORTING' });
   try {
     const delivery = await createDeliveryPackage({ batch, storageRoot, outputRoot: deliveryRoot, pdfExporter });
     onProgress({ completed, failed, total: parsed.companies.length, status: 'DELIVERY_READY' });
-    return { batch, intake: parsed, internalRunRoot, publicOutputRoot: deliveryRoot, deliveryRoot, delivery, completed, failed, deliveryStatus: 'READY' };
+    return { batch, intake: parsed, internalRunRoot, deliveryRoot, delivery, completed, failed, deliveryStatus: 'READY' };
   } catch (error) {
     onProgress({ completed, failed, total: parsed.companies.length, status: 'PDF_EXPORT_FAILED', error: error.message });
-    return { batch, intake: parsed, internalRunRoot, publicOutputRoot: deliveryRoot, deliveryRoot, delivery: null, completed, failed, deliveryStatus: 'FAILED', deliveryError: error.message };
+    return { batch, intake: parsed, internalRunRoot, deliveryRoot, delivery: null, completed, failed, deliveryStatus: 'FAILED', deliveryError: error.message };
   }
 }
 
@@ -91,25 +90,16 @@ export async function replaySavedJson({ csv, diagnosesByUrl, outputRoot, pdfExpo
   }
 }
 
-export const dialogScript = () => "Add-Type -AssemblyName System.Windows.Forms;[System.Windows.Forms.Application]::EnableVisualStyles();$d=New-Object System.Windows.Forms.FolderBrowserDialog;if($d.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK){[Console]::Out.Write($d.SelectedPath)}";
-export const dialogPowerShellArgs = () => ['-NoProfile', '-STA', '-Command', dialogScript()];
-export const chooseOutputFolder = () => new Promise((resolve, reject) => {
-  const child = spawn('powershell.exe', dialogPowerShellArgs(), { windowsHide: false });
-  let output = '';
-  child.stdout.on('data', chunk => { output += chunk; });
-  child.on('error', () => reject(new Error('WINDOWS_DIALOG_FAILED')));
-  child.on('close', code => code === 0 ? resolve(output.trim()) : reject(new Error('WINDOWS_DIALOG_FAILED')));
-});
-export const explorerArgs = target => [target];
-export const openOutputFolder = target => new Promise((resolve, reject) => {
-  const child = spawn('explorer.exe', explorerArgs(target), { windowsHide: false });
-  child.on('error', () => reject(new Error('WINDOWS_EXPLORER_FAILED')));
-  child.on('spawn', resolve);
-});
 export const csvFromRequest = body => {
   if (typeof body.csv !== 'string' || body.csv.trim() === '') throw new Error('CSV_CONTENT_INVALID');
   return body.csv;
 };
+const fileType = name => name.endsWith('.pdf') ? 'application/pdf' : name.endsWith('.zip') ? 'application/zip' : 'application/octet-stream';
+const deliveryFiles = delivery => [
+  ...delivery.rows.filter(row => row.status === 'READY').map(row => ({ name: row.pdfName, path: path.join(delivery.pdfDir, row.pdfName) })),
+  { name: path.basename(delivery.zipPath), path: delivery.zipPath }
+];
+const clientResult = result => ({ completed: result.completed, failed: result.failed, artifacts: result.artifacts });
 const readBody = request => new Promise((resolve, reject) => { let body = ''; request.on('data', chunk => { body += chunk; if (body.length > 1_000_000) request.destroy(); }); request.on('end', () => { try { resolve(body ? JSON.parse(body) : {}); } catch { reject(new Error('REQUEST_JSON_INVALID')); } }); request.on('error', reject); });
 const send = (response, status, value) => { response.writeHead(status, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' }); response.end(JSON.stringify(value)); };
 const localUiOrigin = 'http://127.0.0.1:38152';
@@ -133,17 +123,21 @@ export function createExecutionLock() {
 }
 
 export function createLocalUiServer() {
-  const jobs = new Map(); const executionLock = createExecutionLock();
+  const jobs = new Map(); const artifactJobs = new Map(); const executionLock = createExecutionLock();
+  const registerArtifacts = files => {
+    const artifactJobId = crypto.randomUUID(); const artifacts = files.map(file => ({ name: path.basename(file.name), path: path.resolve(file.path) }));
+    artifactJobs.set(artifactJobId, new Map(artifacts.map(file => [file.name, file.path])));
+    return { artifactJobId, artifacts: artifacts.map(file => ({ name: file.name, url: `/api/artifacts/${artifactJobId}/${encodeURIComponent(file.name)}` })) };
+  };
   return http.createServer(async (request, response) => {
     try {
       if (request.method === 'GET' && request.url.startsWith('/api/job/')) { if (!isLocalUiApiRequest(request)) return send(response, 403, { error: 'LOCAL_UI_REQUEST_REQUIRED' }); return send(response, 200, jobs.get(request.url.slice('/api/job/'.length)) || { status: 'NOT_FOUND' }); }
+      if (request.method === 'GET' && request.url.startsWith('/api/artifacts/')) { if (!isLocalUiApiRequest(request)) return send(response, 403, { error: 'LOCAL_UI_REQUEST_REQUIRED' }); const [, , , artifactJobId, encodedName] = new URL(request.url, localUiOrigin).pathname.split('/'); const artifactPath = artifactJobs.get(artifactJobId)?.get(decodeURIComponent(encodedName || '')); if (!artifactPath || !fs.existsSync(artifactPath)) return send(response, 404, { error: 'ARTIFACT_NOT_FOUND' }); response.writeHead(200, { 'content-type': fileType(artifactPath), 'content-length': fs.statSync(artifactPath).size, 'cache-control': 'no-store' }); return fs.createReadStream(artifactPath).pipe(response); }
       if (request.method === 'GET') { const file = request.url === '/' ? 'index.html' : request.url.slice(1); const target = path.resolve(publicRoot, file); if (!target.startsWith(`${publicRoot}${path.sep}`) || !fs.existsSync(target)) return send(response, 404, { error: 'NOT_FOUND' }); response.writeHead(200, { 'content-type': file.endsWith('.css') ? 'text/css; charset=utf-8' : file.endsWith('.js') ? 'text/javascript; charset=utf-8' : 'text/html; charset=utf-8' }); return fs.createReadStream(target).pipe(response); }
       if (!isLocalUiApiRequest(request)) return send(response, 403, { error: 'LOCAL_UI_REQUEST_REQUIRED' });
       const body = await readBody(request);
-      if (request.url === '/api/choose-folder') return send(response, 200, { path: await chooseOutputFolder() });
-      if (request.url === '/api/open-folder') { const target = mustAbsoluteDirectory(body.path); await openOutputFolder(target); return send(response, 200, { ok: true }); }
-      if (request.url === '/api/run-single') { const outputRoot = mustAbsoluteDirectory(body.outputRoot); const runRoot = path.join(outputRoot, `WSC_${Date.now()}`); fs.mkdirSync(runRoot, { recursive: true, mode: 0o700 }); const internalRunRoot = path.join(localInternalWorkspaceRoot(), 'single', `${Date.now()}_${crypto.randomUUID()}`); const jobId = 'single'; if (!executionLock.acquire(jobId)) return send(response, 409, { error: 'ANOTHER_WSC_JOB_RUNNING' }); const pdfPath = path.join(runRoot, `${safeName(body.name)}_Webセキュリティ診断レポート.pdf`); try { const result = await runSingleUrlToPdf({ url: body.url, name: body.name, storageRoot: path.join(internalRunRoot, '.wsc-private'), approvalRoot: path.join(internalRunRoot, '.wsc-approvals'), pdfExporter: createPdfExporter(), pdfOutputPath: pdfPath, executor: 'wsc-local-ui-single' }); return send(response, 200, { runRoot, pdfPath: result.pdfPath, reportId: result.reportId, deliveryStatus: 'READY' }); } finally { executionLock.release(jobId); } }
-      if (request.url === '/api/run-csv') { const csv = csvFromRequest(body); const jobId = crypto.randomUUID(); if (!executionLock.acquire(jobId)) return send(response, 409, { error: 'ANOTHER_WSC_JOB_RUNNING' }); jobs.set(jobId, { status: 'RUNNING', events: [] }); runCsvSequential({ csv, outputRoot: body.outputRoot, onProgress: event => jobs.get(jobId)?.events.push(event) }).then(result => jobs.set(jobId, { status: result.deliveryStatus === 'READY' ? 'COMPLETE' : 'FAILED_DELIVERY', result, events: jobs.get(jobId)?.events || [] }), error => jobs.set(jobId, { status: 'FAILED', error: error.message, events: jobs.get(jobId)?.events || [] })).finally(() => { executionLock.release(jobId); }); return send(response, 202, { jobId }); }
+      if (request.url === '/api/run-single') { const internalRunRoot = path.join(localInternalWorkspaceRoot(), 'single', `${Date.now()}_${crypto.randomUUID()}`); fs.mkdirSync(internalRunRoot, { recursive: true, mode: 0o700 }); const jobId = 'single'; if (!executionLock.acquire(jobId)) return send(response, 409, { error: 'ANOTHER_WSC_JOB_RUNNING' }); const pdfPath = path.join(internalRunRoot, `${safeName(body.name)}_Webセキュリティ診断レポート.pdf`); try { const result = await runSingleUrlToPdf({ url: body.url, name: body.name, storageRoot: path.join(internalRunRoot, '.wsc-private'), approvalRoot: path.join(internalRunRoot, '.wsc-approvals'), pdfExporter: createPdfExporter(), pdfOutputPath: pdfPath, executor: 'wsc-local-ui-single' }); return send(response, 200, registerArtifacts([{ name: path.basename(result.pdfPath), path: result.pdfPath }])); } finally { executionLock.release(jobId); } }
+      if (request.url === '/api/run-csv') { const csv = csvFromRequest(body); const jobId = crypto.randomUUID(); if (!executionLock.acquire(jobId)) return send(response, 409, { error: 'ANOTHER_WSC_JOB_RUNNING' }); jobs.set(jobId, { status: 'RUNNING', events: [] }); runCsvSequential({ csv, onProgress: event => jobs.get(jobId)?.events.push(event) }).then(result => { const events = jobs.get(jobId)?.events || []; if (result.deliveryStatus !== 'READY') return jobs.set(jobId, { status: 'FAILED_DELIVERY', result: { completed: result.completed, failed: result.failed, deliveryError: result.deliveryError }, events }); const artifacts = registerArtifacts(deliveryFiles(result.delivery)); return jobs.set(jobId, { status: 'COMPLETE', result: clientResult({ ...result, artifacts: artifacts.artifacts }), events }); }, error => jobs.set(jobId, { status: 'FAILED', error: error.message, events: jobs.get(jobId)?.events || [] })).finally(() => { executionLock.release(jobId); }); return send(response, 202, { jobId }); }
       return send(response, 404, { error: 'NOT_FOUND' });
     } catch (error) { return send(response, 400, { error: error.message }); }
   });

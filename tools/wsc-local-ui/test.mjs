@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createLocalPrivateStore } from '../wsc-phase2a/local-store.mjs';
 import { browserPdfArgs } from '../wsc-delivery/browser-pdf.mjs';
-import { createExecutionLock, createLocalUiServer, csvFromRequest, dialogPowerShellArgs, dialogScript, explorerArgs, isLocalUiApiRequest, replaySavedJson, runCsvSequential } from './server.mjs';
+import { createExecutionLock, createLocalUiServer, csvFromRequest, isLocalUiApiRequest, replaySavedJson, runCsvSequential } from './server.mjs';
 
 const temp = fs.mkdtempSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '.test-ui-'));
 const url = 'https://ui-replay.example/';
@@ -30,10 +30,6 @@ assert.equal(progressResponse.body.status, 'NOT_FOUND');
 const foreignResponse = await requestApi(localServer, { host: '127.0.0.1:38152', referer: 'https://example.invalid/' });
 assert.equal(foreignResponse.status, 403);
 
-assert.deepEqual(explorerArgs('C:\\Users\\example\\Downloads'), ['C:\\Users\\example\\Downloads']);
-assert.deepEqual(dialogPowerShellArgs().slice(0, 3), ['-NoProfile', '-STA', '-Command']);
-assert.match(dialogScript(), /FolderBrowserDialog/);
-assert.match(dialogScript(), /SelectedPath/);
 assert.equal(csvFromRequest({ csv }), csv);
 assert.throws(() => csvFromRequest({ csv: '' }), /CSV_CONTENT_INVALID/);
 const uiHtml = fs.readFileSync(new URL('./public/index.html', import.meta.url), 'utf8');
@@ -42,7 +38,10 @@ assert.match(uiHtml, /id="csvFile" type="file" accept="\.csv,text\/csv"/);
 assert.doesNotMatch(uiHtml, /chooseCsv|csvPath/);
 assert.match(uiHtml, /id="chooseFolder"/);
 assert.match(uiScript, /csvFile\.text\(\)/);
-assert.match(uiScript, /choose-folder/);
+assert.match(uiScript, /showDirectoryPicker\(\{ mode: 'readwrite' \}\)/);
+assert.match(uiScript, /getFileHandle\(artifact\.name, \{ create: true \}\)/);
+assert.doesNotMatch(uiHtml, /id="outputRoot"|openFolder/);
+assert.doesNotMatch(uiScript, /choose-folder|outputRoot|open-folder/);
 assert.ok(browserPdfArgs({ htmlPath: 'C:\\report.html', pdfPath: 'C:\\report.pdf' }).includes('--print-to-pdf-no-header'));
 
 const lock = createExecutionLock();
@@ -66,9 +65,7 @@ assert.equal(succeeded.batch.reports[Object.keys(succeeded.batch.reports)[0]].st
 assert.ok(fs.existsSync(succeeded.delivery.zipPath));
 assert.equal(succeeded.delivery.rows.filter(row => row.status === 'READY').length, 1);
 
-const userOutputRoot = path.join(temp, 'user-output');
 const internalWorkspaceRoot = path.join(temp, 'internal-workspace');
-fs.mkdirSync(userOutputRoot);
 let fakeRun = 0;
 const fakeSingleRunner = async ({ name, headOffice, url, storageRoot }) => {
   const store = createLocalPrivateStore(storageRoot); const batchId = `bat_fake_${fakeRun}`; const reportId = `rpt_fake_${fakeRun}`; const companyId = `cmp_fake_${fakeRun}`; fakeRun += 1;
@@ -77,13 +74,11 @@ const fakeSingleRunner = async ({ name, headOffice, url, storageRoot }) => {
   const stored = store.saveReport(batchId, { company_id: companyId, diagnosis_run_id: `run_${reportId}`, report_id: reportId }, { 'company.json': company, 'diagnosis.json': diagnosesByUrl[url], 'result.json': { findings: [] }, 'report.html': '<!doctype html><title>synthetic</title>' });
   return { batchId, reportId, stored };
 };
-const publicDelivery = await runCsvSequential({ csv, outputRoot: userOutputRoot, internalWorkspaceRoot, singleRunner: fakeSingleRunner, pdfExporter: async ({ pdfPath }) => fs.writeFileSync(pdfPath, '%PDF-1.4\nPublic output\n') });
-assert.equal(publicDelivery.deliveryStatus, 'READY');
-assert.ok(publicDelivery.publicOutputRoot.startsWith(`${userOutputRoot}${path.sep}`));
-assert.ok(fs.existsSync(publicDelivery.delivery.zipPath));
+const internalDelivery = await runCsvSequential({ csv, internalWorkspaceRoot, singleRunner: fakeSingleRunner, pdfExporter: async ({ pdfPath }) => fs.writeFileSync(pdfPath, '%PDF-1.4\nInternal delivery\n') });
+assert.equal(internalDelivery.deliveryStatus, 'READY');
+assert.ok(internalDelivery.deliveryRoot.startsWith(`${internalWorkspaceRoot}${path.sep}`));
+assert.ok(fs.existsSync(internalDelivery.delivery.zipPath));
 assert.ok(fs.existsSync(path.join(internalWorkspaceRoot, 'csv')));
-assert.equal(fs.existsSync(path.join(userOutputRoot, '.wsc-private')), false);
-assert.equal(fs.existsSync(path.join(userOutputRoot, '.wsc-approvals')), false);
 
 fs.rmSync(temp, { recursive: true, force: true });
 console.log('WSC local UI replay and safety tests: PASS');
