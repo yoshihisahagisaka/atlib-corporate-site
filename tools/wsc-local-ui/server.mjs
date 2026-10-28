@@ -92,8 +92,8 @@ export async function replaySavedJson({ csv, diagnosesByUrl, outputRoot, pdfExpo
 }
 
 export const dialogScript = mode => mode === 'csv'
-  ? "Add-Type -AssemblyName System.Windows.Forms;$owner=New-Object System.Windows.Forms.Form;$owner.TopMost=$true;$owner.ShowInTaskbar=$false;$owner.Opacity=0;$owner.Show();$owner.Activate();$d=New-Object System.Windows.Forms.OpenFileDialog;$d.Filter='CSV files (*.csv)|*.csv';try{if($d.ShowDialog($owner) -eq [System.Windows.Forms.DialogResult]::OK){[Console]::Out.Write($d.FileName)}}finally{$owner.Close();$owner.Dispose()}"
-  : "Add-Type -AssemblyName System.Windows.Forms;$owner=New-Object System.Windows.Forms.Form;$owner.TopMost=$true;$owner.ShowInTaskbar=$false;$owner.Opacity=0;$owner.Show();$owner.Activate();$d=New-Object System.Windows.Forms.FolderBrowserDialog;try{if($d.ShowDialog($owner) -eq [System.Windows.Forms.DialogResult]::OK){[Console]::Out.Write($d.SelectedPath)}}finally{$owner.Close();$owner.Dispose()}";
+  ? "Add-Type -AssemblyName System.Windows.Forms;[System.Windows.Forms.Application]::EnableVisualStyles();$d=New-Object System.Windows.Forms.OpenFileDialog;$d.Filter='CSV files (*.csv)|*.csv';if($d.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK){[Console]::Out.Write($d.FileName)}"
+  : "Add-Type -AssemblyName System.Windows.Forms;[System.Windows.Forms.Application]::EnableVisualStyles();$d=New-Object System.Windows.Forms.FolderBrowserDialog;if($d.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK){[Console]::Out.Write($d.SelectedPath)}";
 export const dialogPowerShellArgs = mode => ['-NoProfile', '-STA', '-Command', dialogScript(mode)];
 export const choose = mode => new Promise((resolve, reject) => {
   const child = spawn('powershell.exe', dialogPowerShellArgs(mode), { windowsHide: false });
@@ -104,11 +104,11 @@ export const choose = mode => new Promise((resolve, reject) => {
   // lost when PowerShell exits immediately after the user presses OK.
   child.on('close', code => code === 0 ? resolve(output.trim()) : reject(new Error('WINDOWS_DIALOG_FAILED')));
 });
-const explorerScript = "param([string]$target)$shell=New-Object -ComObject Shell.Application;$shell.Explore($target);Start-Sleep -Milliseconds 300;$window=$shell.Windows()|Where-Object{$_.Document.Folder.Self.Path -eq $target}|Select-Object -First 1;if($window){(New-Object -ComObject WScript.Shell).AppActivate([int]$window.HWND)|Out-Null}";
+export const explorerArgs = target => [target];
 export const openOutputFolder = target => new Promise((resolve, reject) => {
-  const child = spawn('powershell.exe', ['-NoProfile', '-STA', '-Command', explorerScript, target], { windowsHide: false });
+  const child = spawn('explorer.exe', explorerArgs(target), { windowsHide: false });
   child.on('error', () => reject(new Error('WINDOWS_EXPLORER_FAILED')));
-  child.on('close', code => code === 0 ? resolve() : reject(new Error('WINDOWS_EXPLORER_FAILED')));
+  child.on('spawn', resolve);
 });
 const readBody = request => new Promise((resolve, reject) => { let body = ''; request.on('data', chunk => { body += chunk; if (body.length > 1_000_000) request.destroy(); }); request.on('end', () => { try { resolve(body ? JSON.parse(body) : {}); } catch { reject(new Error('REQUEST_JSON_INVALID')); } }); request.on('error', reject); });
 const send = (response, status, value) => { response.writeHead(status, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' }); response.end(JSON.stringify(value)); };

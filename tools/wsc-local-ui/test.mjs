@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createLocalPrivateStore } from '../wsc-phase2a/local-store.mjs';
 import { browserPdfArgs } from '../wsc-delivery/browser-pdf.mjs';
-import { createExecutionLock, createLocalUiServer, dialogPowerShellArgs, dialogScript, isLocalUiApiRequest, replaySavedJson, runCsvSequential } from './server.mjs';
+import { createExecutionLock, createLocalUiServer, dialogPowerShellArgs, dialogScript, explorerArgs, isLocalUiApiRequest, replaySavedJson, runCsvSequential } from './server.mjs';
 
 const temp = fs.mkdtempSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '.test-ui-'));
 const url = 'https://ui-replay.example/';
@@ -37,8 +37,9 @@ assert.match(dialogScript('csv'), /OpenFileDialog/);
 assert.match(dialogScript('folder'), /FolderBrowserDialog/);
 assert.match(dialogScript('csv'), /FileName/);
 assert.match(dialogScript('folder'), /SelectedPath/);
-assert.match(dialogScript('csv'), /TopMost/);
-assert.match(dialogScript('folder'), /TopMost/);
+assert.doesNotMatch(dialogScript('csv'), /TopMost|Opacity/);
+assert.doesNotMatch(dialogScript('folder'), /TopMost|Opacity/);
+assert.deepEqual(explorerArgs('C:\\Users\\example\\Downloads'), ['C:\\Users\\example\\Downloads']);
 assert.ok(browserPdfArgs({ htmlPath: 'C:\\report.html', pdfPath: 'C:\\report.pdf' }).includes('--print-to-pdf-no-header'));
 
 const lock = createExecutionLock();
