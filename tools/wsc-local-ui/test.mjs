@@ -42,7 +42,12 @@ assert.match(uiScript, /showDirectoryPicker\(\{ mode: 'readwrite' \}\)/);
 assert.match(uiScript, /getFileHandle\(artifact\.name, \{ create: true \}\)/);
 assert.doesNotMatch(uiHtml, /id="outputRoot"|openFolder/);
 assert.doesNotMatch(uiScript, /choose-folder|outputRoot|open-folder/);
-assert.ok(browserPdfArgs({ htmlPath: 'C:\\report.html', pdfPath: 'C:\\report.pdf' }).includes('--print-to-pdf-no-header'));
+const cdpArgs = browserPdfArgs({ htmlPath: 'C:\\report.html', userDataDir: 'C:\\wsc-cdp-test' });
+assert.ok(cdpArgs.includes('--remote-debugging-address=127.0.0.1'));
+assert.ok(cdpArgs.includes('--remote-debugging-port=0'));
+assert.ok(cdpArgs.includes('--remote-allow-origins=*'));
+assert.ok(cdpArgs.includes('--user-data-dir=C:\\wsc-cdp-test'));
+assert.equal(cdpArgs.some(value => value.startsWith('--print-to-pdf')), false);
 
 const lock = createExecutionLock();
 assert.equal(lock.acquire('csv-1'), true);
