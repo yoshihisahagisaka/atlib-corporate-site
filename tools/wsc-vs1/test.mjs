@@ -42,12 +42,25 @@ assert.ok(!protectedHtml.includes('偽メールの隔離・拒否を求める設
 assert.ok(!protectedHtml.includes('<svg'), 'detail SVG illustrations removed');
 assert.match(protectedHtml, /data:image\/png;base64,/, 'FV icons embedded');
 assert.match(protectedHtml, /data:image\/jpeg;base64,/, 'cover image embedded');
-const atlibHtml = render(evaluate(json('atlib-security-check-v2.json'), opts), json('atlib-company.json'));
-assert.match(atlibHtml, /証明書検証.*成功/, 'Japanese TLS result');
-assert.match(atlibHtml, /通信方式.*TLS 1\.3/, 'Japanese protocol');
-assert.match(atlibHtml, /原値：Tls13/, 'raw value retained');
-assert.match(atlibHtml, /RFC 8446/, 'TLS source');
-assert.match(atlibHtml, /https:\/\/developer\.mozilla\.org\/ja\/docs\/Web\/HTTP\/Reference\/Headers\/Content-Security-Policy/, 'CSP source URL');
+const atlibReport = evaluate(json('atlib-security-check-v2.json'), opts);
+const atlibHtml = render(atlibReport, json('atlib-company.json'));
+for (const approvedCopy of [
+  'Webサイトのアドレスが「https://」で始まっているのを見たことがあると思います。これは、Webサイトと利用者の間でやり取りする情報を暗号化し、第三者に盗み見られたり、途中で書き換えられたりすることを防ぐための仕組みです。', 'また、Webサイトの証明書は、接続先が正しい相手であることを確認するために使われます。ブラウザで「この接続ではプライバシーが保護されません」といった警告が表示される場合、証明書に問題があることなどが考えられます。', '暗号化されていない通信に第三者が介入すると、送信した情報を盗み見られたり、表示内容を書き換えられたりするおそれがあります。', '例えば、お問い合わせフォームに入力した氏名やメールアドレスなどが漏えいすれば、お客様への被害だけでなく、企業の信用問題にもつながりかねません。',
+  'Webサイトのアドレスに「http://」と入力しても、自動的に「https://」へ切り替わることがあります。', 'HSTSは、ブラウザに対して、次回以降も暗号化されたHTTPS通信を使うよう指示する仕組みです。暗号化されていない通信へ戻ってしまう危険を減らします。', '利用者が暗号化されていない通信を使った隙に、第三者が通信へ介入し、偽のWebページへ誘導したり、通信内容を盗み見たりするおそれがあります。', '例えば、外出先のネットワークなどを利用している際に、通信を悪用される可能性があります。',
+  'Webサイトには、メニューを開いたり、入力内容を確認したりするためのプログラムが使われています。', 'CSPは、こうしたプログラムをどこから読み込んでよいかなどを制限する仕組みです。万が一、不正なプログラムが入り込んだ場合でも、勝手な動作や情報の持ち出しを抑えるために役立ちます。', '正規のショッピングサイトに不正なプログラムが仕込まれると、本物の決済画面に見せかけた入力欄から、クレジットカード番号などを盗まれるおそれがあります。', '利用者は正規のサイトを使っているつもりなので、不正に気づきにくいことがあります。こうした被害が発生すれば、お客様の金銭被害だけでなく、企業の信用低下や取引停止にもつながりかねません。',
+  'Webサイトの一部が、別のWebサイトの中に表示されているのを見たことがあるかもしれません。', '画面埋め込み制御は、自社のWebページが他のサイト内に勝手に組み込まれることを制限する仕組みです。悪意のあるサイトに自社の画面を利用され、利用者が気づかないうちに意図しない操作をさせられる攻撃を防ぐために役立ちます。', '例えば、悪意のあるサイトが正規のWebサイトの画面を重ねて表示し、利用者に別のボタンを押していると思わせながら、実際には正規サイト上の操作をさせることがあります。', 'こうした手口によって、利用者が意図しない設定変更や情報の送信などを行ってしまうおそれがあります。',
+  'Webサイトでは、画像や文章、プログラムなど、さまざまな種類のファイルが使われています。', 'NOSNIFFは、ブラウザがファイルの種類を勝手に判断して、想定外の方法で扱うことを防ぐための仕組みです。', '例えば、本来はデータとして扱うべきファイルが、プログラムとして動いてしまうような危険を減らします。', 'Webサイトに置かれた画像や文章などのファイルが、ブラウザに誤ってプログラムとして扱われることがあります。', 'これを悪用されると、利用者が普通にWebサイトを見ているだけで、不正なプログラムが動き、情報を盗まれるおそれがあります。', 'こうした被害は、利用者の安全だけでなく、Webサイトを運営する企業への信頼にも影響する可能性があります。',
+  '普段、会社のメールアドレスから取引先へメールを送ると思います。しかし、メールの差出人は偽装されることがあります。', 'SPFは、その会社のドメインからメールを送信してよいサーバーをあらかじめ登録しておく仕組みです。受信側が送信元を確認する際の手がかりになり、なりすましメールを見分けるために役立ちます。', '自社を装った偽メールが取引先に届き、偽の請求書や振込先変更の案内による詐欺被害につながるおそれがあります。', '例えば、普段から取引している会社の名前で振込先変更のメールが届けば、担当者が本物と信じて送金してしまう可能性があります。', '取引先が被害を受ければ、自社の信用にも影響しかねません。',
+  '迷惑メールフォルダに、不審なメールが自動的に振り分けられた経験があると思います。', 'DMARCは、自社を装ったメールが認証に失敗した場合、受信側に対して隔離や拒否などの対応方針を伝える仕組みです。自社の名前を悪用した偽メールが取引先などに届く危険を減らすために役立ちます。', '自社を装った偽メールによって取引先に金銭被害や情報漏えいが発生し、自社の信用低下や取引停止につながりかねません。', '特に、取引先が自社からの正式な連絡だと思い込み、偽の請求書への支払いや機密情報の送信を行ってしまうことが考えられます。', '被害が広がれば、取引先との信頼関係の修復に長い時間を要する可能性もあります。'
+]) assert.ok(atlibHtml.includes(approvedCopy), `approved customer copy: ${approvedCopy}`);
+assert.match(atlibHtml, /どのような対策なのか/, 'protection explanation heading');
+assert.match(atlibHtml, /対策が不十分だと、どうなるのか/, 'customer impact heading');
+assert.match(atlibHtml, /warning-icon/, 'review findings use the warning triangle');
+assert.match(atlibHtml, /font-family:"Noto Sans JP","Noto Sans CJK JP","Yu Gothic","Meiryo",sans-serif/, 'Japanese Noto Sans font stack is emitted');
+assert.ok(!atlibHtml.includes('原値：') && !atlibHtml.includes('RFC 8446') && !atlibHtml.includes('MDN CSP'), 'customer HTML excludes raw values and technical references');
+assert.ok(!atlibHtml.includes('data-finding-id') && !atlibHtml.includes('ルール版：'), 'customer HTML excludes internal identifiers and versions');
+assert.ok(atlibReport.findings.find((finding) => finding.id === 'TLS_VALID').details.some((detail) => detail.raw === 'Tls13'), 'raw protocol remains in the internal report');
+assert.match(atlibHtml, /診断結果を、これからの対策につなげるために/, 'approved customer closing');
 assert.equal(assertUrlMatch('https://EXAMPLE.test:443/', 'https://example.test/'), 'https://example.test/', 'presentation-only URL difference');
 assert.throws(() => assertUrlMatch('https://example.test/', 'https://www.example.test/'), /一致しない/, 'different host rejected');
 assert.throws(() => assertUrlMatch('http://example.test/', 'https://example.test/'), /一致しない/, 'redirect is not assumed');
