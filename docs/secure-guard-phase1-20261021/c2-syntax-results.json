@@ -1,0 +1,38 @@
+[
+  {
+    "file": "c1-entrypoint.ps1",
+    "errors": 0
+  },
+  {
+    "file": "c1-gcs.ps1",
+    "errors": 0
+  },
+  {
+    "file": "c1-runtime.ps1",
+    "errors": 0
+  },
+  {
+    "file": "c1.tests.ps1",
+    "errors": 0
+  },
+  {
+    "file": "c2-durable-plan.ps1",
+    "errors": 0
+  },
+  {
+    "file": "c2.tests.ps1",
+    "errors": 0
+  },
+  {
+    "file": "organization-offboarding.ps1",
+    "errors": 0
+  },
+  {
+    "file": "organization-offboarding.tests.ps1",
+    "errors": 0
+  },
+  {
+    "file": "render-c1.ps1",
+    "errors": 0
+  }
+]

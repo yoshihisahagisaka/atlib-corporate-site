@@ -1,0 +1,15 @@
+{
+  "name": "atlib-secure-guard-job",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/entrypoint.js",
+    "test": "npm run build && node --test test/inventory.test.cjs test/plan.test.cjs test/gcs.test.cjs test/durable.test.cjs test/entrypoint.test.cjs test/transport.test.cjs"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
+  }
+}
+

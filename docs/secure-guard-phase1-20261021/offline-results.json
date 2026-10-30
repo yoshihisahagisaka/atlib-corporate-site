@@ -1,0 +1,47 @@
+{
+  "kind": "offline-model-only",
+  "liveRequests": 0,
+  "results": [
+    {
+      "name": "1000 customers x 2 Sites; rerun makes no duplicates",
+      "result": "PASS"
+    },
+    {
+      "name": "response lost after create reconciles without another POST",
+      "result": "PASS"
+    },
+    {
+      "name": "unknown create with no visible remote match never reposts",
+      "result": "PASS"
+    },
+    {
+      "name": "known before-send failure resumes safely",
+      "result": "PASS"
+    },
+    {
+      "name": "partial multi-Site failure keeps completed Site",
+      "result": "PASS"
+    },
+    {
+      "name": "duplicate remote External ID stops for review",
+      "result": "PASS"
+    },
+    {
+      "name": "429 numeric and HTTP-date Retry-After never retry early",
+      "result": "PASS"
+    },
+    {
+      "name": "monthly and emergency rotation serialize; stale job replans",
+      "result": "PASS"
+    },
+    {
+      "name": "rotation timeout fences subsequent emergency and monthly jobs",
+      "result": "PASS"
+    },
+    {
+      "name": "tenant membership check rejects cross-customer Site operation",
+      "result": "PASS"
+    }
+  ],
+  "total": 10
+}

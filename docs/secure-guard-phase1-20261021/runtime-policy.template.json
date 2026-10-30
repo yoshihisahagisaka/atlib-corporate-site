@@ -1,0 +1,14 @@
+{
+  "project": "msp-zabbix",
+  "region": "asia-northeast1",
+  "job": "secure-guard-cancellation",
+  "mode": "DryRun",
+  "organization_id": "10220954",
+  "organization_allowlist": ["10220954"],
+  "msp_parent_id": "11473",
+  "runtime_service_account": "secure-guard-job-sa@msp-zabbix.iam.gserviceaccount.com",
+  "source_sha": "__SOURCE_SHA__",
+  "secret_version": "__SECRET_VERSION__",
+  "secret_version_resource": "projects/msp-zabbix/secrets/secure-guard-dnsfilter-api-key/versions/__SECRET_VERSION__",
+  "secret_path": "/var/run/guard-secrets/__SECRET_VERSION__"
+}

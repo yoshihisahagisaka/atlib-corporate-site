@@ -1,0 +1,39 @@
+{
+  "kind": "offline_collector_fixtures",
+  "total": 8,
+  "live_gcp_requests": 0,
+  "results": [
+    {
+      "result": "PASS",
+      "test": "Secret payload access rejected"
+    },
+    {
+      "result": "PASS",
+      "test": "Deploy command rejected"
+    },
+    {
+      "result": "PASS",
+      "test": "Unprojected configuration rejected"
+    },
+    {
+      "result": "PASS",
+      "test": "Job and Service projections omit plaintext env/args"
+    },
+    {
+      "result": "PASS",
+      "test": "Project scope cannot change"
+    },
+    {
+      "result": "PASS",
+      "test": "Metadata-only version list captured"
+    },
+    {
+      "result": "PASS",
+      "test": "Auth/API failure remains UNAVAILABLE"
+    },
+    {
+      "result": "PASS",
+      "test": "Full metadata fixture flow uses only read projections"
+    }
+  ]
+}
