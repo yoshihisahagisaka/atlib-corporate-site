@@ -1,0 +1,38 @@
+section,item,category,scenario,value,unit,evidence_type,source_or_assumption,note
+PIRA structure,Regular members,All regions,Actual,74,organizations,Official published,PIRA as of 2026-03-31,Do not infer listed roster count from this total
+PIRA structure,Supporting members,All regions,Actual,78,organizations,Official published,PIRA as of 2026-03-31,Excluded from initial sales target
+PIRA structure,Member-affiliated companies,All regions,Actual,10000,companies,Official published,PIRA says approximately 10000,Aggregation basis and deduplication not published
+PIRA structure,Foreign personnel,All regions,Actual,100000,people,Official published,PIRA as of 2026-03-31,Not a PC or company count
+Enterprise size,1-4 employees,All industries national,Benchmark,2256386,enterprises,Official statistic,2021 Economic Census,Not PIRA actual
+Enterprise size,5-9 employees,All industries national,Benchmark,581301,enterprises,Official statistic,2021 Economic Census,Not PIRA actual
+Enterprise size,10-19 employees,All industries national,Benchmark,323929,enterprises,Official statistic,2021 Economic Census,Not PIRA actual
+Enterprise size,20-49 employees,All industries national,Benchmark,202148,enterprises,Official statistic,2021 Economic Census,20-29 plus 30-49
+Enterprise size,50-99 employees,All industries national,Benchmark,65941,enterprises,Official statistic,2021 Economic Census,Not PIRA actual
+Enterprise size,100+ employees,All industries national,Benchmark,64887,enterprises,Official statistic,2021 Economic Census,Not PIRA actual
+PC distribution,0 or out of scope,Windows PC band,Low,0.20,share,Scenario assumption,No direct PIRA PC data,Represents non-target or non-Windows-first companies
+PC distribution,1-5,Windows PC band,Low,0.45,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,6-10,Windows PC band,Low,0.24,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,11-30,Windows PC band,Low,0.09,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,31-50,Windows PC band,Low,0.015,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,51-100,Windows PC band,Low,0.004,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,101+,Windows PC band,Low,0.001,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,0 or out of scope,Windows PC band,Base,0.10,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,1-5,Windows PC band,Base,0.37,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,6-10,Windows PC band,Base,0.28,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,11-30,Windows PC band,Base,0.20,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,31-50,Windows PC band,Base,0.03,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,51-100,Windows PC band,Base,0.015,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,101+,Windows PC band,Base,0.005,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,0 or out of scope,Windows PC band,High,0.05,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,1-5,Windows PC band,High,0.25,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,6-10,Windows PC band,High,0.25,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,11-30,Windows PC band,High,0.30,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,31-50,Windows PC band,High,0.09,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,51-100,Windows PC band,High,0.04,share,Scenario assumption,No direct PIRA PC data,
+PC distribution,101+,Windows PC band,High,0.02,share,Scenario assumption,No direct PIRA PC data,
+Pricing,Basic monthly fee,Per company,Current model,5000,JPY/month,User-provided current model,atLIB Secure Guard,50% atLIB and 50% revenue-share pool
+Pricing,Endpoint rate 1-10,Per endpoint,Candidate,300,JPY/month,User-provided candidate,Unapproved,Tier boundary is marginal not retroactive
+Pricing,Endpoint rate 11-30,Per endpoint,Candidate,250,JPY/month,User-provided candidate,Unapproved,Tier boundary is marginal not retroactive
+Pricing,Endpoint rate 31-100,Per endpoint,Candidate,200,JPY/month,User-provided candidate,Unapproved,Tier boundary is marginal not retroactive
+Cost,DNSFilter endpoint cost,Per endpoint,Model assumption,0.92,USD/month,User-provided current display price,Must validate MSP contract price,Not used as confirmed contract price
+Cost,DNSFilter portfolio minimum,Portfolio,Model assumption,150,USD/month,User-provided current display price,Must validate MSP contract minimum,Not used as confirmed contract price
