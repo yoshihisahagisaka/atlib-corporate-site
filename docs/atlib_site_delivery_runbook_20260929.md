@@ -130,6 +130,32 @@ sudo apache2ctl -M | grep headers
 - Apache: `active`
 - `headers_module (shared)`
 
+### 2026-11-10 X-Frame-Options 本番適用・検証
+
+2026-11-10のatLIB Webセキュリティ診断の「他サイトへの画面の埋め込み制御」追加確認推奨への対応。
+
+- 方針確認: 他社サイトへのatLIBページのiframe埋め込み用途はない（運用者回答）。同一オリジン内の埋め込みを許可する `SAMEORIGIN` を採用。
+- 対象: GCP `atlib-corporate-site` / `corporate-site-wp`、本番HTTPS vhost `/etc/apache2/sites-available/production-le-ssl.conf`。ServerName `www.atlib.jp`、ServerAlias `atlib.jp` / `recruit.atlib.jp` / `www.recruit.atlib.jp`。別vhostの `wp-test.atlib.jp` は変更対象外。
+- 事前バックアップ: `/etc/apache2/sites-available/production-le-ssl.conf.bak-20261110-xfo`（`cp -av --no-clobber` で作成）。
+- 本番変更: 既存 `X-Content-Type-Options` 行の直後に以下の1行のみ追加。他の4種の既存ヘッダーは維持。
+
+```apache
+Header always set X-Frame-Options "SAMEORIGIN"
+```
+
+検証結果:
+
+- バックアップとの差分: 追加1行のみ（`diff -u` 実測）。
+- `sudo apache2ctl configtest`: `Syntax OK`。
+- `sudo systemctl reload apache2`: エラーなく終了（再起動なし）。
+- `systemctl is-active apache2`: `active`。
+- 外部からの公開レスポンス: `https://www.atlib.jp/`、`https://recruit.atlib.jp/`、`https://www.atlib.jp/infravision-partner/` はHTTP 200で `X-Frame-Options: SAMEORIGIN`、既存HSTS、NOSNIFFを確認。
+- 検証範囲: 上記3 URLのHTTP応答とサーバー稼働。全LPのブラウザ操作E2Eや外部サイトからの埋め込み試験を実施した証拠ではない。
+
+ロールバックが必要な場合は上記バックアップから当該vhostを復元し、`apache2ctl configtest` 成功後に `systemctl reload apache2` を実行、公開ヘッダーとページ応答を再確認する。復元操作は障害発生時に対象と影響を確認して別途実施する。
+
+`Content-Security-Policy` は未適用のまま。GTM・Google Fonts・Google Maps・既存インラインスクリプト、各LP/Business Webの依存を棚卸しし、Report-Only等で機能影響を検証した後に別途適用判断する。DMARCはメールDNS設定の別施策であり今回変更なし。
+
 ### HSTS導入前のHTTPS確認
 
 `includeSubDomains` 適用前に、把握している現存ホストについてHTTPS/TLSを実測した。
@@ -208,15 +234,14 @@ Business Web側ではSEO / AIOとアプリ固有セキュリティを管理し�
 
 ### 意図的に未適用の設定
 
-以下は全サイト共通設定として現時点では適用しない。
+2026-11-10時点で、以下は全サイト共通設定として未適用。
 
 - `Content-Security-Policy`
-- `X-Frame-Options`
 - HSTS `preload`
 
 CSPはインラインJavaScript/CSS、外部サービス、各LP/Business Webへの影響を棚卸ししてから設計する。
 
-`X-Frame-Options` はiframe/埋め込み要件を確認してから判断する。
+`X-Frame-Options` は埋め込み要件を確認したうえで2026-11-10に `SAMEORIGIN` を本番適用済み（上記の適用・検証記録を参照）。
 
 HSTS `preload` は通常のHSTSより影響および解除コストが大きいため、別途判断する。
 
