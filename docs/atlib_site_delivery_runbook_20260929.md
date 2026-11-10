@@ -156,6 +156,25 @@ Header always set X-Frame-Options "SAMEORIGIN"
 
 `Content-Security-Policy` は未適用のまま。GTM・Google Fonts・Google Maps・既存インラインスクリプト、各LP/Business Webの依存を棚卸しし、Report-Only等で機能影響を検証した後に別途適用判断する。DMARCはメールDNS設定の別施策であり今回変更なし。
 
+### 2026-11-10 旧HTMLバックアップの公開領域外退避
+
+CSP依存先の棚卸しで、運用中の静的LPと同じDocumentRootに旧版HTMLが残存し、旧版ページの一部が外部からHTTP 200で取得できることを発見。現在のLPを残し、公開不要な旧版HTMLの直接アクセスをなくす目的で、運用者承認のもと指定した10ファイルだけを退避した。**削除は行っていない**。
+
+- 対象サーバー: GCP `atlib-corporate-site` / VM `corporate-site-wp`、DocumentRoot `/var/www/html`。
+- 移動先: `/var/backups/atlib-corporate-site/20261110-public-html-archive/`（DocumentRoot外）。
+- `infravision-partner/`（3件）: `index.before-cta-fix.html`、`index.before-fv-responsive.html`、`index.before-timerex-sync.html`。
+- `web-development-partner/`（6件）: `index.backup-20260924.html`、`index.before-fv-adjustment.html`、`index.before-fv-copy-safe.html`、`index.before-fv-final.html`、`index.before-fv-responsive.html`、`index.before-mobile.html`。
+- `policy/`（1件）: `old_index.html`。
+- 事前調査: HTML/JS/CSS内にこれらバックアップ名への文字列参照は見つからず（指定拡張子・WordPress本体3ディレクトリ除外の`grep`）。サイトの全機能E2Eを実施した証拠ではない。
+- 操作: 退避先を作成し、ファイル単位の `sudo mv -nv --` で3件→6件→1件を移動。実行出力は10件とも `renamed`。
+- 退避検証: `sudo find` の退避先一覧で10件を確認。全10件のファイル名・サイズは移動前の調査値と一致。
+- 公開領域検証: `/var/www/html` の `index.before-*.html`、`index.backup-*.html`、`old_index.html` を `sudo find` で再探索した結果、該当0件。
+- HTTP検証: 退避した旧版URL 10件はいずれも404、公開中の `/infravision-partner/`、`/web-development-partner/`、`/policy/` は200（HTTPステータスの確認であり表示・フォームのE2Eではない）。
+- ディレクトリ権限: 退避先の親と3サブディレクトリすべてが `700 root:root`（`sudo stat` 実測）。
+- Apache設定、稼働中の `index.html`、WordPress、GCPの設定は今回変更していない。静的ファイルの移動のみのためApache reloadは行っていない。
+
+復元が必要になった場合は、該当する退避先ファイルと公開先の有無・影響を照合してから、個別に復元する。公開領域へ旧版を一括復元しない。
+
 ### HSTS導入前のHTTPS確認
 
 `includeSubDomains` 適用前に、把握している現存ホストについてHTTPS/TLSを実測した。
