@@ -46,10 +46,31 @@ npm ci --ignore-scripts
 npm run test:contact-api
 
 TypeScript build: PASS
-site-contact-api.test.cjs: 8 PASS / 0 FAIL
+site-contact-api.test.cjs + smoke-site-contact-email.test.cjs: 11 PASS / 0 FAIL
 ```
 
 テストでのSMTPとSiteverifyはモック。実GCP/Google Workspaceへの送信は行っていない。
+
+### 実SMTPメール1通の隔離検証（送信許可：2026-11-13）
+
+ユーザーから `contact@atlib.jp`（Google Workspace ML）へのテスト送信許可あり。
+現行Cloud Run `corporate-site` を変更せず、既存 `Mailer` と既存 Secret Manager の認証情報で**1通だけ**試すためのコマンドを追加。
+
+`gcloud` で `atlib-corporate-site` に認証済みのWindows端末に、PR #58のブランチをクリーンにチェックアウトしてNode.js 20以降で以下を実行する：
+
+```powershell
+npm ci
+npm run build
+node scripts/smoke-site-contact-email.cjs --check
+# --check でSMTP_USER / SMTP_FROM / ホスト / ML送信先を確認してから実送信
+node scripts/smoke-site-contact-email.cjs --send
+```
+
+- `--check` はCloud Runの現在の環境設定を読み取るだけで、秘密情報にはアクセスせずメールも送らない。
+- `--send` はSecret Manager内の既存SMTPパスワードをプロセス内でだけ使用し、宛先固定のテストを**1回**実行する。標準出力・Git・ファイルにはパスワードを出さない。
+- 旧Cloud Runの `corporate-site-00005-fbg` 100%、`corporate-site-00006-xud` タグのみという構成は変更しない（2026-11-13再照合）。
+- ログの `SMTP ACCEPTED` はSMTPサーバー受領を意味し、ML全員への配送保証ではない。受信側で件名、テスト照合ID、From、To、Reply-ToおよびML配信を確認する。
+- この試験はSMTP単体検証であり、新APIやTurnstile、サイトフォームのE2EをPASSとするものではない。
 
 ## 実環境のSTOP条件
 
