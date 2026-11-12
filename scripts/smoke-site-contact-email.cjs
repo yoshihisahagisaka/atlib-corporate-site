@@ -21,15 +21,26 @@ const SERVICE = 'corporate-site';
 const RECIPIENT = 'contact@atlib.jp';
 const DEFAULT_SECRET = 'corporate-site-smtp-password';
 
+function gcloudInvocation(args, platform = process.platform) {
+  // The caller only supplies static CLI flags and validated secret identifiers.
+  // Keep the Windows cmd.exe command free from shell metacharacters.
+  if (!args.every((arg) => typeof arg === 'string' && /^[a-zA-Z0-9_./:=-]+$/u.test(arg))) {
+    throw new Error('Unexpected gcloud argument.');
+  }
+  if (platform === 'win32') {
+    return { executable: 'cmd.exe', args: ['/d', '/s', '/c', `gcloud.cmd ${args.join(' ')}`] };
+  }
+  return { executable: 'gcloud', args };
+}
+
 function gcloud(args) {
+  const invocation = gcloudInvocation(args);
   try {
-    return execFileSync(process.platform === 'win32' ? 'gcloud.cmd' : 'gcloud', args, {
+    return execFileSync(invocation.executable, invocation.args, {
       encoding: 'utf8',
       maxBuffer: 1024 * 1024,
       stdio: ['ignore', 'pipe', 'pipe'],
       windowsHide: true,
-      // Windows .cmd launch needs cmd.exe; all arguments are code-owned.
-      ...(process.platform === 'win32' ? { shell: true } : {}),
     });
   } catch {
     // Do not print subprocess stderr: a secret command must never leak values.
@@ -137,4 +148,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { lookupEnv, nonSecretEnv, smtpSecret };
+module.exports = { gcloudInvocation, lookupEnv, nonSecretEnv, smtpSecret };

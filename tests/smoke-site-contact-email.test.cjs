@@ -2,7 +2,7 @@
 
 const assert = require('node:assert/strict');
 const { test } = require('node:test');
-const { lookupEnv, nonSecretEnv, smtpSecret } = require('../scripts/smoke-site-contact-email.cjs');
+const { gcloudInvocation, lookupEnv, nonSecretEnv, smtpSecret } = require('../scripts/smoke-site-contact-email.cjs');
 
 function service(env) {
   return { spec: { template: { spec: { containers: [{ env }] } } } };
@@ -32,4 +32,16 @@ test('honors valid Cloud Run secret references and rejects unexpected references
   assert.throws(() => smtpSecret(service([
     { name: 'SMTP_PASSWORD', valueFrom: { secretKeyRef: { name: '../other-secret', key: 'latest' } } },
   ])), /unexpected format/);
+});
+
+test('starts gcloud on Windows without Node shell:true and blocks metacharacters', () => {
+  assert.deepEqual(gcloudInvocation(['run', 'services', 'describe', 'corporate-site'], 'win32'), {
+    executable: 'cmd.exe',
+    args: ['/d', '/s', '/c', 'gcloud.cmd run services describe corporate-site'],
+  });
+  assert.deepEqual(gcloudInvocation(['run', 'services', 'describe', 'corporate-site'], 'linux'), {
+    executable: 'gcloud',
+    args: ['run', 'services', 'describe', 'corporate-site'],
+  });
+  assert.throws(() => gcloudInvocation(['--project=x & whoami'], 'win32'), /Unexpected gcloud argument/);
 });

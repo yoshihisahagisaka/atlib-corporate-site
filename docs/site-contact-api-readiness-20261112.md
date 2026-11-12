@@ -46,10 +46,10 @@ npm ci --ignore-scripts
 npm run test:contact-api
 
 TypeScript build: PASS
-site-contact-api.test.cjs + smoke-site-contact-email.test.cjs: 11 PASS / 0 FAIL
+site-contact-api.test.cjs + smoke-site-contact-email.test.cjs: 12 PASS / 0 FAIL
 ```
 
-テストでのSMTPとSiteverifyはモック。実GCP/Google Workspaceへの送信は行っていない。
+上記自動テストでのSMTPとSiteverifyはモック。実送信については次の実環境証跡を参照。
 
 ### 実SMTPメール1通の隔離検証（送信許可：2026-11-13）
 
@@ -59,8 +59,8 @@ site-contact-api.test.cjs + smoke-site-contact-email.test.cjs: 11 PASS / 0 FAIL
 `gcloud` で `atlib-corporate-site` に認証済みのWindows端末に、PR #58のブランチをクリーンにチェックアウトしてNode.js 20以降で以下を実行する：
 
 ```powershell
-npm ci
-npm run build
+npm.cmd ci
+npm.cmd run build
 node scripts/smoke-site-contact-email.cjs --check
 # --check でSMTP_USER / SMTP_FROM / ホスト / ML送信先を確認してから実送信
 node scripts/smoke-site-contact-email.cjs --send
@@ -71,6 +71,15 @@ node scripts/smoke-site-contact-email.cjs --send
 - 旧Cloud Runの `corporate-site-00005-fbg` 100%、`corporate-site-00006-xud` タグのみという構成は変更しない（2026-11-13再照合）。
 - ログの `SMTP ACCEPTED` はSMTPサーバー受領を意味し、ML全員への配送保証ではない。受信側で件名、テスト照合ID、From、To、Reply-ToおよびML配信を確認する。
 - この試験はSMTP単体検証であり、新APIやTurnstile、サイトフォームのE2EをPASSとするものではない。
+
+### 実送信・ML受信結果（2026-11-13 JST）
+
+- テスト端末：Windows / PowerShell。Cloud Runへはデプロイせず、実GCP設定の読み取りとSecret Managerの既存SMTPパスワードを使用。
+- `--check`：PASS。SMTP `smtp.gmail.com:587`、ユーザー `yoshihisa.hagisaka@atlib.jp`、From `system@atlib.jp`、送信先 `contact@atlib.jp` を確認。
+- `--send`：`SMTP ACCEPTED`。照合ID `atLIB-SMTP-TEST-2026-11-12T22:14:50.922Z`。
+- 受信証跡：ユーザーがGoogle WorkspaceのML受信メール本文とメッセージソースを提示。照合ID一致。`Return-Path: system@atlib.jp`、`From: system@atlib.jp`、`To: contact@atlib.jp`、`Reply-To: yoshihisa.hagisaka@atlib.jp`。受信ヘッダーは `TLS1_3` を表示。
+- **判定：SMTP認証→送信→ML受信→主要ヘッダーの一連の検証PASS**。ただし、ML全購読者への配信確認を意味しない。またSite新フォーム／Turnstile／Cloud Run APIは未検証。
+- 初回のWindows実行で `npm.ps1` 実行ポリシー拒否が発生したため `npm.cmd` で回避。`gcloud.cmd` 実行時の Node DEP0190警告は、cmd.exe明示起動へ変更して対策（Windows実機での再確認は未実施）。
 
 ## 実環境のSTOP条件
 
