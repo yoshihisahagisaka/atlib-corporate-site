@@ -6,6 +6,7 @@ import { loadConfig } from './config';
 import { Mailer } from './services/mailer';
 import { createContactFormRouter } from './routes/contactForm';
 import { createEntryFormRouter } from './routes/entryForm';
+import { createSiteContactApiRouter } from './routes/siteContactApi';
 import { createIpRateLimiter } from './middleware/rateLimit';
 
 const RECRUIT_HOST = /^(www\.)?recruit\.atlib\.jp$/i;
@@ -49,6 +50,7 @@ async function main(): Promise<void> {
 
   app.use(createContactFormRouter(mailer, config));
   app.use(createEntryFormRouter(mailer, config));
+  app.use(createSiteContactApiRouter(mailer, config.siteContact));
 
   app.use(
     express.static(PUBLIC_DIR, {
