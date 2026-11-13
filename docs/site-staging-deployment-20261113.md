@@ -117,3 +117,29 @@ No retry or configuration change was made during this investigation.
 - Production remained on `corporate-site-00005-fbg` at 100% traffic with
   `corporate-site-00006-xud` preview-tagged and its existing
   `corporate-site:recruit-note-20260929` image.
+
+## Diagnostic E2E result (2026-11-14 00:40 JST)
+
+- One POST, distinct from the three earlier `00005-pxb` requests, reached
+  revision `corporate-site-staging-00006-zfr` at 00:40:05 JST.
+- HTTP status: 502; latency: 1.563 s; Trace ID:
+  `24c1d020f6d9311aaee4b54dc32e8ffc`; span ID:
+  `44e73cc07dc2a5f7`.
+- The same Trace contains `site_contact_smtp_start`, followed by
+  `site_contact_smtp_failure` with `code=EENVELOPE`, `responseCode=550`, and
+  `command=MAIL FROM`.
+- There is no `site_contact_smtp_success` event, API 200, or SMTP final-success
+  evidence. No retry was made.
+- Confirmed failure stage: the SMTP transaction was rejected while presenting
+  the envelope sender, before successful message submission. The safe log does
+  not retain Google's raw 550 text, so it cannot distinguish an SMTP relay
+  source-IP authorization failure from an allowed-sender/envelope-sender policy
+  failure. Either explanation remains a hypothesis until the Workspace SMTP
+  relay rule or Email Log Search is inspected.
+- Minimum next step: read the existing Workspace SMTP relay rule and Email Log
+  Search without changing them. If the rule is IP-only, Cloud Run needs an
+  approved fixed-egress design (or an approved Workspace SMTP-AUTH rule change);
+  stop before adding network resources. If SMTP AUTH is already authorized,
+  verify whether the envelope sender `system@atlib.jp` is permitted. An
+  application-side envelope-sender change would alter Return-Path behavior and
+  must not be made without a separate design approval.
