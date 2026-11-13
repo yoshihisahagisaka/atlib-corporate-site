@@ -3,6 +3,7 @@ const { test } = require('node:test');
 const express = require('express');
 const {
   createSiteContactApiRouter,
+  safeSmtpFailure,
   verifySiteContactTurnstile,
 } = require('../dist/routes/siteContactApi');
 
@@ -11,6 +12,7 @@ const config = {
   turnstileSecret: 'test-only-secret',
   allowedOrigins: [allowedOrigin, 'https://www.atlib.jp'],
   allowedTurnstileHostnames: ['atlib-tp65-brand-preview.yoshihisa-hagisaka.chatgpt.site', 'www.atlib.jp'],
+  diagnosticLogs: false,
 };
 const valid = {
   inquiryType: 'services',
@@ -32,7 +34,7 @@ async function withApi(run, options = {}) {
   const verifyCalls = [];
   const verify = options.verify ?? (async (input) => { verifyCalls.push(input); return true; });
   const app = express();
-  app.use(createSiteContactApiRouter(mailer, options.config ?? config, verify));
+  app.use(createSiteContactApiRouter(mailer, options.config ?? config, verify, options.logger));
   const server = await new Promise((resolve) => {
     const instance = app.listen(0, '127.0.0.1', () => resolve(instance));
   });
@@ -123,6 +125,49 @@ test('SMTP failure never reports acceptance', async () => {
     assert.equal(response.status, 502);
     assert.deepEqual(await response.json(), { ok: false, code: 'notification_failed' });
   }, { mailer: { async sendContactNotification() { throw new Error('smtp failed'); } } });
+});
+
+test('Staging diagnostic logs contain only trace-correlated allowlisted SMTP fields', async () => {
+  const events = [];
+  const logger = {
+    info(fields, message) { events.push({ level: 'info', fields, message }); },
+    warn(fields, message) { events.push({ level: 'warn', fields, message }); },
+  };
+  const smtpError = Object.assign(new Error('raw response with customer@example.com'), {
+    code: 'EAUTH',
+    responseCode: 535,
+    command: 'AUTH PLAIN',
+    response: 'credential and address must never be logged',
+  });
+  await withApi(async ({ post }) => {
+    const response = await post();
+    assert.equal(response.status, 502);
+  }, {
+    config: { ...config, diagnosticLogs: true },
+    logger,
+    mailer: { async sendContactNotification() { throw smtpError; } },
+  });
+  assert.deepEqual(events.map(({ level, fields }) => ({ level, fields })), [
+    { level: 'info', fields: { event: 'site_contact_smtp_start', traceId: null } },
+    {
+      level: 'warn',
+      fields: {
+        event: 'site_contact_smtp_failure',
+        traceId: null,
+        smtp: { code: 'EAUTH', responseCode: 535, command: 'AUTH' },
+      },
+    },
+  ]);
+  assert.doesNotMatch(JSON.stringify(events), /customer@example|credential|raw response|stack/iu);
+});
+
+test('SMTP diagnostic classification rejects unapproved values and raw error content', () => {
+  assert.deepEqual(safeSmtpFailure({
+    code: 'SECRET_CODE', responseCode: '535', command: 'VRFY customer@example.com', response: 'raw',
+  }), { code: 'UNKNOWN', responseCode: null, command: null });
+  assert.deepEqual(safeSmtpFailure({
+    code: 'ESMTP', responseCode: 550, command: 'RCPT TO:<customer@example.com>',
+  }), { code: 'ESMTP', responseCode: 550, command: 'RCPT TO' });
 });
 
 test('rate limit blocks the sixth submission from one IP within 15 minutes', async () => {

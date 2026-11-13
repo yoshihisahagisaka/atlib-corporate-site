@@ -19,6 +19,7 @@ export interface Config {
     turnstileSecret: string;
     allowedOrigins: string[];
     allowedTurnstileHostnames: string[];
+    diagnosticLogs: boolean;
   };
 }
 
@@ -84,6 +85,7 @@ export async function loadConfig(): Promise<Config> {
       turnstileSecret: process.env.SITE_CONTACT_TURNSTILE_SECRET ?? '',
       allowedOrigins: configuredOrigins(process.env.SITE_CONTACT_ALLOWED_ORIGINS),
       allowedTurnstileHostnames: configuredHostnames(process.env.SITE_CONTACT_TURNSTILE_HOSTNAMES),
+      diagnosticLogs: process.env.SITE_CONTACT_DIAGNOSTIC_LOGS === 'true',
     },
   };
 }

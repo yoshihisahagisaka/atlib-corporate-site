@@ -63,7 +63,7 @@ async function main(): Promise<void> {
 
   app.use(createContactFormRouter(mailer, config));
   app.use(createEntryFormRouter(mailer, config));
-  app.use(createSiteContactApiRouter(mailer, config.siteContact));
+  app.use(createSiteContactApiRouter(mailer, config.siteContact, undefined, logger));
 
   // The Turnstile site key is public configuration, but differs by
   // environment. Inject it at response time so the same image can be promoted

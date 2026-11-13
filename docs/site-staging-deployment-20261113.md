@@ -78,10 +78,32 @@ No retry or configuration change was made during this investigation.
   Consequently SMTP acceptance, Workspace processing, Google Group delivery,
   and Gmail inbox delivery are all **not confirmed**. Workspace mail-log and
   inbox investigation was not used to claim delivery.
-- Minimum proposed change (not implemented): add Staging-only structured event
+- The minimum change proposed at investigation time was Staging-only structured event
   logs for Turnstile success, SMTP start, SMTP success, and SMTP failure. On
   failure, log only a trace-correlated stage plus allowlisted Nodemailer fields
   such as `code`, numeric `responseCode`, and `command`; never log SMTP
   credentials, form fields, email addresses, message body, or raw SMTP response.
-  Keep the client response generic. After review and deployment, obtain separate
-  approval before exactly one further real-message E2E.
+  Keep the client response generic. This was implemented under the subsequent
+  diagnostics approval; a separate approval is still required before exactly
+  one further real-message E2E.
+
+## Staging SMTP diagnostics (2026-11-14)
+
+- Workspace Email Log Search for 2026-11-13 23:52-23:54 JST could not be
+  completed because the authenticated browser access host was unavailable. No
+  Workspace setting was changed. Delivery therefore remains unconfirmed rather
+  than classified as undelivered.
+- The three POSTs used the same revision, browser family/version, same-origin
+  contact page and application instance. Cloud Run recorded two network source
+  representations (IPv6 for the first two and IPv4 for the third), so logs do
+  not prove that all three came from one network identity. No personal network
+  address is copied into this record.
+- Added opt-in `SITE_CONTACT_DIAGNOSTIC_LOGS`; its default is disabled. Staging
+  enables it explicitly, while Production remains disabled and unchanged.
+- Diagnostic events are limited to SMTP start, success, and failure. Each event
+  includes a validated Cloud Trace ID. Failure details are reduced to an
+  allowlisted Nodemailer `code`, integer `responseCode`, and allowlisted SMTP
+  command name. Raw error messages, stack traces, SMTP responses, credentials,
+  addresses, and form fields are never passed to the diagnostic logger.
+- Automated tests and TypeScript build: 18 PASS / 0 FAIL.
+- No real email or automated retry was performed while adding diagnostics.

@@ -13,6 +13,44 @@ const INQUIRY_TYPES: Readonly<Record<string, string>> = {
 type SiteContactConfig = Config['siteContact'];
 type VerifyInput = { token: string; secret: string; hostnames: string[]; remoteIp?: string };
 type TurnstileVerification = (input: VerifyInput) => Promise<boolean>;
+type DiagnosticLogger = {
+  info(fields: Record<string, unknown>, message: string): void;
+  warn(fields: Record<string, unknown>, message: string): void;
+};
+
+const SMTP_ERROR_CODES = new Set([
+  'EAUTH', 'ECONNECTION', 'EDNS', 'EENVELOPE', 'EMESSAGE', 'ESMTP', 'ESTREAM', 'ETIMEDOUT',
+]);
+const SMTP_COMMANDS = ['AUTH', 'DATA', 'EHLO', 'HELO', 'MAIL FROM', 'RCPT TO', 'STARTTLS'] as const;
+
+export function safeSmtpFailure(error: unknown): {
+  code: string;
+  responseCode: number | null;
+  command: string | null;
+} {
+  const candidate = error && typeof error === 'object' ? error as Record<string, unknown> : {};
+  const rawCode = typeof candidate.code === 'string' ? candidate.code.toUpperCase() : '';
+  const rawCommand = typeof candidate.command === 'string' ? candidate.command.toUpperCase().trim() : '';
+  const command = SMTP_COMMANDS.find((allowed) =>
+    rawCommand === allowed || rawCommand.startsWith(`${allowed} `) || rawCommand.startsWith(`${allowed}:`)) ?? null;
+  const responseCode = typeof candidate.responseCode === 'number' &&
+    Number.isInteger(candidate.responseCode) && candidate.responseCode >= 100 && candidate.responseCode <= 599
+    ? candidate.responseCode : null;
+  return {
+    code: SMTP_ERROR_CODES.has(rawCode) ? rawCode : 'UNKNOWN',
+    responseCode,
+    command,
+  };
+}
+
+function requestTraceId(req: express.Request): string | null {
+  const value = req.get('x-cloud-trace-context')?.split('/')[0] ?? '';
+  return /^[a-f0-9]{32}$/u.test(value) ? value : null;
+}
+
+function diagnosticFields(req: express.Request, event: string): Record<string, unknown> {
+  return { event, traceId: requestTraceId(req) };
+}
 
 /** Verify every token server-side; a browser widget's completion is not authorization. */
 export async function verifySiteContactTurnstile(
@@ -78,6 +116,7 @@ export function createSiteContactApiRouter(
   mailer: Pick<Mailer, 'sendContactNotification'>,
   config: SiteContactConfig,
   verify: TurnstileVerification = verifySiteContactTurnstile,
+  logger?: DiagnosticLogger,
 ): Router {
   const router = Router();
   const rateLimit = createIpRateLimiter({ windowMs: 15 * 60 * 1000, maxRequests: 5 });
@@ -116,12 +155,24 @@ export function createSiteContactApiRouter(
     }
     if (!validChallenge) return jsonFailure(res, 403, 'bot_verification_failed');
 
+    if (config.diagnosticLogs && logger) {
+      logger.info(diagnosticFields(req, 'site_contact_smtp_start'), 'Site contact SMTP delivery started');
+    }
     try {
       // ML destination is fixed by the owner. Do not inherit the legacy
       // `database@atlib.jp` secondary recipient or customer auto-reply.
       await mailer.sendContactNotification('contact@atlib.jp', validated.fields);
-    } catch {
-      // No customer message, email, or SMTP diagnostic in HTTP or app logs.
+      if (config.diagnosticLogs && logger) {
+        logger.info(diagnosticFields(req, 'site_contact_smtp_success'), 'Site contact SMTP delivery succeeded');
+      }
+    } catch (error) {
+      if (config.diagnosticLogs && logger) {
+        logger.warn({
+          ...diagnosticFields(req, 'site_contact_smtp_failure'),
+          smtp: safeSmtpFailure(error),
+        }, 'Site contact SMTP delivery failed');
+      }
+      // Keep the HTTP response generic; optional Staging diagnostics above are allowlisted.
       return jsonFailure(res, 502, 'notification_failed');
     }
     res.status(200).json({ ok: true, code: 'accepted' });
