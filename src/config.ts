@@ -15,6 +15,7 @@ export interface Config {
   contactNotifyEmail: string; // お問い合わせ通知の受信先（カンマ区切りで複数可）
   entryNotifyEmail: string; // 採用エントリー通知の受信先（カンマ区切りで複数可）
   siteContact: {
+    turnstileSiteKey: string;
     turnstileSecret: string;
     allowedOrigins: string[];
     allowedTurnstileHostnames: string[];
@@ -79,6 +80,7 @@ export async function loadConfig(): Promise<Config> {
     // Optional while the new Site remains a private static preview. The API
     // returns 503 (fail closed) until all three are provisioned in Cloud Run.
     siteContact: {
+      turnstileSiteKey: process.env.SITE_CONTACT_TURNSTILE_SITE_KEY ?? '',
       turnstileSecret: process.env.SITE_CONTACT_TURNSTILE_SECRET ?? '',
       allowedOrigins: configuredOrigins(process.env.SITE_CONTACT_ALLOWED_ORIGINS),
       allowedTurnstileHostnames: configuredHostnames(process.env.SITE_CONTACT_TURNSTILE_HOSTNAMES),

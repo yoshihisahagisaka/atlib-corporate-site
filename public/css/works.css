@@ -1,0 +1,63 @@
+@charset "utf-8";
+
+/* Nine anonymized atLIB case studies. Shared phase cards live in atlib.css. */
+.works-page #contents,
+.works-page main { width: 100%; max-width: none; }
+.works-page header #menubar a[aria-current="page"] { color: #b86b29; }
+
+.works-hero { background: linear-gradient(115deg,#f5f9fc 0%,#eaf5f2 100%); }
+.works-hero-inner { max-width: 1200px; margin: auto; padding: clamp(2.8rem,4.5vw,4.2rem) clamp(1.4rem,4vw,4rem); }
+.works-hero h1 { font-size: clamp(2.1rem,3.5vw,3.35rem); font-weight: 800; color: var(--brand-navy); line-height: 1.38; letter-spacing: -.03em; margin: 0 0 1rem; }
+.works-hero p { max-width: 780px; color: #4a5f77; font-size: clamp(1rem,1.2vw,1.12rem); line-height: 1.78; margin: .4rem 0; }
+.works-hero p:first-of-type { font-weight: 700; }
+
+.works-index { max-width: 1210px; margin: 0 auto; padding: 3.5rem clamp(1.25rem,4vw,4rem) 3rem; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .65rem; }
+.works-index a { display: flex; align-items: center; gap: .75rem; min-width: 0; background: #f9fbfc; border: 1px solid #dee7ee; border-radius: 9px; padding: .95rem 1rem; color: var(--brand-navy); font-size: .9rem; font-weight: 700; text-decoration: none; line-height: 1.6; }
+.works-index a:hover,.works-index a:focus-visible { border-color: #f28c38; background: #fff7ef; }
+.works-index a span { flex: 0 0 auto; color: #c47733; font-size: .8rem; font-weight: 800; }
+
+.works-list { max-width: 1210px; margin: 0 auto; padding: 0 clamp(1.25rem,4vw,4rem) 5.5rem; }
+.works-case { padding: 3rem 0 3.5rem; border-top: 1px solid #d9e3eb; scroll-margin-top: 90px; }
+.works-case-header { display: flex; gap: 1.2rem 1.5rem; justify-content: space-between; align-items: flex-start; margin-bottom: 1.7rem; }
+.works-case-no { display: block; margin: 0 0 .6rem; color: #bc6e2c; font: 800 .76rem/1.5 var(--accent-font); letter-spacing: .12em; }
+.works-case h2 { display: block; color: var(--brand-navy); font-size: clamp(1.45rem,2.5vw,2.25rem); line-height: 1.5; letter-spacing: -.02em; margin: 0; }
+.works-case h2::before { display: none; }
+.works-case .work-phase h3 { margin: 0 0 .65rem; color: var(--brand-navy); font-size: clamp(1.05rem,1.35vw,1.18rem); font-weight: 800; line-height: 1.55; }
+.works-case .work-phase p { color: #4d6278; font-size: .97rem; line-height: 1.86; }
+.works-case-category { font-size: .82rem; font-weight: 700; color: #71849a; margin: 1.1rem 0 0; }
+.work-status.neutral { color: #4b667f; background: #eaf0f5; }
+
+.works-end { text-align: center; background: var(--brand-navy); padding: clamp(3.8rem,6vw,6rem) 1.4rem; }
+.works-end h2 { display: block; margin: 0 auto 1.2rem; color: #fff; font-size: clamp(1.55rem,2.5vw,2.35rem); line-height: 1.5; }
+.works-end h2::before { display: none; }
+.works-end p { color: #dce7ef; font-size: 1rem; line-height: 1.8; margin: 0 auto 2rem; }
+.works-end a { display: inline-flex; align-items: center; gap: .65rem; border-radius: 5px; padding: .85rem 1.4rem; background: #fff; text-decoration: none; font-weight: 800; color: var(--brand-navy); }
+.works-end-links { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; }
+.works-end .works-end-secondary { background: transparent; border: 1px solid rgba(255,255,255,.6); color: #fff; }
+.works-end a span { color: #c87934; }
+.works-end a:hover,.works-end a:focus-visible { background: #fff2e5; }
+.works-end .works-end-secondary:hover, .works-end .works-end-secondary:focus-visible { background: rgba(255,255,255,.13); color: #fff; border-color: #fff; }
+.works-end .works-end-secondary span { color: #8fd5c3; }
+
+@media (max-width: 800px) {
+  .works-index { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .works-case { scroll-margin-top: 70px; }
+}
+
+@media (max-width: 700px) {
+  .works-hero-inner { padding: 2.6rem 1.4rem; }
+  .works-hero h1 { font-size: clamp(1.85rem,7vw,2.4rem); line-height: 1.48; }
+  .works-hero h1 br { display: none; }
+  .works-index { grid-template-columns: minmax(0,1fr); gap: .5rem; padding: 2.2rem 1.4rem 2.3rem; }
+  .works-index a { font-size: 1rem; padding: .8rem 1rem; }
+  .works-list { padding: 0 1.4rem 3.8rem; }
+  .works-case { padding: 2.3rem 0 2.6rem; }
+  .works-case-header { flex-direction: column; gap: .8rem; margin-bottom: 1.15rem; }
+  .works-case h2 { font-size: 1.45rem; line-height: 1.5; }
+  .works-case .work-phase h3 { font-size: 1.1rem; }
+  .works-case .work-phase p { font-size: 1rem; line-height: 1.8; }
+  .works-case-category { font-size: .9rem; }
+  .works-end { padding: 3.5rem 1.4rem; }
+  .works-end h2 { font-size: 1.6rem; }
+  .works-end p { font-size: 1rem; }
+}
