@@ -53,3 +53,35 @@ verify SMTP acceptance, Google Group routing (`List-ID`, `X-BeenThere`, or
 `Mailing-list`), `Delivered-To`, From, To, Reply-To, SPF, DKIM, and DMARC.
 Production `corporate-site`, load balancer, DNS, GCE, Apache, WordPress, and
 Google Workspace settings remain unchanged.
+
+## Failed form E2E investigation (2026-11-13 23:52-23:53 JST)
+
+No retry or configuration change was made during this investigation.
+
+- Cloud Run request logs contain three `POST /api/contact` requests to revision
+  `corporate-site-staging-00005-pxb`, at 23:52:57, 23:53:13, and 23:53:52 JST.
+  All three returned HTTP 502 in 1.668 s, 0.328 s, and 0.899 s respectively.
+- Trace IDs are `cdf17c615373cbc7262e3c3467eb9fbb`,
+  `2df94161bacab92c4bdba08111371b70`, and
+  `a11c06bd5d9d0fc68b5acc0b526604a6`. Corresponding span IDs are
+  `40984a902523fa00`, `9c97051a1ade0227`, and `80c8bde6fad32da8`.
+- These are server responses, not the browser's 15-second abort. The API's only
+  502 path is `notification_failed` after payload validation and successful
+  Turnstile verification. Therefore Turnstile passed and
+  `sendContactNotification()` was called for each request.
+- `sendContactNotification()` did not resolve successfully. The current catch
+  block deliberately suppresses the Nodemailer error, so existing logs cannot
+  distinguish connection, SMTP AUTH, `MAIL FROM`, `RCPT TO`, `DATA`, or final
+  SMTP-response failure. The earlier no-message SMTP AUTH preflight remains a
+  separate PASS and is not evidence that any of these messages was accepted.
+- There is no successful SMTP final response, API 200, or Message-ID evidence.
+  Consequently SMTP acceptance, Workspace processing, Google Group delivery,
+  and Gmail inbox delivery are all **not confirmed**. Workspace mail-log and
+  inbox investigation was not used to claim delivery.
+- Minimum proposed change (not implemented): add Staging-only structured event
+  logs for Turnstile success, SMTP start, SMTP success, and SMTP failure. On
+  failure, log only a trace-correlated stage plus allowlisted Nodemailer fields
+  such as `code`, numeric `responseCode`, and `command`; never log SMTP
+  credentials, form fields, email addresses, message body, or raw SMTP response.
+  Keep the client response generic. After review and deployment, obtain separate
+  approval before exactly one further real-message E2E.
