@@ -14,6 +14,27 @@ export interface Config {
   formHmacSecret: string;
   contactNotifyEmail: string; // お問い合わせ通知の受信先（カンマ区切りで複数可）
   entryNotifyEmail: string; // 採用エントリー通知の受信先（カンマ区切りで複数可）
+  siteContact: {
+    turnstileSecret: string;
+    allowedOrigins: string[];
+    allowedTurnstileHostnames: string[];
+  };
+}
+
+function configuredOrigins(value: string | undefined): string[] {
+  return (value ?? '').split(',').map((part) => part.trim()).filter((part) => {
+    try {
+      const parsed = new URL(part);
+      return parsed.protocol === 'https:' && parsed.origin === part && !parsed.username && !parsed.password;
+    } catch {
+      return false;
+    }
+  });
+}
+
+function configuredHostnames(value: string | undefined): string[] {
+  return (value ?? '').split(',').map((part) => part.trim().toLowerCase()).filter((part) =>
+    /^(?:[a-z0-9-]+\.)+[a-z0-9-]+$/u.test(part));
 }
 
 /**
@@ -55,5 +76,12 @@ export async function loadConfig(): Promise<Config> {
     formHmacSecret,
     contactNotifyEmail: process.env.CONTACT_NOTIFY_EMAIL ?? 'contact@atlib.jp, database@atlib.jp',
     entryNotifyEmail: process.env.ENTRY_NOTIFY_EMAIL ?? 'contact@atlib.jp, database@atlib.jp',
+    // Optional while the new Site remains a private static preview. The API
+    // returns 503 (fail closed) until all three are provisioned in Cloud Run.
+    siteContact: {
+      turnstileSecret: process.env.SITE_CONTACT_TURNSTILE_SECRET ?? '',
+      allowedOrigins: configuredOrigins(process.env.SITE_CONTACT_ALLOWED_ORIGINS),
+      allowedTurnstileHostnames: configuredHostnames(process.env.SITE_CONTACT_TURNSTILE_HOSTNAMES),
+    },
   };
 }
