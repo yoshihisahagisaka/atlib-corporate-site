@@ -107,3 +107,13 @@ No retry or configuration change was made during this investigation.
   addresses, and form fields are never passed to the diagnostic logger.
 - Automated tests and TypeScript build: 18 PASS / 0 FAIL.
 - No real email or automated retry was performed while adding diagnostics.
+- Implementation commit: `4f635fb8b0e9b8647839f85c49e8eb7fc9a74842`.
+- Cloud Build: `48a4f0bd-4d81-4d60-80f7-da6e9d4f9644` (`SUCCESS`).
+- Image digest: `sha256:28696e739abbc27eadc370be34f8e0e6f044c353eb18defa4e810819e0698802`.
+- Staging revision: `corporate-site-staging-00006-zfr` (100% traffic),
+  with `SITE_CONTACT_DIAGNOSTIC_LOGS=true`.
+- Post-deployment non-mail checks: `/healthz/` HTTP 200, `/contact/` HTTP
+  200, and no ERROR entries for the new revision at verification time.
+- Production remained on `corporate-site-00005-fbg` at 100% traffic with
+  `corporate-site-00006-xud` preview-tagged and its existing
+  `corporate-site:recruit-note-20260929` image.
