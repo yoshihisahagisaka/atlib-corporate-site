@@ -155,3 +155,41 @@ DMARCはWebアプリではなくatlib.jpの公開DNS/メール認証の責務。
 - No ERROR log entries were present for the new revision at validation time.
   Production `corporate-site`, DNS, Workspace, WordPress/Apache, IAM, Secrets,
   and existing revisions were not changed.
+
+## PR #60 Staging 100% promotion and acceptance (2026-11-14)
+
+- Pre-switch checks passed: `corporate-site-staging-00007-g7h` served 100%,
+  `corporate-site-staging-00008-lok` served 0%, and the new revision image
+  digest matched
+  `sha256:6678a23e4ad306f7d58c73da5b4de7f105c2b1b767239eb29826dcda50ebe55e`.
+  Ingress, runtime service account, min/max scaling, concurrency,
+  environment-variable names, and Secret references matched the recorded
+  Staging configuration. `SITE_PUBLIC_MODE` remained absent.
+- Staging traffic was changed once to
+  `corporate-site-staging-00008-lok=100`. Post-switch inspection confirmed the
+  new revision at 100% and the old revision at 0%. No revision was deleted.
+- The canonical Staging service URL returned HTTP 200 for `/healthz/`, `/`,
+  `/company/`, `/services/`, `/works/`, `/contact/`, `/business-web/`,
+  `/recruit/`, `/infravision-partner/`, `/web-development-partner/`, and
+  `/joshisu-kaizen/`.
+- The five new corporate pages retained CSP, `X-Frame-Options: SAMEORIGIN`,
+  `X-Robots-Tag: noindex, nofollow`, the HTML noindex directive, canonical,
+  and OGP metadata. The home page retained Organization/WebSite JSON-LD.
+  Existing LPs remained reachable and retained their existing header scope;
+  CSP and X-Frame-Options were not newly applied to those legacy paths.
+- No severity ERROR entries were found for
+  `corporate-site-staging-00008-lok` during the post-switch validation window.
+- Real-browser acceptance could not be started because the browser access
+  host was unavailable. Therefore desktop 1366 px, mobile 390/375 px, visual
+  layout, hamburger menu, slider, web fonts, images, horizontal overflow,
+  browser-console CSP/JavaScript diagnostics, form field interaction, and
+  Turnstile display/success are **not verified** and are not recorded as PASS.
+  No form POST, CAPTCHA solve, or email transmission was performed.
+- No rollback was performed: HTTP/security checks showed no major regression,
+  while browser-only checks remain an explicit acceptance gap. Staging remains
+  on `corporate-site-staging-00008-lok` at 100% pending browser acceptance.
+- Production `corporate-site` remained unchanged at
+  `corporate-site-00005-fbg=100%`, with the existing preview tag on
+  `corporate-site-00006-xud`. Production, DNS, Workspace, WordPress/Apache,
+  IAM, Secrets, service account, and scaling configuration received zero
+  changes.
