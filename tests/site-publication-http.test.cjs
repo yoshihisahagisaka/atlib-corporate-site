@@ -69,18 +69,23 @@ test('HTTP preview / publication / recruit routing, with no mail sent', async ()
     assert.equal(live.status, 200);
     assert.equal(live.headers.get('x-robots-tag'), null);
     assert.equal(live.headers.get('strict-transport-security'), 'max-age=31536000; includeSubDomains');
+    assert.equal(live.headers.get('x-frame-options'), 'SAMEORIGIN');
+    assert.match(live.headers.get('content-security-policy'), /frame-ancestors 'self'/u);
+    assert.match(live.headers.get('content-security-policy'), /script-src 'self'/u);
     assert.match(liveHtml, /<meta name="robots" content="index,follow,max-image-preview:large">/u);
     assert.doesNotMatch(liveHtml, /デザイン検討用プレビュー|公開サイトではありません/u);
 
     const contact = await request('/contact/', 'www.atlib.jp');
     const contactHtml = await contact.text();
     assert.equal(contact.status, 200);
+    assert.match(contact.headers.get('content-security-policy'), /frame-src https:\/\/challenges\.cloudflare\.com/u);
     assert.doesNotMatch(contactHtml, /Staging検証環境|__TURNSTILE_SITE_KEY__/u);
     assert.match(contactHtml, /data-sitekey="synthetic-site-key-123456"/u);
 
     const stage = await request('/', 'corporate-site-staging-123.run.app');
     const stageHtml = await stage.text();
     assert.equal(stage.headers.get('x-robots-tag'), 'noindex, nofollow');
+    assert.equal(stage.headers.get('x-frame-options'), 'SAMEORIGIN');
     assert.match(stageHtml, /公開サイトではありません/u);
     assert.match(stageHtml, /noindex,nofollow/u);
 
@@ -99,7 +104,14 @@ test('HTTP preview / publication / recruit routing, with no mail sent', async ()
 
     const recruit = await request('/', 'recruit.atlib.jp');
     assert.equal(recruit.status, 200);
+    assert.equal(recruit.headers.get('content-security-policy'), null);
+    assert.equal(recruit.headers.get('x-frame-options'), null);
     assert.doesNotMatch(await recruit.text(), /ITで、企業に自由を。<\/title>/u);
+
+    const legacyLp = await request('/web-development-partner/', 'www.atlib.jp');
+    assert.equal(legacyLp.status, 200);
+    assert.equal(legacyLp.headers.get('content-security-policy'), null);
+    assert.equal(legacyLp.headers.get('x-frame-options'), null);
   } finally {
     child.kill('SIGTERM');
     await new Promise((resolve) => child.once('exit', resolve));

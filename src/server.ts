@@ -9,7 +9,7 @@ import { createContactFormRouter } from './routes/contactForm';
 import { createEntryFormRouter } from './routes/entryForm';
 import { createSiteContactApiRouter } from './routes/siteContactApi';
 import { createIpRateLimiter } from './middleware/rateLimit';
-import { isPublicRequest, renderCorporatePage, siteSecurityHeaders } from './middleware/sitePublication';
+import { corporatePageSecurityHeaders, isPublicRequest, renderCorporatePage, siteSecurityHeaders } from './middleware/sitePublication';
 
 const RECRUIT_HOST = /^(www\.)?recruit\.atlib\.jp$/i;
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
@@ -78,6 +78,7 @@ async function main(): Promise<void> {
           return;
         }
         const template = await readFile(path.join(PUBLIC_DIR, htmlPath), 'utf8');
+        corporatePageSecurityHeaders(res);
         res.setHeader('Cache-Control', 'no-cache');
         res.type('html').send(renderCorporatePage(template, publiclyReleased));
       } catch (error) {
@@ -96,6 +97,7 @@ async function main(): Promise<void> {
         res.redirect(301, `/contact/${req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : ''}`);
         return;
       }
+      corporatePageSecurityHeaders(res);
       const siteKey = config.siteContact.turnstileSiteKey;
       if (!/^[A-Za-z0-9_-]{10,100}$/u.test(siteKey)) {
         res.status(503).send('Contact form is not configured.');

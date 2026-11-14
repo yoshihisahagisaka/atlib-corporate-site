@@ -1,5 +1,33 @@
 import type { Request, Response, NextFunction } from 'express';
 
+// The five new corporate pages do not contain executable inline scripts.
+// Every external source below is backed by a dependency in those pages:
+// - jQuery: ajax.googleapis.com
+// - jquery.inview and Font Awesome: cdnjs.cloudflare.com
+// - web fonts: fonts.googleapis.com / fonts.gstatic.com
+// - contact Turnstile widget: challenges.cloudflare.com
+// This policy must not be applied to legacy LPs or the recruiting site;
+// their separate analytics and inline scripts require a separate audit.
+export const CORPORATE_CONTENT_SECURITY_POLICY = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "frame-ancestors 'self'",
+  "form-action 'self'",
+  "script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com https://challenges.cloudflare.com",
+  "style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
+  "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
+  "img-src 'self' data: https://challenges.cloudflare.com",
+  "connect-src 'self' https://challenges.cloudflare.com",
+  'frame-src https://challenges.cloudflare.com',
+].join('; ');
+
+export function corporatePageSecurityHeaders(res: Response): void {
+  res.setHeader('Content-Security-Policy', CORPORATE_CONTENT_SECURITY_POLICY);
+  // Defense for older browsers that do not implement frame-ancestors.
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+}
+
 // Promotion is an explicit release gate, not NODE_ENV: Staging also runs with
 // NODE_ENV=production. Unknown hosts (including run.app) always stay noindex.
 const PUBLISHED_HOSTS = new Set([

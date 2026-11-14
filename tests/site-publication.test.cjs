@@ -6,6 +6,8 @@ const {
   isPublicRequest,
   renderCorporatePage,
   siteSecurityHeaders,
+  CORPORATE_CONTENT_SECURITY_POLICY,
+  corporatePageSecurityHeaders,
 } = require('../dist/middleware/sitePublication');
 
 const publicDir = path.join(__dirname, '..', 'public');
@@ -49,6 +51,41 @@ test('security headers keep Apache canonical and Staging noindex by default', ()
     assert.equal(headers['Permissions-Policy'], 'camera=(), microphone=(), geolocation=()');
     assert.equal(headers['X-Frame-Options'], undefined);
     assert.equal(headers['Content-Security-Policy'], undefined);
+  }
+});
+
+test('corporate-only CSP restricts scripts, framing and form targets without unsafe inline execution', () => {
+  const headers = {};
+  corporatePageSecurityHeaders({ setHeader: (key, value) => { headers[key] = value; } });
+  assert.equal(headers['Content-Security-Policy'], CORPORATE_CONTENT_SECURITY_POLICY);
+  assert.equal(headers['X-Frame-Options'], 'SAMEORIGIN');
+
+  for (const directive of [
+    "default-src 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "frame-ancestors 'self'",
+    "form-action 'self'",
+    'script-src ',
+    'https://ajax.googleapis.com',
+    'https://cdnjs.cloudflare.com',
+    'https://challenges.cloudflare.com',
+    'frame-src https://challenges.cloudflare.com',
+    'style-src ',
+    'https://fonts.googleapis.com',
+    'font-src ',
+    'https://fonts.gstatic.com',
+    'img-src ',
+    'data:',
+  ]) assert.ok(CORPORATE_CONTENT_SECURITY_POLICY.includes(directive), `missing CSP source: ${directive}`);
+  assert.doesNotMatch(CORPORATE_CONTENT_SECURITY_POLICY, /unsafe-inline|unsafe-eval|\*|blob:/u);
+
+  // JSON-LD is a non-executing structured-data script. New pages otherwise
+  // reference only external JS and have no inline event-handler attributes.
+  for (const [, sourcePath] of pages) {
+    const html = fs.readFileSync(path.join(publicDir, sourcePath), 'utf8');
+    assert.doesNotMatch(html, /\son(?:load|click|submit|error|change)\s*=/iu);
+    assert.doesNotMatch(html, /<script(?![^>]*\bsrc\s*=|[^>]*\btype="application\/ld\+json")/iu);
   }
 });
 
