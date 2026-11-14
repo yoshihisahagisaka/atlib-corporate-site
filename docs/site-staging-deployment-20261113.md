@@ -143,3 +143,29 @@ No retry or configuration change was made during this investigation.
   verify whether the envelope sender `system@atlib.jp` is permitted. An
   application-side envelope-sender change would alter Return-Path behavior and
   must not be made without a separate design approval.
+
+## Contact layout and sender-name deployment (2026-11-14)
+
+- PR #59 HEAD was fast-forwarded cleanly to
+  `5ea11686d9d4a661e9ad1dcbf19aa18084fdf8a4`; no local changes required
+  preservation or conflict resolution.
+- Automated tests and TypeScript build: 19 PASS / 0 FAIL. The offline mail test
+  confirms MIME From display name `atLIB株式会社`, address `system@atlib.jp`,
+  and unchanged SMTP envelope sender `system@atlib.jp`; no real email was sent.
+- Cloud Build: `8f4b0441-3726-48f5-99c3-bcf02ed2125c` (`SUCCESS`).
+- Image digest:
+  `sha256:7d999f69f99a85f2bf9d7bddebfedf2b0c71c4f2be400d6b3a7870de89af7189`.
+- Staging revision: `corporate-site-staging-00007-g7h` (100% traffic). Existing
+  environment variables, Secret references, service account, max scale `2`,
+  and concurrency `10` were preserved.
+- `/healthz/`, `/contact/`, and `/css/contact.css`: HTTP 200. The deployed CSS
+  contains the new compact hero spacing, 1240 px layout cap, wider form column,
+  and the <=600 px mobile width rules. The new revision had no ERROR entries at
+  verification time.
+- PC and smartphone visual QA is **not completed**: the browser access host was
+  unavailable, so title-area spacing, rendered form width/input layout, and
+  absence of horizontal scrolling or visual breakage were not visually
+  asserted. Static CSS presence is not treated as a visual PASS.
+- Production remained on `corporate-site-00005-fbg` at 100% traffic with
+  `corporate-site-00006-xud` preview-tagged and the existing
+  `corporate-site:recruit-note-20260929` image.
