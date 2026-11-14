@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+
+/*Google Fontsの読み込み
+---------------------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+/*Font Awesomeの読み込み
+---------------------------------------------------------------------------*/
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+
+
+/*CSSカスタムプロパティ（サイト全体を一括管理する為の設定）
+---------------------------------------------------------------------------*/
+:root {
+
+	--bg-color: #fff;					/*主にテンプレートの背景色*/
+	--bg-border-color: #d8e1eb;				/*枠線の色*/
+	--bg-inverse-color: #1f3556;			/*上のカラーの「対」として使う色*/
+	--bg-inverse-border-color: rgba(255,255,255,0.5);	/*枠線の色。255,255,255,0.5は白の事で0.5は色が50%出た状態。*/
+	
+	--primary-color: #1f3556;			/*atLIB Deep Navy*/
+	--primary-inverse-color: #fff;		/*上のカラーの「対」として使う色*/
+	--primary-border-color: rgba(255,255,255,0.5);	/*枠線の色。255,255,255,0.5は白の事で0.5は色が50%出た状態。*/
+
+	--primary-light-color: #edf5f7;					/*薄いカラー*/
+	--primary-light-inverse-color: #1f3556;			/*上のカラーの「対」として使う色*/
+	--primary-light-border-color: rgba(0,0,0,0.2);	/*枠線の色。0,0,0は黒の事で0.2は色が20%出た状態。*/
+
+	--light-color: #f8fafc;					/*atLIB Off White*/
+	--light-inverse-color: #1f3556;			/*上のカラーの「対」として使う色*/
+	--light-border-color: rgba(0,0,0,0.2);	/*枠線の色。0,0,0は黒の事で0.2は色が20%出た状態。*/
+
+	--accent-color: #f28c38;			/*atLIB Warm Orange*/
+	--accent-inverse-color: #fff;		/*上のカラーの「対」として使う色*/
+	--accent-border-color: rgba(255,255,255,0.5);	/*枠線の色。255,255,255は白の事で0.5は色が50%出た状態。*/
+
+	--content-space-l: 7vw;		/*余白の一括管理用。画面幅100% = 100vwです。*/
+	--content-space-s: 2rem;	/*余白の一括管理用。2文字分。*/
+
+	--base-font: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+	--accent-font: "Manrope", sans-serif;
+	--growth-color: #2dbe9d;
+
+}

@@ -24,9 +24,15 @@ export interface EntryFormData {
 }
 
 const DIVIDER = '━━━━━━━━━━━━━━━━━━━━━━';
+const SENDER_NAME = 'atLIB株式会社';
 
 export class Mailer {
   private readonly transporter: Transporter;
+
+  /** 表示名のみを設定し、SMTPのエンベロープ送信者アドレスは変えない。 */
+  private sender(): { name: string; address: string } {
+    return { name: SENDER_NAME, address: this.config.from };
+  }
 
   constructor(private readonly config: Config['smtp']) {
     this.transporter = nodemailer.createTransport({
@@ -65,7 +71,7 @@ export class Mailer {
     lines.push('■ お問合せ内容', data.message, DIVIDER);
 
     await this.transporter.sendMail({
-      from: this.config.from,
+      from: this.sender(),
       to,
       replyTo: data.email,
       subject: '【お問い合わせ】WEBサイトからお問い合わせがありました',
@@ -111,7 +117,7 @@ export class Mailer {
     );
 
     await this.transporter.sendMail({
-      from: this.config.from,
+      from: this.sender(),
       to,
       subject: '【自動送信】お問い合わせありがとうございます - atLIB株式会社',
       text: lines.join('\n'),
@@ -157,7 +163,7 @@ export class Mailer {
     lines.push(DIVIDER);
 
     await this.transporter.sendMail({
-      from: this.config.from,
+      from: this.sender(),
       to,
       replyTo: data.email,
       subject: '【エントリー】採用サイトからエントリーありました',
@@ -213,7 +219,7 @@ export class Mailer {
     );
 
     await this.transporter.sendMail({
-      from: this.config.from,
+      from: this.sender(),
       to,
       subject: '【自動送信】エントリーありがとうございます - atLIB株式会社 採用サイト',
       text: lines.join('\n'),

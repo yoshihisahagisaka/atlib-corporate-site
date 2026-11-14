@@ -1,0 +1,115 @@
+@charset "utf-8";
+
+/* Company profile: one-column editorial layout on the existing atLIB brand. */
+.company-page { --company-ink: #243b58; --company-copy: #4c5f76; }
+.company-page #contents { width: 100%; max-width: none; }
+.company-page main { width: 100%; max-width: none; }
+.company-page header #menubar a[aria-current="page"] { color: #c67531; }
+
+.company-hero {
+  position: relative; overflow: hidden;
+  background: linear-gradient(116deg, #f4f8fb 0%, #fff 54%, #edf7f5 100%);
+  border-bottom: 1px solid #dce6ee;
+}
+.company-hero-inner { max-width: 1180px; margin: 0 auto; padding: clamp(4rem,6vw,6rem) clamp(1.4rem,5vw,4.5rem); position: relative; z-index: 1; }
+.company-eyebrow { font: 800 .8rem/1.5 var(--accent-font); color: #bc722e; letter-spacing: .19em; margin: 0 0 1.1rem; }
+.company-hero h1 { color: var(--company-ink); margin: 0 0 1.2rem; font-size: clamp(2.6rem,5.2vw,5.2rem); letter-spacing: -.05em; line-height: 1.22; font-weight: 800; }
+.company-hero h1 span { font: 700 clamp(.88rem,1.15vw,1.05rem)/1.4 var(--accent-font); letter-spacing: .08em; color: #8290a2; display: inline-block; margin-left: 1.5rem; vertical-align: middle; }
+.company-hero-lead { font-weight: 800; font-size: clamp(1.35rem,2vw,2.05rem); color: var(--company-ink); line-height: 1.45; margin: 0 0 .9rem; }
+.company-hero-copy { max-width: 690px; font-size: clamp(.96rem,1.18vw,1.1rem); line-height: 1.8; color: var(--company-copy); margin: 0; }
+.company-mobile-break { display: none; }
+.company-hero-decoration { position: absolute; height: 70%; width: 35%; right: -5%; top: 6%; border: 35px solid rgba(45,190,157,.10); border-radius: 50%; box-shadow: 0 0 0 95px rgba(31,53,86,.035), inset 0 0 0 72px rgba(242,140,56,.045); pointer-events: none; }
+.company-hero-decoration span { position: absolute; border-radius: 50%; width: 1rem; height: 1rem; background: rgba(242,140,56,.43); }
+.company-hero-decoration span:nth-child(1) { left: 8%; top: 11%; }
+.company-hero-decoration span:nth-child(2) { right: 20%; bottom: 13%; background: rgba(45,190,157,.52); }
+.company-hero-decoration span:nth-child(3) { right: 0; top: 25%; width: .55rem; height: .55rem; background: rgba(31,53,86,.23); }
+
+.company-contents-nav { display: flex; justify-content: center; gap: .6rem 1.8rem; padding: 1.45rem 1.25rem; background: #fff; border-bottom: 1px solid #e8edf3; flex-wrap: wrap; }
+.company-contents-nav a { font-size: .87rem; font-weight: 750; color: #53677e; text-decoration: none; padding: .25rem 0; }
+.company-contents-nav a:hover, .company-contents-nav a:focus-visible { color: #be702e; text-decoration: underline; text-underline-offset: .35rem; }
+.company-section { margin: 0; padding: clamp(3.5rem,5.3vw,5.3rem) clamp(1.4rem,4vw,3rem); border-bottom: 1px solid #e4ebf1; scroll-margin-top: 90px; }
+.company-section-head { max-width: 820px; margin: 0 auto 1.9rem; }
+.company-section-number { display: block; color: #b87739; font: 800 .76rem/1.5 var(--accent-font); letter-spacing: .13em; margin-bottom: .65rem; }
+.company-page main h2 { font-size: clamp(1.85rem,2.7vw,3rem); line-height: 1.5; font-weight: 800; color: var(--company-ink); letter-spacing: -.03em; margin: 0; }
+.company-page main h2::before { display: none; }
+.company-section-intro { color: var(--company-copy); line-height: 1.8; margin: .7rem 0 0; }
+.company-reading { max-width: 820px; margin: 0 auto; color: var(--company-copy); }
+.company-reading > p { font-size: 1rem; line-height: 1.8; margin: 0 0 1rem; }
+.company-big-quote { font-size: clamp(2rem,4.2vw,4.15rem) !important; letter-spacing: -.04em; line-height: 1.4 !important; font-weight: 800; color: var(--brand-navy); margin: 0 0 1.45rem !important; }
+.company-big-quote span { font-size: clamp(.95rem,1.7vw,1.5rem); font-weight: 600; color: #77889a; letter-spacing: 0; white-space: nowrap; }
+.company-mvv-section { background: #f7f9fc; }
+.company-mvv-block { border-top: 1px solid #cfdce7; padding: 2.2rem 0 2.6rem; }
+.company-mvv-block:first-child { border-top: 4px solid var(--brand-orange); }
+.company-mvv-block:last-child { padding-bottom: 0; }
+.company-mvv-label { margin: 0 0 1rem; color: #bb7437; letter-spacing: .13em; font: 800 .82rem/1.6 var(--accent-font); }
+.company-mvv-label span { margin-left: .8rem; font-family: var(--base-font); letter-spacing: 0; color: #65768c; font-weight: 600; }
+.company-mission-statement, .company-vision-statement { font-weight: 800; color: var(--company-ink); font-size: clamp(1.55rem,2.7vw,2.7rem); line-height: 1.52; letter-spacing: -.035em; margin: 0 0 1rem; }
+.company-mvv-block > p:not(.company-mvv-label) { font-size: 1rem; line-height: 1.82; margin: 0; }
+.company-values { padding: 0; margin: 0; list-style: none; }
+.company-values li { display: grid; grid-template-columns: 3.1rem minmax(0,1fr); gap: 1.1rem; border-top: 1px solid #dbe4ec; padding: 1.1rem 0; }
+.company-values li:last-child { border-bottom: 1px solid #dbe4ec; }
+.company-value-number { color: #c37936; font: 800 1rem/1.8 var(--accent-font); }
+.company-values h4 { margin: 0 0 .3rem; font-size: clamp(1.04rem,1.35vw,1.22rem); color: var(--company-ink); font-weight: 800; line-height: 1.5; }
+.company-values p { margin: 0; color: #64748a; font-size: .93rem; line-height: 1.76; }
+
+.company-message { border-top: 1px solid #d5e0e9; padding: 2.2rem 0 1.3rem; }
+.company-message + .company-message { margin-top: 2rem; border-top: 4px solid var(--brand-green); padding-top: 2.5rem; }
+.company-message-head { display: flex; align-items: center; gap: 1.3rem; margin-bottom: 1.5rem; }
+.company-message-mark { font-family: Georgia,serif; color: #e4b17d; font-size: 7.5rem; line-height: .8; width: 5rem; height: 4rem; user-select: none; }
+.company-message-role { color: #6d7e90; font-size: .86rem; font-weight: 700; margin: 0 0 .1rem; }
+.company-message h3 { font-size: clamp(1.4rem,2.1vw,1.85rem); color: var(--company-ink); font-weight: 800; line-height: 1.6; margin: 0; }
+.company-message-body { max-width: 770px; }
+.company-message-body p { font-size: 1rem; line-height: 1.8; margin: 0 0 .95rem; color: #455b72; }
+.company-message-body strong { color: var(--brand-navy); font-weight: 800; }
+.company-message-signature { text-align: right; font-weight: 700; color: var(--company-ink); line-height: 1.85; margin: 1.35rem 0 0; font-size: .94rem; }
+
+.company-business-section { background: #f7fafb; }
+.company-business-list { list-style: none; padding: 0; margin: 0; border-top: 3px solid var(--brand-navy); }
+.company-business-list li { display: grid; grid-template-columns: 3.1rem minmax(0,1fr); gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid #dbe5ed; }
+.company-business-list li > span { color: #c37936; font: 800 1.02rem/1.6 var(--accent-font); }
+.company-business-list h3 { font-size: clamp(1.05rem,1.45vw,1.25rem); line-height: 1.6; color: var(--company-ink); font-weight: 800; margin: 0 0 .35rem; }
+.company-business-list p { margin: 0; font-size: .94rem; line-height: 1.8; color: var(--company-copy); }
+.company-related-link { display: flex; justify-content: flex-end; gap: .65rem 1.5rem; flex-wrap: wrap; margin: 1.8rem 0 0 !important; }
+.company-related-link a { color: #b96f2e; font-weight: 800; text-decoration: underline; text-underline-offset: .4rem; }
+.company-related-link a:hover, .company-related-link a:focus-visible { color: var(--brand-navy); }
+.company-related-link span { margin-left: .3rem; }
+
+.company-information-list { margin: 0; border-top: 3px solid var(--brand-navy); }
+.company-information-list > div { display: grid; grid-template-columns: 10rem minmax(0,1fr); gap: 1.4rem; padding: 1rem .2rem; border-bottom: 1px solid #e1e8ef; }
+.company-information-list dt { font-weight: 800; color: var(--company-ink); }
+.company-information-list dd { margin: 0; color: var(--company-copy); line-height: 1.8; }
+.company-information-list a { text-underline-offset: .25rem; }
+
+.company-footer-cta { margin: 0; padding: clamp(4rem,6vw,6rem) 1.5rem; text-align: center; background: var(--brand-navy); color: #fff; }
+.company-footer-cta > div { max-width: 750px; margin: 0 auto; }
+.company-cta-eyebrow { color: #85d4bf; font: 800 .83rem/1.5 var(--accent-font); letter-spacing: .17em; margin: 0 0 1.4rem; }
+.company-page main .company-footer-cta h2 { color: #fff; font-size: clamp(1.8rem,3vw,2.8rem); margin: 0 0 1.1rem; }
+.company-footer-cta p:not(.company-cta-eyebrow) { margin: 0 0 1.7rem; color: #dbe7f2; line-height: 1.9; }
+.company-cta-link { display: inline-flex; align-items: center; gap: .7rem; color: var(--company-ink); background: #fff; border-radius: 5px; padding: .65rem 1.2rem; text-decoration: none; font-weight: 800; font-size: .93rem; }
+.company-cta-link span { color: #c67939; }
+
+@media (max-width: 900px) { .company-hero-decoration { width: 55%; right: -22%; opacity: .7; } }
+@media (max-width: 700px) {
+  .company-hero-copy, .company-reading > p, .company-section-intro,
+  .company-mvv-block > p:not(.company-mvv-label), .company-values p,
+  .company-message-body p, .company-business-list p,
+  .company-footer-cta p:not(.company-cta-eyebrow),
+  .company-cta-link { font-size: 1rem; }
+  .company-contents-nav a { font-size: .9rem; }
+  .company-hero-inner { padding: 3.2rem 1.4rem 3.5rem; }
+  .company-hero h1 span { display: block; margin: .5rem 0 0; font-size: .83rem; }
+  .company-mobile-break { display: initial; }
+  .company-hero-decoration { width: 75%; right: -51%; top: 7%; opacity: .35; }
+  .company-contents-nav { justify-content: flex-start; gap: .25rem 1rem; padding: .85rem 1.3rem; }
+  .company-section { padding: 2.9rem 1.4rem; scroll-margin-top: 70px; }
+  .company-section-head { margin-bottom: 1.5rem; }
+  .company-big-quote span { display: block; margin-top: .25rem; }
+  .company-mvv-block { padding: 1.8rem 0 2.1rem; }
+  .company-values li, .company-business-list li { grid-template-columns: 2rem minmax(0,1fr); gap: .8rem; }
+  .company-message-head { gap: .8rem; }
+  .company-message-mark { width: 3.5rem; font-size: 5rem; height: 2.7rem; }
+  .company-message + .company-message { margin-top: 1.5rem; padding-top: 2rem; }
+  .company-information-list > div { grid-template-columns: minmax(0,1fr); gap: .3rem; padding: .85rem .1rem; }
+  .company-message-signature { font-size: .85rem; }
+}
+@media (prefers-reduced-motion: reduce) { .company-page * { scroll-behavior: auto; } }
