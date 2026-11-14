@@ -108,3 +108,50 @@ DMARCはWebアプリではなくatlib.jpの公開DNS/メール認証の責務。
 4. HTTP GateがPASSしてから、既存Revisionを戻し先として記録したうえでStagingのみ新Revisionを100%へ切替。PC/スマホの画面、横スクロール、メニュー、スライダー、Web Font、CSPコンソール違反、Turnstileを正規Staging URLで確認する。
 5. 明示的に合成メール1通の送信を許可された場合だけフォームE2Eを実施し、表示名、envelope、Reply-To、Googleグループ配送、SPF/DKIM/DMARCを確認。失敗時は自動再試行しない。Gate失敗時はStagingのトラフィックを記録済み旧Revisionへ戻し、原因と証跡を記録する。
 6. Production切替・DNS・Workspace・既存WordPress・Secret/IAM変更は引き続きNO-GO。Staging PASS後に別途Production実配信経路・全旧URL保全・rollback・DMARC集計先のGo/No-Goを提示する。
+
+## PR #60 zero-traffic Staging validation (2026-11-14)
+
+- Canonical PR HEAD: `8c82af40354be3d05b65255603c70342cb107269`.
+  Validation used the independent worktree
+  `C:\atlib\worktree-site-pr60-20261114`; the existing PR #59 Staging
+  worktree was not modified.
+- `npm ci`, TypeScript build, and `npm run test:contact-api`: 26 PASS / 0
+  FAIL. No external mail or form submission was performed.
+- Pre-deployment Staging configuration: ingress `all`, min scale `0`, max
+  scale `2`, concurrency `10`, runtime service account
+  `corporate-site-staging@atlib-corporate-site.iam.gserviceaccount.com`.
+  Environment variable names and the three existing Secret Manager references
+  were recorded without reading secret values or SMTP credential values.
+  `SITE_PUBLIC_MODE` was absent and remains unset.
+- Cloud Build `1eda9cca-d5a0-42ef-93c9-bbc96337d380`: SUCCESS. Unique image
+  tag `pr60-8c82af-20261114-01`; digest
+  `sha256:6678a23e4ad306f7d58c73da5b4de7f105c2b1b767239eb29826dcda50ebe55e`.
+- New revision `corporate-site-staging-00008-lok` was deployed with
+  `--no-traffic --tag=pr60-8c82af`. Tagged URL:
+  `https://pr60-8c82af---corporate-site-staging-y6htingfbq-an.a.run.app`.
+- Traffic after deployment: existing revision
+  `corporate-site-staging-00007-g7h` remains 100%; new revision
+  `corporate-site-staging-00008-lok` is tag-addressable at 0%.
+- Post-deployment configuration comparison found no change to ingress,
+  scaling, concurrency, runtime service account, environment-variable names,
+  or Secret references. The template image is the only intended change.
+- Tagged-URL HTTP checks returned 200 for `/healthz/`, `/`, `/company/`,
+  `/services/`, `/works/`, `/contact/`, `/robots.txt`, `/sitemap.xml`, and
+  `/llms.txt`.
+- The five corporate HTML responses include the restrictive CSP without
+  `unsafe-inline` or `unsafe-eval`, `X-Frame-Options: SAMEORIGIN`,
+  `X-Content-Type-Options: nosniff`, the canonical Referrer/Permissions
+  policies, `X-Robots-Tag: noindex, nofollow`, and HTML
+  `<meta name="robots" content="noindex,nofollow">`. Canonical and OGP values
+  point to `https://www.atlib.jp`; the home Organization/WebSite JSON-LD parsed
+  successfully. HSTS is intentionally absent on the tagged `run.app` host and
+  remains gated to approved public hosts.
+- `robots.txt` references the canonical sitemap; `sitemap.xml` contains all
+  five corporate URLs; `llms.txt` references the canonical public origin.
+- Representative existing paths `/business-web/`, `/recruit/`,
+  `/infravision-partner/`, `/web-development-partner/`, and
+  `/joshisu-kaizen/` returned 200 and their response-body SHA-256 hashes matched
+  the current 100% Staging revision.
+- No ERROR log entries were present for the new revision at validation time.
+  Production `corporate-site`, DNS, Workspace, WordPress/Apache, IAM, Secrets,
+  and existing revisions were not changed.
