@@ -76,6 +76,13 @@ DMARCはWebアプリではなくatlib.jpの公開DNS/メール認証の責務。
 - SPFに許可されている`spf.bmv.jp`の実送信用途・正規性、これら3ルールと実際の送信元のSPF/DKIM alignment、送信先でのAuthentication-Resultsは未確認。
 - 次の人手確認: 3ルールの詳細（送信者制約、許可IP、TLS・SMTP認証）、実送信した3経路のGmail「メッセージのソースを表示」、DMARC集計先アドレスまたはレポート管理ツールの選定。**実メールの宛先と本文・個人情報、Secretは証跡として共有しない**。
 
+**同日追補：問い合わせ通知1通のGmail原本認証（read-only）**
+
+- 利用者が提示した2026-11-14 00:53 JST受信済みメールの原本ヘッダーを確認。`system@atlib.jp` をenvelope/FromとしてGoogle SMTP Relayから送信され、Googleグループ経由で転送された経路である。
+- 元の認証結果は **SPF PASS、DKIM PASS（`d=atlib.jp`、selector `google`）、DMARC PASS（header.from=`atlib.jp`）**。Googleグループ転送後の最終受信側でもPASSを確認。Relay受け入れの経路ではTLS 1.3使用。
+- これで**当該1経路・当該1通**のalignmentと到達が確認できたが、SMTP Relay残りの送信経路、`spf.bmv.jp`の用途およびProduction新配信元の認証は未検証。既存DMARC `p=none` の強制力は上がらない。
+- 当該メールの表示名は旧表示（アドレスのみ）。`atLIB株式会社`という新表示名の本当のメールでの確認は、後続のStagingデプロイ後に合成メッセージ1通を承認の上で送信して行う。原本のMessage-ID・受信先・本文・生ヘッダーはGitに記録しない。
+
 アプリ固有対策は既存のものを保持：Turnstileのserver-side siteverify（hostname/action検証）、Origin完全一致、入力検証、honeypot、最小ログ、no-store、IP rate limit。Cloud Run複数インスタンス間でin-memory rate limitは共有されないため、Cloud Armorのedge rate limit等はProduction Gateで判定する。
 
 ## 本番公開前 Gate（未実施の操作はPASSとしない）
@@ -92,3 +99,12 @@ DMARCはWebアプリではなくatlib.jpの公開DNS/メール認証の責務。
 - `npm run test:contact-api` → 26 PASS / 0 FAIL（TypeScript buildを含む）。
 - 追加のHTTP起動テストは合成SMTP環境で `/`、`/contact/`、Stagingホスト、偽のforwarded Host、301、採用ホストを検証。外部Turnstile API・SMTP送信なし。
 - 実GCP・実SMTP・Cloudflare・Search Console・公開DNSへの接続検証はここでは未実施。Production Go/No-Go判定に流用しない。
+
+## 次回Staging検証順序（PR #60 HEADの適用）
+
+1. GitHub Draft PR #60の最新HEAD、現Staging Revision/100%配分、コンテナImage、環境変数の**キーとSecret参照先のみ**、SA、min/max/concurrency、Ingressをread-only確認する。環境変数値やSecret内容は証跡に貼らない。
+2. PR #60 HEADの独立ImageをCloud Buildで作成する。既存Imageタグを上書きしない。Staging `corporate-site-staging`だけに新Revisionを**0%トラフィックのタグ付き**でデプロイし、現100%Revisionを維持する。`SITE_PUBLIC_MODE=public`をセットしない。
+3. タグ付きURLで`/healthz/`、新5ページと代表旧LP・採用URLのHTTP/SEO/セキュリティヘッダー・`noindex`・プレビュー表示を確認する。ただしタグURLはTurnstile/Origin許可ホストと異なるため、フォームE2EのPASS判定には使わない。
+4. HTTP GateがPASSしてから、既存Revisionを戻し先として記録したうえでStagingのみ新Revisionを100%へ切替。PC/スマホの画面、横スクロール、メニュー、スライダー、Web Font、CSPコンソール違反、Turnstileを正規Staging URLで確認する。
+5. 明示的に合成メール1通の送信を許可された場合だけフォームE2Eを実施し、表示名、envelope、Reply-To、Googleグループ配送、SPF/DKIM/DMARCを確認。失敗時は自動再試行しない。Gate失敗時はStagingのトラフィックを記録済み旧Revisionへ戻し、原因と証跡を記録する。
+6. Production切替・DNS・Workspace・既存WordPress・Secret/IAM変更は引き続きNO-GO。Staging PASS後に別途Production実配信経路・全旧URL保全・rollback・DMARC集計先のGo/No-Goを提示する。
