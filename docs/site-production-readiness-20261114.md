@@ -813,3 +813,83 @@ Required Owner decisions:
 
 Phase 1 made no Production, DNS, LB, certificate, IAM, Secret, SMTP,
 WordPress/Apache, Cloudflare, form, traffic, or merge change.
+
+## Owner scope correction: retire WordPress first (2026-11-15)
+
+The Owner confirmed the existing LPs should remain as currently published;
+any LP redesign or copy changes are a later, independent release. The primary
+objective of this release is to migrate **both the corporate and recruitment
+sites** away from the current GCE/Apache/WordPress delivery path so WordPress
+can be retired safely. This direction supersedes the Phase 1 recommendation to
+leave `recruit.atlib.jp` and `www.recruit.atlib.jp` on the VM as the intended
+end state. It does **not** authorize any Production, certificate, DNS, or
+infrastructure mutation by itself.
+
+### Revised migration priorities and preserved boundaries
+
+1. **Corporate and recruitment delivery:** target `atlib.jp`, `www.atlib.jp`,
+   `recruit.atlib.jp`, and `www.recruit.atlib.jp`. Confirm existing apex/www
+   and recruit-host canonical/redirect behavior before selecting the exact
+   Certificate Manager host set and any staged DNS cutover order. The initial
+   two-host LB/certificate proposal in Phase 1 is not the approved final
+   topology for WordPress retirement.
+2. **Recruit release regression:** import the existing Production-preservation
+   artifacts from Draft PR #56, including the official note banner markup and
+   `atlib_note_banner_final.png`, into this release candidate. Preserve the
+   independent `recruit` hostname routing and entry form behavior.
+3. **Legacy LPs and static policy pages:** retain the currently published
+   content and existing URLs, forms, external links and referenced assets.
+   They are served as static files by Apache, not presumed to be WordPress
+   content merely because they share the VM and vhost. Exact file/asset parity
+   or an equivalent approved routing arrangement is required at cutover, but
+   LP content improvements are **not** part of the WordPress exit gate.
+4. **WordPress-specific surfaces:** inventory only the externally required
+   WordPress pages, media links, feeds and API references; keep approved public
+   URLs working through explicit retention or redirects. Do not expose admin
+   endpoints in the new public application. Stop or remove WordPress only
+   after independent post-cutover acceptance and the rollback observation
+   period; VM retirement is a separate decision.
+5. **Production release gates remain:** dedicated runtime identity and
+   resource-scoped Secrets, Production Turnstile and mail, certificate/LB,
+   browser/SEO/form/asset acceptance, explicit Production Go, and reversible
+   DNS cutover. No new LP redesign, broad WordPress redirect policy, automatic
+   DNS change, or premature rollback teardown is implied.
+
+The immediate work is to complete the static content/recruit preservation
+matrix and test the four-host candidate. Certificate authorization, LB scope,
+and release sequencing must be re-read against this corrected objective
+before separately approved GCP/DNS changes. The evidence from Phase 1 remains
+valid as observations; its earlier two-host-only recommendation is superseded.
+
+### Content reconciliation progress (2026-11-15, local candidate only)
+
+The current publicly served `https://www.atlib.jp` static resources were
+downloaded via HTTPS without GCE/Apache/WordPress writes. Their observed
+response sizes match the earlier VM/IAP Phase 1 inventory. Content was copied
+to the **unreleased** PR #60 candidate as follows:
+
+| Public path | Source decision / action | Live SHA-256 |
+| --- | --- | --- |
+| `/business-web/` | Restore current published HTML; retain newer Business Web design in Git history for a separate approved release | `4c6f80102bd8d2b84b4edaef4153626c116c94cd0fedb32c7fcfa557c6b72e1e` |
+| `/joshisu-kaizen/` | Restore current published HTML; do not substitute Git-only revisions | `f17a9bb7e05c4bf64f365dba79cb4bdee33e21e2e87d0332393944c257b138d8` |
+| `/policy/` | Restore current published HTML; retain the URL without an unapproved redirect | `e8529558baf52815d4dc9099f343eb277763901bb383df346df59182252be3f6` |
+| `/business-web/self-check/self-check.js` | Restore the current published diagnostic JavaScript; its HTML and CSS already match | `633b0359750ea7d4ef1ceee6fd9a9efbeb9949327f1b55afa032aed797857a8b` |
+| `/recruit/` | Reuse the exact official-note markup and PNG preserved in Draft PR #56; normalize HTML CRLF to repository LF | Live HTML `81ebc3a178110c7a02422cd01602d95b8131439d1a5e8c6f8ae6e1f2e47fc346`; image `822fc37e69bb9df2e0555308bf1c9b0f1436e611c42d9007de0f598829ab99f8` |
+| `/customer-harassment-policy/` | No content change; live and Git HTML differ only by line endings | `4b9623ee605ab5cb4223186492f2975be4f97f47f9a21ebdd77e9f9337d33966` |
+| `/infravision-partner/`, `/web-development-partner/`, `/privacy-policy/` | No content change; direct public downloads confirmed equal after CRLF normalization | Existing Phase 1 HTML comparisons remain applicable |
+| `/thanks.html` | No change; live HTML and candidate byte-identical | `029c90eadf5eda6a6b582503858b0dca9836dc921d3bd98ac35bb8914df10871` |
+
+The 21 directly referenced Business Web, Joshisu, and recruitment image assets
+checked against current HTTPS responses all matched their repository copies by
+SHA-256. The diagnostic HTML and CSS also matched exactly. These checks do
+not claim full WordPress media/link inventory completion. They do establish
+that the named LP/policy/recruit HTML and their inspected static dependencies
+need no unapproved visual redesign for the WordPress exit.
+
+Local TypeScript build and the 26 existing Node tests passed after adding
+recruit official-note and legacy-route regression assertions; no form POST,
+real email, Production change, merge, image build or Staging deploy was made.
+Because static content changes in this candidate, the previously accepted
+Staging image digest and Revision must **not** be promoted as the final
+release candidate. A fresh immutable build, Staging checks, four-host LB
+acceptance and separate Production Go are still required.

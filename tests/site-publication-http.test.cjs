@@ -103,15 +103,36 @@ test('HTTP preview / publication / recruit routing, with no mail sent', async ()
     assert.equal(slash.headers.get('location'), '/services/?utm_source=test');
 
     const recruit = await request('/', 'recruit.atlib.jp');
+    const recruitHtml = await recruit.text();
     assert.equal(recruit.status, 200);
     assert.equal(recruit.headers.get('content-security-policy'), null);
     assert.equal(recruit.headers.get('x-frame-options'), null);
-    assert.doesNotMatch(await recruit.text(), /ITで、企業に自由を。<\/title>/u);
+    assert.doesNotMatch(recruitHtml, /ITで、企業に自由を。<\/title>/u);
+    assert.match(recruitHtml, /https:\/\/note\.com\/atlib/u);
+    assert.match(recruitHtml, /images\/workstyle\/atlib_note_banner_final\.png/u);
 
-    const legacyLp = await request('/web-development-partner/', 'www.atlib.jp');
-    assert.equal(legacyLp.status, 200);
-    assert.equal(legacyLp.headers.get('content-security-policy'), null);
-    assert.equal(legacyLp.headers.get('x-frame-options'), null);
+    for (const host of ['recruit.atlib.jp', 'www.recruit.atlib.jp']) {
+      const noteBanner = await request('/images/workstyle/atlib_note_banner_final.png', host);
+      assert.equal(noteBanner.status, 200, `recruit note banner missing on ${host}`);
+      assert.match(noteBanner.headers.get('content-type'), /^image\/png/u);
+    }
+
+    const recruitViaCorporate = await request('/recruit/', 'www.atlib.jp');
+    assert.equal(recruitViaCorporate.status, 200);
+    assert.match(await recruitViaCorporate.text(), /https:\/\/note\.com\/atlib/u);
+
+    for (const legacyPath of [
+      '/business-web/', '/business-web/self-check/',
+      '/business-web/self-check/self-check.js', '/joshisu-kaizen/',
+      '/web-development-partner/', '/infravision-partner/',
+      '/privacy-policy/', '/customer-harassment-policy/', '/policy/',
+      '/thanks.html',
+    ]) {
+      const legacy = await request(legacyPath, 'www.atlib.jp');
+      assert.equal(legacy.status, 200, `existing public path must survive: ${legacyPath}`);
+      assert.equal(legacy.headers.get('content-security-policy'), null);
+      assert.equal(legacy.headers.get('x-frame-options'), null);
+    }
   } finally {
     child.kill('SIGTERM');
     await new Promise((resolve) => child.once('exit', resolve));
