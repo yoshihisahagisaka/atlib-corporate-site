@@ -574,3 +574,242 @@ Remain **NO-GO**. Staging acceptance is complete, but Production release must
 not start until the seven blockers above have explicit evidence and approval.
 No Production, DNS, LB, Apache/WordPress, IAM/Secret, Workspace, Cloudflare,
 form, SMTP, or merge operation was performed by this preflight.
+
+## Production NO-GO resolution Phase 1 (read-only, 2026-11-15)
+
+This phase converts the final-preflight blockers into ordered, independently
+approvable work units. It does not change the accepted implementation or any
+Production resource.
+
+### 1. NO-GO resolution table
+
+| Gate | Confirmed cause | Resolution evidence required | Owner decision | State |
+| --- | --- | --- | --- | --- |
+| Content preservation | Candidate is not byte-identical to several files currently served by Apache; prior Staging comparisons only proved revision-to-revision stability | Approved URL matrix, exact files/hashes, redirect/retirement map, asset crawl | Select the authoritative version for each ambiguous path | Blocked |
+| HTTPS delivery | Backend/NEG and reserved IP exist, but HTTPS URL map, proxies and forwarding rules do not | Complete read-back of an LB assembled without changing web A/AAAA records | Confirm initial host scope is apex + `www`; recruitment remains on VM | Blocked |
+| TLS | Compute managed certificates cannot see domains because DNS still resolves to the VM; multi-SAN certificate also includes recruitment hosts that are not part of the initial cutover | Certificate Manager certificate `ACTIVE` and mapped to the HTTPS proxy before web DNS cutover | Approve API/resources and DNS-authorization CNAME changes | Blocked |
+| Production app | Production uses an old image, default Compute SA with project Editor, legacy SMTP configuration, and lacks contact/public variables | New 0% revision with exact accepted digest and approved configuration diff | Approve SA, Secret, Turnstile, scaling and diagnostic policy | Blocked |
+| CI | Repository has no `.github/workflows` directory; PR `statusCheckRollup` is empty | Either an explicit release waiver tied to local/Cloud Build evidence or an approved required check | Waive for this release or introduce CI | Blocked on decision |
+| Abuse control | App limiter exists, but it is per-instance/in-memory; no Cloud Armor policy exists | Recorded initial risk acceptance or previewed Cloud Armor policy with observed false-positive rate | Select initial posture | Blocked on decision |
+| Production acceptance | Staging is accepted, but release-mode responses and form delivery have not been exercised through the intended LB/host | Pre-DNS LB Host/SNI test, then approved cutover checks and one synthetic mail | Approve acceptance window and rollback authority | Blocked |
+
+### 2. URL preservation difference analysis
+
+The VM files were inspected read-only through IAP. The candidate is the
+accepted repository/image content. A byte difference is not treated as a
+regression unless the Canonical evidence establishes which side is intended.
+
+| URL/path | Current source | Candidate source | Difference/cause | Classification and required action |
+| --- | --- | --- | --- | --- |
+| `/business-web/` | VM file: 19,032 bytes, SHA-256 `4c6f8010...`, modified 2026-10-03 UTC | Repository: 49,625 bytes, SHA-256 `b591...` | Git has eight Business Web commits after the deployed VM timestamp, including rebrand, visual refresh, canonical and UTM work. Candidate adds new copy/SEO/JSON-LD and changes visual references | Appears intentional but is not evidenced as Owner-approved Production content. Owner must approve the newer LP and its self-check/CTA dependencies, or import the live file. Not classified as a regression yet |
+| `/joshisu-kaizen/` | VM file: 66,998 bytes, SHA-256 `f17a9bb7...`, modified 2026-09-05 UTC | Repository: 64,844 bytes, SHA-256 `929a...` | The repository file first appears in commit `74dfd604` on 2026-09-09; the live file predates it and has a materially different document/analytics/link set | Provenance gap. Neither side can be declared canonical from existing evidence. Owner must choose after visual/functional comparison; preserve the chosen complete directory |
+| `/recruit/` on `www` | VM file: 14,295 bytes, SHA-256 `81ebc3a1...`; runbook records 2026-09-29 note release | Repository: 13,242 bytes, SHA-256 `d658...` | Candidate lacks the Canonical `https://note.com/atlib` banner markup and `images/workstyle/atlib_note_banner_final.png` reference added directly to Production | Confirmed regression if `www.atlib.jp/recruit/` moves to Cloud Run unchanged. Import the two Canonical release artifacts and test the directory before corporate DNS cutover. Recruitment hosts themselves remain on VM in the initial cutover |
+| `/infravision-partner/` | VM/Apache static directory | Candidate static directory | HTML SHA-256 exact match | Fit; still run referenced-asset and external lead/TimeRex smoke checks before cutover |
+| `/web-development-partner/` | VM/Apache static directory | Candidate static directory | HTML SHA-256 exact match | Fit; still run referenced-asset and external integration smoke checks |
+| `/privacy-policy/` | VM static file, SHA-256 `0047a24c...` | Candidate static file | Exact match | Fit; retain as canonical policy URL |
+| `/customer-harassment-policy/` | VM 6,198 bytes | Candidate 6,318 bytes | Candidate history includes policy creation plus favicon/cache-bust changes; full document bytes differ | Likely intentional repository follow-up, but Owner approval or exact semantic diff is required before release |
+| `/policy/` | VM 9,860 bytes, old corporate template | Candidate 15,832 bytes, old corporate template with canonical pointing to `/privacy-policy/` | Material template/analytics difference. Existing decision preserves access and canonical; it does not authorize a redirect | Preserve access and canonical behavior. Owner must approve candidate content or require the live file; do not add a 301 without a new decision |
+| `/thanks.html` | VM 12,768 bytes | Candidate 13,113 bytes | Legacy form success page differs; it is not the new contact API success view | Inventory which live flow still links here. Preserve the live version until that dependency is disproved or explicitly retired |
+| `/wp-json/`, `/feed/` | WordPress on VM | Candidate returns 404 | Public WordPress interfaces disappear at `www` cutover | Use access-log/Search Console evidence, then approve redirect/410/retention per URL. No automatic blanket redirect |
+| `/wp-login.php`, `/wp-admin/` | WordPress administrative endpoints on VM | Candidate returns 404 | Expected with WordPress retirement, but operator workflow changes | Do not expose them from Cloud Run. Confirm administrative retirement and retain VM/IAP rollback access during observation |
+| `/wp-content/*`, `/wp-includes/*`, uploaded images | WordPress/VM files | Only assets committed under `public/` are available | Complete referenced-asset parity has not been proven | Crawl current HTML, sitemap, search/index and logs; copy only approved public assets or add explicit redirects. Missing asset report must be zero for retained pages |
+
+Content gate execution order:
+
+1. Owner selects the authoritative version for Business Web, Joshisu Kaizen,
+   customer-harassment policy, `/policy/`, and `/thanks.html`.
+2. Import the confirmed recruitment note artifacts into the candidate; do not
+   alter recruitment-host DNS.
+3. Produce a complete route inventory from Apache access logs, WordPress
+   sitemap/API, repository sitemap, and HTML asset references. Classify each
+   as retain, redirect, 410, or private/admin retirement.
+4. Build a new immutable candidate only if the approved inventory requires
+   source changes. Re-run tests, live-to-candidate hashes, asset crawl, LP
+   forms/external integrations, and Staging acceptance. Any unexplained
+   content or asset difference stops the gate.
+
+### 3. LB and certificate construction order
+
+Current reusable resources:
+
+- `corporate-site-ip` (`136.69.71.191`, RESERVED and unused).
+- `corporate-site-bes` (global `EXTERNAL_MANAGED`, HTTP, CDN enabled).
+- `corporate-site-neg` (serverless NEG in `asia-northeast1`, Cloud Run
+  service `corporate-site`).
+- `corporate-site-http-redirect` URL map (HTTPS redirect only).
+
+Missing or unusable resources:
+
+- No global forwarding rules, target HTTP proxy, or target HTTPS proxy.
+- No HTTPS application URL map pointing to `corporate-site-bes`.
+- Existing Compute managed certificates are failed/provisioning and are not
+  suitable release evidence.
+- Certificate Manager API/resources are absent.
+
+`FAILED_NOT_VISIBLE` is explained by the observed configuration: public A
+records resolve to VM IP `34.146.160.232`, while there is no forwarding rule
+on reserved LB IP `136.69.71.191`. Google-managed Compute certificates require
+the relevant public A/AAAA records to point only to the load balancer. This is
+a configuration consequence, not an application failure.
+
+Recommended ordered build, each step separately approved and read back:
+
+1. Confirm initial certificate/host scope: `atlib.jp` and `www.atlib.jp` only.
+   Keep `recruit.atlib.jp` and `www.recruit.atlib.jp` on the VM. Do not reuse
+   the failed four-host certificate as release evidence.
+2. Enable Certificate Manager and create DNS authorization resource(s). Read
+   back the generated validation CNAME name/target. This does not alter web A
+   or AAAA routing, but resource creation requires approval.
+3. In a separate Squarespace DNS change, add only the generated
+   DNS-authorization CNAME record(s). This is mandatory for the recommended
+   pre-provision path and needs separate approval. It does not move HTTP(S)
+   traffic.
+4. Create a Google-managed Certificate Manager certificate for the approved
+   host scope, then wait for `ACTIVE`. Create its certificate map and map
+   entries. STOP on any authorization/provisioning error; do not fall back to
+   a cutover-first certificate.
+5. Create an HTTPS URL map with default backend `corporate-site-bes`. Add only
+   approved host/path rules; recruitment hosts are excluded from the initial
+   scope.
+6. Create the target HTTPS proxy using the ACTIVE certificate map and HTTPS
+   URL map. Create the target HTTP proxy using the existing redirect map.
+7. Create global port 443 and port 80 forwarding rules on reserved IP
+   `136.69.71.191`. Web A/AAAA records still remain unchanged.
+8. Validate TLS/SNI and application routing with explicit client-side address
+   overrides. Only after all application gates pass may a later change request
+   alter the apex A record. There is currently no AAAA record; do not add one
+   implicitly.
+
+Steps 2, 4-7 are GCP mutations; step 3 is a DNS mutation. None is authorized
+by Phase 1. Everything through design, name availability checks, and command
+review can be completed without changing web A/AAAA. Certificate Manager DNS
+authorization is appropriate because Google documents that it can provision
+the certificate before the target proxy or web traffic cutover. Official
+references:
+
+- https://cloud.google.com/certificate-manager/docs/domain-authorization
+- https://cloud.google.com/load-balancing/docs/ssl-certificates/google-managed-certs
+- https://cloud.google.com/load-balancing/docs/negs/serverless-neg-concepts
+
+### 4. Production application change plan
+
+The Production 0% deployment must be one reviewed transaction, followed by an
+exact read-back. It must not clone the Staging hostname or Staging Turnstile
+secret.
+
+| Setting | Planned Production value/state | Order and stop condition |
+| --- | --- | --- |
+| Runtime identity | New user-managed `corporate-site-production@atlib-corporate-site.iam.gserviceaccount.com` | Create first; grant Secret accessor only on the three exact required Secrets. STOP if project-level roles appear. The current default Compute SA has project Editor and must not be the new revision identity |
+| SMTP/HMAC Secrets | Reuse `corporate-site-smtp-password` and `corporate-site-form-hmac-secret` by reference | Never read values. Verify resource-level bindings and pinned/approved versions before deploy |
+| Turnstile Secret | New Production-only Secret, separate from `corporate-site-staging-turnstile-secret` | Owner creates/approves Production widget for `www.atlib.jp`; add Secret version out of band; STOP if hostname/action cannot be constrained |
+| Image | Accepted immutable digest after content reconciliation | Deploy to `corporate-site` with 0% traffic and a unique tag; STOP on digest mismatch |
+| SMTP | `smtp-relay.gmail.com:587`, existing authenticated Workspace account, From `system@atlib.jp` | Match the Staging-proven relay method; sender display remains code constant `atLIB株式会社`; Reply-To remains submitter. No mail during configuration gate |
+| Origin | `SITE_CONTACT_ALLOWED_ORIGINS=https://www.atlib.jp` | Apex is redirect-only; do not allow wildcard or `run.app` Production origins |
+| Turnstile hostname/site key | `www.atlib.jp` and Production widget site key | Never reuse Staging hostname list/site key implicitly |
+| Diagnostics | `SITE_CONTACT_DIAGNOSTIC_LOGS` absent/false initially | Existing diagnostic events were approved as Staging-only. A Production enablement requires a separate logging decision |
+| Public mode | Absent for initial 0% revision | Set `SITE_PUBLIC_MODE=public` only in the later release-candidate revision after LB Host/SNI validation is authorized; its presence creates a new revision |
+| Ingress | `internal-and-cloud-load-balancing` | Preserve; STOP if changed |
+| Scaling/concurrency | Proposed initial min 0, max 2, concurrency 10 | Mirrors the accepted Staging envelope and limits cost, but Owner must approve capacity risk. Do not inherit current Production max 20/concurrency 80 silently |
+| Invocation | Existing LB-compatible Cloud Run invocation policy | Read back IAM; do not modify `allUsers` or other bindings as a side effect of deployment |
+
+Required sequence: create identity -> grant three resource-level Secret access
+bindings -> create/populate Production Turnstile Secret -> prepare flags/YAML ->
+deploy immutable image at 0% with public mode absent -> compare every setting
+to the approved manifest -> verify tag/non-public health where ingress allows ->
+build and validate LB -> create explicit public-mode release revision -> validate
+through LB Host/SNI override -> only then request DNS cutover approval.
+
+### 5. CI and rate-limit decision
+
+`statusCheckRollup=[]` does not mean CI passed. There is no
+`.github/workflows` directory, so no GitHub Actions workflow ran, and no check
+is available to configure as required. Cloud Build SUCCESS, local `npm ci`,
+TypeScript build, and 26-test evidence are separate and are not GitHub status
+checks. GitHub required checks only gate a merge when a branch/ruleset requires
+named checks. Official reference:
+https://docs.github.com/en/pull-requests/reference/status-checks.
+
+Owner choice:
+
+- **Recommended for this release:** record a one-release CI waiver because
+  the established process used reproducible local tests plus an immutable
+  Cloud Build. Re-run both at the final content commit and require human
+  evidence review before merge. Add CI later as an independent improvement.
+- Alternative: approve a new minimal GitHub Actions workflow (`npm ci`, build,
+  test) and a branch/ruleset required check. This is a new operational
+  mechanism and must not be introduced as an unreviewed release side effect.
+
+Current contact limit is five POST attempts per source IP per 15 minutes. It
+runs before payload and Turnstile validation, stores counters in each process,
+and resets with instance restart/scale-down. It is therefore useful for basic
+abuse but not a distributed/strong global limit. Shared egress IPs can cause
+false 429s; multiple instances can allow more than five aggregate attempts.
+The proxy key deliberately uses the closest forwarded address rather than a
+caller-controlled left-most value.
+
+Initial abuse-control choices:
+
+- **Recommended minimum launch posture:** Turnstile server verification plus
+  the current application limit, max 2 instances, 429/Turnstile/SMTP/error
+  monitoring, and an explicit Owner risk acceptance. Recovery from an
+  erroneous application block is to wait for the 15-minute window or route
+  back to the known revision; do not disable Turnstile.
+- If Cloud Armor is required before launch, first create a rule in preview
+  mode scoped only to `POST /api/contact`, use `throttle` rather than a
+  rate-based ban, key by verified client IP semantics, observe representative
+  traffic, and only then separately approve enforcement. A broad IP ban risks
+  blocking offices/carriers sharing NAT. Recovery is to return the rule to
+  preview or detach the policy, not to change the app/Turnstile. Google
+  recommends previewing rate rules before enforcement:
+  https://cloud.google.com/armor/docs/rate-limiting-overview and
+  https://cloud.google.com/armor/docs/best-practices.
+
+### 6. Owner decisions and gate stop conditions
+
+Required Owner decisions:
+
+1. Authoritative versions for the five ambiguous content paths and treatment
+   of WordPress/feed/assets; approve exact retain/redirect/410 matrix.
+2. Confirm initial DNS/LB scope excludes both recruitment hosts and keeps them
+   on `34.146.160.232`.
+3. Approve Certificate Manager enablement/resources and, separately, the
+   generated DNS-authorization CNAME changes.
+4. Approve Production Turnstile widget/Secret, dedicated SA name and exact
+   resource-level grants.
+5. Approve min 0/max 2/concurrency 10 or provide a capacity requirement.
+6. Approve diagnostics disabled, GitHub CI waiver, and initial no-Cloud-Armor
+   risk acceptance, or authorize their alternatives.
+7. Approve pre-DNS Host/SNI/browser/form acceptance and the later DNS window.
+
+| Gate | Execute only when | STOP when |
+| --- | --- | --- |
+| Content reconciliation | Decisions 1-2 recorded | Any unknown live URL, broken referenced asset, altered LP integration, hash mismatch not explicitly approved, or failed Staging test |
+| Identity/Secret preparation | Decision 4 recorded | Broad/project role, Secret value exposure, Staging Secret reuse, or missing exact Secret binding |
+| Production 0% revision | Final image and settings manifest approved | Traffic changes, digest mismatch, unexpected setting/IAM diff, readiness failure |
+| Certificate preparation | Decision 3 and generated CNAME change approved | Certificate not ACTIVE, web A/AAAA changed, recruitment host included unexpectedly |
+| LB assembly | ACTIVE certificate and approved URL map | Existing backend/NEG changed unexpectedly, forwarding rule uses wrong IP, recruitment route captured |
+| Pre-DNS acceptance | 0% revision promoted only under a separate no-public-impact approval and LB complete | TLS/Host/SEO/security/content/asset/browser/Turnstile failure; no automatic mail retry |
+| DNS cutover | All evidence PASS and explicit Production Go | Any unresolved blocker or rollback path unavailable |
+
+### 7. Next smallest executable work units
+
+1. **Owner decision packet (no infrastructure change):** approve the content
+   matrix, initial host scope, CI waiver, scaling, diagnostics, and initial
+   rate-limit posture. This is the immediate next unit and blocks all others.
+2. **Content-only reconciliation PR/Staging cycle:** after decision 1, import
+   the recruitment note release and only the approved versions of ambiguous
+   pages/assets; build a new immutable image and repeat Staging gates. No
+   Production changes.
+3. **Certificate authorization preparation:** after decision 3, enable/create
+   Certificate Manager DNS authorization and report the generated CNAME;
+   STOP before DNS. The CNAME addition is a separate approved unit.
+4. **Production identity and Secret shell:** after decision 4, create the
+   dedicated SA, exact resource-level bindings, Production Turnstile Secret
+   container/version, and read back; STOP before Cloud Run deployment.
+5. **Production 0% deployment:** only after units 1-4 and final image approval;
+   deploy/read back without traffic, public mode, form POST, or email.
+6. **LB assembly and pre-DNS acceptance**, followed by a separately approved
+   **DNS cutover**, remain later gates.
+
+Phase 1 made no Production, DNS, LB, certificate, IAM, Secret, SMTP,
+WordPress/Apache, Cloudflare, form, traffic, or merge change.
