@@ -518,9 +518,6 @@ details p{color:var(--muted);margin:14px 0 0}
 .form-status{margin-top:14px;padding:14px 16px;border-radius:12px;font-weight:700;font-size:14px}
 .form-status.ok{background:var(--mint);color:var(--green)}
 .form-status.error{background:#FDECEA;color:#B23B2E}
-.apply-cta-col{display:flex;flex-direction:column;justify-content:center;gap:14px}
-.apply-cta-lead{margin:0;font-weight:700;color:var(--navy);line-height:1.7}
-.apply-cta-col .form-submit{display:inline-flex;align-items:center;justify-content:center;text-align:center}
 
 /* COMPANY */
 .company-block{background:#F7FAFB;border-top:1px solid var(--line)}
@@ -1075,18 +1072,45 @@ details p{color:var(--muted);margin:14px 0 0}
         <div>
           <h3>無料診断でわかること</h3>
           <ul class="apply-list">
-            <li>会社の未来像と、いまの情シスの働き方のGap</li>
-            <li>なくす・自動化する・標準化する・任せる・社内に残すの切り分け仮説</li>
+            <li>なくせそうな業務・二重作業の候補</li>
+            <li>自動化・標準化できる定型業務の当たり</li>
             <li>属人化・退職リスクが高い業務の洗い出し</li>
-            <li>「創出した時間」をDX・AI・セキュリティ・IT戦略へどう移すか</li>
-            <li>次の90日で検討すべきこと</li>
+            <li>社内に残す業務／BPOに向く業務の切り分け</li>
+            <li>「どこから、どう変えるか」の初期仮説</li>
           </ul>
-          <p class="small" style="margin-top:18px">担当者との60分の対話で、御社にとって最適な情シス運営体制の仮説をご提示します（この場では診断結果は表示されません）。</p>
+          <p class="small" style="margin-top:18px">下記フォーム送信後、ご入力のメールアドレス宛に診断フォームのURLをお送りします。</p>
         </div>
-        <div class="apply-cta-col">
-          <p class="apply-cta-lead">まずは2〜3分の事前アンケートにご回答ください。<br>内容を確認のうえ、担当者より日程調整のご連絡をします。</p>
-          <a class="cta form-submit js-intake-cta" href="https://sales.atlib.jp/kaizen-assessment-intake.html">無料で情シスKAIZEN診断を申し込む</a>
-          <p class="form-note">送信いただいた内容は、診断のご案内とご連絡のみに利用します。</p>
+        <div>
+          <form id="apply-form" novalidate>
+            <div class="form-row">
+              <label for="f-company">会社名<span class="req">必須</span></label>
+              <input type="text" id="f-company" name="company" required autocomplete="organization">
+            </div>
+            <div class="form-row">
+              <label for="f-name">お名前<span class="req">必須</span></label>
+              <input type="text" id="f-name" name="name" required autocomplete="name">
+            </div>
+            <div class="form-row">
+              <label for="f-email">メールアドレス<span class="req">必須</span></label>
+              <input type="email" id="f-email" name="email" required autocomplete="email">
+            </div>
+            <div class="form-row">
+              <label for="f-phone">電話番号（任意）</label>
+              <input type="tel" id="f-phone" name="phone" autocomplete="tel">
+            </div>
+            <div class="form-hp" aria-hidden="true">
+              <label for="f-hp">この欄は入力しないでください</label>
+              <input type="text" id="f-hp" name="hp" tabindex="-1" autocomplete="off">
+            </div>
+            <label class="consent-row">
+              <input type="checkbox" name="consent" value="1" required>
+              <span><a href="/policy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意します<span class="req">必須</span></span>
+            </label>
+            <button type="submit" class="cta form-submit" id="apply-submit">診断フォームのURLを受け取る</button>
+            <div id="apply-status" class="form-status" role="status" aria-live="polite" hidden></div>
+            <noscript><p class="form-note">このフォームのご利用にはJavaScriptを有効にしてください。無効の場合は、お手数ですが下記までご連絡ください：sales@atlib.jp</p></noscript>
+            <p class="form-note">送信いただいた内容は、診断フォームのご案内とご連絡のみに利用します。</p>
+          </form>
         </div>
       </div>
     </div>
@@ -1150,10 +1174,64 @@ details p{color:var(--muted);margin:14px 0 0}
     });
   });
 
-  // 事前アンケートページ（sales.atlib.jp）への遷移をリード獲得として計測する。
-  document.querySelectorAll('.js-intake-cta').forEach(function(el){
-    el.addEventListener('click', function(){
-      if (typeof gtag === 'function') gtag('event','generate_lead',{form_location:'joshisu-kaizen-lp'});
+  var form = document.getElementById('apply-form');
+  if (!form) return;
+  var statusEl = document.getElementById('apply-status');
+  var submitBtn = document.getElementById('apply-submit');
+  // sales-tools（sales.atlib.jp）側の情シスKAIZEN診断ツールへ、クロスオリジンでPOSTする。
+  // 本フォームはリード獲得のみで、実際の診断12問は先方でメール受信したURL先で回答してもらう。
+  var REQUEST_LINK_ENDPOINT = 'https://sales.atlib.jp/api/kaizen-diagnostic/request-link';
+
+  function showStatus(kind, msg){
+    statusEl.hidden = false;
+    statusEl.className = 'form-status ' + kind;
+    statusEl.textContent = msg;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    statusEl.hidden = true;
+
+    if (!form.company.value.trim() || !form.name.value.trim() || !form.email.value.trim()) {
+      showStatus('error', '会社名・お名前・メールアドレスは必須です。');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())) {
+      showStatus('error', 'メールアドレスの形式をご確認ください。');
+      return;
+    }
+    if (!form.consent.checked) {
+      showStatus('error', 'プライバシーポリシーへの同意が必要です。');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    var payload = {
+      company: form.company.value.trim(),
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      hp: form.hp.value
+    };
+
+    fetch(REQUEST_LINK_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if (res.status === 204) {
+        form.reset();
+        showStatus('ok', 'ご入力のメールアドレスに、情シスKAIZEN診断のURLをお送りしました。');
+        if (typeof gtag === 'function') gtag('event','generate_lead',{form_location:'joshisu-kaizen-lp'});
+      } else {
+        return res.json().catch(function(){ return {}; }).then(function(d){
+          showStatus('error', (d && d.error) || '送信に失敗しました。時間をおいて再度お試しください。');
+        });
+      }
+    }).catch(function(){
+      showStatus('error', '通信エラーが発生しました。時間をおいて再度お試しください。');
+    }).finally(function(){
+      submitBtn.disabled = false;
     });
   });
 

@@ -12,7 +12,6 @@
   border-bottom: 1px solid #dce6ee;
 }
 .company-hero-inner { max-width: 1180px; margin: 0 auto; padding: clamp(4rem,6vw,6rem) clamp(1.4rem,5vw,4.5rem); position: relative; z-index: 1; }
-.company-eyebrow { font: 800 .8rem/1.5 var(--accent-font); color: #bc722e; letter-spacing: .19em; margin: 0 0 1.1rem; }
 .company-hero h1 { color: var(--company-ink); margin: 0 0 1.2rem; font-size: clamp(2.6rem,5.2vw,5.2rem); letter-spacing: -.05em; line-height: 1.22; font-weight: 800; }
 .company-hero h1 span { font: 700 clamp(.88rem,1.15vw,1.05rem)/1.4 var(--accent-font); letter-spacing: .08em; color: #8290a2; display: inline-block; margin-left: 1.5rem; vertical-align: middle; }
 .company-hero-lead { font-weight: 800; font-size: clamp(1.35rem,2vw,2.05rem); color: var(--company-ink); line-height: 1.45; margin: 0 0 .9rem; }
@@ -29,7 +28,6 @@
 .company-contents-nav a:hover, .company-contents-nav a:focus-visible { color: #be702e; text-decoration: underline; text-underline-offset: .35rem; }
 .company-section { margin: 0; padding: clamp(3.5rem,5.3vw,5.3rem) clamp(1.4rem,4vw,3rem); border-bottom: 1px solid #e4ebf1; scroll-margin-top: 90px; }
 .company-section-head { max-width: 820px; margin: 0 auto 1.9rem; }
-.company-section-number { display: block; color: #b87739; font: 800 .76rem/1.5 var(--accent-font); letter-spacing: .13em; margin-bottom: .65rem; }
 .company-page main h2 { font-size: clamp(1.85rem,2.7vw,3rem); line-height: 1.5; font-weight: 800; color: var(--company-ink); letter-spacing: -.03em; margin: 0; }
 .company-page main h2::before { display: none; }
 .company-section-intro { color: var(--company-copy); line-height: 1.8; margin: .7rem 0 0; }
@@ -41,8 +39,7 @@
 .company-mvv-block { border-top: 1px solid #cfdce7; padding: 2.2rem 0 2.6rem; }
 .company-mvv-block:first-child { border-top: 4px solid var(--brand-orange); }
 .company-mvv-block:last-child { padding-bottom: 0; }
-.company-mvv-label { margin: 0 0 1rem; color: #bb7437; letter-spacing: .13em; font: 800 .82rem/1.6 var(--accent-font); }
-.company-mvv-label span { margin-left: .8rem; font-family: var(--base-font); letter-spacing: 0; color: #65768c; font-weight: 600; }
+.company-mvv-label { margin: 0 0 1rem; color: #65768c; letter-spacing: 0; font: 600 .82rem/1.6 var(--base-font); }
 .company-mission-statement, .company-vision-statement { font-weight: 800; color: var(--company-ink); font-size: clamp(1.55rem,2.7vw,2.7rem); line-height: 1.52; letter-spacing: -.035em; margin: 0 0 1rem; }
 .company-mvv-block > p:not(.company-mvv-label) { font-size: 1rem; line-height: 1.82; margin: 0; }
 .company-values { padding: 0; margin: 0; list-style: none; }

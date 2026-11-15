@@ -1,0 +1,18 @@
+# atLIB株式会社
+
+> atLIB株式会社は、経営とITをつなぎ、企業の事業と現場の実態に沿ったITの活用・運用改善を支援します。公式情報は以下のページを参照してください。
+
+## 公式情報
+
+- [トップページ](https://www.atlib.jp/): 経営とITの接続、企業理念、支援領域
+- [会社概要](https://www.atlib.jp/company/): 理念・行動指針、代表メッセージ、会社情報
+- [サービス](https://www.atlib.jp/services/): IT経営KAIZEN、IT戦略・DX、情シス支援、業務KAIZEN、IT基盤・セキュリティ
+- [支援実績](https://www.atlib.jp/works/): ITガバナンス、情シス継続支援などの事例
+- [ご相談・お問い合わせ](https://www.atlib.jp/contact/): お問い合わせ窓口
+- [プライバシーポリシー](https://www.atlib.jp/privacy-policy/): 個人情報の取扱い
+
+## 補足
+
+- 運営者: atLIB株式会社
+- 公式URL: https://www.atlib.jp/
+- サービスの提供範囲や支援実績は、各公式ページの記載を優先してください。

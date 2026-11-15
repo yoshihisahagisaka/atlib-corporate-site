@@ -9,6 +9,7 @@ import { createContactFormRouter } from './routes/contactForm';
 import { createEntryFormRouter } from './routes/entryForm';
 import { createSiteContactApiRouter } from './routes/siteContactApi';
 import { createIpRateLimiter } from './middleware/rateLimit';
+import { corporatePageSecurityHeaders, isPublicRequest, renderCorporatePage, siteSecurityHeaders } from './middleware/sitePublication';
 
 const RECRUIT_HOST = /^(www\.)?recruit\.atlib\.jp$/i;
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
@@ -27,14 +28,8 @@ async function main(): Promise<void> {
   // value from becoming req.ip.
   app.set('trust proxy', 1);
   app.use(pinoHttp({ logger }));
-  app.use((_req, res, next) => {
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-    res.setHeader('X-Robots-Tag', 'noindex, nofollow');
-    next();
-  });
+  const releaseMode = process.env.SITE_PUBLIC_MODE;
+  app.use(siteSecurityHeaders(releaseMode));
   app.use(express.urlencoded({ extended: true }));
 
   app.get('/healthz', (_req, res) => res.status(200).send('ok'));
@@ -65,11 +60,44 @@ async function main(): Promise<void> {
   app.use(createEntryFormRouter(mailer, config));
   app.use(createSiteContactApiRouter(mailer, config.siteContact, undefined, logger));
 
+  // Serve approved corporate templates on both Staging and Production. A
+  // public release removes preview-only wording and meta noindex at response
+  // time; a Staging request remains visibly marked and unindexable.
+  const corporateRoutes: Array<[string, string]> = [
+    ['/', 'index.html'],
+    ['/company/', 'company/index.html'],
+    ['/services/', 'services/index.html'],
+    ['/works/', 'works/index.html'],
+  ];
+  for (const [route, htmlPath] of corporateRoutes) {
+    app.get([route, route === '/' ? '/index.html' : `${route}index.html`], async (req, res, next) => {
+      try {
+        const publiclyReleased = isPublicRequest(req.hostname, req.headers.host, releaseMode);
+        if (publiclyReleased && req.path !== route) {
+          res.redirect(301, `${route}${req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : ''}`);
+          return;
+        }
+        const template = await readFile(path.join(PUBLIC_DIR, htmlPath), 'utf8');
+        corporatePageSecurityHeaders(res);
+        res.setHeader('Cache-Control', 'no-cache');
+        res.type('html').send(renderCorporatePage(template, publiclyReleased));
+      } catch (error) {
+        next(error);
+      }
+    });
+  }
+
   // The Turnstile site key is public configuration, but differs by
   // environment. Inject it at response time so the same image can be promoted
   // to Production without rebuilding the accepted static site.
-  app.get(['/contact', '/contact/'], async (_req, res, next) => {
+  app.get(['/contact', '/contact/', '/contact/index.html'], async (req, res, next) => {
     try {
+      const publiclyReleased = isPublicRequest(req.hostname, req.headers.host, releaseMode);
+      if (publiclyReleased && req.path !== '/contact/') {
+        res.redirect(301, `/contact/${req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : ''}`);
+        return;
+      }
+      corporatePageSecurityHeaders(res);
       const siteKey = config.siteContact.turnstileSiteKey;
       if (!/^[A-Za-z0-9_-]{10,100}$/u.test(siteKey)) {
         res.status(503).send('Contact form is not configured.');
@@ -77,7 +105,7 @@ async function main(): Promise<void> {
       }
       const template = await readFile(path.join(PUBLIC_DIR, 'contact', 'index.html'), 'utf8');
       res.setHeader('Cache-Control', 'no-store');
-      res.type('html').send(template.replace('__TURNSTILE_SITE_KEY__', siteKey));
+      res.type('html').send(renderCorporatePage(template, publiclyReleased).replace('__TURNSTILE_SITE_KEY__', siteKey));
     } catch (error) {
       next(error);
     }
