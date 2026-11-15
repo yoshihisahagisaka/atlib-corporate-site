@@ -317,3 +317,260 @@ DMARCはWebアプリではなくatlib.jpの公開DNS/メール認証の責務。
   preview tag on `corporate-site-00006-xud`. Production, source, image, DNS,
   load balancer, environment variables, IAM, Secrets, Workspace, and
   WordPress/Apache received zero changes.
+
+## Production final preflight (read-only, 2026-11-15)
+
+### Decision
+
+**NO-GO.** The accepted Staging revision is complete, but the public delivery
+path, Production application configuration, TLS certificate, legacy-path
+parity, and Production-host acceptance gates are not complete. This section
+records read-only observations and a proposed release/rollback sequence; it
+does not authorize or perform Production changes.
+
+### Gate 1: Git and evidence
+
+| Check | Result | Classification |
+| --- | --- | --- |
+| Draft PR #60 HEAD | `9d2466bcbf8f236d34adcf32c7a4c6a16dc258ce` before this evidence-only update | Fit |
+| Worktree | Clean before this evidence-only update | Fit |
+| Accepted source/image | Source `321ba151dff43aa3e6c4fbf6201c672545bed04e`; digest `sha256:b3079c34eafc62cab9ef9bbff15acd4f5982201f73f3573ccc9f5797fe70b59f` | Fit |
+| Staging state | `corporate-site-staging-00012-woj=100%`; `00010-bib=0%` rollback | Fit |
+| Staging gates | HTTP/security gate and Owner company-page visual acceptance recorded PASS | Fit |
+| GitHub CI | PR reports no status checks. Local tests and Cloud Build evidence exist, but there is no independent GitHub required check | Gap: record an explicit waiver or add an approved required check before release |
+| Production state | `corporate-site-00005-fbg=100%`; no Production change was made in this preflight | Fit / No-Go retained |
+
+No separately named ADR, Decision Log, or Production Ledger file was found.
+The operative decisions are embedded in this file, the delivery runbook,
+contact API readiness document, Staging deployment evidence, GCP migration
+report, and Git history. Creating a new governance format is not required for
+this release.
+
+### Gate 2: current public route
+
+Authoritative DNS and live routing were read on 2026-11-15 JST.
+
+- Authoritative name servers are `nse1.squarespacedns.com` through
+  `nse4.squarespacedns.com`; therefore the observed authoritative DNS provider
+  is Squarespace DNS. Domain acquisition through Google Workspace does not
+  change that observation.
+- `atlib.jp` has A `34.146.160.232`, no AAAA. `www.atlib.jp` is a CNAME to
+  `atlib.jp`. `recruit.atlib.jp` has A `34.146.160.232`, no AAAA, and
+  `www.recruit.atlib.jp` is a CNAME to `recruit.atlib.jp`. Observed TTL was
+  3600 seconds.
+- HTTP redirects to same-host HTTPS. HTTPS `atlib.jp` redirects to
+  `https://www.atlib.jp/`.
+- All four HTTPS hosts currently terminate on GCE VM `corporate-site-wp`
+  (`asia-northeast1-a`, external static IP `34.146.160.232`) and Apache, not
+  Cloud Run or the prepared GCP load-balancer assets.
+- Apache read-back through IAP showed `/var/www/html` as the Production
+  document root and a TLS vhost for `www.atlib.jp` with aliases `atlib.jp`,
+  `recruit.atlib.jp`, and `www.recruit.atlib.jp`. The same document root also
+  contains WordPress, LP, recruitment, policy, and image assets.
+- The live Let's Encrypt certificate has subject `www.atlib.jp`, SANs for all
+  four hosts, and observed validity 2026-10-22 through 2027-01-20 UTC.
+
+| Host/path | Current delivery | Release target | Classification |
+| --- | --- | --- | --- |
+| `atlib.jp/*` | GCE/Apache; apex redirects to `www` | LB/Cloud Run, preserving apex redirect | Cutover target |
+| `www.atlib.jp/`, `/company/`, `/services/`, `/works/`, `/contact/` | GCE/Apache/WordPress-static mix | LB/Cloud Run accepted image | Cutover target |
+| Five LPs under `www.atlib.jp` | GCE/Apache files | Preserve from the accepted image only after parity decision below | Blocked |
+| Policy/terms and public assets under `www.atlib.jp` | GCE/Apache files | Preserve/redirect by an approved inventory | Blocked: inventory incomplete |
+| WordPress public URLs such as `/wp-json/`, `/feed/`, `/wp-login.php`, `/wp-admin/` | Current VM/WordPress; sampled live endpoints exist while the candidate returns 404 | Explicit redirect, 410, or retirement decision | Blocked |
+| `recruit.atlib.jp/*`, `www.recruit.atlib.jp/*` | GCE/Apache; both hosts observed serving the same current content | Keep on the VM in the initial corporate cutover | Maintain |
+
+The five representative LP comparisons previously recorded between Staging
+revisions did not prove parity with the live VM. Direct live-to-accepted-image
+response comparisons produced:
+
+| Path | Live VM vs accepted candidate |
+| --- | --- |
+| `/infravision-partner/` | Exact SHA-256 match |
+| `/web-development-partner/` | Exact SHA-256 match |
+| `/business-web/` | Mismatch (live 19,032 bytes; candidate 49,625 bytes) |
+| `/joshisu-kaizen/` | Mismatch (live 66,998 bytes; candidate 64,844 bytes) |
+| `/recruit/` | Mismatch (live 14,295 bytes; candidate 13,242 bytes) |
+
+Additional samples showed exact parity for `/privacy-policy/` and the
+favicon, but differences for `/customer-harassment-policy/`, `/policy/`, and
+`/thanks.html`. No conclusion is made about which version is correct. The
+Owner must designate the source of truth or approve intentional differences,
+and the complete public static-asset/old-URL inventory must be reconciled
+before switching `www.atlib.jp`.
+
+Prepared GCP assets are incomplete and are not the live route:
+
+- Reserved global IP `corporate-site-ip` is `136.69.71.191` and unused.
+- Backend service `corporate-site-bes` points to serverless NEG
+  `corporate-site-neg`, which points to Cloud Run service `corporate-site`.
+- There are no global or regional forwarding rules and no target HTTP/HTTPS
+  proxies. The only URL map is an unserved HTTP-redirect map.
+- Existing Compute managed certificates are not usable: the multi-domain
+  certificate is `PROVISIONING_FAILED_PERMANENTLY`, with domains
+  `FAILED_NOT_VISIBLE`; other certificate resources are similarly failed or
+  provisioning. This is consistent with DNS still pointing to the VM rather
+  than an LB forwarding-rule IP.
+- Certificate Manager is not enabled and was not enabled by this preflight.
+
+Google documents that Compute managed certificates require public A/AAAA
+records to point to the load balancer and that `FAILED_NOT_VISIBLE` can result
+when they do not. For a migration, Certificate Manager DNS authorization can
+provision a certificate before the target proxy serves traffic. See:
+https://cloud.google.com/load-balancing/docs/ssl-certificates/google-managed-certs
+and https://cloud.google.com/certificate-manager/docs/domain-authorization.
+
+### Gate 3: Production application configuration
+
+Read-only Production state:
+
+| Item | Observed Production | Required for this release | Classification |
+| --- | --- | --- | --- |
+| Revision/traffic | `corporate-site-00005-fbg=100%`; `00006-xud=0%` tagged preview | Accepted digest deployed as a new 0% revision first | Gap |
+| Image | Old digests (`00005`: `sha256:9d3bd...`; `00006`: `sha256:3c9b2...`) | Accepted `sha256:b3079...` | Gap |
+| Runtime service account | Default Compute SA | Dedicated least-privilege runtime SA with Secret access only as required | Blocker |
+| IAM | `allUsers` has `roles/run.invoker` | Retain only the LB-compatible invocation model selected by the canonical design | Review required; no change made |
+| Ingress | `internal-and-cloud-load-balancing` | Same | Fit |
+| Scaling/concurrency | min 0, max 20, concurrency 80 | Owner-approved public limits; Staging values must not be copied implicitly | Decision blocker |
+| Existing env | Legacy SMTP names plus HMAC; SMTP host is `smtp.gmail.com:587` | Current contact API production variables and relay settings | Gap |
+| Secrets | Legacy SMTP password and HMAC references | Production Turnstile secret and required SMTP secret references, with values never exposed | Gap |
+| `SITE_PUBLIC_MODE` | Absent | `public` only at the explicitly approved Production release gate | Expected pre-release gap |
+| Allowed origins | Absent | `https://www.atlib.jp` (apex remains redirect-only) | Blocker |
+| Turnstile hostnames | Absent | `www.atlib.jp`; dedicated Production widget/secret verified | Blocker |
+| SMTP | Legacy authenticated Gmail configuration | `smtp-relay.gmail.com:587`, `system@atlib.jp`, display name `atLIB株式会社`, customer Reply-To; verify relay authorization | Blocker |
+| Diagnostic logs | Absent | Explicit Production policy; never log body, addresses, credentials, tokens, raw SMTP response, or sensitive stack content | Decision required |
+
+The Production service currently behaves as a prepared/legacy Cloud Run
+backend, not the live website. No forwarding rule/proxy connects the prepared
+NEG to the Internet and public DNS points to the VM. This observation does not
+prove the service has no other historical use.
+
+The implementation supplies per-instance in-memory rate limiting (five
+requests per 15 minutes) and trusts one managed proxy hop. No Cloud Armor
+security policy exists or is attached to `corporate-site-bes`. Cloud Armor is
+recommended for an external application, but existing decisions do not make
+its implementation an unconditional launch prerequisite. The release is
+blocked until the Owner explicitly accepts the initial Turnstile plus
+application-rate-limit posture and conservative scaling, or separately
+approves a Cloud Armor policy. A later Cloud Armor implementation can then be
+managed independently.
+
+### Gate 4: SEO/AIO and security
+
+Implementation review confirms the five new pages contain title,
+description, canonical, OGP and Twitter metadata; the home page includes
+Organization/WebSite JSON-LD; and canonical `robots.txt`, `sitemap.xml`, and
+`llms.txt` are included. The sitemap lists the five corporate pages plus the
+approved policy and LP URLs. `SITE_PUBLIC_MODE=public` combined with an exact
+published host removes preview labels/noindex only on the five new pages;
+`run.app` remains noindex. Apex redirect and recruitment-host routing are
+implemented.
+
+The application implements HSTS `max-age=31536000; includeSubDomains`
+without preload, CSP and `X-Frame-Options` for the five corporate pages, and
+global `nosniff`, Referrer-Policy, and Permissions-Policy. It deliberately
+does not impose the new corporate CSP on existing LP or recruitment content.
+This matches the established decision. Production-host response and browser
+verification remains mandatory because release-mode output has not yet been
+observed on the real host.
+
+Current public DNS publishes DMARC `p=none` without `rua`. Existing evidence
+records one authenticated Staging relay message with SPF, DKIM, and DMARC
+PASS. DMARC enforcement and aggregate reporting are email-governance
+improvements, not blockers for the website release under the existing
+decision; manage them independently. A single approved Production synthetic
+contact E2E, including Google Group delivery, inbox receipt, From/Reply-To and
+SPF/DKIM/DMARC headers, remains a release acceptance gate.
+
+### Final Fit/Gap and blockers
+
+Completed gates:
+
+- Accepted Staging revision, immutable image digest, HTTP/security gate, and
+  Owner company-page visual acceptance.
+- Contact API implementation, Turnstile server verification, relay method,
+  safe SMTP diagnostics, and one prior Staging E2E are evidenced.
+- Current DNS, VM/Apache, Cloud Run, serverless NEG/backend, certificate, and
+  public-host routing have been read back without mutation.
+
+Production blockers:
+
+1. Resolve/approve every live-to-candidate LP, policy, legacy URL, and public
+   asset difference; define redirects or 410 responses for retired WordPress
+   URLs.
+2. Complete and approve the external HTTPS LB design from the already
+   reserved IP/backend/NEG: HTTPS URL map, target proxies, forwarding rules,
+   and a certificate that is ACTIVE before DNS cutover.
+3. Approve the certificate path. The lowest-risk proposal is Certificate
+   Manager DNS authorization, which requires separately approved API/resource
+   creation and Squarespace DNS authorization CNAME records. Do not depend on
+   the currently failed Compute certificates.
+4. Deploy the accepted digest as a new Production 0% revision with the
+   approved service account, secrets, exact origins/hostnames, Production
+   Turnstile widget, SMTP relay, scaling/concurrency, and release logging
+   policy. Each is a separate change gate.
+5. Record the GitHub-CI waiver or establish an approved required CI gate.
+6. Decide the initial Cloud Armor/rate-limit posture explicitly.
+7. Complete pre-cutover production-host testing through the LB, followed by
+   browser/mobile, SEO/security, logs, and the single approved synthetic
+   contact E2E. `SITE_PUBLIC_MODE=public` must not be set before that gate.
+
+Independent follow-up items (not launch blockers under current decisions):
+
+- DMARC enforcement policy and `rua` reporting.
+- Cloud Armor implementation after an explicit initial-risk acceptance.
+- WordPress/VM retirement, cleanup of failed certificates/orphaned resources,
+  and any cost optimization only after a defined retention period.
+- IaC adoption, HSTS preload, IPv6, and enhanced monitoring; none should be
+  introduced implicitly during cutover.
+
+### Proposed cutover and rollback runbook (not executed)
+
+1. Freeze the approved source/digest. Resolve all blockers above and record
+   Owner decisions. Back up the VM/WordPress state and retain the VM, its
+   static IP, and the old Cloud Run revision.
+2. In a separately approved maintenance change, optionally reduce relevant
+   DNS TTL from 3600 to 300 at least one existing TTL in advance. Preserve
+   recruitment DNS on `34.146.160.232`.
+3. Provision the Production Turnstile widget/secret, dedicated runtime SA,
+   exact environment, relay configuration, and accepted image as a new 0%
+   revision. Read back an exact diff before routing any traffic.
+4. Complete the external HTTPS LB on reserved IP `136.69.71.191`. Prefer a
+   DNS-authorized, ACTIVE certificate so TLS can be validated before moving
+   the public A record. Keep existing LP paths on the same Cloud Run backend
+   only after the parity decision.
+5. While public DNS still points to the VM, route the Production Cloud Run
+   service to the accepted revision and test the LB with SNI/Host
+   `www.atlib.jp` using an explicit client-side IP override (for example,
+   `curl --resolve`) and an approved browser hosts override. Verify redirects,
+   all corporate/legacy paths, assets, release-mode SEO, TLS, headers, logs,
+   Turnstile, and one authorized synthetic form submission. The LB serverless
+   NEG cannot infer application health by itself, so this application check is
+   mandatory.
+6. At the approved window, change only the corporate apex A record from
+   `34.146.160.232` to `136.69.71.191`; `www` follows its existing apex CNAME.
+   Do not change `recruit.atlib.jp` or `www.recruit.atlib.jp` in this release.
+   Expected engineered outage is zero with an ACTIVE certificate and verified
+   LB, but mixed old/new delivery can persist for the DNS TTL (currently up to
+   approximately one hour). Announce this as propagation impact, not zero-risk.
+7. Monitor LB 4xx/5xx and latency, Cloud Run errors/instances, Turnstile
+   rejection rates, SMTP success/failure classification, Group/inbox delivery,
+   TLS/certificate state, crawl/noindex/canonical output, and representative
+   corporate/LP/recruitment paths.
+
+Rollback triggers include TLS/certificate failure, widespread 5xx or broken
+assets, missing legacy routes, CSP/JavaScript/Turnstile failure, contact mail
+failure, unintended noindex/canonical output, or a material error-rate/latency
+increase. Roll back by restoring the apex A record to `34.146.160.232`, then
+confirming VM HTTPS and all retained paths. If the fault is revision-specific
+and the LB path is otherwise sound, route Cloud Run back to the recorded old
+revision. Do not delete either revision, LB resources, certificates, VM, or
+static IP during the observation period. Verify authoritative DNS and multiple
+resolvers, all four hosts, TLS, five corporate pages, retained LP/policy
+routes, recruitment hosts, and logs after rollback.
+
+### Final recommendation
+
+Remain **NO-GO**. Staging acceptance is complete, but Production release must
+not start until the seven blockers above have explicit evidence and approval.
+No Production, DNS, LB, Apache/WordPress, IAM/Secret, Workspace, Cloudflare,
+form, SMTP, or merge operation was performed by this preflight.
