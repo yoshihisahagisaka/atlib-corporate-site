@@ -236,3 +236,45 @@ DMARCはWebアプリではなくatlib.jpの公開DNS/メール認証の責務。
 - Remaining gate: separately approve Staging 100% promotion, then perform the
   canonical-service-URL browser and form E2E. The tagged URL is not an allowed
   form Origin and was intentionally not used for POST validation.
+
+## PR #60 company-heading update at zero traffic (2026-11-15)
+
+- Source commit: `321ba151dff43aa3e6c4fbf6201c672545bed04e`. The
+  source worktree and Draft PR #60 HEAD matched before the build.
+- Cloud Build `ddd4ff56-b74f-4c09-8717-79894d9c69a1`: SUCCESS. A unique,
+  previously unused image tag `pr60-company-321ba15-20261115-01` was created
+  for this source commit. Image digest:
+  `sha256:b3079c34eafc62cab9ef9bbff15acd4f5982201f73f3573ccc9f5797fe70b59f`.
+- New ready revision: `corporate-site-staging-00012-woj`, deployed with
+  `--no-traffic --tag=pr60-company-20261115`. Tagged URL:
+  `https://pr60-company-20261115---corporate-site-staging-y6htingfbq-an.a.run.app`.
+- Traffic remained `corporate-site-staging-00010-bib=100%`; the new revision
+  is tag-addressable at 0%. Environment variables, Secret references, runtime
+  service account, IAM, ingress, min/max scaling, and concurrency matched the
+  current Staging revision. `SITE_PUBLIC_MODE` remained absent.
+- Tagged-URL GET checks returned HTTP 200 for `/healthz/`, the five new
+  corporate pages, five representative existing LPs, `/robots.txt`,
+  `/sitemap.xml`, and `/llms.txt`.
+- The `/company/` response no longer contains `ABOUT atLIB`, the five numbered
+  English section labels, or the `MISSION`, `VISION`, and `VALUES` labels. It
+  retains `企業理念`, `目指す未来`, `5つの行動指針`, the Japanese headings and
+  body copy, `Let It Be`, representative messages, business content, and
+  company information.
+- The five new corporate pages retained CSP, `X-Frame-Options: SAMEORIGIN`,
+  `X-Content-Type-Options: nosniff`, Referrer-Policy, Permissions-Policy,
+  header and HTML noindex directives, canonical, and OGP metadata. Home-page
+  JSON-LD remained present. Robots, sitemap, and llms files retained their
+  canonical references.
+- Response-body SHA-256 hashes for `/business-web/`, `/recruit/`,
+  `/infravision-partner/`, `/web-development-partner/`, and
+  `/joshisu-kaizen/` matched the current 100% Staging revision. No severity
+  ERROR entries were present for `corporate-site-staging-00012-woj` during the
+  validation window.
+- PC and smartphone visual validation was not performed because the browser
+  access host was unavailable. This is recorded as unverified, not PASS. No
+  form POST, Turnstile E2E, SMTP connection, or email transmission occurred.
+- Production remained `corporate-site-00005-fbg=100%`, with the existing
+  preview tag on `corporate-site-00006-xud`. Production, DNS, load balancer,
+  Workspace, WordPress/Apache, IAM, and Secrets received zero changes.
+- Remaining gate: separately approve promotion of revision `00012-woj` to
+  Staging 100%, then complete browser acceptance on the canonical service URL.
