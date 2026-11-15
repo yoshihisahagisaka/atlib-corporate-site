@@ -278,3 +278,42 @@ DMARCはWebアプリではなくatlib.jpの公開DNS/メール認証の責務。
   Workspace, WordPress/Apache, IAM, and Secrets received zero changes.
 - Remaining gate: separately approve promotion of revision `00012-woj` to
   Staging 100%, then complete browser acceptance on the canonical service URL.
+
+## PR #60 company-heading revision promoted to Staging 100% (2026-11-15)
+
+- Owner reported that the revised company page passed real-screen visual
+  review. Before promotion, Git and Draft PR #60 HEAD matched evidence commit
+  `8ef7fab59b4f86e17f70b755024769be871acb23`; the worktree was clean.
+- Preflight confirmed `corporate-site-staging-00010-bib=100%` and revision
+  `corporate-site-staging-00012-woj` at 0%, Ready, using image digest
+  `sha256:b3079c34eafc62cab9ef9bbff15acd4f5982201f73f3573ccc9f5797fe70b59f`.
+  Environment variables, runtime service account, IAM, ingress, min/max
+  scaling, and concurrency matched the recorded configuration;
+  `SITE_PUBLIC_MODE` remained absent.
+- Staging traffic was changed once to
+  `corporate-site-staging-00012-woj=100%`. Revision
+  `corporate-site-staging-00010-bib` remains available at 0% as the designated
+  rollback target. No revision was deleted and no new image was built.
+- The canonical Staging service URL returned HTTP 200 for `/healthz/`, the five
+  new corporate pages, five representative existing LPs, `/robots.txt`,
+  `/sitemap.xml`, and `/llms.txt`.
+- The canonical `/company/` response excludes the approved English eyebrow,
+  numbered section labels, and `MISSION`, `VISION`, and `VALUES` labels. It
+  retains `企業理念`, `目指す未来`, `5つの行動指針`, Japanese headings/body,
+  `Let It Be`, representative messages, business content, and company
+  information.
+- The five new corporate pages retained CSP, `X-Frame-Options: SAMEORIGIN`,
+  `X-Content-Type-Options: nosniff`, Referrer-Policy, Permissions-Policy,
+  header and HTML noindex directives, canonical, and OGP metadata. Home-page
+  JSON-LD remained present; robots, sitemap, and llms canonical references
+  remained valid.
+- Response-body SHA-256 hashes for `/business-web/`, `/recruit/`,
+  `/infravision-partner/`, `/web-development-partner/`, and
+  `/joshisu-kaizen/` matched rollback revision `00010-bib`. No severity ERROR
+  entries were present for revision `00012-woj` during the validation window.
+- No rollback was required. No form POST, Turnstile E2E, SMTP connection, or
+  email transmission was performed.
+- Production remained `corporate-site-00005-fbg=100%`, with the existing
+  preview tag on `corporate-site-00006-xud`. Production, source, image, DNS,
+  load balancer, environment variables, IAM, Secrets, Workspace, and
+  WordPress/Apache received zero changes.
