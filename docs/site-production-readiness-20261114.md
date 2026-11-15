@@ -193,3 +193,46 @@ DMARCはWebアプリではなくatlib.jpの公開DNS/メール認証の責務。
   `corporate-site-00006-xud`. Production, DNS, Workspace, WordPress/Apache,
   IAM, Secrets, service account, and scaling configuration received zero
   changes.
+
+## PR #60 Staging Origin allowlist fix at zero traffic (2026-11-15)
+
+- Preflight matched GitHub Draft PR #60 and local HEAD
+  `732697351128976e532fd1c9fc235445acc98ce1`. Staging revision
+  `corporate-site-staging-00008-lok` remained at 100%, using image digest
+  `sha256:6678a23e4ad306f7d58c73da5b4de7f105c2b1b767239eb29826dcda50ebe55e`.
+- At approximately 2026-11-15 14:44:50 JST, a Google Cloud SDK YAML
+  `--flags-file` was used with `gcloud run services update`, `--no-traffic`,
+  and tag `pr60-originfix-20261115`. This avoided PowerShell 5.1 command-line
+  dictionary parsing and changed only the two approved allowlist variables.
+- New ready revision: `corporate-site-staging-00010-bib`. Tagged URL:
+  `https://pr60-originfix-20261115---corporate-site-staging-y6htingfbq-an.a.run.app`.
+  The Cloud Run revision sequence contains no `00009`; the prior rejected
+  command did not create a revision.
+- Read-back confirmed both old and current Staging service origins are present
+  in `SITE_CONTACT_ALLOWED_ORIGINS`, and both corresponding hostnames are
+  present in `SITE_CONTACT_TURNSTILE_HOSTNAMES`. Non-target environment
+  variables, Secret references, runtime service account, IAM, ingress, min/max
+  scaling, concurrency, and image digest are unchanged. `SITE_PUBLIC_MODE`
+  remains absent.
+- Traffic remains `corporate-site-staging-00008-lok=100%`; the new revision is
+  tag-addressable at 0%. No promotion, form POST, Turnstile verification, or
+  email transmission was performed.
+- Tagged-URL GET checks returned HTTP 200 for `/healthz/`, the five new
+  corporate pages, five representative existing LPs, `/robots.txt`,
+  `/sitemap.xml`, and `/llms.txt`.
+- The five new corporate pages retained CSP, `X-Frame-Options: SAMEORIGIN`,
+  `X-Content-Type-Options: nosniff`, Referrer-Policy, Permissions-Policy,
+  header and HTML noindex directives, canonical, and OGP metadata. Home-page
+  JSON-LD remained present. The sitemap retained the five corporate URLs and
+  other canonical URLs; robots and llms files retained the canonical origin.
+- SHA-256 response-body hashes for `/business-web/`, `/recruit/`,
+  `/infravision-partner/`, `/web-development-partner/`, and
+  `/joshisu-kaizen/` matched the current 100% Staging revision. No severity
+  ERROR entries were present for `corporate-site-staging-00010-bib` during the
+  validation window.
+- Production remained `corporate-site-00005-fbg=100%`, with the existing
+  preview tag on `corporate-site-00006-xud`. Production, DNS, Cloudflare,
+  Workspace, WordPress/Apache, IAM, and Secrets received zero changes.
+- Remaining gate: separately approve Staging 100% promotion, then perform the
+  canonical-service-URL browser and form E2E. The tagged URL is not an allowed
+  form Origin and was intentionally not used for POST validation.
