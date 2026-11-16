@@ -1,5 +1,5 @@
 # --- build stage ---
-FROM node:20-alpine AS build
+FROM node:24.22.3-alpine3.24 AS build
 WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci
@@ -8,7 +8,7 @@ COPY src ./src
 RUN npm run build
 
 # --- runtime stage ---
-FROM node:20-alpine
+FROM node:24.22.3-alpine3.24
 WORKDIR /app
 ENV NODE_ENV=production
 COPY package.json package-lock.json* ./

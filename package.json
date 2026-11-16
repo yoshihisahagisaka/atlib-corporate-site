@@ -11,7 +11,7 @@
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "dependencies": {
     "@google-cloud/secret-manager": "^8.0.0",
