@@ -223,7 +223,7 @@ export function createEntryFormRouter(mailer: Mailer, config: Config): Router {
 
     const requiredOk =
       data.name && data.kana && data.birthday && data.address && data.email && data.phone && data.history;
-    if (!requiredOk || !isValidEmail(data.email)) {
+    if (!requiredOk || !isValidEmail(data.email) || req.body?.privacy_consent !== '1') {
       res.redirect('index.html');
       return;
     }
