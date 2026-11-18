@@ -50,7 +50,7 @@ function confirmPage(data: ContactFormData, timestampMs: number, signature: stri
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="format-detection" content="telephone=no">
-	<link rel="icon" href="images/favicon.ico">
+	<link rel="icon" type="image/png" sizes="64x64" href="/images/favicon.png?v=20261118">
 	<meta name="twitter:card" content="summary_large_image" />
 	${TRACKING_TAGS}
 	<link rel="stylesheet" href="css/style.css">
@@ -124,7 +124,7 @@ function errorPage(): string {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="format-detection" content="telephone=no">
-	<link rel="icon" href="images/favicon.ico">
+	<link rel="icon" type="image/png" sizes="64x64" href="/images/favicon.png?v=20261118">
 	<meta name="twitter:card" content="summary_large_image" />
 	${TRACKING_TAGS}
 	<link rel="stylesheet" href="css/style.css">
