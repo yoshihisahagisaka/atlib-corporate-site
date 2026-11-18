@@ -83,6 +83,21 @@ test('HTTP preview / publication / recruit routing, with no mail sent', async ()
     assert.doesNotMatch(liveHtml, /デザイン検討用プレビュー|公開サイトではありません/u);
     assert.match(liveHtml, /href="\/images\/favicon\.png\?v=20261118"/u);
 
+    // CSS and menu JS are cache-busted after the GCE -> Cloud Run DNS cutover.
+    // A stale or missing base stylesheet makes the mobile hero overflow and
+    // renders the outline SVG arrows as large filled triangles.
+    for (const [urlPath, expectedMime] of [
+      ['/css/style.css?v=20261119-mobile', /^text\/css/u],
+      ['/css/atlib.css?v=20261119-mobile', /^text\/css/u],
+      ['/css/theme.css?v=20261119-mobile', /^text\/css/u],
+      ['/css/inview.css?v=20261119-mobile', /^text\/css/u],
+      ['/js/main.js?v=20261119-mobile', /^(?:application|text)\/javascript/u],
+    ]) {
+      const asset = await request(urlPath, 'www.atlib.jp');
+      assert.equal(asset.status, 200, `${urlPath} must be available`);
+      assert.match(asset.headers.get('content-type'), expectedMime, `${urlPath} must not return HTML`);
+    }
+
     for (const host of ['www.atlib.jp', 'recruit.atlib.jp', 'www.recruit.atlib.jp']) {
       const png = await request('/images/favicon.png?v=20261118', host);
       assert.equal(png.status, 200, `favicon PNG missing on ${host}`);

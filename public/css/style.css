@@ -3,8 +3,8 @@
 
 /*cssファイルの読み込み
 ---------------------------------------------------------------------------*/
-@import url("theme.css");
-@import url("inview.css");
+@import url("theme.css?v=20261119-mobile");
+@import url("inview.css?v=20261119-mobile");
 
 
 /*animation11のキーフレーム設定（汎用的）

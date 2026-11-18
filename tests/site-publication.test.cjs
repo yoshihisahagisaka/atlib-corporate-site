@@ -107,6 +107,27 @@ test('five canonical pages expose SEO metadata, with private preview text only o
   }
 });
 
+test('corporate pages request a fresh, root-absolute stylesheet and mobile menu script', () => {
+  const assetVersion = '20261119-mobile';
+  for (const [urlPath, sourcePath] of pages) {
+    const html = fs.readFileSync(path.join(publicDir, sourcePath), 'utf8');
+    assert.match(html, /<meta name="viewport" content="width=device-width, initial-scale=1">/u, urlPath);
+    for (const asset of ['style.css', 'atlib.css']) {
+      assert.ok(html.includes(`href="/css/${asset}?v=${assetVersion}"`), `${urlPath}: ${asset} needs cache busting`);
+    }
+    for (const asset of ['jquery.inview_set.js', 'main.js']) {
+      assert.ok(html.includes(`src="/js/${asset}?v=${assetVersion}"`), `${urlPath}: ${asset} needs cache busting`);
+    }
+    assert.doesNotMatch(html, /(?:href|src)="(?:\.\.\/)?(?:css|js)\//u, `${urlPath}: relative asset reference`);
+  }
+  const stylesheet = fs.readFileSync(path.join(publicDir, 'css/style.css'), 'utf8');
+  for (const asset of ['theme.css', 'inview.css']) {
+    assert.ok(stylesheet.includes(`@import url("${asset}?v=${assetVersion}")`), `${asset} import should refresh`);
+  }
+  assert.match(stylesheet, /\.arrow\s*\{[^}]*fill:\s*none;/su, 'arrow must remain outlined');
+  assert.match(stylesheet, /\.mainimg\s*\{[^}]*flex-direction:\s*column-reverse;/su, 'mobile hero order must be defined');
+});
+
 test('AIO Organization/WebSite structured data is parseable and uses existing identities', () => {
   const home = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
   const match = home.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/u);
