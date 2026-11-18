@@ -132,7 +132,8 @@ test('Template Party license is present on the corporate home page and credits a
   const licenseCode = '<!--License20261110OnkIP-->';
   const home = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
   assert.equal(home.split(licenseCode).length - 1, 1, 'license code must appear once in the top page');
-  assert.match(home, /<head>[\s\S]*<!--License20261110OnkIP-->[\s\S]*<\/head>/u);
+  assert.match(home, /\n<!--License20261110OnkIP-->\n<\/body>/u,
+    'license must be on the line immediately preceding the closing body tag');
   for (const [route, sourcePath] of pages) {
     const html = fs.readFileSync(path.join(publicDir, sourcePath), 'utf8');
     if (route !== '/') assert.doesNotMatch(html, /<!--License20261110OnkIP-->/u);
