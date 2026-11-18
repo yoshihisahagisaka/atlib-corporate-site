@@ -22,24 +22,59 @@ const SMTP_ERROR_CODES = new Set([
   'EAUTH', 'ECONNECTION', 'EDNS', 'EENVELOPE', 'EMESSAGE', 'ESMTP', 'ESTREAM', 'ETIMEDOUT',
 ]);
 const SMTP_COMMANDS = ['AUTH', 'DATA', 'EHLO', 'HELO', 'MAIL FROM', 'RCPT TO', 'STARTTLS'] as const;
+type SmtpResponseHint =
+  | 'rate_limit_indicated'
+  | 'ip_policy_indicated'
+  | 'sender_policy_indicated'
+  | 'tls_policy_indicated'
+  | 'temporary_defer_indicated'
+  | 'other_or_unspecified';
+
+/** Classify provider text without allowing any provider-supplied text into logs. */
+function smtpResponseHint(response: string): SmtpResponseHint {
+  if (/rate[ -]?limit|too many (?:connections|requests|messages)|quota exceeded|peak limit/iu.test(response)) {
+    return 'rate_limit_indicated';
+  }
+  if (/\b(?:ip|address)\b.{0,80}\b(?:not (?:authorized|allowed|registered|in (?:the )?(?:allowlist|whitelist))|blocked)|\b(?:allowlist|whitelist)\b/iu.test(response)) {
+    return 'ip_policy_indicated';
+  }
+  if (/sender.{0,60}(?:not allowed|not authorized|denied)|relay access denied/iu.test(response)) {
+    return 'sender_policy_indicated';
+  }
+  if (/tls.{0,40}required|must (?:use|enable) tls|starttls.{0,40}required/iu.test(response)) {
+    return 'tls_policy_indicated';
+  }
+  if (/try again later|temporar(?:y|ily)|server busy|connection expired/iu.test(response)) {
+    return 'temporary_defer_indicated';
+  }
+  return 'other_or_unspecified';
+}
 
 export function safeSmtpFailure(error: unknown): {
   code: string;
   responseCode: number | null;
   command: string | null;
+  enhancedStatus: string | null;
+  responseHint: SmtpResponseHint;
 } {
   const candidate = error && typeof error === 'object' ? error as Record<string, unknown> : {};
   const rawCode = typeof candidate.code === 'string' ? candidate.code.toUpperCase() : '';
   const rawCommand = typeof candidate.command === 'string' ? candidate.command.toUpperCase().trim() : '';
+  const rawResponse = typeof candidate.response === 'string' ? candidate.response : '';
   const command = SMTP_COMMANDS.find((allowed) =>
     rawCommand === allowed || rawCommand.startsWith(`${allowed} `) || rawCommand.startsWith(`${allowed}:`)) ?? null;
   const responseCode = typeof candidate.responseCode === 'number' &&
     Number.isInteger(candidate.responseCode) && candidate.responseCode >= 100 && candidate.responseCode <= 599
     ? candidate.responseCode : null;
+  // SMTP enhanced status is numeric only (e.g. 4.7.0). Do not log the raw
+  // SMTP response: some providers echo addresses or customer-supplied data.
+  const enhancedStatus = rawResponse.match(/(?:^|[^\d])([245]\.\d{1,3}\.\d{1,3})(?!\d)/u)?.[1] ?? null;
   return {
     code: SMTP_ERROR_CODES.has(rawCode) ? rawCode : 'UNKNOWN',
     responseCode,
     command,
+    enhancedStatus,
+    responseHint: smtpResponseHint(rawResponse),
   };
 }
 
