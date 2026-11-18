@@ -137,7 +137,7 @@ test('Staging diagnostic logs contain only trace-correlated allowlisted SMTP fie
     code: 'EAUTH',
     responseCode: 535,
     command: 'AUTH PLAIN',
-    response: 'credential and address must never be logged',
+    response: '535 5.7.8 credential and address customer@example.com must never be logged',
   });
   await withApi(async ({ post }) => {
     const response = await post();
@@ -154,7 +154,10 @@ test('Staging diagnostic logs contain only trace-correlated allowlisted SMTP fie
       fields: {
         event: 'site_contact_smtp_failure',
         traceId: null,
-        smtp: { code: 'EAUTH', responseCode: 535, command: 'AUTH' },
+        smtp: {
+          code: 'EAUTH', responseCode: 535, command: 'AUTH',
+          enhancedStatus: '5.7.8', responseHint: 'other_or_unspecified',
+        },
       },
     },
   ]);
@@ -164,10 +167,36 @@ test('Staging diagnostic logs contain only trace-correlated allowlisted SMTP fie
 test('SMTP diagnostic classification rejects unapproved values and raw error content', () => {
   assert.deepEqual(safeSmtpFailure({
     code: 'SECRET_CODE', responseCode: '535', command: 'VRFY customer@example.com', response: 'raw',
-  }), { code: 'UNKNOWN', responseCode: null, command: null });
+  }), {
+    code: 'UNKNOWN', responseCode: null, command: null,
+    enhancedStatus: null, responseHint: 'other_or_unspecified',
+  });
   assert.deepEqual(safeSmtpFailure({
     code: 'ESMTP', responseCode: 550, command: 'RCPT TO:<customer@example.com>',
-  }), { code: 'ESMTP', responseCode: 550, command: 'RCPT TO' });
+  }), {
+    code: 'ESMTP', responseCode: 550, command: 'RCPT TO',
+    enhancedStatus: null, responseHint: 'other_or_unspecified',
+  });
+});
+
+test('SMTP 421 diagnostics capture only enhanced status and an allowlisted response hint', () => {
+  const samples = [
+    ['421 4.7.0 Try again later, closing connection. (EHLO)', '4.7.0', 'temporary_defer_indicated'],
+    ['421 4.7.0 Too many connections, rate limited', '4.7.0', 'rate_limit_indicated'],
+    ['421 4.7.0 IP not in whitelist, closing connection', '4.7.0', 'ip_policy_indicated'],
+    ['421 4.7.0 TLS required for RCPT domain', '4.7.0', 'tls_policy_indicated'],
+    ['550 5.7.1 Sender not allowed for relay', '5.7.1', 'sender_policy_indicated'],
+  ];
+  for (const [response, enhancedStatus, responseHint] of samples) {
+    const diagnostic = safeSmtpFailure({
+      code: 'ECONNECTION', responseCode: 421, command: 'EHLO',
+      response: `${response} customer@example.com password=private-do-not-log`,
+    });
+    assert.equal(diagnostic.enhancedStatus, enhancedStatus);
+    assert.equal(diagnostic.responseHint, responseHint);
+    assert.equal(diagnostic.command, 'EHLO');
+    assert.doesNotMatch(JSON.stringify(diagnostic), /customer@example|private-do-not-log|password|closing connection/iu);
+  }
 });
 
 test('rate limit blocks the sixth submission from one IP within 15 minutes', async () => {
