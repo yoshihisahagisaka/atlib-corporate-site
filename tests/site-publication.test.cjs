@@ -128,6 +128,19 @@ test('corporate pages request a fresh, root-absolute stylesheet and mobile menu 
   assert.match(stylesheet, /\.mainimg\s*\{[^}]*flex-direction:\s*column-reverse;/su, 'mobile hero order must be defined');
 });
 
+test('Template Party license is present on the corporate home page and credits are removed', () => {
+  const licenseCode = '<!--License20261110OnkIP-->';
+  const home = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
+  assert.equal(home.split(licenseCode).length - 1, 1, 'license code must appear once in the top page');
+  assert.match(home, /<head>[\s\S]*<!--License20261110OnkIP-->[\s\S]*<\/head>/u);
+  for (const [route, sourcePath] of pages) {
+    const html = fs.readFileSync(path.join(publicDir, sourcePath), 'utf8');
+    if (route !== '/') assert.doesNotMatch(html, /<!--License20261110OnkIP-->/u);
+    assert.doesNotMatch(html, /Web Design:Template-Party|テンプレート利用規約に従い、著作表示を維持します/u, route);
+    assert.match(html, /Copyright &copy; atLIB株式会社 All Rights Reserved\./u, route);
+  }
+});
+
 test('AIO Organization/WebSite structured data is parseable and uses existing identities', () => {
   const home = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
   const match = home.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/u);
