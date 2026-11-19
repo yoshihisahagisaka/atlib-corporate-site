@@ -129,6 +129,32 @@ a:focus-visible,button:focus-visible{outline:3px solid #DA7523;outline-offset:4p
 .people-photo{height:425px;border-radius:120px 22px 22px 22px;overflow:hidden;transform:rotate(1deg);box-shadow:0 26px 50px rgba(5,79,69,.16)}
 .people-photo img{width:100%;height:100%;object-fit:cover}
 
+/* Official note is a recurring editorial touchpoint, not a small outbound footer link. */
+.note-section{background:#fff;padding-block:86px;overflow:hidden}
+.note-feature{position:relative;display:grid;grid-template-columns:1fr .94fr;align-items:center;min-height:445px;overflow:hidden;border-radius:32px;background:linear-gradient(116deg,#FFF5EB 0%,#FFF0E2 66%,#FDE7D6 100%)}
+.note-copy{position:relative;z-index:3;padding:58px 0 58px clamp(36px,5vw,76px)}
+.note-eyebrow{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font:800 12px/1.5 "DM Sans",sans-serif;letter-spacing:.18em;color:var(--green-deep);margin:0 0 20px}
+.note-eyebrow-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--orange)}
+.note-update{display:inline-flex;align-items:center;min-height:26px;padding:3px 11px;border-radius:20px;background:#fff;color:var(--navy);font:800 11px/1.5 "Noto Sans JP",sans-serif;letter-spacing:.03em}
+.note-copy h2{font-size:clamp(29px,3.3vw,45px);line-height:1.58;letter-spacing:-.065em;font-weight:900;margin:0 0 22px;white-space:nowrap}
+.note-copy h2 span{color:#DD7927}
+.note-copy>p:not(.note-eyebrow){max-width:455px;font-size:14px;line-height:2.25;color:var(--ink);margin:0 0 31px}
+.note-button{display:inline-flex;align-items:center;justify-content:space-between;gap:30px;min-height:54px;border-radius:30px;background:var(--orange);color:#fff;padding:12px 22px 12px 25px;font-size:14px;font-weight:800;box-shadow:0 8px 20px rgba(214,117,38,.17);transition:transform .2s,background .2s}
+.note-button:hover{transform:translateY(-3px);background:#DD7825}
+.note-button span{font-size:22px;line-height:1}
+.note-art{position:relative;min-height:445px;isolation:isolate}
+.note-art-ring{position:absolute;width:360px;height:360px;top:-155px;right:-96px;border:66px solid rgba(242,140,56,.17);border-radius:50%;z-index:-1}
+.note-paper{position:absolute;left:50%;top:50%;width:min(335px,76%);height:360px;border-radius:13px;background:#fff;box-shadow:0 24px 52px rgba(85,75,70,.11)}
+.note-paper-back{transform:translate(-42%,-48%) rotate(10deg);background:#D5F5E9;border:1px solid rgba(45,190,157,.16)}
+.note-paper-front{display:flex;flex-direction:column;padding:38px 35px;transform:translate(-53%,-51%) rotate(-5deg);border:1px solid rgba(31,53,86,.035)}
+.note-paper-label{font:800 10px/1.5 "DM Sans",sans-serif;letter-spacing:.23em;color:var(--green-deep)}
+.note-paper-word{font:800 72px/1.5 "DM Sans",sans-serif;letter-spacing:-.07em;color:var(--navy);margin:10px 0 5px}
+.note-paper-word span{color:var(--orange)}
+.note-paper-line{height:5px;width:60px;border-radius:4px;background:var(--orange);margin:1px 0 20px}
+.note-paper-headline{font-size:20px;line-height:1.75;font-weight:900;letter-spacing:-.045em;color:var(--navy)}
+.note-paper-topics{margin-top:auto;font:800 9px/1.4 "DM Sans",sans-serif;letter-spacing:.15em;color:#7F929D}
+.note-art-orb{position:absolute;width:115px;height:115px;right:4%;bottom:-52px;border-radius:50%;background:#F8CA9B;opacity:.62;z-index:-1}
+
 .workstyle{background:var(--offwhite);overflow:hidden}
 .workstyle::before{content:"";position:absolute;bottom:-145px;right:-140px;width:360px;height:360px;border-radius:50%;background:#FDE6D2}
 .workstyle-grid{display:grid;grid-template-columns:.71fr 1.29fr;align-items:center;gap:100px;position:relative}
@@ -195,6 +221,11 @@ a:focus-visible,button:focus-visible{outline:3px solid #DA7523;outline-offset:4p
   .work-card-body h3{font-size:20px}
   .people-grid{gap:37px}
   .people-photo{height:360px}
+  .note-copy{padding-left:36px}
+  .note-copy h2{font-size:clamp(27px,3.5vw,37px)}
+  .note-paper{width:min(275px,78%);height:330px}
+  .note-paper-front{padding:31px 27px}
+  .note-paper-word{font-size:63px}
 }
 @media (max-width:700px){
   :root{--header-height:62px}
@@ -261,6 +292,24 @@ a:focus-visible,button:focus-visible{outline:3px solid #DA7523;outline-offset:4p
   .outline-button{min-height:49px;font-size:14px}
   .people-photo{height:auto;aspect-ratio:1.43;border-radius:75px 16px 16px 16px;transform:none}
   .people-oval{width:230px;height:230px;top:-85px;left:-90px;border-width:45px}
+  .note-section{padding-block:56px}
+  .note-feature{display:flex;flex-direction:column;align-items:stretch;border-radius:23px;min-height:0}
+  .note-copy{padding:34px 24px 12px}
+  .note-eyebrow{font-size:10px;letter-spacing:.13em;gap:8px;margin-bottom:14px}
+  .note-update{font-size:10px;min-height:24px}
+  .note-copy h2{font-size:clamp(26px,7.1vw,36px);line-height:1.5;margin-bottom:16px;white-space:normal}
+  .note-copy>p:not(.note-eyebrow){font-size:14px;line-height:2.05;margin-bottom:23px}
+  .note-button{width:100%;min-height:50px;justify-content:space-between;font-size:14px}
+  .note-art{min-height:220px;overflow:hidden}
+  .note-art-ring{width:220px;height:220px;top:-100px;right:-45px;border-width:42px}
+  .note-paper{height:218px;width:min(235px,64%);top:51%}
+  .note-paper-front{padding:17px 22px}
+  .note-paper-label{font-size:8px}
+  .note-paper-word{font-size:45px;margin:1px 0 0}
+  .note-paper-line{height:4px;width:42px;margin:0 0 8px}
+  .note-paper-headline{font-size:15px;line-height:1.48}
+  .note-paper-topics{font-size:7px;letter-spacing:.08em}
+  .note-art-orb{width:85px;height:85px;bottom:-55px}
   .workstyle-grid{gap:25px}
   .workstyle-copy p:not(.section-kicker){font-size:15px;margin:16px 0 19px}
   .workstyle-photo{height:auto;aspect-ratio:1.5;border-radius:18px 80px 18px 18px}

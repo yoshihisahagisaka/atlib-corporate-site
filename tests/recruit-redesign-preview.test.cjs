@@ -19,7 +19,7 @@ test('standalone preview does not replace existing recruit homepage', () => {
 });
 
 test('all in-page navigation targets exist and corporate links are retained', () => {
-  for (const section of ['values', 'work', 'people', 'workstyle', 'recruit']) {
+  for (const section of ['values', 'work', 'people', 'note', 'workstyle', 'recruit']) {
     assert.match(html, new RegExp('id="' + section + '"'));
     assert.match(html, new RegExp('href="#' + section + '"'));
   }
@@ -28,6 +28,20 @@ test('all in-page navigation targets exist and corporate links are retained', ()
   assert.match(html, /href="\.\.\/workstyle\/"/);
   assert.match(html, /href="\.\.\/member\/"/);
   assert.match(html, /href="\.\.\/requirements\/"/);
+});
+
+test('official atLIB note is prominent, correctly linked and accessible on mobile', () => {
+  assert.match(html, /<section class="note-section section" id="note" aria-labelledby="note-title">/);
+  assert.ok(html.indexOf('id="people"') < html.indexOf('id="note"'));
+  assert.ok(html.indexOf('id="note"') < html.indexOf('id="workstyle"'));
+  assert.match(html, /atLIB公式noteを読む/);
+  assert.match(html, /href="#note"><span>＋<\/span> 公式noteで知る/);
+  assert.ok((html.match(/href="https:\/\/note\.com\/atlib"/g) || []).length >= 2);
+  assert.match(html, /href="https:\/\/note\.com\/atlib" target="_blank" rel="noopener noreferrer" aria-label="atLIB公式noteを読む（新しいタブで開きます）"/);
+  assert.match(html, /公式note（記事を読む）/);
+  assert.match(css, /\.note-feature\{position:relative;display:grid;/);
+  assert.match(css, /@media \(max-width:700px\)[\s\S]*\.note-feature\{display:flex;flex-direction:column;/);
+  assert.match(css, /\.note-button\{width:100%;min-height:50px;/);
 });
 
 test('every local preview image is present and non-empty', () => {
