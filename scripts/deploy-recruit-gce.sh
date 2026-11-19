@@ -65,6 +65,10 @@ trap on_exit EXIT
 [[ "$(hostname)" == "corporate-site-wp" ]]
 test -s "$ARCHIVE"
 command -v rsync >/dev/null
+if sudo find "$ROOT/entry" -maxdepth 1 -type f -name '*.php' | grep . >/dev/null; then
+  echo '[STOP] Legacy PHP entry endpoint exists. Review and retire it separately before deployment.'
+  exit 1
+fi
 tar -xzf "$ARCHIVE" -C "$STAGE"
 test -s "$STAGE/recruit/index.html"
 test -s "$STAGE/recruit/redesign-preview/assets/hero-team.webp"

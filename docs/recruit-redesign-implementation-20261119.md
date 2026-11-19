@@ -46,5 +46,5 @@
 - `node --test tests/recruit-redesign-preview.test.cjs` は14 PASS。`npm run build` とデプロイスクリプトの `bash -n` もPASS。Indeedの2求人は同日の公開ページで会社名・職種が一致することを再確認した。
 - 本番GCEは `atlib-corporate-site/asia-northeast1-a/corporate-site-wp`、Apache `/var/www/html/recruit/`。Cloud Run切替やコーポレートサイト公開設定は操作しない。
 - `scripts/deploy-recruit-gce.sh --apply` は Cloud Shell の認証済み環境で使用するもの。対象VM/VHostのread-only確認、バックアップ、ソースの段階配置、公開URLのスモーク検証、失敗時のバックアップ復元を行う。未検証のIAP SCP転送を初回操作に含むため、実行結果を必ず回収する。
-- 採用フォームへの新規入力導線は撤去済み。ただし現行VM上の孤立した旧PHPエンドポイントの存在・廃止可否は、VM read-only調査前に断定しない。
+- 採用フォームへの新規入力導線は撤去済み。ただし現行VM上の孤立した旧PHPエンドポイントの存在・廃止可否は、VM read-only調査前に断定しない。デプロイスクリプトは `entry/` 直下にPHPが残っていた場合にSTOPし、無断で削除・上書きしない。
 - このワークスペースにはGCP SDKがなく、GCPコンソールも利用不可のため、上記スクリプトを実行したことや公開完了とは扱わない。
