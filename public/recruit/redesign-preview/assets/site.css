@@ -602,6 +602,10 @@ body{font-family:"IBM Plex Sans JP","Noto Sans JP",sans-serif;font-weight:400;li
   background:rgba(219,255,235,.75);
   clip-path:polygon(0 87%,100% 0,100% 100%,0 100%);
 }
+/* FV text-box position adjustment: desktop only; preserve mobile layout. */
+@media(min-width:981px){
+  .hero .hero-copy{transform:translate(clamp(-36px,-3vw,-20px),-32px)}
+}
 @media(max-width:1150px){
   .hero h1{font-size:clamp(39px,4.4vw,61px)}
   .hero .hero-copy{width:54%}
