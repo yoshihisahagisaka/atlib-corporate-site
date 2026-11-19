@@ -28,6 +28,7 @@ test('main menu goes directly to its destination pages and corporate links are r
   assert.match(html, /href="\.\.\/workstyle\/"/);
   assert.match(html, /href="\.\.\/member\/"/);
   assert.match(html, /href="\.\.\/entry\/"/);
+  assert.ok((html.match(/href="https:\/\/www\.atlib\.jp\/company\/"/g) || []).length === 2);
   assert.doesNotMatch(html, /href="\.\.\/requirements\/"|href="#work"|id="work"/);
   assert.doesNotMatch(html, /仕事を知る|募集要項/);
 });
@@ -41,10 +42,10 @@ test('official atLIB note is prominent, correctly linked and accessible on mobil
   assert.match(html, /href="https:\/\/note\.com\/atlib" target="_blank" rel="noopener noreferrer" aria-label="atLIB公式noteを読む（新しいタブで開きます）"/);
   assert.match(html, /公式note（記事を読む）/);
   assert.match(css, /\.note-feature\{position:relative;display:grid;/);
-  assert.match(css, /@media\(max-width:700px\)[\s\S]*\.note-feature\{display:flex;flex-direction:column;/);
-  assert.match(css, /\.note-button\{min-height:49px;width:100%;/);
+  assert.match(css, /@media \(max-width:700px\)[\s\S]*\.note-feature\{display:flex;flex-direction:column;/);
+  assert.match(css, /\.note-button\{width:100%;min-height:50px;/);
   assert.match(html, /atLIBの<br class="mobile-narrow-only"><span>「今」<\/span>を知る。/);
-  assert.match(css, /@media\(max-width:380px\)[\s\S]*\.mobile-narrow-only\{display:initial\}/);
+  assert.match(css, /@media \(max-width:359px\)[^\n]*\.mobile-narrow-only\{display:initial\}/);
 });
 
 test('every local preview image is present and non-empty', () => {
@@ -69,12 +70,8 @@ test('provided official atLIB logo replaces text imitation in header and footer'
 
 test('decorative English subtitles are removed and geometric layout remains', () => {
   assert.doesNotMatch(html, /OUR PROMISE|OUR VALUES|OUR PEOPLE|OUR WORK|WORK STYLE|STORIES FROM|atLIB JOURNAL|SCROLL TO EXPLORE|JOB 01|JOB 02/);
-  assert.match(html, /class="hero-green-plane"/);
-  assert.match(html, /class="hero-lines hero-lines-top"/);
-  assert.match(html, /class="hero-photo-secondary"/);
-  assert.match(css, /\.hero-green-plane\{[^}]*clip-path:polygon\(/);
-  assert.match(css, /\.hero-photo-secondary\{[^}]*clip-path:polygon\(/);
-  assert.match(css, /\.note-feature\{position:relative;display:grid;/);
+  assert.match(css, /\.hero-photo-primary\{border-radius:0 155px 0 0;transform:none\}/);
+  assert.match(css, /\.note-feature\{border-radius:0 90px 0 0\}/);
   assert.match(html, /採用エントリーはこちら/);
 });
 
@@ -97,9 +94,9 @@ test('all relative navigation links resolve to existing content', () => {
 });
 
 test('mobile layout hides secondary hero photo and keeps the FV content-sized', () => {
-  assert.match(css, /@media\(max-width:700px\)/);
-  assert.match(css, /\.hero\{height:auto;min-height:0;/);
-  assert.match(css, /\.hero-photo-secondary\{display:none\}/);
+  assert.match(css, /@media \(max-width:700px\)/);
+  assert.match(css, /\.hero-grid\{display:flex;flex-direction:column;[^}]*min-height:0/);
+  assert.match(css, /\.hero-photo-secondary,\.hero-ring,\.hero-side-label\{display:none\}/);
   assert.doesNotMatch(css, /height:100vh|height:100svh|min-height:100vh|min-height:100svh/);
   assert.match(css, /\.menu-toggle\{width:44px;height:44px/);
   assert.match(css, /prefers-reduced-motion:reduce/);
@@ -155,7 +152,29 @@ test('mobile navigation opens, closes and restores focus on Escape', () => {
   assert.equal(backToTop.hidden, false);
 });
 
-test('external applications are not linked to unverified Indeed URLs', () => {
-  assert.doesNotMatch(html, /href="https?:\/\/(?:jp\.)?indeed\.com/);
+test('all applications go to verified Indeed job listings with no site entry form', () => {
+  const entry = fs.readFileSync(path.join(preview, '..', 'entry', 'index.html'), 'utf8');
+  assert.doesNotMatch(entry, /<form\b|id="entryForm"|action="confirm\.php"/);
+  assert.match(entry, /href="https:\/\/jp\.indeed\.com\/viewjob\?jk=e7592cdea7a7172f"/);
+  assert.match(entry, /href="https:\/\/jp\.indeed\.com\/viewjob\?jk=4ad7fa0e5f35888c"/);
   assert.match(html, /href="\.\.\/entry\/" class="recruit-entry-link"/);
+});
+
+test('new top and legacy detail pages share the same primary navigation', () => {
+  const navLabels = (content, className) => {
+    const nav = content.match(new RegExp('<nav class="' + className + '"[^>]*>([\\s\\S]*?)<\\/nav>'));
+    assert.ok(nav, className);
+    return [...nav[1].matchAll(/<a\b[^>]*>([^<]+)<\/a>/g)].map((match) => match[1]);
+  };
+  const expected = ['私たちの想い', '会社を知る', '人を知る', '働く環境', '公式note', 'エントリー'];
+  assert.deepEqual(navLabels(html, 'desktop-nav'), expected);
+  assert.deepEqual(navLabels(html, 'mobile-nav'), [...expected, 'コーポレートサイトへ']);
+  for (const page of ['message/index.html', 'member/index.html', 'member/ia/index.html', 'member/mm/index.html', 'member/sy/index.html', 'member/yt/index.html', 'workstyle/index.html', 'company/index.html', 'requirements/index.html', 'policy/index.html', 'entry/index.html', 'entry/thanks.html']) {
+    const content = fs.readFileSync(path.join(preview, '..', page), 'utf8');
+    assert.deepEqual(navLabels(content, 'recruit-nav-desktop'), expected, page);
+    assert.deepEqual(navLabels(content, 'recruit-nav-mobile'), [...expected, 'コーポレートサイトへ'], page);
+    assert.doesNotMatch(content, /href="(?:\.\.\/)+company\/?"/, page);
+  }
+  assert.ok(fs.existsSync(path.join(preview, '..', 'css/recruit-nav.css')));
+  assert.ok(fs.existsSync(path.join(preview, '..', 'js/recruit-nav.js')));
 });

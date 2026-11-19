@@ -3,7 +3,7 @@
 ## 目的と公開境界
 
 - atLIB採用サイトの承認済みPC/スマホカンプに基づき、独立したHTML/CSS/JSと写真素材で実装。
-- 公開中の `recruit.atlib.jp` は現行GCE/Apache配信を維持し、既存 `public/recruit/index.html` は変更しない。
+- 公開中の `recruit.atlib.jp` は現行GCE/Apache配信を維持。既存下層ページの共通ナビゲーション変更はPR内のみで、本番反映前に別途判断する。
 - 独立プレビュー：`public/recruit/redesign-preview/index.html`。実配信時の先頭パスは `/redesign-preview/`（採用サイトのホスト）または `/recruit/redesign-preview/`（コーポレート配下）。
 - プレビューに `noindex,nofollow`。本公開時はSEO/OGP/アクセス解析等を現行採用トップから引き継ぐ。
 
@@ -12,15 +12,16 @@
 - ブランド：Emerald `#2DBE9D` 主軸、Navy `#1F3556`、CTA Orange `#F28C38`、低彩度Peachの円形アクセント。
 - PC：FVでメインとサブの写真を重ねる。VALUES/WORK/PEOPLE/WORKSTYLE/RECRUITを一続きに構成。
 - モバイル：FVの高さをビューポート固定にせず、写真は1枚のみ。独立した文字／画像要素のため画面幅に合わせて再配置。44pxメニューボタン、Escape・外部クリックで閉じる、戻るリンク、ページTOPボタン。320px幅ではnote見出しを意図的な改行に切り替える。
-- ナビ：ページ内往復 `#values` / `#work` / `#people` / `#workstyle` / `#recruit`、採用TOP、既存下層ページへの導線、ヘッダー・モバイル・フッターでコーポレートサイトへのリンク。
+- ナビ：新トップと既存下層ページのPC/スマホメニューを `私たちの想い / 会社を知る / 人を知る / 働く環境 / 公式note / エントリー` に統一。「会社を知る」は `https://www.atlib.jp/company/` に直接リンクする。ヘッダーからコーポレートサイトへも遷移できる。
+- 応募：独自エントリーフォームを廃止。`/entry/` は職種案内だけを行い、ITサポートエンジニアとITコンサルタントの確認済みIndeed求人に遷移する。氏名等の応募情報は採用サイトで収集しない。
 - 公式note：現行採用サイトでも採用している `https://note.com/atlib` を継承。PEOPLEの直後、WORKSTYLEの前に編集記事風の専用セクションを配置し、日常・仕事・経営の想いを継続的に発信していることを伝える。オレンジCTAは新規タブで公式アカウントへ。スマホナビには `#note`、フッターには公式noteへの直接リンクを設置。記事タイトルや更新日を固定表示せず、内容が古く見えることを避ける。
 - 画像：新規生成した人物・オフィス写真6点を個別WebP素材として使用。画像は文字やボタンを焼き込まない独立アセット。
 
 ## 公開前の残確認
 
 1. PC/モバイル実機幅で画像・文字の折返しとナビ動作を目視確認。
-2. 既存下層ページ（message/member/workstyle/requirements/policy）との遷移QA。
-3. 正式な職種別Indeed募集URL確定後、募集要項からの導線を調整。未確認URLは設定していない。
+2. 既存下層ページ（message/member/workstyle/requirements/policy/entry）の共通ヘッダー・スマホメニューの表示と遷移QA。
+3. Indeedの職種別URLは2026-11-19に公開求人で存在を確認。掲載終了・URL変更時は `/entry/` のリンクを更新する。
 4. コンテンツ承認、現行GA/Clarity/OGP/法務文書整合、`noindex`解除、本公開導線の切替は別リリース判断。
 
 ## 検証

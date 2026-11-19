@@ -41,31 +41,36 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Sawarabi+Gothic&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/recruit-nav.css">
 </head>
 
 
 <body> 
-<header>
-	<h1><a href="../"><img src="../images/common/h-logo.png" alt="atLIB採用サイト"></a></h1>
-	<!-- MENU ELEMENT -->
-	<div class="menu-btn" id="js__btn">
-	<span class="menu-btn-line"></span>
-	</div>
-	<div class="overlay"></div>
-	<nav class="menu" id="js__nav">
-		<div class="inner_nav">
-			<ul>
-				<li><a href="../message/">メッセージ</a></li>
-				<li><a href="../company/">会社を知る</a></li>
-				<li><a href="../member/">人を知る</a></li>
-				<li><a href="../workstyle/">環境を知る</a></li>
-				<li><a href="../entry/">エントリー</a></li>
-			</ul>
-			<p><a href="../policy/">- プライバシーポリシー</a></p>
-			<p><a href="https://www.atlib.jp/" target="_blank">- コーポレートサイト</a></p>
-		</div>
-	</nav>
-	<!-- /MENU ELEMENT -->
+<header class="recruit-unified-header" id="top">
+  <div class="recruit-nav-row">
+    <a class="recruit-nav-logo" href="../" aria-label="atLIB採用サイト トップへ"><img src="../images/common/h-logo.png" alt="atLIB" width="2047" height="603"></a>
+    <nav class="recruit-nav-desktop" aria-label="メインナビゲーション">
+      <a href="../message/">私たちの想い</a>
+      <a href="https://www.atlib.jp/company/" target="_blank" rel="noopener noreferrer">会社を知る</a>
+      <a href="../member/">人を知る</a>
+      <a href="../workstyle/">働く環境</a>
+      <a href="https://note.com/atlib" target="_blank" rel="noopener noreferrer">公式note</a>
+      <a class="recruit-nav-cta" href="../entry/">エントリー</a>
+    </nav>
+    <div class="recruit-nav-actions">
+      <a class="recruit-nav-corporate" href="https://www.atlib.jp/" target="_blank" rel="noopener noreferrer"><span class="recruit-nav-corporate-desktop">コーポレートサイト</span><span class="recruit-nav-corporate-mobile">企業サイト</span></a>
+      <button class="recruit-nav-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="legacy-mobile-nav"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="recruit-nav-mobile" id="legacy-mobile-nav" aria-label="スマートフォンナビゲーション" hidden>
+    <a href="../message/">私たちの想い</a>
+    <a href="https://www.atlib.jp/company/" target="_blank" rel="noopener noreferrer">会社を知る</a>
+    <a href="../member/">人を知る</a>
+    <a href="../workstyle/">働く環境</a>
+    <a href="https://note.com/atlib" target="_blank" rel="noopener noreferrer">公式note</a>
+    <a href="../entry/">エントリー</a>
+    <a class="recruit-nav-mobile-corporate" href="https://www.atlib.jp/" target="_blank" rel="noopener noreferrer">コーポレートサイトへ</a>
+  </nav>
 </header>
 
 <main>
@@ -80,70 +85,12 @@
 		<div class="colorbox-02"><img src="../images/common/colorbox_h_rt.png" alt=""></div>		
 	</div>
 	<div id="entry">
-		<section class="entry_form">
+		<section class="entry-indeed">
 			<div class="inner_box-M">
-				<div class="txt_box">
-					<p>株式会社atLIBへの採用エントリーは下記フォームをご利用ください。<br>折り返し担当者よりご連絡させていただきます。</p>
-				</div>
-				<div class="form_box">
-					<form id="entryForm" action="confirm.php" method="POST">
-						<div class="form-group">
-							<label for="job_type">応募職種</label>
-							<select id="job_type" name="job_type">
-								<option value="">選択してください</option>
-								<option value="ITコンサルタント">ITコンサルタント</option>
-								<option value="プロジェクトリーダー（PL）及び候補">プロジェクトリーダー（PL）及び候補</option>
-								<option value="IT技術職">IT技術職</option>
-								<option value="営業職">営業職</option>
-								<option value="その他・相談したい">その他・相談したい</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="name">お名前 <span class="required">必須</span></label>
-							<input type="text" id="name" name="name" autocomplete="name" maxlength="100" required>
-						</div>
-						<div class="form-group">
-							<label for="kana">ふりがな <span class="required">必須</span></label>
-							<input type="text" id="kana" name="kana" maxlength="100" required>
-						</div>
-						<div class="form-group">
-							<label for="birthday">生年月日 <span class="required">必須</span></label>
-							<input type="date" id="birthday" name="birthday" autocomplete="bday" required>
-						</div>
-						<div class="form-group">
-							<label for="gender_type">性別（任意）</label>
-							<select id="gender_type" name="gender_type">
-								<option value="">回答しない</option>
-								<option value="男性">男性</option>
-								<option value="女性">女性</option>
-								<option value="その他">その他</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="address">ご住所 <span class="required">必須</span></label>
-							<input type="text" id="address" name="address" autocomplete="street-address" maxlength="300" required>
-						</div>
-						<div class="form-group">
-							<label for="email">メールアドレス <span class="required">必須</span></label>
-							<input type="email" id="email" name="email" autocomplete="email" maxlength="254" required>
-						</div>
-						<div class="form-group">
-							<label for="phone">電話番号 <span class="required">必須</span></label>
-							<input type="tel" id="phone" name="phone" autocomplete="tel" maxlength="30" required>
-						</div>
-						<div class="form-group">
-							<label for="history">職歴 <span class="required">必須</span></label>
-							<textarea id="history" name="history" maxlength="4000" required></textarea>
-						</div>
-						<div class="form-group">
-							<label for="message">ご質問など（任意）</label>
-							<textarea id="message" name="message" maxlength="4000"></textarea>
-						</div>
-						<p class="entry-consent"><label for="privacy_consent"><input type="checkbox" id="privacy_consent" name="privacy_consent" value="1" required> <a href="../policy/" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>を確認し、個人情報の取扱いに同意します。 <span class="required">必須</span></label></p>
-						<div class="submit-wrapper">
-							<button type="submit">入力内容を確認する</button>
-						</div>
-					</form>
+				<p class="entry-indeed-intro">応募受付はIndeedに集約しています。<br>ご希望の職種を選び、Indeedからご応募ください。</p>
+				<div class="entry-indeed-jobs">
+					<a href="https://jp.indeed.com/viewjob?jk=e7592cdea7a7172f" target="_blank" rel="noopener noreferrer"><strong>ITサポートエンジニア</strong><span>Indeedで募集内容・応募へ ↗</span></a>
+					<a href="https://jp.indeed.com/viewjob?jk=4ad7fa0e5f35888c" target="_blank" rel="noopener noreferrer"><strong>ITコンサルタント</strong><span>Indeedで募集内容・応募へ ↗</span></a>
 				</div>
 			</div>
 		</section>
@@ -177,5 +124,6 @@ $body.removeClass('open');
 });
 });
 </script>
+<script src="../js/recruit-nav.js" defer></script>
 </body>
 </html>
