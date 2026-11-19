@@ -176,6 +176,12 @@ a:focus-visible,button:focus-visible{outline:3px solid #DA7523;outline-offset:4p
 .recruit-option strong{display:block;font-size:17px;line-height:1.4;white-space:nowrap}
 .option-arrow{width:38px;height:38px;border-radius:50%;background:var(--orange);display:grid;place-items:center;font-size:22px;flex:none}
 .recruit-note{color:var(--muted);font-size:12px;margin:20px 0 0;text-align:left}
+/* Job applications: direct Indeed links with concise role descriptions. */
+.recruit-option{background:#F2FBF8;color:var(--navy);border:1px solid #BDE5D9;border-left:6px solid var(--green);border-radius:2px}
+.recruit-option:hover{background:#E6F7F1;color:var(--navy)}
+.recruit-option strong{font-size:19px;white-space:normal}
+.recruit-job-desc{display:block;margin-top:9px;color:#526778;font-size:13px;font-weight:500;line-height:1.7}
+
 
 .site-footer{background:var(--navy);color:#fff;padding-top:70px}
 .footer-top{display:flex;justify-content:space-between;gap:50px;padding-bottom:65px}
