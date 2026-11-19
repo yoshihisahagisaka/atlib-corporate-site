@@ -450,6 +450,9 @@ footer .ft_bnr div {
 	position: relative;
 	width: 50%;
 }
+footer .ft_bnr .bnr-entry:only-child {
+	width: 100%;
+}
 footer .ft_bnr div::before {
 	position: absolute;
 	content: "";

@@ -41,39 +41,42 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Sawarabi+Gothic&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/recruit-nav.css">
 </head>
 
 
 <body> 
-<header>
-	<h1><a href="../../"><img src="../../images/common/h-logo.png" alt="atLIB採用サイト"></a></h1>
-	<!-- MENU ELEMENT -->
-	<div class="menu-btn" id="js__btn">
-	<span class="menu-btn-line"></span>
-	</div>
-	<div class="overlay"></div>
-	<nav class="menu" id="js__nav">
-		<div class="inner_nav">
-			<ul>
-				<li><a href="../../message">メッセージ</a></li>
-				<li><a href="../../company">会社を知る</a></li>
-				<li><a href="../../member">人を知る</a></li>
-				<li><a href="../../workstyle">環境を知る</a></li>
-				<li><a href="../../requirements">募集要項</a></li>
-				<li><a href="../../entry">エントリー</a></li>
-			</ul>
-			<p><a href="../../policy">- プライバシーポリシー</a></p>
-			<p><a href="https://www.atlib.jp/" target="_blank">- コーポレートサイト</a></p>
-		</div>
-	</nav>
-	<!-- /MENU ELEMENT -->
+<header class="recruit-unified-header" id="top">
+  <div class="recruit-nav-row">
+    <a class="recruit-nav-logo" href="../../" aria-label="atLIB採用サイト トップへ"><img src="../../images/common/h-logo.png" alt="atLIB" width="2047" height="603"></a>
+    <nav class="recruit-nav-desktop" aria-label="メインナビゲーション">
+      <a href="../../message/">私たちの想い</a>
+      <a href="https://www.atlib.jp/company/">会社を知る</a>
+      <a href="../../member/">人を知る</a>
+      <a href="../../workstyle/">働く環境</a>
+      <a href="https://note.com/atlib" target="_blank" rel="noopener noreferrer">公式note</a>
+      <a class="recruit-nav-cta" href="../../#recruit">エントリー</a>
+    </nav>
+    <div class="recruit-nav-actions">
+      <a class="recruit-nav-corporate" href="https://www.atlib.jp/"><span class="recruit-nav-corporate-desktop">コーポレートサイト</span><span class="recruit-nav-corporate-mobile">企業サイト</span></a>
+      <button class="recruit-nav-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="legacy-mobile-nav"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="recruit-nav-mobile" id="legacy-mobile-nav" aria-label="スマートフォンナビゲーション" hidden>
+    <a href="../../message/">私たちの想い</a>
+    <a href="https://www.atlib.jp/company/">会社を知る</a>
+    <a href="../../member/">人を知る</a>
+    <a href="../../workstyle/">働く環境</a>
+    <a href="https://note.com/atlib" target="_blank" rel="noopener noreferrer">公式note</a>
+    <a href="../../#recruit">エントリー</a>
+    <a class="recruit-nav-mobile-corporate" href="https://www.atlib.jp/">コーポレートサイトへ</a>
+  </nav>
 </header>
 
 <main>
 	<div class="page_header">
 		<div class="inner_box-M">
 			<div class="page_ttl">
-				<p>MEMBER INTERVIEW</p>
 				<h1>インタビュー</h1>
 			</div>
 			<div class="page_map"><p><span><a href="../../">トップページ</a></span>　-　<span><a href="../../member">人を知る</a></span>　-　<span>S.Yさん</span></p></div>
@@ -142,7 +145,6 @@
 		<section class="member_list">
 			<div class="inner_box-M">
 				<div class="ttl_box-bk">
-					<p>OTHER MEMBERS</p>
 					<h2>他のメンバーのインタビュー</h2>
 				</div>
 				<ul class="col2_box">
@@ -187,12 +189,11 @@
 	
 <footer>
 	<div class="ft_bnr">
-		<div class="bnr-job"><a href="../../requirements">募集要項をみる</a></div>
-		<div class="bnr-entry"><a href="../../entry">エントリーする</a></div>
+		<div class="bnr-entry"><a href="../../#recruit">エントリーする</a></div>
 	</div>
 	<div class="ft_cont">
 		<div class="f-logo"><img src="../../images/common/logo_ft.png" alt="atLIB"></div>
-		<p class="f-copy"><a href="../../policy">PrivacyPolicy</a>　<a href="https://www.atlib.jp/" target="_blank">Corpratesite</a><br>&copy;<script type="text/javascript">myDate = new Date() ;myYear = myDate.getFullYear ();document.write(myYear);</script> atLIB株式会社 all rights reserved.</p>
+		<p class="f-copy"><a href="../../policy">PrivacyPolicy</a>　<a href="https://www.atlib.jp/">Corpratesite</a><br>&copy;<script type="text/javascript">myDate = new Date() ;myYear = myDate.getFullYear ();document.write(myYear);</script> atLIB株式会社 all rights reserved.</p>
 	</div>
 </footer>
 
@@ -335,5 +336,6 @@ window.addEventListener('scroll', () => {
 	});
 </script>
 	
+<script src="../../js/recruit-nav.js" defer></script>
 </body>
 </html>

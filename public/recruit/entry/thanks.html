@@ -19,7 +19,7 @@
     })(window, document, "clarity", "script", "xtjmp7ly4g");
 </script>
 <!-- //Microsoft Clarity -->
-<title>送信完了 ｜ atLIB株式会社 採用サイト</title>
+<title>応募のご案内 ｜ atLIB株式会社 採用サイト</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,22 +41,45 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Sawarabi+Gothic&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/recruit-nav.css">
 </head>
 
 
 <body> 
-<header>
-	<h1><a href="../"><img src="../images/common/h-logo.png" alt="atLIB採用サイト"></a></h1>
+<header class="recruit-unified-header" id="top">
+  <div class="recruit-nav-row">
+    <a class="recruit-nav-logo" href="../" aria-label="atLIB採用サイト トップへ"><img src="../images/common/h-logo.png" alt="atLIB" width="2047" height="603"></a>
+    <nav class="recruit-nav-desktop" aria-label="メインナビゲーション">
+      <a href="../message/">私たちの想い</a>
+      <a href="https://www.atlib.jp/company/" target="_blank" rel="noopener noreferrer">会社を知る</a>
+      <a href="../member/">人を知る</a>
+      <a href="../workstyle/">働く環境</a>
+      <a href="https://note.com/atlib" target="_blank" rel="noopener noreferrer">公式note</a>
+      <a class="recruit-nav-cta" href="../entry/">エントリー</a>
+    </nav>
+    <div class="recruit-nav-actions">
+      <a class="recruit-nav-corporate" href="https://www.atlib.jp/" target="_blank" rel="noopener noreferrer"><span class="recruit-nav-corporate-desktop">コーポレートサイト</span><span class="recruit-nav-corporate-mobile">企業サイト</span></a>
+      <button class="recruit-nav-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="legacy-mobile-nav"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="recruit-nav-mobile" id="legacy-mobile-nav" aria-label="スマートフォンナビゲーション" hidden>
+    <a href="../message/">私たちの想い</a>
+    <a href="https://www.atlib.jp/company/" target="_blank" rel="noopener noreferrer">会社を知る</a>
+    <a href="../member/">人を知る</a>
+    <a href="../workstyle/">働く環境</a>
+    <a href="https://note.com/atlib" target="_blank" rel="noopener noreferrer">公式note</a>
+    <a href="../entry/">エントリー</a>
+    <a class="recruit-nav-mobile-corporate" href="https://www.atlib.jp/" target="_blank" rel="noopener noreferrer">コーポレートサイトへ</a>
+  </nav>
 </header>
 
 <main>	
 	<div class="page_header">
 		<div class="inner_box-M">
 			<div class="page_ttl">
-				<p>COMPLETE</p>
-				<h1>送信完了</h1>
+				<h1>応募のご案内</h1>
 			</div>
-			<div class="page_map"><p><span><a href="../">トップページ</a></span>　-　<span>送信完了</span></p></div>
+			<div class="page_map"><p><span><a href="../">トップページ</a></span>　-　<span>応募のご案内</span></p></div>
 		</div>
 		<div class="colorbox-01"><img src="../images/common/colorbox_h_lt.png" alt=""></div>
 		<div class="colorbox-02"><img src="../images/common/colorbox_h_rt.png" alt=""></div>		
@@ -64,11 +87,9 @@
 	<section class="thanks_box">
 		<div class="inner_box-M">
 			<div class="txt_box">
-				<p>この度はエントリーいただき、誠にありがとうございます。<br>
-					ご入力いただいたメールアドレス宛に、受付完了メールを送信いたしました。</p>
-				<p>担当者より改めてご連絡させていただきますので、今しばらくお待ちくださいますようお願い申し上げます。</p>
+				<p>採用サイト独自のエントリーフォームは終了しました。<br>現在はIndeedからのみ応募を受け付けています。</p>
 			</div>
-			<a href="../index.html" class="btn-home">トップページへ戻る</a>
+			<a href="./" class="btn-home">Indeedの募集職種を見る</a>
 		</div>
 	</section>
 </main>
@@ -183,5 +204,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 </script>
 	
+<script src="../js/recruit-nav.js" defer></script>
 </body>
 </html>

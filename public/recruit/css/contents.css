@@ -1786,3 +1786,29 @@ header > h1 {
 
 
 
+/* Keep the official atLIB wordmark legible over the legacy color-block header. */
+header > h1 {
+  box-sizing: content-box;
+  padding: 8px 12px;
+  background: #fff;
+  border-radius: 2px;
+}
+@media screen and (max-width: 599px) {
+  header > h1 { padding: 7px 10px; }
+}
+/* Indeed-only recruitment: no personal information is collected on this site. */
+.entry-indeed { padding: 75px 0 135px; background: #fff; }
+.entry-indeed .inner_box-M { max-width: 860px; }
+.entry-indeed-intro { margin-bottom: 36px; color: #1f3556; font-size: 17px; line-height: 2; }
+.entry-indeed-jobs { display: grid; gap: 18px; }
+.entry-indeed-jobs a { display: flex; align-items: center; justify-content: space-between; gap: 20px; border: 1px solid #c3e7df; background: #f7fffc; padding: 23px 28px; color: #1f3556; border-left: 6px solid #2dbe9d; }
+.entry-indeed-jobs a:hover { background: #e8faf4; }
+.entry-indeed-jobs strong { font-size: 21px; }
+.entry-indeed-jobs span { color: #d8741a; font-size: 14px; font-weight: 700; white-space: nowrap; }
+@media(max-width:700px) {
+  .entry-indeed { padding: 45px 0 80px; }
+  .entry-indeed-intro { font-size: 14px; }
+  .entry-indeed-jobs a { display: block; padding: 20px; }
+  .entry-indeed-jobs strong { display: block; margin-bottom: 8px; font-size: 18px; }
+  .entry-indeed-jobs span { white-space: normal; }
+}
