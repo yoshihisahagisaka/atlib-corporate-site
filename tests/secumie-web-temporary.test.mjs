@@ -7,6 +7,7 @@ import { validTargetUrl, temporaryIntakeMessage } from '../public/js/secumie-web
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const html = readFileSync(path.join(dir, '../public/secumie-web/index.html'), 'utf8');
+const script = readFileSync(path.join(dir, '../public/js/secumie-web-temporary.mjs'), 'utf8');
 
 test('temporary intake requires company, union, website and contact details', () => {
   for (const name of ['unionName', 'company', 'registeredAddress', 'targetUrl', 'name', 'email', 'phone', 'privacyConsent']) {
@@ -31,4 +32,6 @@ test('temporary intake uses the protected contact API and never claims automatic
   assert.match(message, /診断対象URL：https:\/\/example\.jp\//);
   assert.match(message, /自動提供なし/);
   assert.throws(() => temporaryIntakeMessage({unionName:'A',registeredAddress:'B',targetUrl:'http://example.jp'}));
+  assert.match(script, /body\.source = 'secumie_web_temporary'/);
+  assert.match(script, /body\.targetUrl = targetUrl\.trim\(\)/);
 });
