@@ -81,6 +81,10 @@ if (typeof document !== 'undefined') {
           privacyConsent: fields.namedItem('privacyConsent').checked,
           website: fields.namedItem('website').value,
         }, token);
+        // Keep the existing contact API contract, but explicitly identify this
+        // intake so only SECU:MIE submissions trigger a Slack notification.
+        body.source = 'secumie_web_temporary';
+        body.targetUrl = targetUrl.trim();
         const response = await fetch(endpoint, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body), signal: controller.signal,
