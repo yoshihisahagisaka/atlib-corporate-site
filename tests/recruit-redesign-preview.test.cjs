@@ -14,6 +14,7 @@ const js = fs.readFileSync(path.join(preview, 'assets', 'site.js'), 'utf8');
 test('standalone preview does not replace existing recruit homepage', () => {
   assert.ok(fs.existsSync(path.join(preview, '..', 'index.html')));
   assert.match(html, /<meta name="robots" content="noindex,nofollow">/);
+  assert.equal((html.match(/<!--License20261119vzyRP-->/g) || []).length, 1);
   assert.match(html, /<html lang="ja">/);
   assert.match(html, /<main id="main">/);
 });

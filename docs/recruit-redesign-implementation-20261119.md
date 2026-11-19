@@ -6,6 +6,7 @@
 - 公開中の `recruit.atlib.jp` は現行GCE/Apache配信を維持。既存下層ページの共通ナビゲーション変更はPR内のみで、本番反映前に別途判断する。
 - 独立プレビュー：`public/recruit/redesign-preview/index.html`。実配信時の先頭パスは `/redesign-preview/`（採用サイトのホスト）または `/recruit/redesign-preview/`（コーポレート配下）。
 - プレビューに `noindex,nofollow`。本公開時はSEO/OGP/アクセス解析等を現行採用トップから引き継ぐ。
+- 承認後に提供されたライセンス識別コメント `<!--License20261119vzyRP-->` をプレビューのHTML `<head>` に１行のみ付与（表示には影響しない）。
 
 ## 実装内容
 
