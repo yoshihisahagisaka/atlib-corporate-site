@@ -18,16 +18,18 @@ test('standalone preview does not replace existing recruit homepage', () => {
   assert.match(html, /<main id="main">/);
 });
 
-test('all in-page navigation targets exist and corporate links are retained', () => {
-  for (const section of ['values', 'work', 'people', 'note', 'workstyle', 'recruit']) {
+test('main menu goes directly to its destination pages and corporate links are retained', () => {
+  for (const section of ['values', 'people', 'note', 'workstyle', 'recruit']) {
     assert.match(html, new RegExp('id="' + section + '"'));
-    assert.match(html, new RegExp('href="#' + section + '"'));
   }
   assert.ok((html.match(/https:\/\/www\.atlib\.jp\//g) || []).length >= 3);
   assert.match(html, /href="\.\/" class="brand"/);
+  assert.match(html, /href="\.\.\/message\/"/);
   assert.match(html, /href="\.\.\/workstyle\/"/);
   assert.match(html, /href="\.\.\/member\/"/);
-  assert.match(html, /href="\.\.\/requirements\/"/);
+  assert.match(html, /href="\.\.\/entry\/"/);
+  assert.doesNotMatch(html, /href="\.\.\/requirements\/"|href="#work"|id="work"/);
+  assert.doesNotMatch(html, /仕事を知る|募集要項/);
 });
 
 test('official atLIB note is prominent, correctly linked and accessible on mobile', () => {
@@ -35,8 +37,7 @@ test('official atLIB note is prominent, correctly linked and accessible on mobil
   assert.ok(html.indexOf('id="people"') < html.indexOf('id="note"'));
   assert.ok(html.indexOf('id="note"') < html.indexOf('id="workstyle"'));
   assert.match(html, /atLIB公式noteを読む/);
-  assert.match(html, /href="#note"><span>＋<\/span> 公式noteで知る/);
-  assert.ok((html.match(/href="https:\/\/note\.com\/atlib"/g) || []).length >= 2);
+  assert.ok((html.match(/href="https:\/\/note\.com\/atlib"/g) || []).length >= 3);
   assert.match(html, /href="https:\/\/note\.com\/atlib" target="_blank" rel="noopener noreferrer" aria-label="atLIB公式noteを読む（新しいタブで開きます）"/);
   assert.match(html, /公式note（記事を読む）/);
   assert.match(css, /\.note-feature\{position:relative;display:grid;/);
@@ -53,6 +54,32 @@ test('every local preview image is present and non-empty', () => {
     const file = path.join(preview, asset);
     assert.ok(fs.existsSync(file), asset);
     assert.ok(fs.statSync(file).size > 1000, asset);
+  }
+});
+
+test('provided official atLIB logo replaces text imitation in header and footer', () => {
+  assert.ok((html.match(/src="\.\/assets\/atlib-logo\.png"/g) || []).length === 2);
+  assert.doesNotMatch(html, /brand-word|brand-caption|RECRUIT \/ atLIB/);
+  const logo = fs.readFileSync(path.join(preview, 'assets', 'atlib-logo.png'));
+  assert.equal(logo.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
+  for (const sharedImage of ['h-logo.png', 'logo_ft.png']) {
+    assert.ok(fs.readFileSync(path.join(preview, '..', 'images', 'common', sharedImage)).equals(logo));
+  }
+});
+
+test('decorative English subtitles are removed and geometric layout remains', () => {
+  assert.doesNotMatch(html, /OUR PROMISE|OUR VALUES|OUR PEOPLE|OUR WORK|WORK STYLE|STORIES FROM|atLIB JOURNAL|SCROLL TO EXPLORE|JOB 01|JOB 02/);
+  assert.match(css, /\.hero-photo-primary\{border-radius:0 155px 0 0;transform:none\}/);
+  assert.match(css, /\.note-feature\{border-radius:0 90px 0 0\}/);
+  assert.match(html, /採用エントリーはこちら/);
+});
+
+test('reachable legacy subpages no longer advertise old requirements or English kickers', () => {
+  const pages = ['message/index.html', 'company/index.html', 'member/index.html', 'member/ia/index.html', 'member/mm/index.html', 'member/sy/index.html', 'member/yt/index.html', 'workstyle/index.html', 'policy/index.html', 'entry/index.html', 'entry/thanks.html'];
+  for (const page of pages) {
+    const content = fs.readFileSync(path.join(preview, '..', page), 'utf8');
+    assert.doesNotMatch(content, /href="(?:\.\.\/)+requirements\/?"/, page);
+    assert.doesNotMatch(content, /<p>[A-Z][A-Z ]+<\/p>/, page);
   }
 });
 
@@ -126,5 +153,5 @@ test('mobile navigation opens, closes and restores focus on Escape', () => {
 
 test('external applications are not linked to unverified Indeed URLs', () => {
   assert.doesNotMatch(html, /href="https?:\/\/(?:jp\.)?indeed\.com/);
-  assert.match(html, /募集職種・応募条件は募集要項ページでご確認ください。/);
+  assert.match(html, /href="\.\.\/entry\/" class="recruit-entry-link"/);
 });

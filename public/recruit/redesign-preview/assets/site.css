@@ -331,3 +331,42 @@ a:focus-visible,button:focus-visible{outline:3px solid #DA7523;outline-offset:4p
 }
 @media (max-width:359px){.hero h1{font-size:29px}.corporate-link{font-size:12px}.header-actions{gap:6px}.wrap{width:calc(100% - 30px)}.hero-subtitle{font-size:23px}.note-copy h2{font-size:25px}.mobile-narrow-only{display:initial}.recruit-option strong{font-size:15px}.footer-bottom{flex-direction:column}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
+/* Approved identity: authentic wordmark, architectural straight edges and deliberate curves. */
+.brand{display:inline-flex;align-items:center;flex:none;line-height:1}
+.brand img{display:block;width:142px;height:auto;max-width:none}
+.nav-cta,.note-button,.outline-button{border-radius:5px}
+.hero::before{content:"";position:absolute;right:0;top:0;width:23%;height:9px;background:var(--navy);z-index:1}
+.hero-scroll{font:700 12px/1.3 "Noto Sans JP",sans-serif;letter-spacing:.03em}
+.hero-photo-primary{border-radius:0 155px 0 0;transform:none}
+.hero-photo-secondary{border-radius:0 0 0 100px;transform:none}
+.intro::before{content:"";position:absolute;left:0;top:0;width:24%;height:8px;background:var(--navy)}
+.intro::after{content:"";position:absolute;right:0;bottom:0;width:17%;height:8px;background:var(--orange)}
+.intro h2{margin-top:0}
+.photo-soft{border-radius:0 155px 0 0}
+.people-photo{border-radius:135px 0 0 0;transform:none}
+.note-feature{border-radius:0 90px 0 0}
+.note-paper{border-radius:3px}
+.note-paper-front{padding:70px 35px 38px}
+.workstyle-photo{border-radius:0 140px 0 0}
+.recruit-entry-link{display:inline-flex;align-items:center;justify-content:center;gap:38px;min-width:min(100%,340px);min-height:64px;background:var(--green-deep);border-radius:5px;color:#fff;padding:15px 30px;font-size:17px;font-weight:800;transition:background .2s,transform .2s}
+.recruit-entry-link:hover{background:#087F6B;transform:translateY(-3px)}
+.recruit-entry-link span{font-size:23px}
+.footer-brand{padding:12px 18px;background:#fff;border-radius:2px}
+.footer-brand img{width:155px}
+
+@media (max-width:980px){
+  .hero-photo-primary{border-radius:0 125px 0 0}
+  .note-paper-front{padding:61px 27px 31px}
+}
+@media (max-width:700px){
+  .brand img{width:110px}
+  .hero-photo-primary{border-radius:0 85px 0 0}
+  .photo-soft{border-radius:0 85px 0 0}
+  .people-photo{border-radius:85px 0 0 0}
+  .note-feature{border-radius:0 65px 0 0}
+  .note-paper-front{padding:34px 22px 17px}
+  .workstyle-photo{border-radius:0 85px 0 0}
+  .recruit-entry-link{min-width:100%;min-height:56px;font-size:15px}
+  .footer-brand img{width:135px}
+}

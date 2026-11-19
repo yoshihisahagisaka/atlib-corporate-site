@@ -1786,3 +1786,13 @@ header > h1 {
 
 
 
+/* Keep the official atLIB wordmark legible over the legacy color-block header. */
+header > h1 {
+  box-sizing: content-box;
+  padding: 8px 12px;
+  background: #fff;
+  border-radius: 2px;
+}
+@media screen and (max-width: 599px) {
+  header > h1 { padding: 7px 10px; }
+}
