@@ -25,6 +25,23 @@ const valid = {
   website: '',
   turnstileToken: 'example-token',
 };
+const secumie = {
+  ...valid,
+  inquiryType: 'other',
+  company: '株式会社テスト商事',
+  name: '非通知 太郎',
+  email: 'private@example.com',
+  targetUrl: 'https://example.jp',
+  source: 'secumie_web_temporary',
+  message: [
+    '【SECU:MIE Web／国連協総会 無料Webセキュリティ診断・暫定受付】',
+    '所属組合：テスト組合',
+    '本店所在地：東京都',
+    '診断対象URL：https://example.jp',
+    '対応方法：atLIBによる後日確認・診断結果のご案内',
+    '情報提供：協会・組合への自動提供なし（別途同意までatLIB受付のみ）',
+  ].join('\n'),
+};
 
 async function withApi(run, options = {}) {
   const sent = [];
@@ -34,7 +51,7 @@ async function withApi(run, options = {}) {
   const verifyCalls = [];
   const verify = options.verify ?? (async (input) => { verifyCalls.push(input); return true; });
   const app = express();
-  app.use(createSiteContactApiRouter(mailer, options.config ?? config, verify, options.logger));
+  app.use(createSiteContactApiRouter(mailer, options.config ?? config, verify, options.logger, options.secumieSlack));
   const server = await new Promise((resolve) => {
     const instance = app.listen(0, '127.0.0.1', () => resolve(instance));
   });
@@ -125,6 +142,63 @@ test('SMTP failure never reports acceptance', async () => {
     assert.equal(response.status, 502);
     assert.deepEqual(await response.json(), { ok: false, code: 'notification_failed' });
   }, { mailer: { async sendContactNotification() { throw new Error('smtp failed'); } } });
+});
+
+test('SECU:MIE intake sends Slack only after successful SMTP and with two non-personal fields', async () => {
+  const notifications = [];
+  await withApi(async ({ post, sent }) => {
+    assert.equal((await post(valid)).status, 200);
+    assert.equal(notifications.length, 0, 'ordinary corporate form must not notify Slack');
+    assert.equal((await post(secumie)).status, 200);
+    assert.equal(sent.length, 2);
+    assert.deepEqual(notifications, [{ company: '株式会社テスト商事', targetUrl: 'https://example.jp/' }]);
+    assert.doesNotMatch(JSON.stringify(notifications), /private@example|非通知|テスト組合|東京都/u);
+  }, { secumieSlack: async (input) => notifications.push(input) });
+});
+
+test('forged or inconsistent SECU:MIE tags fail before SMTP and Slack', async () => {
+  const notifications = [];
+  const malformed = [
+    { ...secumie, source: 'anything' },
+    { ...secumie, inquiryType: 'services' },
+    { ...secumie, targetUrl: 'http://example.jp' },
+    { ...secumie, targetUrl: 'https://wrong.example' },
+    { ...secumie, targetUrl: 'https://example.jp\n<!here>' },
+    { ...secumie, message: 'unrelated request' },
+  ];
+  for (const offset of [0, 3]) {
+    await withApi(async ({ post, sent }) => {
+      for (const payload of malformed.slice(offset, offset + 3)) {
+        assert.equal((await post(payload)).status, 400);
+      }
+      assert.equal(sent.length, 0);
+      assert.equal(notifications.length, 0);
+    }, { secumieSlack: async (input) => notifications.push(input) });
+  }
+});
+
+test('Slack delivery outage never turns a sent email into an ambiguous failed submission', async () => {
+  const events = [];
+  const logger = {
+    info() {},
+    warn(fields) { events.push(fields); },
+  };
+  await withApi(async ({ post, sent }) => {
+    assert.equal((await post(secumie)).status, 200);
+    assert.equal(sent.length, 1);
+    assert.deepEqual(events, [{ event: 'secumie_slack_delivery_failed', traceId: null }]);
+  }, { logger, secumieSlack: async () => { throw new Error('secret or customer@example.com'); } });
+});
+
+test('SMTP failure prevents SECU:MIE Slack notification', async () => {
+  const notifications = [];
+  await withApi(async ({ post }) => {
+    assert.equal((await post(secumie)).status, 502);
+    assert.equal(notifications.length, 0);
+  }, {
+    mailer: { async sendContactNotification() { throw new Error('smtp failed'); } },
+    secumieSlack: async (input) => notifications.push(input),
+  });
 });
 
 test('Staging diagnostic logs contain only trace-correlated allowlisted SMTP fields', async () => {
