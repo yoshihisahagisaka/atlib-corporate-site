@@ -49,7 +49,7 @@ const HEAD = `	<!-- Google tag (gtag.js) -->
 	<meta name="format-detection" content="telephone=no">
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
-	<link rel="icon" href="../images/favicon.png">
+	<link rel="icon" type="image/png" sizes="64x64" href="/images/favicon.png?v=20261118">
 	<link rel="stylesheet" href="../css/common.css">
 	<link rel="stylesheet" href="../css/top.css">
 	<link rel="stylesheet" href="../css/contents.css">
@@ -223,7 +223,7 @@ export function createEntryFormRouter(mailer: Mailer, config: Config): Router {
 
     const requiredOk =
       data.name && data.kana && data.birthday && data.address && data.email && data.phone && data.history;
-    if (!requiredOk || !isValidEmail(data.email)) {
+    if (!requiredOk || !isValidEmail(data.email) || req.body?.privacy_consent !== '1') {
       res.redirect('index.html');
       return;
     }

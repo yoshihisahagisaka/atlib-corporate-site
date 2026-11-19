@@ -107,6 +107,41 @@ test('five canonical pages expose SEO metadata, with private preview text only o
   }
 });
 
+test('corporate pages request a fresh, root-absolute stylesheet and mobile menu script', () => {
+  const assetVersion = '20261119-mobile';
+  for (const [urlPath, sourcePath] of pages) {
+    const html = fs.readFileSync(path.join(publicDir, sourcePath), 'utf8');
+    assert.match(html, /<meta name="viewport" content="width=device-width, initial-scale=1">/u, urlPath);
+    for (const asset of ['style.css', 'atlib.css']) {
+      assert.ok(html.includes(`href="/css/${asset}?v=${assetVersion}"`), `${urlPath}: ${asset} needs cache busting`);
+    }
+    for (const asset of ['jquery.inview_set.js', 'main.js']) {
+      assert.ok(html.includes(`src="/js/${asset}?v=${assetVersion}"`), `${urlPath}: ${asset} needs cache busting`);
+    }
+    assert.doesNotMatch(html, /(?:href|src)="(?:\.\.\/)?(?:css|js)\//u, `${urlPath}: relative asset reference`);
+  }
+  const stylesheet = fs.readFileSync(path.join(publicDir, 'css/style.css'), 'utf8');
+  for (const asset of ['theme.css', 'inview.css']) {
+    assert.ok(stylesheet.includes(`@import url("${asset}?v=${assetVersion}")`), `${asset} import should refresh`);
+  }
+  assert.match(stylesheet, /\.arrow\s*\{[^}]*fill:\s*none;/su, 'arrow must remain outlined');
+  assert.match(stylesheet, /\.mainimg\s*\{[^}]*flex-direction:\s*column-reverse;/su, 'mobile hero order must be defined');
+});
+
+test('Template Party license is present on the corporate home page and credits are removed', () => {
+  const licenseCode = '<!--License20261110OnkIP-->';
+  const home = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
+  assert.equal(home.split(licenseCode).length - 1, 1, 'license code must appear once in the top page');
+  assert.match(home, /\n<!--License20261110OnkIP-->\n<\/body>/u,
+    'license must be on the line immediately preceding the closing body tag');
+  for (const [route, sourcePath] of pages) {
+    const html = fs.readFileSync(path.join(publicDir, sourcePath), 'utf8');
+    if (route !== '/') assert.doesNotMatch(html, /<!--License20261110OnkIP-->/u);
+    assert.doesNotMatch(html, /Web Design:Template-Party|テンプレート利用規約に従い、著作表示を維持します/u, route);
+    assert.match(html, /Copyright &copy; atLIB株式会社 All Rights Reserved\./u, route);
+  }
+});
+
 test('AIO Organization/WebSite structured data is parseable and uses existing identities', () => {
   const home = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
   const match = home.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/u);

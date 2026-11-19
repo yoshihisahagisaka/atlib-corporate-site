@@ -34,10 +34,17 @@ test('HTTP preview / publication / recruit routing, with no mail sent', async ()
   });
   // Node fetch overrides Host with the URL authority. Use http.request to
   // emulate the real HTTPS LB's forwarded hostname without network access.
-  const request = (pathname, host, extraHeaders = {}) => new Promise((resolve, reject) => {
+  const request = (pathname, host, extraHeaders = {}, method = 'GET', body = '') => new Promise((resolve, reject) => {
     const req = http.request({
-      hostname: '127.0.0.1', port, path: pathname, method: 'GET',
-      headers: { Host: host, ...extraHeaders },
+      hostname: '127.0.0.1', port, path: pathname, method,
+      headers: {
+        Host: host,
+        ...(body ? {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': Buffer.byteLength(body),
+        } : {}),
+        ...extraHeaders,
+      },
     }, (res) => {
       const chunks = [];
       res.on('data', (chunk) => chunks.push(chunk));
@@ -48,7 +55,7 @@ test('HTTP preview / publication / recruit routing, with no mail sent', async ()
       }));
     });
     req.on('error', reject);
-    req.end();
+    req.end(body);
   });
 
   try {
@@ -74,6 +81,31 @@ test('HTTP preview / publication / recruit routing, with no mail sent', async ()
     assert.match(live.headers.get('content-security-policy'), /script-src 'self'/u);
     assert.match(liveHtml, /<meta name="robots" content="index,follow,max-image-preview:large">/u);
     assert.doesNotMatch(liveHtml, /デザイン検討用プレビュー|公開サイトではありません/u);
+    assert.match(liveHtml, /href="\/images\/favicon\.png\?v=20261118"/u);
+
+    // CSS and menu JS are cache-busted after the GCE -> Cloud Run DNS cutover.
+    // A stale or missing base stylesheet makes the mobile hero overflow and
+    // renders the outline SVG arrows as large filled triangles.
+    for (const [urlPath, expectedMime] of [
+      ['/css/style.css?v=20261119-mobile', /^text\/css/u],
+      ['/css/atlib.css?v=20261119-mobile', /^text\/css/u],
+      ['/css/theme.css?v=20261119-mobile', /^text\/css/u],
+      ['/css/inview.css?v=20261119-mobile', /^text\/css/u],
+      ['/js/main.js?v=20261119-mobile', /^(?:application|text)\/javascript/u],
+    ]) {
+      const asset = await request(urlPath, 'www.atlib.jp');
+      assert.equal(asset.status, 200, `${urlPath} must be available`);
+      assert.match(asset.headers.get('content-type'), expectedMime, `${urlPath} must not return HTML`);
+    }
+
+    for (const host of ['www.atlib.jp', 'recruit.atlib.jp', 'www.recruit.atlib.jp']) {
+      const png = await request('/images/favicon.png?v=20261118', host);
+      assert.equal(png.status, 200, `favicon PNG missing on ${host}`);
+      assert.match(png.headers.get('content-type'), /^image\/png/u);
+      const ico = await request('/favicon.ico?v=20261118', host);
+      assert.equal(ico.status, 200, `favicon ICO missing on ${host}`);
+      assert.match(ico.headers.get('content-type'), /^image\/(?:x-icon|vnd\.microsoft\.icon)/u);
+    }
 
     const contact = await request('/contact/', 'www.atlib.jp');
     const contactHtml = await contact.text();
@@ -110,6 +142,45 @@ test('HTTP preview / publication / recruit routing, with no mail sent', async ()
     assert.doesNotMatch(recruitHtml, /ITで、企業に自由を。<\/title>/u);
     assert.match(recruitHtml, /https:\/\/note\.com\/atlib/u);
     assert.match(recruitHtml, /images\/workstyle\/atlib_note_banner_final\.png/u);
+    assert.match(recruitHtml, /href="\/images\/favicon\.png\?v=20261118"/u);
+
+    for (const host of ['recruit.atlib.jp', 'www.recruit.atlib.jp']) {
+      const form = await request('/entry/', host);
+      const html = await form.text();
+      assert.equal(form.status, 200, `recruitment entry form missing on ${host}`);
+      assert.match(html, /<form id="entryForm" action="confirm\.php" method="POST">/u);
+      assert.match(html, /name="privacy_consent" value="1" required/u);
+      assert.match(html, /href="\/images\/favicon\.png\?v=20261118"/u);
+      for (const key of ['name', 'kana', 'birthday', 'address', 'email', 'phone', 'history']) {
+        assert.match(html, new RegExp(`name="${key}"`, 'u'));
+      }
+      assert.doesNotMatch(html, /href="\/entry\/"[^>]*>採用エントリーフォームへ/u);
+      const thanks = await request('/entry/thanks.html', host);
+      assert.equal(thanks.status, 200);
+    }
+
+    const entryFields = new URLSearchParams({
+      job_type: 'IT技術職', name: 'テスト応募者', kana: 'てすとおうぼしゃ',
+      birthday: '2000-01-01', gender_type: '', address: 'テスト住所',
+      email: 'synthetic-applicant@example.invalid', phone: '0000000000',
+      history: 'テスト用の経歴', message: '送信はしません', privacy_consent: '1',
+    });
+    const entryConfirm = await request('/entry/confirm.php', 'recruit.atlib.jp', {}, 'POST', entryFields.toString());
+    const confirmHtml = await entryConfirm.text();
+    assert.equal(entryConfirm.status, 200);
+    assert.match(confirmHtml, /入力内容確認/u);
+    assert.match(confirmHtml, /<form action="send\.php" method="POST"/u);
+    assert.match(confirmHtml, /name="form_sig" value="[a-f0-9]+"/u);
+    assert.match(confirmHtml, /href="\/images\/favicon\.png\?v=20261118"/u);
+
+    const withoutConsent = new URLSearchParams(entryFields);
+    withoutConsent.delete('privacy_consent');
+    const rejected = await request('/entry/confirm.php', 'recruit.atlib.jp', {}, 'POST', withoutConsent.toString());
+    assert.equal(rejected.status, 302);
+    assert.equal(rejected.headers.get('location'), 'index.html');
+
+    const forged = await request('/entry/send.php', 'recruit.atlib.jp', {}, 'POST', entryFields.toString());
+    assert.equal(forged.status, 400, 'unsigned entry submission must not send mail');
 
     for (const host of ['recruit.atlib.jp', 'www.recruit.atlib.jp']) {
       const noteBanner = await request('/images/workstyle/atlib_note_banner_final.png', host);

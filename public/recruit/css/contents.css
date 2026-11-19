@@ -714,6 +714,8 @@ footer .ft_bnr.ft_job div {
 .entry_form input[type="text"],
 .entry_form input[type="email"],
 .entry_form input[type="tel"],
+.entry_form input[type="date"],
+.entry_form select,
 .entry_form textarea {
 	width: calc(100% - 220px);
 	padding: 10px;
@@ -728,6 +730,8 @@ footer .ft_bnr.ft_job div {
 .entry_form input[type="text"]:focus,
 .entry_form input[type="email"]:focus,
 .entry_form input[type="tel"]:focus,
+.entry_form input[type="date"]:focus,
+.entry_form select:focus,
 .entry_form textarea:focus {
 	outline: none;
 	border: 1px solid #6CB1F7;
@@ -737,6 +741,23 @@ footer .ft_bnr.ft_job div {
 .entry_form textarea {
 	min-height: 200px;
 	resize: vertical;
+}
+
+.entry_form .entry-consent {
+	text-align: center;
+	line-height: 1.8;
+}
+
+.entry_form .entry-consent label {
+	display: inline;
+	width: auto;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.entry_form .entry-consent input[type="checkbox"] {
+	vertical-align: middle;
+	margin-right: 0.4em;
 }
 
 .entry_form .submit-wrapper {
@@ -1672,6 +1693,8 @@ header > h1 {
 .entry_form input[type="text"],
 .entry_form input[type="email"],
 .entry_form input[type="tel"],
+.entry_form input[type="date"],
+.entry_form select,
 .entry_form textarea {
 	width: 100%;
 	padding: 10px;
@@ -1685,6 +1708,10 @@ header > h1 {
 .entry_form textarea {
 	min-height: 150px;
 	resize: vertical;
+}
+
+.entry_form .entry-consent label {
+	font-size: 1rem;
 }
 
 .entry_form .submit-wrapper {
