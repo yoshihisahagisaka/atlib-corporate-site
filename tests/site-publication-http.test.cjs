@@ -28,7 +28,8 @@ test('HTTP preview / publication / recruit routing, with no mail sent', async ()
       FORM_HMAC_SECRET: 'synthetic-only',
       SITE_CONTACT_TURNSTILE_SITE_KEY: 'synthetic-site-key-123456',
       SITE_CONTACT_TURNSTILE_SECRET: 'synthetic-only',
-      SITE_CONTACT_ALLOWED_ORIGINS: '',
+      SITE_CONTACT_ALLOWED_ORIGINS: 'https://www.atlib.jp',
+      SITE_CONTACT_TURNSTILE_HOSTNAMES: 'www.atlib.jp',
     },
     stdio: 'ignore',
   });
@@ -113,6 +114,26 @@ test('HTTP preview / publication / recruit routing, with no mail sent', async ()
     assert.match(contact.headers.get('content-security-policy'), /frame-src https:\/\/challenges\.cloudflare\.com/u);
     assert.doesNotMatch(contactHtml, /Staging検証環境|__TURNSTILE_SITE_KEY__/u);
     assert.match(contactHtml, /data-sitekey="synthetic-site-key-123456"/u);
+
+    const secumie = await request('/secumie-web/', 'www.atlib.jp');
+    const secumieHtml = await secumie.text();
+    assert.equal(secumie.status, 200);
+    assert.match(secumie.headers.get('content-security-policy'), /script-src 'self'/u);
+    assert.match(secumieHtml, /data-intake-enabled="true"/u);
+    assert.match(secumieHtml, /data-sitekey="synthetic-site-key-123456"/u);
+    assert.match(secumieHtml, /<meta name="robots" content="noindex,nofollow">/u);
+    for (const assetPath of ['/css/secumie-web-temporary.css', '/js/secumie-web-temporary.mjs']) {
+      const asset = await request(assetPath, 'www.atlib.jp');
+      assert.equal(asset.status, 200, `${assetPath} must be available`);
+    }
+    const secumieStage = await request('/secumie-web/', 'corporate-site-staging-123.run.app');
+    assert.equal(secumieStage.status, 200);
+    assert.equal(secumieStage.headers.get('x-robots-tag'), 'noindex, nofollow');
+    assert.match(await secumieStage.text(), /data-intake-enabled="false"/u);
+    const secumieSpoof = await request('/secumie-web/', 'corporate-site-staging-123.run.app', {
+      'X-Forwarded-Host': 'www.atlib.jp',
+    });
+    assert.match(await secumieSpoof.text(), /data-intake-enabled="false"/u);
 
     const stage = await request('/', 'corporate-site-staging-123.run.app');
     const stageHtml = await stage.text();

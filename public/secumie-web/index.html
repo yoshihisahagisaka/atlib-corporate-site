@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="国連協総会ご参加の皆様向け・SECU:MIE Web無料Webセキュリティ診断のお申し込み">
+  <title>無料Webセキュリティ診断のお申し込み | SECU:MIE Web</title>
+  <link rel="stylesheet" href="/css/secumie-web-temporary.css">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/">SECU:MIE <span>Web</span></a>
+      <a class="back-link" href="https://www.atlib.jp/">atLIB株式会社 <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main class="page">
+    <div class="eyebrow">国際連携推進協会 総会ご参加の皆様へ</div>
+    <h1>無料<span>Webセキュリティ診断</span></h1>
+    <p class="lead">Webサイトやメールの公開設定を確認する、セキュリティ対策の一歩目としてご活用ください。</p>
+
+    <section class="intro" aria-label="診断について">
+      <div class="section-mark" aria-hidden="true"></div>
+      <p>本診断では、公開されているWebサイト・ドメインの設定を確認します。社内ネットワークへの接続や、パスワードの提出は必要ありません。</p>
+      <p>現在は総会向けの先行受付です。診断結果はこの画面には表示されません。お申し込み内容を確認後、atLIBからご案内します。</p>
+    </section>
+
+    <section class="form-card" aria-labelledby="form-title">
+      <h2 id="form-title">診断のお申し込み</h2>
+      <p class="form-help">必須項目をご入力ください。所属組合名は正式名称でご記入ください。</p>
+      <form id="secumie-temporary-form" data-intake-enabled="__SECUMIE_TEMP_ENABLED__" data-contact-api-url="/api/contact" autocomplete="on">
+        <div class="honeypot" aria-hidden="true"><label for="anti-bot-website">入力しないでください</label><input id="anti-bot-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <div class="field"><label for="union-name">所属組合名 <span>必須</span></label><input id="union-name" name="unionName" maxlength="150" required placeholder="組合の正式名称"></div>
+        <div class="field"><label for="company">企業名 <span>必須</span></label><input id="company" name="company" autocomplete="organization" maxlength="150" required></div>
+        <div class="field"><label for="registered-address">本店所在地 <span>必須</span></label><input id="registered-address" name="registeredAddress" maxlength="500" required></div>
+        <div class="field"><label for="target-url">診断対象WebサイトURL <span>必須</span></label><input id="target-url" name="targetUrl" type="url" inputmode="url" placeholder="https://example.com/" maxlength="2000" required></div>
+        <div class="field"><label for="contact-name">ご担当者名 <span>必須</span></label><input id="contact-name" name="name" autocomplete="name" maxlength="100" required></div>
+        <div class="field"><label for="contact-email">メールアドレス <span>必須</span></label><input id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+        <div class="field"><label for="contact-phone">電話番号 <span>必須</span></label><input id="contact-phone" name="phone" type="tel" autocomplete="tel" maxlength="30" required></div>
+
+        <div class="privacy-box">
+          <p>お預かりした情報は、atLIBによる診断受付・ご連絡に利用します。この暫定受付から協会・所属組合へ担当者情報や診断結果を自動提供することはありません。外部への情報提供が必要な場合は、改めてその範囲をご案内します。</p>
+          <label class="privacy-label" for="privacy-consent">
+            <input id="privacy-consent" name="privacyConsent" type="checkbox" required>
+            <span><a href="https://www.atlib.jp/privacy-policy/" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>と上記の情報利用について確認し、同意します。</span>
+          </label>
+        </div>
+
+        <div class="bot-check"><p>迷惑送信対策</p><div class="cf-turnstile" data-sitekey="__TURNSTILE_SITE_KEY__" data-theme="light" data-size="flexible" data-action="contact"></div></div>
+        <button type="submit" disabled aria-disabled="true">無料診断を申し込む</button>
+        <p id="intake-status" role="status" aria-live="polite">受付を準備しています。</p>
+      </form>
+      <div id="intake-success" class="success" hidden role="status">
+        <h2>お申し込みを受け付けました</h2>
+        <p>ありがとうございました。内容を確認のうえ、atLIBからご案内します。</p>
+      </div>
+    </section>
+    <p class="contact-note">お問い合わせは <a href="https://www.atlib.jp/contact/">atLIBお問い合わせ窓口</a> からも承ります。</p>
+  </main>
+  <footer>© atLIB株式会社 / SECU:MIE Web</footer>
+  <script type="module" src="/js/secumie-web-temporary.mjs"></script>
+</body>
+</html>
