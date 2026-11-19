@@ -8,6 +8,7 @@ import { Mailer } from './services/mailer';
 import { createContactFormRouter } from './routes/contactForm';
 import { createEntryFormRouter } from './routes/entryForm';
 import { createSiteContactApiRouter } from './routes/siteContactApi';
+import { createSecumieSlackNotifier } from './services/secumieSlack';
 import { createIpRateLimiter } from './middleware/rateLimit';
 import { corporatePageSecurityHeaders, isPublicRequest, renderCorporatePage, siteSecurityHeaders } from './middleware/sitePublication';
 
@@ -58,7 +59,8 @@ async function main(): Promise<void> {
 
   app.use(createContactFormRouter(mailer, config));
   app.use(createEntryFormRouter(mailer, config));
-  app.use(createSiteContactApiRouter(mailer, config.siteContact, undefined, logger));
+  const secumieSlack = createSecumieSlackNotifier(config.siteContact.secumieSlackWebhookUrl);
+  app.use(createSiteContactApiRouter(mailer, config.siteContact, undefined, logger, secumieSlack));
 
   // Serve approved corporate templates on both Staging and Production. A
   // public release removes preview-only wording and meta noindex at response
