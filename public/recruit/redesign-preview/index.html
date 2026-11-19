@@ -9,7 +9,7 @@
   <title>採用サイト リニューアルプレビュー | atLIB株式会社</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/site.css">
   <script src="./assets/site.js" defer></script>
 </head>
@@ -50,28 +50,27 @@
 
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-bubble hero-bubble-1" aria-hidden="true"></div>
-      <div class="hero-bubble hero-bubble-2" aria-hidden="true"></div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-photo-primary"><img src="./assets/hero-team.webp" alt="" fetchpriority="high" width="1536" height="1024"></div>
+        <div class="hero-photo-secondary"><img src="./assets/values-partners.webp" alt="" width="1536" height="1024"></div>
+      </div>
+      <div class="hero-green-plane" aria-hidden="true"></div>
+      <div class="hero-lines hero-lines-top" aria-hidden="true"><span></span><span></span></div>
+      <div class="hero-lines hero-lines-bottom" aria-hidden="true"><span></span><span></span></div>
+      <div class="hero-peach-arc" aria-hidden="true"></div>
+      <div class="hero-mint-corner" aria-hidden="true"></div>
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <h1 id="hero-title">困っている人を、<br><em>放っておけない。</em></h1>
-          <p class="hero-subtitle">その気持ちを、<br>ITの仕事に。</p>
+          <p class="hero-subtitle"><span aria-hidden="true">/</span>その気持ちを、ITの仕事に。</p>
           <p class="hero-support">お客様の課題に、一緒に向き合う。</p>
-          <a href="#values" class="hero-scroll">下へスクロール <span aria-hidden="true">↓</span></a>
-        </div>
-        <div class="hero-visual">
-          <div class="hero-photo-primary"><img src="./assets/hero-team.webp" alt="オフィスでパソコンを囲みながら話し合うITチーム" fetchpriority="high" width="1536" height="1024"></div>
-          <div class="hero-photo-secondary"><img src="./assets/values-partners.webp" alt="お客様の課題について相談するメンバー" width="1536" height="1024"></div>
-          <div class="hero-ring" aria-hidden="true"></div>
         </div>
       </div>
-      <div class="hero-bottom wrap"><span>ITで、企業に自由を。<br class="mobile-only">人々に未来をつくる。</span><span class="hero-bottom-mark" aria-hidden="true">✳</span></div>
     </section>
 
     <section class="intro section" aria-label="私たちの姿勢">
       <div class="wrap intro-inner">
-        <h2>一緒に考え、<br class="mobile-only">一緒に前へ<span class="orange-period">。</span></h2>
-        <p>目の前の困りごとに耳を傾けること。<br>その先にある「本当に必要なこと」を一緒に見つけること。<br>atLIBは、人と向き合うことから始まるITの仕事を大切にしています。</p>
+        <h2>一緒に考え、一緒に前へ。</h2>
         <div class="intro-circle intro-circle-a" aria-hidden="true"></div>
         <div class="intro-circle intro-circle-b" aria-hidden="true"></div>
       </div>
@@ -79,13 +78,12 @@
 
     <section class="values section" id="values" aria-labelledby="values-title">
       <div class="wrap values-grid">
-        <div class="values-photo photo-soft"><img src="./assets/values-partners.webp" alt="相手の話を聞きながら一緒に考える社員たち" loading="lazy" width="1536" height="1024"></div>
         <div class="values-copy">
           <h2 id="values-title">技術で応える。<br><span>人として、向き合う。</span></h2>
           <p>ITを手段に、お客様と一緒に考え、課題を解決する。</p>
-          <p>大切なのは、知識やスキルだけではありません。相手を理解しようとする姿勢と、チームでよりよい答えを探していく気持ちです。</p>
           <a href="../message/" class="text-link">私たちの想いをもっと知る</a>
         </div>
+        <div class="values-photo photo-soft"><img src="./assets/values-partners.webp" alt="相手の話を聞きながら一緒に考える社員たち" loading="lazy" width="1536" height="1024"></div>
       </div>
     </section>
 
@@ -107,14 +105,7 @@
             <a class="note-button" href="https://note.com/atlib" target="_blank" rel="noopener noreferrer" aria-label="atLIB公式noteを読む（新しいタブで開きます）">atLIB公式noteを読む</a>
           </div>
           <div class="note-art" aria-hidden="true">
-            <div class="note-art-ring"></div>
-            <div class="note-paper note-paper-back"></div>
-            <div class="note-paper note-paper-front">
-              <span class="note-paper-word">note<span>.</span></span>
-              <span class="note-paper-line"></span>
-              <span class="note-paper-headline">私たちらしさを、<br>もっと、身近に。</span>
-            </div>
-            <div class="note-art-orb"></div>
+            <img src="./assets/people-team.webp" alt="" loading="lazy" width="1536" height="1024">
           </div>
         </div>
       </div>

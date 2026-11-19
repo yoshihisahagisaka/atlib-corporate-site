@@ -41,10 +41,10 @@ test('official atLIB note is prominent, correctly linked and accessible on mobil
   assert.match(html, /href="https:\/\/note\.com\/atlib" target="_blank" rel="noopener noreferrer" aria-label="atLIB公式noteを読む（新しいタブで開きます）"/);
   assert.match(html, /公式note（記事を読む）/);
   assert.match(css, /\.note-feature\{position:relative;display:grid;/);
-  assert.match(css, /@media \(max-width:700px\)[\s\S]*\.note-feature\{display:flex;flex-direction:column;/);
-  assert.match(css, /\.note-button\{width:100%;min-height:50px;/);
+  assert.match(css, /@media\(max-width:700px\)[\s\S]*\.note-feature\{display:flex;flex-direction:column;/);
+  assert.match(css, /\.note-button\{min-height:49px;width:100%;/);
   assert.match(html, /atLIBの<br class="mobile-narrow-only"><span>「今」<\/span>を知る。/);
-  assert.match(css, /@media \(max-width:359px\)[^\n]*\.mobile-narrow-only\{display:initial\}/);
+  assert.match(css, /@media\(max-width:380px\)[\s\S]*\.mobile-narrow-only\{display:initial\}/);
 });
 
 test('every local preview image is present and non-empty', () => {
@@ -69,8 +69,12 @@ test('provided official atLIB logo replaces text imitation in header and footer'
 
 test('decorative English subtitles are removed and geometric layout remains', () => {
   assert.doesNotMatch(html, /OUR PROMISE|OUR VALUES|OUR PEOPLE|OUR WORK|WORK STYLE|STORIES FROM|atLIB JOURNAL|SCROLL TO EXPLORE|JOB 01|JOB 02/);
-  assert.match(css, /\.hero-photo-primary\{border-radius:0 155px 0 0;transform:none\}/);
-  assert.match(css, /\.note-feature\{border-radius:0 90px 0 0\}/);
+  assert.match(html, /class="hero-green-plane"/);
+  assert.match(html, /class="hero-lines hero-lines-top"/);
+  assert.match(html, /class="hero-photo-secondary"/);
+  assert.match(css, /\.hero-green-plane\{[^}]*clip-path:polygon\(/);
+  assert.match(css, /\.hero-photo-secondary\{[^}]*clip-path:polygon\(/);
+  assert.match(css, /\.note-feature\{position:relative;display:grid;/);
   assert.match(html, /採用エントリーはこちら/);
 });
 
@@ -93,9 +97,9 @@ test('all relative navigation links resolve to existing content', () => {
 });
 
 test('mobile layout hides secondary hero photo and keeps the FV content-sized', () => {
-  assert.match(css, /@media \(max-width:700px\)/);
-  assert.match(css, /\.hero-grid\{display:flex;flex-direction:column;[^}]*min-height:0/);
-  assert.match(css, /\.hero-photo-secondary,\.hero-ring,\.hero-side-label\{display:none\}/);
+  assert.match(css, /@media\(max-width:700px\)/);
+  assert.match(css, /\.hero\{height:auto;min-height:0;/);
+  assert.match(css, /\.hero-photo-secondary\{display:none\}/);
   assert.doesNotMatch(css, /height:100vh|height:100svh|min-height:100vh|min-height:100svh/);
   assert.match(css, /\.menu-toggle\{width:44px;height:44px/);
   assert.match(css, /prefers-reduced-motion:reduce/);
