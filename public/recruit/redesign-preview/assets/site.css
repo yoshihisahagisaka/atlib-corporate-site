@@ -14,6 +14,7 @@ a:focus-visible,button:focus-visible{outline:3px solid #DA7523;outline-offset:4p
 .skip-link{position:fixed;top:0;left:12px;background:var(--navy);color:#fff;z-index:1000;padding:10px 20px;transform:translateY(-150%)}
 .skip-link:focus{transform:none}
 .mobile-only{display:none}
+.mobile-narrow-only{display:none}
 
 /* Header: the corporate link remains available alongside primary navigation. */
 .site-header{height:var(--header-height);position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);box-shadow:0 2px 20px rgba(25,48,72,.055);backdrop-filter:blur(12px)}
@@ -328,5 +329,5 @@ a:focus-visible,button:focus-visible{outline:3px solid #DA7523;outline-offset:4p
   .footer-bottom{font-size:9px;gap:15px}
   .back-to-top{bottom:15px;right:15px;width:43px;height:43px;font-size:22px}
 }
-@media (max-width:359px){.hero h1{font-size:29px}.corporate-link{font-size:12px}.header-actions{gap:6px}.wrap{width:calc(100% - 30px)}.hero-subtitle{font-size:23px}.recruit-option strong{font-size:15px}.footer-bottom{flex-direction:column}}
+@media (max-width:359px){.hero h1{font-size:29px}.corporate-link{font-size:12px}.header-actions{gap:6px}.wrap{width:calc(100% - 30px)}.hero-subtitle{font-size:23px}.note-copy h2{font-size:25px}.mobile-narrow-only{display:initial}.recruit-option strong{font-size:15px}.footer-bottom{flex-direction:column}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}

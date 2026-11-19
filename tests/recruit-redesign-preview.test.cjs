@@ -42,6 +42,8 @@ test('official atLIB note is prominent, correctly linked and accessible on mobil
   assert.match(css, /\.note-feature\{position:relative;display:grid;/);
   assert.match(css, /@media \(max-width:700px\)[\s\S]*\.note-feature\{display:flex;flex-direction:column;/);
   assert.match(css, /\.note-button\{width:100%;min-height:50px;/);
+  assert.match(html, /atLIBの<br class="mobile-narrow-only"><span>「今」<\/span>を知る。/);
+  assert.match(css, /@media \(max-width:359px\)[^\n]*\.mobile-narrow-only\{display:initial\}/);
 });
 
 test('every local preview image is present and non-empty', () => {
