@@ -20,6 +20,15 @@ test('temporary intake requires company, union, website and contact details', ()
   assert.match(html, /https:\/\/www\.atlib\.jp\/privacy-policy\//);
 });
 
+test('temporary intake shows a compact form and the exact report-delivery receipt copy', () => {
+  assert.doesNotMatch(html, /class="intro"|class="form-help"|id="form-title"/);
+  assert.doesNotMatch(html, /社内ネットワークへの接続や、パスワードの提出/);
+  assert.doesNotMatch(html, /必須項目をご入力ください。所属組合名は正式名称/);
+  assert.match(html, /<h2>お申し込みを受け付けました<\/h2>/);
+  assert.match(html, /<p>診断結果はこの画面には表示されません。<\/p>/);
+  assert.match(html, /<p>診断実施の上、後日セキュリティ診断報告レポートをatLIBから送付いたします。<\/p>/);
+});
+
 test('temporary intake uses the protected contact API and never claims automatic data sharing', () => {
   assert.match(html, /協会・所属組合へ担当者情報や診断結果を自動提供することはありません/);
   assert.doesNotMatch(html, /api\/public\/secumie-web\/v1\/requests/);
