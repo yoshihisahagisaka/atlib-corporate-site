@@ -370,3 +370,115 @@ a:focus-visible,button:focus-visible{outline:3px solid #DA7523;outline-offset:4p
   .recruit-entry-link{min-width:100%;min-height:56px;font-size:15px}
   .footer-brand img{width:135px}
 }
+
+/* Editorial refinement: a rectilinear grid, restrained arc accents and quieter type.
+   Curves belong to the background composition, not every photo or control. */
+body{font-family:"IBM Plex Sans JP","Noto Sans JP",sans-serif;font-weight:400;line-height:1.8}
+.site-header{box-shadow:0 1px 0 rgba(31,53,86,.12);backdrop-filter:none}
+.desktop-nav>a:not(.nav-cta){font-weight:600}
+.nav-cta,.recruit-entry-link,.note-button,.outline-button{border-radius:2px;box-shadow:none;font-weight:700;letter-spacing:.025em}
+.nav-cta:hover,.note-button:hover,.recruit-entry-link:hover{transform:none}
+.menu-toggle{border-radius:3px}
+.mobile-nav>a{font-weight:600}
+.mobile-nav .mobile-corporate{border-radius:2px}
+
+.hero{background:#147E70}
+.hero::before{width:18%;height:6px}
+.hero::after{content:"";position:absolute;top:90px;left:0;width:7px;height:180px;background:rgba(31,53,86,.75)}
+.hero-bubble{display:none}
+.hero h1,.hero-subtitle,.intro h2,.values-copy h2,.people-copy h2,
+.note-copy h2,.workstyle h2,.recruit h2{font-family:"IBM Plex Sans JP","Noto Sans JP",sans-serif;font-weight:600;letter-spacing:-.012em;text-shadow:none}
+.hero h1{line-height:1.46}
+.hero h1 em::after{height:3px;bottom:0;border-radius:0;background:var(--peach)}
+.hero-subtitle{line-height:1.55}
+.hero-support{font-size:16px;font-weight:400;letter-spacing:.01em}
+.hero-photo-primary{border-radius:0;box-shadow:0 12px 28px rgba(13,68,68,.10)}
+.hero-photo-secondary{border:5px solid var(--green);border-radius:0;box-shadow:0 7px 18px rgba(13,68,68,.08)}
+.hero-ring{width:230px;height:230px;border-width:24px;border-color:rgba(255,222,183,.48);right:-16%;bottom:1%}
+.hero-scroll{font-family:"IBM Plex Sans JP","Noto Sans JP",sans-serif;font-weight:500}
+.hero-scroll span{border-radius:0;width:27px;height:29px}
+.hero-bottom-mark{display:none}
+
+.section{padding-block:110px}
+.intro{padding-block:125px;background:#fff}
+.intro::before,.intro::after{height:5px}
+.intro h2{font-size:clamp(30px,3.8vw,48px);line-height:1.6}
+.intro p:not(.small-caption){font-size:16px;font-weight:400;line-height:2.25}
+.intro-circle-a{display:none}
+.intro-circle-b{width:185px;height:185px;right:-83px;bottom:-88px;border-width:22px;border-color:rgba(251,214,181,.65)}
+
+.values::after{width:300px;height:300px;right:-190px;top:-175px;border-width:34px;opacity:.65}
+.photo-soft,.people-photo,.workstyle-photo{border-radius:0;box-shadow:0 12px 30px rgba(23,64,81,.07)}
+.values-photo::after{width:130px;height:130px;right:-20px;bottom:-30px;background:transparent;border:20px solid rgba(251,214,181,.6)}
+.values-copy h2{font-size:clamp(28px,3vw,42px);line-height:1.55}
+.values-copy>p:not(.section-kicker){font-size:16px;line-height:2.1}
+.text-link{font-size:15px;font-weight:600;gap:16px}
+.text-link span{font-size:17px}
+
+.people{background:#137B6E}
+.people-oval{width:365px;height:365px;top:-200px;left:-160px;border-width:27px;opacity:.5}
+.people-copy h2{font-size:clamp(34px,3.8vw,53px);line-height:1.52}
+.people-copy>p:not(.section-kicker){font-size:16px;font-weight:400;line-height:2.15}
+.outline-button{font-size:15px}
+
+.note-section{background:#fff}
+.note-feature{border-radius:0;background:#F4F7F6;border-left:6px solid var(--green);min-height:425px}
+.note-copy{padding-top:54px;padding-bottom:54px}
+.note-update{border-radius:0;background:#E5F2EE;font-family:"IBM Plex Sans JP","Noto Sans JP",sans-serif;font-size:12px;font-weight:600;padding:5px 12px}
+.note-copy h2{font-size:clamp(29px,3vw,43px);line-height:1.57}
+.note-copy>p:not(.note-eyebrow){font-size:16px;line-height:2.05}
+.note-art{min-height:425px}
+.note-art-ring,.note-art-orb,.note-paper-back{display:none}
+.note-paper{width:min(315px,75%);height:324px;border-radius:0;box-shadow:9px 9px 0 rgba(31,53,86,.09)}
+.note-paper-front{transform:translate(-50%,-50%);border:1px solid rgba(31,53,86,.13);padding:47px 32px 31px}
+.note-paper-word{font-family:"IBM Plex Sans JP","Noto Sans JP",sans-serif;font-size:64px;font-weight:700;letter-spacing:-.065em}
+.note-paper-line{border-radius:0;height:3px}
+.note-paper-headline{font-size:20px;font-weight:600;line-height:1.65;letter-spacing:-.015em}
+
+.workstyle::before{width:280px;height:280px;right:-200px;bottom:-180px;background:transparent;border:31px solid #FDE6D2}
+.workstyle h2{font-size:clamp(33px,3.7vw,49px)}
+.workstyle-copy p:not(.section-kicker){font-size:16px;line-height:2.2}
+.recruit-ring{width:410px;height:410px;border-width:43px;left:-265px;bottom:-200px;opacity:.6}
+.recruit h2{font-size:clamp(35px,4.2vw,55px);line-height:1.5}
+.recruit-inner>p:not(.section-kicker,.recruit-note){font-size:16px;font-weight:400}
+.recruit-entry-link{font-size:16px}
+.back-to-top{border-radius:3px}
+
+@media (max-width:980px){
+  .hero-ring{width:175px;height:175px;border-width:21px;right:-13%}
+  .note-paper{width:min(280px,78%);height:300px}
+  .note-paper-front{padding:40px 27px 25px}
+  .note-paper-word{font-size:57px}
+}
+@media (max-width:700px){
+  .section{padding-block:78px}
+  .hero::after{height:90px;top:64px;width:4px}
+  .hero h1{font-size:clamp(28px,7.45vw,38px);line-height:1.5;letter-spacing:-.028em}
+  .hero-subtitle{font-size:clamp(21px,6.15vw,28px);font-weight:700;line-height:1.48}
+  .hero-support{font-size:15px}
+  .hero-photo-primary{border-radius:0}
+  .intro{padding-block:84px}
+  .intro h2{font-size:clamp(27px,7vw,34px)}
+  .intro p:not(.small-caption){font-size:16px;line-height:2.1}
+  .intro-circle-b{width:120px;height:120px;right:-75px;bottom:-60px;border-width:17px}
+  .photo-soft,.people-photo,.workstyle-photo{border-radius:0}
+  .values-copy h2{font-size:clamp(26px,7vw,34px)}
+  .values-copy>p:not(.section-kicker),.people-copy>p:not(.section-kicker),
+  .workstyle-copy p:not(.section-kicker){font-size:16px}
+  .people-copy h2{font-size:clamp(32px,7.7vw,43px)}
+  .people-oval{width:215px;height:215px;top:-100px;left:-120px;border-width:23px}
+  .note-feature{border-radius:0;border-left-width:4px}
+  .note-copy{padding:30px 26px 9px}
+  .note-copy h2{font-size:clamp(27px,7vw,35px);line-height:1.5}
+  .note-copy>p:not(.note-eyebrow){font-size:16px}
+  .note-art{min-height:230px}
+  .note-paper{width:min(240px,68%);height:206px}
+  .note-paper-front{padding:18px 22px 15px}
+  .note-paper-word{font-size:43px;margin:0}
+  .note-paper-headline{font-size:15px;line-height:1.5}
+  .workstyle h2{font-size:clamp(32px,8.1vw,41px)}
+  .recruit h2{font-size:clamp(32px,8vw,42px)}
+  .recruit-inner>p:not(.section-kicker,.recruit-note){font-size:16px}
+  .recruit-ring{width:220px;height:220px;left:-160px;bottom:-110px;border-width:27px}
+  .recruit-entry-link{font-size:16px}
+}
