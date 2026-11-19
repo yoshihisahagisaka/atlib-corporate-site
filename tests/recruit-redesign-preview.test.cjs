@@ -8,15 +8,40 @@ const vm = require('node:vm');
 
 const preview = path.join(__dirname, '..', 'public', 'recruit', 'redesign-preview');
 const html = fs.readFileSync(path.join(preview, 'index.html'), 'utf8');
+const production = fs.readFileSync(path.join(preview, '..', 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(preview, 'assets', 'site.css'), 'utf8');
 const js = fs.readFileSync(path.join(preview, 'assets', 'site.js'), 'utf8');
 
-test('standalone preview does not replace existing recruit homepage', () => {
+test('standalone preview remains noindex independently of approved production homepage', () => {
   assert.ok(fs.existsSync(path.join(preview, '..', 'index.html')));
   assert.match(html, /<meta name="robots" content="noindex,nofollow">/);
   assert.equal((html.match(/<!--License20261119vzyRP-->/g) || []).length, 1);
   assert.match(html, /<html lang="ja">/);
   assert.match(html, /<main id="main">/);
+});
+
+test('release homepage has approved content, working asset routes and existing analytics', () => {
+  const approvedBody = html.slice(html.indexOf('<body>'))
+    .replaceAll('href="../', 'href="./')
+    .replaceAll('./assets/', './redesign-preview/assets/');
+  assert.equal(production.slice(production.indexOf('<body>')), approvedBody, 'The visible homepage body must match the approved design');
+  assert.equal((production.match(/<!--License20261119vzyRP-->/g) || []).length, 1);
+  assert.doesNotMatch(production, /noindex|リニューアルプレビュー|<form\b/);
+  assert.match(production, /<title>採用情報 \| atLIB株式会社<\/title>/);
+  assert.match(production, /<link rel="canonical" href="https:\/\/recruit\.atlib\.jp\/">/);
+  assert.match(production, /<meta property="og:url" content="https:\/\/recruit\.atlib\.jp\/">/);
+  assert.match(production, /G-1CBDCR2PD0/);
+  assert.match(production, /xtjmp7ly4g/);
+  assert.match(production, /https:\/\/www\.atlib\.jp\/company\//);
+  assert.match(production, /href="\.\/entry\/" class="recruit-entry-link"/);
+  assert.match(production, /atLIBの<br class="mobile-narrow-only"><span>「今」<\/span>を知る。/);
+  for (const asset of [...production.matchAll(/(?:src|href)="(\.\/(?:redesign-preview\/assets|images)\/[^"?]+)/g)]) {
+    const file = path.join(preview, '..', asset[1]);
+    assert.ok(fs.existsSync(file), `Missing production asset: ${asset[1]}`);
+  }
+  for (const link of [...production.matchAll(/href="(\.\/(?:message|member|workstyle|entry|policy)\/?)"/g)]) {
+    assert.ok(fs.existsSync(path.resolve(preview, '..', link[1])), `Missing production page: ${link[1]}`);
+  }
 });
 
 test('main menu goes directly to its destination pages and corporate links are retained', () => {
