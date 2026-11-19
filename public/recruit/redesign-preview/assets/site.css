@@ -630,7 +630,7 @@ body{font-family:"IBM Plex Sans JP","Noto Sans JP",sans-serif;font-weight:400;li
   .hero .hero-photo-primary img{object-position:53% 52%}
   .hero .hero-photo-secondary{display:none}
   .hero .hero-green-plane{
-    clip-path:polygon(0 0,100% 0,70% 51%,18% 100%,0 100%);
+    clip-path:polygon(0 0,100% 0,100% 45%,0 68%);
     background:linear-gradient(125deg,#25c4a7,#06aa84);
   }
   .hero .hero-lines-top{top:0;left:48%;transform:scale(.65);transform-origin:left top}
