@@ -2,6 +2,7 @@ import express, { Router, type ErrorRequestHandler } from 'express';
 import type { Config } from '../config';
 import type { ContactFormData, Mailer } from '../services/mailer';
 import { createIpRateLimiter } from '../middleware/rateLimit';
+import type { SecumieSlackIntake, SecumieSlackNotifier } from '../services/secumieSlack';
 
 const MAX_BODY_BYTES = '32kb';
 const INQUIRY_TYPES: Readonly<Record<string, string>> = {
@@ -82,7 +83,19 @@ function field(value: unknown, maxLength: number): string | null {
   return normalized && normalized.length <= maxLength ? normalized : null;
 }
 
-function validatePayload(body: unknown): { fields: ContactFormData; token: string } | null {
+function secumieTargetUrl(value: unknown): string | null {
+  const candidate = field(value, 2048);
+  if (!candidate || /[\r\n<>\u2028\u2029]/u.test(candidate)) return null;
+  try {
+    const url = new URL(candidate);
+    if (url.protocol !== 'https:' || !url.hostname || url.username || url.password) return null;
+    return url.href;
+  } catch {
+    return null;
+  }
+}
+
+function validatePayload(body: unknown): { fields: ContactFormData; token: string; secumie?: SecumieSlackIntake } | null {
   if (!body || typeof body !== 'object' || Array.isArray(body)) return null;
   const data = body as Record<string, unknown>;
   if (data.privacyConsent !== true || (data.website !== undefined && data.website !== '')) return null;
@@ -97,9 +110,20 @@ function validatePayload(body: unknown): { fields: ContactFormData; token: strin
   if (!company || !name || !email || !message || phone === null || !token) return null;
   if (!/^[^\s@<>"\x00-\x1f\x7f]+@[^\s@<>"\x00-\x1f\x7f]+\.[^\s@<>"\x00-\x1f\x7f]+$/u.test(email)) return null;
 
+  let secumie: SecumieSlackIntake | undefined;
+  if (data.source !== undefined) {
+    if (data.source !== 'secumie_web_temporary' || data.inquiryType !== 'other') return null;
+    const targetUrl = secumieTargetUrl(data.targetUrl);
+    // Only the dedicated, correctly structured intake may select Slack.
+    if (!targetUrl || !message.startsWith('【SECU:MIE Web／国連協総会 無料Webセキュリティ診断・暫定受付】\n') ||
+        !message.includes(`\n診断対象URL：${String(data.targetUrl).trim()}\n`)) return null;
+    secumie = { company, targetUrl };
+  }
+
   return {
     fields: { inquiry_type: INQUIRY_TYPES[data.inquiryType]!, company, name, email, phone, message },
     token,
+    secumie,
   };
 }
 
@@ -117,6 +141,7 @@ export function createSiteContactApiRouter(
   config: SiteContactConfig,
   verify: TurnstileVerification = verifySiteContactTurnstile,
   logger?: DiagnosticLogger,
+  secumieSlack?: SecumieSlackNotifier,
 ): Router {
   const router = Router();
   const rateLimit = createIpRateLimiter({ windowMs: 15 * 60 * 1000, maxRequests: 5 });
@@ -174,6 +199,19 @@ export function createSiteContactApiRouter(
       }
       // Keep the HTTP response generic; optional Staging diagnostics above are allowlisted.
       return jsonFailure(res, 502, 'notification_failed');
+    }
+    if (validated.secumie) {
+      if (secumieSlack) {
+        try {
+          await secumieSlack(validated.secumie);
+        } catch {
+          // Email is the current source of truth; an outage in Slack should
+          // never turn an accepted registration into an ambiguous retry.
+          logger?.warn(diagnosticFields(req, 'secumie_slack_delivery_failed'), 'SECU:MIE Slack delivery failed');
+        }
+      } else {
+        logger?.warn(diagnosticFields(req, 'secumie_slack_not_configured'), 'SECU:MIE Slack webhook not configured');
+      }
     }
     res.status(200).json({ ok: true, code: 'accepted' });
   });

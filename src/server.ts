@@ -8,6 +8,7 @@ import { Mailer } from './services/mailer';
 import { createContactFormRouter } from './routes/contactForm';
 import { createEntryFormRouter } from './routes/entryForm';
 import { createSiteContactApiRouter } from './routes/siteContactApi';
+import { createSecumieSlackNotifier } from './services/secumieSlack';
 import { createIpRateLimiter } from './middleware/rateLimit';
 import { corporatePageSecurityHeaders, isPublicRequest, renderCorporatePage, siteSecurityHeaders } from './middleware/sitePublication';
 
@@ -58,7 +59,8 @@ async function main(): Promise<void> {
 
   app.use(createContactFormRouter(mailer, config));
   app.use(createEntryFormRouter(mailer, config));
-  app.use(createSiteContactApiRouter(mailer, config.siteContact, undefined, logger));
+  const secumieSlack = createSecumieSlackNotifier(config.siteContact.secumieSlackWebhookUrl);
+  app.use(createSiteContactApiRouter(mailer, config.siteContact, undefined, logger, secumieSlack));
 
   // Serve approved corporate templates on both Staging and Production. A
   // public release removes preview-only wording and meta noindex at response
@@ -106,6 +108,35 @@ async function main(): Promise<void> {
       const template = await readFile(path.join(PUBLIC_DIR, 'contact', 'index.html'), 'utf8');
       res.setHeader('Cache-Control', 'no-store');
       res.type('html').send(renderCorporatePage(template, publiclyReleased).replace('__TURNSTILE_SITE_KEY__', siteKey));
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  // Temporary SECU:MIE Web intake on the existing corporate HTTPS origin.
+  // Reuse the already-verified contact API, SMTP and Turnstile. Keep this
+  // independent of the future Web database and shared OTP production release.
+  app.get(['/secumie-web', '/secumie-web/', '/secumie-web/index.html'], async (req, res, next) => {
+    try {
+      const publiclyReleased = isPublicRequest(req.hostname, req.headers.host, releaseMode);
+      if (publiclyReleased && req.path !== '/secumie-web/') {
+        res.redirect(301, `/secumie-web/${req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : ''}`);
+        return;
+      }
+      corporatePageSecurityHeaders(res);
+      const siteKey = config.siteContact.turnstileSiteKey;
+      if (!/^[A-Za-z0-9_-]{10,100}$/u.test(siteKey)) {
+        res.status(503).send('SECU:MIE Web intake is not configured.');
+        return;
+      }
+      const intakeReady = publiclyReleased && Boolean(config.siteContact.turnstileSecret) &&
+        config.siteContact.allowedOrigins.includes('https://www.atlib.jp') &&
+        config.siteContact.allowedTurnstileHostnames.includes('www.atlib.jp');
+      const template = await readFile(path.join(PUBLIC_DIR, 'secumie-web', 'index.html'), 'utf8');
+      res.setHeader('Cache-Control', 'no-store');
+      res.type('html').send(template
+        .replace('__TURNSTILE_SITE_KEY__', siteKey)
+        .replace('__SECUMIE_TEMP_ENABLED__', intakeReady ? 'true' : 'false'));
     } catch (error) {
       next(error);
     }

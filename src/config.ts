@@ -20,6 +20,7 @@ export interface Config {
     allowedOrigins: string[];
     allowedTurnstileHostnames: string[];
     diagnosticLogs: boolean;
+    secumieSlackWebhookUrl: string;
   };
 }
 
@@ -86,6 +87,8 @@ export async function loadConfig(): Promise<Config> {
       allowedOrigins: configuredOrigins(process.env.SITE_CONTACT_ALLOWED_ORIGINS),
       allowedTurnstileHostnames: configuredHostnames(process.env.SITE_CONTACT_TURNSTILE_HOSTNAMES),
       diagnosticLogs: process.env.SITE_CONTACT_DIAGNOSTIC_LOGS === 'true',
+      // Inject via Cloud Run --set-secrets; never put a webhook URL in source.
+      secumieSlackWebhookUrl: process.env.SECUMIE_WEB_SLACK_WEBHOOK_URL ?? '',
     },
   };
 }
