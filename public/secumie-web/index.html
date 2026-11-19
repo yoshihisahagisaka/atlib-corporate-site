@@ -21,15 +21,7 @@
     <h1>無料<span>Webセキュリティ診断</span></h1>
     <p class="lead">Webサイトやメールの公開設定を確認する、セキュリティ対策の一歩目としてご活用ください。</p>
 
-    <section class="intro" aria-label="診断について">
-      <div class="section-mark" aria-hidden="true"></div>
-      <p>本診断では、公開されているWebサイト・ドメインの設定を確認します。社内ネットワークへの接続や、パスワードの提出は必要ありません。</p>
-      <p>現在は総会向けの先行受付です。診断結果はこの画面には表示されません。お申し込み内容を確認後、atLIBからご案内します。</p>
-    </section>
-
-    <section class="form-card" aria-labelledby="form-title">
-      <h2 id="form-title">診断のお申し込み</h2>
-      <p class="form-help">必須項目をご入力ください。所属組合名は正式名称でご記入ください。</p>
+    <section class="form-card" aria-label="無料Webセキュリティ診断のお申し込み">
       <form id="secumie-temporary-form" data-intake-enabled="__SECUMIE_TEMP_ENABLED__" data-contact-api-url="/api/contact" autocomplete="on">
         <div class="honeypot" aria-hidden="true"><label for="anti-bot-website">入力しないでください</label><input id="anti-bot-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <div class="field"><label for="union-name">所属組合名 <span>必須</span></label><input id="union-name" name="unionName" maxlength="150" required placeholder="組合の正式名称"></div>
@@ -54,7 +46,8 @@
       </form>
       <div id="intake-success" class="success" hidden role="status">
         <h2>お申し込みを受け付けました</h2>
-        <p>ありがとうございました。内容を確認のうえ、atLIBからご案内します。</p>
+        <p>診断結果はこの画面には表示されません。</p>
+        <p>診断実施の上、後日セキュリティ診断報告レポートをatLIBから送付いたします。</p>
       </div>
     </section>
     <p class="contact-note">お問い合わせは <a href="https://www.atlib.jp/contact/">atLIBお問い合わせ窓口</a> からも承ります。</p>
