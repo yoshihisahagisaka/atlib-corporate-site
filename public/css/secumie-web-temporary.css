@@ -2,7 +2,7 @@
 *{box-sizing:border-box}body{margin:0}a{color:#135078}a:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid #ed9c55;outline-offset:3px}
 .site-header{background:#fff;border-bottom:1px solid #dce5e4}.header-inner{max-width:920px;margin:auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
 .brand{font-size:27px;letter-spacing:.03em;color:#153957;text-decoration:none;font-weight:850}.brand span{color:#248267}.back-link{font-size:13px;text-decoration:none}
-.page{max-width:760px;margin:0 auto;padding:45px 20px 70px}.eyebrow{display:inline-block;padding:8px 15px;border-radius:40px;background:#e5f3ed;color:#24765c;font-size:13px;font-weight:700}
+.page{max-width:880px;margin:0 auto;padding:45px 20px 70px}.eyebrow{display:inline-block;padding:8px 15px;border-radius:40px;background:#e5f3ed;color:#24765c;font-size:13px;font-weight:700}
 h1{font-size:clamp(30px,5vw,43px);line-height:1.4;letter-spacing:-.03em;margin:16px 0}h1 span{color:#248267}#secumie-guide-heading span{display:block}.lead{font-size:17px;line-height:1.9;margin:0 0 28px}
 .form-card{background:#fff;border:1px solid #d9e5e1;border-radius:18px;padding:clamp(20px,5vw,36px);box-shadow:0 10px 32px #17324c0a}h2{font-size:23px;margin:0 0 12px}
 .field{margin:0 0 20px}.field label{display:block;font-weight:700;font-size:15px;margin-bottom:8px}.field label span{display:inline-block;background:#f7e9dd;color:#a25318;font-size:11px;padding:2px 6px;border-radius:3px;margin-left:5px;vertical-align:middle}
