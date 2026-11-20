@@ -27,7 +27,33 @@ export function temporaryIntakeMessage({ unionName, registeredAddress, targetUrl
   ].join('\n');
 }
 
+// The temporary intake remains a single URL: navigation only hides/shows DOM sections.
+export function setSecumieScreen(doc, screen) {
+  if (screen !== 'guide' && screen !== 'form') return false;
+  const guide = doc.getElementById('secumie-guide');
+  const formView = doc.getElementById('secumie-form-view');
+  const heading = doc.getElementById(screen === 'form' ? 'secumie-form-heading' : 'secumie-guide-heading');
+  if (!guide || !formView || !heading) return false;
+  guide.hidden = screen === 'form';
+  formView.hidden = screen !== 'form';
+  heading.focus({ preventScroll: true });
+  heading.scrollIntoView?.({ block: 'start' });
+  return true;
+}
+
+export function bindSecumieScreen(doc) {
+  const triggers = doc.querySelectorAll('[data-secumie-open-form]');
+  const back = doc.getElementById('secumie-back-to-guide');
+  if (!back || triggers.length === 0) return false;
+  for (const trigger of triggers) {
+    trigger.addEventListener('click', () => setSecumieScreen(doc, 'form'));
+  }
+  back.addEventListener('click', () => setSecumieScreen(doc, 'guide'));
+  return true;
+}
+
 if (typeof document !== 'undefined') {
+  bindSecumieScreen(document);
   const form = document.getElementById('secumie-temporary-form');
   const button = form?.querySelector('button[type="submit"]');
   const status = document.getElementById('intake-status');
