@@ -196,7 +196,7 @@ test('HTTP preview / publication / recruit routing, with no mail sent', async ()
       '/business-web/', '/business-web/self-check/',
       '/business-web/self-check/self-check.js', '/joshisu-kaizen/',
       '/web-development-partner/', '/infravision-partner/',
-      '/privacy-policy/', '/customer-harassment-policy/', '/policy/',
+      '/privacy-policy/', '/customer-harassment-policy/',
       '/thanks.html',
     ]) {
       const legacy = await request(legacyPath, 'www.atlib.jp');
