@@ -12,6 +12,7 @@ import { createIpRateLimiter } from './middleware/rateLimit';
 import { corporatePageSecurityHeaders, isPublicRequest, renderCorporatePage, siteSecurityHeaders } from './middleware/sitePublication';
 
 const RECRUIT_HOST = /^(www\.)?recruit\.atlib\.jp$/i;
+const LP_PATH = /^\/(?:business-web|joshisu-kaizen|infravision-partner|web-development-partner)(?:\/|$)/;
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 
 async function main(): Promise<void> {
@@ -38,6 +39,36 @@ async function main(): Promise<void> {
   app.use((req, res, next) => {
     if (req.hostname === 'atlib.jp') {
       res.redirect(301, `https://www.atlib.jp${req.originalUrl}`);
+      return;
+    }
+    next();
+  });
+
+  // service.atlib.jp hosts the existing four LP paths using the same static root.
+  // Old www URLs redirect only after DNS, TLS, lead-form CORS and smoke checks pass.
+  const serviceRedirectsEnabled = process.env.SERVICE_LP_REDIRECTS_ENABLED === 'true';
+  app.use((req, res, next) => {
+    const host = req.hostname.toLowerCase();
+    if (host === 'service.atlib.jp') {
+      if (req.path === '/') { res.redirect(302, 'https://www.atlib.jp/services/'); return; }
+      if (req.path === '/sitemap.xml') {
+        res.type('application/xml').sendFile(path.join(PUBLIC_DIR, 'service-sitemap.xml'));
+        return;
+      }
+      if (req.path === '/robots.txt') {
+        res.type('text/plain').send('User-agent: *\nAllow: /\nSitemap: https://service.atlib.jp/sitemap.xml\n');
+        return;
+      }
+      if (req.path === '/privacy-policy/' || req.path === '/privacy-policy') {
+        res.redirect(302, 'https://www.atlib.jp/privacy-policy/');
+        return;
+      }
+      if (!LP_PATH.test(req.path) && !req.path.startsWith('/images/') && req.path !== '/favicon.ico') {
+        res.status(404).send('Not Found');
+        return;
+      }
+    } else if (serviceRedirectsEnabled && host === 'www.atlib.jp' && LP_PATH.test(req.path)) {
+      res.redirect(301, `https://service.atlib.jp${req.originalUrl}`);
       return;
     }
     next();
