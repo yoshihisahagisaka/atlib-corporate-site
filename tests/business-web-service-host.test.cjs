@@ -26,8 +26,8 @@ async function withSite(redirects, check) {
       SITE_CONTACT_TURNSTILE_SECRET:'synthetic-only',SITE_CONTACT_ALLOWED_ORIGINS:''},
     stdio:'ignore'
   });
-  const request=(url,host)=>new Promise((resolve,reject)=>{
-    const req=http.request({hostname:'127.0.0.1',port,path:url,headers:{Host:host}},res=>{
+  const request=(url,host,forwardedHost)=>new Promise((resolve,reject)=>{
+    const req=http.request({hostname:'127.0.0.1',port,path:url,headers:{Host:host,...(forwardedHost?{'X-Forwarded-Host':forwardedHost}:{})}},res=>{
       const parts=[];
       res.on('data',v=>parts.push(v));
       res.on('end',()=>resolve({status:res.statusCode,headers:res.headers,body:Buffer.concat(parts).toString('utf8')}));
@@ -77,6 +77,10 @@ test('service host serves Business KAIZEN only with approved SEO routes',async()
     const policy=await request('/privacy-policy/','service.atlib.jp');
     assert.equal(policy.status,302);
     assert.equal(policy.headers.location,'https://www.atlib.jp/privacy-policy/');
+    // An untrusted X-Forwarded-Host must not turn the service host into a corporate host.
+    assert.equal((await request('/services/','service.atlib.jp','www.atlib.jp')).status,404);
+    assert.equal((await request('/business-web/','service.atlib.jp','www.atlib.jp')).status,404);
+    assert.equal((await request('/business-web/','www.atlib.jp','service.atlib.jp')).status,200);
     const existing=await request('/business-web/','www.atlib.jp');
     assert.equal(existing.status,200,'www LP preserved before redirect gate');
     const card=await request('/services/','www.atlib.jp');
@@ -90,6 +94,7 @@ test('www migration redirects are gated and keep query strings',async()=>{
     const r=await request('/business-web/self-check/?utm_source=campaign','www.atlib.jp');
     assert.equal(r.status,301);
     assert.equal(r.headers.location,'https://service.atlib.jp/business-web/self-check/?utm_source=campaign');
+    assert.equal((await request('/business-web/','www.atlib.jp','service.atlib.jp')).status,200);
     assert.equal((await request('/business-web-other/','www.atlib.jp')).status,404);
     assert.equal((await request('/joshisu-kaizen/','www.atlib.jp')).status,200);
   });
