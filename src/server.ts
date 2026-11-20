@@ -48,8 +48,12 @@ async function main(): Promise<void> {
   // Enable the old www URL redirects only AFTER HTTPS and the lead API are verified.
   const businessWebRedirects = process.env.BUSINESS_WEB_REDIRECTS_ENABLED === 'true';
   app.use((req, res, next) => {
-    const host = req.hostname.toLowerCase();
+    // Trust the actual Host and require it to match the proxy-derived hostname.
+    // An X-Forwarded-Host mismatch must never bypass service-host isolation.
+    const host = (req.headers.host ?? '').toLowerCase().replace(/:\d+$/u, '');
+    const forwardedHost = req.hostname.toLowerCase();
     if (host === 'service.atlib.jp') {
+      if (forwardedHost !== host) { res.status(404).send('Not Found'); return; }
       if (req.path === '/') { res.redirect(302, '/business-web/'); return; }
       if (req.path === '/robots.txt') {
         res.type('text/plain').send('User-agent: *\nAllow: /business-web/\nSitemap: https://service.atlib.jp/sitemap.xml\n');
@@ -63,7 +67,7 @@ async function main(): Promise<void> {
         res.redirect(302, 'https://www.atlib.jp/privacy-policy/'); return;
       }
       if (!BUSINESS_WEB_PATH.test(req.path)) { res.status(404).send('Not Found'); return; }
-    } else if (businessWebRedirects && (host === 'www.atlib.jp' || host === 'atlib.jp') && BUSINESS_WEB_PATH.test(req.path)) {
+    } else if (businessWebRedirects && forwardedHost === host && (host === 'www.atlib.jp' || host === 'atlib.jp') && BUSINESS_WEB_PATH.test(req.path)) {
       res.redirect(301, `https://service.atlib.jp${req.originalUrl}`); return;
     }
     next();
