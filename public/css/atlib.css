@@ -3,10 +3,10 @@
 /* atLIB brand trial overrides for Template Party tp_biz65.
    The original animations and required Template Party credit remain in use. */
 :root { --brand-navy: #1f3556; --brand-orange: #f28c38; --brand-green: #2dbe9d; --brand-offwhite: #f8fafc; }
-html { scroll-behavior: smooth; }
-body { line-height: 1.85; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body { line-height: 1.85; overflow-x: clip; }
 section { scroll-margin-top: 96px; }
-header { align-items: center; height: 88px; padding-right: 2rem; margin-bottom: 0; background: #fff; box-shadow: 0 4px 28px rgba(20,48,80,.045); }
+header { align-items: center; height: 88px; padding-right: 2rem; margin-bottom: 0; background: #fff; box-shadow: 0 4px 28px rgba(20,48,80,.045); position: sticky; top: 0; z-index: 100; }
 header .logo { margin: 0; line-height: 1; }
 header .logo a { text-decoration: none; }
 header .logo img.site-logo { display: block; width: clamp(142px,14vw,195px); height: auto; }
@@ -223,7 +223,7 @@ footer .menu ul { font-size: .86rem; }
 }
 @media (max-width: 700px) {
   /* tp_biz65 shrinks its root font to ~13px on phones. Restore a readable 16px base. */
-  html { font-size: 16px; }
+  html { font-size: 16px; scroll-padding-top: 70px; }
   body { font-size: 16px; }
   header { height: 70px; padding: 0 1rem; }
   header .logo img.site-logo { width: 148px; }
