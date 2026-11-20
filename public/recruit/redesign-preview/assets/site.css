@@ -656,5 +656,5 @@ body{font-family:"IBM Plex Sans JP","Noto Sans JP",sans-serif;font-weight:400;li
 /* FV desktop heading containment: keep all white copy within the angled green panel. */
 @media(min-width:981px){
   .hero h1{font-size:clamp(39px,3.65vw,57px)}
-  .hero .hero-subtitle{font-size:clamp(20px,2vw,29px)}
+  .hero .hero-subtitle{font-size:clamp(20px,2vw,28px)}
 }
