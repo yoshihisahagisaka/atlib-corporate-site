@@ -83,3 +83,8 @@ test('guide and application are two panels on the same URL, keeping the original
   assert.equal(events.focus, 'guide-heading');
   assert.equal(setSecumieScreen(doc, 'other'), false);
 });
+
+test('guide assets are versioned to avoid stale production CSS and JS', () => {
+  assert.match(html, /href="\/css\/secumie-web-temporary\.css\?v=20261120-guide2"/);
+  assert.match(html, /src="\/js\/secumie-web-temporary\.mjs\?v=20261120-guide2"/);
+});
