@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex,nofollow">
   <meta name="description" content="国連協総会ご参加の皆様向け・SECU:MIE Web無料Webセキュリティ診断のお申し込み">
   <title>無料Webセキュリティ診断のお申し込み | SECU:MIE Web</title>
-  <link rel="stylesheet" href="/css/secumie-web-temporary.css">
+  <link rel="stylesheet" href="/css/secumie-web-temporary.css?v=20261120-guide2">
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
@@ -17,11 +17,59 @@
     </div>
   </header>
   <main class="page">
-    <div class="eyebrow">国際連携推進協会 総会ご参加の皆様へ</div>
-    <h1>無料<span>Webセキュリティ診断</span></h1>
-    <p class="lead">Webサイトやメールの公開設定を確認する、セキュリティ対策の一歩目としてご活用ください。</p>
+    <section id="secumie-guide" class="guide-screen" aria-labelledby="secumie-guide-heading">
+      <div class="eyebrow">国際連携推進協会 関係者の皆様へ</div>
+      <h1 id="secumie-guide-heading" tabindex="-1">御社のWebサイト、<span>本当に大丈夫ですか？</span></h1>
+      <p class="lead">会社と取引先を守るために、まずは現状を知ることから。</p>
+      <p class="guide-description">Webサイトやメールの設定に不備があると、不正アクセスやなりすましなどのリスクにつながる場合があります。自社の設定状況を把握することが、対策の第一歩です。</p>
+      <div class="guide-actions">
+        <button type="button" class="primary-action" data-secumie-open-form>無料診断を申し込む <span aria-hidden="true">→</span></button>
+        <p>公開情報をもとに確認する、無料の診断です。</p>
+      </div>
 
-    <section class="form-card" aria-label="無料Webセキュリティ診断のお申し込み">
+      <section class="guide-section" aria-labelledby="secumie-check-heading">
+        <h2 id="secumie-check-heading">無料診断で分かること</h2>
+        <div class="guide-grid">
+          <div class="guide-item">
+            <h3>Webサイトのセキュリティ設定</h3>
+            <p>HTTPS通信・電子証明書・主要なセキュリティ設定などを確認します。</p>
+          </div>
+          <div class="guide-item">
+            <h3>メールのなりすまし対策</h3>
+            <p>SPF・DKIM・DMARCなど、外部から確認できる設定を調べます。</p>
+          </div>
+          <div class="guide-item">
+            <h3>現在の対策状況の見える化</h3>
+            <p>できていること、未設定のこと、追加確認が推奨されることを整理します。</p>
+          </div>
+        </div>
+        <p class="guide-disclaimer">※公開情報で確認できる範囲の診断です。すべての脆弱性や不正アクセスの有無を確認するものではありません。</p>
+      </section>
+
+      <section class="guide-section guide-why" aria-labelledby="secumie-why-heading">
+        <h2 id="secumie-why-heading">セキュリティ対策は、現状を知ることから</h2>
+        <p>何から手をつければよいか分からない場合も、まずは現状の確認から。見直しが必要な項目を把握し、大切なお客様や取引先との信頼を守るためにお役立てください。</p>
+      </section>
+
+      <section class="guide-section" aria-labelledby="secumie-steps-heading">
+        <h2 id="secumie-steps-heading">お申し込みから結果のご案内まで</h2>
+        <ol class="guide-steps">
+          <li><span class="step-number">01</span><strong>無料診断のお申し込み</strong><span>企業情報と対象URLをご入力</span></li>
+          <li><span class="step-number">02</span><strong>診断レポートのご提供</strong><span>atLIBが診断し、後日送付</span></li>
+          <li><span class="step-number">03</span><strong>結果のご説明・ご相談</strong><span>ご希望に応じて対策をご案内</span></li>
+        </ol>
+        <p class="guide-followup">結果のご説明については、診断後にご相談させていただきます。</p>
+      </section>
+
+      <div class="guide-bottom-action">
+        <p>セキュリティ対策の一歩目として、ぜひご活用ください。</p>
+        <button type="button" class="primary-action" data-secumie-open-form>無料診断を申し込む <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section class="form-card" id="secumie-form-view" aria-labelledby="secumie-form-heading" hidden>
+      <button type="button" id="secumie-back-to-guide" class="back-to-guide">← 診断のご案内に戻る</button>
+      <h2 id="secumie-form-heading" tabindex="-1">無料Webセキュリティ診断のお申し込み</h2>
       <form id="secumie-temporary-form" data-intake-enabled="__SECUMIE_TEMP_ENABLED__" data-contact-api-url="/api/contact" autocomplete="on">
         <div class="honeypot" aria-hidden="true"><label for="anti-bot-website">入力しないでください</label><input id="anti-bot-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <div class="field"><label for="union-name">所属組合名 <span>必須</span></label><input id="union-name" name="unionName" maxlength="150" required placeholder="組合の正式名称"></div>
@@ -53,6 +101,6 @@
     <p class="contact-note">お問い合わせは <a href="https://www.atlib.jp/contact/">atLIBお問い合わせ窓口</a> からも承ります。</p>
   </main>
   <footer>© atLIB株式会社 / SECU:MIE Web</footer>
-  <script type="module" src="/js/secumie-web-temporary.mjs"></script>
+  <script type="module" src="/js/secumie-web-temporary.mjs?v=20261120-guide2"></script>
 </body>
 </html>

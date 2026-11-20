@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { validTargetUrl, temporaryIntakeMessage } from '../public/js/secumie-web-temporary.mjs';
+import { validTargetUrl, temporaryIntakeMessage, setSecumieScreen, bindSecumieScreen } from '../public/js/secumie-web-temporary.mjs';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const html = readFileSync(path.join(dir, '../public/secumie-web/index.html'), 'utf8');
@@ -43,4 +43,48 @@ test('temporary intake uses the protected contact API and never claims automatic
   assert.throws(() => temporaryIntakeMessage({unionName:'A',registeredAddress:'B',targetUrl:'http://example.jp'}));
   assert.match(script, /body\.source = 'secumie_web_temporary'/);
   assert.match(script, /body\.targetUrl = targetUrl\.trim\(\)/);
+});
+
+test('guide and application are two panels on the same URL, keeping the original intake', () => {
+  assert.match(html, /id="secumie-guide" class="guide-screen"/);
+  assert.match(html, /id="secumie-form-view"[^>]* hidden>/);
+  assert.match(html, /id="secumie-temporary-form"/);
+  assert.match(html, /data-secumie-open-form/g);
+  assert.match(html, /結果のご説明・ご相談/);
+  assert.match(html, /すべての脆弱性や不正アクセスの有無を確認するものではありません/);
+
+  const events = {};
+  const makeElement = (name) => ({
+    hidden: name === 'form',
+    focus() { events.focus = name; },
+    scrollIntoView() { events.scroll = name; },
+    addEventListener(type, handler) { events[name + ':' + type] = handler; },
+  });
+  const els = {
+    'secumie-guide': makeElement('guide'),
+    'secumie-form-view': makeElement('form'),
+    'secumie-guide-heading': makeElement('guide-heading'),
+    'secumie-form-heading': makeElement('form-heading'),
+    'secumie-back-to-guide': makeElement('back'),
+  };
+  const triggers = [makeElement('open1'), makeElement('open2')];
+  const doc = {
+    getElementById(id) { return els[id] ?? null; },
+    querySelectorAll(selector) { return selector === '[data-secumie-open-form]' ? triggers : []; },
+  };
+  assert.equal(bindSecumieScreen(doc), true);
+  events['open1:click']();
+  assert.equal(els['secumie-guide'].hidden, true);
+  assert.equal(els['secumie-form-view'].hidden, false);
+  assert.equal(events.focus, 'form-heading');
+  events['back:click']();
+  assert.equal(els['secumie-guide'].hidden, false);
+  assert.equal(els['secumie-form-view'].hidden, true);
+  assert.equal(events.focus, 'guide-heading');
+  assert.equal(setSecumieScreen(doc, 'other'), false);
+});
+
+test('guide assets are versioned to avoid stale production CSS and JS', () => {
+  assert.match(html, /href="\/css\/secumie-web-temporary\.css\?v=20261120-guide2"/);
+  assert.match(html, /src="\/js\/secumie-web-temporary\.mjs\?v=20261120-guide2"/);
 });
