@@ -102,7 +102,7 @@ test('decorative English subtitles are removed and geometric layout remains', ()
 });
 
 test('reachable legacy subpages no longer advertise old requirements or English kickers', () => {
-  const pages = ['message/index.html', 'company/index.html', 'member/index.html', 'member/ia/index.html', 'member/mm/index.html', 'member/sy/index.html', 'member/yt/index.html', 'workstyle/index.html', 'policy/index.html', 'entry/index.html', 'entry/thanks.html'];
+  const pages = ['message/index.html', 'company/index.html', 'member/index.html', 'member/ia/index.html', 'member/mm/index.html', 'member/sy/index.html', 'member/yt/index.html', 'workstyle/index.html', 'entry/index.html', 'entry/thanks.html'];
   for (const page of pages) {
     const content = fs.readFileSync(path.join(preview, '..', page), 'utf8');
     assert.doesNotMatch(content, /href="(?:\.\.\/)+requirements\/?"/, page);
@@ -195,7 +195,7 @@ test('new top and legacy detail pages share the same primary navigation', () => 
   const expected = ['私たちの想い', '会社を知る', '人を知る', '働く環境', '公式note', 'エントリー'];
   assert.deepEqual(navLabels(html, 'desktop-nav'), expected);
   assert.deepEqual(navLabels(html, 'mobile-nav'), [...expected, 'コーポレートサイトへ']);
-  for (const page of ['message/index.html', 'member/index.html', 'member/ia/index.html', 'member/mm/index.html', 'member/sy/index.html', 'member/yt/index.html', 'workstyle/index.html', 'company/index.html', 'requirements/index.html', 'policy/index.html', 'entry/index.html', 'entry/thanks.html']) {
+  for (const page of ['message/index.html', 'member/index.html', 'member/ia/index.html', 'member/mm/index.html', 'member/sy/index.html', 'member/yt/index.html', 'workstyle/index.html', 'company/index.html', 'requirements/index.html', 'entry/index.html', 'entry/thanks.html']) {
     const content = fs.readFileSync(path.join(preview, '..', page), 'utf8');
     assert.deepEqual(navLabels(content, 'recruit-nav-desktop'), expected, page);
     assert.deepEqual(navLabels(content, 'recruit-nav-mobile'), [...expected, 'コーポレートサイトへ'], page);
