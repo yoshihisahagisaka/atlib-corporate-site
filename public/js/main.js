@@ -225,11 +225,11 @@ $(function() {
     //===========================================================
     // 'normal' ＝ 通常タイプ（固定ヘッダーなし）
     // 'fixed' ＝ fixedヘッダー対応
-    var scrollType = 'normal';
+    var scrollType = 'fixed';
 
     // fixedヘッダー時に位置計算に使う要素（※fixed版を使う際は必ずチェック。画面上部に貼り付くブロックを指定する。）
     // 例：'header' / '#header' / '.site-header'
-    var fixedHeaderSelector = '#menubar';
+    var fixedHeaderSelector = 'header';
 
     // ページ上部へ戻るボタンのセレクター
     var topButton = $('.pagetop');
