@@ -56,7 +56,7 @@ async function main(): Promise<void> {
         return;
       }
       if (req.path === '/robots.txt') {
-        res.type('text/plain').send('User-agent: *\\nAllow: /\\nSitemap: https://service.atlib.jp/sitemap.xml\\n');
+        res.type('text/plain').send('User-agent: *\nAllow: /\nSitemap: https://service.atlib.jp/sitemap.xml\n');
         return;
       }
       if (req.path === '/privacy-policy/' || req.path === '/privacy-policy') {
