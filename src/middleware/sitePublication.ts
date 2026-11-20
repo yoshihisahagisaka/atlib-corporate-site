@@ -35,6 +35,7 @@ const PUBLISHED_HOSTS = new Set([
   'atlib.jp',
   'recruit.atlib.jp',
   'www.recruit.atlib.jp',
+  'service.atlib.jp',
 ]);
 
 function publishedHost(hostname: string, hostHeader: string | undefined): boolean {
