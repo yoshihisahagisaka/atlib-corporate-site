@@ -307,8 +307,9 @@ test('SMTP failure prevents mirror and mirror failure preserves accepted email',
     const result = await post({ ...secumie, phone: '0000000000' });
     assert.equal(result.status, 200);
     assert.equal(sent.length, 1);
-    assert.equal(warnings.length, 1);
-    assert.equal(warnings[0].event, 'secumie_web_mirror_failed');
+    assert.ok(warnings.some(w => w.event === 'secumie_web_mirror_failed'));
+    assert.ok(warnings.every(w => !Object.hasOwn(w, 'contactEmail')
+      && !Object.hasOwn(w, 'companyName')));
   }, {
     secumieWebMirror: async () => { throw new Error('synthetic backend unavailable'); },
     logger: { warn: data => warnings.push(data), info() {} },
