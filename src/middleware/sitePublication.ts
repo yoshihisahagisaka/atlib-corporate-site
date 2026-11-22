@@ -35,6 +35,7 @@ const PUBLISHED_HOSTS = new Set([
   'atlib.jp',
   'recruit.atlib.jp',
   'www.recruit.atlib.jp',
+  'service.atlib.jp',
 ]);
 
 function publishedHost(hostname: string, hostHeader: string | undefined): boolean {
@@ -52,6 +53,24 @@ export function isPublicRequest(
   return releaseMode === 'public' && publishedHost(hostname, hostHeader);
 }
 
+// Business Web: a narrow CSP for the new hostname without changing
+// existing corporate, recruiting, SECU:MIE or other legacy LP policies.
+// The LP uses inline CSS; the diagnostic screen also uses inline style
+// attributes for progress meters. JavaScript is served only from self.
+export const BUSINESS_WEB_CONTENT_SECURITY_POLICY = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "frame-ancestors 'none'",
+  "form-action 'self'",
+  "script-src 'self'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data:",
+  "font-src 'self' data:",
+  "connect-src 'self' https://sales.atlib.jp",
+  'upgrade-insecure-requests',
+].join('; ');
+
 export function siteSecurityHeaders(releaseMode: string | undefined) {
   return (req: Request, res: Response, next: NextFunction): void => {
     res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -66,6 +85,17 @@ export function siteSecurityHeaders(releaseMode: string | undefined) {
 
     if (!isPublicRequest(req.hostname, req.headers.host, releaseMode)) {
       res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+    }
+
+    // Apply only to the Business Web branch of the approved service hostname.
+    // Other hosts and non-Business Web paths retain their existing policy.
+    if (
+      isPublicRequest(req.hostname, req.headers.host, releaseMode) &&
+      req.hostname.toLowerCase() === 'service.atlib.jp' &&
+      /^\/business-web(?:\/|$)/u.test(req.path)
+    ) {
+      res.setHeader('Content-Security-Policy', BUSINESS_WEB_CONTENT_SECURITY_POLICY);
+      res.setHeader('X-Frame-Options', 'DENY');
     }
     next();
   };

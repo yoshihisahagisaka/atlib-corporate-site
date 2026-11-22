@@ -12,6 +12,7 @@ import { createIpRateLimiter } from './middleware/rateLimit';
 import { corporatePageSecurityHeaders, isPublicRequest, renderCorporatePage, siteSecurityHeaders } from './middleware/sitePublication';
 
 const RECRUIT_HOST = /^(www\.)?recruit\.atlib\.jp$/i;
+const BUSINESS_WEB_PATH = /^\/business-web(?:\/|$)/;
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 
 async function main(): Promise<void> {
@@ -43,6 +44,34 @@ async function main(): Promise<void> {
     next();
   });
 
+  // The service host exposes only Business KAIZEN. No partner LPs or corporate pages.
+  // Enable the old www URL redirects only AFTER HTTPS and the lead API are verified.
+  const businessWebRedirects = process.env.BUSINESS_WEB_REDIRECTS_ENABLED === 'true';
+  app.use((req, res, next) => {
+    // Trust the actual Host and require it to match the proxy-derived hostname.
+    // An X-Forwarded-Host mismatch must never bypass service-host isolation.
+    const host = (req.headers.host ?? '').toLowerCase().replace(/:\d+$/u, '');
+    const forwardedHost = req.hostname.toLowerCase();
+    if (host === 'service.atlib.jp') {
+      if (forwardedHost !== host) { res.status(404).send('Not Found'); return; }
+      if (req.path === '/') { res.redirect(302, '/business-web/'); return; }
+      if (req.path === '/robots.txt') {
+        res.type('text/plain').send('User-agent: *\nAllow: /business-web/\nSitemap: https://service.atlib.jp/sitemap.xml\n');
+        return;
+      }
+      if (req.path === '/sitemap.xml') {
+        res.type('application/xml').send('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://service.atlib.jp/business-web/</loc></url></urlset>');
+        return;
+      }
+      if (req.path === '/privacy-policy' || req.path === '/privacy-policy/') {
+        res.redirect(302, 'https://www.atlib.jp/privacy-policy/'); return;
+      }
+      if (!BUSINESS_WEB_PATH.test(req.path)) { res.status(404).send('Not Found'); return; }
+    } else if (businessWebRedirects && forwardedHost === host && (host === 'www.atlib.jp' || host === 'atlib.jp') && BUSINESS_WEB_PATH.test(req.path)) {
+      res.redirect(301, `https://service.atlib.jp${req.originalUrl}`); return;
+    }
+    next();
+  });
   // recruit.atlib.jp / www.recruit.atlib.jp は public/recruit/ をドキュメントルートとして扱う。
   // フォームのaction="confirm.php"等の相対パス解決はクライアント側のURL基準のままなので、
   // ここでのURL書き換えはサーバー内部だけの処理（クライアントには見えない）。
