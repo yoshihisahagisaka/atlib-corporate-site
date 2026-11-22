@@ -121,12 +121,16 @@ function validatePayload(body: unknown): { fields: ContactFormData; token: strin
     const unionName = /^所属組合：([^\r\n]+)$/mu.exec(message)?.[1]?.trim() ?? '';
     const registeredAddress = /^本店所在地：([^\r\n]+)$/mu.exec(message)?.[1]?.trim() ?? '';
     if (!unionName || unionName.length > 150 ||
-        !registeredAddress || registeredAddress.length > 500 || !phone) return null;
-    secumie = { company, targetUrl }; // The existing Slack summary stays PII-free.
-    mirror = {
-      companyName: company, unionName, registeredAddress, websiteUrl: targetUrl,
-      contactName: name, contactEmail: email, contactPhone: phone,
-    };
+        !registeredAddress || registeredAddress.length > 500) return null;
+    secumie = { company, targetUrl }; // Preserve the existing public contact API.
+    // The LP requires a phone number; historical API-only callers did not.
+    // Mirror only complete requests while keeping the existing email semantics.
+    if (phone) {
+      mirror = {
+        companyName: company, unionName, registeredAddress, websiteUrl: targetUrl,
+        contactName: name, contactEmail: email, contactPhone: phone,
+      };
+    }
   }
 
   return {
