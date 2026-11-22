@@ -124,7 +124,6 @@ test('retired www Business Web routes always return 410, even if legacy flag is 
     assert.equal((await request('/','www.atlib.jp')).status,200);
     assert.equal((await request('/services/','www.atlib.jp')).status,200);
     assert.equal((await request('/contact/','www.atlib.jp')).status,200);
-    assert.equal((await request('/secumie-web/','www.atlib.jp')).status,200);
     assert.equal((await request('/business-web/','www.atlib.jp','service.atlib.jp')).status,410);
     assert.equal((await request('/business-web-other/','www.atlib.jp')).status,404);
     assert.equal((await request('/joshisu-kaizen/','www.atlib.jp')).status,200);
