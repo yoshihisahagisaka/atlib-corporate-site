@@ -72,6 +72,16 @@ test('service host serves Business KAIZEN only with approved SEO routes',async()
     assert.match(js.body,/https:\/\/www\.atlib\.jp\/privacy-policy\//);
     assert.match(js.body,/https:\/\/www\.atlib\.jp\/#link3/);
     assert.doesNotMatch(js.body,/href="\/it-management-kaizen\/"/);
+    assert.match(js.body,/class="panel application-panel"/);
+    assert.match(js.body,/class="form-grid"/);
+    assert.match(js.body,/class="form-consent"/);
+    assert.match(js.body,/name="privacyConsent" type="checkbox" required/);
+    assert.match(js.body,/name="diagnosisTransferConsent" type="checkbox" required/);
+    assert.match(js.body,/name="email" type="email" autocomplete="email"/);
+    const css=await request('/business-web/self-check/self-check.css','service.atlib.jp');
+    assert.equal(css.status,200);
+    assert.match(css.body,/\.form-grid\s*\{display:grid;grid-template-columns:repeat\(2,/);
+    assert.match(css.body,/@media\(max-width:650px\).*\.form-grid\s*\{grid-template-columns:1fr/s);
     const image=await request('/business-web/assets/atlib-logo.png','service.atlib.jp');
     assert.equal(image.status,200);
     const sitemap=await request('/sitemap.xml','service.atlib.jp');
