@@ -9,6 +9,7 @@ import { createContactFormRouter } from './routes/contactForm';
 import { createEntryFormRouter } from './routes/entryForm';
 import { createSiteContactApiRouter } from './routes/siteContactApi';
 import { createSecumieSlackNotifier } from './services/secumieSlack';
+import { createSecumieWebMirror } from './services/secumieWebMirror';
 import { createIpRateLimiter } from './middleware/rateLimit';
 import { corporatePageSecurityHeaders, isPublicRequest, renderCorporatePage, siteSecurityHeaders } from './middleware/sitePublication';
 
@@ -60,7 +61,10 @@ async function main(): Promise<void> {
   app.use(createContactFormRouter(mailer, config));
   app.use(createEntryFormRouter(mailer, config));
   const secumieSlack = createSecumieSlackNotifier(config.siteContact.secumieSlackWebhookUrl);
-  app.use(createSiteContactApiRouter(mailer, config.siteContact, undefined, logger, secumieSlack));
+  const secumieMirror = createSecumieWebMirror(
+    config.siteContact.secumieWebMirrorUrl, config.siteContact.secumieWebMirrorSecret,
+  );
+  app.use(createSiteContactApiRouter(mailer, config.siteContact, undefined, logger, secumieSlack, secumieMirror));
 
   // Serve approved corporate templates on both Staging and Production. A
   // public release removes preview-only wording and meta noindex at response
