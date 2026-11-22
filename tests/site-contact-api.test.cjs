@@ -1,6 +1,8 @@
 const assert = require('node:assert/strict');
 const { test } = require('node:test');
 const express = require('express');
+const { createHmac } = require('node:crypto');
+const { createSecumieWebMirror } = require('../dist/services/secumieWebMirror');
 const {
   createSiteContactApiRouter,
   safeSmtpFailure,
@@ -51,7 +53,7 @@ async function withApi(run, options = {}) {
   const verifyCalls = [];
   const verify = options.verify ?? (async (input) => { verifyCalls.push(input); return true; });
   const app = express();
-  app.use(createSiteContactApiRouter(mailer, options.config ?? config, verify, options.logger, options.secumieSlack));
+  app.use(createSiteContactApiRouter(mailer, options.config ?? config, verify, options.logger, options.secumieSlack, options.secumieWebMirror));
   const server = await new Promise((resolve) => {
     const instance = app.listen(0, '127.0.0.1', () => resolve(instance));
   });
@@ -193,7 +195,7 @@ test('Slack delivery outage never turns a sent email into an ambiguous failed su
 test('SMTP failure prevents SECU:MIE Slack notification', async () => {
   const notifications = [];
   await withApi(async ({ post }) => {
-    assert.equal((await post(secumie)).status, 502);
+    assert.equal((await post({ ...secumie, phone: '0000000000' })).status, 502);
     assert.equal(notifications.length, 0);
   }, {
     mailer: { async sendContactNotification() { throw new Error('smtp failed'); } },
@@ -270,4 +272,73 @@ test('Siteverify requires success, exact hostname and the contact action', async
     assert.equal(calls[0].url, 'https://challenges.cloudflare.com/turnstile/v0/siteverify');
   }
   assert.equal(await verifySiteContactTurnstile(input, async () => { throw new Error('offline'); }), false);
+});
+
+test('Only successfully emailed SECU:MIE intake is mirrored to the existing admin list', async () => {
+  const mirrored = [];
+  await withApi(async ({ post, sent }) => {
+    const normal = await post(valid);
+    assert.equal(normal.status, 200);
+    assert.equal(mirrored.length, 0);
+    const special = await post({ ...secumie, phone: '0000000000' });
+    assert.equal(special.status, 200);
+    assert.equal(sent.length, 2);
+    assert.deepEqual(mirrored, [{
+      companyName: '株式会社テスト商事', unionName: 'テスト組合',
+      registeredAddress: '東京都', websiteUrl: 'https://example.jp/',
+      contactName: '非通知 太郎', contactEmail: 'private@example.com', contactPhone: '0000000000',
+    }]);
+  }, {
+    secumieWebMirror: async item => { mirrored.push(item); },
+  });
+});
+
+test('SMTP failure prevents mirror and mirror failure preserves accepted email', async () => {
+  let mirrored = 0;
+  await withApi(async ({ post }) => {
+    assert.equal((await post(secumie)).status, 502);
+    assert.equal(mirrored, 0);
+  }, {
+    mailer: { async sendContactNotification() { throw new Error('synthetic smtp failure'); } },
+    secumieWebMirror: async () => { mirrored++; },
+  });
+  const warnings = [];
+  await withApi(async ({ post, sent }) => {
+    const result = await post({ ...secumie, phone: '0000000000' });
+    assert.equal(result.status, 200);
+    assert.equal(sent.length, 1);
+    assert.equal(warnings.length, 1);
+    assert.equal(warnings[0].event, 'secumie_web_mirror_failed');
+  }, {
+    secumieWebMirror: async () => { throw new Error('synthetic backend unavailable'); },
+    logger: { warn: data => warnings.push(data), info() {} },
+  });
+});
+
+test('Optional mirror signs requests; incomplete or unsafe configuration fails closed', async () => {
+  assert.equal(createSecumieWebMirror('', ''), undefined);
+  assert.throws(() => createSecumieWebMirror('https://sales.atlib.jp/api/internal/secumie-web/v1/temporary-intakes', 'short'), /Incomplete/);
+  assert.throws(() => createSecumieWebMirror('https://evil.example/wrong-path', 'x'.repeat(32)), /Invalid/);
+  const checked = [];
+  const mirror = createSecumieWebMirror(
+    'https://sales.atlib.jp/api/internal/secumie-web/v1/temporary-intakes',
+    'synthetic-key-with-at-least-32-characters',
+    async (url, request) => {
+      const body = JSON.parse(request.body);
+      const expected = createHmac('sha256', 'synthetic-key-with-at-least-32-characters')
+        .update(request.headers['x-secumie-timestamp']).update('\n').update(request.body).digest('hex');
+      assert.equal(request.headers['x-secumie-signature'], expected);
+      assert.equal(body.source, 'secumie_web_temporary');
+      assert.match(body.eventId, /^[0-9a-f-]{36}$/);
+      assert.equal(body.consented, true);
+      checked.push(url);
+      return { ok: true, json: async () => ({ ok: true }) };
+    },
+  );
+  await mirror({
+    companyName: '検証株式会社', unionName: 'テスト組合', registeredAddress: '東京都',
+    websiteUrl: 'https://example.jp/', contactName: '担当者',
+    contactEmail: 'test@example.jp', contactPhone: '0000000000',
+  });
+  assert.deepEqual(checked, ['https://sales.atlib.jp/api/internal/secumie-web/v1/temporary-intakes']);
 });
