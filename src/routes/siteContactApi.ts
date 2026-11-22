@@ -3,6 +3,7 @@ import type { Config } from '../config';
 import type { ContactFormData, Mailer } from '../services/mailer';
 import { createIpRateLimiter } from '../middleware/rateLimit';
 import type { SecumieSlackIntake, SecumieSlackNotifier } from '../services/secumieSlack';
+import type { SecumieWebMirror, SecumieWebMirrorIntake } from '../services/secumieWebMirror';
 
 const MAX_BODY_BYTES = '32kb';
 const INQUIRY_TYPES: Readonly<Record<string, string>> = {
@@ -95,7 +96,7 @@ function secumieTargetUrl(value: unknown): string | null {
   }
 }
 
-function validatePayload(body: unknown): { fields: ContactFormData; token: string; secumie?: SecumieSlackIntake } | null {
+function validatePayload(body: unknown): { fields: ContactFormData; token: string; secumie?: SecumieSlackIntake; mirror?: SecumieWebMirrorIntake } | null {
   if (!body || typeof body !== 'object' || Array.isArray(body)) return null;
   const data = body as Record<string, unknown>;
   if (data.privacyConsent !== true || (data.website !== undefined && data.website !== '')) return null;
@@ -111,19 +112,30 @@ function validatePayload(body: unknown): { fields: ContactFormData; token: strin
   if (!/^[^\s@<>"\x00-\x1f\x7f]+@[^\s@<>"\x00-\x1f\x7f]+\.[^\s@<>"\x00-\x1f\x7f]+$/u.test(email)) return null;
 
   let secumie: SecumieSlackIntake | undefined;
+  let mirror: SecumieWebMirrorIntake | undefined;
   if (data.source !== undefined) {
     if (data.source !== 'secumie_web_temporary' || data.inquiryType !== 'other') return null;
     const targetUrl = secumieTargetUrl(data.targetUrl);
-    // Only the dedicated, correctly structured intake may select Slack.
     if (!targetUrl || !message.startsWith('【SECU:MIE Web／国連協総会 無料Webセキュリティ診断・暫定受付】\n') ||
         !message.includes(`\n診断対象URL：${String(data.targetUrl).trim()}\n`)) return null;
-    secumie = { company, targetUrl };
+    const unionName = /^所属組合：([^\r\n]+)$/mu.exec(message)?.[1]?.trim() ?? '';
+    const registeredAddress = /^本店所在地：([^\r\n]+)$/mu.exec(message)?.[1]?.trim() ?? '';
+    if (!unionName || unionName.length > 150 ||
+        !registeredAddress || registeredAddress.length > 500) return null;
+    secumie = { company, targetUrl }; // Preserve the existing public contact API.
+    // The LP requires a phone number; historical API-only callers did not.
+    // Mirror only complete requests while keeping the existing email semantics.
+    if (phone) {
+      mirror = {
+        companyName: company, unionName, registeredAddress, websiteUrl: targetUrl,
+        contactName: name, contactEmail: email, contactPhone: phone,
+      };
+    }
   }
 
   return {
     fields: { inquiry_type: INQUIRY_TYPES[data.inquiryType]!, company, name, email, phone, message },
-    token,
-    secumie,
+    token, secumie, mirror,
   };
 }
 
@@ -142,6 +154,7 @@ export function createSiteContactApiRouter(
   verify: TurnstileVerification = verifySiteContactTurnstile,
   logger?: DiagnosticLogger,
   secumieSlack?: SecumieSlackNotifier,
+  secumieWebMirror?: SecumieWebMirror,
 ): Router {
   const router = Router();
   const rateLimit = createIpRateLimiter({ windowMs: 15 * 60 * 1000, maxRequests: 5 });
@@ -211,6 +224,13 @@ export function createSiteContactApiRouter(
         }
       } else {
         logger?.warn(diagnosticFields(req, 'secumie_slack_not_configured'), 'SECU:MIE Slack webhook not configured');
+      }
+    }
+    // Keep the accepted email as the source of truth if the optional mirror fails.
+    if (validated.mirror && secumieWebMirror) {
+      try { await secumieWebMirror(validated.mirror); }
+      catch {
+        logger?.warn(diagnosticFields(req, 'secumie_web_mirror_failed'), 'SECU:MIE Web admin mirror unavailable');
       }
     }
     res.status(200).json({ ok: true, code: 'accepted' });

@@ -21,6 +21,8 @@ export interface Config {
     allowedTurnstileHostnames: string[];
     diagnosticLogs: boolean;
     secumieSlackWebhookUrl: string;
+    secumieWebMirrorUrl: string;
+    secumieWebMirrorSecret: string;
   };
 }
 
@@ -89,6 +91,8 @@ export async function loadConfig(): Promise<Config> {
       diagnosticLogs: process.env.SITE_CONTACT_DIAGNOSTIC_LOGS === 'true',
       // Inject via Cloud Run --set-secrets; never put a webhook URL in source.
       secumieSlackWebhookUrl: process.env.SECUMIE_WEB_SLACK_WEBHOOK_URL ?? '',
+      secumieWebMirrorUrl: process.env.SECUMIE_WEB_MIRROR_URL ?? '',
+      secumieWebMirrorSecret: process.env.SECUMIE_WEB_MIRROR_SECRET ?? '',
     },
   };
 }

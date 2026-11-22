@@ -1,0 +1,33 @@
+name: SECU MIE Web corporate intake mirror contract
+
+on:
+  push:
+    branches:
+      - feat/secumie-web-mail-intake-mirror-20261122
+  pull_request:
+    branches:
+      - feat/secumie-web-guide-two-step-20261120
+    paths:
+      - 'src/routes/siteContactApi.ts'
+      - 'src/services/secumieWebMirror.ts'
+      - 'src/server.ts'
+      - 'src/config.ts'
+      - 'tests/site-contact-api.test.cjs'
+      - '.github/workflows/secumie-web-mirror-contract.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  contact-mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - run: node --test tests/site-contact-api.test.cjs tests/secumie-web-temporary.test.mjs
