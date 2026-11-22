@@ -17,6 +17,8 @@ test('IT経営KAIZEN LP v37 preserves the approved value proposition and officia
   assert.match(source, /\/images\/brand\/it-management-kaizen-logo-v1\.png/);
   assert.match(source, /rel="canonical" href="https:\/\/www\.atlib\.jp\/it-management-kaizen\/"/);
   assert.match(source, /property="og:url" content="https:\/\/www\.atlib\.jp\/it-management-kaizen\/"/);
+  assert.match(source, /application\/ld\+json/);
+  assert.match(source, /https:\/\/www\.atlib\.jp\/privacy-policy\//);
   assert.doesNotMatch(source, /v27 デザイン確認用|公開用ではありません|申込フォームのUI確認版/);
 });
 
