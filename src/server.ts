@@ -45,8 +45,7 @@ async function main(): Promise<void> {
   });
 
   // The service host exposes only Business KAIZEN. No partner LPs or corporate pages.
-  // Enable the old www URL redirects only AFTER HTTPS and the lead API are verified.
-  const businessWebRedirects = process.env.BUSINESS_WEB_REDIRECTS_ENABLED === 'true';
+  // The retired www Business Web path returns 410; do not redirect it to the new host.
   app.use((req, res, next) => {
     // Trust the actual Host and require it to match the proxy-derived hostname.
     // An X-Forwarded-Host mismatch must never bypass service-host isolation.
@@ -67,8 +66,10 @@ async function main(): Promise<void> {
         res.redirect(302, 'https://www.atlib.jp/privacy-policy/'); return;
       }
       if (!BUSINESS_WEB_PATH.test(req.path)) { res.status(404).send('Not Found'); return; }
-    } else if (businessWebRedirects && forwardedHost === host && (host === 'www.atlib.jp' || host === 'atlib.jp') && BUSINESS_WEB_PATH.test(req.path)) {
-      res.redirect(301, `https://service.atlib.jp${req.originalUrl}`); return;
+    } else if (host === 'www.atlib.jp' && BUSINESS_WEB_PATH.test(req.path)) {
+      // Explicit retirement prevents stale content and accidental redirect loops.
+      res.setHeader('Cache-Control', 'no-store');
+      res.status(410).type('text/plain').send('Gone'); return;
     }
     next();
   });
