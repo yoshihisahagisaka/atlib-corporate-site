@@ -63,7 +63,8 @@ test('service host serves Business KAIZEN only with approved SEO routes',async()
     assert.match(lp.headers['content-security-policy'],/connect-src 'self' https:\/\/sales\.atlib\.jp/);
     const check=await request('/business-web/self-check/','service.atlib.jp');
     assert.equal(check.status,200);
-    assert.match(check.body,/self-check\.js/);
+    assert.match(check.body,/self-check\.js\?v=20261122-form1/);
+    assert.match(check.body,/self-check\.css\?v=20261122-form1/);
     assert.equal(check.headers['x-frame-options'],'DENY');
     assert.match(check.headers['content-security-policy'],/frame-ancestors 'none'/);
     const js=await request('/business-web/self-check/self-check.js','service.atlib.jp');
