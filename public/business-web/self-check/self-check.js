@@ -89,7 +89,7 @@ ${r.bottlenecks.length?`<section><h2>改善を進めるうえで注目したい�
 ${r.unknowns.length?`<section><h2>まだ確認できていないこと</h2><ul class="unknowns">${r.unknowns.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>`:''}
 <section><h2>考えられる改善の方向性</h2><p>${body[key]}</p><p>ここで示しているのは改善の方向性です。既存ツールの改善、自動化、AIによる業務支援、部分的な仕組み化、システム開発など、どの方法が適しているかは、実際の業務を確認したうえで検討します。</p></section>
 ${(r.directionStatus!=='DETERMINED'||r.toBe.clarity!=='CLEAR')?`<section><h2>回答者のお立場から</h2><p>${roleText(state.answers.Q01)}</p></section>`:''}
-${r.showItManagementKaizen?`<section><h2>IT経営KAIZENという選択肢</h2><p>個別のツール検討の前に、目指す業務の姿と優先順位を整理する選択肢があります。</p><a class="btn secondary" href="/it-management-kaizen/">IT経営KAIZENについて見る</a></section>`:''}
+${r.showItManagementKaizen?`<section><h2>IT経営KAIZENという選択肢</h2><p>個別のツール検討の前に、目指す業務の姿と優先順位を整理する選択肢があります。</p><a class="btn secondary" href="https://www.atlib.jp/#link3">IT経営KAIZENについて見る</a></section>`:''}
 <section class="consult"><h2>診断結果を引き継いで、無料相談する</h2><p>診断結果を引き継いで相談できるため、同じ回答内容を最初から入力し直す必要はありません。実際の業務を確認しながら、何を減らせるか、何を仕組みにできるか、どの方法が適しているかを整理します。</p><button class="btn" id="consult">診断結果を引き継いで、無料相談する</button><p class="phase-note">※診断結果は、このボタンから続けてお申し込みいただいた場合に引き継がれます。画面を閉じた場合や、後から別のページ・お問い合わせ窓口からお申し込みいただいた場合は、自動では引き継がれません。</p></section>
 <p><button class="btn secondary" id="restart">最初からやり直す</button></p>
 </article>`;
