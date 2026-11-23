@@ -25,6 +25,7 @@ const html = fs.readFileSync(path.join(source,'index.html'),'utf8');
 const references = [...new Set([...html.matchAll(/assets\/([A-Za-z0-9._-]+\.(?:png|webp|js))/g)].map(m=>m[1]))].sort();
 assert.deepEqual(references, [...assets].sort(), 'Only the approved referenced files may be staged');
 
+fs.rmSync(target,{recursive:true,force:true}); // Generated output only; never touch public/ WWW files.
 fs.mkdirSync(path.join(target,'assets'),{recursive:true});
 fs.copyFileSync(path.join(source,'index.html'),path.join(target,'index.html'));
 for(const filename of assets) {
