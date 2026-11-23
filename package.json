@@ -9,7 +9,7 @@
     "test:contact-api": "npm run build && node --test tests/site-contact-api.test.cjs tests/site-contact-form-client.test.mjs tests/rate-limit-proxy.test.cjs tests/smoke-site-contact-email.test.cjs tests/sender-display-name.test.cjs tests/site-publication.test.cjs tests/site-publication-http.test.cjs tests/recruit-entry-form.test.cjs",
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "test:service-web": "npm run build && node --test tests/business-web-service-host.test.cjs"
+    "test:service-web": "npm run build && node --test tests/business-web-service-host.test.cjs tests/it-management-kaizen-lp-contract.test.cjs"
   },
   "engines": {
     "node": ">=22"
