@@ -9,7 +9,9 @@ Source branch: `feat/it-management-kaizen-service-release-20261123`, based on Co
 - Preserve `https://service.atlib.jp/business-web/` and all unrelated Corporate/SECU:MIE/Recruit pages.
 - Existing Cloud Run `corporate-site`, existing HTTPS LB/Certificate Manager and A record. No new Cloud Run service, SQL, API, DNS, OAuth or SMTP.
 - No changes in Sales Tools as part of this PR. Never reuse the old LP modal/Case API.
-- New service host only allows IT経営KAIZEN root/index and static assets; it does not expose private backup/old subpaths. Business Web host contract unchanged.
+- New service host only allows IT経営KAIZEN root/index and approved static assets; it does not expose backup/old subpaths. Business Web host contract unchanged.
+- **Mandatory content isolation**: `www.atlib.jp/it-management-kaizen/*` must retain the byte-identical currently deployed legacy files until separate retirement. NEVER overlay the approved new HTML onto `/app/public/it-management-kaizen/*` in the production image. `npm run test:service-web` runs `scripts/stageItManagementServiceContent.cjs` to place ONLY the approved LP and 11 referenced assets in `dist/service-content/it-management-kaizen`; the service-host handler serves them from `/app/dist/service-content/it-management-kaizen` with `fallthrough:false` before generic WWW static delivery. In the immutable image overlay, COPY only that private staged subtree, changed service middleware and verified server code blocks (plus a one-link scoped Corporate services patch). No other static WWW contents are copied.
+- Source-tree `public/it-management-kaizen/index.html` in Git is the approved staging input, NOT the deployed legacy WWW asset. In production, the old WWW file must remain untouched throughout the initial new-host launch.
 - 7-question intake/Case/notification/TimeRex operation is an independent **production GO gate**. The Sales Tools `DIAGNOSIS_PUBLIC_INTAKE_ENABLED` must be checked from the actual running Revision; verify schema contract GET and test the intended application lifecycle before release.
 
 ## Content and security
