@@ -116,6 +116,11 @@ test('service host serves only the approved KAIZEN services with SEO and securit
     assert.equal(itLogo.status,200);
     const itCorpLogo=await request('/it-management-kaizen/assets/atlib-corporate-logo.png','service.atlib.jp');
     assert.equal(itCorpLogo.status,200);
+    // This legacy-only asset exists in public/it-management-kaizen, but is NOT
+    // shipped to the service-host private LP directory. Never fall back to WWW.
+    const legacyOnly='/it-management-kaizen/assets/it-management-kaizen-dialogue-visual-v1.png';
+    assert.equal((await request(legacyOnly,'service.atlib.jp')).status,404);
+    assert.equal((await request(legacyOnly,'www.atlib.jp')).status,200);
     assert.equal((await request('/it-management-kaizen/old/index.html','service.atlib.jp')).status,404);
     assert.equal((await request('/it-management-kaizen-other/','service.atlib.jp')).status,404);
     assert.equal((await request('/it-management-kaizen/','service.atlib.jp','www.atlib.jp')).status,404);
