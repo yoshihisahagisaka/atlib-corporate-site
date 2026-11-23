@@ -18,6 +18,7 @@ test('v44 approved service, SEO and structured data resolve to the new canonical
   assert.match(html, /5ページの診断レポート/);
   assert.match(html, /rel="canonical" href="https:\/\/service\.atlib\.jp\/it-management-kaizen\/"/);
   assert.match(html, /property="og:url" content="https:\/\/service\.atlib\.jp\/it-management-kaizen\/"/);
+  assert.match(html, /property="og:image" content="https:\/\/service\.atlib\.jp\/it-management-kaizen\/assets\/hero-photo-provisional\.png"/);
   assert.doesNotMatch(html, /https:\/\/www\.atlib\.jp\/it-management-kaizen\//);
   const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   assert.equal(ld.length,1);
