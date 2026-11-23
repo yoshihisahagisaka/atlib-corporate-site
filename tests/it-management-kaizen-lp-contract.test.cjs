@@ -51,7 +51,10 @@ test('existing approved CTA attribution forwards only allowlisted query paramete
   const links=Array.from({length:4},()=>({href:questionnaire}));
   const window={location:{search:'?utm_source=conference&utm_campaign=nov26&acquisition_source_type=referral&secret=never'}};
   const document={
+    // The shared JS also initializes sticky-header UI; this test isolates CTA
+    // attribution by reporting no header elements in its synthetic DOM.
     querySelector:()=>null,
+    getElementById(id){assert.equal(id,'mobile-sticky-cta');return null;},
     querySelectorAll(selector){assert.equal(selector,'a[data-it-diagnosis-link]');return links;}
   };
   vm.runInNewContext(js,{window,document,URL,URLSearchParams});
