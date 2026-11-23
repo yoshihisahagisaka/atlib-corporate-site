@@ -36,6 +36,10 @@ test('four CTAs connect directly to the existing 7-question intake; dead form is
 });
 
 test('approved LP assets are present and executable JavaScript is served only from self',()=>{
+  const staged = path.resolve(__dirname,'../dist/service-content/it-management-kaizen');
+  assert.equal(fs.readFileSync(path.join(staged,'index.html'),'utf8'),html);
+  assert.equal(fs.readFileSync(path.join(staged,'assets/it-management-kaizen-v44.js'),'utf8'),js);
+  assert.equal(fs.existsSync(path.join(staged,'assets/it-management-kaizen-dialogue-visual-v1.png')),false);
   const assets=[...new Set([...html.matchAll(/assets\/[A-Za-z0-9._-]+\.(?:png|webp|js)/g)].map(x=>x[0]))];
   assert.ok(assets.length>=10);
   for(const asset of assets)assert.ok(fs.existsSync(path.join(dir,asset)),asset);
