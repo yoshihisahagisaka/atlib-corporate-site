@@ -120,6 +120,9 @@ test('service host serves only the approved KAIZEN services with SEO and securit
     assert.equal((await request('/it-management-kaizen-other/','service.atlib.jp')).status,404);
     assert.equal((await request('/it-management-kaizen/','service.atlib.jp','www.atlib.jp')).status,404);
     assert.equal((await request('/it-management-kaizen/','www.atlib.jp')).status,200);
+    const taggedPreview=await request('/it-management-kaizen/','preview-candidate.a.run.app');
+    assert.equal(taggedPreview.status,200);
+    assert.equal(taggedPreview.headers['x-robots-tag'],'noindex, nofollow');
     const policy=await request('/privacy-policy/','service.atlib.jp');
     assert.equal(policy.status,302);
     assert.equal(policy.headers.location,'https://www.atlib.jp/privacy-policy/');
