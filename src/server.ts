@@ -153,13 +153,13 @@ async function main(): Promise<void> {
   const itManagementServiceStatic = express.static(ITMGMT_SERVICE_DIR, {
     fallthrough: false,
     setHeaders: (res, filePath) => {
-      if (/\\.html?$/.test(filePath)) res.setHeader('Cache-Control', 'no-cache');
-      else if (/\\.(css|js)$/.test(filePath)) res.setHeader('Cache-Control', 'public, max-age=3600');
+      if (/\.html?$/.test(filePath)) res.setHeader('Cache-Control', 'no-cache');
+      else if (/\.(css|js)$/.test(filePath)) res.setHeader('Cache-Control', 'public, max-age=3600');
       else res.setHeader('Cache-Control', 'public, max-age=86400');
     },
   });
   app.use('/it-management-kaizen', (req, res, next) => {
-    const host = (req.headers.host ?? '').toLowerCase().replace(/:\\d+$/u, '');
+    const host = (req.headers.host ?? '').toLowerCase().replace(/:\d+$/u, '');
     if (host === 'service.atlib.jp' && req.hostname.toLowerCase() === host) {
       itManagementServiceStatic(req, res, next);
       return;
