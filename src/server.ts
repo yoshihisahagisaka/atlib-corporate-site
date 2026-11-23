@@ -17,6 +17,7 @@ const ITMGMT_PATH = /^\/it-management-kaizen(?:\/|$)/;
 // The service hostname exposes only the public LP and its versioned, static assets.
 const ITMGMT_PUBLIC_PATH = /^\/it-management-kaizen(?:\/(?:index\.html|assets\/[A-Za-z0-9][A-Za-z0-9._-]*)?)?$/;
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
+const ITMGMT_SERVICE_DIR = path.join(__dirname, 'service-content', 'it-management-kaizen');
 
 async function main(): Promise<void> {
   const config = await loadConfig();
@@ -145,6 +146,25 @@ async function main(): Promise<void> {
     } catch (error) {
       next(error);
     }
+  });
+
+  // service.atlib.jp serves the new LP from a private directory, not WWW's
+  // legacy public/it-management-kaizen tree. Never fall back to WWW on a miss.
+  const itManagementServiceStatic = express.static(ITMGMT_SERVICE_DIR, {
+    fallthrough: false,
+    setHeaders: (res, filePath) => {
+      if (/\\.html?$/.test(filePath)) res.setHeader('Cache-Control', 'no-cache');
+      else if (/\\.(css|js)$/.test(filePath)) res.setHeader('Cache-Control', 'public, max-age=3600');
+      else res.setHeader('Cache-Control', 'public, max-age=86400');
+    },
+  });
+  app.use('/it-management-kaizen', (req, res, next) => {
+    const host = (req.headers.host ?? '').toLowerCase().replace(/:\\d+$/u, '');
+    if (host === 'service.atlib.jp' && req.hostname.toLowerCase() === host) {
+      itManagementServiceStatic(req, res, next);
+      return;
+    }
+    next();
   });
 
   app.use(
