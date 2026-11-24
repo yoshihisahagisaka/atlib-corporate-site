@@ -33,7 +33,9 @@
 
 - TypeScript build: PASS
 - Business Web host/CSP/injection: 2/2 PASS
-- E2c Browser Desktop/Mobile: 8/8 PASS
+- E2c Browser Desktop/Mobile: 10/10 PASS
+  - Turnstile render uses the documented explicit execution fields without a frontend `size: 'invisible'` value.
+  - A non-responsive Turnstile script is stopped after five seconds; its script element and handlers are released, measurement is not retried, and diagnosis/result/consultation continue.
   - start/complete一回性、別token、restart
   - Turnstile失敗・API障害でも結果表示
   - 未設定時の無効化
@@ -43,6 +45,11 @@
 - Existing Corporate suite: 26/29 PASS。残る3件はPR #74 HEADでも同じ内容で再現し、Recruit note banner、既存corporate asset version、Template Party license位置に関するbase不一致。E2c差分は該当ファイルを変更しない。
 
 ## Release gates
+
+- Turnstile widget is configured as Invisible mode in Cloudflare; the frontend does not pass an unsupported `size: 'invisible'` render option.
+- Real Turnstile execution, action/hostname validation, and the behavior of any widget not configured as Invisible remain a Staging acceptance gate. Confirm that no visible widget is clipped or hidden and that keyboard, screen-reader, and mobile operation remain usable.
+- Before publication, confirm Cloudflare Invisible mode privacy disclosure and any required Turnstile branding or privacy/terms presentation against the production widget configuration.
+- The three existing Corporate regression failures reproduced on PR #74 remain a separate release gate and are not changed by E2c.
 
 1. Production/Test別Turnstile widget/sitekeyの作成とhostname設定。
 2. E2bのProduction/Test設定、正式Origin、CORS、Migration適用が完了してからCorporate設定を有効化する。

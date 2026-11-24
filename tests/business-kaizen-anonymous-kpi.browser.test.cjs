@@ -26,7 +26,7 @@ test.beforeAll(async()=>{
 });
 test.afterAll(async()=>{await new Promise(resolve=>server.close(resolve))});
 
-const turnstileScript=`(()=>{let next=0;const widgets=new Map();window.__turnstileActions=[];window.turnstile={render:(_el,options)=>{const id=++next;widgets.set(id,options);window.__turnstileActions.push(options.action);return id},execute:id=>setTimeout(()=>{const options=widgets.get(id);if(window.__turnstileFailure)options['error-callback']();else options.callback('mock-token-'+id)},0),remove:id=>widgets.delete(id)}})();`;
+const turnstileScript=`(()=>{let next=0;const widgets=new Map();window.__turnstileRenderOptions=[];window.turnstile={render:(_el,options)=>{const id=++next;widgets.set(id,options);window.__turnstileRenderOptions.push({action:options.action,execution:options.execution,size:options.size});return id},execute:id=>setTimeout(()=>{const options=widgets.get(id);if(window.__turnstileFailure)options['error-callback']();else options.callback('mock-token-'+id)},0),remove:id=>widgets.delete(id)}})();`;
 async function mockMeasurement(page,events,{apiFailure=false,turnstileFailure=false}={}){
   await page.addInitScript(value=>{window.__turnstileFailure=value},turnstileFailure);
   await page.route('https://challenges.cloudflare.com/**',route=>route.fulfill({status:200,contentType:'application/javascript',body:turnstileScript}));
@@ -54,7 +54,10 @@ test('sends one start and complete per attempt with separate tokens and strict U
   await expect(page.locator('[data-diagnosis-result] h1')).toBeVisible();
   await expect.poll(()=>events.filter(event=>event.eventType==='diagnosis_complete').length).toBe(1);
   expect(events[0].turnstileToken).not.toBe(events[1].turnstileToken);
-  expect(await page.evaluate(()=>window.__turnstileActions)).toEqual(['diagnosis_start','diagnosis_complete']);
+  expect(await page.evaluate(()=>window.__turnstileRenderOptions)).toEqual([
+    {action:'diagnosis_start',execution:'execute',size:undefined},
+    {action:'diagnosis_complete',execution:'execute',size:undefined},
+  ]);
   for(const event of events)expect(Object.keys(event).sort()).toEqual(['eventType','turnstileToken','utmCampaign','utmContent','utmMedium','utmSource','utmTerm'].sort());
   expect(events[0]).toMatchObject({utmSource:'google',utmMedium:'cpc',utmCampaign:'spring',utmContent:'hero',utmTerm:'kaizen'});
   await page.getByRole('button',{name:'最初からやり直す'}).click();await begin(page);await page.locator('.option').first().click();
@@ -65,6 +68,19 @@ test('Turnstile and API failures never block answers or result rendering',async(
   const turnstileEvents=[];await mockMeasurement(page,turnstileEvents,{turnstileFailure:true});await page.goto(baseUrl);await begin(page);await answerThroughResult(page);expect(turnstileEvents).toHaveLength(0);
   const apiEvents=[];await page.unrouteAll({behavior:'wait'});await mockMeasurement(page,apiEvents,{apiFailure:true});await page.goto(baseUrl);await begin(page);await answerThroughResult(page);
   await expect.poll(()=>apiEvents.length).toBe(2);await expect(page.locator('[data-diagnosis-result]')).toBeVisible();
+});
+
+test('Turnstile script load timeout ends measurement without blocking diagnosis or consultation',async({page})=>{
+  await page.route('https://challenges.cloudflare.com/**',async route=>{
+    await new Promise(resolve=>setTimeout(resolve,6000));
+    try{await route.abort('timedout')}catch{}
+  });
+  await page.goto(baseUrl);await begin(page);await answerThroughResult(page);
+  await expect(page.locator('[data-diagnosis-result]')).toBeVisible();
+  await expect.poll(()=>page.locator('script[src*="challenges.cloudflare.com/turnstile"]').count(),{timeout:6500}).toBe(0);
+  await page.locator('#consult').click();
+  await expect(page.locator('#form')).toBeVisible();
+  expect(await page.evaluate(()=>Boolean(window.turnstile))).toBe(false);
 });
 
 test('missing public configuration disables measurement without changing diagnosis',async({page})=>{
