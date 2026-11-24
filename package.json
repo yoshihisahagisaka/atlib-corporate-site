@@ -9,7 +9,8 @@
     "test:contact-api": "npm run build && node --test tests/site-contact-api.test.cjs tests/site-contact-form-client.test.mjs tests/rate-limit-proxy.test.cjs tests/smoke-site-contact-email.test.cjs tests/sender-display-name.test.cjs tests/site-publication.test.cjs tests/site-publication-http.test.cjs tests/recruit-entry-form.test.cjs",
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "test:service-web": "npm run build && node --test tests/business-web-service-host.test.cjs"
+    "test:service-web": "npm run build && node --test tests/business-web-service-host.test.cjs",
+    "test:business-kaizen-anonymous-kpi:browser": "playwright test --config=tests/business-kaizen-anonymous-kpi.playwright.config.cjs"
   },
   "engines": {
     "node": ">=22"
@@ -28,6 +29,7 @@
     "qs": "6.17.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@types/express": "^4.17.21",
     "@types/node": "^20.12.12",
     "@types/nodemailer": "^6.4.17",

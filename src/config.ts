@@ -21,6 +21,12 @@ export interface Config {
     allowedTurnstileHostnames: string[];
     diagnosticLogs: boolean;
   };
+  businessKaizenAnonymousKpi: {
+    enabled: boolean;
+    turnstileSiteKey: string;
+    apiEndpoint: string;
+    allowedOrigins: string[];
+  };
 }
 
 function configuredOrigins(value: string | undefined): string[] {
@@ -63,6 +69,17 @@ export async function loadConfig(): Promise<Config> {
     if (!value) throw new Error(`Missing required config value: ${name}`);
     return value;
   };
+  const anonymousSiteKey = process.env.BUSINESS_KAIZEN_ANONYMOUS_KPI_TURNSTILE_SITE_KEY ?? '';
+  const anonymousEndpoint = process.env.BUSINESS_KAIZEN_ANONYMOUS_KPI_API_ENDPOINT ?? '';
+  const anonymousOrigins = configuredOrigins(process.env.BUSINESS_KAIZEN_ANONYMOUS_KPI_ALLOWED_ORIGINS);
+  let anonymousEndpointValid = false;
+  try {
+    const endpoint = new URL(anonymousEndpoint);
+    anonymousEndpointValid = endpoint.protocol === 'https:' && !endpoint.username && !endpoint.password &&
+      !endpoint.search && !endpoint.hash && endpoint.pathname === '/api/public/business-kaizen/anonymous-events';
+  } catch { anonymousEndpointValid = false; }
+  const anonymousEnabled = process.env.BUSINESS_KAIZEN_ANONYMOUS_KPI_ENABLED === 'true' &&
+    /^[A-Za-z0-9_-]{10,100}$/u.test(anonymousSiteKey) && anonymousEndpointValid && anonymousOrigins.length > 0;
 
   return {
     nodeEnv: process.env.NODE_ENV ?? 'development',
@@ -86,6 +103,12 @@ export async function loadConfig(): Promise<Config> {
       allowedOrigins: configuredOrigins(process.env.SITE_CONTACT_ALLOWED_ORIGINS),
       allowedTurnstileHostnames: configuredHostnames(process.env.SITE_CONTACT_TURNSTILE_HOSTNAMES),
       diagnosticLogs: process.env.SITE_CONTACT_DIAGNOSTIC_LOGS === 'true',
+    },
+    businessKaizenAnonymousKpi: {
+      enabled: anonymousEnabled,
+      turnstileSiteKey: anonymousSiteKey,
+      apiEndpoint: anonymousEndpoint,
+      allowedOrigins: anonymousOrigins,
     },
   };
 }

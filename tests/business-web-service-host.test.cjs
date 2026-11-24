@@ -23,7 +23,11 @@ async function withSite(redirects, check) {
       SMTP_HOST:'127.0.0.1',SMTP_USER:'synthetic-user',SMTP_PASSWORD:'synthetic-password',
       SMTP_FROM:'system@atlib.jp',FORM_HMAC_SECRET:'synthetic-only',
       SITE_CONTACT_TURNSTILE_SITE_KEY:'synthetic-site-key-123456',
-      SITE_CONTACT_TURNSTILE_SECRET:'synthetic-only',SITE_CONTACT_ALLOWED_ORIGINS:''},
+      SITE_CONTACT_TURNSTILE_SECRET:'synthetic-only',SITE_CONTACT_ALLOWED_ORIGINS:'',
+      BUSINESS_KAIZEN_ANONYMOUS_KPI_ENABLED:'true',
+      BUSINESS_KAIZEN_ANONYMOUS_KPI_TURNSTILE_SITE_KEY:'synthetic-kpi-site-key-123456',
+      BUSINESS_KAIZEN_ANONYMOUS_KPI_API_ENDPOINT:'https://kpi.test.example/api/public/business-kaizen/anonymous-events',
+      BUSINESS_KAIZEN_ANONYMOUS_KPI_ALLOWED_ORIGINS:'https://service.atlib.jp'},
     stdio:'ignore'
   });
   const request=(url,host,forwardedHost)=>new Promise((resolve,reject)=>{
@@ -60,11 +64,17 @@ test('service host serves Business KAIZEN only with approved SEO routes',async()
     assert.match(lp.headers['content-security-policy'],/frame-ancestors 'none'/);
     assert.match(lp.headers['content-security-policy'],/script-src 'self'/);
     assert.match(lp.headers['content-security-policy'],/style-src 'self' 'unsafe-inline'/);
-    assert.match(lp.headers['content-security-policy'],/connect-src 'self' https:\/\/sales\.atlib\.jp/);
+    assert.match(lp.headers['content-security-policy'],/connect-src[^;]*https:\/\/sales\.atlib\.jp/);
+    assert.match(lp.headers['content-security-policy'],/script-src 'self' https:\/\/challenges\.cloudflare\.com/);
+    assert.match(lp.headers['content-security-policy'],/frame-src https:\/\/challenges\.cloudflare\.com/);
+    assert.match(lp.headers['content-security-policy'],/connect-src 'self' https:\/\/kpi\.test\.example/);
     const check=await request('/business-web/self-check/','service.atlib.jp');
     assert.equal(check.status,200);
-    assert.match(check.body,/self-check\.js\?v=20261122-form1/);
+    assert.match(check.body,/self-check\.js\?v=20261124-e2c1/);
     assert.match(check.body,/self-check\.css\?v=20261122-form1/);
+    assert.match(check.body,/name="business-kaizen-anonymous-kpi-enabled" content="true"/);
+    assert.match(check.body,/name="business-kaizen-anonymous-kpi-site-key" content="synthetic-kpi-site-key-123456"/);
+    assert.match(check.body,/name="business-kaizen-anonymous-kpi-api-endpoint" content="https:\/\/kpi\.test\.example\/api\/public\/business-kaizen\/anonymous-events"/);
     assert.equal(check.headers['x-frame-options'],'DENY');
     assert.match(check.headers['content-security-policy'],/frame-ancestors 'none'/);
     const js=await request('/business-web/self-check/self-check.js','service.atlib.jp');
@@ -105,6 +115,8 @@ test('service host serves Business KAIZEN only with approved SEO routes',async()
     const existing=await request('/business-web/','www.atlib.jp');
     assert.equal(existing.status,200,'www LP preserved before redirect gate');
     assert.equal(existing.headers['content-security-policy'],undefined,'existing WWW static LP policy unchanged');
+    const legacyCheck=await request('/business-web/self-check/','www.atlib.jp');
+    assert.match(legacyCheck.body,/name="business-kaizen-anonymous-kpi-enabled" content="false"/,'non-allowlisted legacy Origin must fail closed');
     const card=await request('/services/','www.atlib.jp');
     assert.equal(card.status,200);
     assert.match(card.body,/https:\/\/service\.atlib\.jp\/business-web\//);

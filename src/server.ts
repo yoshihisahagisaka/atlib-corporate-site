@@ -30,7 +30,9 @@ async function main(): Promise<void> {
   app.set('trust proxy', 1);
   app.use(pinoHttp({ logger }));
   const releaseMode = process.env.SITE_PUBLIC_MODE;
-  app.use(siteSecurityHeaders(releaseMode));
+  const anonymousKpiApiOrigin = config.businessKaizenAnonymousKpi.enabled
+    ? new URL(config.businessKaizenAnonymousKpi.apiEndpoint).origin : undefined;
+  app.use(siteSecurityHeaders(releaseMode, anonymousKpiApiOrigin));
   app.use(express.urlencoded({ extended: true }));
 
   app.get('/healthz', (_req, res) => res.status(200).send('ok'));
@@ -138,6 +140,22 @@ async function main(): Promise<void> {
     } catch (error) {
       next(error);
     }
+  });
+
+  app.get(['/business-web/self-check/', '/business-web/self-check/index.html'], async (req, res, next) => {
+    try {
+      const origin = `https://${req.hostname.toLowerCase()}`;
+      const anonymous = config.businessKaizenAnonymousKpi;
+      const enabled = anonymous.enabled && anonymous.allowedOrigins.includes(origin);
+      const template = await readFile(path.join(PUBLIC_DIR, 'business-web', 'self-check', 'index.html'), 'utf8');
+      const attribute = (value: string): string => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;')
+        .replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+      res.setHeader('Cache-Control', 'no-store');
+      res.type('html').send(template
+        .replace('__ANONYMOUS_KPI_ENABLED__', enabled ? 'true' : 'false')
+        .replace('__ANONYMOUS_KPI_SITE_KEY__', enabled ? attribute(anonymous.turnstileSiteKey) : '')
+        .replace('__ANONYMOUS_KPI_API_ENDPOINT__', enabled ? attribute(anonymous.apiEndpoint) : ''));
+    } catch (error) { next(error); }
   });
 
   app.use(
