@@ -63,15 +63,16 @@ export const BUSINESS_WEB_CONTENT_SECURITY_POLICY = [
   "object-src 'none'",
   "frame-ancestors 'none'",
   "form-action 'self'",
-  "script-src 'self'",
+  "script-src 'self' https://challenges.cloudflare.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self' data:",
-  "connect-src 'self' https://sales.atlib.jp",
+  "connect-src 'self' https://sales.atlib.jp https://challenges.cloudflare.com",
+  'frame-src https://challenges.cloudflare.com',
   'upgrade-insecure-requests',
 ].join('; ');
 
-export function siteSecurityHeaders(releaseMode: string | undefined) {
+export function siteSecurityHeaders(releaseMode: string | undefined, anonymousKpiApiOrigin?: string) {
   return (req: Request, res: Response, next: NextFunction): void => {
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
@@ -94,7 +95,10 @@ export function siteSecurityHeaders(releaseMode: string | undefined) {
       req.hostname.toLowerCase() === 'service.atlib.jp' &&
       /^\/business-web(?:\/|$)/u.test(req.path)
     ) {
-      res.setHeader('Content-Security-Policy', BUSINESS_WEB_CONTENT_SECURITY_POLICY);
+      const policy = anonymousKpiApiOrigin
+        ? BUSINESS_WEB_CONTENT_SECURITY_POLICY.replace("connect-src 'self'", `connect-src 'self' ${anonymousKpiApiOrigin}`)
+        : BUSINESS_WEB_CONTENT_SECURITY_POLICY;
+      res.setHeader('Content-Security-Policy', policy);
       res.setHeader('X-Frame-Options', 'DENY');
     }
     next();
