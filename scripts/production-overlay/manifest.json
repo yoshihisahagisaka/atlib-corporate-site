@@ -3,7 +3,7 @@
   "issue": 81,
   "pullRequest": 82,
   "baseCommit": "45533d6c3e6e2995499fb3923230992442156105",
-  "headCommit": "72095e89170168cfe93dcdc0c267ea589c9f2402",
+  "headCommit": "4fb0ad2a69a0b77fbb5addfafb8b5eb911f93622",
   "productionRevision": "corporate-site-imv-20261123071048",
   "baseImage": "asia-northeast1-docker.pkg.dev/atlib-corporate-site/cloud-run-source-deploy/corporate-site-recruit-overlay@sha256:0653f45d969ff4eaab604534adb3cbc0ed8c856e722e2e76546f0a9babc46baa",
   "allowedFiles": [

@@ -73,3 +73,25 @@ Screenshots:
 - `docs/evidence/issue-81-browser/home-{390,1440}-full.png`
 - `docs/evidence/issue-81-browser/services-{390,1440}-full.png`
 - `docs/evidence/issue-81-browser/management-explainer-{390,1440}.png`
+
+## Corporate Brand Design v4 (2026-11-26)
+
+- Content HEAD: `4fb0ad2a69a0b77fbb5addfafb8b5eb911f93622`
+- Approved prototype SHA-256: `fd8cdc99de9edc4423a21ccc6948830a09a69d76ede9cf551434bb8ce79e6413`
+- Top-page order was changed to perspective, values, support results, clients, concise services, gallery, mission/100-year vision, free diagnoses, and contact. Existing hero, support-result, gallery, mission/vision, shared JavaScript, and public links remain in place.
+- The detailed KAIZEN diagrams and service catalog remain on `/services/`; the unchanged four-step `link5` support flow moved there from the home page.
+- Eight existing client logos were restored without adding or modifying image assets. The evidence is the previous Corporate HTML plus the current `/joshisu-kaizen/` references to the same repository files: MIXI, シンエイ動画, グローバル・リンク・マネジメント, ゲンバカンリシステムズ, 大和バルブ, 藤海ビルサービス, マイクレン・ヘルスケア, and Vidaway.
+- Formal current publication-permission records were not found in Git. The existing publication history supports restoration, while any future logo additions or removals remain an Owner/legal review item.
+- The latest atLIB ISMS logo PDF SHA-256 is `89e172a3f411f97844e1ba828ee03b001ee5486ca6deeebeedca2dbf6c45a14e`; it identifies certification `GIJP-1167-IC` and `ISO/IEC 27001:2022`. The accompanying GCERTI usage guide SHA-256 is `526c3c5ff22e565435d5492972e0f00c4c7fe8bcb90478eb2f81dff7492c3f13`.
+- The guide permits the supplied IAS + GCERTI mark on a Web site during the valid certification period. It prohibits editing (including aspect-ratio/content changes), prohibits IAF use, requires at least 12 mm width, permits only file-format conversion, and requires the certified office to be stated when a site also covers uncertified offices or out-of-scope activity. The supplied mark already contains the certification number and standard.
+- Git contains ISO/IEC 27001 certification text but no ISMS logo asset or historical logo placement. Publishing the mark requires an unedited Web-format derivative, confirmation of the certified office/scope wording, and an explicit Overlay asset/allowlist approval. It was therefore not added in this gate.
+- The five action principles remain on `/company/#mvv`; the company-page local navigation and all Corporate footers still label that destination “理念と行動指針”. No removal or Recruit-site change was made. Proposed later decision: keep Corporate focused on philosophy, vision, representative message, and customer value, then evaluate whether the action-principle detail should move to Recruit while retaining a Corporate summary/link.
+
+Final CDP Browser Gate: 14/14 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CSS pixels across `/` and `/services/`.
+
+- Horizontal overflow, broken images, missing required anchors, Console errors, Page exceptions, and Resource failures: 0.
+- Existing home slider, gallery animation, mobile menu open/close, official KAIZEN logos, and all eight client logos: PASS.
+- Machine-readable evidence: `docs/evidence/issue-81-browser/browser-gate-v4.json`.
+- Full-page screenshots: `docs/evidence/issue-81-browser/{home,services}-v4-{390,1440}-full.png`.
+- Section screenshots: `docs/evidence/issue-81-browser/{home,services}-v4-feature-{390,1440}.png`.
+- Final checks against Content HEAD: Build PASS; Renewal 6 PASS / 0 FAIL; Production Overlay 6 PASS / 0 FAIL; Service Web 7 PASS / 0 FAIL; established baseline 26 PASS / 3 known FAIL (no increase); `git diff --check` PASS.

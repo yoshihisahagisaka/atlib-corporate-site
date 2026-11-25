@@ -34,10 +34,10 @@ function balancedElement(html, marker, tagName) {
 
 function protectedBlocks(html) {
   const works = balancedElement(html, '<section class="work-section"', 'section');
+  const mission = balancedElement(html, '<section class="mission-section', 'section');
   const contracts = [
     ['hero', '<div class="mainimg"', '<div class="brand-line"'],
     ['gallery', '<section class="motion-section', '<section class="mission-section'],
-    ['mission', '<section class="mission-section', '<section class="contact-section'],
   ];
   const blocks = Object.fromEntries(contracts.map(([name, start, end]) => {
     const from = html.indexOf(start); const to = html.indexOf(end, from + start.length);
@@ -45,6 +45,7 @@ function protectedBlocks(html) {
     return [name, crypto.createHash('sha256').update(html.slice(from, to)).digest('hex')];
   }));
   blocks.works = crypto.createHash('sha256').update(works).digest('hex');
+  blocks.mission = crypto.createHash('sha256').update(mission).digest('hex');
   return blocks;
 }
 

@@ -72,16 +72,20 @@ async function inspect(port, siteOrigin, page, width) {
   await Promise.all(['Page.enable', 'Runtime.enable', 'Network.enable', 'Log.enable'].map((method) => client.send(method)));
   await client.send('Emulation.setDeviceMetricsOverride', { width, height: 1200, deviceScaleFactor: 1, mobile: false });
   await client.send('Page.navigate', { url }); await sleep(1200);
+  await client.send('Runtime.evaluate', { expression: `(async()=>{ for(let y=0;y<document.documentElement.scrollHeight;y+=Math.max(300,innerHeight*.8)){ scrollTo(0,y); await new Promise(r=>setTimeout(r,45)); } scrollTo(0,0); await new Promise(r=>setTimeout(r,500)); return true; })()`, awaitPromise: true, returnByValue: true });
   const expression = `(() => {
     const d=document, root=d.documentElement, body=d.body;
     const broken=[...d.images].filter(x=>!x.complete||x.naturalWidth===0).map(x=>x.getAttribute('src'));
     const logo=d.querySelector('img.renewal-business-logo');
-    const section=d.querySelector('.renewal-management-explainer');
+    const section=d.querySelector(${JSON.stringify(page.name === 'home' ? '.renewal-brand-services' : '.renewal-management-explainer')});
+    const gallery=d.querySelector('.motion-section .img');
     let slider=null; const indicators=[...d.querySelectorAll('.slide-indicators button,.slide-indicators span')];
     if (indicators.length>1) { const before=[...d.querySelectorAll('.slide')].findIndex(x=>x.classList.contains('active')); indicators[1].click(); const after=[...d.querySelectorAll('.slide')].findIndex(x=>x.classList.contains('active')); slider={before,after}; }
     const rect=section?.getBoundingClientRect();
     const overflow=[...d.querySelectorAll('body *')].map((el)=>{const r=el.getBoundingClientRect();return{tag:el.tagName,className:String(el.className||''),id:el.id,left:r.left,right:r.right,width:r.width};}).filter((x)=>x.right>root.clientWidth+1||x.left< -1).slice(0,25);
-    return {innerWidth:innerWidth,clientWidth:root.clientWidth,scrollWidth:root.scrollWidth,bodyScrollWidth:body.scrollWidth,overflow,broken,logo:{present:!!logo,complete:logo?.complete,naturalWidth:logo?.naturalWidth,naturalHeight:logo?.naturalHeight},section:rect?{x:rect.x,y:rect.y,width:rect.width,height:rect.height}:null,menuInteraction:null,slider};
+    const requiredAnchors=${JSON.stringify(page.name === 'home' ? ['link1','link4','track-record','kaizen','diagnosis','contact'] : ['kaizen','it-projects','it-bpo','business-kaizen','security','casual-consulting','link5'])};
+    const clientLogos=[...d.querySelectorAll('.renewal-brand-client-logos img')];
+    return {innerWidth:innerWidth,clientWidth:root.clientWidth,scrollWidth:root.scrollWidth,bodyScrollWidth:body.scrollWidth,overflow,broken,logo:{present:!!logo,complete:logo?.complete,naturalWidth:logo?.naturalWidth,naturalHeight:logo?.naturalHeight},clientLogos:{count:clientLogos.length,visible:clientLogos.filter(x=>x.getBoundingClientRect().width>0&&x.getBoundingClientRect().height>0).length},section:rect?{x:rect.x,y:rect.y,width:rect.width,height:rect.height}:null,anchors:requiredAnchors.filter(id=>!d.getElementById(id)),gallery:{present:!!gallery,animation:getComputedStyle(gallery||body).animationName},menuInteraction:null,slider};
   })()`;
   const evaluated = await client.send('Runtime.evaluate', { expression, returnByValue: true });
   const metrics = evaluated.result.value;
@@ -97,10 +101,10 @@ async function inspect(port, siteOrigin, page, width) {
     await sleep(1100);
     const layout = await client.send('Page.getLayoutMetrics');
     const full = await client.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip: { x: 0, y: 0, width: layout.cssContentSize.width, height: layout.cssContentSize.height, scale: 1 } });
-    fs.writeFileSync(path.join(evidenceRoot, `${page.name}-${width}-full.png`), Buffer.from(full.data, 'base64'));
-    if (page.name === 'services' && metrics.section) {
+    fs.writeFileSync(path.join(evidenceRoot, `${page.name}-v4-${width}-full.png`), Buffer.from(full.data, 'base64'));
+    if (metrics.section) {
       const partial = await client.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip: { ...metrics.section, scale: 1 } });
-      fs.writeFileSync(path.join(evidenceRoot, `management-explainer-${width}.png`), Buffer.from(partial.data, 'base64'));
+      fs.writeFileSync(path.join(evidenceRoot, `${page.name}-v4-feature-${width}.png`), Buffer.from(partial.data, 'base64'));
     }
   }
   client.close(); await fetch(`http://127.0.0.1:${port}/json/close/${target.id}`);
@@ -118,12 +122,13 @@ async function inspect(port, siteOrigin, page, width) {
     const [portText] = await waitForFile(path.join(profile, 'DevToolsActivePort'));
     const port = Number(portText); const results = [];
     for (const width of widths) for (const page of pages) results.push(await inspect(port, siteOrigin, page, width));
-    fs.writeFileSync(path.join(evidenceRoot, 'browser-gate-v2.json'), `${JSON.stringify({ generatedAt: new Date().toISOString(), widths, results }, null, 2)}\n`);
+    fs.writeFileSync(path.join(evidenceRoot, 'browser-gate-v4.json'), `${JSON.stringify({ generatedAt: new Date().toISOString(), widths, results }, null, 2)}\n`);
     for (const result of results) {
       assert.equal(result.innerWidth, result.width, `${result.page}/${result.width}: viewport`);
       assert.ok(result.scrollWidth <= result.clientWidth + 1, `${result.page}/${result.width}: document overflow ${result.scrollWidth}/${result.clientWidth} ${JSON.stringify(result.overflow)}`);
       assert.ok(result.bodyScrollWidth <= result.clientWidth + 1, `${result.page}/${result.width}: body overflow ${result.bodyScrollWidth}/${result.clientWidth} ${JSON.stringify(result.overflow)}`);
       assert.deepEqual(result.broken, [], `${result.page}/${result.width}: broken images`);
+      assert.deepEqual(result.anchors, [], `${result.page}/${result.width}: required anchors`);
       assert.equal(result.logo.present, true, `${result.page}/${result.width}: business logo missing`);
       assert.equal(result.logo.complete, true, `${result.page}/${result.width}: business logo incomplete`);
       assert.ok(result.logo.naturalWidth > 0 && result.logo.naturalHeight > 0, `${result.page}/${result.width}: business logo dimensions`);
@@ -134,6 +139,8 @@ async function inspect(port, siteOrigin, page, width) {
         assert.equal(result.menuInteraction?.closedAfterWait, false, `${result.page}/${result.width}: mobile menu close`);
       }
       if (result.page === 'home') assert.notEqual(result.slider?.before, result.slider?.after, `${result.width}: slider`);
+      if (result.page === 'home') assert.notEqual(result.gallery?.animation, 'none', `${result.width}: gallery animation`);
+      if (result.page === 'home') assert.deepEqual(result.clientLogos, { count: 8, visible: 8 }, `${result.width}: client logos`);
       if (result.page === 'services') assert.ok(result.section?.height > 0, `${result.width}: explainer section`);
     }
     process.stdout.write(`CORPORATE_BROWSER_GATE=${results.length} PASS\n`);

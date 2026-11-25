@@ -49,23 +49,42 @@ test('renewal styling remains isolated and official assets remain referenced', (
   assert.match(home, /class="slide img1"/u);
 });
 
-test('approved v3 visuals and customer-facing language are retained', () => {
+test('approved v4 separates the editorial home from the detailed service catalogue', () => {
   const home = read('index.html');
   const services = read('services/index.html');
   const css = read('css/atlib-service-renewal.css');
-  for (const html of [home, services]) {
-    assert.match(html, /UNDERSTAND \/ DESIGN \/ BUILD/u);
-    assert.match(html, /業務理解・要件設計・開発/u);
-    assert.match(html, /renewal-advisory-options/u);
-    assert.match(html, /月額相談/u);
-    assert.match(html, /必要なときに別途依頼/u);
-    assert.doesNotMatch(html, /KAIZENとは独立したサービス|従来の常駐型情シスアウトソーシングではなく|公開済みの3つの無料診断/u);
+  for (const value of ['renewal-brand-thinking', 'renewal-brand-values', 'renewal-brand-services', 'renewal-brand-diagnosis']) {
+    assert.match(home, new RegExp(value, 'u'));
   }
-  for (const value of ['7問', '＋60分の対話', '15問', 'URL']) assert.match(home, new RegExp(value));
-  assert.match(home, /renewal-diagnostic-visual/u);
-  assert.match(css, /\.renewal-kaizen \{ background: #eef3f7; \}/u);
-  assert.match(css, /\.renewal-security \{ background: #fff; \}/u);
-  assert.match(css, /\.renewal-advisory \{[^}]*background: #faf5ee;/u);
+  assert.ok(home.indexOf('id="link1"') < home.indexOf('id="link4"'));
+  assert.ok(home.indexOf('id="link4"') < home.indexOf('id="track-record"'));
+  assert.ok(home.indexOf('id="track-record"') < home.indexOf('id="kaizen"'));
+  assert.ok(home.indexOf('id="track-record"') < home.indexOf('renewal-brand-clients'));
+  assert.ok(home.indexOf('renewal-brand-clients') < home.indexOf('id="kaizen"'));
+  assert.ok(home.indexOf('id="kaizen"') < home.indexOf('class="motion-section"'));
+  assert.ok(home.indexOf('class="mission-section') < home.indexOf('id="diagnosis"'));
+  assert.match(services, /UNDERSTAND \/ DESIGN \/ BUILD/u);
+  assert.match(services, /業務理解・要件設計・開発/u);
+  assert.match(services, /renewal-advisory-options/u);
+  assert.match(services, /月額相談/u);
+  assert.match(services, /必要なときに別途依頼/u);
+  assert.match(services, /id="link5"/u);
+  assert.doesNotMatch(home, /renewal-flow|renewal-advisory-options|renewal-diagnostic-visual/u);
+  for (const html of [home, services]) assert.doesNotMatch(html, /KAIZENとは独立したサービス|従来の常駐型情シスアウトソーシングではなく|公開済みの3つの無料診断/u);
+  assert.match(css, /Corporate Brand Design v4/u);
+});
+
+test('previously published client logos are restored from existing assets only', () => {
+  const home = read('index.html');
+  assert.match(home, /id="renewal-brand-clients-title">主な取引企業/u);
+  for (const [file, company] of [
+    ['mixi', '株式会社MIXI'], ['shinei', 'シンエイ動画株式会社'],
+    ['glm', '株式会社グローバル・リンク・マネジメント'], ['gks', '株式会社ゲンバカンリシステムズ'],
+    ['yamato', '株式会社大和バルブ'], ['tokai', '藤海ビルサービス株式会社'],
+    ['micren', 'マイクレン・ヘルスケア株式会社'], ['vidaway', '株式会社Vidaway'],
+  ]) {
+    assert.match(home, new RegExp(`images/partner_logo_${file}\\.png[^>]+alt="${company}"`, 'u'));
+  }
 });
 
 test('human review v2 logo, copy removals and IT management explainer are exact', () => {
