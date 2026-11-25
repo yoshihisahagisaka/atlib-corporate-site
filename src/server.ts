@@ -13,7 +13,11 @@ import { corporatePageSecurityHeaders, isPublicRequest, renderCorporatePage, sit
 
 const RECRUIT_HOST = /^(www\.)?recruit\.atlib\.jp$/i;
 const BUSINESS_WEB_PATH = /^\/business-web(?:\/|$)/;
+const ITMGMT_PATH = /^\/it-management-kaizen(?:\/|$)/;
+// The service hostname exposes only the public LP and its versioned, static assets.
+const ITMGMT_PUBLIC_PATH = /^\/it-management-kaizen(?:\/(?:index\.html|assets\/[A-Za-z0-9][A-Za-z0-9._-]*)?)?$/;
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
+const ITMGMT_SERVICE_DIR = path.join(__dirname, 'service-content', 'it-management-kaizen');
 
 async function main(): Promise<void> {
   const config = await loadConfig();
@@ -44,9 +48,10 @@ async function main(): Promise<void> {
     next();
   });
 
-  // The service host exposes only Business KAIZEN. No partner LPs or corporate pages.
-  // Enable the old www URL redirects only AFTER HTTPS and the lead API are verified.
+  // The service host exposes only Business KAIZEN and IT Management KAIZEN.
+  // Retiring each old www URL is an independent, post-release operation.
   const businessWebRedirects = process.env.BUSINESS_WEB_REDIRECTS_ENABLED === 'true';
+  const retireItManagementWww = process.env.ITMGMT_WWW_RETIRE_ENABLED === 'true';
   app.use((req, res, next) => {
     // Trust the actual Host and require it to match the proxy-derived hostname.
     // An X-Forwarded-Host mismatch must never bypass service-host isolation.
@@ -56,17 +61,20 @@ async function main(): Promise<void> {
       if (forwardedHost !== host) { res.status(404).send('Not Found'); return; }
       if (req.path === '/') { res.redirect(302, '/business-web/'); return; }
       if (req.path === '/robots.txt') {
-        res.type('text/plain').send('User-agent: *\nAllow: /business-web/\nSitemap: https://service.atlib.jp/sitemap.xml\n');
+        res.type('text/plain').send('User-agent: *\nAllow: /business-web/\nAllow: /it-management-kaizen/\nSitemap: https://service.atlib.jp/sitemap.xml\n');
         return;
       }
       if (req.path === '/sitemap.xml') {
-        res.type('application/xml').send('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://service.atlib.jp/business-web/</loc></url></urlset>');
+        res.type('application/xml').send('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://service.atlib.jp/business-web/</loc></url><url><loc>https://service.atlib.jp/it-management-kaizen/</loc></url></urlset>');
         return;
       }
       if (req.path === '/privacy-policy' || req.path === '/privacy-policy/') {
         res.redirect(302, 'https://www.atlib.jp/privacy-policy/'); return;
       }
-      if (!BUSINESS_WEB_PATH.test(req.path)) { res.status(404).send('Not Found'); return; }
+      if (!BUSINESS_WEB_PATH.test(req.path) && !ITMGMT_PUBLIC_PATH.test(req.path)) { res.status(404).send('Not Found'); return; }
+    } else if (retireItManagementWww && host === 'www.atlib.jp' && ITMGMT_PATH.test(req.path)) {
+      res.setHeader('Cache-Control', 'no-store');
+      res.status(410).type('text/plain').send('Gone'); return;
     } else if (businessWebRedirects && forwardedHost === host && (host === 'www.atlib.jp' || host === 'atlib.jp') && BUSINESS_WEB_PATH.test(req.path)) {
       res.redirect(301, `https://service.atlib.jp${req.originalUrl}`); return;
     }
@@ -138,6 +146,25 @@ async function main(): Promise<void> {
     } catch (error) {
       next(error);
     }
+  });
+
+  // service.atlib.jp serves the new LP from a private directory, not WWW's
+  // legacy public/it-management-kaizen tree. Never fall back to WWW on a miss.
+  const itManagementServiceStatic = express.static(ITMGMT_SERVICE_DIR, {
+    fallthrough: false,
+    setHeaders: (res, filePath) => {
+      if (/\.html?$/.test(filePath)) res.setHeader('Cache-Control', 'no-cache');
+      else if (/\.(css|js)$/.test(filePath)) res.setHeader('Cache-Control', 'public, max-age=3600');
+      else res.setHeader('Cache-Control', 'public, max-age=86400');
+    },
+  });
+  app.use('/it-management-kaizen', (req, res, next) => {
+    const host = (req.headers.host ?? '').toLowerCase().replace(/:\d+$/u, '');
+    if (host === 'service.atlib.jp' && req.hostname.toLowerCase() === host) {
+      itManagementServiceStatic(req, res, next);
+      return;
+    }
+    next();
   });
 
   app.use(

@@ -53,10 +53,9 @@ export function isPublicRequest(
   return releaseMode === 'public' && publishedHost(hostname, hostHeader);
 }
 
-// Business Web: a narrow CSP for the new hostname without changing
-// existing corporate, recruiting, SECU:MIE or other legacy LP policies.
-// The LP uses inline CSS; the diagnostic screen also uses inline style
-// attributes for progress meters. JavaScript is served only from self.
+// Service-host LPs use the same narrow CSP without changing the other corporate hosts.
+// Both Business KAIZEN and IT経営KAIZEN use inline CSS; executable JavaScript is served
+// from the service host, not embedded inline in HTML.
 export const BUSINESS_WEB_CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -87,12 +86,13 @@ export function siteSecurityHeaders(releaseMode: string | undefined) {
       res.setHeader('X-Robots-Tag', 'noindex, nofollow');
     }
 
-    // Apply only to the Business Web branch of the approved service hostname.
+    // Apply only to the two explicitly approved LP branches of the service hostname.
     // Other hosts and non-Business Web paths retain their existing policy.
     if (
       isPublicRequest(req.hostname, req.headers.host, releaseMode) &&
       req.hostname.toLowerCase() === 'service.atlib.jp' &&
-      /^\/business-web(?:\/|$)/u.test(req.path)
+      (/^\/business-web(?:\/|$)/u.test(req.path) ||
+       /^\/it-management-kaizen(?:\/|$)/u.test(req.path))
     ) {
       res.setHeader('Content-Security-Policy', BUSINESS_WEB_CONTENT_SECURITY_POLICY);
       res.setHeader('X-Frame-Options', 'DENY');
