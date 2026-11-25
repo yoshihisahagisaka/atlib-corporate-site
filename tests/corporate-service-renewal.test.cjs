@@ -48,3 +48,22 @@ test('renewal styling remains isolated and official assets remain referenced', (
   assert.match(home, /class="work-section"/u);
   assert.match(home, /class="slide img1"/u);
 });
+
+test('approved v3 visuals and customer-facing language are retained', () => {
+  const home = read('index.html');
+  const services = read('services/index.html');
+  const css = read('css/atlib-service-renewal.css');
+  for (const html of [home, services]) {
+    assert.match(html, /UNDERSTAND \/ DESIGN \/ BUILD/u);
+    assert.match(html, /業務理解・要件設計・開発/u);
+    assert.match(html, /renewal-advisory-options/u);
+    assert.match(html, /月額相談/u);
+    assert.match(html, /必要なときに別途依頼/u);
+    assert.doesNotMatch(html, /KAIZENとは独立したサービス|従来の常駐型情シスアウトソーシングではなく|公開済みの3つの無料診断/u);
+  }
+  for (const value of ['7問', '＋60分の対話', '15問', 'URL']) assert.match(home, new RegExp(value));
+  assert.match(home, /renewal-diagnostic-visual/u);
+  assert.match(css, /\.renewal-kaizen \{ background: #eef3f7; \}/u);
+  assert.match(css, /\.renewal-security \{ background: #fff; \}/u);
+  assert.match(css, /\.renewal-advisory \{[^}]*background: #faf5ee;/u);
+});
