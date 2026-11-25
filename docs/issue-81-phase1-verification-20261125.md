@@ -101,9 +101,18 @@ Final CDP Browser Gate: 14/14 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CS
 - Content HEAD: `3e9d3c75519e30dcf343ce5b1075e9addf8825ef`.
 - MIXI uses the supplied transparent RGB positive PNG without recoloring, deformation, cropping, or aspect-ratio changes. Source/render SHA-256: `de166bd8fb91d8edf30f9fbaa6b01e32ef8d2d89fda98e438ab6ee2ae2b37f53`.
 - ISMS uses a format-only PNG rendering of the supplied PDF page. It contains IAS + GCERTI, not IAF. PDF SHA-256: `89e172a3f411f97844e1ba828ee03b001ee5486ca6deeebeedca2dbf6c45a14e`; PNG SHA-256: `6838d56096c64059cdd5c2becdc6d3c8c5148849d4d830ac9392b32a0b92c4fc`.
-- Published facts: ISO/IEC 27001:2022; certificate GIJP-1167-IC; scope `ITコンサルティング事業・IT支援事業`; certified office `東京都中央区八丁堀4-12-7 明豊パークタワービル3階`; validity `2026年12月1日〜2029年11月30日`.
+- Published ISMS information is intentionally limited to the official logo, certification name `ISO/IEC 27001:2022` / `情報セキュリティマネジメントシステム`, and certificate number `GIJP-1167-IC`. Scope, certified office, validity period, and expiry are not published as text.
 - The ISMS logo is present in company information and the common footer. CSS keeps its displayed width above the 12 mm Web minimum at PC and mobile widths.
 - Overlay protection remains fail-closed for `public/images`; only the two named official logo assets are explicit exceptions. The candidate Dockerfile has one COPY per allowlisted path.
 - Final CDP Browser Gate: 21/21 PASS across home, services, and company at 320, 390, 650, 651, 768, 1024, and 1440 CSS px. No broken image, horizontal overflow, Console/Page/Resource error, or anchor regression. MIXI decoded at 6000x3614; every ISMS rendering was visible at no less than the 12 mm Web minimum.
 - Updated full-page evidence: `docs/evidence/issue-81-browser/{home,services,company}-v4-{390,1440}-full.png`; company ISMS detail: `company-v4-feature-{390,1440}.png`; machine-readable result: `browser-gate-v4.json`.
 - Final checks: `npm ci` PASS; Build PASS; Renewal 7 PASS / 0 FAIL; Production Overlay 6 PASS / 0 FAIL; Service Web 7 PASS / 0 FAIL; established baseline 26 PASS / 3 known FAIL (no increase); `git diff --check` PASS.
+
+## ISMS copy minimization (2026-11-26)
+
+- Content HEAD: `46358b4b6bd34fe148300d9f74efc0b4e7819a41`.
+- Company information and all common footers publish the official logo, certification name, and certificate number. Scope, certified office, validity-period, and expiry text were removed.
+- Management confirmed this is an existing-certification renewal and that the official logo remains unchanged.
+- The contract requires the logo, certification name, and certificate number, and explicitly rejects the removed scope, office, and date metadata.
+- Overlay allowlist remains the same eight paths; only `headCommit` changed for the new approved Content HEAD.
+- Final verification against this Content HEAD: Build PASS; Renewal 7 PASS / 0 FAIL; Production Overlay 6 PASS / 0 FAIL; Service Web 7 PASS / 0 FAIL; established baseline remains 26 PASS / 3 known FAIL (no increase); CDP Browser Gate 21 / 21 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CSS px; `git diff --check` PASS.
