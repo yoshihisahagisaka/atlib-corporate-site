@@ -107,7 +107,7 @@
 .renewal-diagnosis-note { margin: 1.4rem 0 0; color: #cfdeea; font-size: .8rem; }
 
 /* Services page composition. */
-.services-page .renewal-service-page { padding-top: 5rem; }
+.services-page .renewal-service-page { padding-top: 4rem; }
 .renewal-service-detail { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(20rem, .98fr); gap: 2rem; align-items: center; margin-top: 1.5rem; padding: 2rem; border: 1px solid var(--renewal-line); border-top: 5px solid var(--renewal-navy); border-radius: .4rem; background: #fff; }
 .renewal-management-summary { grid-template-columns: minmax(0, 1fr); }
 .renewal-management-summary .renewal-detail-copy { max-width: 52rem; }
@@ -155,8 +155,6 @@
 .renewal-security-catalog article { padding: 1.2rem; border: 1px solid #d4e5e0; background: #fff; }
 .renewal-security-catalog h3 { margin: .6rem 0; color: #235f54; font-size: 1.05rem; }
 .renewal-security-catalog p { margin: 0; color: var(--renewal-muted); font-size: .8rem; }
-.renewal-status { color: #6e7e8c; font-size: .7rem; font-weight: 800; }
-
 @media (max-width: 900px) {
   .renewal-shell { width: min(100% - 2.5rem, 720px); }
   .renewal-section-head, .renewal-advisory-panel, .renewal-service-detail { grid-template-columns: 1fr; gap: 1.4rem; }
@@ -210,14 +208,14 @@
 .renewal-brand-thinking-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .renewal-brand-thinking-copy { min-width: 0; }
 .renewal-brand-thinking-copy .intro-heading { margin: 0 0 2.2rem; }
-.renewal-brand-thinking-copy .intro-heading h2 { margin: .55rem 0 1rem; color: var(--renewal-navy); font-size: clamp(2.15rem, 4vw, 4rem); line-height: 1.35; letter-spacing: -.02em; }
+.renewal-brand-thinking-copy .intro-heading h2 { max-width: 11em; margin: .55rem 0 1rem; color: var(--renewal-navy); font-size: clamp(2.15rem, 4vw, 4rem); line-height: 1.35; letter-spacing: -.02em; text-wrap: balance; word-break: keep-all; overflow-wrap: anywhere; }
 .renewal-brand-thinking-copy .intro-connection { color: var(--renewal-orange); font-weight: 700; }
 .renewal-brand-thinking-copy .intro-copy p { margin: 0 0 1.15rem; line-height: 2.05; }
 .renewal-brand-thinking-copy .mission-quote { margin-top: 1.8rem; padding-left: 1.2rem; border-left: 3px solid var(--renewal-orange); color: var(--renewal-navy); font-weight: 700; }
 
 .renewal-brand-values { padding: clamp(5.5rem, 8vw, 8rem) 0; background: #fff; }
 .renewal-brand-heading { display: grid; grid-template-columns: minmax(14rem, .75fr) minmax(20rem, 1.25fr); gap: 3rem; align-items: end; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
-.renewal-brand-heading h2 { margin: .4rem 0 0; color: var(--renewal-navy); font-size: clamp(2.2rem, 4.2vw, 4rem); line-height: 1.25; }
+.renewal-brand-heading h2 { margin: .4rem 0 0; color: var(--renewal-navy); font-size: clamp(2.2rem, 4.2vw, 4rem); line-height: 1.25; text-wrap: balance; word-break: keep-all; overflow-wrap: anywhere; }
 .renewal-brand-heading > p:last-child { margin: 0; color: var(--renewal-muted); line-height: 2; }
 .renewal-brand-value-list article { display: grid; grid-template-columns: 6rem minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); padding: 2.4rem 0; border-top: 1px solid #dbe2e8; }
 .renewal-brand-value-list article:last-child { border-bottom: 1px solid #dbe2e8; }
@@ -232,8 +230,11 @@
 .renewal-brand-diagnosis .renewal-brand-heading h2 { margin: .7rem 0 1rem; }
 .renewal-brand-section-lead { max-width: 42rem; margin: 0 0 3.5rem; color: var(--renewal-muted); line-height: 2; }
 .renewal-brand-client-logos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); align-items: center; margin-top: 1rem; }
-.renewal-brand-client-logos img { display: block; width: 100%; height: clamp(4.5rem, 8vw, 7rem); object-fit: contain; }
-.renewal-brand-client-logos .renewal-brand-client-logo-mixi { width: 88%; justify-self: center; }
+.renewal-brand-client-logos > img,
+.renewal-brand-client-frame { display: block; width: 100%; height: clamp(4.5rem, 8vw, 7rem); }
+.renewal-brand-client-logos > img { object-fit: contain; }
+.renewal-brand-client-frame-mixi { box-sizing: border-box; padding: clamp(.5rem, 1.1vw, .85rem); border: 1px solid #dbe2e8; background: #fff; }
+.renewal-brand-client-frame-mixi img { display: block; width: 100%; height: 100%; object-fit: contain; }
 
 .renewal-isms-company { display: grid; grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); align-items: center; }
 .renewal-isms-company img { display: block; width: 100%; height: auto; }
@@ -272,8 +273,12 @@
 .renewal-service-page .renewal-management-explainer { border-radius: 0; box-shadow: none; }
 .renewal-service-page + .renewal-security .renewal-security-card,
 .renewal-service-advisory .renewal-advisory-panel { border-radius: 0; box-shadow: none; }
-.renewal-service-advisory + .svc-how { margin-bottom: 4rem; }
-.workflow-section#link5 { margin-top: 0; padding-top: clamp(4rem, 7vw, 7rem); }
+.services-page .renewal-section { padding-block: clamp(3.6rem, 5.6vw, 5.6rem); }
+.services-page .renewal-advisory { padding-block: clamp(2.8rem, 4.8vw, 4.4rem); }
+.services-page .renewal-section-head { margin-bottom: 2rem; }
+.renewal-service-advisory + .svc-how { margin-bottom: 3.2rem; }
+.workflow-section#link5 { margin-top: 0; padding-top: clamp(3.2rem, 5.6vw, 5.6rem); }
+.work-intro h2 { text-wrap: balance; word-break: keep-all; overflow-wrap: anywhere; }
 
 @media (max-width: 900px) {
   .renewal-brand-thinking-layout, .renewal-brand-feature { grid-template-columns: 1fr; }
@@ -296,8 +301,8 @@
   .renewal-brand-diagnosis .renewal-brand-heading > p:last-child { position: static; display: block; }
   .renewal-brand-value-list article { grid-template-columns: 3.2rem minmax(0, 1fr); gap: .8rem; padding: 1.8rem 0; }
   .renewal-brand-client-logos { gap: 1.2rem; }
-  .renewal-brand-client-logos img { height: 4.5rem; }
-  .renewal-brand-client-logos .renewal-brand-client-logo-mixi { width: 92%; }
+  .renewal-brand-client-logos > img, .renewal-brand-client-frame { height: 4.5rem; }
+  .renewal-brand-client-frame-mixi { padding: .45rem; }
   .renewal-isms-company { grid-template-columns: 1fr; }
   .renewal-isms-company img { width: min(100%, 18rem); }
   .renewal-isms-footer { grid-template-columns: 8.5rem minmax(0, 1fr); gap: .8rem; }

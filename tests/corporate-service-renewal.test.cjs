@@ -105,6 +105,19 @@ test('official MIXI and ISMS assets and certification facts are exact', () => {
   for (const relative of ['index.html', 'company/index.html', 'services/index.html', 'works/index.html', 'contact/index.html']) assert.doesNotMatch(read(relative), /IAF/u, relative);
 });
 
+test('human review final adjustments remove public status and phone copy while preserving paths', () => {
+  const home = read('index.html');
+  const services = read('services/index.html');
+  const company = read('company/index.html');
+  const css = read('css/atlib-service-renewal.css');
+  assert.match(home, /renewal-brand-client-frame renewal-brand-client-frame-mixi/u);
+  assert.match(css, /\.renewal-brand-client-frame-mixi \{[^}]*border: 1px solid #dbe2e8;[^}]*background: #fff;/u);
+  assert.doesNotMatch(services, /商用公開準備中|構成検証中|「準備中」「検証中」|renewal-status/u);
+  assert.doesNotMatch(company, /03-6661-1616|tel:0366611616/u);
+  assert.match(company, /href="\.\.\/contact\/"/u);
+  assert.match(css, /\.services-page \.renewal-section \{ padding-block: clamp\(3\.6rem, 5\.6vw, 5\.6rem\); \}/u);
+});
+
 test('human review v2 logo, copy removals and IT management explainer are exact', () => {
   const home = read('index.html');
   const services = read('services/index.html');

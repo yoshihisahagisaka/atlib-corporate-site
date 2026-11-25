@@ -111,6 +111,16 @@ Final CDP Browser Gate: 14/14 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CS
 ## ISMS copy minimization (2026-11-26)
 
 - Content HEAD: `46358b4b6bd34fe148300d9f74efc0b4e7819a41`.
+
+## Human review final adjustments (2026-11-26)
+
+- Top-page editorial headings now use balanced, Japanese-aware responsive wrapping instead of fixed line breaks. MIXI is presented in a plain bordered white display area while the supplied PNG remains byte-identical (`de166bd8fb91d8edf30f9fbaa6b01e32ef8d2d89fda98e438ab6ee2ae2b37f53`).
+- The service catalogue no longer publishes the internal `準備中` / `検証中` badges or explanatory note. No new application, purchase, price, launch-date, or availability promise was added. Major service-page vertical spacing was reduced while all service diagrams, names, links, and the four-step workflow remain present.
+- The public company phone row (`03-6661-1616` and its `tel:` link) was removed. The optional phone input in the contact form is user-supplied form data, not a published company contact number, and remains unchanged. No other public company phone number occurs in the five Corporate HTML files.
+- GCERTI's supplied usage guide permits the GCERTI certification mark alone, requires the customer information (certificate number and standard), and sets a 12 mm minimum width. The provided current folder and its `old` folder contain only combined IAS + GCERTI PDFs. A formally supplied standalone GCERTI asset was not found. In accordance with the Owner's STOP rule, the current combined Web derivative was not cropped or altered; the IAS-removal sub-change remains blocked pending a formal standalone asset. Existing ISMS PNG SHA-256 remains `6838d56096c64059cdd5c2becdc6d3c8c5148849d4d830ac9392b32a0b92c4fc`.
+- Automated verification: TypeScript Build PASS; Corporate Renewal 8/8 PASS; Production Overlay 6/6 PASS; Service Web 7/7 PASS; baseline 26 PASS / known 3 FAIL (no increase); `git diff --check` PASS.
+- CDP Browser Gate: 35/35 PASS across home, services, company, works, and contact at 320, 390, 650, 651, 768, 1024, and 1440 CSS px. It confirmed exact viewport widths, no horizontal overflow or broken image, zero Console/Page/Resource errors, required anchors, mobile menu open/close, slider and gallery behavior, eight visible client logos, and common-footer rendering. The local contact check substitutes Cloudflare's documented always-pass test key only in the test server; it never submits the form.
+- Full-page and focused 390/1440 evidence is under `docs/evidence/issue-81-browser/`; the machine-readable result is `browser-gate-v4.json`.
 - Company information and all common footers publish the official logo, certification name, and certificate number. Scope, certified office, validity-period, and expiry text were removed.
 - Management confirmed this is an existing-certification renewal and that the official logo remains unchanged.
 - The contract requires the logo, certification name, and certificate number, and explicitly rejects the removed scope, office, and date metadata.

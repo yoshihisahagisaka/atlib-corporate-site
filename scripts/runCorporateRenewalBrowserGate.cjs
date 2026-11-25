@@ -11,7 +11,13 @@ const root = path.resolve(__dirname, '..');
 const publicRoot = path.join(root, 'public');
 const evidenceRoot = path.join(root, 'docs/evidence/issue-81-browser');
 const widths = [320, 390, 650, 651, 768, 1024, 1440];
-const pages = [{ name: 'home', file: 'index.html' }, { name: 'services', file: 'services/index.html' }, { name: 'company', file: 'company/index.html' }];
+const pages = [
+  { name: 'home', file: 'index.html' },
+  { name: 'services', file: 'services/index.html' },
+  { name: 'company', file: 'company/index.html' },
+  { name: 'works', file: 'works/index.html' },
+  { name: 'contact', file: 'contact/index.html' },
+];
 const chromeCandidates = process.platform === 'win32'
   ? ['C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe']
   : ['/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser'];
@@ -62,6 +68,12 @@ function staticServer() {
     const file = path.resolve(publicRoot, `.${relative}`);
     if (!file.startsWith(`${publicRoot}${path.sep}`) || !fs.existsSync(file) || !fs.statSync(file).isFile()) { res.writeHead(404); res.end('Not found'); return; }
     res.writeHead(200, { 'Content-Type': types[path.extname(file).toLowerCase()] || 'application/octet-stream' });
+    if (file === path.join(publicRoot, 'contact', 'index.html')) {
+      // The repository intentionally stores a deployment placeholder. Use Cloudflare's
+      // documented always-pass test key only in this local, non-submitting Browser Gate.
+      res.end(fs.readFileSync(file, 'utf8').replace('__TURNSTILE_SITE_KEY__', '1x00000000000000000000AA'));
+      return;
+    }
     fs.createReadStream(file).pipe(res);
   });
 }
@@ -82,13 +94,13 @@ async function inspect(port, siteOrigin, page, width) {
     const d=document, root=d.documentElement, body=d.body;
     const broken=[...d.images].filter(x=>!x.complete||x.naturalWidth===0).map(x=>x.getAttribute('src'));
     const logo=d.querySelector('img.renewal-business-logo');
-    const section=d.querySelector(${JSON.stringify(page.name === 'home' ? '.renewal-brand-services' : page.name === 'services' ? '.renewal-management-explainer' : '.renewal-isms-company')});
+    const section=d.querySelector(${JSON.stringify(page.name === 'home' ? '.renewal-brand-client-logos' : page.name === 'services' ? '.renewal-security' : page.name === 'company' ? '.renewal-isms-company' : '.renewal-isms-footer')});
     const gallery=d.querySelector('.motion-section .img');
     let slider=null; const indicators=[...d.querySelectorAll('.slide-indicators button,.slide-indicators span')];
     if (indicators.length>1) { const before=[...d.querySelectorAll('.slide')].findIndex(x=>x.classList.contains('active')); indicators[1].click(); const after=[...d.querySelectorAll('.slide')].findIndex(x=>x.classList.contains('active')); slider={before,after}; }
     const rect=section?.getBoundingClientRect();
     const overflow=[...d.querySelectorAll('body *')].map((el)=>{const r=el.getBoundingClientRect();return{tag:el.tagName,className:String(el.className||''),id:el.id,left:r.left,right:r.right,width:r.width};}).filter((x)=>x.right>root.clientWidth+1||x.left< -1).slice(0,25);
-    const requiredAnchors=${JSON.stringify(page.name === 'home' ? ['link1','link4','track-record','kaizen','diagnosis','contact'] : page.name === 'services' ? ['kaizen','it-projects','it-bpo','business-kaizen','security','casual-consulting','link5'] : ['mvv','messages','business','information'])};
+    const requiredAnchors=${JSON.stringify(page.name === 'home' ? ['link1','link4','track-record','kaizen','diagnosis','contact'] : page.name === 'services' ? ['kaizen','it-projects','it-bpo','business-kaizen','security','casual-consulting','link5'] : page.name === 'company' ? ['mvv','messages','business','information'] : [])};
     const clientLogos=[...d.querySelectorAll('.renewal-brand-client-logos img')];
     const isms=[...d.querySelectorAll('img[src*="isms-gcerti-gijp-1167-ic.png"]')];
     const mixi=d.querySelector('img.renewal-brand-client-logo-mixi');
@@ -143,7 +155,7 @@ async function inspect(port, siteOrigin, page, width) {
       assert.ok(result.bodyScrollWidth <= result.clientWidth + 1, `${result.page}/${result.width}: body overflow ${result.bodyScrollWidth}/${result.clientWidth} ${JSON.stringify(result.overflow)}`);
       assert.deepEqual(result.broken, [], `${result.page}/${result.width}: broken images`);
       assert.deepEqual(result.anchors, [], `${result.page}/${result.width}: required anchors`);
-      if (result.page !== 'company') {
+      if (['home', 'services'].includes(result.page)) {
         assert.equal(result.logo.present, true, `${result.page}/${result.width}: business logo missing`);
         assert.equal(result.logo.complete, true, `${result.page}/${result.width}: business logo incomplete`);
         assert.ok(result.logo.naturalWidth > 0 && result.logo.naturalHeight > 0, `${result.page}/${result.width}: business logo dimensions`);
@@ -162,6 +174,7 @@ async function inspect(port, siteOrigin, page, width) {
       if (result.page === 'home') assert.deepEqual({ present: result.officialLogos.mixiPresent, width: result.officialLogos.mixiNaturalWidth, height: result.officialLogos.mixiNaturalHeight }, { present: true, width: 6000, height: 3614 }, `${result.width}: official MIXI logo`);
       if (result.page === 'services') assert.ok(result.section?.height > 0, `${result.width}: explainer section`);
       if (result.page === 'company') assert.ok(result.section?.height > 0, `${result.width}: ISMS company section`);
+      if (['works', 'contact'].includes(result.page)) assert.ok(result.section?.height > 0, `${result.page}/${result.width}: common footer`);
     }
     process.stdout.write(`CORPORATE_BROWSER_GATE=${results.length} PASS\n`);
   } finally {
