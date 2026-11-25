@@ -233,6 +233,15 @@
 .renewal-brand-section-lead { max-width: 42rem; margin: 0 0 3.5rem; color: var(--renewal-muted); line-height: 2; }
 .renewal-brand-client-logos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); align-items: center; margin-top: 1rem; }
 .renewal-brand-client-logos img { display: block; width: 100%; height: clamp(4.5rem, 8vw, 7rem); object-fit: contain; }
+.renewal-brand-client-logos .renewal-brand-client-logo-mixi { width: 88%; justify-self: center; }
+
+.renewal-isms-company { display: grid; grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); align-items: center; }
+.renewal-isms-company img { display: block; width: 100%; height: auto; }
+.renewal-isms-company p { margin: 0; line-height: 1.9; }
+.renewal-isms-footer { display: grid; grid-template-columns: 10.5rem minmax(15rem, 25rem); gap: 1rem; align-items: center; }
+.renewal-isms-footer img { display: block; width: 10.5rem; height: auto; }
+.renewal-isms-footer p { margin: 0; font-size: .72rem; line-height: 1.65; }
+.renewal-isms-footer p span { font-size: .64rem; opacity: .82; }
 
 .renewal-brand-services { padding: clamp(6rem, 10vw, 9rem) 0; background: #fff; }
 .renewal-brand-feature-list { display: grid; gap: clamp(5rem, 10vw, 9rem); }
@@ -288,6 +297,13 @@
   .renewal-brand-value-list article { grid-template-columns: 3.2rem minmax(0, 1fr); gap: .8rem; padding: 1.8rem 0; }
   .renewal-brand-client-logos { gap: 1.2rem; }
   .renewal-brand-client-logos img { height: 4.5rem; }
+  .renewal-brand-client-logos .renewal-brand-client-logo-mixi { width: 92%; }
+  .renewal-isms-company { grid-template-columns: 1fr; }
+  .renewal-isms-company img { width: min(100%, 18rem); }
+  .renewal-isms-footer { grid-template-columns: 8.5rem minmax(0, 1fr); gap: .8rem; }
+  .renewal-isms-footer img { width: 8.5rem; }
+  .renewal-isms-footer p { font-size: .66rem; }
+  .renewal-isms-footer p span { font-size: .58rem; }
   .renewal-brand-feature-list { gap: 4.5rem; }
   .renewal-brand-feature { gap: 1.7rem; }
   .renewal-brand-feature figure { aspect-ratio: 4 / 3; }
