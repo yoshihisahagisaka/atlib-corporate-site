@@ -34,3 +34,12 @@ Source branch: `feat/it-management-kaizen-service-release-20261123`, based on Co
 - Public intake disabled, misconfigured, wrong live Revision, failed Case-to-TimeRex or user consent, missing any referenced images, wrong canonical/noindex behavior, CSP blocks scripts, unexpected Cloud CDN response, nonmatching immutable image, or regression in any existing service => **NO-GO**. Preserve existing traffic and revise the Draft PR.
 
 Scope of this record is the code-level release contract. It does not assert production readiness or authorize a traffic change on its own.
+
+## Browser layout release gate (2026-11-25)
+
+- Before promotion, run `npm run test:itmgmt-browser-layout` with an existing Chrome/Chromium installation at widths 320, 360, 390, 393, 430, 650, 651, 768, 1024 and 1440.
+- Record `window.innerWidth`, `documentElement.clientWidth`, `documentElement.scrollWidth`, `body.scrollWidth` and `visualViewport.width`; do not infer the viewport from screenshot dimensions alone.
+- Chrome headless on Windows may enforce a minimum layout viewport near 489 px while still producing a narrower PNG. A PNG requested at 390 px can therefore be a crop of a wider page and is not valid overflow evidence unless the DOM width values are also 390 px.
+- The gate requires document/body width within one pixel of the client width, all four diagnosis CTAs inside the viewport, the 650/651 media boundary, expanded FAQ, scrolled header/mobile sticky CTA, UTM allowlist and referenced images to pass.
+- `overflow-x:hidden` on `html` or `body` is not an accepted fix. Identify the first widening element and its computed style when a real DOM-width failure occurs.
+- The 2026-11-24 apparent 390 px overflow was remeasured on 2026-11-25 as a harness false positive: Chrome laid the page out at 489 px and cropped the PNG to 390 px. Exact DOM viewports from 320 through 1440 had no root overflow, so no production CSS was changed. The corrected 390 px evidence and this automated gate supersede the cropped screenshot for layout decisions.
