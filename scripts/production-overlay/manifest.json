@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "issue": 81,
+  "pullRequest": 82,
+  "baseCommit": "45533d6c3e6e2995499fb3923230992442156105",
+  "headCommit": "738faf81a4409f8b9683623851d1fbb239aa25b6",
+  "productionRevision": "corporate-site-imv-20261123071048",
+  "baseImage": "asia-northeast1-docker.pkg.dev/atlib-corporate-site/cloud-run-source-deploy/corporate-site-recruit-overlay@sha256:0653f45d969ff4eaab604534adb3cbc0ed8c856e722e2e76546f0a9babc46baa",
+  "allowedFiles": [
+    "public/index.html",
+    "public/services/index.html",
+    "public/company/index.html",
+    "public/works/index.html",
+    "public/contact/index.html",
+    "public/css/atlib-service-renewal.css"
+  ],
+  "protectedTrees": [
+    "public/images",
+    "public/js"
+  ],
+  "protectedFiles": [
+    "public/css/style.css",
+    "public/css/atlib.css",
+    "public/css/services.css"
+  ]
+}

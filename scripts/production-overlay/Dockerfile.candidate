@@ -1,0 +1,8 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+COPY overlay/public/index.html /app/public/index.html
+COPY overlay/public/services/index.html /app/public/services/index.html
+COPY overlay/public/company/index.html /app/public/company/index.html
+COPY overlay/public/works/index.html /app/public/works/index.html
+COPY overlay/public/contact/index.html /app/public/contact/index.html
+COPY overlay/public/css/atlib-service-renewal.css /app/public/css/atlib-service-renewal.css

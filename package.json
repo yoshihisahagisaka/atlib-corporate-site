@@ -11,7 +11,8 @@
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "test:service-web": "npm run build && node scripts/stageItManagementServiceContent.cjs && node --test tests/business-web-service-host.test.cjs tests/it-management-kaizen-lp-contract.test.cjs",
     "test:itmgmt-browser-layout": "node --test tests/it-management-kaizen-browser-layout.test.cjs",
-    "test:corporate-renewal": "node --test tests/corporate-service-renewal.test.cjs"
+    "test:corporate-renewal": "node --test tests/corporate-service-renewal.test.cjs",
+    "test:production-overlay": "node --test tests/production-overlay.test.cjs"
   },
   "engines": {
     "node": ">=22"

@@ -1,0 +1,16 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --pull=false
+      - --build-arg
+      - BASE_IMAGE=${_BASE_IMAGE}
+      - --file
+      - Dockerfile
+      - --tag
+      - ${_CANDIDATE_IMAGE}
+      - .
+images:
+  - ${_CANDIDATE_IMAGE}
+options:
+  logging: CLOUD_LOGGING_ONLY

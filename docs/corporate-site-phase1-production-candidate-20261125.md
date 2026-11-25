@@ -1,0 +1,99 @@
+# Corporate Site Renewal Phase 1 — Production Candidate preparation
+
+Status: preparation only / Production NO-GO  
+Issue: #81 / Draft PR: #82  
+Approved source: `738faf81a4409f8b9683623851d1fbb239aa25b6`  
+Git base: `45533d6c3e6e2995499fb3923230992442156105`
+
+## Production read-back (2026-11-25 JST)
+
+Read-only Cloud Run inspection matched the approved precondition:
+
+- Project/region/service: `atlib-corporate-site` / `asia-northeast1` / `corporate-site`
+- 100% revision: `corporate-site-imv-20261123071048`
+- Immutable image: `asia-northeast1-docker.pkg.dev/atlib-corporate-site/cloud-run-source-deploy/corporate-site-recruit-overlay@sha256:0653f45d969ff4eaab604534adb3cbc0ed8c856e722e2e76546f0a9babc46baa`
+- Runtime identity: `corporate-site-production@atlib-corporate-site.iam.gserviceaccount.com`
+- Ingress: `internal-and-cloud-load-balancing`; concurrency 10; max instances 2
+- Existing environment keys and Secret references remain present. Secret values were not read or recorded.
+
+No Cloud Build, Artifact Registry push, Cloud Run deploy/traffic update, IAM/Secret, DNS, LB, TLS, or merge was performed.
+
+## Overlay contract
+
+The candidate is derived from the immutable Production image, not from the Git Dockerfile. `prepare-production-overlay.ps1` extracts `/app` from that digest, generates the exact approved Git Base-to-content-HEAD diff for the allowlist, requires `git apply --check` against the extracted Production files, applies it once, then verifies the full before/after trees. A candidate cannot be prepared when a patch hunk is ambiguous or inapplicable. A later evidence/control commit is permitted only when the six current content blobs remain byte-identical to approved content HEAD `738faf81a4409f8b9683623851d1fbb239aa25b6`.
+
+Only these six paths may differ:
+
+1. `public/index.html`
+2. `public/services/index.html`
+3. `public/company/index.html`
+4. `public/works/index.html`
+5. `public/contact/index.html`
+6. `public/css/atlib-service-renewal.css`
+
+The resulting Dockerfile uses the exact Production digest as `FROM` and has six explicit `COPY` statements. It never copies Git's complete `public` tree. The manifest is `scripts/production-overlay/manifest.json`.
+
+## Preservation and difference gate
+
+`overlay-verifier.cjs` hashes every extracted file before and after. It fails on any changed path outside the six-file allowlist and separately protects:
+
+- all `public/images/**` and `public/js/**` files;
+- `public/css/style.css`, `public/css/atlib.css`, and `public/css/services.css`;
+- the existing home first-view/slider block;
+- support-results HTML;
+- photo-gallery HTML;
+- mission and 100-year vision HTML.
+
+The candidate must also retain the Production-public transformations already in the base image: no preview banner/text, public robots behavior, Production canonical/SEO, contact configuration behavior, host routing, legacy LPs, recruitment site, privacy and harassment-policy routes, and private partner boundaries. These are tested after the image is built; the overlay step must not attempt to regenerate them from Git.
+
+## Prepared scripts
+
+- `prepare-production-overlay.ps1`: read-back, immutable image extraction, one-time patch, hashes, build-context preparation. STOPs when Docker is unavailable, output exists, or any precondition differs.
+- `build-production-candidate.ps1`: separately approved Cloud Build submit. Requires `-Execute`, a unique image tag, and existing verification evidence.
+- `scan-production-candidate.ps1`: one On-Demand Scan of an immutable digest. Requires `-Execute`; never retries automatically.
+- `deploy-isolated-candidate.ps1`: future 0%-traffic deploy only. Requires `-Execute`, a new short tag, and re-verifies the old 100% revision before and after.
+- `rollback-production.ps1`: future explicit rollback to the recorded Production revision, with Ready and traffic read-back.
+
+Cloud Build uses `cloudbuild.production-overlay.yaml` and the generated context containing only `Dockerfile` plus `overlay/`.
+
+## Execution sequence for a separately approved gate
+
+1. Use a clean worktree. The preparation script verifies all six content blobs against the manifest content HEAD, independently of a later evidence/control commit. Run `npm ci`, Build, `test:corporate-renewal`, `test:production-overlay`, `test:service-web`, and the established baseline suite.
+2. On a Windows host or Cloud Shell with Docker and authenticated Artifact Registry access, run `prepare-production-overlay.ps1`. Do not reuse an existing output directory.
+3. Review `approved.patch`, `overlay-verification.json`, the six candidate files, and Production transformation checks.
+4. With explicit Build approval, call `build-production-candidate.ps1 -Execute` using a new unique tag. Record Build ID and immutable digest; never overwrite an existing tag.
+5. With explicit scan approval, call `scan-production-candidate.ps1 -Execute` once. Retrieve the Operation/Scan IDs and all vulnerabilities. Critical 0 / High 0 is required; unresolved scan state is not PASS.
+6. Reconfirm Production revision/digest/traffic/settings. With separate deployment approval, call `deploy-isolated-candidate.ps1 -Execute`. Existing Production stays 100%; candidate remains 0% and tagged.
+7. Inspect the tagged Revision's digest and settings. The run.app tag may be blocked by the existing LB-only ingress and cannot prove real-host routing. Perform read-only health/static checks where reachable; do not POST forms or send mail without a separate approval.
+8. Under a later host-correct acceptance gate, verify Corporate pages, LPs, diagnostics, SECU:MIE WEB, Recruit, policies, contact GET/UI, private partner boundaries, CSP/SEO/canonical/robots, PC/mobile layout, console/page/resource errors, and Cloud Run ERROR logs.
+9. Promotion is a later explicit gate. Record `corporate-site-imv-20261123071048` as rollback before traffic movement. On any post-promotion critical regression, execute the reviewed rollback script and read back 100% traffic.
+
+## Vulnerability scan result requirements
+
+Scan the built immutable digest only. Record Build ID, image digest, Operation ID, Scan ID, and CRITICAL/HIGH/MEDIUM/LOW/UNKNOWN counts, including fix availability. STOP on Critical/High, digest mismatch, scan failure, missing results, or any temptation to substitute an external private-image scanner.
+
+## STOP conditions
+
+- approved content HEAD/base, six-file blob, or clean-worktree mismatch;
+- Production revision, digest, 100% traffic, SA, Secret references, ingress, scaling, concurrency, or public-mode state differs from the approved read-back;
+- Docker/Artifact Registry access unavailable;
+- Base→HEAD patch is not uniquely applicable to extracted Production HTML;
+- any path outside the six-file manifest changes;
+- any protected asset or protected HTML block hash changes;
+- Production-public transformation, host boundary, LP/Recruit/policy/contact behavior is lost;
+- build, digest read-back, vulnerability scan, isolated deploy, or setting comparison fails or becomes unknown;
+- any Production traffic, IAM, Secret, DNS/LB/TLS, WordPress/GCE, or form/mail action occurs without its separate approval.
+
+## Validation completed in this preparation gate
+
+- Git HEAD and clean-worktree preflight: PASS before changes.
+- Production read-only revision/image/traffic/configuration preflight: PASS.
+- Build (`tsc`): PASS.
+- Renewal contract tests: 4 PASS / 0 FAIL.
+- Service-web regression tests: 7 PASS / 0 FAIL.
+- Established baseline suite: 26 PASS / 3 known FAIL; no FAIL increase.
+- Overlay verifier tests: 3 PASS / 0 FAIL, including exact six-file Base-to-HEAD diff, protected home blocks, and unauthorized JS rejection.
+- PowerShell parser validation for all prepared scripts: PASS.
+- Existing PR #82 Build, contract tests, service-web tests and browser evidence remain the source acceptance evidence.
+
+Not executed: immutable image extraction/dry-run against `/app` (Docker CLI unavailable locally), Cloud Build, push, digest scan, isolated deploy, tag URL checks, real-host acceptance, traffic change, rollback exercise, or merge.
