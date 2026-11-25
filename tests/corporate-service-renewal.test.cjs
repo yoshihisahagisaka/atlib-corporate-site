@@ -67,3 +67,22 @@ test('approved v3 visuals and customer-facing language are retained', () => {
   assert.match(css, /\.renewal-security \{ background: #fff; \}/u);
   assert.match(css, /\.renewal-advisory \{[^}]*background: #faf5ee;/u);
 });
+
+test('human review v2 logo, copy removals and IT management explainer are exact', () => {
+  const home = read('index.html');
+  const services = read('services/index.html');
+  const css = read('css/atlib-service-renewal.css');
+  assert.match(home, /src="business-web\/assets\/gyomu-kaizen-logo\.png"[^>]*alt="業務KAIZEN"/u);
+  assert.match(services, /src="\.\.\/business-web\/assets\/gyomu-kaizen-logo\.png"[^>]*alt="業務KAIZEN"/u);
+  for (const html of [home, services]) {
+    assert.doesNotMatch(html, /無料診断からのご利用をおすすめ|全社員向けヘルプデスク、継続管理、無制限の実作業/u);
+  }
+  assert.doesNotMatch(home, /BUILDは運用開始に必要な初期整備/u);
+  assert.match(services, /id="management-explainer-title">IT経営KAIZENとは/u);
+  assert.match(services, /考えることから、実行すること。<br>そして、改善を続けること。/u);
+  for (const value of ['設計Assessment', '実行支援', '運用支援', '継続KAIZEN']) assert.match(services, new RegExp(value, 'u'));
+  for (const id of ['it-projects', 'it-bpo']) assert.match(services, new RegExp(`id="${id}"`, 'u'));
+  assert.doesNotMatch(services, /IT経営KAIZENの実行・運用支援/u);
+  assert.match(css, /\.renewal-management-services \{[^}]*grid-template-columns: repeat\(2,/u);
+  assert.match(css, /@media \(max-width: 900px\)[\s\S]*\.renewal-management-services \{ grid-template-columns: 1fr; \}/u);
+});

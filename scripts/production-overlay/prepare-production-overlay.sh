@@ -27,8 +27,8 @@ git -C "$repo_root" diff --binary "$base" "$approved" -- "${allowed[@]}" >"$arti
 # git apply reads patch paths relative to its own cwd.  In particular,
 # --git-dir/--work-tree alone does not reliably target the extracted /app tree.
 # Run both gates in the isolated candidate directory; never alter the repo.
-git -C "$artifact_root/candidate" apply --check --binary "$artifact_root/approved.patch" || stop 'approved patch is not uniquely applicable to Production content'
-git -C "$artifact_root/candidate" apply --binary "$artifact_root/approved.patch" || stop 'approved patch application failed'
+git -c core.autocrlf=false -C "$artifact_root/candidate" apply --check --binary "$artifact_root/approved.patch" || stop 'approved patch is not uniquely applicable to Production content'
+git -c core.autocrlf=false -C "$artifact_root/candidate" apply --binary "$artifact_root/approved.patch" || stop 'approved patch application failed'
 
 node "$overlay_dir/overlay-verifier.cjs" "$artifact_root/base" "$artifact_root/candidate" "$manifest" "$artifact_root/overlay-verification.json" || stop 'overlay verification failed'
 for relative in "${allowed[@]}"; do

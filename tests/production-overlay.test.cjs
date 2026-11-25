@@ -68,8 +68,8 @@ test('candidate build context accepts only the manifest Dockerfile and six files
 
 test('Cloud Shell approved Git patch targets the extracted candidate, not the approved checkout', () => {
   const script = fs.readFileSync(path.resolve(__dirname, '../scripts/production-overlay/prepare-production-overlay.sh'), 'utf8');
-  assert.match(script, /git -C "\$artifact_root\/candidate" apply --check --binary "\$artifact_root\/approved\.patch"/u);
-  assert.match(script, /git -C "\$artifact_root\/candidate" apply --binary "\$artifact_root\/approved\.patch"/u);
+  assert.match(script, /git -c core\.autocrlf=false -C "\$artifact_root\/candidate" apply --check --binary "\$artifact_root\/approved\.patch"/u);
+  assert.match(script, /git -c core\.autocrlf=false -C "\$artifact_root\/candidate" apply --binary "\$artifact_root\/approved\.patch"/u);
   assert.doesNotMatch(script, /git --git-dir=.*--work-tree=.* apply/u);
 
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'atlib-shell-patch-'));
@@ -97,12 +97,12 @@ test('Cloud Shell approved Git patch targets the extracted candidate, not the ap
 
     // The Git checkout already has the approved files; the extracted candidate is at Base.
     assert.notEqual(spawnSync('git', ['-C', checkout, 'apply', '--check', '--binary', patch]).status, 0);
-    execFileSync('git', ['-C', candidate, 'apply', '--check', '--binary', patch]);
-    execFileSync('git', ['-C', candidate, 'apply', '--binary', patch]);
+    execFileSync('git', ['-c', 'core.autocrlf=false', '-C', candidate, 'apply', '--check', '--binary', patch]);
+    execFileSync('git', ['-c', 'core.autocrlf=false', '-C', candidate, 'apply', '--binary', patch]);
     assert.equal(fs.readFileSync(path.join(candidate, 'public/index.html'), 'utf8'), 'renewal\n');
     assert.equal(fs.readFileSync(path.join(candidate, 'public/css/atlib-service-renewal.css'), 'utf8'),
       '.renewal { display: block; }\n');
-    assert.notEqual(spawnSync('git', ['-C', candidate, 'apply', '--check', '--binary', patch]).status, 0);
+    assert.notEqual(spawnSync('git', ['-c', 'core.autocrlf=false', '-C', candidate, 'apply', '--check', '--binary', patch]).status, 0);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

@@ -54,3 +54,22 @@ The limited follow-up to PR #82 changes only:
 - this verification document and browser evidence
 
 The KAIZEN, security, casual consulting, and free-diagnosis sections were aligned with approved prototype v3. Existing images, shared CSS, JavaScript, support-results HTML, gallery, mission/vision content, LPs, and diagnostic functions remain unchanged.
+
+## Human review final revision v2 (2026-11-26)
+
+- Content HEAD: `72095e89170168cfe93dcdc0c267ea589c9f2402`
+- Public changes are limited to `public/index.html`, `public/services/index.html`, and `public/css/atlib-service-renewal.css`.
+- The existing `public/business-web/assets/gyomu-kaizen-logo.png` is referenced without modifying or duplicating the image.
+- The five specified limitation/recommendation sentences were removed without replacement.
+- The former execution/operation note was integrated into the new “IT経営KAIZENとは” explanation, cycle diagram, and four service cards. Legacy anchors `it-projects` and `it-bpo` remain.
+- Browser Gate: 14/14 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CSS pixels across `/` and `/services/`.
+- Horizontal overflow, broken images, Console errors, Page exceptions, and Resource failures: 0.
+- Mobile menu open/close and the existing home slider: PASS.
+
+Machine-readable evidence: `docs/evidence/issue-81-browser/browser-gate-v2.json`.
+
+Screenshots:
+
+- `docs/evidence/issue-81-browser/home-{390,1440}-full.png`
+- `docs/evidence/issue-81-browser/services-{390,1440}-full.png`
+- `docs/evidence/issue-81-browser/management-explainer-{390,1440}.png`
