@@ -24,10 +24,11 @@ base="$(manifest_value '.baseCommit')"
 mapfile -t allowed < <(jq -er '.allowedFiles[]' "$manifest")
 git -C "$repo_root" diff --binary "$base" "$approved" -- "${allowed[@]}" >"$artifact_root/approved.patch" || stop 'approved Git diff generation failed'
 [[ -s "$artifact_root/approved.patch" ]] || stop 'approved Git diff is empty'
-git_dir="$(git -C "$repo_root" rev-parse --git-common-dir)"
-[[ "$git_dir" = /* ]] || git_dir="$repo_root/$git_dir"
-git --git-dir="$git_dir" --work-tree="$artifact_root/candidate" apply --check --binary "$artifact_root/approved.patch" || stop 'approved patch is not uniquely applicable to Production content'
-git --git-dir="$git_dir" --work-tree="$artifact_root/candidate" apply --binary "$artifact_root/approved.patch" || stop 'approved patch application failed'
+# git apply reads patch paths relative to its own cwd.  In particular,
+# --git-dir/--work-tree alone does not reliably target the extracted /app tree.
+# Run both gates in the isolated candidate directory; never alter the repo.
+git -C "$artifact_root/candidate" apply --check --binary "$artifact_root/approved.patch" || stop 'approved patch is not uniquely applicable to Production content'
+git -C "$artifact_root/candidate" apply --binary "$artifact_root/approved.patch" || stop 'approved patch application failed'
 
 node "$overlay_dir/overlay-verifier.cjs" "$artifact_root/base" "$artifact_root/candidate" "$manifest" "$artifact_root/overlay-verification.json" || stop 'overlay verification failed'
 for relative in "${allowed[@]}"; do
