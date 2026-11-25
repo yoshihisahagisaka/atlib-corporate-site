@@ -6,3 +6,5 @@ COPY overlay/public/company/index.html /app/public/company/index.html
 COPY overlay/public/works/index.html /app/public/works/index.html
 COPY overlay/public/contact/index.html /app/public/contact/index.html
 COPY overlay/public/css/atlib-service-renewal.css /app/public/css/atlib-service-renewal.css
+COPY overlay/public/images/partner_logo_mixi.png /app/public/images/partner_logo_mixi.png
+COPY overlay/public/images/isms-gcerti-gijp-1167-ic.png /app/public/images/isms-gcerti-gijp-1167-ic.png

@@ -11,7 +11,7 @@ const root = path.resolve(__dirname, '..');
 const publicRoot = path.join(root, 'public');
 const evidenceRoot = path.join(root, 'docs/evidence/issue-81-browser');
 const widths = [320, 390, 650, 651, 768, 1024, 1440];
-const pages = [{ name: 'home', file: 'index.html' }, { name: 'services', file: 'services/index.html' }];
+const pages = [{ name: 'home', file: 'index.html' }, { name: 'services', file: 'services/index.html' }, { name: 'company', file: 'company/index.html' }];
 const chromeCandidates = process.platform === 'win32'
   ? ['C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe']
   : ['/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser'];
@@ -36,6 +36,10 @@ function cdp(wsUrl) {
       if (message.error) item.reject(new Error(message.error.message)); else item.resolve(message.result);
     } else for (const handler of listeners.get(message.method) || []) handler(message.params);
   };
+  socket.onclose = () => {
+    for (const item of pending.values()) item.reject(new Error('CDP WebSocket closed unexpectedly'));
+    pending.clear();
+  };
   return {
     ready,
     on(method, handler) { const list = listeners.get(method) || []; list.push(handler); listeners.set(method, list); },
@@ -46,6 +50,7 @@ function cdp(wsUrl) {
 function requestJson(url, method = 'GET') {
   return new Promise((resolve, reject) => {
     const req = http.request(url, { method }, (res) => { let body = ''; res.setEncoding('utf8'); res.on('data', (chunk) => { body += chunk; }); res.on('end', () => { try { resolve(JSON.parse(body)); } catch (error) { reject(error); } }); });
+    req.setTimeout(10000, () => req.destroy(new Error(`CDP HTTP timeout: ${url}`)));
     req.on('error', reject); req.end();
   });
 }
@@ -77,15 +82,17 @@ async function inspect(port, siteOrigin, page, width) {
     const d=document, root=d.documentElement, body=d.body;
     const broken=[...d.images].filter(x=>!x.complete||x.naturalWidth===0).map(x=>x.getAttribute('src'));
     const logo=d.querySelector('img.renewal-business-logo');
-    const section=d.querySelector(${JSON.stringify(page.name === 'home' ? '.renewal-brand-services' : '.renewal-management-explainer')});
+    const section=d.querySelector(${JSON.stringify(page.name === 'home' ? '.renewal-brand-services' : page.name === 'services' ? '.renewal-management-explainer' : '.renewal-isms-company')});
     const gallery=d.querySelector('.motion-section .img');
     let slider=null; const indicators=[...d.querySelectorAll('.slide-indicators button,.slide-indicators span')];
     if (indicators.length>1) { const before=[...d.querySelectorAll('.slide')].findIndex(x=>x.classList.contains('active')); indicators[1].click(); const after=[...d.querySelectorAll('.slide')].findIndex(x=>x.classList.contains('active')); slider={before,after}; }
     const rect=section?.getBoundingClientRect();
     const overflow=[...d.querySelectorAll('body *')].map((el)=>{const r=el.getBoundingClientRect();return{tag:el.tagName,className:String(el.className||''),id:el.id,left:r.left,right:r.right,width:r.width};}).filter((x)=>x.right>root.clientWidth+1||x.left< -1).slice(0,25);
-    const requiredAnchors=${JSON.stringify(page.name === 'home' ? ['link1','link4','track-record','kaizen','diagnosis','contact'] : ['kaizen','it-projects','it-bpo','business-kaizen','security','casual-consulting','link5'])};
+    const requiredAnchors=${JSON.stringify(page.name === 'home' ? ['link1','link4','track-record','kaizen','diagnosis','contact'] : page.name === 'services' ? ['kaizen','it-projects','it-bpo','business-kaizen','security','casual-consulting','link5'] : ['mvv','messages','business','information'])};
     const clientLogos=[...d.querySelectorAll('.renewal-brand-client-logos img')];
-    return {innerWidth:innerWidth,clientWidth:root.clientWidth,scrollWidth:root.scrollWidth,bodyScrollWidth:body.scrollWidth,overflow,broken,logo:{present:!!logo,complete:logo?.complete,naturalWidth:logo?.naturalWidth,naturalHeight:logo?.naturalHeight},clientLogos:{count:clientLogos.length,visible:clientLogos.filter(x=>x.getBoundingClientRect().width>0&&x.getBoundingClientRect().height>0).length},section:rect?{x:rect.x,y:rect.y,width:rect.width,height:rect.height}:null,anchors:requiredAnchors.filter(id=>!d.getElementById(id)),gallery:{present:!!gallery,animation:getComputedStyle(gallery||body).animationName},menuInteraction:null,slider};
+    const isms=[...d.querySelectorAll('img[src*="isms-gcerti-gijp-1167-ic.png"]')];
+    const mixi=d.querySelector('img.renewal-brand-client-logo-mixi');
+    return {innerWidth:innerWidth,clientWidth:root.clientWidth,scrollWidth:root.scrollWidth,bodyScrollWidth:body.scrollWidth,overflow,broken,logo:{present:!!logo,complete:logo?.complete,naturalWidth:logo?.naturalWidth,naturalHeight:logo?.naturalHeight},clientLogos:{count:clientLogos.length,visible:clientLogos.filter(x=>x.getBoundingClientRect().width>0&&x.getBoundingClientRect().height>0).length},officialLogos:{ismsCount:isms.length,ismsVisible:isms.filter(x=>x.getBoundingClientRect().width>=45&&x.getBoundingClientRect().height>0).length,mixiPresent:!!mixi,mixiNaturalWidth:mixi?.naturalWidth,mixiNaturalHeight:mixi?.naturalHeight},section:rect?{x:rect.x,y:rect.y,width:rect.width,height:rect.height}:null,anchors:requiredAnchors.filter(id=>!d.getElementById(id)),gallery:{present:!!gallery,animation:getComputedStyle(gallery||body).animationName},menuInteraction:null,slider};
   })()`;
   const evaluated = await client.send('Runtime.evaluate', { expression, returnByValue: true });
   const metrics = evaluated.result.value;
@@ -117,11 +124,18 @@ async function inspect(port, siteOrigin, page, width) {
   const server = staticServer();
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
   const siteOrigin = `http://127.0.0.1:${server.address().port}`;
-  const processHandle = spawn(chrome, ['--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check', '--allow-file-access-from-files', '--remote-debugging-port=0', `--user-data-dir=${profile}`, 'about:blank'], { stdio: 'ignore' });
+  const processHandle = spawn(chrome, ['--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check', '--allow-file-access-from-files', '--remote-debugging-port=0', `--user-data-dir=${profile}`, 'about:blank'], { stdio: ['ignore', 'pipe', 'pipe'] });
+  let chromeError = '';
+  processHandle.stderr.on('data', (chunk) => { chromeError += chunk.toString(); });
+  processHandle.on('exit', (code) => { if (code !== 0) process.stderr.write(`CHROME_EXIT=${code} ${chromeError.slice(-2000)}\n`); });
   try {
     const [portText] = await waitForFile(path.join(profile, 'DevToolsActivePort'));
     const port = Number(portText); const results = [];
-    for (const width of widths) for (const page of pages) results.push(await inspect(port, siteOrigin, page, width));
+    for (const width of widths) for (const page of pages) {
+      process.stdout.write(`BROWSER_GATE_START=${page.name}/${width}\n`);
+      results.push(await inspect(port, siteOrigin, page, width));
+      process.stdout.write(`BROWSER_GATE_PASS=${page.name}/${width}\n`);
+    }
     fs.writeFileSync(path.join(evidenceRoot, 'browser-gate-v4.json'), `${JSON.stringify({ generatedAt: new Date().toISOString(), widths, results }, null, 2)}\n`);
     for (const result of results) {
       assert.equal(result.innerWidth, result.width, `${result.page}/${result.width}: viewport`);
@@ -129,9 +143,13 @@ async function inspect(port, siteOrigin, page, width) {
       assert.ok(result.bodyScrollWidth <= result.clientWidth + 1, `${result.page}/${result.width}: body overflow ${result.bodyScrollWidth}/${result.clientWidth} ${JSON.stringify(result.overflow)}`);
       assert.deepEqual(result.broken, [], `${result.page}/${result.width}: broken images`);
       assert.deepEqual(result.anchors, [], `${result.page}/${result.width}: required anchors`);
-      assert.equal(result.logo.present, true, `${result.page}/${result.width}: business logo missing`);
-      assert.equal(result.logo.complete, true, `${result.page}/${result.width}: business logo incomplete`);
-      assert.ok(result.logo.naturalWidth > 0 && result.logo.naturalHeight > 0, `${result.page}/${result.width}: business logo dimensions`);
+      if (result.page !== 'company') {
+        assert.equal(result.logo.present, true, `${result.page}/${result.width}: business logo missing`);
+        assert.equal(result.logo.complete, true, `${result.page}/${result.width}: business logo incomplete`);
+        assert.ok(result.logo.naturalWidth > 0 && result.logo.naturalHeight > 0, `${result.page}/${result.width}: business logo dimensions`);
+      }
+      assert.ok(result.officialLogos.ismsCount >= 1, `${result.page}/${result.width}: ISMS logo missing`);
+      assert.equal(result.officialLogos.ismsVisible, result.officialLogos.ismsCount, `${result.page}/${result.width}: ISMS minimum display size`);
       assert.deepEqual(result.errors, { console: [], page: [], resource: [] }, `${result.page}/${result.width}: browser errors`);
       if (result.width <= 650) {
         assert.equal(result.menuInteraction?.before, false, `${result.page}/${result.width}: mobile menu initial`);
@@ -141,7 +159,9 @@ async function inspect(port, siteOrigin, page, width) {
       if (result.page === 'home') assert.notEqual(result.slider?.before, result.slider?.after, `${result.width}: slider`);
       if (result.page === 'home') assert.notEqual(result.gallery?.animation, 'none', `${result.width}: gallery animation`);
       if (result.page === 'home') assert.deepEqual(result.clientLogos, { count: 8, visible: 8 }, `${result.width}: client logos`);
+      if (result.page === 'home') assert.deepEqual({ present: result.officialLogos.mixiPresent, width: result.officialLogos.mixiNaturalWidth, height: result.officialLogos.mixiNaturalHeight }, { present: true, width: 6000, height: 3614 }, `${result.width}: official MIXI logo`);
       if (result.page === 'services') assert.ok(result.section?.height > 0, `${result.width}: explainer section`);
+      if (result.page === 'company') assert.ok(result.section?.height > 0, `${result.width}: ISMS company section`);
     }
     process.stdout.write(`CORPORATE_BROWSER_GATE=${results.length} PASS\n`);
   } finally {

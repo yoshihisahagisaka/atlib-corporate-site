@@ -87,6 +87,19 @@ test('previously published client logos are restored from existing assets only',
   }
 });
 
+test('official MIXI and ISMS assets and certification facts are exact', () => {
+  const crypto = require('node:crypto');
+  const hash = (relative) => crypto.createHash('sha256').update(fs.readFileSync(path.join(root, relative))).digest('hex');
+  const home = read('index.html');
+  const company = read('company/index.html');
+  assert.equal(hash('images/partner_logo_mixi.png'), 'de166bd8fb91d8edf30f9fbaa6b01e32ef8d2d89fda98e438ab6ee2ae2b37f53');
+  assert.equal(hash('images/isms-gcerti-gijp-1167-ic.png'), '6838d56096c64059cdd5c2becdc6d3c8c5148849d4d830ac9392b32a0b92c4fc');
+  assert.match(home, /class="renewal-brand-client-logo-mixi"[^>]+width="6000" height="3614"/u);
+  for (const value of ['ISO\/IEC 27001:2022', 'GIJP-1167-IC', 'ITコンサルティング事業・IT支援事業', '東京都中央区八丁堀4-12-7 明豊パークタワービル3階', '2026年12月1日〜2029年11月30日']) assert.match(company, new RegExp(value, 'u'));
+  for (const relative of ['index.html', 'company/index.html', 'services/index.html', 'works/index.html', 'contact/index.html']) assert.match(read(relative), /class="renewal-isms-footer"/u, relative);
+  for (const relative of ['index.html', 'company/index.html', 'services/index.html', 'works/index.html', 'contact/index.html']) assert.doesNotMatch(read(relative), /IAF/u, relative);
+});
+
 test('human review v2 logo, copy removals and IT management explainer are exact', () => {
   const home = read('index.html');
   const services = read('services/index.html');

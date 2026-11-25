@@ -67,7 +67,9 @@ function verifyOverlay(baseRoot, candidateRoot, manifest) {
     if (!changed.includes(entry)) throw new Error(`Allowed file did not change: ${entry}`);
   }
   for (const tree of manifest.protectedTrees) {
-    if (changed.some((entry) => entry === tree || entry.startsWith(`${tree}/`))) throw new Error(`Protected tree changed: ${tree}`);
+    const unapproved = changed.filter((entry) =>
+      (entry === tree || entry.startsWith(`${tree}/`)) && !allowed.has(entry));
+    if (unapproved.length) throw new Error(`Protected tree changed: ${tree}: ${unapproved.join(', ')}`);
   }
   for (const entry of manifest.protectedFiles) {
     if (hashes[entry]?.before !== hashes[entry]?.after) throw new Error(`Protected file changed: ${entry}`);
