@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { execFileSync } = require('node:child_process');
+const { execFileSync, spawnSync } = require('node:child_process');
 const test = require('node:test');
 const { protectedBlocks, verifyOverlay } = require('../scripts/production-overlay/overlay-verifier.cjs');
 
@@ -46,4 +46,39 @@ test('approved Git Base to HEAD public diff is exactly the six-file manifest', (
   const before = execFileSync('git', ['-C', repository, 'show', `${manifestFile.baseCommit}:public/index.html`], { encoding: 'utf8', maxBuffer: 5 * 1024 * 1024 });
   const after = execFileSync('git', ['-C', repository, 'show', `${manifestFile.headCommit}:public/index.html`], { encoding: 'utf8', maxBuffer: 5 * 1024 * 1024 });
   assert.deepEqual(protectedBlocks(after), protectedBlocks(before));
+});
+
+test('candidate build context accepts only the manifest Dockerfile and six files', () => {
+  const repository = path.resolve(__dirname, '..');
+  const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'atlib-context-'));
+  const root = path.join(temporary, 'context');
+  const output = path.join(temporary, 'evidence.json');
+  try {
+    fs.mkdirSync(root);
+    fs.copyFileSync(path.join(repository, 'scripts/production-overlay/Dockerfile.candidate'), path.join(root, 'Dockerfile'));
+    for (const relative of allowed) write(root, `overlay/${relative}`, relative);
+    execFileSync(process.execPath, [path.join(repository, 'scripts/production-overlay/candidate-context-verifier.cjs'), root, path.join(repository, 'scripts/production-overlay/manifest.json'), output]);
+    assert.equal(JSON.parse(fs.readFileSync(output, 'utf8')).files.length, 7);
+    write(root, 'overlay/public/js/unapproved.js', 'no');
+    const rejected = spawnSync(process.execPath, [path.join(repository, 'scripts/production-overlay/candidate-context-verifier.cjs'), root, path.join(repository, 'scripts/production-overlay/manifest.json'), output], { encoding: 'utf8' });
+    assert.notEqual(rejected.status, 0);
+    assert.match(rejected.stderr, /Build context allowlist mismatch/u);
+  } finally { fs.rmSync(temporary, { recursive: true, force: true }); }
+});
+
+test('Cloud Shell gates fail closed and remain independently executable', () => {
+  const repository = path.resolve(__dirname, '..');
+  const scripts = ['build-production-candidate.sh', 'scan-production-candidate.sh', 'deploy-isolated-candidate.sh'];
+  for (const script of scripts) {
+    const body = fs.readFileSync(path.join(repository, 'scripts/production-overlay', script), 'utf8');
+    assert.match(body, /--execute/u, `${script}: explicit execution gate missing`);
+    assert.match(body, /stop '/u, `${script}: STOP conditions missing`);
+  }
+  const build = fs.readFileSync(path.join(repository, 'scripts/production-overlay/build-production-candidate.sh'), 'utf8');
+  assert.match(build, /candidate tag absence could not be proven/u);
+  const scan = fs.readFileSync(path.join(repository, 'scripts/production-overlay/scan-production-candidate.sh'), 'utf8');
+  assert.match(scan, /scan digest differs from the built immutable digest/u);
+  const deploy = fs.readFileSync(path.join(repository, 'scripts/production-overlay/deploy-isolated-candidate.sh'), 'utf8');
+  assert.match(deploy, /--no-traffic/u);
+  assert.match(deploy, /Runtime settings differ/u);
 });

@@ -49,12 +49,59 @@ The candidate must also retain the Production-public transformations already in 
 ## Prepared scripts
 
 - `prepare-production-overlay.ps1`: read-back, immutable image extraction, one-time patch, hashes, build-context preparation. STOPs when Docker is unavailable, output exists, or any precondition differs.
+- `prepare-production-overlay.sh`: Cloud Shell equivalent. It reuses the same manifest and Node verifier, writes the binary Git diff directly to a file, requires `git apply --check`, and records every build-context SHA-256.
+- `build-production-candidate.sh`: independent Cloud Build Gate. It repeats Production/content/context read-back and distinguishes a proven missing tag from permission/API/network failures.
+- `scan-production-candidate.sh`: independent immutable-digest On-Demand Scan Gate. It records Operation, Scan ID, full findings and severity counts, and requires Critical 0 / High 0.
+- `deploy-isolated-candidate.sh`: independent 0%-traffic Gate. It requires the scanned digest, preserves the existing 100% Revision, and compares Runtime configuration after deployment.
 - `build-production-candidate.ps1`: separately approved Cloud Build submit. Requires `-Execute`, a unique image tag, and existing verification evidence.
 - `scan-production-candidate.ps1`: one On-Demand Scan of an immutable digest. Requires `-Execute`; never retries automatically.
 - `deploy-isolated-candidate.ps1`: future 0%-traffic deploy only. Requires `-Execute`, a new short tag, and re-verifies the old 100% revision before and after.
 - `rollback-production.ps1`: future explicit rollback to the recorded Production revision, with Ready and traffic read-back.
 
 Cloud Build uses `cloudbuild.production-overlay.yaml` and the generated context containing only `Dockerfile` plus `overlay/`.
+
+## Cloud Shell copy/paste: Production image extraction and overlay verification
+
+The following is the complete preparation Gate. It performs read-only Production checks plus local Docker extraction and verification. It does not submit a Build, push an image, scan, or deploy.
+
+```bash
+set -euo pipefail
+git clone https://github.com/yoshihisahagisaka/atlib-corporate-site.git
+cd atlib-corporate-site
+git fetch origin refs/pull/82/head
+git checkout --detach FETCH_HEAD
+git status --short
+gcloud config set project atlib-corporate-site
+bash scripts/production-overlay/prepare-production-overlay.sh "$HOME/atlib-production-overlay-artifacts"
+```
+
+Expected artifact directory:
+
+```bash
+ARTIFACT_ROOT="$HOME/atlib-production-overlay-artifacts/738faf81a4409f8b9683623851d1fbb239aa25b6"
+jq . "$ARTIFACT_ROOT/overlay-verification.json"
+cat "$ARTIFACT_ROOT/build-context.sha256"
+```
+
+The script verifies that the six checked-out content blobs remain identical to approved content HEAD `738faf81a4409f8b9683623851d1fbb239aa25b6`; therefore the later control/evidence commit may differ without changing candidate content.
+
+The subsequent commands are intentionally separate and must only be run under their corresponding approvals:
+
+```bash
+# Build Gate only
+bash scripts/production-overlay/build-production-candidate.sh --execute "$ARTIFACT_ROOT" \
+  asia-northeast1-docker.pkg.dev/atlib-corporate-site/cloud-run-source-deploy/corporate-site-renewal:REPLACE_WITH_NEW_UNIQUE_TAG
+
+# Scan Gate only; copy the immutable digest URI emitted by the Build Gate
+bash scripts/production-overlay/scan-production-candidate.sh --execute "$ARTIFACT_ROOT" \
+  REPLACE_WITH_IMAGE_URI@sha256:REPLACE_WITH_DIGEST
+
+# Isolated Deploy Gate only; requires the same digest in scan-evidence.json
+bash scripts/production-overlay/deploy-isolated-candidate.sh --execute "$ARTIFACT_ROOT" \
+  REPLACE_WITH_IMAGE_URI@sha256:REPLACE_WITH_DIGEST REPLACE_WITH_SHORT_TAG
+```
+
+The isolated run.app URL is evidence of Revision reachability only. It is not a public-host acceptance result, and the existing LB/Host boundary must not be relaxed.
 
 ## Execution sequence for a separately approved gate
 
@@ -92,8 +139,10 @@ Scan the built immutable digest only. Record Build ID, image digest, Operation I
 - Renewal contract tests: 4 PASS / 0 FAIL.
 - Service-web regression tests: 7 PASS / 0 FAIL.
 - Established baseline suite: 26 PASS / 3 known FAIL; no FAIL increase.
-- Overlay verifier tests: 3 PASS / 0 FAIL, including exact six-file Base-to-HEAD diff, protected home blocks, and unauthorized JS rejection.
+- Overlay and Cloud Shell contract tests: 5 PASS / 0 FAIL, including exact six-file Base-to-HEAD diff, protected home blocks, unauthorized JS rejection, build-context allowlisting, and independent Gate contracts.
 - PowerShell parser validation for all prepared scripts: PASS.
+- Bash parser validation for all Cloud Shell scripts: PASS.
+- Explicit-approval STOP tests for Build, Scan, and isolated Deploy: 3 PASS / 0 FAIL.
 - Existing PR #82 Build, contract tests, service-web tests and browser evidence remain the source acceptance evidence.
 
 Not executed: immutable image extraction/dry-run against `/app` (Docker CLI unavailable locally), Cloud Build, push, digest scan, isolated deploy, tag URL checks, real-host acceptance, traffic change, rollback exercise, or merge.
