@@ -201,3 +201,96 @@
   .renewal-management-services article { gap: .75rem; padding-inline: 1rem; }
   .renewal-management-icon { flex-basis: 2.4rem; width: 2.4rem; height: 2.4rem; }
 }
+
+/* Corporate Brand Design v4: editorial home composition */
+.renewal-brand-shell { width: min(100% - 4rem, 1180px); margin-inline: auto; }
+.renewal-brand-thinking { padding: clamp(5.5rem, 9vw, 8.5rem) 0; background: #fff; }
+.renewal-brand-thinking-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(22rem, .95fr); gap: clamp(3rem, 7vw, 7rem); align-items: center; width: min(100% - 4rem, 1280px); margin-inline: auto; }
+.renewal-brand-thinking-image { min-width: 0; margin: 0; overflow: hidden; aspect-ratio: 4 / 3; }
+.renewal-brand-thinking-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.renewal-brand-thinking-copy { min-width: 0; }
+.renewal-brand-thinking-copy .intro-heading { margin: 0 0 2.2rem; }
+.renewal-brand-thinking-copy .intro-heading h2 { margin: .55rem 0 1rem; color: var(--renewal-navy); font-size: clamp(2.15rem, 4vw, 4rem); line-height: 1.35; letter-spacing: -.02em; }
+.renewal-brand-thinking-copy .intro-connection { color: var(--renewal-orange); font-weight: 700; }
+.renewal-brand-thinking-copy .intro-copy p { margin: 0 0 1.15rem; line-height: 2.05; }
+.renewal-brand-thinking-copy .mission-quote { margin-top: 1.8rem; padding-left: 1.2rem; border-left: 3px solid var(--renewal-orange); color: var(--renewal-navy); font-weight: 700; }
+
+.renewal-brand-values { padding: clamp(5.5rem, 8vw, 8rem) 0; background: #fff; }
+.renewal-brand-heading { display: grid; grid-template-columns: minmax(14rem, .75fr) minmax(20rem, 1.25fr); gap: 3rem; align-items: end; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+.renewal-brand-heading h2 { margin: .4rem 0 0; color: var(--renewal-navy); font-size: clamp(2.2rem, 4.2vw, 4rem); line-height: 1.25; }
+.renewal-brand-heading > p:last-child { margin: 0; color: var(--renewal-muted); line-height: 2; }
+.renewal-brand-value-list article { display: grid; grid-template-columns: 6rem minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); padding: 2.4rem 0; border-top: 1px solid #dbe2e8; }
+.renewal-brand-value-list article:last-child { border-bottom: 1px solid #dbe2e8; }
+.renewal-brand-value-list article > span { color: var(--renewal-orange); font: 700 1rem/1.5 Arial, sans-serif; letter-spacing: .1em; }
+.renewal-brand-value-list h3 { margin: 0 0 .65rem; color: var(--renewal-navy); font-size: clamp(1.4rem, 2.2vw, 2rem); }
+.renewal-brand-value-list p { margin: 0; color: var(--renewal-muted); line-height: 1.9; }
+
+.renewal-brand-clients { padding: clamp(5rem, 8vw, 7.5rem) 0; background: #fff; }
+.renewal-brand-clients .renewal-brand-heading,
+.renewal-brand-diagnosis .renewal-brand-heading { display: block; margin-bottom: 1.5rem; padding-bottom: 0; }
+.renewal-brand-clients .renewal-brand-heading h2,
+.renewal-brand-diagnosis .renewal-brand-heading h2 { margin: .7rem 0 1rem; }
+.renewal-brand-section-lead { max-width: 42rem; margin: 0 0 3.5rem; color: var(--renewal-muted); line-height: 2; }
+.renewal-brand-client-logos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); align-items: center; margin-top: 1rem; }
+.renewal-brand-client-logos img { display: block; width: 100%; height: clamp(4.5rem, 8vw, 7rem); object-fit: contain; }
+
+.renewal-brand-services { padding: clamp(6rem, 10vw, 9rem) 0; background: #fff; }
+.renewal-brand-feature-list { display: grid; gap: clamp(5rem, 10vw, 9rem); }
+.renewal-brand-feature { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(22rem, .9fr); gap: clamp(2.5rem, 7vw, 7rem); align-items: center; }
+.renewal-brand-feature-reverse figure { order: 2; }
+.renewal-brand-feature figure { margin: 0; overflow: hidden; aspect-ratio: 16 / 11; }
+.renewal-brand-feature figure img { width: 100%; height: 100%; object-fit: cover; }
+.renewal-brand-feature .renewal-official-logo { display: block; width: min(100%, 24rem); height: auto; margin: 1rem 0 1.6rem; }
+.renewal-brand-feature .renewal-business-logo { width: min(100%, 22rem); }
+.renewal-brand-feature h3 { margin: 0 0 1rem; color: var(--renewal-navy); font-size: clamp(1.55rem, 2.5vw, 2.35rem); line-height: 1.45; }
+.renewal-brand-feature p:not(.renewal-service-kind) { color: var(--renewal-muted); line-height: 2; }
+.renewal-brand-link { display: inline-flex; gap: .8rem; align-items: center; margin-top: 1rem; padding-bottom: .3rem; border-bottom: 1px solid currentColor; color: var(--renewal-navy); font-weight: 700; text-decoration: none; }
+.renewal-brand-link span { color: var(--renewal-orange); }
+.renewal-brand-secondary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 5rem); margin-top: clamp(5rem, 9vw, 8rem); padding-top: 3rem; border-top: 1px solid #dbe2e8; }
+.renewal-brand-secondary article { padding-right: clamp(0rem, 4vw, 3rem); }
+.renewal-brand-secondary h3 { margin: .7rem 0; color: var(--renewal-navy); font-size: 1.55rem; }
+.renewal-brand-secondary p { color: var(--renewal-muted); }
+
+.renewal-brand-diagnosis { padding: clamp(5.5rem, 9vw, 8rem) 0; background: #fff; }
+.renewal-brand-diagnosis-links { margin-top: 1rem; border-top: 1px solid #dbe2e8; }
+.renewal-brand-diagnosis-links a { display: grid; grid-template-columns: 4rem 1fr auto; gap: 1.2rem; align-items: center; padding: 1.8rem 0; border-bottom: 1px solid #dbe2e8; color: var(--renewal-navy); text-decoration: none; }
+.renewal-brand-diagnosis-links span { color: var(--renewal-green); font: 700 .78rem/1 Arial, sans-serif; letter-spacing: .1em; }
+.renewal-brand-diagnosis-links strong { font-size: clamp(1.1rem, 2vw, 1.45rem); }
+.renewal-brand-diagnosis-links i { color: var(--renewal-orange); font-style: normal; font-size: 1.3rem; }
+
+/* The detailed service catalogue keeps its diagrams but sheds unnecessary nested decoration. */
+.renewal-service-page .renewal-service-detail { border-radius: 0; box-shadow: none; }
+.renewal-service-page .renewal-management-explainer { border-radius: 0; box-shadow: none; }
+.renewal-service-page + .renewal-security .renewal-security-card,
+.renewal-service-advisory .renewal-advisory-panel { border-radius: 0; box-shadow: none; }
+.renewal-service-advisory + .svc-how { margin-bottom: 4rem; }
+.workflow-section#link5 { margin-top: 0; padding-top: clamp(4rem, 7vw, 7rem); }
+
+@media (max-width: 900px) {
+  .renewal-brand-thinking-layout, .renewal-brand-feature { grid-template-columns: 1fr; }
+  .renewal-brand-feature-reverse figure { order: 0; }
+  .renewal-brand-heading { grid-template-columns: 1fr; gap: 1rem; }
+  .renewal-brand-client-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 650px) {
+  .renewal-brand-shell, .renewal-brand-thinking-layout { width: calc(100% - 2rem); }
+  .renewal-brand-thinking { padding-block: 4.5rem; }
+  .renewal-brand-thinking-layout { gap: 2.2rem; }
+  .renewal-brand-thinking-image { aspect-ratio: 4 / 3; }
+  .renewal-brand-thinking-copy .intro-heading h2 { font-size: 2.2rem; }
+  .renewal-brand-values, .renewal-brand-clients, .renewal-brand-services, .renewal-brand-diagnosis { padding-block: 4.8rem; }
+  .renewal-brand-heading { grid-template-columns: 1fr; gap: 1rem; }
+  .renewal-brand-heading h2 { font-size: 2.2rem; }
+  .renewal-brand-diagnosis .renewal-brand-heading { display: block; margin-bottom: 2.8rem; }
+  .renewal-brand-diagnosis .renewal-brand-heading h2 { margin: .7rem 0 1rem; }
+  .renewal-brand-diagnosis .renewal-brand-heading > p:last-child { position: static; display: block; }
+  .renewal-brand-value-list article { grid-template-columns: 3.2rem minmax(0, 1fr); gap: .8rem; padding: 1.8rem 0; }
+  .renewal-brand-client-logos { gap: 1.2rem; }
+  .renewal-brand-client-logos img { height: 4.5rem; }
+  .renewal-brand-feature-list { gap: 4.5rem; }
+  .renewal-brand-feature { gap: 1.7rem; }
+  .renewal-brand-feature figure { aspect-ratio: 4 / 3; }
+  .renewal-brand-secondary { grid-template-columns: 1fr; gap: 2.8rem; margin-top: 4.5rem; }
+  .renewal-brand-diagnosis-links a { grid-template-columns: 2.5rem 1fr auto; padding: 1.4rem 0; }
+}
