@@ -66,6 +66,48 @@ test('candidate build context accepts only the manifest Dockerfile and six files
   } finally { fs.rmSync(temporary, { recursive: true, force: true }); }
 });
 
+test('Cloud Shell approved Git patch targets the extracted candidate, not the approved checkout', () => {
+  const script = fs.readFileSync(path.resolve(__dirname, '../scripts/production-overlay/prepare-production-overlay.sh'), 'utf8');
+  assert.match(script, /git -C "\$artifact_root\/candidate" apply --check --binary "\$artifact_root\/approved\.patch"/u);
+  assert.match(script, /git -C "\$artifact_root\/candidate" apply --binary "\$artifact_root\/approved\.patch"/u);
+  assert.doesNotMatch(script, /git --git-dir=.*--work-tree=.* apply/u);
+
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'atlib-shell-patch-'));
+  const checkout = path.join(root, 'checkout');
+  const candidate = path.join(root, 'candidate');
+  const patch = path.join(root, 'approved.patch');
+  try {
+    fs.mkdirSync(checkout); fs.mkdirSync(candidate);
+    execFileSync('git', ['init', '-q', checkout]);
+    execFileSync('git', ['-C', checkout, 'config', 'core.autocrlf', 'false']);
+    write(checkout, 'public/index.html', 'original\n');
+    write(candidate, 'public/index.html', 'original\n');
+    execFileSync('git', ['-C', checkout, 'add', 'public/index.html']);
+    const commit = message => execFileSync('git', ['-C', checkout,
+      '-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+      'commit', '-qm', message]);
+    commit('base');
+    const base = execFileSync('git', ['-C', checkout, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+    write(checkout, 'public/index.html', 'renewal\n');
+    write(checkout, 'public/css/atlib-service-renewal.css', '.renewal { display: block; }\n');
+    execFileSync('git', ['-C', checkout, 'add', 'public']);
+    commit('approved');
+    fs.writeFileSync(patch, execFileSync('git', ['-C', checkout, 'diff', '--binary',
+      base, 'HEAD', '--', 'public/index.html', 'public/css/atlib-service-renewal.css']));
+
+    // The Git checkout already has the approved files; the extracted candidate is at Base.
+    assert.notEqual(spawnSync('git', ['-C', checkout, 'apply', '--check', '--binary', patch]).status, 0);
+    execFileSync('git', ['-C', candidate, 'apply', '--check', '--binary', patch]);
+    execFileSync('git', ['-C', candidate, 'apply', '--binary', patch]);
+    assert.equal(fs.readFileSync(path.join(candidate, 'public/index.html'), 'utf8'), 'renewal\n');
+    assert.equal(fs.readFileSync(path.join(candidate, 'public/css/atlib-service-renewal.css'), 'utf8'),
+      '.renewal { display: block; }\n');
+    assert.notEqual(spawnSync('git', ['-C', candidate, 'apply', '--check', '--binary', patch]).status, 0);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('Cloud Shell gates fail closed and remain independently executable', () => {
   const repository = path.resolve(__dirname, '..');
   const scripts = ['build-production-candidate.sh', 'scan-production-candidate.sh', 'deploy-isolated-candidate.sh'];
