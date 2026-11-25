@@ -114,6 +114,7 @@ Final CDP Browser Gate: 14/14 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CS
 
 ## Human review final adjustments (2026-11-26)
 
+- Content HEAD: `dd0af6a1697a74a13ea2c396471bcece231bdcb6`.
 - Top-page editorial headings now use balanced, Japanese-aware responsive wrapping instead of fixed line breaks. MIXI is presented in a plain bordered white display area while the supplied PNG remains byte-identical (`de166bd8fb91d8edf30f9fbaa6b01e32ef8d2d89fda98e438ab6ee2ae2b37f53`).
 - The service catalogue no longer publishes the internal `準備中` / `検証中` badges or explanatory note. No new application, purchase, price, launch-date, or availability promise was added. Major service-page vertical spacing was reduced while all service diagrams, names, links, and the four-step workflow remain present.
 - The public company phone row (`03-6661-1616` and its `tel:` link) was removed. The optional phone input in the contact form is user-supplied form data, not a published company contact number, and remains unchanged. No other public company phone number occurs in the five Corporate HTML files.
