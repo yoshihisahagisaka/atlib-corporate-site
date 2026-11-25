@@ -43,3 +43,13 @@ Scope of this record is the code-level release contract. It does not assert prod
 - The gate requires document/body width within one pixel of the client width, all four diagnosis CTAs inside the viewport, the 650/651 media boundary, expanded FAQ, scrolled header/mobile sticky CTA, UTM allowlist and referenced images to pass.
 - `overflow-x:hidden` on `html` or `body` is not an accepted fix. Identify the first widening element and its computed style when a real DOM-width failure occurs.
 - The 2026-11-24 apparent 390 px overflow was remeasured on 2026-11-25 as a harness false positive: Chrome laid the page out at 489 px and cropped the PNG to 390 px. Exact DOM viewports from 320 through 1440 had no root overflow, so no production CSS was changed. The corrected 390 px evidence and this automated gate supersede the cropped screenshot for layout decisions.
+
+## Production ledger (2026-11-25)
+
+- Management-approved v44 image `sha256:0653f45d969ff4eaab604534adb3cbc0ed8c856e722e2e76546f0a9babc46baa` was promoted without rebuild or redeploy.
+- Production Revision: `corporate-site-imv-20261123071048` (100%). Rollback Revision: `corporate-site-bwf-20261122122157` (0%).
+- Public HTTP, SEO/CSP, four CTA/UTM, existing-service regression, host isolation, and legacy WWW preservation gates passed.
+- CDP device metrics passed at mobile 390 x 844 (`innerWidth=390`, `clientWidth=390`, document/body `scrollWidth=390`, `visualViewport.width=390`, mobile media active) and desktop 1440 x 1200 (`innerWidth=1440`, scrollbar-adjusted `clientWidth=1425`, no root overflow).
+- Expanded FAQ, scrolled header, mobile sticky CTA, and zero console/page/resource failures were verified. The earlier cropped-viewport false positive is superseded by these DOM measurements.
+- The automatic rollback path was exercised during release-script gate corrections and restored the previous Revision each time; the final run passed with rollback armed and not triggered.
+- No Git merge, build, push, deploy, database, IAM, Secret, DNS, old-WWW retirement, or Sales Tools change was performed.
