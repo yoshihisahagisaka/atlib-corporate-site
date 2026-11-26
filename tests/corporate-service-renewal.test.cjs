@@ -93,7 +93,7 @@ test('official MIXI and ISMS assets and certification facts are exact', () => {
   const home = read('index.html');
   const company = read('company/index.html');
   assert.equal(hash('images/partner_logo_mixi.png'), 'de166bd8fb91d8edf30f9fbaa6b01e32ef8d2d89fda98e438ab6ee2ae2b37f53');
-  assert.equal(hash('images/isms-gcerti-gijp-1167-ic.png'), '6838d56096c64059cdd5c2becdc6d3c8c5148849d4d830ac9392b32a0b92c4fc');
+  assert.equal(hash('images/isms-gcerti-gijp-1167-ic.png'), '89725ad37e6ada14766b8b0f8beb31061292832d066ecbccaa6047d4bb383678');
   assert.match(home, /class="renewal-brand-client-logo-mixi"[^>]+width="6000" height="3614"/u);
   for (const html of [home, company, read('services/index.html'), read('works/index.html'), read('contact/index.html')]) {
     assert.match(html, /ISO\/IEC 27001:2022/u);
@@ -103,6 +103,7 @@ test('official MIXI and ISMS assets and certification facts are exact', () => {
   }
   for (const relative of ['index.html', 'company/index.html', 'services/index.html', 'works/index.html', 'contact/index.html']) assert.match(read(relative), /class="renewal-isms-footer"/u, relative);
   for (const relative of ['index.html', 'company/index.html', 'services/index.html', 'works/index.html', 'contact/index.html']) assert.doesNotMatch(read(relative), /IAF/u, relative);
+  for (const relative of ['index.html', 'company/index.html', 'services/index.html', 'works/index.html', 'contact/index.html']) assert.doesNotMatch(read(relative), /IAS|MSCB-113/u, relative);
 });
 
 test('human review final adjustments remove public status and phone copy while preserving paths', () => {

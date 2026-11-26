@@ -122,6 +122,13 @@ Final CDP Browser Gate: 14/14 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CS
 - Automated verification: TypeScript Build PASS; Corporate Renewal 8/8 PASS; Production Overlay 6/6 PASS; Service Web 7/7 PASS; baseline 26 PASS / known 3 FAIL (no increase); `git diff --check` PASS.
 - CDP Browser Gate: 35/35 PASS across home, services, company, works, and contact at 320, 390, 650, 651, 768, 1024, and 1440 CSS px. It confirmed exact viewport widths, no horizontal overflow or broken image, zero Console/Page/Resource errors, required anchors, mobile menu open/close, slider and gallery behavior, eight visible client logos, and common-footer rendering. The local contact check substitutes Cloudflare's documented always-pass test key only in the test server; it never submits the form.
 - Full-page and focused 390/1440 evidence is under `docs/evidence/issue-81-browser/`; the machine-readable result is `browser-gate-v4.json`.
+
+## GCERTI standalone mark resolution (2026-11-26)
+
+- Management supplied the formal standalone Web PNG from `001_管理/003_logo・電子印/ISMSロゴ/ISMSロゴ.png`. Source and repository render are byte-identical: SHA-256 `89725ad37e6ada14766b8b0f8beb31061292832d066ecbccaa6047d4bb383678`, 945 x 630 px, 32-bit ARGB.
+- The approved existing path `public/images/isms-gcerti-gijp-1167-ic.png` now contains only the GCERTI mark, certificate number `GIJP-1167-IC`, and standard `ISO/IEC 27001:2022`. IAS / `MSCB-113` and IAF marks are absent. No crop, recoloring, shape change, or aspect-ratio change was performed.
+- Company certification information and all five common footers use the intrinsic 945 x 630 dimensions while CSS maintains a displayed width above GCERTI's 12 mm minimum. Public text remains limited to the certification name and certificate number.
+- This resolves the ISMS-logo STOP item. The Overlay allowlist remains path-specific and is not broadened.
 - Company information and all common footers publish the official logo, certification name, and certificate number. Scope, certified office, validity-period, and expiry text were removed.
 - Management confirmed this is an existing-certification renewal and that the official logo remains unchanged.
 - The contract requires the logo, certification name, and certificate number, and explicitly rejects the removed scope, office, and date metadata.
