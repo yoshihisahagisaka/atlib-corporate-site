@@ -1,18 +1,33 @@
 # atLIB株式会社
 
-> atLIB株式会社は、経営とITをつなぎ、企業の事業と現場の実態に沿ったITの活用・運用改善を支援します。公式情報は以下のページを参照してください。
+> atLIB株式会社は、経営とITをつなぐITコンサルティング会社です。「ITで、企業に自由を。人々に未来をつくる。」を理念とし、企業の経営目的と現場の実態から必要なITを考え、設計・実行・運用・改善を支援します。
 
 ## 公式情報
 
-- [トップページ](https://www.atlib.jp/): 経営とITの接続、企業理念、支援領域
-- [会社概要](https://www.atlib.jp/company/): 理念・行動指針、代表メッセージ、会社情報
-- [サービス](https://www.atlib.jp/services/): IT経営KAIZEN、IT戦略・DX、情シス支援、業務KAIZEN、IT基盤・セキュリティ
-- [支援実績](https://www.atlib.jp/works/): ITガバナンス、情シス継続支援などの事例
-- [ご相談・お問い合わせ](https://www.atlib.jp/contact/): お問い合わせ窓口
-- [プライバシーポリシー](https://www.atlib.jp/privacy-policy/): 個人情報の取扱い
+- [トップページ](https://www.atlib.jp/): 企業理念、支援姿勢、サービス、主要取引企業
+- [会社概要](https://www.atlib.jp/company/): 理念・ビジョン、代表メッセージ、事業領域、会社情報、ISMS認証
+- [サービス一覧](https://www.atlib.jp/services/): IT経営KAIZEN、業務KAIZEN、セキュリティサービス、カジュアルコンサル
+- [支援実績](https://www.atlib.jp/works/): ITガバナンス、情報システム部門支援、クラウド移行、業務改善などの事例
+- [お問い合わせ](https://www.atlib.jp/contact/): ITに関するご相談・お問い合わせ
 
-## 補足
+## サービス
 
-- 運営者: atLIB株式会社
-- 公式URL: https://www.atlib.jp/
-- サービスの提供範囲や支援実績は、各公式ページの記載を優先してください。
+- [IT経営KAIZEN](https://service.atlib.jp/it-management-kaizen/): 経営の目的から必要なITを考え、設計・実行・運用・継続改善を支援
+- [業務KAIZEN](https://service.atlib.jp/business-web/): 業務を理解し、必要なWebシステムの設計・開発・導入を支援
+- [セキュリティサービス](https://www.atlib.jp/services/#security): セキュリティ対策の可視化、管理体制、運用ルールの整備を支援
+- [カジュアルコンサル](https://www.atlib.jp/services/#casual-consulting): IT専任担当者がいない中小企業向けの月額IT相談窓口
+
+## 無料診断
+
+- [IT経営診断](https://sales.atlib.jp/it-management-kaizen/free-diagnosis/)
+- [業務改善診断](https://service.atlib.jp/business-web/self-check/)
+- [Webセキュリティ診断](https://www.atlib.jp/secumie-web/)
+
+## 公式情報発信・その他
+
+- [公式note](https://note.com/atlib): atLIBの人、仕事への想い、企業文化、取り組み
+- [採用情報](https://recruit.atlib.jp/)
+- [プライバシーポリシー](https://www.atlib.jp/privacy-policy/)
+- [カスタマーハラスメント対応方針](https://www.atlib.jp/customer-harassment-policy/)
+
+運営者: atLIB株式会社。サービスの提供範囲・支援実績は各公式ページの記載を優先してください。
