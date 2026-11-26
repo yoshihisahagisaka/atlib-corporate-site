@@ -2,7 +2,7 @@
 
 Status: preparation only / Production NO-GO  
 Issue: #81 / Draft PR: #82  
-Approved source: `dd0af6a1697a74a13ea2c396471bcece231bdcb6`
+Approved source: `eb58f9c75b2ec9f0e4560903bffd81af1b56f030`
 Git base: `45533d6c3e6e2995499fb3923230992442156105`
 
 ## Production read-back (2026-11-25 JST)
@@ -20,7 +20,7 @@ No Cloud Build, Artifact Registry push, Cloud Run deploy/traffic update, IAM/Sec
 
 ## Overlay contract
 
-The candidate is derived from the immutable Production image, not from the Git Dockerfile. `prepare-production-overlay.ps1` extracts `/app` from that digest, generates the exact approved Git Base-to-content-HEAD diff for the allowlist, requires `git apply --check` against the extracted Production files, applies it once, then verifies the full before/after trees. A candidate cannot be prepared when a patch hunk is ambiguous or inapplicable. A later evidence/control commit is permitted only when the eight current content blobs remain byte-identical to approved content HEAD `dd0af6a1697a74a13ea2c396471bcece231bdcb6`.
+The candidate is derived from the immutable Production image, not from the Git Dockerfile. `prepare-production-overlay.ps1` extracts `/app` from that digest, generates the exact approved Git Base-to-content-HEAD diff for the allowlist, requires `git apply --check` against the extracted Production files, applies it once, then verifies the full before/after trees. A candidate cannot be prepared when a patch hunk is ambiguous or inapplicable. A later evidence/control commit is permitted only when the eight current content blobs remain byte-identical to approved content HEAD `eb58f9c75b2ec9f0e4560903bffd81af1b56f030`.
 
 Only these eight paths may differ:
 
@@ -80,12 +80,12 @@ bash scripts/production-overlay/prepare-production-overlay.sh "$HOME/atlib-produ
 Expected artifact directory:
 
 ```bash
-ARTIFACT_ROOT="$HOME/atlib-production-overlay-artifacts/dd0af6a1697a74a13ea2c396471bcece231bdcb6"
+ARTIFACT_ROOT="$HOME/atlib-production-overlay-artifacts/eb58f9c75b2ec9f0e4560903bffd81af1b56f030"
 jq . "$ARTIFACT_ROOT/overlay-verification.json"
 cat "$ARTIFACT_ROOT/build-context.sha256"
 ```
 
-The script verifies that the eight checked-out content blobs remain identical to approved content HEAD `dd0af6a1697a74a13ea2c396471bcece231bdcb6`; therefore the later control/evidence commit may differ without changing candidate content. Earlier Build, Scan, and Deploy evidence belongs to the previous candidate and is not valid for this content HEAD.
+The script verifies that the eight checked-out content blobs remain identical to approved content HEAD `eb58f9c75b2ec9f0e4560903bffd81af1b56f030`; therefore the later control/evidence commit may differ without changing candidate content. Earlier Build, Scan, and Deploy evidence belongs to the previous candidate and is not valid for this content HEAD.
 
 The subsequent commands are intentionally separate and must only be run under their corresponding approvals:
 
