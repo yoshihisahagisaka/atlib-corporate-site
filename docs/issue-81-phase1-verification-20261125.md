@@ -146,3 +146,15 @@ Final CDP Browser Gate: 14/14 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CS
 - Final automated verification: Build PASS; Corporate Renewal 9/9 PASS; Production Overlay 6/6 PASS; Service Web 7/7 PASS; baseline 26 PASS / 3 known FAIL (no increase); `git diff --check` PASS.
 - Final CDP Browser Gate: 40/40 PASS across home, services, company, works, and contact at 320, 390, 650, 651, 768, 1024, 1440, and 1920 CSS px. The new geometry Gate reported no heading containment/overlap, service photo/copy overlap, section-boundary gap/overlap, or interactive diagram regression. Console/Page/Resource errors, broken images, and horizontal overflow were zero.
 - Full-page evidence at 390/1440/1920 and R3 focused home/services evidence are under `docs/evidence/issue-81-browser/`; machine-readable geometry and browser results are in `browser-gate-v4.json`.
+
+## R4 SEO/AIO and note quality package v2 (2026-11-26)
+
+- Content HEAD: `5b7656c0a13114a8da19809d2c25cf7b942eaf1b`.
+- Package SHA-256: `15ef80ce7ef604102c4d3b83dc076e17fa99403638e4f47f6fcc3a4dddf46d`. The package remained outside the repository; its exact-HEAD, clean-worktree `--check` and apply both returned PASS.
+- Applied the supplied metadata, structured-data, descriptive-link, three-photo lazy-loading, footer note-link, and original inline-SVG note-banner changes. `llms.txt` was not changed. No telephone, price, GA4, GTM, or Clarity addition was made.
+- Build PASS; Corporate Renewal 9/9 PASS; R4 quality contract 4/4 PASS; Production Overlay 6/6 PASS; Service Web 7/7 PASS; baseline 26 PASS / 3 established FAIL (no increase); `git diff --check` PASS.
+- CDP Browser Gate: 40/40 PASS across five pages at 320, 390, 650, 651, 768, 1024, 1440, and 1920 CSS px. It verifies geometry, no overflow, all non-slider images after forced lazy-load completion, slider and gallery operation, mobile menu, note visibility and URL, Klee One loading, R4 home-only placement, and zero Console/Page/Resource errors.
+- Keyboard accessibility is contract-tested by the note link's native anchor semantics and explicit `:focus-visible` rule.
+- Current-public HTTP baseline: 135 PASS / 1 FAIL / 18 INFO. The only FAIL is the pre-existing `http://www.atlib.jp/` redirect target `https://www.atlib.jp:443/`; R4 made no Production change. Evidence: `docs/evidence/issue-81-r4/baseline-http.json`.
+- Lighthouse baseline is UNMEASURED because no Lighthouse CLI is installed. Per the supplied README, no package was installed.
+- Updated full-page evidence at 390/1440/1920 is under `docs/evidence/issue-81-browser/`; the machine-readable final result is `browser-gate-v4.json`.
