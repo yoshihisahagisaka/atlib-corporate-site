@@ -8,7 +8,7 @@ const { execFileSync, spawnSync } = require('node:child_process');
 const test = require('node:test');
 const { protectedBlocks, verifyOverlay } = require('../scripts/production-overlay/overlay-verifier.cjs');
 
-const allowed = ['public/index.html','public/services/index.html','public/company/index.html','public/works/index.html','public/contact/index.html','public/css/atlib-service-renewal.css','public/images/partner_logo_mixi.png','public/images/isms-gcerti-gijp-1167-ic.png'];
+const allowed = ['public/index.html','public/services/index.html','public/company/index.html','public/works/index.html','public/contact/index.html','public/css/atlib-service-renewal.css','public/images/partner_logo_mixi.png','public/images/isms-gcerti-gijp-1167-ic.png','public/llms.txt'];
 const manifest = { allowedFiles: allowed, protectedTrees: ['public/images','public/js'], protectedFiles: ['public/css/style.css','public/css/atlib.css','public/css/services.css'] };
 const home = (renewal = '') => `<div class="mainimg">hero</div><div class="brand-line"></div>${renewal}<section class="work-section">works</section><section class="strengths-section"></section><section class="motion-section">gallery</section><section class="mission-section">mission</section><section class="contact-section"></section>`;
 function write(root, relative, value) { const target = path.join(root, relative); fs.mkdirSync(path.dirname(target), { recursive: true }); fs.writeFileSync(target, value); }
@@ -20,16 +20,18 @@ function fixture() {
     for (const item of manifest.protectedFiles) write(dir, item, 'protected');
     write(dir, 'public/images/logo.png', 'image'); write(dir, 'public/js/main.js', 'script');
     write(dir, 'public/images/partner_logo_mixi.png', 'old-mixi');
+    write(dir, 'public/llms.txt', 'old-llms');
   }
   for (const item of allowed.slice(1, 5)) write(candidate, item, 'changed');
   write(candidate, 'public/index.html', home('<section class="renewal-section">approved</section>'));
   write(candidate, 'public/css/atlib-service-renewal.css', 'renewal');
   write(candidate, 'public/images/partner_logo_mixi.png', 'official-mixi');
   write(candidate, 'public/images/isms-gcerti-gijp-1167-ic.png', 'official-isms');
+  write(candidate, 'public/llms.txt', 'updated-llms');
   return { root, base, candidate };
 }
 
-test('Production overlay accepts the six content files and two explicit official logo assets', () => {
+test('Production overlay accepts the seven content files and two explicit official logo assets', () => {
   const data = fixture();
   try { assert.deepEqual(verifyOverlay(data.base, data.candidate, manifest).changed, allowed.slice().sort()); }
   finally { fs.rmSync(data.root, { recursive: true, force: true }); }
@@ -126,4 +128,10 @@ test('Cloud Shell gates fail closed and remain independently executable', () => 
   const deploy = fs.readFileSync(path.join(repository, 'scripts/production-overlay/deploy-isolated-candidate.sh'), 'utf8');
   assert.match(deploy, /--no-traffic/u);
   assert.match(deploy, /Runtime settings differ/u);
+});
+
+ test('llms lists current public services and official note', () => {
+  const s = fs.readFileSync(path.resolve(__dirname, '../public/llms.txt'), 'utf8');
+  for (const value of ['IT経営KAIZEN','業務KAIZEN','セキュリティサービス','カジュアルコンサル','https://note.com/atlib']) assert.ok(s.includes(value), value);
+  assert.doesNotMatch(s, /Secure Guard|Secure Send|多層防御パック|03-6661-1616|準備中|検証中/u);
 });

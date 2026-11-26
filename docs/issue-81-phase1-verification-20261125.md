@@ -158,3 +158,15 @@ Final CDP Browser Gate: 14/14 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CS
 - Current-public HTTP baseline: 135 PASS / 1 FAIL / 18 INFO. The only FAIL is the pre-existing `http://www.atlib.jp/` redirect target `https://www.atlib.jp:443/`; R4 made no Production change. Evidence: `docs/evidence/issue-81-r4/baseline-http.json`.
 - Lighthouse baseline is UNMEASURED because no Lighthouse CLI is installed. Per the supplied README, no package was installed.
 - Updated full-page evidence at 390/1440/1920 is under `docs/evidence/issue-81-browser/`; the machine-readable final result is `browser-gate-v4.json`.
+
+## R4 finalization: llms and nine-path overlay (2026-11-26)
+
+- Content HEAD: `401f4e294854eec0c74c245e7b1c1dcee5a3eb37`.
+- Finalization ZIP SHA-256: `97be21e010bdc4faff558c4b3e18ddf726e0ce33b2728cd58813e41b452f41d7`.
+- The supplied two-phase script returned CHECK PASS and APPLY PASS for both phases. Content changed only `public/llms.txt`; Control changed only the Overlay manifest, candidate Dockerfile, and Overlay contract test.
+- The Overlay allowlist is exactly nine paths: the previous six content files, two explicit official-logo assets, and `public/llms.txt`. The candidate Dockerfile has one explicit COPY for each path; protected-tree rules remain unchanged.
+- Build PASS; Corporate Renewal 9/9 PASS; R4 quality contract 4/4 PASS; Production Overlay 7/7 PASS; Service Web 7/7 PASS; baseline 26 PASS / 3 established FAIL (no increase); HTTP redirect unit test 3/3 PASS; `git diff --check` PASS.
+- Corrected current-public HTTP baseline: 136 PASS / 0 FAIL / 18 INFO. Evidence: `docs/evidence/issue-81-r4/baseline-http-r4-final.json`.
+- Existing R4 Browser/geometry Gate 40/40 is inherited, not rerun: no HTML, CSS, image, or JavaScript file changed in finalization.
+- Lighthouse 12.8.2 was installed only under a repository-external temporary directory; application dependencies were unchanged and Chrome sandbox was not disabled. The retry measured 9/10 current-public cases: SEO 1.00; Accessibility 0.89-0.96; Performance mobile 0.55-0.56 and desktop 0.71-0.80. Contact mobile remained UNMEASURED because Chrome returned `NO_FCP` twice. These are single-run lab baselines, not field Core Web Vitals or release thresholds.
+- Lighthouse summaries are under `docs/evidence/issue-81-r4/lighthouse-baseline*/summary.json`. Production Build, Scan, Deploy, Traffic, and Merge were not performed.

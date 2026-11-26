@@ -1,0 +1,1356 @@
+{
+  "version": "12.8.2",
+  "origin": "https://www.atlib.jp",
+  "lab_only": true,
+  "note": "Single-run lab measurements, not field Core Web Vitals; staging noindex is intentional; automated accessibility does not establish WCAG conformance. Missing audit IDs depend on Lighthouse version. No score threshold is asserted.",
+  "results": [
+    {
+      "page": "home",
+      "profile": "mobile",
+      "url": "https://www.atlib.jp/",
+      "scores": {
+        "performance": 0.56,
+        "accessibility": 0.89,
+        "seo": 1
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 13370.864000000003,
+          "numericUnit": "millisecond",
+          "displayValue": "13.4 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0,
+          "numericUnit": "unitless",
+          "displayValue": "0"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 9983.67796,
+          "numericUnit": "millisecond",
+          "displayValue": "10.0 s"
+        },
+        "speed-index": {
+          "numericValue": 9983.67796,
+          "numericUnit": "millisecond",
+          "displayValue": "10.0 s"
+        },
+        "server-response-time": {
+          "numericValue": 28.013999999999996,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 30 ms"
+        },
+        "interactive": {
+          "numericValue": 13370.864000000005,
+          "numericUnit": "millisecond",
+          "displayValue": "13.4 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 467 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 299 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 80 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "14 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 7,960 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "home",
+      "profile": "desktop",
+      "url": "https://www.atlib.jp/",
+      "scores": {
+        "performance": 0.74,
+        "accessibility": 0.89,
+        "seo": 1
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 2654.6256999999996,
+          "numericUnit": "millisecond",
+          "displayValue": "2.7 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0.0011847447518834782,
+          "numericUnit": "unitless",
+          "displayValue": "0.001"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 2075.4540600000005,
+          "numericUnit": "millisecond",
+          "displayValue": "2.1 s"
+        },
+        "speed-index": {
+          "numericValue": 2075.4540600000005,
+          "numericUnit": "millisecond",
+          "displayValue": "2.1 s"
+        },
+        "server-response-time": {
+          "numericValue": 17.000999999999998,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 2658.6256999999996,
+          "numericUnit": "millisecond",
+          "displayValue": "2.7 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 461 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 220 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 80 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "13 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 1,520 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "services",
+      "profile": "mobile",
+      "url": "https://www.atlib.jp/services/",
+      "scores": {
+        "performance": 0.56,
+        "accessibility": 0.96,
+        "seo": 1
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 10009.104659999999,
+          "numericUnit": "millisecond",
+          "displayValue": "10.0 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0,
+          "numericUnit": "unitless",
+          "displayValue": "0"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 9233.70738,
+          "numericUnit": "millisecond",
+          "displayValue": "9.2 s"
+        },
+        "speed-index": {
+          "numericValue": 9233.70738,
+          "numericUnit": "millisecond",
+          "displayValue": "9.2 s"
+        },
+        "server-response-time": {
+          "numericValue": 21.159000000000006,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 10009.10466,
+          "numericUnit": "millisecond",
+          "displayValue": "10.0 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 101 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 85 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "8 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 7,250 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "services",
+      "profile": "desktop",
+      "url": "https://www.atlib.jp/services/",
+      "scores": {
+        "performance": 0.78,
+        "accessibility": 0.96,
+        "seo": 1
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 2107.9341,
+          "numericUnit": "millisecond",
+          "displayValue": "2.1 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0.0011878638732423581,
+          "numericUnit": "unitless",
+          "displayValue": "0.001"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 2085.8297000000002,
+          "numericUnit": "millisecond",
+          "displayValue": "2.1 s"
+        },
+        "speed-index": {
+          "numericValue": 2085.8297000000002,
+          "numericUnit": "millisecond",
+          "displayValue": "2.1 s"
+        },
+        "server-response-time": {
+          "numericValue": 17.817000000000007,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 2107.9341,
+          "numericUnit": "millisecond",
+          "displayValue": "2.1 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 102 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 85 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "8 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 1,580 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "contact",
+      "profile": "desktop",
+      "url": "https://www.atlib.jp/contact/",
+      "scores": {
+        "performance": 0.8,
+        "accessibility": 0.96,
+        "seo": 1
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 2108.3824999999997,
+          "numericUnit": "millisecond",
+          "displayValue": "2.1 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0.0011803639284566297,
+          "numericUnit": "unitless",
+          "displayValue": "0.001"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 1898.275,
+          "numericUnit": "millisecond",
+          "displayValue": "1.9 s"
+        },
+        "speed-index": {
+          "numericValue": 1898.275,
+          "numericUnit": "millisecond",
+          "displayValue": "1.9 s"
+        },
+        "server-response-time": {
+          "numericValue": 19.87400000000001,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 2110.3824999999997,
+          "numericUnit": "millisecond",
+          "displayValue": "2.1 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 102 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 80 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "10 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 1,320 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "company",
+      "profile": "mobile",
+      "url": "https://www.atlib.jp/company/",
+      "scores": {
+        "performance": 0.55,
+        "accessibility": 0.95,
+        "seo": 1
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 11551.077000000001,
+          "numericUnit": "millisecond",
+          "displayValue": "11.6 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0,
+          "numericUnit": "unitless",
+          "displayValue": "0"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 10641.243,
+          "numericUnit": "millisecond",
+          "displayValue": "10.6 s"
+        },
+        "speed-index": {
+          "numericValue": 12430.31854799123,
+          "numericUnit": "millisecond",
+          "displayValue": "12.4 s"
+        },
+        "server-response-time": {
+          "numericValue": 18.441000000000003,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 11551.077000000001,
+          "numericUnit": "millisecond",
+          "displayValue": "11.6 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 101 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 85 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "8 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 8,660 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "company",
+      "profile": "desktop",
+      "url": "https://www.atlib.jp/company/",
+      "scores": {
+        "performance": 0.71,
+        "accessibility": 0.95,
+        "seo": 1
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 2608.6305000000007,
+          "numericUnit": "millisecond",
+          "displayValue": "2.6 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0.0011788314153089179,
+          "numericUnit": "unitless",
+          "displayValue": "0.001"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 2564.211500000001,
+          "numericUnit": "millisecond",
+          "displayValue": "2.6 s"
+        },
+        "speed-index": {
+          "numericValue": 2564.211500000001,
+          "numericUnit": "millisecond",
+          "displayValue": "2.6 s"
+        },
+        "server-response-time": {
+          "numericValue": 17.370999999999995,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 2608.630500000001,
+          "numericUnit": "millisecond",
+          "displayValue": "2.6 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 102 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 85 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "11 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 1,970 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "works",
+      "profile": "mobile",
+      "url": "https://www.atlib.jp/works/",
+      "scores": {
+        "performance": 0.56,
+        "accessibility": 0.95,
+        "seo": 1
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 11199.459,
+          "numericUnit": "millisecond",
+          "displayValue": "11.2 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0,
+          "numericUnit": "unitless",
+          "displayValue": "0"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 10434.735000000002,
+          "numericUnit": "millisecond",
+          "displayValue": "10.4 s"
+        },
+        "speed-index": {
+          "numericValue": 10434.735000000002,
+          "numericUnit": "millisecond",
+          "displayValue": "10.4 s"
+        },
+        "server-response-time": {
+          "numericValue": 19.550999999999995,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 11199.459,
+          "numericUnit": "millisecond",
+          "displayValue": "11.2 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 101 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 83 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "8 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 8,560 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "works",
+      "profile": "desktop",
+      "url": "https://www.atlib.jp/works/",
+      "scores": {
+        "performance": 0.75,
+        "accessibility": 0.95,
+        "seo": 1
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 2340.16,
+          "numericUnit": "millisecond",
+          "displayValue": "2.3 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0.0011777505399806541,
+          "numericUnit": "unitless",
+          "displayValue": "0.001"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 2255.564,
+          "numericUnit": "millisecond",
+          "displayValue": "2.3 s"
+        },
+        "speed-index": {
+          "numericValue": 2255.564,
+          "numericUnit": "millisecond",
+          "displayValue": "2.3 s"
+        },
+        "server-response-time": {
+          "numericValue": 20.130999999999993,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 2340.16,
+          "numericUnit": "millisecond",
+          "displayValue": "2.3 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 102 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 83 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "8 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 1,740 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    }
+  ],
+  "failures": [
+    {
+      "page": "contact",
+      "profile": "mobile",
+      "error": "Command '['C:\\\\atlib\\\\tmp\\\\atlib-lh-r4-final\\\\node_modules\\\\.bin\\\\lighthouse.cmd', 'https://www.atlib.jp/contact/', '--output=json', '--output-path=C:\\\\atlib\\\\worktree-corporate-service-renewal-20261125\\\\docs\\\\evidence\\\\issue-81-r4\\\\lighthouse-baseline-retry\\\\contact-mobile.json', '--quiet', '--chrome-flags=--headless --disable-gpu', '--only-categories=performance,accessibility,seo']' returned non-zero exit status 1."
+    }
+  ]
+}
