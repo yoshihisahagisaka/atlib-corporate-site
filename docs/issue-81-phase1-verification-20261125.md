@@ -138,6 +138,7 @@ Final CDP Browser Gate: 14/14 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CS
 
 ## R3 reviewed layout corrections (2026-11-26)
 
+- Content HEAD: `90133a3afde01ac8e083ed6440c8b3f8ce837cb7`.
 - Applied the Owner-supplied `pr82_r3_apply.py` only after its clean-worktree, exact-HEAD `--check` returned `CHECK PASS`. The script remained outside the repository.
 - Editorial section headings are no longer semantic site headers, preventing the shared sticky-header CSS/JavaScript from affecting them. The two KAIZEN feature headings use controlled phrase wrapping without changing approved copy.
 - The IT-management service-cycle diagram is now a non-interactive four-stage timeline rather than button-like stacked boxes. The diagram contains no anchor, button, button role, or tabindex.
