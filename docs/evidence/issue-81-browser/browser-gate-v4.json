@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T02:17:20.380Z",
+  "generatedAt": "2026-11-26T11:20:13.534Z",
   "widths": [
     320,
     390,
@@ -29,9 +29,9 @@
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -3.0542449951171875,
-          "right": 308.0542755126953,
-          "width": 311.1085205078125
+          "left": -3.558074951171875,
+          "right": 308.5580749511719,
+          "width": 312.11614990234375
         },
         {
           "tag": "DIV",
@@ -53,176 +53,176 @@
           "tag": "DIV",
           "className": "img rtl",
           "id": "",
-          "left": -40.60979461669922,
-          "right": 1358.5777053833008,
+          "left": -43.668174743652344,
+          "right": 1355.5193252563477,
           "width": 1399.1875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": -40.60979461669922,
-          "right": 46.82770538330078,
+          "left": -43.668174743652344,
+          "right": 43.769325256347656,
           "width": 87.4375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -32.60979461669922,
-          "right": 38.81208038330078,
+          "left": -35.668174743652344,
+          "right": 35.753700256347656,
           "width": 71.421875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 221.70269775390625,
-          "right": 309.14019775390625,
+          "left": 218.64431762695312,
+          "right": 306.0818176269531,
           "width": 87.4375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 309.14019775390625,
-          "right": 396.57769775390625,
+          "left": 306.0818176269531,
+          "right": 393.5193176269531,
           "width": 87.4375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 317.14019775390625,
-          "right": 388.56207275390625,
+          "left": 314.0818176269531,
+          "right": 385.5036926269531,
           "width": 71.421875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 396.57769775390625,
-          "right": 484.01519775390625,
+          "left": 393.5193176269531,
+          "right": 480.9568176269531,
           "width": 87.4375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 404.57769775390625,
-          "right": 475.98394775390625,
+          "left": 401.5193176269531,
+          "right": 472.9255676269531,
           "width": 71.40625
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 484.01519775390625,
-          "right": 571.4526977539062,
-          "width": 87.4375
+          "left": 480.9568176269531,
+          "right": 568.3943481445312,
+          "width": 87.43753051757812
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 492.01519775390625,
-          "right": 563.4370727539062,
-          "width": 71.421875
+          "left": 488.9568176269531,
+          "right": 560.3787231445312,
+          "width": 71.42190551757812
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 571.4526977539062,
-          "right": 658.8901977539062,
+          "left": 568.3943481445312,
+          "right": 655.8318481445312,
           "width": 87.4375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 579.4526977539062,
-          "right": 650.8901977539062,
+          "left": 576.3943481445312,
+          "right": 647.8318481445312,
           "width": 71.4375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 658.8901977539062,
-          "right": 746.3276977539062,
+          "left": 655.8318481445312,
+          "right": 743.2693481445312,
           "width": 87.4375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 666.8901977539062,
-          "right": 738.3120727539062,
+          "left": 663.8318481445312,
+          "right": 735.2537231445312,
           "width": 71.421875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 746.3276977539062,
-          "right": 833.7651977539062,
+          "left": 743.2693481445312,
+          "right": 830.7068481445312,
           "width": 87.4375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 754.3276977539062,
-          "right": 825.7339477539062,
+          "left": 751.2693481445312,
+          "right": 822.6755981445312,
           "width": 71.40625
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 833.7651977539062,
-          "right": 921.2026977539062,
+          "left": 830.7068481445312,
+          "right": 918.1443481445312,
           "width": 87.4375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 841.7651977539062,
-          "right": 913.1870727539062,
+          "left": 838.7068481445312,
+          "right": 910.1287231445312,
           "width": 71.421875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 921.2026977539062,
-          "right": 1008.6402587890625,
-          "width": 87.43756103515625
+          "left": 918.1443481445312,
+          "right": 1005.581787109375,
+          "width": 87.43743896484375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 929.2026977539062,
-          "right": 1000.6401977539062,
+          "left": 926.1443481445312,
+          "right": 997.5818481445312,
           "width": 71.4375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1008.6402587890625,
-          "right": 1096.0777587890625,
+          "left": 1005.581787109375,
+          "right": 1093.019287109375,
           "width": 87.4375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1016.6402587890625,
-          "right": 1088.0621337890625,
+          "left": 1013.581787109375,
+          "right": 1085.003662109375,
           "width": 71.421875
         }
       ],
@@ -243,6 +243,13 @@
         "mixiPresent": true,
         "mixiNaturalWidth": 6000,
         "mixiNaturalHeight": 3614
+      },
+      "note": {
+        "present": true,
+        "visible": true,
+        "href": "https://note.com/atlib",
+        "fontFamily": "\"Klee One\", \"Yu Mincho\", \"Hiragino Mincho ProN\", serif",
+        "kleeLoaded": true
       },
       "section": {
         "x": 16,
@@ -312,9 +319,16 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 0,
-        "y": 5337.59375,
+        "y": 5323.5,
         "width": 305,
         "height": 1653.71875
       },
@@ -386,6 +400,13 @@
         "ismsVisible": 2,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 23.984375,
         "y": 8473.40625,
@@ -434,6 +455,13 @@
         "ismsCount": 1,
         "ismsVisible": 1,
         "mixiPresent": false
+      },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
       },
       "section": {
         "x": 22.390625,
@@ -484,6 +512,13 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 22.390625,
         "y": 2775.1875,
@@ -527,9 +562,9 @@
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -3.7915191650390625,
-          "right": 378.79148864746094,
-          "width": 382.5830078125
+          "left": -4.8486480712890625,
+          "right": 379.84861755371094,
+          "width": 384.697265625
         },
         {
           "tag": "DIV",
@@ -551,176 +586,176 @@
           "tag": "DIV",
           "className": "img rtl",
           "id": "",
-          "left": -51.102745056152344,
-          "right": 1667.2722549438477,
+          "left": -52.17634582519531,
+          "right": 1666.1986541748047,
           "width": 1718.375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": -51.102745056152344,
-          "right": 56.287879943847656,
+          "left": -52.17634582519531,
+          "right": 55.21427917480469,
           "width": 107.390625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -43.102745056152344,
-          "right": 48.272254943847656,
+          "left": -44.17634582519531,
+          "right": 47.19865417480469,
           "width": 91.375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 271.0691223144531,
-          "right": 378.4597473144531,
+          "left": 269.9955139160156,
+          "right": 377.3861389160156,
           "width": 107.390625
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 378.4597473144531,
-          "right": 485.85040283203125,
+          "left": 377.3861389160156,
+          "right": 484.77679443359375,
           "width": 107.39065551757812
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 386.4597473144531,
-          "right": 477.8347473144531,
+          "left": 385.3861389160156,
+          "right": 476.7611389160156,
           "width": 91.375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 485.85040283203125,
-          "right": 593.2410278320312,
+          "left": 484.77679443359375,
+          "right": 592.1674194335938,
           "width": 107.390625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 493.85040283203125,
-          "right": 585.2254028320312,
+          "left": 492.77679443359375,
+          "right": 584.1517944335938,
           "width": 91.375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 593.2410278320312,
-          "right": 700.6316528320312,
+          "left": 592.1674194335938,
+          "right": 699.5580444335938,
           "width": 107.390625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 601.2410278320312,
-          "right": 692.6160278320312,
+          "left": 600.1674194335938,
+          "right": 691.5424194335938,
           "width": 91.375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 700.6316528320312,
-          "right": 808.0222778320312,
+          "left": 699.5580444335938,
+          "right": 806.9486694335938,
           "width": 107.390625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 708.6316528320312,
-          "right": 800.0066528320312,
+          "left": 707.5580444335938,
+          "right": 798.9330444335938,
           "width": 91.375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 808.0222778320312,
-          "right": 915.4129028320312,
+          "left": 806.9486694335938,
+          "right": 914.3392944335938,
           "width": 107.390625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 816.0222778320312,
-          "right": 907.3972778320312,
+          "left": 814.9486694335938,
+          "right": 906.3236694335938,
           "width": 91.375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 915.4129028320312,
-          "right": 1022.803466796875,
+          "left": 914.3392944335938,
+          "right": 1021.7298583984375,
           "width": 107.39056396484375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 923.4129028320312,
-          "right": 1014.787841796875,
+          "left": 922.3392944335938,
+          "right": 1013.7142333984375,
           "width": 91.37493896484375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1022.803466796875,
-          "right": 1130.194091796875,
+          "left": 1021.7298583984375,
+          "right": 1129.1204833984375,
           "width": 107.390625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1030.803466796875,
-          "right": 1122.178466796875,
+          "left": 1029.7298583984375,
+          "right": 1121.1048583984375,
           "width": 91.375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1130.194091796875,
-          "right": 1237.584716796875,
+          "left": 1129.1204833984375,
+          "right": 1236.5111083984375,
           "width": 107.390625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1138.194091796875,
-          "right": 1229.569091796875,
+          "left": 1137.1204833984375,
+          "right": 1228.4954833984375,
           "width": 91.375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1237.584716796875,
-          "right": 1344.975341796875,
+          "left": 1236.5111083984375,
+          "right": 1343.9017333984375,
           "width": 107.390625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1245.584716796875,
-          "right": 1336.959716796875,
+          "left": 1244.5111083984375,
+          "right": 1335.8861083984375,
           "width": 91.375
         }
       ],
@@ -741,6 +776,13 @@
         "mixiPresent": true,
         "mixiNaturalWidth": 6000,
         "mixiNaturalHeight": 3614
+      },
+      "note": {
+        "present": true,
+        "visible": true,
+        "href": "https://note.com/atlib",
+        "fontFamily": "\"Klee One\", \"Yu Mincho\", \"Hiragino Mincho ProN\", serif",
+        "kleeLoaded": true
       },
       "section": {
         "x": 16,
@@ -810,9 +852,16 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 0,
-        "y": 4870.078125,
+        "y": 4855.984375,
         "width": 375,
         "height": 1472.125
       },
@@ -884,6 +933,13 @@
         "ismsVisible": 2,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 23.984375,
         "y": 7493.765625,
@@ -932,6 +988,13 @@
         "ismsCount": 1,
         "ismsVisible": 1,
         "mixiPresent": false
+      },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
       },
       "section": {
         "x": 22.390625,
@@ -982,6 +1045,13 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 22.390625,
         "y": 2649.703125,
@@ -1025,9 +1095,9 @@
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -7.22283935546875,
-          "right": 642.2228393554688,
-          "width": 649.4456787109375
+          "left": -6.7908935546875,
+          "right": 641.7908935546875,
+          "width": 648.581787109375
         },
         {
           "tag": "DIV",
@@ -1049,176 +1119,176 @@
           "tag": "DIV",
           "className": "img rtl",
           "id": "",
-          "left": -82.40486145019531,
-          "right": 2821.5951385498047,
+          "left": -86.33561706542969,
+          "right": 2817.6643829345703,
           "width": 2904
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": -82.40486145019531,
-          "right": 99.09513854980469,
+          "left": -86.33561706542969,
+          "right": 95.16438293457031,
           "width": 181.5
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -74.40486145019531,
-          "right": 91.07951354980469,
+          "left": -78.33561706542969,
+          "right": 87.14875793457031,
           "width": 165.484375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 462.0951232910156,
-          "right": 643.5951538085938,
-          "width": 181.50003051757812
+          "left": 458.1643981933594,
+          "right": 639.6643676757812,
+          "width": 181.49996948242188
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 643.5951538085938,
-          "right": 825.0951538085938,
+          "left": 639.6643676757812,
+          "right": 821.1643676757812,
           "width": 181.5
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 651.5951538085938,
-          "right": 817.0795288085938,
+          "left": 647.6643676757812,
+          "right": 813.1487426757812,
           "width": 165.484375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 825.0951538085938,
-          "right": 1006.5950927734375,
-          "width": 181.49993896484375
+          "left": 821.1643676757812,
+          "right": 1002.6644287109375,
+          "width": 181.50006103515625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 833.0951538085938,
-          "right": 998.5794677734375,
-          "width": 165.48431396484375
+          "left": 829.1643676757812,
+          "right": 994.6488037109375,
+          "width": 165.48443603515625
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1006.5950927734375,
-          "right": 1188.0950927734375,
+          "left": 1002.6644287109375,
+          "right": 1184.1644287109375,
           "width": 181.5
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1014.5950927734375,
-          "right": 1180.0794677734375,
+          "left": 1010.6644287109375,
+          "right": 1176.1488037109375,
           "width": 165.484375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1188.0950927734375,
-          "right": 1369.5950927734375,
+          "left": 1184.1644287109375,
+          "right": 1365.6644287109375,
           "width": 181.5
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1196.0950927734375,
-          "right": 1361.5950927734375,
+          "left": 1192.1644287109375,
+          "right": 1357.6644287109375,
           "width": 165.5
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1369.5950927734375,
-          "right": 1551.0950927734375,
+          "left": 1365.6644287109375,
+          "right": 1547.1644287109375,
           "width": 181.5
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1377.5950927734375,
-          "right": 1543.0794677734375,
+          "left": 1373.6644287109375,
+          "right": 1539.1488037109375,
           "width": 165.484375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1551.0950927734375,
-          "right": 1732.5950927734375,
+          "left": 1547.1644287109375,
+          "right": 1728.6644287109375,
           "width": 181.5
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1559.0950927734375,
-          "right": 1724.5794677734375,
+          "left": 1555.1644287109375,
+          "right": 1720.6488037109375,
           "width": 165.484375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1732.5950927734375,
-          "right": 1914.0950927734375,
+          "left": 1728.6644287109375,
+          "right": 1910.1644287109375,
           "width": 181.5
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1740.5950927734375,
-          "right": 1906.0794677734375,
+          "left": 1736.6644287109375,
+          "right": 1902.1488037109375,
           "width": 165.484375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1914.0950927734375,
-          "right": 2095.59521484375,
-          "width": 181.5001220703125
+          "left": 1910.1644287109375,
+          "right": 2091.664306640625,
+          "width": 181.4998779296875
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1922.0950927734375,
-          "right": 2087.59521484375,
-          "width": 165.5001220703125
+          "left": 1918.1644287109375,
+          "right": 2083.664306640625,
+          "width": 165.4998779296875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 2095.59521484375,
-          "right": 2277.09521484375,
+          "left": 2091.664306640625,
+          "right": 2273.164306640625,
           "width": 181.5
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 2103.59521484375,
-          "right": 2269.07958984375,
+          "left": 2099.664306640625,
+          "right": 2265.148681640625,
           "width": 165.484375
         }
       ],
@@ -1239,6 +1309,13 @@
         "mixiPresent": true,
         "mixiNaturalWidth": 6000,
         "mixiNaturalHeight": 3614
+      },
+      "note": {
+        "present": true,
+        "visible": true,
+        "href": "https://note.com/atlib",
+        "fontFamily": "\"Klee One\", \"Yu Mincho\", \"Hiragino Mincho ProN\", serif",
+        "kleeLoaded": true
       },
       "section": {
         "x": 16,
@@ -1308,9 +1385,16 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 0,
-        "y": 4130.1875,
+        "y": 4123.140625,
         "width": 635,
         "height": 1326.328125
       },
@@ -1382,6 +1466,13 @@
         "ismsVisible": 2,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 23.984375,
         "y": 6025.234375,
@@ -1430,6 +1521,13 @@
         "ismsCount": 1,
         "ismsVisible": 1,
         "mixiPresent": false
+      },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
       },
       "section": {
         "x": 22.390625,
@@ -1480,6 +1578,13 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 22.390625,
         "y": 2403.28125,
@@ -1523,9 +1628,9 @@
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -6.739532470703125,
-          "right": 642.7394714355469,
-          "width": 649.47900390625
+          "left": -7.6051025390625,
+          "right": 643.6051025390625,
+          "width": 651.210205078125
         },
         {
           "tag": "DIV",
@@ -1547,177 +1652,177 @@
           "tag": "DIV",
           "className": "img rtl",
           "id": "",
-          "left": -85.85547637939453,
-          "right": 2822.6445236206055,
+          "left": -91.91366577148438,
+          "right": 2816.5863342285156,
           "width": 2908.5
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": -85.85547637939453,
-          "right": 95.92577362060547,
+          "left": -91.91366577148438,
+          "right": 89.86758422851562,
           "width": 181.78125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -77.85547637939453,
-          "right": 87.89452362060547,
+          "left": -83.91366577148438,
+          "right": 81.83633422851562,
           "width": 165.75
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 459.48828125,
-          "right": 641.26953125,
-          "width": 181.78125
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 641.26953125,
-          "right": 823.05078125,
+          "left": 635.2113647460938,
+          "right": 816.9926147460938,
           "width": 181.78125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 649.26953125,
-          "right": 815.01953125,
+          "left": 643.2113647460938,
+          "right": 808.9613647460938,
           "width": 165.75
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 823.05078125,
-          "right": 1004.83203125,
-          "width": 181.78125
+          "left": 816.9926147460938,
+          "right": 998.7738037109375,
+          "width": 181.78118896484375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 831.05078125,
-          "right": 996.81640625,
-          "width": 165.765625
+          "left": 824.9926147460938,
+          "right": 990.7581787109375,
+          "width": 165.76556396484375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1004.83203125,
-          "right": 1186.61328125,
+          "left": 998.7738037109375,
+          "right": 1180.5550537109375,
           "width": 181.78125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1012.83203125,
-          "right": 1178.58203125,
+          "left": 1006.7738037109375,
+          "right": 1172.5238037109375,
           "width": 165.75
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1186.61328125,
-          "right": 1368.39453125,
+          "left": 1180.5550537109375,
+          "right": 1362.3363037109375,
           "width": 181.78125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1194.61328125,
-          "right": 1360.39453125,
+          "left": 1188.5550537109375,
+          "right": 1354.3363037109375,
           "width": 165.78125
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1368.39453125,
-          "right": 1550.17578125,
+          "left": 1362.3363037109375,
+          "right": 1544.1175537109375,
           "width": 181.78125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1376.39453125,
-          "right": 1542.14453125,
+          "left": 1370.3363037109375,
+          "right": 1536.0863037109375,
           "width": 165.75
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1550.17578125,
-          "right": 1731.95703125,
+          "left": 1544.1175537109375,
+          "right": 1725.8988037109375,
           "width": 181.78125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1558.17578125,
-          "right": 1723.94140625,
+          "left": 1552.1175537109375,
+          "right": 1717.8831787109375,
           "width": 165.765625
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1731.95703125,
-          "right": 1913.73828125,
+          "left": 1725.8988037109375,
+          "right": 1907.6800537109375,
           "width": 181.78125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1739.95703125,
-          "right": 1905.70703125,
+          "left": 1733.8988037109375,
+          "right": 1899.6488037109375,
           "width": 165.75
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1913.73828125,
-          "right": 2095.51953125,
-          "width": 181.78125
+          "left": 1907.6800537109375,
+          "right": 2089.46142578125,
+          "width": 181.7813720703125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1921.73828125,
-          "right": 2087.51953125,
-          "width": 165.78125
+          "left": 1915.6800537109375,
+          "right": 2081.46142578125,
+          "width": 165.7813720703125
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 2095.51953125,
-          "right": 2277.30078125,
+          "left": 2089.46142578125,
+          "right": 2271.24267578125,
           "width": 181.78125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 2103.51953125,
-          "right": 2269.26953125,
+          "left": 2097.46142578125,
+          "right": 2263.21142578125,
           "width": 165.75
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 2271.24267578125,
+          "right": 2453.02392578125,
+          "width": 181.78125
         }
       ],
       "broken": [],
@@ -1737,6 +1842,13 @@
         "mixiPresent": true,
         "mixiNaturalWidth": 6000,
         "mixiNaturalHeight": 3614
+      },
+      "note": {
+        "present": true,
+        "visible": true,
+        "href": "https://note.com/atlib",
+        "fontFamily": "\"Klee One\", \"Yu Mincho\", \"Hiragino Mincho ProN\", serif",
+        "kleeLoaded": true
       },
       "section": {
         "x": 32,
@@ -1800,9 +1912,16 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 0,
-        "y": 4172.453125,
+        "y": 4165.40625,
         "width": 636,
         "height": 995.375
       },
@@ -1868,6 +1987,13 @@
         "ismsVisible": 2,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 23.984375,
         "y": 6025.234375,
@@ -1910,6 +2036,13 @@
         "ismsCount": 1,
         "ismsVisible": 1,
         "mixiPresent": false
+      },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
       },
       "section": {
         "x": 22.390625,
@@ -1954,6 +2087,13 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 22.390625,
         "y": 2378.140625,
@@ -1991,9 +2131,9 @@
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -7.174072265625,
-          "right": 760.174072265625,
-          "width": 767.34814453125
+          "left": -8.199188232421875,
+          "right": 761.1992492675781,
+          "width": 769.3984375
         },
         {
           "tag": "DIV",
@@ -2015,176 +2155,176 @@
           "tag": "DIV",
           "className": "img rtl",
           "id": "",
-          "left": -100.00051879882812,
-          "right": 3342.061981201172,
+          "left": -104.6636962890625,
+          "right": 3337.3988037109375,
           "width": 3442.0625
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": -100.00051879882812,
-          "right": 115.12448120117188,
+          "left": -104.6636962890625,
+          "right": 110.4613037109375,
           "width": 215.125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -92.93801879882812,
-          "right": 108.03073120117188,
+          "left": -97.6011962890625,
+          "right": 103.3675537109375,
           "width": 200.96875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 545.37451171875,
-          "right": 760.49951171875,
+          "left": 540.7113037109375,
+          "right": 755.8363037109375,
           "width": 215.125
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 760.49951171875,
-          "right": 975.62451171875,
+          "left": 755.8363037109375,
+          "right": 970.9613037109375,
           "width": 215.125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 767.56201171875,
-          "right": 968.53076171875,
+          "left": 762.8988037109375,
+          "right": 963.8675537109375,
           "width": 200.96875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 975.62451171875,
-          "right": 1190.74951171875,
+          "left": 970.9613037109375,
+          "right": 1186.0863037109375,
           "width": 215.125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 982.68701171875,
-          "right": 1183.67138671875,
+          "left": 978.0238037109375,
+          "right": 1179.0081787109375,
           "width": 200.984375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1190.74951171875,
-          "right": 1405.87451171875,
+          "left": 1186.0863037109375,
+          "right": 1401.2113037109375,
           "width": 215.125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1197.81201171875,
-          "right": 1398.78076171875,
+          "left": 1193.1488037109375,
+          "right": 1394.1175537109375,
           "width": 200.96875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1405.87451171875,
-          "right": 1620.99951171875,
+          "left": 1401.2113037109375,
+          "right": 1616.3363037109375,
           "width": 215.125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1412.93701171875,
-          "right": 1613.93701171875,
+          "left": 1408.2738037109375,
+          "right": 1609.2738037109375,
           "width": 201
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1620.99951171875,
-          "right": 1836.12451171875,
+          "left": 1616.3363037109375,
+          "right": 1831.4613037109375,
           "width": 215.125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1628.06201171875,
-          "right": 1829.03076171875,
+          "left": 1623.3988037109375,
+          "right": 1824.3675537109375,
           "width": 200.96875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1836.12451171875,
-          "right": 2051.24951171875,
-          "width": 215.125
+          "left": 1831.4613037109375,
+          "right": 2046.58642578125,
+          "width": 215.1251220703125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1843.18701171875,
-          "right": 2044.17138671875,
-          "width": 200.984375
+          "left": 1838.5238037109375,
+          "right": 2039.50830078125,
+          "width": 200.9844970703125
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 2051.24951171875,
-          "right": 2266.37451171875,
+          "left": 2046.58642578125,
+          "right": 2261.71142578125,
           "width": 215.125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 2058.31201171875,
-          "right": 2259.28076171875,
+          "left": 2053.64892578125,
+          "right": 2254.61767578125,
           "width": 200.96875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 2266.37451171875,
-          "right": 2481.49951171875,
+          "left": 2261.71142578125,
+          "right": 2476.83642578125,
           "width": 215.125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 2273.43701171875,
-          "right": 2474.43701171875,
+          "left": 2268.77392578125,
+          "right": 2469.77392578125,
           "width": 201
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 2481.49951171875,
-          "right": 2696.62451171875,
+          "left": 2476.83642578125,
+          "right": 2691.96142578125,
           "width": 215.125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 2488.56201171875,
-          "right": 2689.53076171875,
+          "left": 2483.89892578125,
+          "right": 2684.86767578125,
           "width": 200.96875
         }
       ],
@@ -2205,6 +2345,13 @@
         "mixiPresent": true,
         "mixiNaturalWidth": 6000,
         "mixiNaturalHeight": 3614
+      },
+      "note": {
+        "present": true,
+        "visible": true,
+        "href": "https://note.com/atlib",
+        "fontFamily": "\"Klee One\", \"Yu Mincho\", \"Hiragino Mincho ProN\", serif",
+        "kleeLoaded": true
       },
       "section": {
         "x": 28.25,
@@ -2268,9 +2415,16 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 0,
-        "y": 3574.625,
+        "y": 3568.40625,
         "width": 753,
         "height": 733.5
       },
@@ -2336,6 +2490,13 @@
         "ismsVisible": 2,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 194.5625,
         "y": 4832.546875,
@@ -2378,6 +2539,13 @@
         "ismsCount": 1,
         "ismsVisible": 1,
         "mixiPresent": false
+      },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
       },
       "section": {
         "x": 28.25,
@@ -2422,6 +2590,13 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 28.25,
         "y": 2110.875,
@@ -2459,9 +2634,9 @@
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -9.61297607421875,
-          "right": 1018.6129760742188,
-          "width": 1028.2259521484375
+          "left": -10.9864501953125,
+          "right": 1019.9864501953125,
+          "width": 1030.972900390625
         },
         {
           "tag": "DIV",
@@ -2483,177 +2658,177 @@
           "tag": "DIV",
           "className": "img rtl",
           "id": "",
-          "left": -131.68675231933594,
-          "right": 4477.750747680664,
+          "left": -140.330322265625,
+          "right": 4469.107177734375,
           "width": 4609.4375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": -131.68675231933594,
-          "right": 156.39137268066406,
+          "left": -140.330322265625,
+          "right": 147.747802734375,
           "width": 288.078125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -124.26487731933594,
-          "right": 148.93824768066406,
+          "left": -132.908447265625,
+          "right": 140.294677734375,
           "width": 273.203125
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 732.547607421875,
-          "right": 1020.625732421875,
+          "left": 723.904052734375,
+          "right": 1011.982177734375,
+          "width": 288.078125
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 1011.982177734375,
+          "right": 1300.060302734375,
           "width": 288.078125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 739.969482421875,
-          "right": 1013.188232421875,
+          "left": 1019.404052734375,
+          "right": 1292.607177734375,
+          "width": 273.203125
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 1300.060302734375,
+          "right": 1588.138427734375,
+          "width": 288.078125
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 1307.482177734375,
+          "right": 1580.685302734375,
+          "width": 273.203125
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 1588.138427734375,
+          "right": 1876.216552734375,
+          "width": 288.078125
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 1595.560302734375,
+          "right": 1868.763427734375,
+          "width": 273.203125
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 1876.216552734375,
+          "right": 2164.294677734375,
+          "width": 288.078125
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 1883.638427734375,
+          "right": 2156.857177734375,
           "width": 273.21875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1020.625732421875,
-          "right": 1308.703857421875,
+          "left": 2164.294677734375,
+          "right": 2452.372802734375,
           "width": 288.078125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1028.047607421875,
-          "right": 1301.250732421875,
+          "left": 2171.716552734375,
+          "right": 2444.919677734375,
           "width": 273.203125
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1308.703857421875,
-          "right": 1596.781982421875,
+          "left": 2452.372802734375,
+          "right": 2740.450927734375,
           "width": 288.078125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1316.125732421875,
-          "right": 1589.328857421875,
+          "left": 2459.794677734375,
+          "right": 2732.997802734375,
           "width": 273.203125
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1596.781982421875,
-          "right": 1884.860107421875,
+          "left": 2740.450927734375,
+          "right": 3028.529052734375,
           "width": 288.078125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1604.203857421875,
-          "right": 1877.406982421875,
+          "left": 2747.872802734375,
+          "right": 3021.075927734375,
           "width": 273.203125
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1884.860107421875,
-          "right": 2172.938232421875,
+          "left": 3028.529052734375,
+          "right": 3316.607177734375,
           "width": 288.078125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1892.281982421875,
-          "right": 2165.500732421875,
+          "left": 3035.950927734375,
+          "right": 3309.169677734375,
           "width": 273.21875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 2172.938232421875,
-          "right": 2461.016357421875,
+          "left": 3316.607177734375,
+          "right": 3604.685302734375,
           "width": 288.078125
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 2180.360107421875,
-          "right": 2453.563232421875,
+          "left": 3324.029052734375,
+          "right": 3597.232177734375,
           "width": 273.203125
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 2461.016357421875,
-          "right": 2749.094482421875,
-          "width": 288.078125
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 2468.438232421875,
-          "right": 2741.641357421875,
-          "width": 273.203125
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 2749.094482421875,
-          "right": 3037.172607421875,
-          "width": 288.078125
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 2756.516357421875,
-          "right": 3029.719482421875,
-          "width": 273.203125
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 3037.172607421875,
-          "right": 3325.250732421875,
-          "width": 288.078125
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 3044.594482421875,
-          "right": 3317.813232421875,
-          "width": 273.21875
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 3325.250732421875,
-          "right": 3613.328857421875,
-          "width": 288.078125
         }
       ],
       "broken": [],
@@ -2673,6 +2848,13 @@
         "mixiPresent": true,
         "mixiNaturalWidth": 6000,
         "mixiNaturalHeight": 3614
+      },
+      "note": {
+        "present": true,
+        "visible": true,
+        "href": "https://note.com/atlib",
+        "fontFamily": "\"Klee One\", \"Yu Mincho\", \"Hiragino Mincho ProN\", serif",
+        "kleeLoaded": true
       },
       "section": {
         "x": 29.734375,
@@ -2736,9 +2918,16 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 0,
-        "y": 2888.640625,
+        "y": 2881.265625,
         "width": 1009,
         "height": 739.265625
       },
@@ -2796,6 +2985,13 @@
         "ismsVisible": 2,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 266.96875,
         "y": 5132.703125,
@@ -2838,6 +3034,13 @@
         "ismsCount": 1,
         "ismsVisible": 1,
         "mixiPresent": false
+      },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
       },
       "section": {
         "x": 280.859375,
@@ -2882,6 +3085,13 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 280.859375,
         "y": 1778.03125,
@@ -2919,9 +3129,9 @@
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -14.5462646484375,
-          "right": 1439.5462646484375,
-          "width": 1454.092529296875
+          "left": -17.3173828125,
+          "right": 1442.3173828125,
+          "width": 1459.634765625
         },
         {
           "tag": "DIV",
@@ -2943,176 +3153,176 @@
           "tag": "DIV",
           "className": "img rtl",
           "id": "",
-          "left": -190.25384521484375,
-          "right": 6316.121154785156,
+          "left": -204.59088134765625,
+          "right": 6301.784118652344,
           "width": 6506.375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": -190.25384521484375,
-          "right": 216.38677978515625,
+          "left": -204.59088134765625,
+          "right": 202.04974365234375,
           "width": 406.640625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -182.25384521484375,
-          "right": 208.37115478515625,
+          "left": -196.59088134765625,
+          "right": 194.03411865234375,
           "width": 390.625
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1029.6680908203125,
-          "right": 1436.3087158203125,
+          "left": 1421.9716796875,
+          "right": 1828.6123046875,
           "width": 406.640625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1037.6680908203125,
-          "right": 1428.2930908203125,
+          "left": 1429.9716796875,
+          "right": 1820.5966796875,
           "width": 390.625
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1436.3087158203125,
-          "right": 1842.9493408203125,
+          "left": 1828.6123046875,
+          "right": 2235.2529296875,
           "width": 406.640625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1444.3087158203125,
-          "right": 1834.9337158203125,
-          "width": 390.625
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 1842.9493408203125,
-          "right": 2249.58984375,
-          "width": 406.6405029296875
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 1850.9493408203125,
-          "right": 2241.55859375,
-          "width": 390.6092529296875
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 2249.58984375,
-          "right": 2656.23046875,
-          "width": 406.640625
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 2257.58984375,
-          "right": 2648.21484375,
-          "width": 390.625
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 2656.23046875,
-          "right": 3062.87109375,
-          "width": 406.640625
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 2664.23046875,
-          "right": 3054.85546875,
-          "width": 390.625
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 3062.87109375,
-          "right": 3469.51171875,
-          "width": 406.640625
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 3070.87109375,
-          "right": 3461.49609375,
-          "width": 390.625
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 3469.51171875,
-          "right": 3876.15234375,
-          "width": 406.640625
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 3477.51171875,
-          "right": 3868.12109375,
+          "left": 1836.6123046875,
+          "right": 2227.2216796875,
           "width": 390.609375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 3876.15234375,
-          "right": 4282.79296875,
+          "left": 2235.2529296875,
+          "right": 2641.8935546875,
           "width": 406.640625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 3884.15234375,
-          "right": 4274.77734375,
+          "left": 2243.2529296875,
+          "right": 2633.8779296875,
           "width": 390.625
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 4282.79296875,
-          "right": 4689.43359375,
+          "left": 2641.8935546875,
+          "right": 3048.5341796875,
           "width": 406.640625
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 4290.79296875,
-          "right": 4681.41796875,
+          "left": 2649.8935546875,
+          "right": 3040.5185546875,
           "width": 390.625
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 4689.43359375,
-          "right": 5096.07421875,
+          "left": 3048.5341796875,
+          "right": 3455.1748046875,
+          "width": 406.640625
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 3056.5341796875,
+          "right": 3447.1591796875,
+          "width": 390.625
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 3455.1748046875,
+          "right": 3861.8154296875,
+          "width": 406.640625
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 3463.1748046875,
+          "right": 3853.7841796875,
+          "width": 390.609375
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 3861.8154296875,
+          "right": 4268.4560546875,
+          "width": 406.640625
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 3869.8154296875,
+          "right": 4260.4404296875,
+          "width": 390.625
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 4268.4560546875,
+          "right": 4675.0966796875,
+          "width": 406.640625
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 4276.4560546875,
+          "right": 4667.0810546875,
+          "width": 390.625
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 4675.0966796875,
+          "right": 5081.7373046875,
+          "width": 406.640625
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 4683.0966796875,
+          "right": 5073.7216796875,
+          "width": 390.625
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 5081.7373046875,
+          "right": 5488.3779296875,
           "width": 406.640625
         }
       ],
@@ -3133,6 +3343,13 @@
         "mixiPresent": true,
         "mixiNaturalWidth": 6000,
         "mixiNaturalHeight": 3614
+      },
+      "note": {
+        "present": true,
+        "visible": true,
+        "href": "https://note.com/atlib",
+        "fontFamily": "\"Klee One\", \"Yu Mincho\", \"Hiragino Mincho ProN\", serif",
+        "kleeLoaded": true
       },
       "section": {
         "x": 122.5,
@@ -3196,9 +3413,16 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 0,
-        "y": 3216.34375,
+        "y": 3207.703125,
         "width": 1425,
         "height": 828.53125
       },
@@ -3256,6 +3480,13 @@
         "ismsVisible": 2,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 488.078125,
         "y": 6013.21875,
@@ -3298,6 +3529,13 @@
         "ismsCount": 1,
         "ismsVisible": 1,
         "mixiPresent": false
+      },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
       },
       "section": {
         "x": 302.34375,
@@ -3342,6 +3580,13 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 302.34375,
         "y": 1952.1875,
@@ -3379,9 +3624,9 @@
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -19.631103515625,
-          "right": 1924.631103515625,
-          "width": 1944.26220703125
+          "left": -23.8914794921875,
+          "right": 1928.8914794921875,
+          "width": 1952.782958984375
         },
         {
           "tag": "DIV",
@@ -3403,176 +3648,176 @@
           "tag": "DIV",
           "className": "img rtl",
           "id": "",
-          "left": -253.947265625,
-          "right": 8441.240234375,
+          "left": -272.0622863769531,
+          "right": 8423.125213623047,
           "width": 8695.1875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": -253.947265625,
-          "right": 289.490234375,
+          "left": -272.0622863769531,
+          "right": 271.3752136230469,
           "width": 543.4375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": -245.947265625,
-          "right": 281.474609375,
+          "left": -264.0622863769531,
+          "right": 263.3595886230469,
           "width": 527.421875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1376.365234375,
-          "right": 1919.802734375,
+          "left": 1901.687744140625,
+          "right": 2445.125244140625,
           "width": 543.4375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1384.365234375,
-          "right": 1911.802734375,
+          "left": 1909.687744140625,
+          "right": 2437.109619140625,
+          "width": 527.421875
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 2445.125244140625,
+          "right": 2988.562744140625,
+          "width": 543.4375
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 2453.125244140625,
+          "right": 2980.547119140625,
+          "width": 527.421875
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 2988.562744140625,
+          "right": 3532.000244140625,
+          "width": 543.4375
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 2996.562744140625,
+          "right": 3523.984619140625,
+          "width": 527.421875
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 3532.000244140625,
+          "right": 4075.4375,
+          "width": 543.437255859375
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 3540.000244140625,
+          "right": 4067.4375,
+          "width": 527.437255859375
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 4075.4375,
+          "right": 4618.875,
+          "width": 543.4375
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 4083.4375,
+          "right": 4610.859375,
+          "width": 527.421875
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 4618.875,
+          "right": 5162.3125,
+          "width": 543.4375
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 4626.875,
+          "right": 5154.296875,
+          "width": 527.421875
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 5162.3125,
+          "right": 5705.75,
+          "width": 543.4375
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 5170.3125,
+          "right": 5697.734375,
+          "width": 527.421875
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "",
+          "left": 5705.75,
+          "right": 6249.1875,
+          "width": 543.4375
+        },
+        {
+          "tag": "IMG",
+          "className": "",
+          "id": "",
+          "left": 5713.75,
+          "right": 6241.1875,
           "width": 527.4375
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 1919.802734375,
-          "right": 2463.240234375,
+          "left": 6249.1875,
+          "right": 6792.625,
           "width": 543.4375
         },
         {
           "tag": "IMG",
           "className": "",
           "id": "",
-          "left": 1927.802734375,
-          "right": 2455.224609375,
+          "left": 6257.1875,
+          "right": 6784.609375,
           "width": 527.421875
         },
         {
           "tag": "DIV",
           "className": "",
           "id": "",
-          "left": 2463.240234375,
-          "right": 3006.677734375,
-          "width": 543.4375
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 2471.240234375,
-          "right": 2998.662109375,
-          "width": 527.421875
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 3006.677734375,
-          "right": 3550.115234375,
-          "width": 543.4375
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 3014.677734375,
-          "right": 3542.099609375,
-          "width": 527.421875
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 3550.115234375,
-          "right": 4093.552734375,
-          "width": 543.4375
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 3558.115234375,
-          "right": 4085.552734375,
-          "width": 527.4375
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 4093.552734375,
-          "right": 4636.990234375,
-          "width": 543.4375
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 4101.552734375,
-          "right": 4628.974609375,
-          "width": 527.421875
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 4636.990234375,
-          "right": 5180.427734375,
-          "width": 543.4375
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 4644.990234375,
-          "right": 5172.412109375,
-          "width": 527.421875
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 5180.427734375,
-          "right": 5723.865234375,
-          "width": 543.4375
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 5188.427734375,
-          "right": 5715.849609375,
-          "width": 527.421875
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 5723.865234375,
-          "right": 6267.302734375,
-          "width": 543.4375
-        },
-        {
-          "tag": "IMG",
-          "className": "",
-          "id": "",
-          "left": 5731.865234375,
-          "right": 6259.302734375,
-          "width": 527.4375
-        },
-        {
-          "tag": "DIV",
-          "className": "",
-          "id": "",
-          "left": 6267.302734375,
-          "right": 6810.740234375,
+          "left": 6792.625,
+          "right": 7336.0625,
           "width": 543.4375
         }
       ],
@@ -3593,6 +3838,13 @@
         "mixiPresent": true,
         "mixiNaturalWidth": 6000,
         "mixiNaturalHeight": 3614
+      },
+      "note": {
+        "present": true,
+        "visible": true,
+        "href": "https://note.com/atlib",
+        "fontFamily": "\"Klee One\", \"Yu Mincho\", \"Hiragino Mincho ProN\", serif",
+        "kleeLoaded": true
       },
       "section": {
         "x": 362.5,
@@ -3656,9 +3908,16 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 0,
-        "y": 3276.09375,
+        "y": 3267.453125,
         "width": 1905,
         "height": 867.25
       },
@@ -3716,6 +3975,13 @@
         "ismsVisible": 2,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 728.078125,
         "y": 6230.53125,
@@ -3759,6 +4025,13 @@
         "ismsVisible": 1,
         "mixiPresent": false
       },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
+      },
       "section": {
         "x": 302.34375,
         "y": 5681.765625,
@@ -3801,6 +4074,13 @@
         "ismsCount": 1,
         "ismsVisible": 1,
         "mixiPresent": false
+      },
+      "note": {
+        "present": false,
+        "visible": false,
+        "href": null,
+        "fontFamily": null,
+        "kleeLoaded": true
       },
       "section": {
         "x": 302.34375,

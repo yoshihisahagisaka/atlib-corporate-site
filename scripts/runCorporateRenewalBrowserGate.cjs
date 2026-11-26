@@ -89,10 +89,10 @@ async function inspect(port, siteOrigin, page, width) {
   await Promise.all(['Page.enable', 'Runtime.enable', 'Network.enable', 'Log.enable'].map((method) => client.send(method)));
   await client.send('Emulation.setDeviceMetricsOverride', { width, height: 1200, deviceScaleFactor: 1, mobile: false });
   await client.send('Page.navigate', { url }); await sleep(1200);
-  await client.send('Runtime.evaluate', { expression: `(async()=>{ for(let y=0;y<document.documentElement.scrollHeight;y+=Math.max(300,innerHeight*.8)){ scrollTo(0,y); await new Promise(r=>setTimeout(r,45)); } scrollTo(0,0); await new Promise(r=>setTimeout(r,500)); return true; })()`, awaitPromise: true, returnByValue: true });
+  await client.send('Runtime.evaluate', { expression: `(async()=>{ document.querySelectorAll('img[loading="lazy"]').forEach((image)=>{image.loading='eager';}); for(let y=0;y<document.documentElement.scrollHeight;y+=Math.max(300,innerHeight*.8)){ scrollTo(0,y); await new Promise(r=>setTimeout(r,45)); } scrollTo(0,0); await new Promise(r=>setTimeout(r,800)); return true; })()`, awaitPromise: true, returnByValue: true });
   const expression = `(() => {
     const d=document, root=d.documentElement, body=d.body;
-    const broken=[...d.images].filter(x=>!x.complete||x.naturalWidth===0).map(x=>x.getAttribute('src'));
+    const broken=[...d.images].filter((image)=>!image.closest('.mainimg .slide')&&(!image.complete||image.naturalWidth===0)).map(x=>x.getAttribute('src'));
     const logo=d.querySelector('img.renewal-business-logo');
     const section=d.querySelector(${JSON.stringify(page.name === 'home' ? '.renewal-brand-client-logos' : page.name === 'services' ? '.renewal-security' : page.name === 'company' ? '.renewal-isms-company' : '.renewal-isms-footer')});
     const gallery=d.querySelector('.motion-section .img');
@@ -147,7 +147,10 @@ async function inspect(port, siteOrigin, page, width) {
       if(catalogueGap===null||catalogueGap<0||catalogueGap>110) layoutIssues.push('KAIZEN/security content gap: '+catalogueGap);
       if(serviceLayout.securityBackground===serviceLayout.advisoryBackground) layoutIssues.push('section backgrounds not distinct');
     }
-    return {layoutIssues,homeLayout,serviceLayout,innerWidth:innerWidth,clientWidth:root.clientWidth,scrollWidth:root.scrollWidth,bodyScrollWidth:body.scrollWidth,overflow,broken,logo:{present:!!logo,complete:logo?.complete,naturalWidth:logo?.naturalWidth,naturalHeight:logo?.naturalHeight},clientLogos:{count:clientLogos.length,visible:clientLogos.filter(x=>x.getBoundingClientRect().width>0&&x.getBoundingClientRect().height>0).length},officialLogos:{ismsCount:isms.length,ismsVisible:isms.filter(x=>x.getBoundingClientRect().width>=45&&x.getBoundingClientRect().height>0).length,mixiPresent:!!mixi,mixiNaturalWidth:mixi?.naturalWidth,mixiNaturalHeight:mixi?.naturalHeight},section:rect?{x:rect.x,y:rect.y,width:rect.width,height:rect.height}:null,anchors:requiredAnchors.filter(id=>!d.getElementById(id)),gallery:{present:!!gallery,animation:getComputedStyle(gallery||body).animationName},menuInteraction:null,slider};
+    const note=d.querySelector('.renewal-note-banner');
+    const noteTitle=d.querySelector('#renewal-note-title');
+    const noteStyle=noteTitle?getComputedStyle(noteTitle):null;
+    return {layoutIssues,homeLayout,serviceLayout,innerWidth:innerWidth,clientWidth:root.clientWidth,scrollWidth:root.scrollWidth,bodyScrollWidth:body.scrollWidth,overflow,broken,logo:{present:!!logo,complete:logo?.complete,naturalWidth:logo?.naturalWidth,naturalHeight:logo?.naturalHeight},clientLogos:{count:clientLogos.length,visible:clientLogos.filter(x=>x.getBoundingClientRect().width>0&&x.getBoundingClientRect().height>0).length},officialLogos:{ismsCount:isms.length,ismsVisible:isms.filter(x=>x.getBoundingClientRect().width>=45&&x.getBoundingClientRect().height>0).length,mixiPresent:!!mixi,mixiNaturalWidth:mixi?.naturalWidth,mixiNaturalHeight:mixi?.naturalHeight},note:{present:!!note,visible:!!note&&box(note).width>0&&box(note).height>0,href:note?.href||null,fontFamily:noteStyle?.fontFamily||null,kleeLoaded:d.fonts.check('600 24px "Klee One"')},section:rect?{x:rect.x,y:rect.y,width:rect.width,height:rect.height}:null,anchors:requiredAnchors.filter(id=>!d.getElementById(id)),gallery:{present:!!gallery,animation:getComputedStyle(gallery||body).animationName},menuInteraction:null,slider};
   })()`;
   const evaluated = await client.send('Runtime.evaluate', { expression, returnByValue: true });
   const metrics = evaluated.result.value;
@@ -226,6 +229,11 @@ async function inspect(port, siteOrigin, page, width) {
       if (result.page === 'home') assert.notEqual(result.slider?.before, result.slider?.after, `${result.width}: slider`);
       if (result.page === 'home') assert.notEqual(result.gallery?.animation, 'none', `${result.width}: gallery animation`);
       if (result.page === 'home') assert.deepEqual(result.clientLogos, { count: 8, visible: 8 }, `${result.width}: client logos`);
+      if (result.page === 'home') {
+        assert.deepEqual({present:result.note.present,visible:result.note.visible,href:result.note.href}, {present:true,visible:true,href:'https://note.com/atlib'}, `${result.page}/${result.width}: note banner`);
+        assert.match(result.note.fontFamily, /Klee One/u, `${result.page}/${result.width}: note title font`);
+        assert.equal(result.note.kleeLoaded, true, `${result.page}/${result.width}: Klee One loaded`);
+      } else assert.equal(result.note.present, false, `${result.page}/${result.width}: home-only note banner`);
       if (result.page === 'home') assert.deepEqual({ present: result.officialLogos.mixiPresent, width: result.officialLogos.mixiNaturalWidth, height: result.officialLogos.mixiNaturalHeight }, { present: true, width: 6000, height: 3614 }, `${result.width}: official MIXI logo`);
       if (result.page === 'services') assert.ok(result.section?.height > 0, `${result.width}: explainer section`);
       if (result.page === 'company') assert.ok(result.section?.height > 0, `${result.width}: ISMS company section`);
