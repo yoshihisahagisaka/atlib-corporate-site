@@ -134,4 +134,14 @@ Final CDP Browser Gate: 14/14 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CS
 - Management confirmed this is an existing-certification renewal and that the official logo remains unchanged.
 - The contract requires the logo, certification name, and certificate number, and explicitly rejects the removed scope, office, and date metadata.
 - Overlay allowlist remains the same eight paths; only `headCommit` changed for the new approved Content HEAD.
-- Final verification against this Content HEAD: Build PASS; Renewal 7 PASS / 0 FAIL; Production Overlay 6 PASS / 0 FAIL; Service Web 7 PASS / 0 FAIL; established baseline remains 26 PASS / 3 known FAIL (no increase); CDP Browser Gate 21 / 21 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CSS px; `git diff --check` PASS.
+- Final verification against this Content HEAD: Build PASS; Renewal 8 PASS / 0 FAIL; Production Overlay 6 PASS / 0 FAIL; Service Web 7 PASS / 0 FAIL; established baseline remains 26 PASS / 3 known FAIL (no increase); CDP Browser Gate 35 / 35 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CSS px; `git diff --check` PASS.
+
+## R3 reviewed layout corrections (2026-11-26)
+
+- Applied the Owner-supplied `pr82_r3_apply.py` only after its clean-worktree, exact-HEAD `--check` returned `CHECK PASS`. The script remained outside the repository.
+- Editorial section headings are no longer semantic site headers, preventing the shared sticky-header CSS/JavaScript from affecting them. The two KAIZEN feature headings use controlled phrase wrapping without changing approved copy.
+- The IT-management service-cycle diagram is now a non-interactive four-stage timeline rather than button-like stacked boxes. The diagram contains no anchor, button, button role, or tabindex.
+- Service-page top-level sections now reset the shared section margin, use deliberate compact padding, and expose section boundaries through the approved white, pale-green, beige, and blue-gray backgrounds/borders.
+- Final automated verification: Build PASS; Corporate Renewal 9/9 PASS; Production Overlay 6/6 PASS; Service Web 7/7 PASS; baseline 26 PASS / 3 known FAIL (no increase); `git diff --check` PASS.
+- Final CDP Browser Gate: 40/40 PASS across home, services, company, works, and contact at 320, 390, 650, 651, 768, 1024, 1440, and 1920 CSS px. The new geometry Gate reported no heading containment/overlap, service photo/copy overlap, section-boundary gap/overlap, or interactive diagram regression. Console/Page/Resource errors, broken images, and horizontal overflow were zero.
+- Full-page evidence at 390/1440/1920 and R3 focused home/services evidence are under `docs/evidence/issue-81-browser/`; machine-readable geometry and browser results are in `browser-gate-v4.json`.

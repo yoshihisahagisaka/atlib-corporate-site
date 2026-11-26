@@ -138,7 +138,7 @@ Scan the built immutable digest only. Record Build ID, image digest, Operation I
 - Git HEAD and clean-worktree preflight: PASS before changes.
 - Production read-only revision/image/traffic/configuration preflight: PASS.
 - Build (`tsc`): PASS.
-- Renewal contract tests: 7 PASS / 0 FAIL.
+- Renewal contract tests: 9 PASS / 0 FAIL.
 - Service-web regression tests: 7 PASS / 0 FAIL.
 - Established baseline suite: 26 PASS / 3 known FAIL; no FAIL increase.
 - Overlay and Cloud Shell contract tests: 6 PASS / 0 FAIL, including exact eight-file Base-to-HEAD diff, protected home blocks, unauthorized JS rejection, build-context allowlisting, and independent Gate contracts.

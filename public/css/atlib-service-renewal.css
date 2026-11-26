@@ -107,7 +107,6 @@
 .renewal-diagnosis-note { margin: 1.4rem 0 0; color: #cfdeea; font-size: .8rem; }
 
 /* Services page composition. */
-.services-page .renewal-service-page { padding-top: 4rem; }
 .renewal-service-detail { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(20rem, .98fr); gap: 2rem; align-items: center; margin-top: 1.5rem; padding: 2rem; border: 1px solid var(--renewal-line); border-top: 5px solid var(--renewal-navy); border-radius: .4rem; background: #fff; }
 .renewal-management-summary { grid-template-columns: minmax(0, 1fr); }
 .renewal-management-summary .renewal-detail-copy { max-width: 52rem; }
@@ -115,27 +114,30 @@
 .renewal-detail-copy .renewal-pills { padding: 0; margin-top: 1rem; }
 .renewal-detail-copy .renewal-actions { padding: 1.2rem 0 0; }
 .renewal-service-detail .renewal-flow { margin: 0; }
-.renewal-management-explainer { margin: 2rem 0; padding: clamp(2rem, 4vw, 3.5rem); border: 1px solid #d5e1eb; border-radius: .45rem; background: #eef3f7; box-shadow: 0 1rem 2.6rem rgba(31, 53, 86, .06); }
+.renewal-management-explainer { margin: 1.5rem 0; padding: clamp(1.25rem, 2.5vw, 2rem); border: 1px solid #d5e1eb; border-radius: .45rem; background: #eef3f7; box-shadow: 0 1rem 2.6rem rgba(31, 53, 86, .06); }
 .renewal-management-intro { max-width: 52rem; }
 .renewal-management-intro h2 { margin: 0; color: var(--renewal-navy); font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.35; }
 .renewal-management-intro h3 { margin: .8rem 0 1rem; color: var(--renewal-navy); font-size: clamp(1.2rem, 2vw, 1.65rem); line-height: 1.65; }
 .renewal-management-intro > p:not(.renewal-kicker) { margin: .5rem 0; color: var(--renewal-muted); line-height: 1.9; }
-.renewal-management-cycle { position: relative; max-width: 48rem; margin: 2rem auto; padding: 1.6rem; border: 1px solid #d1deea; border-radius: .4rem; background: #fff; }
-.renewal-management-cycle figcaption { margin-bottom: 1.2rem; color: var(--renewal-navy); font-size: .86rem; font-weight: 800; text-align: center; }
-.renewal-cycle-node { padding: .8rem 1rem; border: 1px solid #c5d3e2; border-radius: .25rem; background: #fff; text-align: center; }
-.renewal-cycle-node small, .renewal-cycle-split small { display: block; margin-bottom: .2rem; color: #657c94; font: 700 .64rem/1.3 Arial, sans-serif; letter-spacing: .08em; }
-.renewal-cycle-node strong, .renewal-cycle-split strong { display: block; color: var(--renewal-navy); font-size: .92rem; }
-.renewal-cycle-future { border-color: var(--renewal-navy); background: var(--renewal-navy); }
-.renewal-cycle-future small, .renewal-cycle-future strong { color: #fff; }
-.renewal-cycle-design { border-top: 3px solid var(--renewal-orange); }
-.renewal-cycle-arrow { display: block; color: #8297ab; line-height: 1.6; text-align: center; }
-.renewal-cycle-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
-.renewal-cycle-split > div { padding: .8rem; border: 1px solid #c5d3e2; border-top: 3px solid var(--renewal-orange); background: #fff; text-align: center; }
-.renewal-cycle-split > div:last-child { border-top-color: var(--renewal-green); }
-.renewal-cycle-continuous { border-color: var(--renewal-green); background: var(--renewal-green); }
-.renewal-cycle-continuous small, .renewal-cycle-continuous strong { color: #fff; }
-.renewal-cycle-return { display: flex; justify-content: center; align-items: center; gap: .45rem; margin-top: .8rem; color: var(--renewal-orange); }
-.renewal-cycle-return span { font-size: 1.5rem; line-height: 1; }
+.renewal-management-cycle { max-width: 46rem; margin: 1.5rem auto; padding: clamp(1rem, 2.5vw, 1.75rem); border: 1px solid #d1deea; border-radius: 0; background: #fff; }
+.renewal-management-cycle figcaption { margin: 0 0 1.25rem; color: var(--renewal-navy); font-size: .95rem; font-weight: 800; text-align: left; }
+.renewal-cycle-steps { --cycle-rail: 1.75rem; }
+.renewal-cycle-step { --step-color: var(--renewal-navy); position: relative; display: grid; grid-template-columns: var(--cycle-rail) minmax(0, 1fr); column-gap: .85rem; align-items: start; padding: 0 0 1.25rem; }
+.renewal-cycle-step:not(:last-child)::after { content: ""; position: absolute; top: 1.18rem; bottom: 0; left: calc(var(--cycle-rail) / 2 - 1px); width: 2px; background: #c5d3df; }
+.renewal-cycle-step:last-child { padding-bottom: 0; }
+.renewal-cycle-marker { position: relative; z-index: 1; justify-self: center; box-sizing: border-box; width: 1rem; height: 1rem; margin-top: .18rem; border: 2px solid var(--step-color); border-radius: 50%; background: #fff; }
+.renewal-cycle-future .renewal-cycle-marker, .renewal-cycle-continuous .renewal-cycle-marker { background: var(--step-color); }
+.renewal-cycle-design { --step-color: var(--renewal-orange); }
+.renewal-cycle-parallel { --step-color: #8297ab; }
+.renewal-cycle-continuous { --step-color: var(--renewal-green); }
+.renewal-cycle-copy, .renewal-cycle-split { min-width: 0; }
+.renewal-cycle-step small { display: block; margin: 0 0 .2rem; color: #526b83; font: 700 .68rem/1.4 Arial, sans-serif; letter-spacing: .07em; overflow-wrap: anywhere; }
+.renewal-cycle-step strong { display: block; color: var(--renewal-navy); font-size: 1.05rem; font-weight: 800; line-height: 1.55; overflow-wrap: anywhere; }
+.renewal-cycle-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; padding: .2rem 0; }
+.renewal-cycle-split > div { min-width: 0; padding: .1rem 0 .1rem .75rem; border-left: 3px solid var(--renewal-orange); }
+.renewal-cycle-split > div:last-child { border-left-color: var(--renewal-green); }
+.renewal-cycle-return { display: flex; align-items: center; gap: .45rem; margin: 1rem 0 0 calc(var(--cycle-rail, 1.75rem) + .85rem); padding-top: .7rem; border-top: 1px dashed #c5d3df; color: var(--renewal-green); }
+.renewal-cycle-return span { font-size: 1.25rem; line-height: 1; }
 .renewal-cycle-return strong { font-size: .82rem; }
 .renewal-management-services { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
 .renewal-management-services article { position: relative; display: flex; gap: 1rem; min-width: 0; padding: 1.4rem; border: 1px solid #d5e1eb; border-top: 4px solid var(--renewal-navy); border-radius: .35rem; background: #fff; }
@@ -214,9 +216,11 @@
 .renewal-brand-thinking-copy .mission-quote { margin-top: 1.8rem; padding-left: 1.2rem; border-left: 3px solid var(--renewal-orange); color: var(--renewal-navy); font-weight: 700; }
 
 .renewal-brand-values { padding: clamp(5.5rem, 8vw, 8rem) 0; background: #fff; }
-.renewal-brand-heading { display: grid; grid-template-columns: minmax(14rem, .75fr) minmax(20rem, 1.25fr); gap: 3rem; align-items: end; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
-.renewal-brand-heading h2 { margin: .4rem 0 0; color: var(--renewal-navy); font-size: clamp(2.2rem, 4.2vw, 4rem); line-height: 1.25; text-wrap: balance; word-break: keep-all; overflow-wrap: anywhere; }
-.renewal-brand-heading > p:last-child { margin: 0; color: var(--renewal-muted); line-height: 2; }
+.renewal-brand-heading { display: block; min-width: 0; margin: 0 0 clamp(1.5rem, 3vw, 2.5rem); }
+.renewal-brand-heading > .renewal-kicker { margin: 0 0 .7rem; }
+.renewal-brand-heading h2 { display: block; margin: 0; color: var(--renewal-navy); font-size: clamp(1.85rem, 3vw, 3rem); line-height: 1.35; letter-spacing: -.025em; word-break: normal; line-break: strict; overflow-wrap: break-word; text-wrap: balance; }
+.renewal-brand-heading h2::before { display: none; }
+.renewal-brand-heading > p:last-child { max-width: 46rem; margin: .8rem 0 0; color: var(--renewal-muted); line-height: 1.85; }
 .renewal-brand-value-list article { display: grid; grid-template-columns: 6rem minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); padding: 2.4rem 0; border-top: 1px solid #dbe2e8; }
 .renewal-brand-value-list article:last-child { border-bottom: 1px solid #dbe2e8; }
 .renewal-brand-value-list article > span { color: var(--renewal-orange); font: 700 1rem/1.5 Arial, sans-serif; letter-spacing: .1em; }
@@ -246,13 +250,15 @@
 
 .renewal-brand-services { padding: clamp(6rem, 10vw, 9rem) 0; background: #fff; }
 .renewal-brand-feature-list { display: grid; gap: clamp(5rem, 10vw, 9rem); }
-.renewal-brand-feature { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(22rem, .9fr); gap: clamp(2.5rem, 7vw, 7rem); align-items: center; }
+.renewal-brand-feature { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 4vw, 4.5rem); align-items: center; }
+.renewal-brand-feature > div, .renewal-brand-feature > figure { min-width: 0; }
 .renewal-brand-feature-reverse figure { order: 2; }
 .renewal-brand-feature figure { margin: 0; overflow: hidden; aspect-ratio: 16 / 11; }
 .renewal-brand-feature figure img { width: 100%; height: 100%; object-fit: cover; }
 .renewal-brand-feature .renewal-official-logo { display: block; width: min(100%, 24rem); height: auto; margin: 1rem 0 1.6rem; }
 .renewal-brand-feature .renewal-business-logo { width: min(100%, 22rem); }
-.renewal-brand-feature h3 { margin: 0 0 1rem; color: var(--renewal-navy); font-size: clamp(1.55rem, 2.5vw, 2.35rem); line-height: 1.45; }
+.renewal-brand-feature h3 { margin: 0 0 1rem; color: var(--renewal-navy); font-size: clamp(1.4rem, 2vw, 2rem); line-height: 1.5; word-break: normal; line-break: strict; overflow-wrap: break-word; }
+.renewal-brand-phrase { display: inline-block; max-width: 100%; }
 .renewal-brand-feature p:not(.renewal-service-kind) { color: var(--renewal-muted); line-height: 2; }
 .renewal-brand-link { display: inline-flex; gap: .8rem; align-items: center; margin-top: 1rem; padding-bottom: .3rem; border-bottom: 1px solid currentColor; color: var(--renewal-navy); font-weight: 700; text-decoration: none; }
 .renewal-brand-link span { color: var(--renewal-orange); }
@@ -273,18 +279,23 @@
 .renewal-service-page .renewal-management-explainer { border-radius: 0; box-shadow: none; }
 .renewal-service-page + .renewal-security .renewal-security-card,
 .renewal-service-advisory .renewal-advisory-panel { border-radius: 0; box-shadow: none; }
-.services-page .renewal-section { padding-block: clamp(3.6rem, 5.6vw, 5.6rem); }
-.services-page .renewal-advisory { padding-block: clamp(2.8rem, 4.8vw, 4.4rem); }
-.services-page .renewal-section-head { margin-bottom: 2rem; }
-.renewal-service-advisory + .svc-how { margin-bottom: 3.2rem; }
-.workflow-section#link5 { margin-top: 0; padding-top: clamp(3.2rem, 5.6vw, 5.6rem); }
+/* R3: remove the shared section margin before defining section rhythm. */
+.services-page main > .renewal-section,
+.services-page main > .renewal-advisory { margin: 0; padding-block: clamp(1.75rem, 2.5vw, 3rem); }
+.services-page main > .renewal-service-page { background: #fff; }
+.services-page main > .renewal-security { background: #f4f8f7; border-top: 1px solid #d5e3de; }
+.services-page main > .renewal-advisory { background: #faf5ee; border-top: 1px solid #ecdcc9; }
+.services-page .renewal-section-head { margin-bottom: 1.5rem; }
+.services-page main > .svc-how { margin: 0 auto; padding-block: clamp(1.75rem, 2.5vw, 3rem); }
+.services-page main > .workflow-section#link5 { margin: 0; padding-block: clamp(1.75rem, 2.5vw, 3rem); background: #f5f7fa; border-top: 1px solid #dbe2e8; }
+.services-page main > .workflow-section#link5 .section-lead { margin-bottom: 1.5rem; }
+.services-page main > .svc-contact { margin: 0; padding-block: clamp(2rem, 3vw, 3.5rem); }
 .work-intro h2 { text-wrap: balance; word-break: keep-all; overflow-wrap: anywhere; }
 .work-intro h2 br { display: none; }
 
 @media (max-width: 900px) {
   .renewal-brand-thinking-layout, .renewal-brand-feature { grid-template-columns: 1fr; }
   .renewal-brand-feature-reverse figure { order: 0; }
-  .renewal-brand-heading { grid-template-columns: 1fr; gap: 1rem; }
   .renewal-brand-client-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -295,8 +306,7 @@
   .renewal-brand-thinking-image { aspect-ratio: 4 / 3; }
   .renewal-brand-thinking-copy .intro-heading h2 { font-size: 2.2rem; }
   .renewal-brand-values, .renewal-brand-clients, .renewal-brand-services, .renewal-brand-diagnosis { padding-block: 4.8rem; }
-  .renewal-brand-heading { grid-template-columns: 1fr; gap: 1rem; }
-  .renewal-brand-heading h2 { font-size: 2.2rem; }
+  .renewal-brand-heading h2 { font-size: clamp(1.65rem, 6vw, 2.1rem); }
   .renewal-brand-diagnosis .renewal-brand-heading { display: block; margin-bottom: 2.8rem; }
   .renewal-brand-diagnosis .renewal-brand-heading h2 { margin: .7rem 0 1rem; }
   .renewal-brand-diagnosis .renewal-brand-heading > p:last-child { position: static; display: block; }

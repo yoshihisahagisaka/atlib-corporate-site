@@ -116,7 +116,7 @@ test('human review final adjustments remove public status and phone copy while p
   assert.doesNotMatch(services, /商用公開準備中|構成検証中|「準備中」「検証中」|renewal-status/u);
   assert.doesNotMatch(company, /03-6661-1616|tel:0366611616/u);
   assert.match(company, /href="\.\.\/contact\/"/u);
-  assert.match(css, /\.services-page \.renewal-section \{ padding-block: clamp\(3\.6rem, 5\.6vw, 5\.6rem\); \}/u);
+  assert.match(css, /\.services-page main > \.renewal-advisory \{ margin: 0; padding-block: clamp\(1\.75rem, 2\.5vw, 3rem\); \}/u);
 });
 
 test('human review v2 logo, copy removals and IT management explainer are exact', () => {
@@ -136,4 +136,20 @@ test('human review v2 logo, copy removals and IT management explainer are exact'
   assert.doesNotMatch(services, /IT経営KAIZENの実行・運用支援/u);
   assert.match(css, /\.renewal-management-services \{[^}]*grid-template-columns: repeat\(2,/u);
   assert.match(css, /@media \(max-width: 900px\)[\s\S]*\.renewal-management-services \{ grid-template-columns: 1fr; \}/u);
+});
+
+
+test('R3 editorial headings, diagram and section boundaries are structurally isolated', () => {
+  const home = read('index.html');
+  const services = read('services/index.html');
+  const css = read('css/atlib-service-renewal.css');
+  assert.doesNotMatch(home, /<header class="renewal-brand-heading/u);
+  assert.equal([...home.matchAll(/<div class="renewal-brand-heading inview">/gu)].length, 4);
+  const diagram = services.match(/<figure class="renewal-management-cycle">[\s\S]*?<\/figure>/u)?.[0];
+  assert.ok(diagram);
+  assert.equal([...diagram.matchAll(/class="renewal-cycle-step /gu)].length, 4);
+  assert.doesNotMatch(diagram, /<(?:a|button)\b|role="button"|tabindex=/u);
+  assert.match(css, /\.renewal-brand-heading \{ display: block;/u);
+  assert.match(css, /\.services-page main > \.renewal-security \{ background: #f4f8f7; border-top:/u);
+  assert.match(css, /\.services-page main > \.workflow-section#link5 \{ margin: 0;/u);
 });
