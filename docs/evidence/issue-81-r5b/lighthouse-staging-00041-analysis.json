@@ -1,0 +1,889 @@
+{
+  "generatedAt": "2026-11-27T03:55:32.316Z",
+  "lighthouseVersion": "12.8.2",
+  "origin": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app",
+  "profile": "mobile",
+  "runsPerPage": 3,
+  "pages": {
+    "home": {
+      "samples": [
+        {
+          "run": 1,
+          "performance": 0.77,
+          "FCP": 2506.212,
+          "LCP": 5445.183,
+          "CLS": 0,
+          "TBT": 0,
+          "renderDelay": 413.2720000305176,
+          "totalTransfer": 1828883,
+          "externalFontTransfer": 2902,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153493,
+          "lcpElement": {
+            "selector": "div#container > div#top > div.text > p.hero-description",
+            "snippet": "<p class=\"hero-description\">",
+            "nodeLabel": "主役は、企業の事業と、そこで働く人たち。経営が目指すことと現場の実態をつなぎ、ITを本業の成果につながる手段として生かします。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://fonts.googleapis.com/css2?family=Klee+One:wght@600&display=swap&text=IT%E3%81%AE%E3%81%93%E3%81%A8%E3%80%81%E7%B5%8C%E5%96%B6%E3%81%AE%E3%81%93%E3%81%A8%E3%80%82",
+              "transferSize": 762,
+              "wastedMs": 806
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31883,
+              "wastedMs": 450
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52522,
+              "wastedMs": 600
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27206,
+              "wastedMs": 300
+            }
+          ]
+        },
+        {
+          "run": 2,
+          "performance": 0.76,
+          "FCP": 2513.457,
+          "LCP": 5588.904,
+          "CLS": 0,
+          "TBT": 0,
+          "renderDelay": 404.933,
+          "totalTransfer": 1828891,
+          "externalFontTransfer": 2902,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153493,
+          "lcpElement": {
+            "selector": "div#container > div#top > div.text > p.hero-description",
+            "snippet": "<p class=\"hero-description\">",
+            "nodeLabel": "主役は、企業の事業と、そこで働く人たち。経営が目指すことと現場の実態をつなぎ、ITを本業の成果につながる手段として生かします。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://fonts.googleapis.com/css2?family=Klee+One:wght@600&display=swap&text=IT%E3%81%AE%E3%81%93%E3%81%A8%E3%80%81%E7%B5%8C%E5%96%B6%E3%81%AE%E3%81%93%E3%81%A8%E3%80%82",
+              "transferSize": 762,
+              "wastedMs": 817
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27168,
+              "wastedMs": 300
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31883,
+              "wastedMs": 450
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52561,
+              "wastedMs": 600
+            }
+          ]
+        },
+        {
+          "run": 3,
+          "performance": 0.76,
+          "FCP": 2490.3770000000004,
+          "LCP": 5582.570000000001,
+          "CLS": 0,
+          "TBT": 0,
+          "renderDelay": 335.63399996948243,
+          "totalTransfer": 1828861,
+          "externalFontTransfer": 2902,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153493,
+          "lcpElement": {
+            "selector": "div#container > div#top > div.text > p.hero-description",
+            "snippet": "<p class=\"hero-description\">",
+            "nodeLabel": "主役は、企業の事業と、そこで働く人たち。経営が目指すことと現場の実態をつなぎ、ITを本業の成果につながる手段として生かします。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://fonts.googleapis.com/css2?family=Klee+One:wght@600&display=swap&text=IT%E3%81%AE%E3%81%93%E3%81%A8%E3%80%81%E7%B5%8C%E5%96%B6%E3%81%AE%E3%81%93%E3%81%A8%E3%80%82",
+              "transferSize": 762,
+              "wastedMs": 803
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31884,
+              "wastedMs": 450
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52522,
+              "wastedMs": 600
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27207,
+              "wastedMs": 300
+            }
+          ]
+        }
+      ],
+      "median": {
+        "performance": 0.76,
+        "FCP": 2506.212,
+        "LCP": 5582.570000000001,
+        "CLS": 0,
+        "TBT": 0,
+        "renderDelay": 404.933,
+        "totalTransfer": 1828883,
+        "externalFontTransfer": 2902,
+        "notoSansJpFontBodyTransfer": 0,
+        "manropeFontBodyTransfer": 0,
+        "fontAwesomeTransfer": 0,
+        "fontCssTransfer": 153493
+      },
+      "lcpElements": [
+        {
+          "selector": "div#container > div#top > div.text > p.hero-description",
+          "snippet": "<p class=\"hero-description\">",
+          "nodeLabel": "主役は、企業の事業と、そこで働く人たち。経営が目指すことと現場の実態をつなぎ、ITを本業の成果につながる手段として生かします。"
+        }
+      ],
+      "renderBlocking": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Klee+One:wght@600&display=swap&text=IT%E3%81%AE%E3%81%93%E3%81%A8%E3%80%81%E7%B5%8C%E5%96%B6%E3%81%AE%E3%81%93%E3%81%A8%E3%80%82",
+          "transferSize": 762,
+          "wastedMs": 806
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+          "transferSize": 52522,
+          "wastedMs": 600
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "transferSize": 31883,
+          "wastedMs": 450
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "transferSize": 27206,
+          "wastedMs": 300
+        }
+      ]
+    },
+    "services": {
+      "samples": [
+        {
+          "run": 1,
+          "performance": 0.75,
+          "FCP": 1830.5325,
+          "LCP": 7905.5325,
+          "CLS": 0,
+          "TBT": 0,
+          "renderDelay": 713.671,
+          "totalTransfer": 1295628,
+          "externalFontTransfer": 0,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153116,
+          "lcpElement": {
+            "selector": "div#top > div.svc-shell > div.svc-hero-copy > p.svc-hero-detail",
+            "snippet": "<p class=\"svc-hero-detail\">",
+            "nodeLabel": "経営の目的や現在の体制に合わせて、必要な支援を選び、組み合わせることができます。戦略の相談からでも、日々の運用や具体的なプロジェクトからでも、ご一緒できます。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/services.css?v=20261119-mobile",
+              "transferSize": 12813,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52498,
+              "wastedMs": 300
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31916,
+              "wastedMs": 300
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27216,
+              "wastedMs": 150
+            }
+          ]
+        },
+        {
+          "run": 2,
+          "performance": 0.75,
+          "FCP": 1684.6435000000001,
+          "LCP": 7984.6435,
+          "CLS": 0,
+          "TBT": 0,
+          "renderDelay": 540.1680000305175,
+          "totalTransfer": 1295308,
+          "externalFontTransfer": 0,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 152969,
+          "lcpElement": {
+            "selector": "div#top > div.svc-shell > div.svc-hero-copy > p.svc-hero-detail",
+            "snippet": "<p class=\"svc-hero-detail\">",
+            "nodeLabel": "経営の目的や現在の体制に合わせて、必要な支援を選び、組み合わせることができます。戦略の相談からでも、日々の運用や具体的なプロジェクトからでも、ご一緒できます。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31891,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/services.css?v=20261119-mobile",
+              "transferSize": 12814,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52522,
+              "wastedMs": 300
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27215,
+              "wastedMs": 150
+            }
+          ]
+        },
+        {
+          "run": 3,
+          "performance": 0.75,
+          "FCP": 1673.2694999999999,
+          "LCP": 7973.269499999999,
+          "CLS": 0,
+          "TBT": 7,
+          "renderDelay": 606.7209999694825,
+          "totalTransfer": 1295937,
+          "externalFontTransfer": 0,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153131,
+          "lcpElement": {
+            "selector": "div#top > div.svc-shell > div.svc-hero-copy > p.svc-hero-detail",
+            "snippet": "<p class=\"svc-hero-detail\">",
+            "nodeLabel": "経営の目的や現在の体制に合わせて、必要な支援を選び、組み合わせることができます。戦略の相談からでも、日々の運用や具体的なプロジェクトからでも、ご一緒できます。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31885,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52524,
+              "wastedMs": 300
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/services.css?v=20261119-mobile",
+              "transferSize": 12815,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27226,
+              "wastedMs": 150
+            }
+          ]
+        }
+      ],
+      "median": {
+        "performance": 0.75,
+        "FCP": 1684.6435000000001,
+        "LCP": 7973.269499999999,
+        "CLS": 0,
+        "TBT": 0,
+        "renderDelay": 606.7209999694825,
+        "totalTransfer": 1295628,
+        "externalFontTransfer": 0,
+        "notoSansJpFontBodyTransfer": 0,
+        "manropeFontBodyTransfer": 0,
+        "fontAwesomeTransfer": 0,
+        "fontCssTransfer": 153116
+      },
+      "lcpElements": [
+        {
+          "selector": "div#top > div.svc-shell > div.svc-hero-copy > p.svc-hero-detail",
+          "snippet": "<p class=\"svc-hero-detail\">",
+          "nodeLabel": "経営の目的や現在の体制に合わせて、必要な支援を選び、組み合わせることができます。戦略の相談からでも、日々の運用や具体的なプロジェクトからでも、ご一緒できます。"
+        }
+      ],
+      "renderBlocking": [
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+          "transferSize": 52522,
+          "wastedMs": 300
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/services.css?v=20261119-mobile",
+          "transferSize": 12814,
+          "wastedMs": 150
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "transferSize": 31891,
+          "wastedMs": 150
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "transferSize": 27216,
+          "wastedMs": 150
+        }
+      ]
+    },
+    "contact": {
+      "samples": [
+        {
+          "run": 1,
+          "performance": 0.78,
+          "FCP": 2242.601,
+          "LCP": 5425.738000000001,
+          "CLS": 0,
+          "TBT": 0,
+          "renderDelay": 297.687,
+          "totalTransfer": 715760,
+          "externalFontTransfer": 0,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153125,
+          "lcpElement": {
+            "selector": "main#top > div.contact-hero > div.contact-hero-inner > p",
+            "snippet": "<p>",
+            "nodeLabel": "課題が整理できていなくても、依頼したいサービスが決まっていなくても構いません。事業のこと、ITのこと。気になるところからお聞かせください。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31901,
+              "wastedMs": 450
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/contact.css?v=20261119-mobile",
+              "transferSize": 7313,
+              "wastedMs": 0
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52549,
+              "wastedMs": 600
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27216,
+              "wastedMs": 300
+            }
+          ]
+        },
+        {
+          "run": 2,
+          "performance": 0.86,
+          "FCP": 1523.797,
+          "LCP": 4223.7970000000005,
+          "CLS": 0,
+          "TBT": 0,
+          "renderDelay": 290.692,
+          "totalTransfer": 722320,
+          "externalFontTransfer": 0,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153125,
+          "lcpElement": {
+            "selector": "main#top > div.contact-hero > div.contact-hero-inner > p",
+            "snippet": "<p>",
+            "nodeLabel": "課題が整理できていなくても、依頼したいサービスが決まっていなくても構いません。事業のこと、ITのこと。気になるところからお聞かせください。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52498,
+              "wastedMs": 300
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31916,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/contact.css?v=20261119-mobile",
+              "transferSize": 7313,
+              "wastedMs": 0
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27207,
+              "wastedMs": 150
+            }
+          ]
+        },
+        {
+          "run": 3,
+          "performance": 0.78,
+          "FCP": 2315.1215,
+          "LCP": 5294.974999999999,
+          "CLS": 0,
+          "TBT": 0,
+          "renderDelay": 282.403,
+          "totalTransfer": 726161,
+          "externalFontTransfer": 0,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153139,
+          "lcpElement": {
+            "selector": "main#top > div.contact-hero > div.contact-hero-inner > p",
+            "snippet": "<p>",
+            "nodeLabel": "課題が整理できていなくても、依頼したいサービスが決まっていなくても構いません。事業のこと、ITのこと。気になるところからお聞かせください。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/contact.css?v=20261119-mobile",
+              "transferSize": 7313,
+              "wastedMs": 0
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52498,
+              "wastedMs": 600
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31925,
+              "wastedMs": 450
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27207,
+              "wastedMs": 300
+            }
+          ]
+        }
+      ],
+      "median": {
+        "performance": 0.78,
+        "FCP": 2242.601,
+        "LCP": 5294.974999999999,
+        "CLS": 0,
+        "TBT": 0,
+        "renderDelay": 290.692,
+        "totalTransfer": 722320,
+        "externalFontTransfer": 0,
+        "notoSansJpFontBodyTransfer": 0,
+        "manropeFontBodyTransfer": 0,
+        "fontAwesomeTransfer": 0,
+        "fontCssTransfer": 153125
+      },
+      "lcpElements": [
+        {
+          "selector": "main#top > div.contact-hero > div.contact-hero-inner > p",
+          "snippet": "<p>",
+          "nodeLabel": "課題が整理できていなくても、依頼したいサービスが決まっていなくても構いません。事業のこと、ITのこと。気になるところからお聞かせください。"
+        }
+      ],
+      "renderBlocking": [
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+          "transferSize": 52498,
+          "wastedMs": 600
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "transferSize": 31916,
+          "wastedMs": 450
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "transferSize": 27207,
+          "wastedMs": 300
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/contact.css?v=20261119-mobile",
+          "transferSize": 7313,
+          "wastedMs": 0
+        }
+      ]
+    },
+    "company": {
+      "samples": [
+        {
+          "run": 1,
+          "performance": 0.87,
+          "FCP": 1675.8605,
+          "LCP": 3925.8605,
+          "CLS": 0,
+          "TBT": 0,
+          "renderDelay": 477.091,
+          "totalTransfer": 476472,
+          "externalFontTransfer": 0,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153125,
+          "lcpElement": {
+            "selector": "main > section#origin > div.company-reading > p",
+            "snippet": "<p>",
+            "nodeLabel": "atLIBという社名には、「Let It Be（あるがまま）」という想いを込めています。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31893,
+              "wastedMs": 300
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/company.css?v=20261119-mobile",
+              "transferSize": 9978,
+              "wastedMs": 0
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52522,
+              "wastedMs": 300
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27207,
+              "wastedMs": 150
+            }
+          ]
+        },
+        {
+          "run": 2,
+          "performance": 0.87,
+          "FCP": 1671.0175,
+          "LCP": 3921.0175,
+          "CLS": 0,
+          "TBT": 0,
+          "renderDelay": 358.911,
+          "totalTransfer": 476502,
+          "externalFontTransfer": 0,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153148,
+          "lcpElement": {
+            "selector": "main > section#origin > div.company-reading > p",
+            "snippet": "<p>",
+            "nodeLabel": "atLIBという社名には、「Let It Be（あるがまま）」という想いを込めています。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31892,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27169,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/company.css?v=20261119-mobile",
+              "transferSize": 9970,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52571,
+              "wastedMs": 300
+            }
+          ]
+        },
+        {
+          "run": 3,
+          "performance": 0.87,
+          "FCP": 1673.0445,
+          "LCP": 3923.0445,
+          "CLS": 0,
+          "TBT": 0,
+          "renderDelay": 359.501,
+          "totalTransfer": 476494,
+          "externalFontTransfer": 0,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153148,
+          "lcpElement": {
+            "selector": "main > section#origin > div.company-reading > p",
+            "snippet": "<p>",
+            "nodeLabel": "atLIBという社名には、「Let It Be（あるがまま）」という想いを込めています。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31892,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/company.css?v=20261119-mobile",
+              "transferSize": 9969,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27177,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52561,
+              "wastedMs": 300
+            }
+          ]
+        }
+      ],
+      "median": {
+        "performance": 0.87,
+        "FCP": 1673.0445,
+        "LCP": 3923.0445,
+        "CLS": 0,
+        "TBT": 0,
+        "renderDelay": 359.501,
+        "totalTransfer": 476494,
+        "externalFontTransfer": 0,
+        "notoSansJpFontBodyTransfer": 0,
+        "manropeFontBodyTransfer": 0,
+        "fontAwesomeTransfer": 0,
+        "fontCssTransfer": 153148
+      },
+      "lcpElements": [
+        {
+          "selector": "main > section#origin > div.company-reading > p",
+          "snippet": "<p>",
+          "nodeLabel": "atLIBという社名には、「Let It Be（あるがまま）」という想いを込めています。"
+        }
+      ],
+      "renderBlocking": [
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+          "transferSize": 52561,
+          "wastedMs": 300
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "transferSize": 31892,
+          "wastedMs": 150
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/company.css?v=20261119-mobile",
+          "transferSize": 9970,
+          "wastedMs": 150
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "transferSize": 27177,
+          "wastedMs": 150
+        }
+      ]
+    },
+    "works": {
+      "samples": [
+        {
+          "run": 1,
+          "performance": 0.87,
+          "FCP": 1614.5645,
+          "LCP": 3924.5645000000004,
+          "CLS": 0,
+          "TBT": 32,
+          "renderDelay": 469.37100003051756,
+          "totalTransfer": 473219,
+          "externalFontTransfer": 0,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153148,
+          "lcpElement": {
+            "selector": "div#container > div#top > div.works-hero-inner > h1",
+            "snippet": "<h1>",
+            "nodeLabel": "企業の可能性を広げる、私たちの仕事。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31902,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27177,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/works.css?v=20261119-mobile",
+              "transferSize": 4705,
+              "wastedMs": 0
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52561,
+              "wastedMs": 300
+            }
+          ]
+        },
+        {
+          "run": 2,
+          "performance": 0.87,
+          "FCP": 1675.1075,
+          "LCP": 3925.1075,
+          "CLS": 0,
+          "TBT": 0,
+          "renderDelay": 332.6,
+          "totalTransfer": 473212,
+          "externalFontTransfer": 0,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153148,
+          "lcpElement": {
+            "selector": "div#container > div#top > div.works-hero-inner > h1",
+            "snippet": "<h1>",
+            "nodeLabel": "企業の可能性を広げる、私たちの仕事。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31901,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27168,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52521,
+              "wastedMs": 300
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/works.css?v=20261119-mobile",
+              "transferSize": 4744,
+              "wastedMs": 150
+            }
+          ]
+        },
+        {
+          "run": 3,
+          "performance": 0.87,
+          "FCP": 1557.134,
+          "LCP": 3943.134,
+          "CLS": 0,
+          "TBT": 86,
+          "renderDelay": 487.2090000305176,
+          "totalTransfer": 473033,
+          "externalFontTransfer": 0,
+          "notoSansJpFontBodyTransfer": 0,
+          "manropeFontBodyTransfer": 0,
+          "fontAwesomeTransfer": 0,
+          "fontCssTransfer": 153125,
+          "lcpElement": {
+            "selector": "div#container > div#top > div.works-hero-inner > h1",
+            "snippet": "<h1>",
+            "nodeLabel": "企業の可能性を広げる、私たちの仕事。"
+          },
+          "renderBlocking": [
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+              "transferSize": 52516,
+              "wastedMs": 300
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+              "transferSize": 31916,
+              "wastedMs": 150
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/works.css?v=20261119-mobile",
+              "transferSize": 4705,
+              "wastedMs": 0
+            },
+            {
+              "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+              "transferSize": 27216,
+              "wastedMs": 150
+            }
+          ]
+        }
+      ],
+      "median": {
+        "performance": 0.87,
+        "FCP": 1614.5645,
+        "LCP": 3925.1075,
+        "CLS": 0,
+        "TBT": 32,
+        "renderDelay": 469.37100003051756,
+        "totalTransfer": 473212,
+        "externalFontTransfer": 0,
+        "notoSansJpFontBodyTransfer": 0,
+        "manropeFontBodyTransfer": 0,
+        "fontAwesomeTransfer": 0,
+        "fontCssTransfer": 153148
+      },
+      "lcpElements": [
+        {
+          "selector": "div#container > div#top > div.works-hero-inner > h1",
+          "snippet": "<h1>",
+          "nodeLabel": "企業の可能性を広げる、私たちの仕事。"
+        }
+      ],
+      "renderBlocking": [
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/corporate-r5-base.css?v=20261127-r5b",
+          "transferSize": 52521,
+          "wastedMs": 300
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "transferSize": 31902,
+          "wastedMs": 150
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "transferSize": 27177,
+          "wastedMs": 150
+        },
+        {
+          "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/css/works.css?v=20261119-mobile",
+          "transferSize": 4705,
+          "wastedMs": 0
+        }
+      ]
+    }
+  },
+  "failures": [],
+  "homeOptionalImages": [
+    {
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/images/concept.jpg",
+      "medianTransfer": 75147
+    },
+    {
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/images/mainimg2_s.jpg",
+      "medianTransfer": 41996
+    },
+    {
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/images/mainimg3_s.jpg",
+      "medianTransfer": 35261
+    }
+  ]
+}

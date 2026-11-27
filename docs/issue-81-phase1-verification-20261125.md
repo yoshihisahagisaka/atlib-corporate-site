@@ -182,3 +182,11 @@ Final CDP Browser Gate: 14/14 PASS at 320, 390, 650, 651, 768, 1024, and 1440 CS
 - Machine-readable evidence: `docs/evidence/issue-81-browser/browser-gate-v4.json`. Full-page evidence: `docs/evidence/issue-81-browser/{home,services,company,works,contact}-v4-{320,390,1440,1920}-full.png`; home/services focused evidence is also recorded at those widths. The 768 px viewport and geometry result is recorded in the machine-readable Gate; computed opacity/visibility was separately confirmed as `1` / `visible`.
 - Overlay allowlist is exactly ten paths: the prior nine paths plus `public/css/corporate-r5-base.css`; candidate context is eleven files. Existing protected shared CSS, image, JavaScript, service LP, Recruit, and server behavior gates remain fail-closed.
 - This gate did not run Cloud Build, image scan, deploy, traffic changes, form submission, or merge. The Staging direct URL still does not represent Cloud CDN compression; performance must be remeasured only after a separately approved candidate deployment.
+
+## R5-B tagged-Revision mobile Performance Gate (2026-11-27)
+
+- Measured `corporate-site-staging-00041-pow` at immutable digest `sha256:d15a905ad2a2f44d864e6e0ebe99b528d3006e444ddfced19ce995435be812f4`; the tagged Revision remained 0% while `corporate-site-staging-00031-kot` remained 100%.
+- Lighthouse 12.8.2 produced 15/15 valid mobile reports: five pages x three runs. Performance medians are Home 76, Services 75, Contact 78, Company 87, and Works 87. All pass the approved 70 target.
+- Compared with R4's median 56, the improvement is +19 to +31 points. Mobile Noto Sans JP / Manrope font-body and Font Awesome external transfers are 0 on every run; the approved Home-only Klee One subset remains.
+- Detailed metrics, LCP targets/render delay, render-blocking resources, total transfer, optional Home reductions, and R4 comparison are in `docs/pr82-r5b-staging-performance-20261127.md` and `docs/evidence/issue-81-r5b/`.
+- No additional performance implementation is required by this Gate. No form POST, Build, Scan, Deploy, traffic, GCP configuration, or merge operation was performed.

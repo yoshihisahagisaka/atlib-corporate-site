@@ -1,0 +1,218 @@
+{
+  "version": "12.8.2",
+  "origin": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app",
+  "profile": "mobile",
+  "results": [
+    {
+      "run": 1,
+      "page": "home",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/",
+      "score": 0.77,
+      "metrics": {
+        "first-contentful-paint": 2506.212,
+        "largest-contentful-paint": 5445.183,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 0,
+        "speed-index": 2506.212,
+        "server-response-time": 27.068
+      }
+    },
+    {
+      "run": 1,
+      "page": "services",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/services/",
+      "score": 0.75,
+      "metrics": {
+        "first-contentful-paint": 1830.5325,
+        "largest-contentful-paint": 7905.5325,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 0,
+        "speed-index": 1830.5325,
+        "server-response-time": 15.435
+      }
+    },
+    {
+      "run": 1,
+      "page": "contact",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/contact/",
+      "score": 0.78,
+      "metrics": {
+        "first-contentful-paint": 2242.601,
+        "largest-contentful-paint": 5425.738000000001,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 0,
+        "speed-index": 2242.601,
+        "server-response-time": 24.346999999999998
+      }
+    },
+    {
+      "run": 1,
+      "page": "company",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/company/",
+      "score": 0.87,
+      "metrics": {
+        "first-contentful-paint": 1675.8605,
+        "largest-contentful-paint": 3925.8605,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 0,
+        "speed-index": 1675.8605,
+        "server-response-time": 16.708000000000002
+      }
+    },
+    {
+      "run": 1,
+      "page": "works",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/works/",
+      "score": 0.87,
+      "metrics": {
+        "first-contentful-paint": 1614.5645,
+        "largest-contentful-paint": 3924.5645000000004,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 32,
+        "speed-index": 1614.5645,
+        "server-response-time": 17.830000000000002
+      }
+    },
+    {
+      "run": 2,
+      "page": "home",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/",
+      "score": 0.76,
+      "metrics": {
+        "first-contentful-paint": 2513.457,
+        "largest-contentful-paint": 5588.904,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 0,
+        "speed-index": 2513.457,
+        "server-response-time": 16.633
+      }
+    },
+    {
+      "run": 2,
+      "page": "services",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/services/",
+      "score": 0.75,
+      "metrics": {
+        "first-contentful-paint": 1684.6435000000001,
+        "largest-contentful-paint": 7984.6435,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 0,
+        "speed-index": 1684.6435000000001,
+        "server-response-time": 16.726999999999997
+      }
+    },
+    {
+      "run": 2,
+      "page": "contact",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/contact/",
+      "score": 0.86,
+      "metrics": {
+        "first-contentful-paint": 1523.797,
+        "largest-contentful-paint": 4223.7970000000005,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 0,
+        "speed-index": 1523.797,
+        "server-response-time": 18.071
+      }
+    },
+    {
+      "run": 2,
+      "page": "company",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/company/",
+      "score": 0.87,
+      "metrics": {
+        "first-contentful-paint": 1671.0175,
+        "largest-contentful-paint": 3921.0175,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 0,
+        "speed-index": 1671.0175,
+        "server-response-time": 13.896
+      }
+    },
+    {
+      "run": 2,
+      "page": "works",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/works/",
+      "score": 0.87,
+      "metrics": {
+        "first-contentful-paint": 1675.1075,
+        "largest-contentful-paint": 3925.1075,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 0,
+        "speed-index": 1675.1075,
+        "server-response-time": 16.019
+      }
+    },
+    {
+      "run": 3,
+      "page": "home",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/",
+      "score": 0.76,
+      "metrics": {
+        "first-contentful-paint": 2490.3770000000004,
+        "largest-contentful-paint": 5582.570000000001,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 0,
+        "speed-index": 2490.3770000000004,
+        "server-response-time": 18.787
+      }
+    },
+    {
+      "run": 3,
+      "page": "services",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/services/",
+      "score": 0.75,
+      "metrics": {
+        "first-contentful-paint": 1673.2694999999999,
+        "largest-contentful-paint": 7973.269499999999,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 7,
+        "speed-index": 1673.2694999999999,
+        "server-response-time": 19.441000000000003
+      }
+    },
+    {
+      "run": 3,
+      "page": "contact",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/contact/",
+      "score": 0.78,
+      "metrics": {
+        "first-contentful-paint": 2315.1215,
+        "largest-contentful-paint": 5294.974999999999,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 0,
+        "speed-index": 2315.1215,
+        "server-response-time": 17.224999999999998
+      }
+    },
+    {
+      "run": 3,
+      "page": "company",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/company/",
+      "score": 0.87,
+      "metrics": {
+        "first-contentful-paint": 1673.0445,
+        "largest-contentful-paint": 3923.0445,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 0,
+        "speed-index": 1673.0445,
+        "server-response-time": 19.53
+      }
+    },
+    {
+      "run": 3,
+      "page": "works",
+      "url": "https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app/works/",
+      "score": 0.87,
+      "metrics": {
+        "first-contentful-paint": 1557.134,
+        "largest-contentful-paint": 3943.134,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 86,
+        "speed-index": 1557.134,
+        "server-response-time": 15.135000000000002
+      }
+    }
+  ],
+  "failures": []
+}
