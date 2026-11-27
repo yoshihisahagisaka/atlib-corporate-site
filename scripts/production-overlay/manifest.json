@@ -3,7 +3,7 @@
   "issue": 81,
   "pullRequest": 82,
   "baseCommit": "45533d6c3e6e2995499fb3923230992442156105",
-  "headCommit": "401f4e294854eec0c74c245e7b1c1dcee5a3eb37",
+  "headCommit": "fa39da1fe04a583411591ef8034386f2411e53ee",
   "productionRevision": "corporate-site-imv-20261123071048",
   "baseImage": "asia-northeast1-docker.pkg.dev/atlib-corporate-site/cloud-run-source-deploy/corporate-site-recruit-overlay@sha256:0653f45d969ff4eaab604534adb3cbc0ed8c856e722e2e76546f0a9babc46baa",
   "allowedFiles": [
@@ -15,7 +15,8 @@
     "public/css/atlib-service-renewal.css",
     "public/images/partner_logo_mixi.png",
     "public/images/isms-gcerti-gijp-1167-ic.png",
-    "public/llms.txt"
+    "public/llms.txt",
+    "public/css/corporate-r5-base.css"
   ],
   "protectedTrees": [
     "public/images",

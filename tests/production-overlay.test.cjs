@@ -8,7 +8,7 @@ const { execFileSync, spawnSync } = require('node:child_process');
 const test = require('node:test');
 const { protectedBlocks, verifyOverlay } = require('../scripts/production-overlay/overlay-verifier.cjs');
 
-const allowed = ['public/index.html','public/services/index.html','public/company/index.html','public/works/index.html','public/contact/index.html','public/css/atlib-service-renewal.css','public/images/partner_logo_mixi.png','public/images/isms-gcerti-gijp-1167-ic.png','public/llms.txt'];
+const allowed = ['public/index.html','public/services/index.html','public/company/index.html','public/works/index.html','public/contact/index.html','public/css/atlib-service-renewal.css','public/images/partner_logo_mixi.png','public/images/isms-gcerti-gijp-1167-ic.png','public/llms.txt','public/css/corporate-r5-base.css'];
 const manifest = { allowedFiles: allowed, protectedTrees: ['public/images','public/js'], protectedFiles: ['public/css/style.css','public/css/atlib.css','public/css/services.css'] };
 const home = (renewal = '') => `<div class="mainimg">hero</div><div class="brand-line"></div>${renewal}<section class="work-section">works</section><section class="strengths-section"></section><section class="motion-section">gallery</section><section class="mission-section">mission</section><section class="contact-section"></section>`;
 function write(root, relative, value) { const target = path.join(root, relative); fs.mkdirSync(path.dirname(target), { recursive: true }); fs.writeFileSync(target, value); }
@@ -28,6 +28,7 @@ function fixture() {
   write(candidate, 'public/images/partner_logo_mixi.png', 'official-mixi');
   write(candidate, 'public/images/isms-gcerti-gijp-1167-ic.png', 'official-isms');
   write(candidate, 'public/llms.txt', 'updated-llms');
+  write(candidate, 'public/css/corporate-r5-base.css', 'corporate-r5-css');
   return { root, base, candidate };
 }
 

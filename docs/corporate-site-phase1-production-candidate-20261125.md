@@ -2,7 +2,7 @@
 
 Status: preparation only / Production NO-GO  
 Issue: #81 / Draft PR: #82  
-Approved source: `401f4e294854eec0c74c245e7b1c1dcee5a3eb37`
+Approved source: `fa39da1fe04a583411591ef8034386f2411e53ee`
 Git base: `45533d6c3e6e2995499fb3923230992442156105`
 
 ## Production read-back (2026-11-25 JST)
@@ -20,9 +20,9 @@ No Cloud Build, Artifact Registry push, Cloud Run deploy/traffic update, IAM/Sec
 
 ## Overlay contract
 
-The candidate is derived from the immutable Production image, not from the Git Dockerfile. `prepare-production-overlay.ps1` extracts `/app` from that digest, generates the exact approved Git Base-to-content-HEAD diff for the allowlist, requires `git apply --check` against the extracted Production files, applies it once, then verifies the full before/after trees. A candidate cannot be prepared when a patch hunk is ambiguous or inapplicable. A later evidence/control commit is permitted only when the nine current content blobs remain byte-identical to approved content HEAD `401f4e294854eec0c74c245e7b1c1dcee5a3eb37`.
+The candidate is derived from the immutable Production image, not from the Git Dockerfile. `prepare-production-overlay.ps1` extracts `/app` from that digest, generates the exact approved Git Base-to-content-HEAD diff for the allowlist, requires `git apply --check` against the extracted Production files, applies it once, then verifies the full before/after trees. A candidate cannot be prepared when a patch hunk is ambiguous or inapplicable. A later evidence/control commit is permitted only when the ten current content blobs remain byte-identical to approved content HEAD `fa39da1fe04a583411591ef8034386f2411e53ee`.
 
-Only these nine paths may differ:
+Only these ten paths may differ:
 
 1. `public/index.html`
 2. `public/services/index.html`
@@ -33,12 +33,13 @@ Only these nine paths may differ:
 7. `public/images/partner_logo_mixi.png` (explicit official-asset exception)
 8. `public/images/isms-gcerti-gijp-1167-ic.png` (explicit official-asset exception)
 9. `public/llms.txt`
+10. `public/css/corporate-r5-base.css`
 
-The resulting Dockerfile uses the exact Production digest as `FROM` and has nine explicit `COPY` statements. It never copies Git's complete `public` tree. The manifest is `scripts/production-overlay/manifest.json`.
+The resulting Dockerfile uses the exact Production digest as `FROM` and has ten explicit `COPY` statements. It never copies Git's complete `public` tree. The manifest is `scripts/production-overlay/manifest.json`.
 
 ## Preservation and difference gate
 
-`overlay-verifier.cjs` hashes every extracted file before and after. It fails on any changed path outside the nine-file allowlist and separately protects:
+`overlay-verifier.cjs` hashes every extracted file before and after. It fails on any changed path outside the ten-file allowlist and separately protects:
 
 - all `public/images/**` and `public/js/**` files except the two individually allowlisted official logo assets;
 - `public/css/style.css`, `public/css/atlib.css`, and `public/css/services.css`;
@@ -81,12 +82,12 @@ bash scripts/production-overlay/prepare-production-overlay.sh "$HOME/atlib-produ
 Expected artifact directory:
 
 ```bash
-ARTIFACT_ROOT="$HOME/atlib-production-overlay-artifacts/401f4e294854eec0c74c245e7b1c1dcee5a3eb37"
+ARTIFACT_ROOT="$HOME/atlib-production-overlay-artifacts/fa39da1fe04a583411591ef8034386f2411e53ee"
 jq . "$ARTIFACT_ROOT/overlay-verification.json"
 cat "$ARTIFACT_ROOT/build-context.sha256"
 ```
 
-The script verifies that the nine checked-out content blobs remain identical to approved content HEAD `401f4e294854eec0c74c245e7b1c1dcee5a3eb37`; therefore the later control/evidence commit may differ without changing candidate content. Earlier Build, Scan, and Deploy evidence belongs to the previous candidate and is not valid for this content HEAD.
+The script verifies that the ten checked-out content blobs remain identical to approved content HEAD `fa39da1fe04a583411591ef8034386f2411e53ee`; therefore the later control/evidence commit may differ without changing candidate content. Earlier Build, Scan, and Deploy evidence belongs to the previous candidate and is not valid for this content HEAD.
 
 The subsequent commands are intentionally separate and must only be run under their corresponding approvals:
 
@@ -108,9 +109,9 @@ The isolated run.app URL is evidence of Revision reachability only. It is not a 
 
 ## Execution sequence for a separately approved gate
 
-1. Use a clean worktree. The preparation script verifies all nine content blobs against the manifest content HEAD, independently of a later evidence/control commit. Run `npm ci`, Build, `test:corporate-renewal`, `test:production-overlay`, `test:service-web`, and the established baseline suite.
+1. Use a clean worktree. The preparation script verifies all ten content blobs against the manifest content HEAD, independently of a later evidence/control commit. Run `npm ci`, Build, `test:corporate-renewal`, `test:production-overlay`, `test:service-web`, and the established baseline suite.
 2. On a Windows host or Cloud Shell with Docker and authenticated Artifact Registry access, run `prepare-production-overlay.ps1`. Do not reuse an existing output directory.
-3. Review `approved.patch`, `overlay-verification.json`, the nine candidate files, and Production transformation checks.
+3. Review `approved.patch`, `overlay-verification.json`, the ten candidate files, and Production transformation checks.
 4. With explicit Build approval, call `build-production-candidate.ps1 -Execute` using a new unique tag. Record Build ID and immutable digest; never overwrite an existing tag.
 5. With explicit scan approval, call `scan-production-candidate.ps1 -Execute` once. Retrieve the Operation/Scan IDs and all vulnerabilities. Critical 0 / High 0 is required; unresolved scan state is not PASS.
 6. Reconfirm Production revision/digest/traffic/settings. With separate deployment approval, call `deploy-isolated-candidate.ps1 -Execute`. Existing Production stays 100%; candidate remains 0% and tagged.
@@ -124,11 +125,11 @@ Scan the built immutable digest only. Record Build ID, image digest, Operation I
 
 ## STOP conditions
 
-- approved content HEAD/base, nine-file blob, or clean-worktree mismatch;
+- approved content HEAD/base, ten-file blob, or clean-worktree mismatch;
 - Production revision, digest, 100% traffic, SA, Secret references, ingress, scaling, concurrency, or public-mode state differs from the approved read-back;
 - Docker/Artifact Registry access unavailable;
 - Base→HEAD patch is not uniquely applicable to extracted Production HTML;
-- any path outside the nine-file manifest changes;
+- any path outside the ten-file manifest changes;
 - any protected asset or protected HTML block hash changes;
 - Production-public transformation, host boundary, LP/Recruit/policy/contact behavior is lost;
 - build, digest read-back, vulnerability scan, isolated deploy, or setting comparison fails or becomes unknown;
@@ -142,7 +143,7 @@ Scan the built immutable digest only. Record Build ID, image digest, Operation I
 - Renewal contract tests: 9 PASS / 0 FAIL.
 - Service-web regression tests: 7 PASS / 0 FAIL.
 - Established baseline suite: 26 PASS / 3 known FAIL; no FAIL increase.
-- Overlay and Cloud Shell contract tests: 7 PASS / 0 FAIL, including exact nine-file Base-to-HEAD diff, protected home blocks, unauthorized JS rejection, build-context allowlisting, and independent Gate contracts.
+- Overlay and Cloud Shell contract tests: 7 PASS / 0 FAIL, including exact ten-file Base-to-HEAD diff, protected home blocks, unauthorized JS rejection, build-context allowlisting, and independent Gate contracts.
 - PowerShell parser validation for all prepared scripts: PASS.
 - Bash parser validation for all Cloud Shell scripts: PASS.
 - Explicit-approval STOP tests for Build, Scan, and isolated Deploy: 3 PASS / 0 FAIL.
