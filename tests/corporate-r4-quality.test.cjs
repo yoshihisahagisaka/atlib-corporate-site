@@ -29,7 +29,7 @@ test('R4 metadata, entity identity and publication controls',()=>{
 });
 test('R4 services use only confirmed services, with descriptive visible links',()=>{
  const s=read('services/index.html'),g=graph(s),services=g.filter(x=>x['@type']==='Service');
- assert.deepEqual(services.map(x=>x.name),['IT経営KAIZEN','業務KAIZEN','セキュリティコンサルティング','カジュアルコンサル']);
+ assert.deepEqual(services.map(x=>x.name),['IT経営KAIZEN','業務KAIZEN','セキュリティコンサルティング','カジュアルコンサル','SECU:MIE WEB','SECU:MIE Insight']);
  for(const svc of services){assert.equal(svc.provider['@id'],base+'#organization');assert.ok(s.includes(svc.name));}
  for(const f of ['index.html','services/index.html'])for(const name of ['IT経営KAIZEN','業務KAIZEN'])assert.ok(read(f).includes(name+'の詳細を見る'));
  assert.match(s,/<h3 class="renewal-business-heading">業務から考える、Webシステム開発。<\/h3>/u);
@@ -48,7 +48,7 @@ test('R4 note banner is accessible, original and outside protected blocks',()=>{
  assert.match(m[0],/<h2 id="renewal-note-title">ITのこと、経営のこと。<\/h2>/u);
  assert.match(m[0],/<svg[^>]+aria-hidden="true" focusable="false"/u);
  assert.doesNotMatch(m[0],/<(?:img|script|button|iframe)\b/u);
- assert.match(s,/fonts\.googleapis\.com\/css2\?family=Klee\+One:wght@600&amp;display=swap&amp;text=/u);
+ assert.match(s,/fonts\.googleapis\.com\/css2\?family=M\+PLUS\+Rounded\+1c:wght@700&amp;display=swap&amp;text=/u);
  assert.match(css,/\.renewal-note-banner:focus-visible/u);
- for(const f of Object.keys(pages).filter(x=>x!=='index.html'))assert.doesNotMatch(read(f),/renewal-note-section|Klee\+One/u);
+ for(const f of Object.keys(pages).filter(x=>x!=='index.html'))assert.doesNotMatch(read(f),/renewal-note-section|M\+PLUS\+Rounded\+1c|Klee\+One/u);
 });

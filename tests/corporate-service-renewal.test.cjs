@@ -19,7 +19,8 @@ test('approved Phase 1 service hierarchy and public links are present', () => {
     'https://sales.atlib.jp/it-management-kaizen/free-diagnosis/',
     'https://service.atlib.jp/business-web/',
     'https://service.atlib.jp/business-web/self-check/',
-    'https://www.atlib.jp/secumie-web/',
+    'https://service.atlib.jp/secumie-web/',
+    'https://service.atlib.jp/secumie-insight/',
   ]) assert.match(home, new RegExp(`href="${href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`));
 });
 
