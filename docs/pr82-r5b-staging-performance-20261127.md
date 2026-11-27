@@ -1,11 +1,11 @@
 # PR #82 R5-B Staging mobile performance measurement
 
-Date: 2026-11-27 JST  
-Scope: read-only measurement and analysis  
-Content HEAD: `fa39da1fe04a583411591ef8034386f2411e53ee`  
-Control HEAD at measurement start: `7f5adcdf24cb170a9a77e73041fab07d935b4786`  
-Revision: `corporate-site-staging-00041-pow`  
-Image: `sha256:d15a905ad2a2f44d864e6e0ebe99b528d3006e444ddfced19ce995435be812f4`  
+Date: 2026-11-27 JST
+Scope: read-only measurement and analysis
+Content HEAD: `fa39da1fe04a583411591ef8034386f2411e53ee`
+Control HEAD at measurement start: `7f5adcdf24cb170a9a77e73041fab07d935b4786`
+Revision: `corporate-site-staging-00041-pow`
+Image: `sha256:d15a905ad2a2f44d864e6e0ebe99b528d3006e444ddfced19ce995435be812f4`
 URL: `https://r5b-1127034348---corporate-site-staging-y6htingfbq-an.a.run.app`
 
 ## Integrity and method
