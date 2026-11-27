@@ -1,0 +1,1499 @@
+{
+  "version": "12.8.2",
+  "origin": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app",
+  "lab_only": true,
+  "note": "Single-run lab measurements, not field Core Web Vitals; staging noindex is intentional; automated accessibility does not establish WCAG conformance. Missing audit IDs depend on Lighthouse version. No score threshold is asserted.",
+  "results": [
+    {
+      "page": "home",
+      "profile": "mobile",
+      "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/",
+      "scores": {
+        "performance": 0.56,
+        "accessibility": 0.91,
+        "seo": 0.69
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 11695.947,
+          "numericUnit": "millisecond",
+          "displayValue": "11.7 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0,
+          "numericUnit": "unitless",
+          "displayValue": "0"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 9641.903,
+          "numericUnit": "millisecond",
+          "displayValue": "9.6 s"
+        },
+        "speed-index": {
+          "numericValue": 9641.903,
+          "numericUnit": "millisecond",
+          "displayValue": "9.6 s"
+        },
+        "server-response-time": {
+          "numericValue": 30.41,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 30 ms"
+        },
+        "interactive": {
+          "numericValue": 11695.947,
+          "numericUnit": "millisecond",
+          "displayValue": "11.7 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 970 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 876 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 108 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "26 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 7,590 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "home",
+      "profile": "desktop",
+      "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/",
+      "scores": {
+        "performance": 0.72,
+        "accessibility": 0.91,
+        "seo": 0.69
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 2856.4090000000006,
+          "numericUnit": "millisecond",
+          "displayValue": "2.9 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0.0017472290363348708,
+          "numericUnit": "unitless",
+          "displayValue": "0.002"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 2123.59,
+          "numericUnit": "millisecond",
+          "displayValue": "2.1 s"
+        },
+        "speed-index": {
+          "numericValue": 2123.59,
+          "numericUnit": "millisecond",
+          "displayValue": "2.1 s"
+        },
+        "server-response-time": {
+          "numericValue": 16.115000000000002,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 2898.4090000000006,
+          "numericUnit": "millisecond",
+          "displayValue": "2.9 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 964 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 848 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 108 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "25 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 1,540 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "services",
+      "profile": "mobile",
+      "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/services/",
+      "scores": {
+        "performance": 0.56,
+        "accessibility": 0.94,
+        "seo": 0.69
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 15626.635000000004,
+          "numericUnit": "millisecond",
+          "displayValue": "15.6 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0,
+          "numericUnit": "unitless",
+          "displayValue": "0"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 10142.866000000002,
+          "numericUnit": "millisecond",
+          "displayValue": "10.1 s"
+        },
+        "speed-index": {
+          "numericValue": 10142.866000000002,
+          "numericUnit": "millisecond",
+          "displayValue": "10.1 s"
+        },
+        "server-response-time": {
+          "numericValue": 27.228,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 30 ms"
+        },
+        "interactive": {
+          "numericValue": 15626.635000000004,
+          "numericUnit": "millisecond",
+          "displayValue": "15.6 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 754 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 498 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 119 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "12 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 8,140 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "services",
+      "profile": "desktop",
+      "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/services/",
+      "scores": {
+        "performance": 0.72,
+        "accessibility": 0.94,
+        "seo": 0.69
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 2901.981999999999,
+          "numericUnit": "millisecond",
+          "displayValue": "2.9 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0.025210243355410087,
+          "numericUnit": "unitless",
+          "displayValue": "0.025"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 2155.572,
+          "numericUnit": "millisecond",
+          "displayValue": "2.2 s"
+        },
+        "speed-index": {
+          "numericValue": 2155.572,
+          "numericUnit": "millisecond",
+          "displayValue": "2.2 s"
+        },
+        "server-response-time": {
+          "numericValue": 18.731,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 2901.981999999999,
+          "numericUnit": "millisecond",
+          "displayValue": "2.9 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 754 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 519 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 119 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "12 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 1,590 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "contact",
+      "profile": "mobile",
+      "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/contact/",
+      "scores": {
+        "performance": 0.56,
+        "accessibility": 0.96,
+        "seo": 0.69
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 11129.085499999997,
+          "numericUnit": "millisecond",
+          "displayValue": "11.1 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0,
+          "numericUnit": "unitless",
+          "displayValue": "0"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 9523.4555,
+          "numericUnit": "millisecond",
+          "displayValue": "9.5 s"
+        },
+        "speed-index": {
+          "numericValue": 9523.4555,
+          "numericUnit": "millisecond",
+          "displayValue": "9.5 s"
+        },
+        "server-response-time": {
+          "numericValue": 15.418999999999999,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 11129.085499999997,
+          "numericUnit": "millisecond",
+          "displayValue": "11.1 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 120 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 108 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "11 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 6,970 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "contact",
+      "profile": "desktop",
+      "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/contact/",
+      "scores": {
+        "performance": 0.78,
+        "accessibility": 0.96,
+        "seo": 0.69
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 2191.3959999999997,
+          "numericUnit": "millisecond",
+          "displayValue": "2.2 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0.001565022256947522,
+          "numericUnit": "unitless",
+          "displayValue": "0.002"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 1973.6375000000003,
+          "numericUnit": "millisecond",
+          "displayValue": "2.0 s"
+        },
+        "speed-index": {
+          "numericValue": 1973.6375000000003,
+          "numericUnit": "millisecond",
+          "displayValue": "2.0 s"
+        },
+        "server-response-time": {
+          "numericValue": 14.846,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 10 ms"
+        },
+        "interactive": {
+          "numericValue": 2191.3959999999997,
+          "numericUnit": "millisecond",
+          "displayValue": "2.2 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 121 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 108 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "11 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 1,360 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "company",
+      "profile": "mobile",
+      "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/company/",
+      "scores": {
+        "performance": 0.56,
+        "accessibility": 0.96,
+        "seo": 0.69
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 12329.064000000004,
+          "numericUnit": "millisecond",
+          "displayValue": "12.3 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0,
+          "numericUnit": "unitless",
+          "displayValue": "0"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 11554.978999999998,
+          "numericUnit": "millisecond",
+          "displayValue": "11.6 s"
+        },
+        "speed-index": {
+          "numericValue": 11554.978999999998,
+          "numericUnit": "millisecond",
+          "displayValue": "11.6 s"
+        },
+        "server-response-time": {
+          "numericValue": 23.44,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 12329.064000000006,
+          "numericUnit": "millisecond",
+          "displayValue": "12.3 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 115 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 113 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "10 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 9,560 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "company",
+      "profile": "desktop",
+      "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/company/",
+      "scores": {
+        "performance": 0.73,
+        "accessibility": 0.96,
+        "seo": 0.69
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 2493.833500000001,
+          "numericUnit": "millisecond",
+          "displayValue": "2.5 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0.0015612874591526308,
+          "numericUnit": "unitless",
+          "displayValue": "0.002"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 2369.9905000000003,
+          "numericUnit": "millisecond",
+          "displayValue": "2.4 s"
+        },
+        "speed-index": {
+          "numericValue": 2369.9905000000003,
+          "numericUnit": "millisecond",
+          "displayValue": "2.4 s"
+        },
+        "server-response-time": {
+          "numericValue": 13.213000000000001,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 10 ms"
+        },
+        "interactive": {
+          "numericValue": 2493.8335000000015,
+          "numericUnit": "millisecond",
+          "displayValue": "2.5 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 120 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 113 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "10 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 1,770 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "works",
+      "profile": "mobile",
+      "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/works/",
+      "scores": {
+        "performance": 0.56,
+        "accessibility": 0.96,
+        "seo": 0.69
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 11219.756500000001,
+          "numericUnit": "millisecond",
+          "displayValue": "11.2 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0,
+          "numericUnit": "unitless",
+          "displayValue": "0"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 10750.244499999999,
+          "numericUnit": "millisecond",
+          "displayValue": "10.8 s"
+        },
+        "speed-index": {
+          "numericValue": 10750.244499999999,
+          "numericUnit": "millisecond",
+          "displayValue": "10.8 s"
+        },
+        "server-response-time": {
+          "numericValue": 18.660999999999998,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 11219.756500000001,
+          "numericUnit": "millisecond",
+          "displayValue": "11.2 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 120 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 111 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "10 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 8,750 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    },
+    {
+      "page": "works",
+      "profile": "desktop",
+      "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/works/",
+      "scores": {
+        "performance": 0.69,
+        "accessibility": 0.96,
+        "seo": 0.69
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "numericValue": 2812.2154999999993,
+          "numericUnit": "millisecond",
+          "displayValue": "2.8 s"
+        },
+        "cumulative-layout-shift": {
+          "numericValue": 0.0015632636823949741,
+          "numericUnit": "unitless",
+          "displayValue": "0.002"
+        },
+        "total-blocking-time": {
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms"
+        },
+        "first-contentful-paint": {
+          "numericValue": 2647.366499999999,
+          "numericUnit": "millisecond",
+          "displayValue": "2.6 s"
+        },
+        "speed-index": {
+          "numericValue": 2647.366499999999,
+          "numericUnit": "millisecond",
+          "displayValue": "2.6 s"
+        },
+        "server-response-time": {
+          "numericValue": 19.381,
+          "numericUnit": "millisecond",
+          "displayValue": "Root document took 20 ms"
+        },
+        "interactive": {
+          "numericValue": 2812.2154999999993,
+          "numericUnit": "millisecond",
+          "displayValue": "2.8 s"
+        }
+      },
+      "audits": {
+        "image-alt": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "label": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "color-contrast": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "heading-order": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "landmark-one-main": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "html-has-lang": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "link-name": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "button-name": {
+          "score": null,
+          "scoreDisplayMode": "notApplicable",
+          "displayValue": null
+        },
+        "unsized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": null
+        },
+        "uses-optimized-images": {
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": ""
+        },
+        "modern-image-formats": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 75 KiB"
+        },
+        "uses-responsive-images": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 121 KiB"
+        },
+        "uses-text-compression": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 111 KiB"
+        },
+        "uses-long-cache-ttl": {
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "10 resources found"
+        },
+        "render-blocking-resources": {
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 2,090 ms"
+        },
+        "canonical": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "is-crawlable": {
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "meta-description": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "document-title": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        },
+        "http-status-code": {
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "displayValue": null
+        }
+      }
+    }
+  ],
+  "failures": []
+}
