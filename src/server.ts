@@ -105,6 +105,9 @@ async function main(): Promise<void> {
     ['/company/', 'company/index.html'],
     ['/services/', 'services/index.html'],
     ['/works/', 'works/index.html'],
+    ['/services/casual-consulting/', 'services/casual-consulting/index.html'],
+    ['/services/security-consulting/', 'services/security-consulting/index.html'],
+    ['/guide/', 'guide/index.html'],
   ];
   for (const [route, htmlPath] of corporateRoutes) {
     app.get([route, route === '/' ? '/index.html' : `${route}index.html`], async (req, res, next) => {

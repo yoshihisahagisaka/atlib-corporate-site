@@ -1,0 +1,1233 @@
+{
+  "mode": "baseline",
+  "base": "https://www.atlib.jp",
+  "summary": {
+    "PASS": 135,
+    "FAIL": 1,
+    "INFO": 18
+  },
+  "findings": [
+    {
+      "level": "PASS",
+      "item": "/ status",
+      "detail": "200"
+    },
+    {
+      "level": "PASS",
+      "item": "/ TLS verification",
+      "detail": "0"
+    },
+    {
+      "level": "PASS",
+      "item": "/ lang",
+      "detail": "ja"
+    },
+    {
+      "level": "PASS",
+      "item": "/ H1",
+      "detail": "1"
+    },
+    {
+      "level": "PASS",
+      "item": "/ canonical",
+      "detail": "['https://www.atlib.jp/']"
+    },
+    {
+      "level": "PASS",
+      "item": "/ description",
+      "detail": "['経営とITをつなぐ。atLIB株式会社は、ITを目的ではなく事業を支える手段として捉え、IT戦略・DX、情シス支援、IT基盤構築、システム開発・自動化を通じて企業の挑戦と成長を支えます。']"
+    },
+    {
+      "level": "PASS",
+      "item": "/ og:title",
+      "detail": "['atLIB株式会社 | ITで、企業に自由を。']"
+    },
+    {
+      "level": "PASS",
+      "item": "/ og:description",
+      "detail": "['経営とITをつなぐ。IT戦略・DX、情シス支援、IT基盤構築、システム開発・自動化を通じて企業の挑戦を支えます。']"
+    },
+    {
+      "level": "PASS",
+      "item": "/ og:url",
+      "detail": "['https://www.atlib.jp/']"
+    },
+    {
+      "level": "PASS",
+      "item": "/ og:image",
+      "detail": "['https://www.atlib.jp/images/concept.jpg']"
+    },
+    {
+      "level": "PASS",
+      "item": "/ twitter:card",
+      "detail": "['summary_large_image']"
+    },
+    {
+      "level": "PASS",
+      "item": "/ public indexability",
+      "detail": "index,follow,max-image-preview:large / "
+    },
+    {
+      "level": "PASS",
+      "item": "/ x-content-type-options",
+      "detail": "nosniff"
+    },
+    {
+      "level": "PASS",
+      "item": "/ x-frame-options",
+      "detail": "SAMEORIGIN"
+    },
+    {
+      "level": "PASS",
+      "item": "/ referrer-policy",
+      "detail": "strict-origin-when-cross-origin"
+    },
+    {
+      "level": "PASS",
+      "item": "/ CSP default-src",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/ CSP base-uri",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/ CSP object-src",
+      "detail": "[\"'none'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/ CSP frame-ancestors",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/ CSP form-action",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/ CSP scripts",
+      "detail": "[\"'self'\", 'https://ajax.googleapis.com', 'https://cdnjs.cloudflare.com', 'https://challenges.cloudflare.com']"
+    },
+    {
+      "level": "PASS",
+      "item": "/ Permissions-Policy",
+      "detail": "camera=(), microphone=(), geolocation=()"
+    },
+    {
+      "level": "PASS",
+      "item": "/ HSTS",
+      "detail": "max-age=31536000; includeSubDomains"
+    },
+    {
+      "level": "INFO",
+      "item": "/ JSON-LD blocks",
+      "detail": "1"
+    },
+    {
+      "level": "INFO",
+      "item": "/ image dimensions missing",
+      "detail": [
+        "images/concept.jpg",
+        "images/mainimg2.jpg",
+        "images/mainimg3.jpg",
+        "images/landscape1.jpg",
+        "images/strengths2.jpg",
+        "images/concept.jpg",
+        "images/mainimg2.jpg",
+        "images/landscape1.jpg",
+        "images/strengths2.jpg",
+        "images/concept.jpg",
+        "images/mainimg2.jpg"
+      ]
+    },
+    {
+      "level": "PASS",
+      "item": "/ missing alt",
+      "detail": []
+    },
+    {
+      "level": "INFO",
+      "item": "/ transfer metrics",
+      "detail": {
+        "http_version": "1.1",
+        "encoding": "none",
+        "bytes_transferred": 19589,
+        "ttfb_seconds": 0.126243
+      }
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ status",
+      "detail": "200"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ TLS verification",
+      "detail": "0"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ lang",
+      "detail": "ja"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ H1",
+      "detail": "1"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ canonical",
+      "detail": "['https://www.atlib.jp/services/']"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ description",
+      "detail": "['atLIB株式会社のサービス紹介。IT経営KAIZEN、カジュアルコンサル、情シスアウトソーシング、業務KAIZEN、ITプロジェクト支援、セキュリティサービスなどをご紹介します。']"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ og:title",
+      "detail": "['サービス | atLIB株式会社']"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ og:description",
+      "detail": "['IT経営KAIZEN、IT戦略・DX、情シスアウトソーシング、業務KAIZEN、ITプロジェクト支援、セキュリティサービスをご紹介します。']"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ og:url",
+      "detail": "['https://www.atlib.jp/services/']"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ og:image",
+      "detail": "['https://www.atlib.jp/images/concept.jpg']"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ twitter:card",
+      "detail": "['summary_large_image']"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ public indexability",
+      "detail": "index,follow,max-image-preview:large / "
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ x-content-type-options",
+      "detail": "nosniff"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ x-frame-options",
+      "detail": "SAMEORIGIN"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ referrer-policy",
+      "detail": "strict-origin-when-cross-origin"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ CSP default-src",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ CSP base-uri",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ CSP object-src",
+      "detail": "[\"'none'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ CSP frame-ancestors",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ CSP form-action",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ CSP scripts",
+      "detail": "[\"'self'\", 'https://ajax.googleapis.com', 'https://cdnjs.cloudflare.com', 'https://challenges.cloudflare.com']"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ Permissions-Policy",
+      "detail": "camera=(), microphone=(), geolocation=()"
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ HSTS",
+      "detail": "max-age=31536000; includeSubDomains"
+    },
+    {
+      "level": "INFO",
+      "item": "/services/ JSON-LD blocks",
+      "detail": "0"
+    },
+    {
+      "level": "INFO",
+      "item": "/services/ image dimensions missing",
+      "detail": []
+    },
+    {
+      "level": "PASS",
+      "item": "/services/ missing alt",
+      "detail": []
+    },
+    {
+      "level": "INFO",
+      "item": "/services/ transfer metrics",
+      "detail": {
+        "http_version": "1.1",
+        "encoding": "none",
+        "bytes_transferred": 13267,
+        "ttfb_seconds": 0.086687
+      }
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ status",
+      "detail": "200"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ TLS verification",
+      "detail": "0"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ lang",
+      "detail": "ja"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ H1",
+      "detail": "1"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ canonical",
+      "detail": "['https://www.atlib.jp/company/']"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ description",
+      "detail": "['atLIB株式会社の理念、ビジョン、行動指針、代表メッセージ、事業領域、会社情報をご紹介します。']"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ og:title",
+      "detail": "['会社概要・私たちについて | atLIB株式会社']"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ og:description",
+      "detail": "['atLIB株式会社の理念、ビジョン、行動指針、代表メッセージ、事業領域、会社情報をご紹介します。']"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ og:url",
+      "detail": "['https://www.atlib.jp/company/']"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ og:image",
+      "detail": "['https://www.atlib.jp/images/concept.jpg']"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ twitter:card",
+      "detail": "['summary_large_image']"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ public indexability",
+      "detail": "index,follow,max-image-preview:large / "
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ x-content-type-options",
+      "detail": "nosniff"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ x-frame-options",
+      "detail": "SAMEORIGIN"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ referrer-policy",
+      "detail": "strict-origin-when-cross-origin"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ CSP default-src",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ CSP base-uri",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ CSP object-src",
+      "detail": "[\"'none'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ CSP frame-ancestors",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ CSP form-action",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ CSP scripts",
+      "detail": "[\"'self'\", 'https://ajax.googleapis.com', 'https://cdnjs.cloudflare.com', 'https://challenges.cloudflare.com']"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ Permissions-Policy",
+      "detail": "camera=(), microphone=(), geolocation=()"
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ HSTS",
+      "detail": "max-age=31536000; includeSubDomains"
+    },
+    {
+      "level": "INFO",
+      "item": "/company/ JSON-LD blocks",
+      "detail": "0"
+    },
+    {
+      "level": "INFO",
+      "item": "/company/ image dimensions missing",
+      "detail": []
+    },
+    {
+      "level": "PASS",
+      "item": "/company/ missing alt",
+      "detail": []
+    },
+    {
+      "level": "INFO",
+      "item": "/company/ transfer metrics",
+      "detail": {
+        "http_version": "1.1",
+        "encoding": "none",
+        "bytes_transferred": 15999,
+        "ttfb_seconds": 0.118895
+      }
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ status",
+      "detail": "200"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ TLS verification",
+      "detail": "0"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ lang",
+      "detail": "ja"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ H1",
+      "detail": "1"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ canonical",
+      "detail": "['https://www.atlib.jp/works/']"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ description",
+      "detail": "['atLIB株式会社の支援事例。ITガバナンス、情シス支援、クラウド移行、ネットワーク構築、業務システム開発など、企業の変化と成長を支えてきた取り組みをご紹介します。']"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ og:title",
+      "detail": "['支援実績・事例紹介 | atLIB株式会社']"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ og:description",
+      "detail": "['ITガバナンス、情シス支援、クラウド移行、ネットワーク構築、業務システム開発などの支援事例をご紹介します。']"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ og:url",
+      "detail": "['https://www.atlib.jp/works/']"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ og:image",
+      "detail": "['https://www.atlib.jp/images/concept.jpg']"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ twitter:card",
+      "detail": "['summary_large_image']"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ public indexability",
+      "detail": "index,follow,max-image-preview:large / "
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ x-content-type-options",
+      "detail": "nosniff"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ x-frame-options",
+      "detail": "SAMEORIGIN"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ referrer-policy",
+      "detail": "strict-origin-when-cross-origin"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ CSP default-src",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ CSP base-uri",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ CSP object-src",
+      "detail": "[\"'none'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ CSP frame-ancestors",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ CSP form-action",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ CSP scripts",
+      "detail": "[\"'self'\", 'https://ajax.googleapis.com', 'https://cdnjs.cloudflare.com', 'https://challenges.cloudflare.com']"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ Permissions-Policy",
+      "detail": "camera=(), microphone=(), geolocation=()"
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ HSTS",
+      "detail": "max-age=31536000; includeSubDomains"
+    },
+    {
+      "level": "INFO",
+      "item": "/works/ JSON-LD blocks",
+      "detail": "0"
+    },
+    {
+      "level": "INFO",
+      "item": "/works/ image dimensions missing",
+      "detail": []
+    },
+    {
+      "level": "PASS",
+      "item": "/works/ missing alt",
+      "detail": []
+    },
+    {
+      "level": "INFO",
+      "item": "/works/ transfer metrics",
+      "detail": {
+        "http_version": "1.1",
+        "encoding": "none",
+        "bytes_transferred": 18209,
+        "ttfb_seconds": 0.091884
+      }
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ status",
+      "detail": "200"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ TLS verification",
+      "detail": "0"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ lang",
+      "detail": "ja"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ H1",
+      "detail": "1"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ canonical",
+      "detail": "['https://www.atlib.jp/contact/']"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ description",
+      "detail": "['atLIB株式会社へのご相談・お問い合わせ。IT戦略、情シス支援、業務KAIZENなど、お困りごとや検討中のテーマをお聞かせください。']"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ og:title",
+      "detail": "['ご相談・お問い合わせ | atLIB株式会社']"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ og:description",
+      "detail": "['IT戦略、情シス支援、業務KAIZENなど、atLIB株式会社へのご相談・お問い合わせはこちらから。']"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ og:url",
+      "detail": "['https://www.atlib.jp/contact/']"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ og:image",
+      "detail": "['https://www.atlib.jp/images/concept.jpg']"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ twitter:card",
+      "detail": "['summary_large_image']"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ public indexability",
+      "detail": "index,follow,max-image-preview:large / "
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ x-content-type-options",
+      "detail": "nosniff"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ x-frame-options",
+      "detail": "SAMEORIGIN"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ referrer-policy",
+      "detail": "strict-origin-when-cross-origin"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ CSP default-src",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ CSP base-uri",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ CSP object-src",
+      "detail": "[\"'none'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ CSP frame-ancestors",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ CSP form-action",
+      "detail": "[\"'self'\"]"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ CSP scripts",
+      "detail": "[\"'self'\", 'https://ajax.googleapis.com', 'https://cdnjs.cloudflare.com', 'https://challenges.cloudflare.com']"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ Permissions-Policy",
+      "detail": "camera=(), microphone=(), geolocation=()"
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ HSTS",
+      "detail": "max-age=31536000; includeSubDomains"
+    },
+    {
+      "level": "INFO",
+      "item": "/contact/ JSON-LD blocks",
+      "detail": "0"
+    },
+    {
+      "level": "INFO",
+      "item": "/contact/ image dimensions missing",
+      "detail": []
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/ missing alt",
+      "detail": []
+    },
+    {
+      "level": "INFO",
+      "item": "/contact/ transfer metrics",
+      "detail": {
+        "http_version": "1.1",
+        "encoding": "none",
+        "bytes_transferred": 8944,
+        "ttfb_seconds": 0.089386
+      }
+    },
+    {
+      "level": "PASS",
+      "item": "/robots.txt status",
+      "detail": "200"
+    },
+    {
+      "level": "PASS",
+      "item": "/robots.txt sitemap reference",
+      "detail": "present"
+    },
+    {
+      "level": "PASS",
+      "item": "/sitemap.xml status",
+      "detail": "200"
+    },
+    {
+      "level": "PASS",
+      "item": "/sitemap.xml five canonical URLs",
+      "detail": [
+        "https://www.atlib.jp/",
+        "https://www.atlib.jp/company/",
+        "https://www.atlib.jp/services/",
+        "https://www.atlib.jp/works/",
+        "https://www.atlib.jp/contact/",
+        "https://www.atlib.jp/privacy-policy/",
+        "https://www.atlib.jp/customer-harassment-policy/",
+        "https://www.atlib.jp/joshisu-kaizen/"
+      ]
+    },
+    {
+      "level": "PASS",
+      "item": "/llms.txt status",
+      "detail": "200"
+    },
+    {
+      "level": "INFO",
+      "item": "/llms.txt note link",
+      "detail": false
+    },
+    {
+      "level": "INFO",
+      "item": "/css/atlib-service-renewal.css baseline",
+      "detail": "404"
+    },
+    {
+      "level": "PASS",
+      "item": "/index.html redirect",
+      "detail": {
+        "status": 301,
+        "location": "/?r4check=1"
+      }
+    },
+    {
+      "level": "PASS",
+      "item": "/services/index.html redirect",
+      "detail": {
+        "status": 301,
+        "location": "/services/?r4check=1"
+      }
+    },
+    {
+      "level": "PASS",
+      "item": "/company/index.html redirect",
+      "detail": {
+        "status": 301,
+        "location": "/company/?r4check=1"
+      }
+    },
+    {
+      "level": "PASS",
+      "item": "/works/index.html redirect",
+      "detail": {
+        "status": 301,
+        "location": "/works/?r4check=1"
+      }
+    },
+    {
+      "level": "PASS",
+      "item": "/contact/index.html redirect",
+      "detail": {
+        "status": 301,
+        "location": "/contact/?r4check=1"
+      }
+    },
+    {
+      "level": "FAIL",
+      "item": "http://www.atlib.jp/ canonical redirect",
+      "detail": {
+        "status": 301,
+        "location": "https://www.atlib.jp:443/"
+      }
+    },
+    {
+      "level": "PASS",
+      "item": "https://atlib.jp/ canonical redirect",
+      "detail": {
+        "status": 301,
+        "location": "https://www.atlib.jp/"
+      }
+    },
+    {
+      "level": "PASS",
+      "item": "service host boundary /company/",
+      "detail": "404"
+    },
+    {
+      "level": "PASS",
+      "item": "service host boundary /services/",
+      "detail": "404"
+    },
+    {
+      "level": "PASS",
+      "item": "service host boundary /works/",
+      "detail": "404"
+    },
+    {
+      "level": "PASS",
+      "item": "service host boundary /contact/",
+      "detail": "404"
+    },
+    {
+      "level": "INFO",
+      "item": "not measured",
+      "detail": "Lighthouse, field CWV, accessibility contrast/keyboard, GA4/GTM account and event delivery, form POST, security exploit testing, Schema.org semantic validator, Google indexing, and AIO scoring are not certified by this HTTP audit."
+    }
+  ],
+  "responses": {
+    "https://www.atlib.jp/": {
+      "url": "https://www.atlib.jp/",
+      "status": 200,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 19589,
+      "bytes_decoded": 19589,
+      "ttfb_seconds": 0.126243,
+      "total_seconds": 0.128097,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "no-cache",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com",
+        "x-frame-options": "SAMEORIGIN",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "5fbfb7181e4b29ec34917d040231f4e409009765c4b6d3a7354e1f58b3f969d0"
+    },
+    "https://www.atlib.jp/services/": {
+      "url": "https://www.atlib.jp/services/",
+      "status": 200,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 13267,
+      "bytes_decoded": 13267,
+      "ttfb_seconds": 0.086687,
+      "total_seconds": 0.088532,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "no-cache",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com",
+        "x-frame-options": "SAMEORIGIN",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "237495e7aac904b0a108fe07f727a7e274d694f90efe2147cb5dc8166f6405cf"
+    },
+    "https://www.atlib.jp/company/": {
+      "url": "https://www.atlib.jp/company/",
+      "status": 200,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 15999,
+      "bytes_decoded": 15999,
+      "ttfb_seconds": 0.118895,
+      "total_seconds": 0.120571,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "no-cache",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com",
+        "x-frame-options": "SAMEORIGIN",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "5d9847a1abb596dca16e14dfb8dd57c31cf7eec26f767bfbc113a3a79aa76898"
+    },
+    "https://www.atlib.jp/works/": {
+      "url": "https://www.atlib.jp/works/",
+      "status": 200,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 18209,
+      "bytes_decoded": 18209,
+      "ttfb_seconds": 0.091884,
+      "total_seconds": 0.101582,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "no-cache",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com",
+        "x-frame-options": "SAMEORIGIN",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "0071f84984044fcae8d731b2532d915c0f1bec1bd5c36672c31fa0f8c73a7a70"
+    },
+    "https://www.atlib.jp/contact/": {
+      "url": "https://www.atlib.jp/contact/",
+      "status": 200,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 8944,
+      "bytes_decoded": 8944,
+      "ttfb_seconds": 0.089386,
+      "total_seconds": 0.091073,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "no-store",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com",
+        "x-frame-options": "SAMEORIGIN",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "3f2cf69c1addc453880b11043aa03b3eb26229570fa958bc49b182f8f5489604"
+    },
+    "https://www.atlib.jp/robots.txt": {
+      "url": "https://www.atlib.jp/robots.txt",
+      "status": 200,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 318,
+      "bytes_decoded": 318,
+      "ttfb_seconds": 0.090218,
+      "total_seconds": 0.090924,
+      "headers": {
+        "content-type": "text/plain; charset=UTF-8",
+        "cache-control": "public,max-age=3600",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "a38dc6b2b0326d4a61498d9f58a3d468cd4bb606d1583e753f33ddf9f1986884"
+    },
+    "https://www.atlib.jp/sitemap.xml": {
+      "url": "https://www.atlib.jp/sitemap.xml",
+      "status": 200,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 630,
+      "bytes_decoded": 630,
+      "ttfb_seconds": 0.083298,
+      "total_seconds": 0.084039,
+      "headers": {
+        "content-type": "application/xml",
+        "cache-control": "public,max-age=3600",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "2159358e0f9c2f0fc0ea39d9111e6dbf45f684d7107f809803fa223419db9de1"
+    },
+    "https://www.atlib.jp/llms.txt": {
+      "url": "https://www.atlib.jp/llms.txt",
+      "status": 200,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 1081,
+      "bytes_decoded": 1081,
+      "ttfb_seconds": 0.071682,
+      "total_seconds": 0.072362,
+      "headers": {
+        "content-type": "text/plain; charset=UTF-8",
+        "cache-control": "public,max-age=3600",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "4f6300e474e24cc8ff8bc69f09c38ad8d443da2f14ea2f74b9370e62aaf7cbb1"
+    },
+    "https://www.atlib.jp/css/atlib-service-renewal.css": {
+      "url": "https://www.atlib.jp/css/atlib-service-renewal.css",
+      "status": 404,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 168,
+      "bytes_decoded": 168,
+      "ttfb_seconds": 0.087926,
+      "total_seconds": 0.088605,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "content-security-policy": "default-src 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "2c8536d39362a6d550ce050dcfdc7fb2aff08f82b7d17f43db88479aa606ddbe"
+    },
+    "https://www.atlib.jp/index.html?r4check=1": {
+      "url": "https://www.atlib.jp/index.html?r4check=1",
+      "status": 301,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 45,
+      "bytes_decoded": 45,
+      "ttfb_seconds": 0.094132,
+      "total_seconds": 0.094756,
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "location": "/?r4check=1",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "2dbb4edfd961873529c10aa6366c0548a2d673a782353cfdcbe882af7e5acaf4"
+    },
+    "https://www.atlib.jp/services/index.html?r4check=1": {
+      "url": "https://www.atlib.jp/services/index.html?r4check=1",
+      "status": 301,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 54,
+      "bytes_decoded": 54,
+      "ttfb_seconds": 0.094597,
+      "total_seconds": 0.095354,
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "location": "/services/?r4check=1",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "d92caf5b1836c8c48987e12832a3c6910b6f48f5e68a3a0dbeab1e0bbaf0ae76"
+    },
+    "https://www.atlib.jp/company/index.html?r4check=1": {
+      "url": "https://www.atlib.jp/company/index.html?r4check=1",
+      "status": 301,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 53,
+      "bytes_decoded": 53,
+      "ttfb_seconds": 0.092679,
+      "total_seconds": 0.093274,
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "location": "/company/?r4check=1",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "2834eed8b4403d2b0394383b3861c3b14c96906024ef38b4287ea67a53404dc0"
+    },
+    "https://www.atlib.jp/works/index.html?r4check=1": {
+      "url": "https://www.atlib.jp/works/index.html?r4check=1",
+      "status": 301,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 51,
+      "bytes_decoded": 51,
+      "ttfb_seconds": 0.088751,
+      "total_seconds": 0.089429,
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "location": "/works/?r4check=1",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "0883bb648a0a243db690c172891c1177c6e7a2468d2b5209037709a7460cda06"
+    },
+    "https://www.atlib.jp/contact/index.html?r4check=1": {
+      "url": "https://www.atlib.jp/contact/index.html?r4check=1",
+      "status": 301,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 53,
+      "bytes_decoded": 53,
+      "ttfb_seconds": 0.091144,
+      "total_seconds": 0.091815,
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "location": "/contact/?r4check=1",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "ef58372e0c0b3b44656c8a65a11b2cfd34c688354a69f3a2e8a29004ef2cbd7a"
+    },
+    "http://www.atlib.jp/": {
+      "url": "http://www.atlib.jp/",
+      "status": 301,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 0,
+      "bytes_decoded": 0,
+      "ttfb_seconds": 0.019529,
+      "total_seconds": 0.019782,
+      "headers": {
+        "content-type": "text/html; charset=UTF-8",
+        "cache-control": "private",
+        "location": "https://www.atlib.jp:443/"
+      },
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "https://atlib.jp/": {
+      "url": "https://atlib.jp/",
+      "status": 301,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 55,
+      "bytes_decoded": 55,
+      "ttfb_seconds": 0.089824,
+      "total_seconds": 0.090442,
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "location": "https://www.atlib.jp/",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "721c9ca81d9bc42b5c245ad6f19ce7eae772b3f83fbe7da6682d6275d69bc93e"
+    },
+    "https://service.atlib.jp/company/": {
+      "url": "https://service.atlib.jp/company/",
+      "status": 404,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 9,
+      "bytes_decoded": 9,
+      "ttfb_seconds": 0.209913,
+      "total_seconds": 0.210428,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+    },
+    "https://service.atlib.jp/services/": {
+      "url": "https://service.atlib.jp/services/",
+      "status": 404,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 9,
+      "bytes_decoded": 9,
+      "ttfb_seconds": 0.084788,
+      "total_seconds": 0.085423,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+    },
+    "https://service.atlib.jp/works/": {
+      "url": "https://service.atlib.jp/works/",
+      "status": 404,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 9,
+      "bytes_decoded": 9,
+      "ttfb_seconds": 0.094262,
+      "total_seconds": 0.094842,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+    },
+    "https://service.atlib.jp/contact/": {
+      "url": "https://service.atlib.jp/contact/",
+      "status": 404,
+      "http_version": "1.1",
+      "tls_verify_result": 0,
+      "bytes_transferred": 9,
+      "bytes_decoded": 9,
+      "ttfb_seconds": 0.079078,
+      "total_seconds": 0.079643,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "sha256": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+    }
+  }
+}

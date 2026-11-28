@@ -1,18 +1,42 @@
 # atLIB株式会社
 
-> atLIB株式会社は、経営とITをつなぎ、企業の事業と現場の実態に沿ったITの活用・運用改善を支援します。公式情報は以下のページを参照してください。
+> atLIB株式会社は、経営とITをつなぐITコンサルティング会社です。「ITで、企業に自由を。人々に未来をつくる。」を理念とし、企業の経営目的と現場の実態から必要なITを考え、設計・実行・運用・改善を支援します。
 
 ## 公式情報
 
-- [トップページ](https://www.atlib.jp/): 経営とITの接続、企業理念、支援領域
-- [会社概要](https://www.atlib.jp/company/): 理念・行動指針、代表メッセージ、会社情報
-- [サービス](https://www.atlib.jp/services/): IT経営KAIZEN、IT戦略・DX、情シス支援、業務KAIZEN、IT基盤・セキュリティ
-- [支援実績](https://www.atlib.jp/works/): ITガバナンス、情シス継続支援などの事例
-- [ご相談・お問い合わせ](https://www.atlib.jp/contact/): お問い合わせ窓口
-- [プライバシーポリシー](https://www.atlib.jp/privacy-policy/): 個人情報の取扱い
+- [トップページ](https://www.atlib.jp/): 企業理念、支援姿勢、サービス、主要取引企業
+- [会社概要](https://www.atlib.jp/company/): 理念・ビジョン、代表メッセージ、事業領域、会社情報、ISMS認証
+- [サービス一覧](https://www.atlib.jp/services/): IT経営KAIZEN、業務KAIZEN、セキュリティサービス、カジュアルコンサル
+- [支援実績](https://www.atlib.jp/works/): ITガバナンス、情報システム部門支援、クラウド移行、業務改善などの事例
+- [お問い合わせ](https://www.atlib.jp/contact/): ITに関するご相談・お問い合わせ
 
-## 補足
+- [課題・依頼内容から探す](https://www.atlib.jp/guide/): 経営・IT戦略、IT環境の整備・運用、業務改善・システム開発、セキュリティ・情報管理、日常のIT相談・AI活用。お困りごとや依頼内容からatLIBのサービスを探せます。
 
-- 運営者: atLIB株式会社
-- 公式URL: https://www.atlib.jp/
-- サービスの提供範囲や支援実績は、各公式ページの記載を優先してください。
+## サービス
+
+- [IT経営KAIZEN](https://service.atlib.jp/it-management-kaizen/): 経営の目的から必要なITを考え、設計・実行・運用・継続改善を支援
+- [業務KAIZEN](https://service.atlib.jp/business-web/): 業務を理解し、必要なWebシステムの設計・開発・導入を支援
+- [セキュリティサービス](https://www.atlib.jp/services/#security): セキュリティ対策の可視化、管理体制、運用ルールの整備を支援
+- [セキュリティコンサルティング](https://www.atlib.jp/services/security-consulting/): ISMS・Pマーク取得支援、SecureNavi導入・運用支援、デジタル化・AI導入補助金活用、SCS評価制度対応。企業の実態に合った情報管理・セキュリティ体制の構築を支援します。
+- [ISMS取得支援・ISMSに沿った運用体制構築](https://www.atlib.jp/services/security-consulting/#isms-support): 情報セキュリティ管理体制の構築と認証取得に向けた支援
+- [Pマーク取得支援](https://www.atlib.jp/services/security-consulting/#pmark-support): 個人情報管理体制と運用ルールの整備、取得準備
+- [SecureNavi導入・運用支援](https://www.atlib.jp/services/security-consulting/#securenavi-support): SecureNavi販売代理店としてISMS・Pマークの取得準備、管理体制構築、取得後の運用・改善を支援
+- [デジタル化・AI導入補助金を活用したSecureNavi導入](https://www.atlib.jp/services/security-consulting/#securenavi-subsidy): IT導入支援事業者としてSecureNaviを補助対象ITツール登録。利用には要件適合、審査・交付決定が必要。対象年度・プラン・経費・受付状況は個別確認
+- [SCS評価制度対応・★3取得支援](https://www.atlib.jp/services/security-consulting/#scs-support): 現状把握、管理・運用体制整備、専門家確認に向けた調整・申請準備
+- [カジュアルコンサル](https://www.atlib.jp/services/casual-consulting/): IT専任担当者がいない中小企業向けの月額IT相談窓口。日常のITに関する疑問や判断を相談でき、必要に応じて個別調査や作業も別途依頼できます。
+
+## 無料診断
+
+- [IT経営診断](https://sales.atlib.jp/it-management-kaizen/free-diagnosis/)
+- [業務改善診断](https://service.atlib.jp/business-web/self-check/)
+- [SECU:MIE WEB｜Webセキュリティ診断](https://service.atlib.jp/secumie-web/): WebサイトのURLから、外部から確認できるセキュリティ設定を診断します。
+- [SECU:MIE Insight｜情報管理セルフチェック](https://service.atlib.jp/secumie-insight/): 日々の情報管理を振り返り、自社の取り組みや改善のヒントを確認します。
+
+## 公式情報発信・その他
+
+- [公式note](https://note.com/atlib): atLIBの人、仕事への想い、企業文化、取り組み
+- [採用情報](https://recruit.atlib.jp/)
+- [プライバシーポリシー](https://www.atlib.jp/privacy-policy/)
+- [カスタマーハラスメント対応方針](https://www.atlib.jp/customer-harassment-policy/)
+
+運営者: atLIB株式会社。サービスの提供範囲・支援実績は各公式ページの記載を優先してください。

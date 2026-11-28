@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" sizes="64x64" href="/images/favicon.png?v=20261118">
-<title>atLIB株式会社 | ITで、企業に自由を。</title>
+<title>atLIB株式会社｜経営とITをつなぐITコンサルティング会社</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="経営とITをつなぐ。atLIB株式会社は、ITを目的ではなく事業を支える手段として捉え、IT戦略・DX、情シス支援、IT基盤構築、システム開発・自動化を通じて企業の挑戦と成長を支えます。">
+<meta name="description" content="ITで、企業に自由を。人々に未来をつくる。atLIBは、IT経営KAIZEN・業務KAIZENを中心に、企業のIT戦略、業務改善、システム開発、運用改善、セキュリティ対策を支援します。">
 <meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="https://www.atlib.jp/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:site_name" content="atLIB株式会社">
-<meta property="og:title" content="atLIB株式会社 | ITで、企業に自由を。">
-<meta property="og:description" content="経営とITをつなぐ。IT戦略・DX、情シス支援、IT基盤構築、システム開発・自動化を通じて企業の挑戦を支えます。">
+<meta property="og:title" content="atLIB株式会社｜経営とITをつなぐITコンサルティング会社">
+<meta property="og:description" content="ITで、企業に自由を。人々に未来をつくる。atLIBは、IT経営KAIZEN・業務KAIZENを中心に、企業のIT戦略、業務改善、システム開発、運用改善、セキュリティ対策を支援します。">
 <meta property="og:url" content="https://www.atlib.jp/">
 <meta property="og:image" content="https://www.atlib.jp/images/concept.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -25,7 +25,12 @@
       "@id": "https://www.atlib.jp/#organization",
       "name": "atLIB株式会社",
       "url": "https://www.atlib.jp/",
-      "logo": { "@type": "ImageObject", "url": "https://www.atlib.jp/images/brand/atlib-logo.png" },
+      "description": "経営とITをつなぎ、企業のITコンサルティングとIT支援を行います。",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.atlib.jp/images/brand/atlib-logo.png"
+      },
+      "foundingDate": "2019-02-27",
       "address": {
         "@type": "PostalAddress",
         "postalCode": "104-0032",
@@ -33,7 +38,10 @@
         "addressLocality": "中央区",
         "streetAddress": "八丁堀4-12-7 明豊パークタワービル3階",
         "addressCountry": "JP"
-      }
+      },
+      "sameAs": [
+        "https://note.com/atlib"
+      ]
     },
     {
       "@type": "WebSite",
@@ -41,13 +49,34 @@
       "url": "https://www.atlib.jp/",
       "name": "atLIB株式会社",
       "inLanguage": "ja",
-      "publisher": { "@id": "https://www.atlib.jp/#organization" }
+      "publisher": {
+        "@id": "https://www.atlib.jp/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.atlib.jp/#webpage",
+      "url": "https://www.atlib.jp/",
+      "name": "atLIB株式会社｜経営とITをつなぐITコンサルティング会社",
+      "description": "ITで、企業に自由を。人々に未来をつくる。atLIBは、IT経営KAIZEN・業務KAIZENを中心に、企業のIT戦略、業務改善、システム開発、運用改善、セキュリティ対策を支援します。",
+      "inLanguage": "ja",
+      "isPartOf": {
+        "@id": "https://www.atlib.jp/#website"
+      },
+      "about": {
+        "@id": "https://www.atlib.jp/#organization"
+      }
     }
   ]
 }
 </script>
-<link rel="stylesheet" href="/css/style.css?v=20261119-mobile">
+<link rel="stylesheet" media="(min-width: 768px)" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" media="(min-width: 768px)" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/css/corporate-r5-base.css?v=20261127-r5b">
 <link rel="stylesheet" href="/css/atlib.css?v=20261120-sticky">
+<link rel="stylesheet" href="/css/atlib-service-renewal.css?v=20261126-r4">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&amp;display=swap&amp;text=IT%E3%81%AE%E3%81%93%E3%81%A8%E3%80%81%E7%B5%8C%E5%96%B6%E3%81%AE%E3%81%93%E3%81%A8%E3%80%82">
+<link rel="stylesheet" href="/css/secumie-service-refresh.css?v=20261128-v3-5">
 </head>
 
 <body class="home">
@@ -59,12 +88,14 @@
 <header>
 <p class="logo"><a href="#top" aria-label="atLIB トップへ"><img class="site-logo" src="images/brand/atlib-logo.png" width="2047" height="603" alt="atLIB"></a></p>
 
-<div id="menubar">
+<div id="menubar" class="smr-guide-nav">
 <nav aria-label="メインナビゲーション">
 <ul>
 <li><a href="company/">会社概要</a></li>
 <li><a href="services/">サービス</a></li>
-<li><a href="#link3">IT経営KAIZEN</a></li>
+<li><a href="/guide/">サービスガイド</a></li>
+<li><a href="services/#kaizen">KAIZENサービス</a></li>
+<li><a href="#diagnosis">無料診断</a></li>
 <li><a href="works/">支援実績</a></li>
 <li><a href="https://recruit.atlib.jp/">採用情報</a></li>
 <li class="btn accent"><a href="contact/"><i class="fa-regular fa-envelope"></i>ご相談・お問い合わせ</a></li>
@@ -97,10 +128,13 @@
 <div id="contents">
 <main>
 
-<section class="mt0 bg-parts bg1-primary-light-parts intro-section" id="link1">
-<div class="intro-layout inview">
+<section class="mt0 renewal-brand-thinking" id="link1">
+<div class="renewal-brand-thinking-layout inview">
+<figure class="renewal-brand-thinking-image"><img src="images/landscape1.jpg" width="1000" height="560" loading="lazy" decoding="async" alt="仕事に向き合うデスクとパソコン"></figure>
+<div class="renewal-brand-thinking-copy">
 <div class="intro-heading">
-<h2>企業が、本当に<br>やりたいことに<br>没頭できるように。</h2>
+<p class="renewal-kicker">OUR PERSPECTIVE</p>
+<h2>企業が、本当にやりたいことに没頭できるように。</h2>
 <p class="intro-connection">経営の目的から、ITの使い方を考える。</p>
 </div>
 <div class="intro-copy">
@@ -109,28 +143,16 @@
 <p class="mission-quote">ITを使うことではなく、ITを使って本業を前に進めること。</p>
 </div>
 </div>
+</div>
 </section>
 
-<section class="concerns-section" id="consultation-examples" aria-labelledby="concerns-heading">
-<div class="concerns-intro inview">
-<h2 id="concerns-heading">こんな場面から、<br>ご一緒できます。</h2>
-<p>「ITの問題」として整理できていなくても構いません。<br>経営や日々の仕事の中で感じていることから、何が必要なのかを考えていきます。</p>
-</div>
-<div class="concerns-list">
-<article class="concern-row inview">
-<div class="concern-question"><span class="concern-no">01</span><h3>ITに費用をかけているのに、<br>効果が見えない。</h3></div>
-<div class="concern-answer"><p>今のIT環境と費用の使い方を整理し、何を維持し、何に力を向けるべきかを考えます。新しい製品の導入だけにとらわれず、経営の優先順位に沿って判断を支えます。</p><p class="concern-fields">関わる領域：IT戦略・DX ／ IT経営KAIZEN</p></div>
-</article>
-<article class="concern-row inview">
-<div class="concern-question"><span class="concern-no">02</span><h3>日々のIT対応で手がいっぱい。<br>改善に手が回らない。</h3></div>
-<div class="concern-answer"><p>問い合わせや端末・アカウント管理などの日常業務を支えながら、対応履歴と現場の課題を整理します。担当者だけに負担が集中しない運用と、改善に取り組める状態を目指します。</p><p class="concern-fields">関わる領域：情シスアウトソーシング ／ ITインフラ</p></div>
-</article>
-<article class="concern-row inview">
-<div class="concern-question"><span class="concern-no">03</span><h3>システムはあるのに、<br>手作業がなくならない。</h3></div>
-<div class="concern-answer"><p>まず仕事の流れを確かめ、二重入力や情報の分断が生まれる理由を整理します。今ある仕組みで改善できる部分を見極め、必要に応じて連携や自動化を組み合わせます。</p><p class="concern-fields">関わる領域：システム開発・自動化 ／ IT戦略・DX</p></div>
-</article>
-</div>
-<p class="concerns-footnote">※上記はご相談内容の例であり、個別の導入実績・成果を示すものではありません。</p>
+<section class="renewal-brand-values" id="link4" aria-labelledby="renewal-brand-values-title">
+<div class="renewal-brand-shell"><div class="renewal-brand-heading inview"><p class="renewal-kicker">WHAT WE VALUE</p><h2 id="renewal-brand-values-title">大切にしていること</h2></div>
+<div class="renewal-brand-value-list">
+<article class="inview"><span>01</span><div><h3>課題の本質を見る</h3><p>目の前のITトラブルだけで判断せず、その背景と本業への影響を確かめます。</p></div></article>
+<article class="inview"><span>02</span><div><h3>経営とITをつなぐ</h3><p>経営の意図を現場に、現場の事実を経営に届け、同じ目的に向かう判断を支えます。</p></div></article>
+<article class="inview"><span>03</span><div><h3>今あるものを生かす</h3><p>導入ありきでは考えません。既存のITを使いこなし、必要な改善を積み重ねます。</p></div></article>
+</div></div>
 </section>
 
 <section class="work-section" id="track-record" aria-labelledby="work-heading">
@@ -163,54 +185,34 @@
 <p class="work-more"><a href="works/">その他の支援事例を見る <span aria-hidden="true">→</span></a></p>
 </section>
 
-<section class="bg-parts bg1-primary-light-parts kaizen-section" id="link3">
-<div class="kaizen-content inview">
-<div class="kaizen-brand">
-<svg class="kaizen-official-logo" viewBox="76 218 1895 251" role="img" aria-label="IT経営KAIZEN">
-<image href="images/brand/it-management-kaizen-logo-v1.png" x="0" y="0" width="2048" height="681"></image>
-</svg>
-<p class="kaizen-tagline">ITを企業成長の武器にする</p>
-</div>
-<div class="kaizen-body">
-<h2>目指す未来から、<br>ITの使い方を考える。</h2>
-<div class="kaizen-copy">
-<p class="kaizen-lead">未来から考える。事実で決める。<br>実行し、変化を確かめる。</p>
-<p>最初に考えるのは、ITの課題ではなく「どんな会社にしたいか」。そこから現場の実態を確かめ、分かっている事実と未確認のことを分けて、取り組むべき課題を明らかにします。</p>
-<p>既存の人・IT・仕組みを生かしながら、技術・運用・管理を一体で見直す。必要なことを実行し、事業や働き方にどんな変化が生まれたかを確かめる。それがIT経営KAIZENです。</p>
-</div>
-</div>
-<ol class="kaizen-flow" aria-label="IT経営KAIZENの進め方">
-<li><span class="step-no">01</span><strong>未来を描く</strong></li>
-<li><span class="step-no">02</span><strong>事実を知る</strong></li>
-<li><span class="step-no">03</span><strong>実行する</strong></li>
-<li><span class="step-no">04</span><strong>変化を確かめる</strong></li>
-</ol>
-<p class="kaizen-service-link"><a href="services/#it-management-kaizen">IT経営KAIZENの支援内容を見る <span aria-hidden="true">→</span></a></p>
-<div class="kaizen-investment">
-<h3>ITへの支出を、<br>「守る」だけで終わらせない。</h3>
-<p>安定運用やセキュリティに必要なコストを大切にしながら、今あるITの使い方を見直し、事業の成果につながる領域にも力を向ける。新しいものを買うことだけが投資ではありません。経営の目的に沿って、費用の使い方を考えます。</p>
-</div>
-</div>
+<section class="renewal-brand-clients" aria-labelledby="renewal-brand-clients-title">
+<div class="renewal-brand-shell"><div class="renewal-brand-heading inview"><p class="renewal-kicker">OUR CLIENTS</p><h2 id="renewal-brand-clients-title">主な取引企業</h2></div>
+<p class="renewal-brand-section-lead">業種・企業規模を問わず、さまざまな企業のIT・情シスをご支援しています。</p>
+<div class="renewal-brand-client-logos">
+<span class="renewal-brand-client-frame renewal-brand-client-frame-mixi"><img class="renewal-brand-client-logo-mixi" src="images/partner_logo_mixi.png" width="6000" height="3614" alt="株式会社MIXI"></span>
+<img src="images/partner_logo_shinei.png" width="490" height="234" alt="シンエイ動画株式会社">
+<img src="images/partner_logo_glm.png" width="490" height="234" alt="株式会社グローバル・リンク・マネジメント">
+<img src="images/partner_logo_gks.png" width="490" height="234" alt="株式会社ゲンバカンリシステムズ">
+<img src="images/partner_logo_yamato.png" width="490" height="234" alt="株式会社大和バルブ">
+<img src="images/partner_logo_tokai.png" width="490" height="234" alt="藤海ビルサービス株式会社">
+<img src="images/partner_logo_micren.png" width="490" height="234" alt="マイクレン・ヘルスケア株式会社">
+<img src="images/partner_logo_vidaway.png" width="490" height="234" alt="株式会社Vidaway">
+</div></div>
 </section>
 
-<section class="strengths-section" id="link4">
-<h2 class="c">大切にしていること</h2>
-<div class="list1 strengths-grid">
-<div class="list inview"><div class="strength-icon navy"><i class="fa-solid fa-magnifying-glass-chart"></i><span>01</span></div><div class="text"><h4>課題の本質を見る</h4><p>目の前のITトラブルだけで判断せず、その背景と本業への影響を確かめます。</p></div></div>
-<div class="list inview"><div class="strength-icon orange"><i class="fa-solid fa-arrows-to-circle"></i><span>02</span></div><div class="text"><h4>経営とITをつなぐ</h4><p>経営の意図を現場に、現場の事実を経営に届け、同じ目的に向かう判断を支えます。</p></div></div>
-<div class="list inview"><div class="strength-icon green"><i class="fa-solid fa-seedling"></i><span>03</span></div><div class="text"><h4>今あるものを生かす</h4><p>導入ありきでは考えません。既存のITを使いこなし、必要な改善を積み重ねます。</p></div></div>
-</div>
-</section>
 
-<section class="workflow-section" id="link5">
-<h2 class="c">ご支援の進め方</h2>
-<p class="c section-lead">経営の目標と現場の実態を伺い、必要なところからご一緒します。<br>すでにある体制や仕組みを尊重しながら、実行後の変化まで見据えて進めます。</p>
-<div class="list2 mb3rem">
-<div class="list inview"><p class="no">01</p><div class="image"><i class="fa-regular fa-comments"></i></div><div class="text"><h4>対話する</h4><p>目指す姿と、日々の困りごとを伺います。</p></div></div>
-<div class="list inview"><p class="no">02</p><div class="image"><i class="fa-solid fa-list-check"></i></div><div class="text"><h4>事実を整理する</h4><p>現場の運用やIT環境を確認し、課題を整理します。</p></div></div>
-<div class="list inview"><p class="no">03</p><div class="image"><i class="fa-solid fa-lightbulb"></i></div><div class="text"><h4>方針を描く</h4><p>何を変え、何を生かすかを、優先順位とともに決めます。</p></div></div>
-<div class="list inview"><p class="no">04</p><div class="image"><i class="fa-solid fa-arrow-trend-up"></i></div><div class="text"><h4>実行・改善する</h4><p>変化を確かめながら、必要な見直しを続けます。</p></div></div>
+<section class="renewal-brand-services" id="kaizen" aria-labelledby="renewal-brand-services-title">
+<span class="renewal-anchor" id="link3" aria-hidden="true"></span><span class="renewal-anchor" id="consultation-examples" aria-hidden="true"></span>
+<div class="renewal-brand-shell"><div class="renewal-brand-heading inview"><p class="renewal-kicker">OUR SERVICES</p><h2 id="renewal-brand-services-title">未来を考え、前に進めるための支援。</h2><p>経営と現場、それぞれの視点から企業の変化に向き合います。</p></div>
+<div class="sg-entry"><a href="/guide/">課題・依頼内容から探す <span aria-hidden="true">→</span></a><p>サービス名が分からなくても、お困りごとからお探しいただけます。</p></div>
+<div class="renewal-brand-feature-list">
+<article class="renewal-brand-feature inview" id="it-management-kaizen"><figure><img src="images/mainimg2.jpg" width="2000" height="1000" loading="lazy" decoding="async" alt="パソコンを使った業務の様子"></figure><div><p class="renewal-service-kind">IT経営コンサルティング</p><svg class="renewal-official-logo" viewBox="76 218 1895 251" role="img" aria-label="IT経営KAIZEN"><image href="images/brand/it-management-kaizen-logo-v1.png" x="0" y="0" width="2048" height="681"></image></svg><h3>会社の未来を、<wbr><span class="renewal-brand-phrase">ITで実現する。</span></h3><p>経営の目的から必要なITを考え、設計・実行・運用・改善まで支援します。</p><a class="renewal-brand-link" href="https://service.atlib.jp/it-management-kaizen/">IT経営KAIZENの詳細を見る <span aria-hidden="true">→</span></a></div></article>
+<article class="renewal-brand-feature renewal-brand-feature-reverse inview" id="business-kaizen"><figure><img src="images/mainimg3.jpg" width="2000" height="1000" loading="lazy" decoding="async" alt="チームで仕事を進める様子"></figure><div><p class="renewal-service-kind">Webシステム開発・業務自動化</p><img class="renewal-official-logo renewal-business-logo" src="business-web/assets/gyomu-kaizen-logo.png" width="2172" height="724" alt="業務KAIZEN"><h3>業務から考える、<wbr><span class="renewal-brand-phrase">Webシステム開発。</span></h3><p>仕事の流れを理解し、必要な仕組みの設計・開発・導入まで支援します。</p><a class="renewal-brand-link" href="https://service.atlib.jp/business-web/">業務KAIZENの詳細を見る <span aria-hidden="true">→</span></a></div></article>
 </div>
+<div class="renewal-brand-secondary">
+<article class="inview" id="security"><p class="renewal-kicker">SECURITY</p><h3>セキュリティサービス</h3><p>対策状況の可視化から、ISMS・Pマーク取得支援（SecureNavi活用）、SCS評価制度対応、管理体制・対策の整備まで。</p><a class="renewal-brand-link" href="services/#security">サービス一覧で見る <span aria-hidden="true">→</span></a></article>
+<article class="inview" id="casual-consulting"><p class="renewal-kicker">IT ADVISORY</p><h3>カジュアルコンサル</h3><p>中小企業のための、気軽に相談できる月額IT相談窓口。</p><a class="renewal-brand-link" href="/services/casual-consulting/">カジュアルコンサルの詳細を見る <span aria-hidden="true">→</span></a></article>
+</div></div>
 </section>
 
 <section class="motion-section" aria-label="業務とITの写真ギャラリー">
@@ -231,6 +233,38 @@
 <div class="vision-inner inview"><h3>2119年、atLIBらしさが<br>当たり前の世界にする。</h3><p>2019年の創業から100年先を見据えた、私たちの目指す未来です。</p></div>
 </section>
 
+
+<section class="renewal-brand-diagnosis" id="diagnosis" aria-labelledby="renewal-brand-diagnosis-title">
+<div class="renewal-brand-shell"><div class="renewal-brand-heading inview"><p class="renewal-kicker">FREE DIAGNOSIS</p><h2 id="renewal-brand-diagnosis-title">まずは、知ることから。</h2></div>
+<p class="renewal-brand-section-lead">気になるテーマに合わせて、4つの無料診断からお選びいただけます。</p>
+<nav class="renewal-brand-diagnosis-links" aria-label="無料診断">
+<a href="https://sales.atlib.jp/it-management-kaizen/free-diagnosis/"><span>01</span><strong>IT経営診断</strong><i aria-hidden="true">→</i></a>
+<a href="https://service.atlib.jp/business-web/self-check/"><span>02</span><strong>業務改善診断</strong><i aria-hidden="true">→</i></a>
+<a href="https://service.atlib.jp/secumie-web/"><span>03</span><strong>Webセキュリティ診断<small class="smr-diagnosis-name">SECU:MIE WEB</small></strong><i aria-hidden="true">→</i></a>
+<a href="https://service.atlib.jp/secumie-insight/"><span>04</span><strong>情報管理セルフチェック<small class="smr-diagnosis-name">SECU:MIE Insight</small></strong><i aria-hidden="true">→</i></a>
+</nav></div>
+</section>
+
+<section class="renewal-note-section" aria-labelledby="renewal-note-title">
+<div class="renewal-brand-shell">
+<a class="renewal-note-banner" href="https://note.com/atlib">
+<svg class="renewal-note-wave" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+<path d="M0 40 C220 -25 380 140 720 84 S1020 25 1200 0 V150 H0Z" fill="#e3efed"/>
+<path d="M0 65 C240 0 390 150 745 110 S1030 45 1200 25 V150 H0Z" fill="#bce0d7"/>
+<path d="M0 95 C245 32 420 170 770 127 S1040 76 1200 57 V150 H0Z" fill="#2dbe9d"/>
+<path d="M0 117 C250 68 450 172 800 140 S1050 106 1200 83 V150 H0Z" fill="#1f3556"/>
+<path d="M0 95 C245 32 420 170 770 127 S1040 76 1200 57" fill="none" stroke="#f28c38" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+</svg>
+<div class="renewal-note-copy">
+<p class="renewal-note-kicker">atLIB JOURNAL</p>
+<h2 id="renewal-note-title">ITのこと、経営のこと。</h2>
+<p class="renewal-note-description">私たちの考え方や取り組み、ITにまつわる情報をお届けします。</p>
+<span class="renewal-note-action">公式noteを見る <span aria-hidden="true">↗</span></span>
+</div>
+</a>
+</div>
+</section>
+
 <section class="contact-section mt0 mb0" id="contact">
 <div class="contact-panel"><div class="contact-rings" aria-hidden="true"></div><div class="contact-content"><h2>経営とITのこと、<br>まずはお聞かせください。</h2><p>「何から始めればいいか分からない」という段階でも構いません。<br>事業のこと、日々の運用のこと。気になるところから気軽にご相談ください。</p><a class="contact-entry-link" href="contact/">ご相談・お問い合わせへ <span aria-hidden="true">→</span></a><p class="contact-preview-note">※お問い合わせフォームは現在、送信機能を準備中です。</p></div></div>
 </section>
@@ -240,7 +274,8 @@
 
 <footer>
 <div><img class="footer-logo" src="images/brand/atlib-logo.png" width="2047" height="603" alt="atLIB"><p>atLIB株式会社<br>〒104-0032 東京都中央区八丁堀4-12-7<br>明豊パークタワービル3階</p></div>
-<div class="menu"><ul><li class="title">atLIBについて</li><li><a href="company/">会社概要</a></li><li><a href="company/#mvv">理念と行動指針</a></li><li><a href="company/#messages">代表メッセージ</a></li></ul><ul><li class="title">サービス・実績</li><li><a href="services/">サービス一覧</a></li><li><a href="#link3">IT経営KAIZEN</a></li><li><a href="works/">支援実績</a></li></ul><ul><li class="title">その他</li><li><a href="contact/">お問い合わせ</a></li><li><a href="https://recruit.atlib.jp/">採用情報</a></li><li><a href="https://www.atlib.jp/privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a></li><li><a href="https://www.atlib.jp/customer-harassment-policy/">カスタマーハラスメント対応方針</a></li></ul></div>
+<div class="renewal-isms-footer"><img src="images/isms-gcerti-gijp-1167-ic.png" width="945" height="630" alt="ISO/IEC 27001:2022認証 GIJP-1167-IC"><p><strong>ISO/IEC 27001:2022</strong><br>情報セキュリティマネジメントシステム<br>認証番号：GIJP-1167-IC</p></div>
+<div class="menu"><ul><li class="title">atLIBについて</li><li><a href="company/">会社概要</a></li><li><a href="company/#mvv">理念と行動指針</a></li><li><a href="company/#messages">代表メッセージ</a></li></ul><ul><li class="title">サービス・実績</li><li><a href="services/">サービス一覧</a></li><li><a href="services/#kaizen">KAIZENサービス</a></li><li><a href="#diagnosis">無料診断</a></li><li><a href="works/">支援実績</a></li></ul><ul><li class="title">その他</li><li><a href="contact/">お問い合わせ</a></li><li><a href="https://recruit.atlib.jp/">採用情報</a></li><li><a href="https://note.com/atlib">公式note</a></li><li><a href="https://www.atlib.jp/privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a></li><li><a href="https://www.atlib.jp/customer-harassment-policy/">カスタマーハラスメント対応方針</a></li></ul></div>
 <small>Copyright &copy; atLIB株式会社 All Rights Reserved.<span class="footer-copy-divider">　｜　</span><span class="footer-copy-note">デザイン検討用プレビュー</span></small>
 </footer>
 

@@ -1,0 +1,2851 @@
+{
+  "generatedAt": "2026-11-27T01:18:32.742Z",
+  "pages": {
+    "home": {
+      "mobile": {
+        "samples": [
+          {
+            "run": 1,
+            "performance": 0.53,
+            "FCP": 10127.820000000002,
+            "LCP": 12381.787999999999,
+            "CLS": 0,
+            "TBT": 169
+          },
+          {
+            "run": 2,
+            "performance": 0.56,
+            "FCP": 9914.191,
+            "LCP": 14628.706999999999,
+            "CLS": 0,
+            "TBT": 0
+          },
+          {
+            "run": 3,
+            "performance": 0.56,
+            "FCP": 9641.903,
+            "LCP": 11695.947,
+            "CLS": 0,
+            "TBT": 0
+          }
+        ],
+        "count": 3,
+        "median": {
+          "performance": 0.56,
+          "FCP": 9914.191,
+          "LCP": 12381.787999999999,
+          "CLS": 0,
+          "TBT": 0
+        }
+      },
+      "desktop": {
+        "samples": [
+          {
+            "run": 1,
+            "performance": 0.71,
+            "FCP": 2178.988,
+            "LCP": 2916.7459999999996,
+            "CLS": 0.02530084069511187,
+            "TBT": 0
+          },
+          {
+            "run": 2,
+            "performance": 0.77,
+            "FCP": 1649.7935000000002,
+            "LCP": 2800.3944999999994,
+            "CLS": 0.0019358956616654475,
+            "TBT": 0
+          },
+          {
+            "run": 3,
+            "performance": 0.72,
+            "FCP": 2123.59,
+            "LCP": 2856.4090000000006,
+            "CLS": 0.0017472290363348708,
+            "TBT": 0
+          }
+        ],
+        "count": 3,
+        "median": {
+          "performance": 0.72,
+          "FCP": 2123.59,
+          "LCP": 2856.4090000000006,
+          "CLS": 0.0019358956616654475,
+          "TBT": 0
+        }
+      }
+    },
+    "services": {
+      "mobile": {
+        "samples": [
+          {
+            "run": 1,
+            "performance": 0.56,
+            "FCP": 10558.820499999996,
+            "LCP": 15104.376499999998,
+            "CLS": 0,
+            "TBT": 0
+          },
+          {
+            "run": 2,
+            "performance": 0.56,
+            "FCP": 10026.393500000002,
+            "LCP": 14736.217000000004,
+            "CLS": 0,
+            "TBT": 0
+          },
+          {
+            "run": 3,
+            "performance": 0.56,
+            "FCP": 10142.866000000002,
+            "LCP": 15626.635000000004,
+            "CLS": 0,
+            "TBT": 0
+          }
+        ],
+        "count": 3,
+        "median": {
+          "performance": 0.56,
+          "FCP": 10142.866000000002,
+          "LCP": 15104.376499999998,
+          "CLS": 0,
+          "TBT": 0
+        }
+      },
+      "desktop": {
+        "samples": [
+          {
+            "run": 1,
+            "performance": 0.72,
+            "FCP": 2136.52366,
+            "LCP": 2947.1825,
+            "CLS": 0.025212305785664767,
+            "TBT": 0
+          },
+          {
+            "run": 2,
+            "performance": 0.7,
+            "FCP": 2255.2960000000003,
+            "LCP": 3026.33,
+            "CLS": 0.02521133636482069,
+            "TBT": 0
+          },
+          {
+            "run": 3,
+            "performance": 0.72,
+            "FCP": 2155.572,
+            "LCP": 2901.981999999999,
+            "CLS": 0.025210243355410087,
+            "TBT": 0
+          }
+        ],
+        "count": 3,
+        "median": {
+          "performance": 0.72,
+          "FCP": 2155.572,
+          "LCP": 2947.1825,
+          "CLS": 0.02521133636482069,
+          "TBT": 0
+        }
+      }
+    },
+    "contact": {
+      "mobile": {
+        "samples": [
+          {
+            "run": 1,
+            "performance": 0.56,
+            "FCP": 9852.60141,
+            "LCP": 11421.763260000002,
+            "CLS": 0,
+            "TBT": 0
+          },
+          {
+            "run": 3,
+            "performance": 0.56,
+            "FCP": 9523.4555,
+            "LCP": 11129.085499999997,
+            "CLS": 0,
+            "TBT": 0
+          }
+        ],
+        "count": 2,
+        "median": {
+          "performance": 0.56,
+          "FCP": 9688.028455,
+          "LCP": 11275.42438,
+          "CLS": 0,
+          "TBT": 0
+        }
+      },
+      "desktop": {
+        "samples": [
+          {
+            "run": 1,
+            "performance": 0.77,
+            "FCP": 2037.7532800000004,
+            "LCP": 2339.79248,
+            "CLS": 0.0015705068714907224,
+            "TBT": 0
+          },
+          {
+            "run": 2,
+            "performance": 0.78,
+            "FCP": 2007.6190000000004,
+            "LCP": 2235.5274999999992,
+            "CLS": 0.02521155406014416,
+            "TBT": 0
+          },
+          {
+            "run": 3,
+            "performance": 0.78,
+            "FCP": 1973.6375000000003,
+            "LCP": 2191.3959999999997,
+            "CLS": 0.001565022256947522,
+            "TBT": 0
+          }
+        ],
+        "count": 3,
+        "median": {
+          "performance": 0.78,
+          "FCP": 2007.6190000000004,
+          "LCP": 2235.5274999999992,
+          "CLS": 0.0015705068714907224,
+          "TBT": 0
+        }
+      }
+    },
+    "company": {
+      "mobile": {
+        "samples": [
+          {
+            "run": 1,
+            "performance": 0.56,
+            "FCP": 10751.815,
+            "LCP": 11394.157000000001,
+            "CLS": 0,
+            "TBT": 0
+          },
+          {
+            "run": 2,
+            "performance": 0.56,
+            "FCP": 10839.773500000001,
+            "LCP": 11480.484,
+            "CLS": 0,
+            "TBT": 0
+          },
+          {
+            "run": 3,
+            "performance": 0.56,
+            "FCP": 11554.978999999998,
+            "LCP": 12329.064000000004,
+            "CLS": 0,
+            "TBT": 0
+          }
+        ],
+        "count": 3,
+        "median": {
+          "performance": 0.56,
+          "FCP": 10839.773500000001,
+          "LCP": 11480.484,
+          "CLS": 0,
+          "TBT": 0
+        }
+      },
+      "desktop": {
+        "samples": [
+          {
+            "run": 1,
+            "performance": 0.71,
+            "FCP": 2524.2549999999997,
+            "LCP": 2605.1564399999997,
+            "CLS": 0.0016210559289234143,
+            "TBT": 0
+          },
+          {
+            "run": 2,
+            "performance": 0.76,
+            "FCP": 2197.9935000000005,
+            "LCP": 2282.5924999999993,
+            "CLS": 0.02521126342042564,
+            "TBT": 0
+          },
+          {
+            "run": 3,
+            "performance": 0.73,
+            "FCP": 2369.9905000000003,
+            "LCP": 2493.833500000001,
+            "CLS": 0.0015612874591526308,
+            "TBT": 0
+          }
+        ],
+        "count": 3,
+        "median": {
+          "performance": 0.73,
+          "FCP": 2369.9905000000003,
+          "LCP": 2493.833500000001,
+          "CLS": 0.0016210559289234143,
+          "TBT": 0
+        }
+      }
+    },
+    "works": {
+      "mobile": {
+        "samples": [
+          {
+            "run": 2,
+            "performance": 0.56,
+            "FCP": 10848.9955,
+            "LCP": 11472.469000000001,
+            "CLS": 0,
+            "TBT": 0
+          },
+          {
+            "run": 3,
+            "performance": 0.56,
+            "FCP": 10750.244499999999,
+            "LCP": 11219.756500000001,
+            "CLS": 0,
+            "TBT": 0
+          }
+        ],
+        "count": 2,
+        "median": {
+          "performance": 0.56,
+          "FCP": 10799.619999999999,
+          "LCP": 11346.11275,
+          "CLS": 0,
+          "TBT": 0
+        }
+      },
+      "desktop": {
+        "samples": [
+          {
+            "run": 1,
+            "performance": 0.75,
+            "FCP": 2266.9459999999995,
+            "LCP": 2391.583999999999,
+            "CLS": 0.025209981264827645,
+            "TBT": 0
+          },
+          {
+            "run": 2,
+            "performance": 0.72,
+            "FCP": 2450.291,
+            "LCP": 2558.9420000000005,
+            "CLS": 0.02526765415712728,
+            "TBT": 0
+          },
+          {
+            "run": 3,
+            "performance": 0.69,
+            "FCP": 2647.366499999999,
+            "LCP": 2812.2154999999993,
+            "CLS": 0.0015632636823949741,
+            "TBT": 0
+          }
+        ],
+        "count": 3,
+        "median": {
+          "performance": 0.72,
+          "FCP": 2450.291,
+          "LCP": 2558.9420000000005,
+          "CLS": 0.025209981264827645,
+          "TBT": 0
+        }
+      }
+    }
+  },
+  "details": {
+    "home": {
+      "renderBlocking": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap",
+          "totalBytes": 151929,
+          "wastedMs": 1845
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Klee+One:wght@600&display=swap&text=IT%E3%81%AE%E3%81%93%E3%81%A8%E3%80%81%E7%B5%8C%E5%96%B6%E3%81%AE%E3%81%93%E3%81%A8%E3%80%82",
+          "totalBytes": 762,
+          "wastedMs": 806
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "totalBytes": 27168,
+          "wastedMs": 450
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/style.css?v=20261119-mobile",
+          "totalBytes": 42096,
+          "wastedMs": 600
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "totalBytes": 31904,
+          "wastedMs": 450
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/inview.css?v=20261119-mobile",
+          "totalBytes": 3251,
+          "wastedMs": 150
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
+          "totalBytes": 19560,
+          "wastedMs": 933
+        }
+      ],
+      "images": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/business-web/assets/gyomu-kaizen-logo.png",
+          "transferSize": 417694,
+          "resourceSize": 417331,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/it-management-kaizen-logo-v1.png",
+          "transferSize": 393035,
+          "resourceSize": 392709,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_mixi.png",
+          "transferSize": 138327,
+          "resourceSize": 138151,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "transferSize": 105333,
+          "resourceSize": 105149,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/concept.jpg",
+          "transferSize": 75147,
+          "resourceSize": 74998,
+          "mimeType": "image/jpeg"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/mainimg2.jpg",
+          "transferSize": 55022,
+          "resourceSize": 54875,
+          "mimeType": "image/jpeg"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/mainimg2_s.jpg",
+          "transferSize": 41995,
+          "resourceSize": 41875,
+          "mimeType": "image/jpeg"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/landscape1.jpg",
+          "transferSize": 41471,
+          "resourceSize": 41345,
+          "mimeType": "image/jpeg"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/mainimg3_s.jpg",
+          "transferSize": 35261,
+          "resourceSize": 35139,
+          "mimeType": "image/jpeg"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/strengths2.jpg",
+          "transferSize": 32207,
+          "resourceSize": 32086,
+          "mimeType": "image/jpeg"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_shinei.png",
+          "transferSize": 27155,
+          "resourceSize": 27043,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_yamato.png",
+          "transferSize": 24474,
+          "resourceSize": 24363,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/isms-gcerti-gijp-1167-ic.png",
+          "transferSize": 20855,
+          "resourceSize": 20735,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_vidaway.png",
+          "transferSize": 20837,
+          "resourceSize": 20721,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_tokai.png",
+          "transferSize": 18359,
+          "resourceSize": 18246,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_micren.png",
+          "transferSize": 12226,
+          "resourceSize": 12120,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_gks.png",
+          "transferSize": 11498,
+          "resourceSize": 11396,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_glm.png",
+          "transferSize": 10820,
+          "resourceSize": 10717,
+          "mimeType": "image/png"
+        }
+      ],
+      "estimatedImageSavings": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/business-web/assets/gyomu-kaizen-logo.png",
+          "totalBytes": 417331,
+          "wastedBytes": 383859,
+          "node": "<img class=\"renewal-official-logo renewal-business-logo\" src=\"business-web/assets/gyomu-kaizen-logo.png\" width=\"2172\" height=\"724\" alt=\"業務KAIZEN\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_mixi.png",
+          "totalBytes": 138151,
+          "wastedBytes": 137972,
+          "node": "<img class=\"renewal-brand-client-logo-mixi\" src=\"images/partner_logo_mixi.png\" width=\"6000\" height=\"3614\" alt=\"株式会社MIXI\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "totalBytes": 105149,
+          "wastedBytes": 103040,
+          "node": "<img class=\"footer-logo\" src=\"images/brand/atlib-logo.png\" width=\"2047\" height=\"603\" alt=\"atLIB\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/mainimg2.jpg",
+          "totalBytes": 54875,
+          "wastedBytes": 45775,
+          "node": "<img src=\"images/mainimg2.jpg\" width=\"2000\" height=\"1000\" loading=\"lazy\" decoding=\"async\" alt=\"パソコンを使った業務の様子\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/concept.jpg",
+          "totalBytes": 74998,
+          "wastedBytes": 31706,
+          "node": "<img src=\"images/concept.jpg\" alt=\"都市と青空を望む実写の街並み\" style=\"transition: transform 6000ms linear;\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/strengths2.jpg",
+          "totalBytes": 32086,
+          "wastedBytes": 31006,
+          "node": "<img src=\"images/strengths2.jpg\" alt=\"分析画面と業務資料\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/mainimg2_s.jpg",
+          "totalBytes": 41875,
+          "wastedBytes": 24813,
+          "node": "<img src=\"https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/ima…\" alt=\"PCと資料を使って業務を分析する様子\" style=\"transition: transform 6000ms linear;\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/mainimg3_s.jpg",
+          "totalBytes": 35139,
+          "wastedBytes": 20822,
+          "node": "<img src=\"https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/ima…\" alt=\"PCと業務資料を前に改善を検討する様子\" style=\"transition: transform 6000ms linear;\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/isms-gcerti-gijp-1167-ic.png",
+          "totalBytes": 20735,
+          "wastedBytes": 19415,
+          "node": "<img src=\"images/isms-gcerti-gijp-1167-ic.png\" width=\"945\" height=\"630\" alt=\"ISO/IEC 27001:2022認証 GIJP-1167-IC\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_shinei.png",
+          "totalBytes": 27043,
+          "wastedBytes": 17682,
+          "node": "<img src=\"images/partner_logo_shinei.png\" width=\"490\" height=\"234\" alt=\"シンエイ動画株式会社\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/landscape1.jpg",
+          "totalBytes": 41345,
+          "wastedBytes": 16858,
+          "node": "<img src=\"images/landscape1.jpg\" width=\"1000\" height=\"560\" loading=\"lazy\" decoding=\"async\" alt=\"仕事に向き合うデスクとパソコン\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_yamato.png",
+          "totalBytes": 24363,
+          "wastedBytes": 15930,
+          "node": "<img src=\"images/partner_logo_yamato.png\" width=\"490\" height=\"234\" alt=\"株式会社大和バルブ\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_vidaway.png",
+          "totalBytes": 20721,
+          "wastedBytes": 13548,
+          "node": "<img src=\"images/partner_logo_vidaway.png\" width=\"490\" height=\"234\" alt=\"株式会社Vidaway\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_tokai.png",
+          "totalBytes": 18246,
+          "wastedBytes": 11930,
+          "node": "<img src=\"images/partner_logo_tokai.png\" width=\"490\" height=\"234\" alt=\"藤海ビルサービス株式会社\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_micren.png",
+          "totalBytes": 12120,
+          "wastedBytes": 7925,
+          "node": "<img src=\"images/partner_logo_micren.png\" width=\"490\" height=\"234\" alt=\"マイクレン・ヘルスケア株式会社\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_gks.png",
+          "totalBytes": 11396,
+          "wastedBytes": 7451,
+          "node": "<img src=\"images/partner_logo_gks.png\" width=\"490\" height=\"234\" alt=\"株式会社ゲンバカンリシステムズ\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_glm.png",
+          "totalBytes": 10717,
+          "wastedBytes": 7007,
+          "node": "<img src=\"images/partner_logo_glm.png\" width=\"490\" height=\"234\" alt=\"株式会社グローバル・リンク・マネジメント\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/business-web/assets/gyomu-kaizen-logo.png",
+          "totalBytes": 417331,
+          "wastedBytes": 351399.45,
+          "node": "<img class=\"renewal-official-logo renewal-business-logo\" src=\"business-web/assets/gyomu-kaizen-logo.png\" width=\"2172\" height=\"724\" alt=\"業務KAIZEN\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/it-management-kaizen-logo-v1.png",
+          "totalBytes": 392709,
+          "wastedBytes": 343393.8
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "totalBytes": 105149,
+          "wastedBytes": 76828.9,
+          "node": "<img class=\"footer-logo\" src=\"images/brand/atlib-logo.png\" width=\"2047\" height=\"603\" alt=\"atLIB\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_mixi.png",
+          "totalBytes": 138151,
+          "wastedBytes": 73585.2,
+          "node": "<img class=\"renewal-brand-client-logo-mixi\" src=\"images/partner_logo_mixi.png\" width=\"6000\" height=\"3614\" alt=\"株式会社MIXI\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_shinei.png",
+          "totalBytes": 27043,
+          "wastedBytes": 20670.5,
+          "node": "<img src=\"images/partner_logo_shinei.png\" width=\"490\" height=\"234\" alt=\"シンエイ動画株式会社\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_yamato.png",
+          "totalBytes": 24363,
+          "wastedBytes": 20041.1,
+          "node": "<img src=\"images/partner_logo_yamato.png\" width=\"490\" height=\"234\" alt=\"株式会社大和バルブ\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_vidaway.png",
+          "totalBytes": 20721,
+          "wastedBytes": 18152.65,
+          "node": "<img src=\"images/partner_logo_vidaway.png\" width=\"490\" height=\"234\" alt=\"株式会社Vidaway\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/mainimg2.jpg",
+          "totalBytes": 54875,
+          "wastedBytes": 16614.050000000003,
+          "node": "<img src=\"images/mainimg2.jpg\" alt=\"PCを使った業務分析\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_tokai.png",
+          "totalBytes": 18246,
+          "wastedBytes": 13191.65,
+          "node": "<img src=\"images/partner_logo_tokai.png\" width=\"490\" height=\"234\" alt=\"藤海ビルサービス株式会社\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/concept.jpg",
+          "totalBytes": 74998,
+          "wastedBytes": 11386.800000000003,
+          "node": "<img src=\"images/concept.jpg\" alt=\"都市と青空を望む実写の街並み\" style=\"transition: transform 6000ms linear;\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/mainimg2_s.jpg",
+          "totalBytes": 41875,
+          "wastedBytes": 10996.25,
+          "node": "<img src=\"https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/ima…\" alt=\"PCと資料を使って業務を分析する様子\" style=\"transition: transform 6000ms linear;\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/mainimg3_s.jpg",
+          "totalBytes": 35139,
+          "wastedBytes": 10105.95,
+          "node": "<img src=\"https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/ima…\" alt=\"PCと業務資料を前に改善を検討する様子\" style=\"transition: transform 6000ms linear;\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_micren.png",
+          "totalBytes": 12120,
+          "wastedBytes": 8876.05,
+          "node": "<img src=\"images/partner_logo_micren.png\" width=\"490\" height=\"234\" alt=\"マイクレン・ヘルスケア株式会社\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/landscape1.jpg",
+          "totalBytes": 41345,
+          "wastedBytes": 8867.849999999999,
+          "node": "<img src=\"images/landscape1.jpg\" alt=\"業務用PCと仕事環境\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/partner_logo_gks.png",
+          "totalBytes": 11396,
+          "wastedBytes": 8833.5,
+          "node": "<img src=\"images/partner_logo_gks.png\" width=\"490\" height=\"234\" alt=\"株式会社ゲンバカンリシステムズ\">"
+        }
+      ],
+      "textCompression": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/style.css?v=20261119-mobile",
+          "totalBytes": 41913,
+          "wastedBytes": 31376
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "totalBytes": 31770,
+          "wastedBytes": 25825
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "totalBytes": 27032,
+          "wastedBytes": 20995
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/",
+          "totalBytes": 22862,
+          "wastedBytes": 15522
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/js/main.js?v=20261120-sticky",
+          "totalBytes": 18340,
+          "wastedBytes": 12896
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/inview.css?v=20261119-mobile",
+          "totalBytes": 3229,
+          "wastedBytes": 2306
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/theme.css?v=20261119-mobile",
+          "totalBytes": 2372,
+          "wastedBytes": 1489
+        }
+      ],
+      "externalCssFonts": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Klee+One:wght@600&display=swap&text=IT%E3%81%AE%E3%81%93%E3%81%A8%E3%80%81%E7%B5%8C%E5%96%B6%E3%81%AE%E3%81%93%E3%81%A8%E3%80%82",
+          "resourceType": "Stylesheet",
+          "transferSize": 762,
+          "resourceSize": 346
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap",
+          "resourceType": "Stylesheet",
+          "transferSize": 151929,
+          "resourceSize": 573430
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap",
+          "resourceType": "Stylesheet",
+          "transferSize": 825,
+          "resourceSize": 10895
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
+          "resourceType": "Stylesheet",
+          "transferSize": 19560,
+          "resourceSize": 103009
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFYwQgP-FVthw.woff2",
+          "resourceType": "Font",
+          "transferSize": 24677,
+          "resourceSize": 24648
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.117.woff2",
+          "resourceType": "Font",
+          "transferSize": 13031,
+          "resourceSize": 13004
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.119.woff2",
+          "resourceType": "Font",
+          "transferSize": 78905,
+          "resourceSize": 78868
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-regular-400.woff2",
+          "resourceType": "Font",
+          "transferSize": 26062,
+          "resourceSize": 25392
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2",
+          "resourceType": "Font",
+          "transferSize": 157049,
+          "resourceSize": 156400
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.116.woff2",
+          "resourceType": "Font",
+          "transferSize": 17349,
+          "resourceSize": 17320
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.96.woff2",
+          "resourceType": "Font",
+          "transferSize": 22233,
+          "resourceSize": 22204
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.108.woff2",
+          "resourceType": "Font",
+          "transferSize": 21473,
+          "resourceSize": 21444
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.110.woff2",
+          "resourceType": "Font",
+          "transferSize": 17809,
+          "resourceSize": 17780
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.97.woff2",
+          "resourceType": "Font",
+          "transferSize": 19977,
+          "resourceSize": 19948
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.115.woff2",
+          "resourceType": "Font",
+          "transferSize": 19733,
+          "resourceSize": 19704
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.111.woff2",
+          "resourceType": "Font",
+          "transferSize": 18889,
+          "resourceSize": 18860
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.106.woff2",
+          "resourceType": "Font",
+          "transferSize": 23889,
+          "resourceSize": 23860
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.113.woff2",
+          "resourceType": "Font",
+          "transferSize": 16521,
+          "resourceSize": 16488
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.114.woff2",
+          "resourceType": "Font",
+          "transferSize": 16667,
+          "resourceSize": 16632
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.112.woff2",
+          "resourceType": "Font",
+          "transferSize": 17385,
+          "resourceSize": 17348
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.109.woff2",
+          "resourceType": "Font",
+          "transferSize": 16561,
+          "resourceSize": 16524
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.103.woff2",
+          "resourceType": "Font",
+          "transferSize": 18397,
+          "resourceSize": 18360
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.107.woff2",
+          "resourceType": "Font",
+          "transferSize": 18817,
+          "resourceSize": 18780
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=LDI2apCLNRc6A8oT4pbYF8Opc-DGk4gmun1pAXI4z2Lc4J4Oy5czmQdF0GNCXdY&skey=d6df239877fd4fc1&v=v14",
+          "resourceType": "Font",
+          "transferSize": 2905,
+          "resourceSize": 2876
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggexSvfedN4.woff2",
+          "resourceType": "Font",
+          "transferSize": 24473,
+          "resourceSize": 24436
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.82.woff2",
+          "resourceType": "Font",
+          "transferSize": 21617,
+          "resourceSize": 21580
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.105.woff2",
+          "resourceType": "Font",
+          "transferSize": 18977,
+          "resourceSize": 18940
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.100.woff2",
+          "resourceType": "Font",
+          "transferSize": 22909,
+          "resourceSize": 22872
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.101.woff2",
+          "resourceType": "Font",
+          "transferSize": 18345,
+          "resourceSize": 18308
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.102.woff2",
+          "resourceType": "Font",
+          "transferSize": 20849,
+          "resourceSize": 20812
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.95.woff2",
+          "resourceType": "Font",
+          "transferSize": 20257,
+          "resourceSize": 20220
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.118.woff2",
+          "resourceType": "Font",
+          "transferSize": 18321,
+          "resourceSize": 18284
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.104.woff2",
+          "resourceType": "Font",
+          "transferSize": 20021,
+          "resourceSize": 19984
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.99.woff2",
+          "resourceType": "Font",
+          "transferSize": 21653,
+          "resourceSize": 21616
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.92.woff2",
+          "resourceType": "Font",
+          "transferSize": 21133,
+          "resourceSize": 21096
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.93.woff2",
+          "resourceType": "Font",
+          "transferSize": 19549,
+          "resourceSize": 19512
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.89.woff2",
+          "resourceType": "Font",
+          "transferSize": 20260,
+          "resourceSize": 20220
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.98.woff2",
+          "resourceType": "Font",
+          "transferSize": 20993,
+          "resourceSize": 20956
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.74.woff2",
+          "resourceType": "Font",
+          "transferSize": 20801,
+          "resourceSize": 20764
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.58.woff2",
+          "resourceType": "Font",
+          "transferSize": 25173,
+          "resourceSize": 25136
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.91.woff2",
+          "resourceType": "Font",
+          "transferSize": 21961,
+          "resourceSize": 21924
+        }
+      ],
+      "lcpElement": [
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "label": "Element"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "page-3-IMG",
+                "path": "1,HTML,1,BODY,0,DIV,2,DIV,1,DIV,0,DIV,0,PICTURE,0,IMG",
+                "selector": "div.image > div.slide > picture > img",
+                "boundingRect": {
+                  "top": 94,
+                  "bottom": 404,
+                  "left": 0,
+                  "right": 412,
+                  "width": 412,
+                  "height": 310
+                },
+                "snippet": "<img src=\"images/concept.jpg\" alt=\"都市と青空を望む実写の街並み\" style=\"transition: transform 6000ms linear;\">",
+                "nodeLabel": "都市と青空を望む実写の街並み"
+              }
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "phase",
+              "valueType": "text",
+              "label": "Phase"
+            },
+            {
+              "key": "percent",
+              "valueType": "text",
+              "label": "% of LCP"
+            },
+            {
+              "key": "timing",
+              "valueType": "ms",
+              "label": "Timing"
+            }
+          ],
+          "items": [
+            {
+              "phase": "TTFB",
+              "timing": 634.905,
+              "percent": "5%"
+            },
+            {
+              "phase": "Load Delay",
+              "timing": 935.6327371740203,
+              "percent": "8%"
+            },
+            {
+              "phase": "Load Time",
+              "timing": 517.3008498850156,
+              "percent": "4%"
+            },
+            {
+              "phase": "Render Delay",
+              "timing": 9608.108412940965,
+              "percent": "82%"
+            }
+          ]
+        }
+      ],
+      "lcpInsight": [
+        {
+          "type": "checklist",
+          "items": {
+            "priorityHinted": {
+              "label": "fetchpriority=high should be applied",
+              "value": false
+            },
+            "requestDiscoverable": {
+              "label": "Request is discoverable in initial document",
+              "value": true
+            },
+            "eagerlyLoaded": {
+              "label": "lazy load not applied",
+              "value": true
+            }
+          }
+        },
+        {
+          "type": "node",
+          "lhId": "page-3-IMG",
+          "path": "1,HTML,1,BODY,0,DIV,2,DIV,1,DIV,0,DIV,0,PICTURE,0,IMG",
+          "selector": "div.image > div.slide > picture > img",
+          "boundingRect": {
+            "top": 94,
+            "bottom": 404,
+            "left": 0,
+            "right": 412,
+            "width": 412,
+            "height": 310
+          },
+          "snippet": "<img src=\"images/concept.jpg\" alt=\"都市と青空を望む実写の街並み\" style=\"transition: transform 6000ms linear;\">",
+          "nodeLabel": "都市と青空を望む実写の街並み"
+        }
+      ]
+    },
+    "services": {
+      "renderBlocking": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap",
+          "totalBytes": 151943,
+          "wastedMs": 2358
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/services.css?v=20261119-mobile",
+          "totalBytes": 12791,
+          "wastedMs": 150
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/style.css?v=20261119-mobile",
+          "totalBytes": 42066,
+          "wastedMs": 450
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "totalBytes": 31905,
+          "wastedMs": 450
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
+          "totalBytes": 19560,
+          "wastedMs": 934
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "totalBytes": 27216,
+          "wastedMs": 300
+        }
+      ],
+      "images": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/business-web/assets/gyomu-kaizen-logo.png",
+          "transferSize": 417724,
+          "resourceSize": 417331,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/it-management-kaizen-logo-v1.png",
+          "transferSize": 393075,
+          "resourceSize": 392709,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "transferSize": 105342,
+          "resourceSize": 105149,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/isms-gcerti-gijp-1167-ic.png",
+          "transferSize": 20856,
+          "resourceSize": 20735,
+          "mimeType": "image/png"
+        }
+      ],
+      "estimatedImageSavings": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/business-web/assets/gyomu-kaizen-logo.png",
+          "totalBytes": 417331,
+          "wastedBytes": 387828,
+          "node": "<img class=\"renewal-official-logo renewal-business-logo\" src=\"../business-web/assets/gyomu-kaizen-logo.png\" width=\"2172\" height=\"724\" alt=\"業務KAIZEN\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "totalBytes": 105149,
+          "wastedBytes": 103040,
+          "node": "<img class=\"footer-logo\" src=\"../images/brand/atlib-logo.png\" width=\"2047\" height=\"603\" alt=\"atLIB\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/isms-gcerti-gijp-1167-ic.png",
+          "totalBytes": 20735,
+          "wastedBytes": 19415,
+          "node": "<img src=\"../images/isms-gcerti-gijp-1167-ic.png\" width=\"945\" height=\"630\" alt=\"ISO/IEC 27001:2022認証 GIJP-1167-IC\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/business-web/assets/gyomu-kaizen-logo.png",
+          "totalBytes": 417331,
+          "wastedBytes": 351399.45,
+          "node": "<img class=\"renewal-official-logo renewal-business-logo\" src=\"../business-web/assets/gyomu-kaizen-logo.png\" width=\"2172\" height=\"724\" alt=\"業務KAIZEN\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/it-management-kaizen-logo-v1.png",
+          "totalBytes": 392709,
+          "wastedBytes": 343393.8
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "totalBytes": 105149,
+          "wastedBytes": 76828.9,
+          "node": "<img class=\"footer-logo\" src=\"../images/brand/atlib-logo.png\" width=\"2047\" height=\"603\" alt=\"atLIB\">"
+        }
+      ],
+      "textCompression": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/style.css?v=20261119-mobile",
+          "totalBytes": 41913,
+          "wastedBytes": 31376
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "totalBytes": 31770,
+          "wastedBytes": 25825
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "totalBytes": 27032,
+          "wastedBytes": 20995
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/services/",
+          "totalBytes": 24986,
+          "wastedBytes": 17839
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/js/main.js?v=20261120-sticky",
+          "totalBytes": 18340,
+          "wastedBytes": 12896
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/services.css?v=20261119-mobile",
+          "totalBytes": 12679,
+          "wastedBytes": 9412
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/inview.css?v=20261119-mobile",
+          "totalBytes": 3229,
+          "wastedBytes": 2306
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/theme.css?v=20261119-mobile",
+          "totalBytes": 2372,
+          "wastedBytes": 1489
+        }
+      ],
+      "externalCssFonts": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap",
+          "resourceType": "Stylesheet",
+          "transferSize": 151943,
+          "resourceSize": 573430
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap",
+          "resourceType": "Stylesheet",
+          "transferSize": 1219,
+          "resourceSize": 10895
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
+          "resourceType": "Stylesheet",
+          "transferSize": 19560,
+          "resourceSize": 103009
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFYwQgP-FVthw.woff2",
+          "resourceType": "Font",
+          "transferSize": 24677,
+          "resourceSize": 24648
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.117.woff2",
+          "resourceType": "Font",
+          "transferSize": 13031,
+          "resourceSize": 13004
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.119.woff2",
+          "resourceType": "Font",
+          "transferSize": 78905,
+          "resourceSize": 78868
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-regular-400.woff2",
+          "resourceType": "Font",
+          "transferSize": 26023,
+          "resourceSize": 25392
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.111.woff2",
+          "resourceType": "Font",
+          "transferSize": 18889,
+          "resourceSize": 18860
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2",
+          "resourceType": "Font",
+          "transferSize": 157106,
+          "resourceSize": 156400
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.116.woff2",
+          "resourceType": "Font",
+          "transferSize": 17349,
+          "resourceSize": 17320
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.96.woff2",
+          "resourceType": "Font",
+          "transferSize": 22233,
+          "resourceSize": 22204
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.108.woff2",
+          "resourceType": "Font",
+          "transferSize": 21473,
+          "resourceSize": 21444
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.110.woff2",
+          "resourceType": "Font",
+          "transferSize": 17809,
+          "resourceSize": 17780
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.97.woff2",
+          "resourceType": "Font",
+          "transferSize": 19977,
+          "resourceSize": 19948
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.115.woff2",
+          "resourceType": "Font",
+          "transferSize": 19741,
+          "resourceSize": 19704
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.106.woff2",
+          "resourceType": "Font",
+          "transferSize": 23895,
+          "resourceSize": 23860
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.113.woff2",
+          "resourceType": "Font",
+          "transferSize": 16517,
+          "resourceSize": 16488
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.107.woff2",
+          "resourceType": "Font",
+          "transferSize": 18813,
+          "resourceSize": 18780
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.112.woff2",
+          "resourceType": "Font",
+          "transferSize": 17377,
+          "resourceSize": 17348
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.114.woff2",
+          "resourceType": "Font",
+          "transferSize": 16669,
+          "resourceSize": 16632
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.109.woff2",
+          "resourceType": "Font",
+          "transferSize": 16561,
+          "resourceSize": 16524
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.99.woff2",
+          "resourceType": "Font",
+          "transferSize": 21653,
+          "resourceSize": 21616
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.118.woff2",
+          "resourceType": "Font",
+          "transferSize": 18321,
+          "resourceSize": 18284
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.105.woff2",
+          "resourceType": "Font",
+          "transferSize": 18977,
+          "resourceSize": 18940
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.103.woff2",
+          "resourceType": "Font",
+          "transferSize": 18397,
+          "resourceSize": 18360
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.100.woff2",
+          "resourceType": "Font",
+          "transferSize": 22909,
+          "resourceSize": 22872
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggexSvfedN4.woff2",
+          "resourceType": "Font",
+          "transferSize": 24473,
+          "resourceSize": 24436
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.104.woff2",
+          "resourceType": "Font",
+          "transferSize": 20021,
+          "resourceSize": 19984
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.102.woff2",
+          "resourceType": "Font",
+          "transferSize": 20849,
+          "resourceSize": 20812
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.101.woff2",
+          "resourceType": "Font",
+          "transferSize": 18345,
+          "resourceSize": 18308
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.86.woff2",
+          "resourceType": "Font",
+          "transferSize": 19289,
+          "resourceSize": 19252
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.93.woff2",
+          "resourceType": "Font",
+          "transferSize": 19549,
+          "resourceSize": 19512
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.90.woff2",
+          "resourceType": "Font",
+          "transferSize": 22073,
+          "resourceSize": 22036
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.81.woff2",
+          "resourceType": "Font",
+          "transferSize": 20057,
+          "resourceSize": 20020
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.92.woff2",
+          "resourceType": "Font",
+          "transferSize": 21133,
+          "resourceSize": 21096
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.98.woff2",
+          "resourceType": "Font",
+          "transferSize": 20993,
+          "resourceSize": 20956
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.95.woff2",
+          "resourceType": "Font",
+          "transferSize": 20257,
+          "resourceSize": 20220
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.85.woff2",
+          "resourceType": "Font",
+          "transferSize": 19133,
+          "resourceSize": 19096
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.74.woff2",
+          "resourceType": "Font",
+          "transferSize": 20801,
+          "resourceSize": 20764
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.91.woff2",
+          "resourceType": "Font",
+          "transferSize": 21961,
+          "resourceSize": 21924
+        }
+      ],
+      "lcpElement": [
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "label": "Element"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "page-2-P",
+                "path": "1,HTML,1,BODY,0,DIV,2,DIV,0,DIV,0,DIV,2,P",
+                "selector": "div#top > div.svc-shell > div.svc-hero-copy > p.svc-hero-detail",
+                "boundingRect": {
+                  "top": 319,
+                  "bottom": 435,
+                  "left": 22,
+                  "right": 390,
+                  "width": 367,
+                  "height": 115
+                },
+                "snippet": "<p class=\"svc-hero-detail\">",
+                "nodeLabel": "経営の目的や現在の体制に合わせて、必要な支援を選び、組み合わせることができます。戦略の相談からでも、日々の運用や具体的なプロジェクトからでも、ご一緒できます。"
+              }
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "phase",
+              "valueType": "text",
+              "label": "Phase"
+            },
+            {
+              "key": "percent",
+              "valueType": "text",
+              "label": "% of LCP"
+            },
+            {
+              "key": "timing",
+              "valueType": "ms",
+              "label": "Timing"
+            }
+          ],
+          "items": [
+            {
+              "phase": "TTFB",
+              "timing": 626.635,
+              "percent": "4%"
+            },
+            {
+              "phase": "Load Delay",
+              "timing": 0,
+              "percent": "0%"
+            },
+            {
+              "phase": "Load Time",
+              "timing": 0,
+              "percent": "0%"
+            },
+            {
+              "phase": "Render Delay",
+              "timing": 15000.000000000004,
+              "percent": "96%"
+            }
+          ]
+        }
+      ],
+      "lcpInsight": []
+    },
+    "contact": {
+      "renderBlocking": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap",
+          "totalBytes": 151931,
+          "wastedMs": 2355
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/style.css?v=20261119-mobile",
+          "totalBytes": 42034,
+          "wastedMs": 750
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "totalBytes": 27177,
+          "wastedMs": 450
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "totalBytes": 31953,
+          "wastedMs": 150
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
+          "totalBytes": 19560,
+          "wastedMs": 931
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/theme.css?v=20261119-mobile",
+          "totalBytes": 2394,
+          "wastedMs": 150
+        }
+      ],
+      "images": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "transferSize": 105308,
+          "resourceSize": 105149,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/isms-gcerti-gijp-1167-ic.png",
+          "transferSize": 20855,
+          "resourceSize": 20735,
+          "mimeType": "image/png"
+        }
+      ],
+      "estimatedImageSavings": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "totalBytes": 105149,
+          "wastedBytes": 103040,
+          "node": "<img class=\"footer-logo\" src=\"../images/brand/atlib-logo.png\" width=\"2047\" height=\"603\" alt=\"atLIB\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/isms-gcerti-gijp-1167-ic.png",
+          "totalBytes": 20735,
+          "wastedBytes": 19415,
+          "node": "<img src=\"../images/isms-gcerti-gijp-1167-ic.png\" width=\"945\" height=\"630\" alt=\"ISO/IEC 27001:2022認証 GIJP-1167-IC\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "totalBytes": 105149,
+          "wastedBytes": 76828.9,
+          "node": "<img class=\"footer-logo\" src=\"../images/brand/atlib-logo.png\" width=\"2047\" height=\"603\" alt=\"atLIB\">"
+        }
+      ],
+      "textCompression": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/style.css?v=20261119-mobile",
+          "totalBytes": 41913,
+          "wastedBytes": 31376
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "totalBytes": 31770,
+          "wastedBytes": 25825
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "totalBytes": 27032,
+          "wastedBytes": 20995
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/js/main.js?v=20261120-sticky",
+          "totalBytes": 18340,
+          "wastedBytes": 12896
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/contact/",
+          "totalBytes": 12295,
+          "wastedBytes": 8130
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/contact.css?v=20261119-mobile",
+          "totalBytes": 7188,
+          "wastedBytes": 5096
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/inview.css?v=20261119-mobile",
+          "totalBytes": 3229,
+          "wastedBytes": 2306
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/js/contact-form.mjs?v=20261119-mobile",
+          "totalBytes": 3873,
+          "wastedBytes": 2271
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/theme.css?v=20261119-mobile",
+          "totalBytes": 2372,
+          "wastedBytes": 1489
+        }
+      ],
+      "externalCssFonts": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap",
+          "resourceType": "Stylesheet",
+          "transferSize": 151931,
+          "resourceSize": 573430
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap",
+          "resourceType": "Stylesheet",
+          "transferSize": 1219,
+          "resourceSize": 10895
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
+          "resourceType": "Stylesheet",
+          "transferSize": 19560,
+          "resourceSize": 103009
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFYwQgP-FVthw.woff2",
+          "resourceType": "Font",
+          "transferSize": 24677,
+          "resourceSize": 24648
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.117.woff2",
+          "resourceType": "Font",
+          "transferSize": 13031,
+          "resourceSize": 13004
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.119.woff2",
+          "resourceType": "Font",
+          "transferSize": 78905,
+          "resourceSize": 78868
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-regular-400.woff2",
+          "resourceType": "Font",
+          "transferSize": 26063,
+          "resourceSize": 25392
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2",
+          "resourceType": "Font",
+          "transferSize": 157069,
+          "resourceSize": 156400
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.116.woff2",
+          "resourceType": "Font",
+          "transferSize": 17349,
+          "resourceSize": 17320
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.96.woff2",
+          "resourceType": "Font",
+          "transferSize": 22233,
+          "resourceSize": 22204
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.108.woff2",
+          "resourceType": "Font",
+          "transferSize": 21473,
+          "resourceSize": 21444
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.110.woff2",
+          "resourceType": "Font",
+          "transferSize": 17809,
+          "resourceSize": 17780
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.97.woff2",
+          "resourceType": "Font",
+          "transferSize": 19977,
+          "resourceSize": 19948
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.115.woff2",
+          "resourceType": "Font",
+          "transferSize": 19733,
+          "resourceSize": 19704
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.111.woff2",
+          "resourceType": "Font",
+          "transferSize": 18889,
+          "resourceSize": 18860
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.106.woff2",
+          "resourceType": "Font",
+          "transferSize": 23889,
+          "resourceSize": 23860
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.113.woff2",
+          "resourceType": "Font",
+          "transferSize": 16521,
+          "resourceSize": 16488
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.109.woff2",
+          "resourceType": "Font",
+          "transferSize": 16559,
+          "resourceSize": 16524
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.112.woff2",
+          "resourceType": "Font",
+          "transferSize": 17385,
+          "resourceSize": 17348
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.100.woff2",
+          "resourceType": "Font",
+          "transferSize": 22909,
+          "resourceSize": 22872
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.104.woff2",
+          "resourceType": "Font",
+          "transferSize": 20021,
+          "resourceSize": 19984
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.107.woff2",
+          "resourceType": "Font",
+          "transferSize": 18817,
+          "resourceSize": 18780
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.102.woff2",
+          "resourceType": "Font",
+          "transferSize": 20849,
+          "resourceSize": 20812
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.99.woff2",
+          "resourceType": "Font",
+          "transferSize": 21653,
+          "resourceSize": 21616
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.114.woff2",
+          "resourceType": "Font",
+          "transferSize": 16669,
+          "resourceSize": 16632
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.105.woff2",
+          "resourceType": "Font",
+          "transferSize": 18977,
+          "resourceSize": 18940
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.86.woff2",
+          "resourceType": "Font",
+          "transferSize": 19289,
+          "resourceSize": 19252
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.98.woff2",
+          "resourceType": "Font",
+          "transferSize": 20993,
+          "resourceSize": 20956
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.103.woff2",
+          "resourceType": "Font",
+          "transferSize": 18397,
+          "resourceSize": 18360
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.101.woff2",
+          "resourceType": "Font",
+          "transferSize": 18345,
+          "resourceSize": 18308
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.91.woff2",
+          "resourceType": "Font",
+          "transferSize": 21961,
+          "resourceSize": 21924
+        }
+      ],
+      "lcpElement": [
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "label": "Element"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "page-2-P",
+                "path": "1,HTML,1,BODY,0,DIV,2,MAIN,0,DIV,0,DIV,2,P",
+                "selector": "main#top > div.contact-hero > div.contact-hero-inner > p",
+                "boundingRect": {
+                  "top": 218,
+                  "bottom": 309,
+                  "left": 20,
+                  "right": 392,
+                  "width": 372,
+                  "height": 91
+                },
+                "snippet": "<p>",
+                "nodeLabel": "課題が整理できていなくても、依頼したいサービスが決まっていなくても構いません。事業のこと、ITのこと。気になるところからお聞かせください。"
+              }
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "phase",
+              "valueType": "text",
+              "label": "Phase"
+            },
+            {
+              "key": "percent",
+              "valueType": "text",
+              "label": "% of LCP"
+            },
+            {
+              "key": "timing",
+              "valueType": "ms",
+              "label": "Timing"
+            }
+          ],
+          "items": [
+            {
+              "phase": "TTFB",
+              "timing": 621.3,
+              "percent": "6%"
+            },
+            {
+              "phase": "Load Delay",
+              "timing": 0,
+              "percent": "0%"
+            },
+            {
+              "phase": "Load Time",
+              "timing": 0,
+              "percent": "0%"
+            },
+            {
+              "phase": "Render Delay",
+              "timing": 10507.785499999998,
+              "percent": "94%"
+            }
+          ]
+        }
+      ],
+      "lcpInsight": []
+    },
+    "company": {
+      "renderBlocking": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap",
+          "totalBytes": 151888,
+          "wastedMs": 2358
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/style.css?v=20261119-mobile",
+          "totalBytes": 42052,
+          "wastedMs": 450
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/company.css?v=20261119-mobile",
+          "totalBytes": 9955,
+          "wastedMs": 150
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "totalBytes": 31915,
+          "wastedMs": 450
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "totalBytes": 27208,
+          "wastedMs": 300
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
+          "totalBytes": 19557,
+          "wastedMs": 933
+        }
+      ],
+      "images": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "transferSize": 105358,
+          "resourceSize": 105149,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/isms-gcerti-gijp-1167-ic.png",
+          "transferSize": 20872,
+          "resourceSize": 20735,
+          "mimeType": "image/png"
+        }
+      ],
+      "estimatedImageSavings": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "totalBytes": 105149,
+          "wastedBytes": 103040,
+          "node": "<img class=\"footer-logo\" src=\"../images/brand/atlib-logo.png\" width=\"2047\" height=\"603\" alt=\"atLIB\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/isms-gcerti-gijp-1167-ic.png",
+          "totalBytes": 20735,
+          "wastedBytes": 14837,
+          "node": "<img src=\"../images/isms-gcerti-gijp-1167-ic.png\" width=\"945\" height=\"630\" alt=\"ISO/IEC 27001:2022認証 GIJP-1167-IC\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "totalBytes": 105149,
+          "wastedBytes": 76828.9,
+          "node": "<img class=\"footer-logo\" src=\"../images/brand/atlib-logo.png\" width=\"2047\" height=\"603\" alt=\"atLIB\">"
+        }
+      ],
+      "textCompression": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/style.css?v=20261119-mobile",
+          "totalBytes": 41913,
+          "wastedBytes": 31376
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "totalBytes": 31770,
+          "wastedBytes": 25825
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "totalBytes": 27032,
+          "wastedBytes": 20995
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/company/",
+          "totalBytes": 19359,
+          "wastedBytes": 13113
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/js/main.js?v=20261120-sticky",
+          "totalBytes": 18340,
+          "wastedBytes": 12896
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/company.css?v=20261119-mobile",
+          "totalBytes": 9844,
+          "wastedBytes": 7226
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/inview.css?v=20261119-mobile",
+          "totalBytes": 3229,
+          "wastedBytes": 2306
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/theme.css?v=20261119-mobile",
+          "totalBytes": 2372,
+          "wastedBytes": 1489
+        }
+      ],
+      "externalCssFonts": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap",
+          "resourceType": "Stylesheet",
+          "transferSize": 151888,
+          "resourceSize": 573430
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap",
+          "resourceType": "Stylesheet",
+          "transferSize": 1287,
+          "resourceSize": 12490
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
+          "resourceType": "Stylesheet",
+          "transferSize": 19557,
+          "resourceSize": 103009
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFYwQgP-FVthw.woff2",
+          "resourceType": "Font",
+          "transferSize": 24677,
+          "resourceSize": 24648
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.117.woff2",
+          "resourceType": "Font",
+          "transferSize": 13031,
+          "resourceSize": 13004
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.119.woff2",
+          "resourceType": "Font",
+          "transferSize": 78905,
+          "resourceSize": 78868
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-regular-400.woff2",
+          "resourceType": "Font",
+          "transferSize": 26061,
+          "resourceSize": 25392
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.111.woff2",
+          "resourceType": "Font",
+          "transferSize": 18889,
+          "resourceSize": 18860
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=xn7KYHE41ni1AdIRqAuZuw1Bx9mbZk79FI3O0Ugp5H3HH7exiUyFoFRhwwkS-w&skey=c397ded15edc0853&v=v23",
+          "resourceType": "Font",
+          "transferSize": 25344,
+          "resourceSize": 25312
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.116.woff2",
+          "resourceType": "Font",
+          "transferSize": 17349,
+          "resourceSize": 17320
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2",
+          "resourceType": "Font",
+          "transferSize": 157046,
+          "resourceSize": 156400
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.96.woff2",
+          "resourceType": "Font",
+          "transferSize": 22233,
+          "resourceSize": 22204
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.108.woff2",
+          "resourceType": "Font",
+          "transferSize": 21473,
+          "resourceSize": 21444
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.110.woff2",
+          "resourceType": "Font",
+          "transferSize": 17809,
+          "resourceSize": 17780
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.97.woff2",
+          "resourceType": "Font",
+          "transferSize": 19977,
+          "resourceSize": 19948
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.115.woff2",
+          "resourceType": "Font",
+          "transferSize": 19733,
+          "resourceSize": 19704
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.106.woff2",
+          "resourceType": "Font",
+          "transferSize": 23889,
+          "resourceSize": 23860
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.113.woff2",
+          "resourceType": "Font",
+          "transferSize": 16521,
+          "resourceSize": 16488
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.114.woff2",
+          "resourceType": "Font",
+          "transferSize": 16667,
+          "resourceSize": 16632
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.86.woff2",
+          "resourceType": "Font",
+          "transferSize": 19289,
+          "resourceSize": 19252
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.109.woff2",
+          "resourceType": "Font",
+          "transferSize": 16561,
+          "resourceSize": 16524
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.95.woff2",
+          "resourceType": "Font",
+          "transferSize": 20257,
+          "resourceSize": 20220
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.103.woff2",
+          "resourceType": "Font",
+          "transferSize": 18397,
+          "resourceSize": 18360
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.93.woff2",
+          "resourceType": "Font",
+          "transferSize": 19549,
+          "resourceSize": 19512
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.118.woff2",
+          "resourceType": "Font",
+          "transferSize": 18321,
+          "resourceSize": 18284
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.101.woff2",
+          "resourceType": "Font",
+          "transferSize": 18345,
+          "resourceSize": 18308
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.72.woff2",
+          "resourceType": "Font",
+          "transferSize": 22909,
+          "resourceSize": 22872
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.107.woff2",
+          "resourceType": "Font",
+          "transferSize": 18817,
+          "resourceSize": 18780
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.112.woff2",
+          "resourceType": "Font",
+          "transferSize": 17385,
+          "resourceSize": 17348
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.104.woff2",
+          "resourceType": "Font",
+          "transferSize": 20021,
+          "resourceSize": 19984
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.100.woff2",
+          "resourceType": "Font",
+          "transferSize": 22909,
+          "resourceSize": 22872
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.74.woff2",
+          "resourceType": "Font",
+          "transferSize": 20801,
+          "resourceSize": 20764
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.85.woff2",
+          "resourceType": "Font",
+          "transferSize": 19133,
+          "resourceSize": 19096
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.105.woff2",
+          "resourceType": "Font",
+          "transferSize": 18977,
+          "resourceSize": 18940
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.88.woff2",
+          "resourceType": "Font",
+          "transferSize": 19761,
+          "resourceSize": 19724
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.98.woff2",
+          "resourceType": "Font",
+          "transferSize": 20993,
+          "resourceSize": 20956
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.90.woff2",
+          "resourceType": "Font",
+          "transferSize": 22073,
+          "resourceSize": 22036
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.102.woff2",
+          "resourceType": "Font",
+          "transferSize": 20849,
+          "resourceSize": 20812
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.89.woff2",
+          "resourceType": "Font",
+          "transferSize": 20261,
+          "resourceSize": 20220
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.75.woff2",
+          "resourceType": "Font",
+          "transferSize": 21789,
+          "resourceSize": 21752
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.99.woff2",
+          "resourceType": "Font",
+          "transferSize": 21653,
+          "resourceSize": 21616
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.91.woff2",
+          "resourceType": "Font",
+          "transferSize": 21961,
+          "resourceSize": 21924
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.64.woff2",
+          "resourceType": "Font",
+          "transferSize": 27312,
+          "resourceSize": 27272
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.87.woff2",
+          "resourceType": "Font",
+          "transferSize": 22237,
+          "resourceSize": 22200
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.58.woff2",
+          "resourceType": "Font",
+          "transferSize": 25173,
+          "resourceSize": 25136
+        }
+      ],
+      "lcpElement": [
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "label": "Element"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "page-2-P",
+                "path": "1,HTML,1,BODY,0,DIV,4,DIV,0,MAIN,1,SECTION,1,DIV,1,P",
+                "selector": "main > section#origin > div.company-reading > p",
+                "boundingRect": {
+                  "top": 749,
+                  "bottom": 806,
+                  "left": 22,
+                  "right": 390,
+                  "width": 367,
+                  "height": 58
+                },
+                "snippet": "<p>",
+                "nodeLabel": "atLIBという社名には、「Let It Be（あるがまま）」という想いを込めています。"
+              }
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "phase",
+              "valueType": "text",
+              "label": "Phase"
+            },
+            {
+              "key": "percent",
+              "valueType": "text",
+              "label": "% of LCP"
+            },
+            {
+              "key": "timing",
+              "valueType": "ms",
+              "label": "Timing"
+            }
+          ],
+          "items": [
+            {
+              "phase": "TTFB",
+              "timing": 621.3795,
+              "percent": "5%"
+            },
+            {
+              "phase": "Load Delay",
+              "timing": 0,
+              "percent": "0%"
+            },
+            {
+              "phase": "Load Time",
+              "timing": 0,
+              "percent": "0%"
+            },
+            {
+              "phase": "Render Delay",
+              "timing": 11707.684500000003,
+              "percent": "95%"
+            }
+          ]
+        }
+      ],
+      "lcpInsight": []
+    },
+    "works": {
+      "renderBlocking": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap",
+          "totalBytes": 151906,
+          "wastedMs": 2513
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/style.css?v=20261119-mobile",
+          "totalBytes": 42034,
+          "wastedMs": 450
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "totalBytes": 31891,
+          "wastedMs": 450
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "totalBytes": 27177,
+          "wastedMs": 300
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/works.css?v=20261119-mobile",
+          "totalBytes": 4744,
+          "wastedMs": 150
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
+          "totalBytes": 19556,
+          "wastedMs": 944
+        }
+      ],
+      "images": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "transferSize": 105335,
+          "resourceSize": 105149,
+          "mimeType": "image/png"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/isms-gcerti-gijp-1167-ic.png",
+          "transferSize": 20904,
+          "resourceSize": 20735,
+          "mimeType": "image/png"
+        }
+      ],
+      "estimatedImageSavings": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "totalBytes": 105149,
+          "wastedBytes": 103040,
+          "node": "<img class=\"footer-logo\" src=\"../images/brand/atlib-logo.png\" width=\"2047\" height=\"603\" alt=\"atLIB\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/isms-gcerti-gijp-1167-ic.png",
+          "totalBytes": 20735,
+          "wastedBytes": 19415,
+          "node": "<img src=\"../images/isms-gcerti-gijp-1167-ic.png\" width=\"945\" height=\"630\" alt=\"ISO/IEC 27001:2022認証 GIJP-1167-IC\">"
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/images/brand/atlib-logo.png",
+          "totalBytes": 105149,
+          "wastedBytes": 76828.9,
+          "node": "<img class=\"footer-logo\" src=\"../images/brand/atlib-logo.png\" width=\"2047\" height=\"603\" alt=\"atLIB\">"
+        }
+      ],
+      "textCompression": [
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/style.css?v=20261119-mobile",
+          "totalBytes": 41913,
+          "wastedBytes": 31376
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib-service-renewal.css?v=20261126-r4",
+          "totalBytes": 31770,
+          "wastedBytes": 25825
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/atlib.css?v=20261120-sticky",
+          "totalBytes": 27032,
+          "wastedBytes": 20995
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/works/",
+          "totalBytes": 21331,
+          "wastedBytes": 15177
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/js/main.js?v=20261120-sticky",
+          "totalBytes": 18340,
+          "wastedBytes": 12896
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/works.css?v=20261119-mobile",
+          "totalBytes": 4580,
+          "wastedBytes": 3150
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/inview.css?v=20261119-mobile",
+          "totalBytes": 3229,
+          "wastedBytes": 2306
+        },
+        {
+          "url": "https://r4-1127010138---corporate-site-staging-y6htingfbq-an.a.run.app/css/theme.css?v=20261119-mobile",
+          "totalBytes": 2372,
+          "wastedBytes": 1489
+        }
+      ],
+      "externalCssFonts": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap",
+          "resourceType": "Stylesheet",
+          "transferSize": 151906,
+          "resourceSize": 573430
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap",
+          "resourceType": "Stylesheet",
+          "transferSize": 1219,
+          "resourceSize": 10895
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
+          "resourceType": "Stylesheet",
+          "transferSize": 19556,
+          "resourceSize": 103009
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFYwQgP-FVthw.woff2",
+          "resourceType": "Font",
+          "transferSize": 24677,
+          "resourceSize": 24648
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.117.woff2",
+          "resourceType": "Font",
+          "transferSize": 13031,
+          "resourceSize": 13004
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.119.woff2",
+          "resourceType": "Font",
+          "transferSize": 78905,
+          "resourceSize": 78868
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-regular-400.woff2",
+          "resourceType": "Font",
+          "transferSize": 26026,
+          "resourceSize": 25392
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.110.woff2",
+          "resourceType": "Font",
+          "transferSize": 17809,
+          "resourceSize": 17780
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.111.woff2",
+          "resourceType": "Font",
+          "transferSize": 18889,
+          "resourceSize": 18860
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2",
+          "resourceType": "Font",
+          "transferSize": 157088,
+          "resourceSize": 156400
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.116.woff2",
+          "resourceType": "Font",
+          "transferSize": 17349,
+          "resourceSize": 17320
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.96.woff2",
+          "resourceType": "Font",
+          "transferSize": 22233,
+          "resourceSize": 22204
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.108.woff2",
+          "resourceType": "Font",
+          "transferSize": 21473,
+          "resourceSize": 21444
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.97.woff2",
+          "resourceType": "Font",
+          "transferSize": 19977,
+          "resourceSize": 19948
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.115.woff2",
+          "resourceType": "Font",
+          "transferSize": 19733,
+          "resourceSize": 19704
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.106.woff2",
+          "resourceType": "Font",
+          "transferSize": 23889,
+          "resourceSize": 23860
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.113.woff2",
+          "resourceType": "Font",
+          "transferSize": 16521,
+          "resourceSize": 16488
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.112.woff2",
+          "resourceType": "Font",
+          "transferSize": 17383,
+          "resourceSize": 17348
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.118.woff2",
+          "resourceType": "Font",
+          "transferSize": 18321,
+          "resourceSize": 18284
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.114.woff2",
+          "resourceType": "Font",
+          "transferSize": 16669,
+          "resourceSize": 16632
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.104.woff2",
+          "resourceType": "Font",
+          "transferSize": 20021,
+          "resourceSize": 19984
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.109.woff2",
+          "resourceType": "Font",
+          "transferSize": 16561,
+          "resourceSize": 16524
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.107.woff2",
+          "resourceType": "Font",
+          "transferSize": 18817,
+          "resourceSize": 18780
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggexSvfedN4.woff2",
+          "resourceType": "Font",
+          "transferSize": 24473,
+          "resourceSize": 24436
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.99.woff2",
+          "resourceType": "Font",
+          "transferSize": 21653,
+          "resourceSize": 21616
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.103.woff2",
+          "resourceType": "Font",
+          "transferSize": 18397,
+          "resourceSize": 18360
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.101.woff2",
+          "resourceType": "Font",
+          "transferSize": 18345,
+          "resourceSize": 18308
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.100.woff2",
+          "resourceType": "Font",
+          "transferSize": 22909,
+          "resourceSize": 22872
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.92.woff2",
+          "resourceType": "Font",
+          "transferSize": 21133,
+          "resourceSize": 21096
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.88.woff2",
+          "resourceType": "Font",
+          "transferSize": 19761,
+          "resourceSize": 19724
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.93.woff2",
+          "resourceType": "Font",
+          "transferSize": 19549,
+          "resourceSize": 19512
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.89.woff2",
+          "resourceType": "Font",
+          "transferSize": 20257,
+          "resourceSize": 20220
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.98.woff2",
+          "resourceType": "Font",
+          "transferSize": 20993,
+          "resourceSize": 20956
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.95.woff2",
+          "resourceType": "Font",
+          "transferSize": 20257,
+          "resourceSize": 20220
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.86.woff2",
+          "resourceType": "Font",
+          "transferSize": 19289,
+          "resourceSize": 19252
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.90.woff2",
+          "resourceType": "Font",
+          "transferSize": 22073,
+          "resourceSize": 22036
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.81.woff2",
+          "resourceType": "Font",
+          "transferSize": 20057,
+          "resourceSize": 20020
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.105.woff2",
+          "resourceType": "Font",
+          "transferSize": 18977,
+          "resourceSize": 18940
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.94.woff2",
+          "resourceType": "Font",
+          "transferSize": 22105,
+          "resourceSize": 22068
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.102.woff2",
+          "resourceType": "Font",
+          "transferSize": 20852,
+          "resourceSize": 20812
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.74.woff2",
+          "resourceType": "Font",
+          "transferSize": 20801,
+          "resourceSize": 20764
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.65.woff2",
+          "resourceType": "Font",
+          "transferSize": 22171,
+          "resourceSize": 22128
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.87.woff2",
+          "resourceType": "Font",
+          "transferSize": 22237,
+          "resourceSize": 22200
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.70.woff2",
+          "resourceType": "Font",
+          "transferSize": 21713,
+          "resourceSize": 21672
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.85.woff2",
+          "resourceType": "Font",
+          "transferSize": 19133,
+          "resourceSize": 19096
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFowwII2lcnk-AFfrgQrvWXpdFg3KXxAMsKMbdN.91.woff2",
+          "resourceType": "Font",
+          "transferSize": 21961,
+          "resourceSize": 21924
+        }
+      ],
+      "lcpElement": [
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "label": "Element"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "page-1-H1",
+                "path": "1,HTML,1,BODY,0,DIV,2,DIV,0,DIV,0,H1",
+                "selector": "div#container > div#top > div.works-hero-inner > h1",
+                "boundingRect": {
+                  "top": 135,
+                  "bottom": 223,
+                  "left": 22,
+                  "right": 390,
+                  "width": 367,
+                  "height": 88
+                },
+                "snippet": "<h1>",
+                "nodeLabel": "企業の可能性を広げる、私たちの仕事。"
+              }
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "phase",
+              "valueType": "text",
+              "label": "Phase"
+            },
+            {
+              "key": "percent",
+              "valueType": "text",
+              "label": "% of LCP"
+            },
+            {
+              "key": "timing",
+              "valueType": "ms",
+              "label": "Timing"
+            }
+          ],
+          "items": [
+            {
+              "phase": "TTFB",
+              "timing": 629.2115,
+              "percent": "6%"
+            },
+            {
+              "phase": "Load Delay",
+              "timing": 0,
+              "percent": "0%"
+            },
+            {
+              "phase": "Load Time",
+              "timing": 0,
+              "percent": "0%"
+            },
+            {
+              "phase": "Render Delay",
+              "timing": 10590.545000000002,
+              "percent": "94%"
+            }
+          ]
+        }
+      ],
+      "lcpInsight": []
+    }
+  }
+}

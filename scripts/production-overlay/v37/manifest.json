@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "version": "3.7",
+  "issue": 81,
+  "pullRequest": 82,
+  "gitBase": "e672c0db82df65332b1f2631f5576adcf07c295a",
+  "productionBaseRevision": "corporate-site-00068-xig",
+  "productionBaseImage": "asia-northeast1-docker.pkg.dev/atlib-corporate-site/cloud-run-source-deploy/corporate-site-recruit-overlay@sha256:ed87a672073ad6bf3c8ee076b6fa8d0b4b71352d19c815c7a31dffdcb3dcf472",
+  "publicOverlay": {
+    "refreshVersion": "3.6",
+    "baseImage": "asia-northeast1-docker.pkg.dev/atlib-corporate-site/cloud-run-source-deploy/corporate-site-recruit-overlay@sha256:ed87a672073ad6bf3c8ee076b6fa8d0b4b71352d19c815c7a31dffdcb3dcf472",
+    "allowedFiles": [
+      "public/index.html",
+      "public/services/index.html",
+      "public/llms.txt",
+      "public/css/secumie-service-refresh.css",
+      "public/images/service-refresh/secumie-web-360.webp",
+      "public/images/service-refresh/secumie-web-720.webp",
+      "public/images/service-refresh/secumie-insight-360.webp",
+      "public/images/service-refresh/secumie-insight-720.webp",
+      "public/images/service-refresh/management-768.webp",
+      "public/images/service-refresh/business-768.webp",
+      "public/images/service-refresh/advisory-768.webp",
+      "public/services/casual-consulting/index.html",
+      "public/sitemap.xml",
+      "public/guide/index.html",
+      "public/services/security-consulting/index.html",
+      "public/images/service-refresh/securenavi-logo.webp",
+      "public/images/service-refresh/security-consulting-768.webp"
+    ],
+    "files": {
+      "public/index.html": "e880f50f8fb67c8782e4316c59fbb2233bfbb967bd755cb0c78fe33fdada9723",
+      "public/services/index.html": "2e7e331976c38607a39f130bf1e8bdbd48681c769afee32658252c43e0884977",
+      "public/llms.txt": "944237641c208fe3dc144606cd241940efed0a24294ff70e80711186bd0b2c29",
+      "public/css/secumie-service-refresh.css": "c8869586f4f9368a272a9edca214aa8434cc842a862381d27addcbcb615280de",
+      "public/images/service-refresh/secumie-web-360.webp": "3a6251b84a51683081d3f8981014ba954327c2433cd107ef0fefd62bbd94e098",
+      "public/images/service-refresh/secumie-web-720.webp": "e9f6741515c24f984e32b8fc1e960c171c355a121ac04e7fde81fb057c1ba554",
+      "public/images/service-refresh/secumie-insight-360.webp": "ae90eb265055841e18fb8e4db41e768c7afeecdddaed7cc09f82a7513fa8d34b",
+      "public/images/service-refresh/secumie-insight-720.webp": "6c0f1cac7f2c95aa688619a02ccb0c22dd62cc1ea3de0ab2d2c26fd271fcaf90",
+      "public/images/service-refresh/management-768.webp": "929c2d80a0307cbf2cf2f0211b9c2c4928f267dcf579c98d77ed23112cb45629",
+      "public/images/service-refresh/business-768.webp": "6524655e7766a27780b2e241972a96f66cb9478017e822dba21322f6bfaf75ab",
+      "public/images/service-refresh/advisory-768.webp": "18e4b83df29c47ce5eec06297b8590f2b021189219d4b812537368b496c9a95d",
+      "public/services/casual-consulting/index.html": "0e1730a3beb0b82c186addf7022a862fdd124c78e835c98cc02437a201566d7f",
+      "public/sitemap.xml": "e3eb69cd0876f9165bf9e1141f6988f3ceb557e08b2f8f61b35e15ce8a35ada7",
+      "public/guide/index.html": "907ca01ac480ea6966458a1fd5b95734d598b41c895aee85000fcacbdda10027",
+      "public/services/security-consulting/index.html": "99ac718c76350012dfe867b74aaec9469479a9dab26df9d472eead4fbc9328b7",
+      "public/images/service-refresh/securenavi-logo.webp": "9bbf7646b47181562c9b7f19c774c527b1aa70e3ad44741164489858c7ced50d",
+      "public/images/service-refresh/security-consulting-768.webp": "d9256077d4a38ca37fb898d8ba16687dbb7924aa68ceece7f25a7dc4c8914e96"
+    }
+  },
+  "routeOverlay": {
+    "refreshVersion": "3.7",
+    "baseImage": "asia-northeast1-docker.pkg.dev/atlib-corporate-site/cloud-run-source-deploy/corporate-site-recruit-overlay@sha256:a5e0ec66a4f7616a532e48e01ba7c9efc469347c1c1d4e7a586761e9373549ae",
+    "allowedFiles": [
+      "dist/server.js"
+    ],
+    "files": {
+      "dist/server.js": "3a6adf120dd879e54a961c214af441773e0b7f92498554ef39dce884de60cff4"
+    }
+  },
+  "runtimeBeforeSha256": "377e0a925247726cc37084cf22718d399fad23afc26c5ce069d8871a1b33a456",
+  "runtimeAfterSha256": "3a6adf120dd879e54a961c214af441773e0b7f92498554ef39dce884de60cff4",
+  "stagingRevision": "corporate-site-staging-00046-dug",
+  "candidateImage": "asia-northeast1-docker.pkg.dev/atlib-corporate-site/cloud-run-source-deploy/corporate-site-recruit-overlay@sha256:f6c78808fcbc36dabaf6e3b43892e5c2e9b47dd4db16edc143462741d03095ed",
+  "buildId": "31b773cd-4fe7-415d-bb00-e1803ece4680",
+  "scanId": "projects/atlib-corporate-site/locations/asia/scans/822ca557-8118-47d8-95bd-3c96c1b1a266"
+}
